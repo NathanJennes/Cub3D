@@ -36,7 +36,7 @@ if (( $? != 0 )); then
   exit 1
 fi
 
-git commit -m $1
+git commit -m "$1"
 if (( $? != 0 )); then
   echo "Could not commit the changes"
   exit 1
