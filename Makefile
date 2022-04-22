@@ -15,12 +15,12 @@ LIB_PATH		:=		-L$(LIBFT_DIR) -L$(MLX_DIR) -L$(LEAKY_DIR)
 
 OS				=	$(shell uname -s)
 ifeq ($(OS), Linux)
-	MLXFLAGS	=		-lXext -lX11 -lm -lz
+	MLXFLAGS	=		-L /usr/local/lib -lmlx_Linux -L/usr/X11/lib -I/usr/local/include -lXext -lX11 -lz
 else
-	MLXFLAGS	=		-framework OpenGL -framework AppKit
+	MLXFLAGS	=		-lmlx -framework OpenGL -framework AppKit
 endif
 
-LIBS			:=		$(MLXFLAGS) $(LIB_PATH) -lft -lmlx -lleaky
+LIBS			:=		$(MLXFLAGS) $(LIB_PATH) -lft -lleaky -lm
 
 BIN_CC			:=		gcc
 
@@ -52,12 +52,16 @@ export LIB_PATH
 .PHONY: all
 all: header
 	@$(MAKE) -j4 -C $(LIBFT_DIR)
+ifeq ($(OS), Darwin)
 	@$(MAKE) -j4 -C $(MLX_DIR)
+endif
 	@$(MAKE) -j4 -C $(SRCS_DIR) -r -R --warn-undefined-variables
 
 debug: header
 	@$(MAKE) -j4 -C $(LIBFT_DIR) debug
+ifeq ($(OS), Darwin)
 	@$(MAKE) -j4 -C $(MLX_DIR)
+endif
 	@$(MAKE) -j4 -C $(SRCS_DIR) -r -R --warn-undefined-variables
 
 .PHONY: bonus
@@ -66,7 +70,9 @@ bonus: all
 .PHONY: clean
 clean: header
 	@$(MAKE) -C $(LIBFT_DIR) clean
+ifeq ($(OS), Darwin)
 	@$(MAKE) -C $(MLX_DIR) clean
+endif
 	@$(MAKE) -C $(SRCS_DIR) clean
 
 .PHONY: fclean
