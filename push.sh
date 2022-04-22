@@ -3,7 +3,11 @@ if (( $# != 1 )); then
   exit 1
 fi
 
-cd Libft ||  (echo "You must be in the root directory of the project to push!" && exit 1)
+cd Libft
+if (( $? != 0 )); then
+  echo "You must be in the root directory of the project to push!"
+  exit 1
+fi
 
 git status | grep -q "Leaky"
 if (( $? == 0 )); then
