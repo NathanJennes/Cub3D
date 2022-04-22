@@ -6,24 +6,25 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 12:09:41 by cybattis          #+#    #+#             */
-/*   Updated: 2022/04/22 19:17:13 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/22 19:20:46 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INPUT_CODE_H
 # define INPUT_CODE_H
 
-# define MOUSE_LEFT			1
-# define MOUSE_MIDDLE		2
-# define MOUSE_RIGHT		3
-# define MOUSE_WHEELUP		4
-# define MOUSE_WHEELDOWN	5
-# define MOUSE_LEFTWHEEL	6
-# define MOUSE_RIGHTWHEEL	7
-# define MOUSE_UPTHUMB		8
-# define MOUSE_DOWNTHUMB	9
-
 # ifdef __linux__
+
+#  define MOUSE_LEFT		1
+#  define MOUSE_MIDDLE		2
+#  define MOUSE_RIGHT		3
+#  define MOUSE_WHEELUP		4
+#  define MOUSE_WHEELDOWN	5
+#  define MOUSE_LEFTWHEEL	6
+#  define MOUSE_RIGHTWHEEL	7
+#  define MOUSE_UPTHUMB		8
+#  define MOUSE_DOWNTHUMB	9
+
 #  define KEY_SPACE			32
 
 #  define KEY_COMMA			44
@@ -123,6 +124,13 @@
 #  define KEY_PRTSC			65301
 
 # else
+
+#  define MOUSE_LEFT		1
+#  define MOUSE_MIDDLE		3
+#  define MOUSE_RIGHT		2
+#  define MOUSE_WHEELUP		4
+#  define MOUSE_WHEELDOWN	5
+
 #  define KEY_SPACE 49
 
 #  define KEY_COMMA 43
