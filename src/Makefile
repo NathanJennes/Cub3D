@@ -21,7 +21,7 @@ $(OBJS_DIR)/%.o:	$(SRCS_DIR)/%.c | $(OBJS_DIR)
 
 $(NAME): $(OBJS) $(LIBFT_LIB)
 	@printf "$(_BLUE)\nCompiled source files\n"
-	@$(BIN_CC) $(BIN_CFLAGS) $(OBJS) $(LIBS) $(MLXFLAGS) -o ../$@
+	@$(BIN_CC) $(BIN_CFLAGS) $(OBJS) $(LIBS) -o ../$@
 	@printf "$(_GREEN)Finish compiling $(NAME)!$(_END)\n"
 
 bonus: all
