@@ -9,7 +9,7 @@ if (( $? != 0 )); then
   exit 1
 fi
 
-git status | grep -q "Leaky"
+git status | grep -q "Leaky "
 if (( $? == 0 )); then
   echo "Changes were made to Leaky, please commit them manually"
   exit 1
@@ -22,7 +22,7 @@ if (( $? == 0 )); then
 fi
 
 cd ..
-git status | grep -q "Libft"
+git status | grep -q "Libft "
 if (( $? == 0 )); then
   echo "Changes were made to Libft, please commit them manually"
   exit 1
