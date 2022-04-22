@@ -5,20 +5,22 @@ MASTER_MAKE		:=		$(MAKE_DIR)/Makefile
 SRCS_DIR		:=		$(MAKE_DIR)/src
 OBJS_DIR		:=		$(MAKE_DIR)/obj
 
-LIB_DIR			:=		$(MAKE_DIR)/Libft
+LIBFT_DIR		:=		$(MAKE_DIR)/Libft
+LEAKY_DIR		:=		$(LIBFT_DIR)/Leaky
+MLX_DIR			:=		$(MAKE_DIR)/minilibx
 
-INC_PATH		:=		-I$(LIB_DIR) -I$(LIB_DIR)/Leaky -I$(MAKE_DIR)/include
+INC_PATH		:=		-I$(LIBFT_DIR) -I$(LEAKY_DIR) -I$(MAKE_DIR)/include -I$(MLX_DIR)
 
-LIB_PATH		:=		-L$(LIB_DIR)
+LIB_PATH		:=		-L$(LIBFT_DIR) -L$(MLX_DIR) -L$(LEAKY_DIR)
 
 OS				=	$(shell uname -s)
 ifeq ($(OS), Linux)
-	MLXFLAGS	=	-L /usr/local/lib -lmlx_Linux -L/usr/X11/lib -I/usr/local/include -lXext -lX11 -lm -lz
+	MLXFLAGS	=		-L/usr/X11/lib -I/usr/local/include -lXext -lX11 -lm -lz
 else
-	MLXFLAGS	=	-L mlx -lmlx -framework OpenGL -framework AppKit
+	MLXFLAGS	=		-framework OpenGL -framework AppKit
 endif
 
-LIBS			:=		$(LIB_PATH) -lft
+LIBS			:=		$(MLXFLAGS) $(LIB_PATH) -lft -lmlx -lleaky
 
 BIN_CC			:=		gcc
 
@@ -31,7 +33,7 @@ BIN_CFLAGS		+=		$(INC_PATH)
 BIN_LDFLAGS		:=
 BIN_LDFLAGS		+=		#-fsanitize=address
 
-LIBFT_LIB		:=		$(LIB_DIR)/libft.a
+LIBFT_LIB		:=		$(LIBFT_DIR)/libft.a
 
 export MAKE_DIR
 export OBJS_DIR
@@ -46,16 +48,14 @@ export BIN_CFLAGS
 export BIN_LDFLAGS
 export LIBFT_LIB
 export LIB_PATH
-export READLINE
-export MLXFLAGS
 
 .PHONY: all
 all: header
-	@$(MAKE) -j4 -C $(LIB_DIR)
+	@$(MAKE) -j4 -C $(LIBFT_DIR)
 	@$(MAKE) -j4 -C $(SRCS_DIR) -r -R --warn-undefined-variables
 
 debug: header
-	@$(MAKE) -j4 -C $(LIB_DIR) debug
+	@$(MAKE) -j4 -C $(LIBFT_DIR) debug
 	@$(MAKE) -j4 -C $(SRCS_DIR) -r -R --warn-undefined-variables
 
 .PHONY: bonus
@@ -63,12 +63,12 @@ bonus: all
 
 .PHONY: clean
 clean: header
-	@$(MAKE) -C $(LIB_DIR) clean
+	@$(MAKE) -C $(LIBFT_DIR) clean
 	@$(MAKE) -C $(SRCS_DIR) clean
 
 .PHONY: fclean
 fclean:
-	@$(MAKE) -C $(LIB_DIR) fclean
+	@$(MAKE) -C $(LIBFT_DIR) fclean
 	@$(MAKE) -C $(SRCS_DIR) fclean
 
 .PHONY: re
