@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_code.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 12:09:41 by cybattis          #+#    #+#             */
-/*   Updated: 2022/04/21 14:53:12 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/04/22 19:17:13 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,102 +123,102 @@
 #  define KEY_PRTSC			65301
 
 # else
-#  define KEY_SPACE
+#  define KEY_SPACE 49
 
-#  define KEY_COMMA
-#  define KEY_MINUS
-#  define KEY_PERIOD
-#  define KEY_SLASH
+#  define KEY_COMMA 43
+#  define KEY_MINUS 27
+#  define KEY_PERIOD 47
+#  define KEY_SLASH 44
 
-#  define KEY_ZERO
-#  define KEY_ONE
-#  define KEY_TWO
-#  define KEY_THREE
-#  define KEY_FOUR
-#  define KEY_FIVE
-#  define KEY_SIX
-#  define KEY_SEVEN
-#  define KEY_EIGHT
-#  define KEY_NINE
+#  define KEY_ZERO 29
+#  define KEY_ONE 18
+#  define KEY_TWO 19
+#  define KEY_THREE 20
+#  define KEY_FOUR 21
+#  define KEY_FIVE 23
+#  define KEY_SIX 22
+#  define KEY_SEVEN 26
+#  define KEY_EIGHT 28
+#  define KEY_NINE 25
 
-#  define KEY_SEMICOLON
-#  define KEY_EQUAL
+#  define KEY_SEMICOLON 41
+#  define KEY_EQUAL 24
 
-#  define KEY_LBRACKET
-#  define KEY_BCKSLASH
-#  define KEY_RBRACKET
+#  define KEY_LBRACKET 33
+#  define KEY_BCKSLASH 42
+#  define KEY_RBRACKET 30
 
-#  define KEY_GRAVE
+#  define KEY_GRAVE 50
 
-#  define KEY_A
-#  define KEY_B
-#  define KEY_C
-#  define KEY_D
-#  define KEY_E
-#  define KEY_F
-#  define KEY_G
-#  define KEY_H
-#  define KEY_I
-#  define KEY_J
-#  define KEY_K
-#  define KEY_L
-#  define KEY_M
-#  define KEY_N
-#  define KEY_O
-#  define KEY_P
-#  define KEY_Q
-#  define KEY_R
-#  define KEY_S
-#  define KEY_T
-#  define KEY_U
-#  define KEY_V
-#  define KEY_W
-#  define KEY_X
-#  define KEY_Y
-#  define KEY_Z
+#  define KEY_A 0
+#  define KEY_B 11
+#  define KEY_C 8
+#  define KEY_D 2
+#  define KEY_E 14
+#  define KEY_F 3
+#  define KEY_G 5
+#  define KEY_H 4
+#  define KEY_I 34
+#  define KEY_J 38
+#  define KEY_K 40
+#  define KEY_L 37
+#  define KEY_M 46
+#  define KEY_N 45
+#  define KEY_O 31
+#  define KEY_P 35
+#  define KEY_Q 12
+#  define KEY_R 15
+#  define KEY_S 1
+#  define KEY_T 17
+#  define KEY_U 32
+#  define KEY_V 9
+#  define KEY_W 13
+#  define KEY_X 7
+#  define KEY_Y 16
+#  define KEY_Z 6
 
-#  define KEY_F1
-#  define KEY_F2
-#  define KEY_F3
-#  define KEY_F4
-#  define KEY_F5
-#  define KEY_F6
-#  define KEY_F7
-#  define KEY_F8
-#  define KEY_F9
-#  define KEY_F10
+#  define KEY_F1 122
+#  define KEY_F2 120
+#  define KEY_F3 99
+#  define KEY_F4 118
+#  define KEY_F5 96
+#  define KEY_F6 97
+#  define KEY_F7 98
+#  define KEY_F8 100
+#  define KEY_F9 101
+#  define KEY_F10 109
 #  define KEY_F11
-#  define KEY_F12
+#  define KEY_F12 111
 
-#  define KEY_BACKSPACE
-#  define KEY_TAB
-#  define KEY_RETURN
-#  define KEY_ESC
+#  define KEY_BACKSPACE 51
+#  define KEY_TAB 48
+#  define KEY_RETURN 36
+#  define KEY_ESC 53
 
-#  define KEY_LEFT
-#  define KEY_UP
-#  define KEY_RIGHT
-#  define KEY_DOWN
+#  define KEY_LEFT 123
+#  define KEY_UP 126
+#  define KEY_RIGHT 124
+#  define KEY_DOWN 125
 
-#  define KEY_HOME
-#  define KEY_PGUP
-#  define KEY_PGDOWN
-#  define KEY_END
-#  define KEY_INS
-#  define KEY_DEL
+#  define KEY_HOME 115
+#  define KEY_PGUP 116
+#  define KEY_PGDOWN 121
+#  define KEY_END 119
+#  define KEY_INS 114
+#  define KEY_DEL 117
 
-#  define KEY_MENU
-#  define KEY_LSHIFT
-#  define KEY_RSHIFT
-#  define KEY_LCTRL
-#  define KEY_RCTRL
-#  define KEY_CAPS
-#  define KEY_LMETA
-#  define KEY_RMETA
+#  define KEY_MENU 110
+#  define KEY_LSHIFT 257
+#  define KEY_RSHIFT 258
+#  define KEY_LCTRL 256
+#  define KEY_RCTRL 269
+#  define KEY_CAPS 272
+#  define KEY_LMETA 261
+#  define KEY_RMETA 262
 
-#  define KEY_PAUSE
-#  define KEY_SCRLK
-#  define KEY_PRTSC
+#  define KEY_PAUSE 113
+#  define KEY_SCRLK 107
+#  define KEY_PRTSC 105
 # endif
 
 #endif
