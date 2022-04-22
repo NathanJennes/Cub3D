@@ -1,6 +1,7 @@
 .DS_Store
 obj/
 .idea/
+cube3d
 
 *.o
 *.d
