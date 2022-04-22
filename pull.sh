@@ -70,3 +70,19 @@ fi
 
 FT_LAST=$(git log -1 --pretty=%B | sed 's/ *$//g')
 echo "Last commit of Libft: $FT_LAST"
+
+cd ..
+
+CUBE_COMMITS=$(git rev-list --count HEAD)
+git pull &> /dev/null
+CUBE_COMMITS_AFTER=$(git rev-list --count HEAD)
+CUBE_DIFFERENCE=$((CUBE_COMMITS_AFTER-CUBE_COMMITS))
+
+if (( CUBE_DIFFERENCE != 0 )); then
+  echo "Pulling $CUBE_DIFFERENCE commits from Cube3D"
+else
+  echo "No new commits from Cube3D"
+fi
+
+CUBE_LAST=$(git log -1 --pretty=%B | sed 's/ *$//g')
+echo "Last commit of Cube3D: $CUBE_LAST"
