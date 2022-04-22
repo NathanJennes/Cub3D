@@ -1,8 +1,3 @@
-if (( $# != 1 )); then
-  echo "Invalid push arguments!"
-  exit 1
-fi
-
 cd Libft
 if (( $? != 0 )); then
   echo "You must be in the root directory of the project to push!"
@@ -40,10 +35,18 @@ if (( $? != 0 )); then
   exit 1
 fi
 
-git commit -m "$1"
-if (( $? != 0 )); then
-  echo "Could not commit the changes"
-  exit 1
+if (( ${#1} > 0 )); then
+  git commit -m "$1"
+  if (( $? != 0 )); then
+    echo "Could not commit the changes"
+    exit 1
+  fi
+else
+  git commit
+  if (( $? != 0 )); then
+    echo "Could not commit the changes"
+    exit 1
+  fi
 fi
 
 git push
