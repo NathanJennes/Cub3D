@@ -50,6 +50,7 @@ fi
 
 LK_LAST=$(git log -1 --pretty=%B | sed 's/ *$//g')
 echo "Last commit of Leaky: $LK_LAST"
+echo "--"
 
 cd ..
 git checkout master 2> /dev/null | grep -q "M       "
@@ -70,6 +71,7 @@ fi
 
 FT_LAST=$(git log -1 --pretty=%B | sed 's/ *$//g')
 echo "Last commit of Libft: $FT_LAST"
+echo "--"
 
 cd ..
 
