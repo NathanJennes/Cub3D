@@ -52,10 +52,12 @@ export LIB_PATH
 .PHONY: all
 all: header
 	@$(MAKE) -j4 -C $(LIBFT_DIR)
+	@$(MAKE) -j4 -C $(MLX_DIR)
 	@$(MAKE) -j4 -C $(SRCS_DIR) -r -R --warn-undefined-variables
 
 debug: header
 	@$(MAKE) -j4 -C $(LIBFT_DIR) debug
+	@$(MAKE) -j4 -C $(MLX_DIR)
 	@$(MAKE) -j4 -C $(SRCS_DIR) -r -R --warn-undefined-variables
 
 .PHONY: bonus
@@ -64,10 +66,11 @@ bonus: all
 .PHONY: clean
 clean: header
 	@$(MAKE) -C $(LIBFT_DIR) clean
+	@$(MAKE) -C $(MLX_DIR) clean
 	@$(MAKE) -C $(SRCS_DIR) clean
 
 .PHONY: fclean
-fclean:
+fclean: clean
 	@$(MAKE) -C $(LIBFT_DIR) fclean
 	@$(MAKE) -C $(SRCS_DIR) fclean
 
