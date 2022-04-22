@@ -15,7 +15,7 @@ LIB_PATH		:=		-L$(LIBFT_DIR) -L$(MLX_DIR) -L$(LEAKY_DIR)
 
 OS				=	$(shell uname -s)
 ifeq ($(OS), Linux)
-	MLXFLAGS	=		-L/usr/X11/lib -I/usr/local/include -lXext -lX11 -lm -lz
+	MLXFLAGS	=		-lXext -lX11 -lm -lz
 else
 	MLXFLAGS	=		-framework OpenGL -framework AppKit
 endif
