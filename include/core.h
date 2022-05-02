@@ -46,7 +46,7 @@ void		error_close_app(t_mlx *app);
 
 /* draw.c */
 void		clear_screen(t_mlx *app, int color);
-int			draw_frame(t_mlx *fdf);
+int			draw_frame(t_mlx *app);
 void		mlx_pixel_put_img(t_frame *frame, int x, int y, int color);
 
 /* hooks.c.c */

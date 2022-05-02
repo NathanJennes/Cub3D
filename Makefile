@@ -20,20 +20,20 @@ else
 	MLXFLAGS	=		-lmlx -framework OpenGL -framework AppKit
 endif
 
-LIBS			:=		$(MLXFLAGS) $(LIB_PATH) -lft -lleaky -lm
+LIBS			:=		$(MLXFLAGS) $(LIB_PATH) -lftd -lleaky -lm
 
 BIN_CC			:=		gcc
 
 BIN_CFLAGS		:=
 BIN_CFLAGS		+=		-MD
 BIN_CFLAGS		+=		-Wall -Wextra -Werror
-BIN_CFLAGS		+=		#-g3 -fsanitize=address
+BIN_CFLAGS		+=		-g3 -fsanitize=address
 BIN_CFLAGS		+=		$(INC_PATH)
 
 BIN_LDFLAGS		:=
-BIN_LDFLAGS		+=		#-fsanitize=address
+BIN_LDFLAGS		+=		-fsanitize=address
 
-LIBFT_LIB		:=		$(LIBFT_DIR)/libft.a
+LIBFT_LIB		:=		$(LIBFT_DIR)/libftd.a
 
 export MAKE_DIR
 export OBJS_DIR
