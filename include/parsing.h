@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/16 18:35:28 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/02 13:45:48 by njennes          ###   ########.fr       */
+/*   Created: 2022/05/02 13:32:54 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/02 13:32:54 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "core.h"
-#include "leaky.h"
+#ifndef PARSING_H
+# define PARSING_H
 
-int	main(int argc, char **argv)
-{
-	t_mlx	*app;
 
-	if (!is_legal_file(argc, argv))
-		return (error_code_msg(1, "Error"));
-	app = init_app(argv[1]);
-	return (0);
-}
+
+#endif

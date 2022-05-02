@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   error_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 15:27:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/04/22 14:52:04 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/02 13:43:38 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ void	ft_error_msg(char *msg)
 {
 	dprintf(2, "Error: %s\n", msg);
 	exit(EXIT_FAILURE);
+}
+
+int	error_code_msg(int code, char *msg)
+{
+	printf("%s\n", msg);
+	return (code);
 }
 
 void	ft_free_2d(void **ptr, int i)
