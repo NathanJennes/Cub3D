@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:51:10 by cybattis          #+#    #+#             */
-/*   Updated: 2022/04/22 14:52:04 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/02 17:30:47 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "core.h"
+#include "leaky.h"
 
 void	init_window(t_mlx *app, char *win_name)
 {
@@ -20,10 +21,7 @@ void	init_window(t_mlx *app, char *win_name)
 		error_close_app(app);
 	app->win = mlx_new_window(app->mlx, WIN_W, WIN_H, win_name);
 	if (!app->win)
-	{
-		free(app->mlx);
 		error_close_app(app);
-	}
 	app->frame.img = mlx_new_image(app->mlx, WIN_W, WIN_H);
 	if (!app->frame.img)
 		error_close_app(app);
@@ -35,18 +33,37 @@ void	init_window(t_mlx *app, char *win_name)
 
 int	close_app(t_mlx *app)
 {
+	check_leaky_errors();
 	mlx_destroy_image(app->mlx, app->frame.img);
 	mlx_destroy_window(app->mlx, app->win);
-	free(app);
+	gc_clean();
 	exit(EXIT_SUCCESS);
 }
 
 void	error_close_app(t_mlx *app)
 {
+	check_leaky_errors();
 	if (app->mlx && app->frame.img)
 		mlx_destroy_image(app->mlx, app->frame.img);
 	if (app->mlx && app->win)
 		mlx_destroy_window(app->mlx, app->win);
-	free(app);
+	gc_clean();
+	printf("Error\n");
 	exit(EXIT_FAILURE);
+}
+
+void	check_leaky_errors(void)
+{
+	size_t	i;
+
+	if (gc_strarray_size((char **) gc_get_errors()) == 0)
+		printf("Leaky has no errors\n");
+	else
+		printf("Leaky has errors\n");
+	i = 0;
+	while (i < gc_strarray_size((char **) gc_get_errors()))
+	{
+		printf("Error[%lu]: %s\n", i, gc_get_errors()[i]);
+		i++;
+	}
 }

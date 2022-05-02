@@ -4,7 +4,7 @@ NAME 			=	cub3d
 # ****************************************************************************
 
 SRCS_FILE		=	main.c core.c hooks.c error_utils.c colors_utils.c draw.c	\
-					init.c gc.c
+					init.c gc.c parsing.c parsing_utils.c
 
 SRCS			=	$(addprefix $(SRCS_DIR)/, $(SRCS_FILE))
 OBJS			=	$(addprefix $(OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
