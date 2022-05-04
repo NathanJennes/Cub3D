@@ -1,45 +1,65 @@
-NAME 			=	cub3d
+RELEASE_NAME 			:=	cub3d
+DEBUG_NAME				:=	cub3dd
 
 # Source files
 # ****************************************************************************
 
-SRCS_FILE		=	main.c core.c hooks.c error_utils.c colors_utils.c draw.c	\
+SRCS_FILE		:=	main.c core.c hooks.c error_utils.c colors_utils.c draw.c	\
 					init.c gc.c parsing.c parsing_utils.c
 
-SRCS			=	$(addprefix $(SRCS_DIR)/, $(SRCS_FILE))
-OBJS			=	$(addprefix $(OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
+SRCS			:=	$(addprefix $(SRCS_DIR)/, $(SRCS_FILE))
+RELEASE_OBJS	:=	$(addprefix $(RELEASE_OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
+DEBUG_OBJS		:=	$(addprefix $(DEBUG_OBJS_DIR)/, $(notdir $(SRCS:.c=d.o)))
 
-DEPENDS			=	$(OBJS:.o=.d)
+DEPENDS			:=	$(RELEASE_OBJS:.o=.d) $(DEBUG_OBJS:.o=.d)
 
 # Recipe
 # ****************************************************************************
 
-all: $(NAME)
+.PHONY: all
+all: $(RELEASE_NAME)
 
-$(OBJS_DIR)/%.o:	$(SRCS_DIR)/%.c | $(OBJS_DIR)
-	@$(BIN_CC) $(BIN_CFLAGS) -c $< -o $@
-	@printf "$(_GREEN)█$(_END)"
+.PHONY: debug
+debug: $(DEBUG_NAME)
 
-$(NAME): $(OBJS) $(LIBFT_LIB)
-	@printf "$(_BLUE)\nCompiled source files\n"
-	@$(BIN_CC) $(BIN_CFLAGS) $(OBJS) $(LIBS) -o ../$@
-	@printf "$(_GREEN)Finish compiling $(NAME)!$(_END)\n"
-
+.PHONY: bonus
 bonus: all
 
-debug:
-	@$(MAKE) $(NAME_DBG) -C .
+$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/%.c | $(RELEASE_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
+	@printf "$(_BLUE)\nCompiled source files\n"
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(RELEASE_OBJS) $(RELEASE_LIBS) -o ../$@
+	@printf "$(_GREEN)Finish compiling $(RELEASE_NAME)!$(_END)\n"
+
+$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/%.c | $(DEBUG_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(DEBUG_NAME): $(DEBUG_OBJS) $(DEBUG_LIBFT_LIB) $(DEBUG_LEAKY_LIB)
+	@printf "$(_BLUE)\nCompiled source files\n"
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(DEBUG_OBJS) $(DEBUG_LIBS) -o ../$@
+	@printf "$(_GREEN)Finish compiling $(DEBUG_NAME)!$(_END)\n"
 
 clean:
 	@printf "$(_YELLOW)Removing object files ...$(_END)\n"
-	@rm -rf $(OBJS_DIR)
+	@rm -rf $(RELEASE_OBJS_DIR)
+	@rm -rf $(DEBUG_OBJS_DIR)
 	@rm -fr *.dSYM
 
 fclean:	clean
 	@printf "$(_RED)Removing Executable ...$(_END)\n"
-	@rm -rf ../$(NAME)
+	@rm -rf ../$(RELEASE_NAME)
+	@rm -rf ../$(DEBUG_NAME)
 
 re:		fclean all
 
-$(OBJS_DIR):
-	@mkdir -p $(OBJS_DIR)
+$(RELEASE_OBJS_DIR):
+	@mkdir -p $(RELEASE_OBJS_DIR)
+
+$(DEBUG_OBJS_DIR):
+	@mkdir -p $(DEBUG_OBJS_DIR)
+
+-include $(DEPENDS)

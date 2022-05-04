@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/02 17:31:03 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 18:26:09 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,7 @@ void	init_map(t_mlx *app, char *file)
 	while (line)
 	{
 		parse_line(app, &infos, line);
-		check_leaky_errors();
-		getchar();
 		gc_free(line);
-		check_leaky_errors();
-		getchar();
 		line = gc_get_next_line(fd);
 	}
 	if (!infos.map_raw)
@@ -44,7 +40,6 @@ void	init_map(t_mlx *app, char *file)
 	construct_map(&infos);
 	if (!infos.spawn_dir)
 		error_close_app(app);
-	printf("hey\n");
 	for (size_t i = 0; i < infos.height; i++)
 	{
 		for (size_t j = 0; j < infos.width; j++)

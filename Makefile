@@ -3,7 +3,9 @@ MAKE_DIR		:=		$(PWD)
 MASTER_MAKE		:=		$(MAKE_DIR)/Makefile
 
 SRCS_DIR		:=		$(MAKE_DIR)/src
-OBJS_DIR		:=		$(MAKE_DIR)/obj
+
+RELEASE_OBJS_DIR	:=		$(MAKE_DIR)/obj
+DEBUG_OBJS_DIR		:=		$(MAKE_DIR)/objd
 
 LIBFT_DIR		:=		$(MAKE_DIR)/Libft
 LEAKY_DIR		:=		$(LIBFT_DIR)/Leaky
@@ -20,33 +22,52 @@ else
 	MLXFLAGS	=		-lmlx -framework OpenGL -framework AppKit
 endif
 
-LIBS			:=		$(MLXFLAGS) $(LIB_PATH) -lft -lleaky -lm
+RELEASE_LIBS		:=		$(MLXFLAGS) $(LIB_PATH) -lft -lleaky -lm
+DEBUG_LIBS			:=		$(MLXFLAGS) $(LIB_PATH) -lftd -lleakyd -lm
 
-BIN_CC			:=		gcc
+BIN_CC				:=		gcc
 
-BIN_CFLAGS		:=
-BIN_CFLAGS		+=		-MD
-BIN_CFLAGS		+=		-Wall -Wextra -Werror
-BIN_CFLAGS		+=		#-g3 -fsanitize=address
-BIN_CFLAGS		+=		$(INC_PATH)
+RELEASE_BIN_CFLAGS		:=
+RELEASE_BIN_CFLAGS		+=		-MD
+RELEASE_BIN_CFLAGS		+=		-Wall -Wextra -Werror
+RELEASE_BIN_CFLAGS		+=		$(INC_PATH)
 
-BIN_LDFLAGS		:=
-BIN_LDFLAGS		+=		#-fsanitize=address
+DEBUG_BIN_CFLAGS		:=
+DEBUG_BIN_CFLAGS		+=		-MD
+DEBUG_BIN_CFLAGS		+=		-Wall -Wextra -Werror
+DEBUG_BIN_CFLAGS		+=		-g3 -fsanitize=address -DDEBUG
+DEBUG_BIN_CFLAGS		+=		$(INC_PATH)
 
-LIBFT_LIB		:=		$(LIBFT_DIR)/libft.a
+RELEASE_BIN_LDFLAGS		:=
+
+DEBUG_BIN_LDFLAGS		:=
+DEBUG_BIN_LDFLAGS		+=		-fsanitize=address
+
+RELEASE_LIBFT_LIB	:=		$(LIBFT_DIR)/libft.a
+DEBUG_LIBFT_LIB		:=		$(LIBFT_DIR)/libftd.a
+
+RELEASE_LEAKY_LIB	:=		$(LEAKY_DIR)/libleaky.a
+DEBUG_LEAKY_LIB		:=		$(LEAKY_DIR)/libleakyd.a
 
 export MAKE_DIR
-export OBJS_DIR
+export RELEASE_OBJS_DIR
+export DEBUG_OBJS_DIR
 export MASTER_MAKE
 export SRCS_DIR
 export OBJS_DIR
 export INC_PATH
 export LIB_PATH
-export LIBS
+export RELEASE_LIBS
+export DEBUG_LIBS
 export BIN_CC
-export BIN_CFLAGS
-export BIN_LDFLAGS
-export LIBFT_LIB
+export RELEASE_BIN_CFLAGS
+export DEBUG_BIN_CFLAGS
+export RELEASE_BIN_LDFLAGS
+export DEBUG_BIN_LDFLAGS
+export DEBUG_LIBFT_LIB
+export RELEASE_LIBFT_LIB
+export DEBUG_LEAKY_LIB
+export RELEASE_LEAKY_LIB
 export LIB_PATH
 
 .PHONY: all
@@ -62,7 +83,7 @@ debug: header
 ifeq ($(OS), Darwin)
 	@$(MAKE) -j4 -C $(MLX_DIR)
 endif
-	@$(MAKE) -j4 -C $(SRCS_DIR) -r -R --warn-undefined-variables
+	@$(MAKE) -j4 -C $(SRCS_DIR) -r -R --warn-undefined-variables debug
 
 .PHONY: bonus
 bonus: all

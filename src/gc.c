@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:51:26 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/02 14:51:36 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 17:33:16 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,13 @@ static int	gc_callback(void *ptr);
 
 void	init_gc(void)
 {
-	gc_ignore_warnings(0);
 	gc_clean_on_error(0);
 	gc_set_callback(gc_callback);
-	gc_set_default_capacity(10);
+	gc_set_default_capacity(1);
 }
 
 void	post_init_gc(t_mlx *app)
 {
-
 	gc_set_callback_param(app);
 }
 

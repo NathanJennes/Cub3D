@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/02 17:26:23 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 18:25:36 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_mlx	*init_app(char *file)
 	t_mlx	*app;
 
 	init_gc();
+	printf("Initial app allocation\n");
 	app = gc_calloc(1, sizeof(t_mlx));
 	post_init_gc(app);
 	gc_object_start(app);

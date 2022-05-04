@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/02 17:31:45 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 14:07:25 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,19 +65,10 @@ void	add_map_row(t_mlx *app, t_map_info *infos, char *line)
 	infos->height++;
 	if (contains_illegal_char(infos, line))
 		error_close_app(app);
-	check_leaky_errors();
-	getchar();
-	printf("hey\n");
 	if (!infos->map_raw)
 		infos->map_raw = gc_strarray_init();
-	check_leaky_errors();
-	getchar();
-	printf("lol\n");
 	infos->map_raw = gc_strarray_append(infos->map_raw, line);
 	line = ft_trimr(line);
-	check_leaky_errors();
-	getchar();
-	printf("lel\n");
 	if (ft_strlen(line) > infos->width)
 		infos->width = ft_strlen(line);
 }

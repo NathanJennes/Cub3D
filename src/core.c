@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:51:10 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/02 17:30:47 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 19:09:58 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ int	close_app(t_mlx *app)
 	check_leaky_errors();
 	mlx_destroy_image(app->mlx, app->frame.img);
 	mlx_destroy_window(app->mlx, app->win);
+	printf("Footprint before free: %lu\n", gc_getfootprint());
+	gc_print_status();
+	gc_free(app);
+	printf("Footprint after free: %lu\n", gc_getfootprint());
+	gc_print_status();
 	gc_clean();
 	exit(EXIT_SUCCESS);
 }
@@ -51,7 +56,6 @@ void	error_close_app(t_mlx *app)
 	printf("Error\n");
 	exit(EXIT_FAILURE);
 }
-
 void	check_leaky_errors(void)
 {
 	size_t	i;
