@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/05 15:35:33 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 16:25:10 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,22 @@
 # define VOID		-1
 
 # define BKGD_COLOR	0x0037464B
+
+# define SLIDER_PAD		5
+# define SLIDER_BTN_W	20
+# define SLIDER_H		20
+# define SLIDER_W		75
+# define SLIDER_BTN2_XO	SLIDER_BTN_W + SLIDER_PAD * 2 + SLIDER_W
+
+typedef struct s_slider
+{
+	int		displayed;
+	t_vec2	pos;
+	float	increment_size;
+	float	min;
+	float	max;
+	float	value;
+}	t_slider;
 
 typedef struct s_map_info
 {
@@ -79,6 +95,7 @@ typedef struct s_mlx
 	t_frame		frame;
 	t_map_info	map;
 	t_player	player;
+	t_slider	map_scale_slider;
 }	t_mlx;
 
 /* core.c */
@@ -97,11 +114,20 @@ void		init_gc(void);
 void		clear_screen(int color);
 int			main_loop(void);
 void		mlx_pixel_put_img(int x, int y, int color);
+int			color_lerp(int col1, int col2, float value);
+
+/* colors_utils.c */
+int			create_trgb(int t, int r, int g, int b);
+int			get_t(int trgb);
+int			get_r(int trgb);
+int			get_g(int trgb);
+int			get_b(int trgb);
 
 /* rendering */
-void		render_mmap(int zoom);
+void		render_mmap(float zoom);
 void		render_circle(t_vec2 pos, float diameter, int color);
 void		render_rect(t_vec2 pos, t_vec2 size, int color);
+void		render_line(t_vec2 start, t_vec2 end, int col1, int col2);
 int			outside_mmap_bounds(int x, int y);
 
 /* hooks.c.c */
@@ -114,5 +140,9 @@ t_frame		*get_frame(void);
 t_map_info	*get_map_infos(void);
 t_player	*get_player(void);
 void		*get_mlx(void);
+
+/* UI */
+void		show_slider(t_slider *slider);
+void		update_slider(t_slider *slider, int mx, int my);
 
 #endif

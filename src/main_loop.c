@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 15:47:45 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 16:28:11 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	main_loop()
 
 	app = get_app();
 	clear_screen(BKGD_COLOR);
-	render_mmap(1);
+	render_mmap(app->map_scale_slider.value);
+	show_slider(&app->map_scale_slider);
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 	return (0);
 }

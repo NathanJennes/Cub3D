@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:49:16 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 15:38:56 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 16:04:43 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,27 @@ void	render_circle(t_vec2 pos, float diameter, int color)
 			j++;
 		}
 		i++;
+	}
+}
+
+void	render_line(t_vec2 start, t_vec2 end, int col1, int col2)
+{
+	double	pixels_to_draw;
+	double	pixels_drawn;
+	t_vec2	ppos;
+	t_vec2	delta;
+
+	pixels_to_draw = ft_sqrt((ft_pow2(end.x - start.x)) + \
+			ft_pow2(end.y - start.y));
+	delta.x = (end.x - start.x) / pixels_to_draw;
+	delta.y = (end.y - start.y) / pixels_to_draw;
+	ppos = vec2(start.x, start.y);
+	pixels_drawn = 0;
+	while (pixels_drawn < pixels_to_draw)
+	{
+		vec2_add(&ppos, delta);
+		mlx_pixel_put_img(ppos.x, ppos.y,
+			color_lerp(col1, col2, pixels_drawn / pixels_to_draw));
+		pixels_drawn++;
 	}
 }

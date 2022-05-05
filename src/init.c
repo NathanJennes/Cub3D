@@ -6,14 +6,15 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 15:35:42 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 16:29:13 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "parsing.h"
 
-void init_hooks();
+static void init_hooks(void);
+static void	init_ui(void);
 
 int	is_legal_file(int argc, char **argv)
 {
@@ -32,14 +33,14 @@ int	is_legal_file(int argc, char **argv)
 void	init_app(char *file)
 {
 	init_gc();
-	printf("Initial app allocation\n");
+	init_ui();
 	init_map(file);
-	init_window("Default Template");
+	init_window("Cub3d");
 	init_hooks();
 	mlx_loop(get_mlx());
 }
 
-void init_hooks()
+static void init_hooks(void)
 {
 	t_mlx	*app;
 
@@ -48,4 +49,17 @@ void init_hooks()
 	mlx_hook(app->win, 17, 0, close_app, app);
 	mlx_hook(app->win, 2, 1L << 0, key_hooks, app);
 	mlx_loop_hook(app->mlx, main_loop, app);
+}
+
+static void	init_ui(void)
+{
+	t_mlx	*app;
+
+	app = get_app();
+	app->map_scale_slider.pos = vec2(WIN_W - 150, 10);
+	app->map_scale_slider.increment_size = 0.1f;
+	app->map_scale_slider.value = 1.0f;
+	app->map_scale_slider.min = 0.2f;
+	app->map_scale_slider.max = 5.0f;
+	app->map_scale_slider.displayed = 1;
 }

@@ -9,7 +9,8 @@ SRCS_FILE		:=	main.c core.c main_loop.c error_utils.c						\
 					init.c gc.c													\
 					parsing.c parsing_utils.c									\
 					draw.c rendering_primitives.c colors_utils.c render_map.c	\
-					getters.c
+					getters.c													\
+					slider.c
 
 SRCS			:=	$(addprefix $(SRCS_DIR)/, $(SRCS_FILE))
 RELEASE_OBJS	:=	$(addprefix $(RELEASE_OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:57:26 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/05 15:36:05 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 16:28:36 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ static void	handle_moving(int keycode, t_mlx *app);
 
 int	mouse_hooks(int mousecode, int x, int y)
 {
-	(void)x;
-	(void)y;
+	t_mlx	*app;
+
+	app = get_app();
 	if (mousecode)
 		dprintf(STDERR_FILENO, "Mouse: %d\n", mousecode);
+	update_slider(&app->map_scale_slider, x, y);
 	return (0);
 }
 
