@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/05 15:33:49 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 15:35:33 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void		init_gc(void);
 
 /* draw.c */
 void		clear_screen(int color);
-int			draw_frame(void);
+int			main_loop(void);
 void		mlx_pixel_put_img(int x, int y, int color);
 
 /* rendering */

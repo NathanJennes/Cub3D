@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 15:28:45 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 15:35:42 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ void init_hooks()
 	mlx_mouse_hook(app->win, mouse_hooks, app);
 	mlx_hook(app->win, 17, 0, close_app, app);
 	mlx_hook(app->win, 2, 1L << 0, key_hooks, app);
-	mlx_loop_hook(app->mlx, draw_frame, app);
+	mlx_loop_hook(app->mlx, main_loop, app);
 }

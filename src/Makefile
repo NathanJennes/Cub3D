@@ -4,9 +4,11 @@ DEBUG_NAME				:=	cub3dd
 # Source files
 # ****************************************************************************
 
-SRCS_FILE		:=	main.c core.c hooks.c error_utils.c colors_utils.c draw.c	\
-					init.c gc.c parsing.c parsing_utils.c render_map.c			\
-					rendering_primitives.c	\
+SRCS_FILE		:=	main.c core.c main_loop.c error_utils.c						\
+					hooks.c														\
+					init.c gc.c													\
+					parsing.c parsing_utils.c									\
+					draw.c rendering_primitives.c colors_utils.c render_map.c	\
 					getters.c
 
 SRCS			:=	$(addprefix $(SRCS_DIR)/, $(SRCS_FILE))
