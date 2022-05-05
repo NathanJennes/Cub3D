@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 14:07:25 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 13:42:59 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ void	add_map_row(t_mlx *app, t_map_info *infos, char *line)
 {
 	infos->height++;
 	if (contains_illegal_char(infos, line))
+	{
+		printf("Illegal chars found in the map\n");
 		error_close_app(app);
+	}
 	if (!infos->map_raw)
 		infos->map_raw = gc_strarray_init();
 	infos->map_raw = gc_strarray_append(infos->map_raw, line);
@@ -93,7 +96,7 @@ static int	contains_illegal_char(t_map_info *infos, char *line)
 				|| line[i] == 'N' || line[i] == 'E') || !saw_wall
 				|| infos->spawn_dir))
 			return (1);
-		else if (line[i] != '0' && !ft_isalpha(line[i]))
+		else if (line[i] != '0' && !ft_isalpha(line[i]) && line[i] != ' ')
 			return (1);
 		else
 			last_is_wall = 0;

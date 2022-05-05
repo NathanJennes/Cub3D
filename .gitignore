@@ -2,6 +2,7 @@
 obj/
 .idea/
 cub3d
+cub3dd
 
 *.o
 *.d

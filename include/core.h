@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/02 16:23:54 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 13:39:11 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,14 @@
 #  define WIN_H		540
 # endif
 
-# define WALL 1
-# define EMPTY 0
-# define VOID -1
+# define MMAP_W				500
+# define MMAP_H				500
+# define MMAP_PAD			20
+# define MMAP_ZOOM_FACTOR	20
+
+# define WALL		1
+# define EMPTY		0
+# define VOID		-1
 
 # define BKGD_COLOR	0x0037464B
 
@@ -55,12 +60,19 @@ typedef struct s_frame
 	int		endian;
 }	t_frame;
 
+typedef struct s_player
+{
+	t_vec2	pos;
+	float	direction;
+}	t_player;
+
 typedef struct s_mlx
 {
 	void		*mlx;
 	void		*win;
 	t_frame		frame;
 	t_map_info	map;
+	t_player	player;
 }	t_mlx;
 
 /* core.c */
@@ -80,6 +92,9 @@ void		post_init_gc(t_mlx *app);
 void		clear_screen(t_mlx *app, int color);
 int			draw_frame(t_mlx *app);
 void		mlx_pixel_put_img(t_frame *frame, int x, int y, int color);
+
+/* rendering */
+void		render_map(t_mlx *app, int zoom);
 
 /* hooks.c.c */
 int			key_hooks(int keycode, t_mlx *app);

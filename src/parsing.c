@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 13:03:41 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 13:20:28 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	init_map(t_mlx *app, char *file)
 	if (!infos.spawn_dir)
 		error_close_app(app);
 	gc_strarray_free(infos.map_raw);
+	app->map = infos;
+	app->player.pos = infos.spawn_pos;
 }
 
 static void	parse_line(t_mlx *app, t_map_info *infos, char *line)

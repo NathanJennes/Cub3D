@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 15:56:16 by cybattis          #+#    #+#             */
-/*   Updated: 2022/04/20 21:08:04 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/05 13:39:32 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 
-int	draw_frame(t_mlx *fdf)
+int	draw_frame(t_mlx *app)
 {
-	clear_screen(fdf, BKGD_COLOR);
-	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->frame.img, 0, 0);
+	clear_screen(app, BKGD_COLOR);
+	render_map(app, 2);
+	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 	return (0);
 }
 
