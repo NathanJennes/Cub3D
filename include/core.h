@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/05 14:12:53 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 14:52:43 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 #  define WIN_H		540
 # endif
 
-# define MMAP_W				500
-# define MMAP_H				500
+# define MMAP_W				100
+# define MMAP_H				50
 # define MMAP_PAD			20
 # define MMAP_ZOOM_FACTOR	20
 # define MMAP_PLAYER_DIAM	10
@@ -102,6 +102,8 @@ void		mlx_pixel_put_img(t_frame *frame, int x, int y, int color);
 /* rendering */
 void		render_mmap(t_mlx *app, int zoom);
 void		render_circle(t_frame *frame, t_vec2 pos, float diameter, int color);
+void		render_rect(t_frame *frame, t_vec2 pos, t_vec2 size, int color);
+int			outside_mmap_bounds(int x, int y);
 
 /* hooks.c.c */
 int			key_hooks(int keycode, t_mlx *app);
