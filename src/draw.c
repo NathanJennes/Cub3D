@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 15:56:16 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/05 14:06:27 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 14:15:39 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ void	mlx_pixel_put_img(t_frame *frame, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	render_circle(t_frame *frame, t_vec2 pos, int diameter, int color)
+void	render_circle(t_frame *frame, t_vec2 pos, float diameter, int color)
 {
-	int	i;
-	int	j;
-	int	diameter_2;
+	float	i;
+	float	j;
+	float	diameter_2;
 
 	i = -diameter / 2;
 	diameter_2 = (diameter / 2) * (diameter / 2);
@@ -67,7 +67,7 @@ void	render_circle(t_frame *frame, t_vec2 pos, int diameter, int color)
 		j = -diameter / 2;
 		while (j < diameter / 2)
 		{
-			if (i * i + j * j <= diameter_2)
+			if (i * i + j * j < diameter_2)
 				mlx_pixel_put_img(frame, pos.x + j, pos.y + i, color);
 			j++;
 		}

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 13:11:29 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 14:05:14 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 14:07:15 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	render_mmap(t_mlx *app, int zoom)
 		+ MMAP_PAD;
 	player_pos.y = (player_pos.y / CELL_HEIGHT) * cell_size + cell_size / 2
 		 + MMAP_PAD;
-	printf("Drawing player at %d %d\n", (int)player_pos.x, (int)player_pos.y);
 	render_circle(&app->frame, player_pos, MMAP_PLAYER_DIAM,
 		create_trgb(0, 255, 0, 0));
 }
