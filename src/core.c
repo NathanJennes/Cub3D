@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:51:10 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/04 19:09:58 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 15:32:05 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,44 @@
 #include "core.h"
 #include "leaky.h"
 
-void	init_window(t_mlx *app, char *win_name)
+void	init_window(char *win_name)
 {
+	t_mlx	*app;
+
+	app = get_app();
 	app->mlx = mlx_init();
 	if (!app->mlx)
-		error_close_app(app);
+		error_close_app();
 	app->win = mlx_new_window(app->mlx, WIN_W, WIN_H, win_name);
 	if (!app->win)
-		error_close_app(app);
+		error_close_app();
 	app->frame.img = mlx_new_image(app->mlx, WIN_W, WIN_H);
 	if (!app->frame.img)
-		error_close_app(app);
+		error_close_app();
 	app->frame.addr = mlx_get_data_addr(app->frame.img, &app->frame.bits_pp,
 			&app->frame.line_length, &app->frame.endian);
 	if (!app->frame.addr)
-		error_close_app(app);
+		error_close_app();
 }
 
-int	close_app(t_mlx *app)
+int	close_app()
 {
 	check_leaky_errors();
-	mlx_destroy_image(app->mlx, app->frame.img);
-	mlx_destroy_window(app->mlx, app->win);
-	printf("Footprint before free: %lu\n", gc_getfootprint());
-	gc_print_status();
-	gc_free(app);
-	printf("Footprint after free: %lu\n", gc_getfootprint());
+	mlx_destroy_image(get_mlx(), get_frame()->img);
+	mlx_destroy_window(get_mlx(), get_app()->win);
 	gc_print_status();
 	gc_clean();
+	printf("Footprint after clean: %lu\n", gc_getfootprint());
 	exit(EXIT_SUCCESS);
 }
 
-void	error_close_app(t_mlx *app)
+void	error_close_app()
 {
 	check_leaky_errors();
-	if (app->mlx && app->frame.img)
-		mlx_destroy_image(app->mlx, app->frame.img);
-	if (app->mlx && app->win)
-		mlx_destroy_window(app->mlx, app->win);
+	if (get_mlx() && get_frame()->img)
+		mlx_destroy_image(get_mlx(), get_frame()->img);
+	if (get_mlx() && get_app()->win)
+		mlx_destroy_window(get_mlx(), get_app()->win);
 	gc_clean();
 	printf("Error\n");
 	exit(EXIT_FAILURE);

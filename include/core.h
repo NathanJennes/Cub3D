@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/05 14:52:43 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 15:33:49 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,31 +82,37 @@ typedef struct s_mlx
 }	t_mlx;
 
 /* core.c */
-void		init_window(t_mlx *app, char *win_name);
-int			close_app(t_mlx *app);
-void		error_close_app(t_mlx *app);
+void		init_window(char *win_name);
+int			close_app(void);
+void		error_close_app(void);
 int			error_code_msg(int code, char *msg);
 void		check_leaky_errors(void);
 
 /* initialization */
 int			is_legal_file(int argc, char **argv);
-t_mlx		*init_app(char *file);
+void		init_app(char *file);
 void		init_gc(void);
-void		post_init_gc(t_mlx *app);
 
 /* draw.c */
-void		clear_screen(t_mlx *app, int color);
-int			draw_frame(t_mlx *app);
-void		mlx_pixel_put_img(t_frame *frame, int x, int y, int color);
+void		clear_screen(int color);
+int			draw_frame(void);
+void		mlx_pixel_put_img(int x, int y, int color);
 
 /* rendering */
-void		render_mmap(t_mlx *app, int zoom);
-void		render_circle(t_frame *frame, t_vec2 pos, float diameter, int color);
-void		render_rect(t_frame *frame, t_vec2 pos, t_vec2 size, int color);
+void		render_mmap(int zoom);
+void		render_circle(t_vec2 pos, float diameter, int color);
+void		render_rect(t_vec2 pos, t_vec2 size, int color);
 int			outside_mmap_bounds(int x, int y);
 
 /* hooks.c.c */
-int			key_hooks(int keycode, t_mlx *app);
+int			key_hooks(int keycode);
 int			mouse_hooks(int mousecode, int x, int y);
+
+/* getters */
+t_mlx		*get_app(void);
+t_frame		*get_frame(void);
+t_map_info	*get_map_infos(void);
+t_player	*get_player(void);
+void		*get_mlx(void);
 
 #endif

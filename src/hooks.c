@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:57:26 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/05 14:12:49 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 15:36:05 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,16 @@ int	mouse_hooks(int mousecode, int x, int y)
 	return (0);
 }
 
-int	key_hooks(int keycode, t_mlx *app)
+int	key_hooks(int keycode)
 {
+	t_mlx	*app;
+
+	app = get_app();
 	if (keycode == KEY_LEFT || keycode == KEY_UP || keycode == KEY_RIGHT
 		|| keycode == KEY_DOWN)
 		dprintf(STDERR_FILENO, "Arrow: %d\n", keycode);
 	else if (keycode == KEY_ESC)
-		close_app(app);
+		close_app();
 	else
 		handle_moving(keycode, app);
 	return (0);

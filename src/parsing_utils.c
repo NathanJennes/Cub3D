@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 13:42:59 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 15:37:33 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,57 +17,54 @@
 
 static int	contains_illegal_char(t_map_info *infos, char *line);
 
-t_vec3	parse_color(t_mlx *app, char *line)
+t_vec3	parse_color(char *line)
 {
 	t_vec3	color;
 
 	if (!ft_isdigit(*line))
-		error_close_app(app);
+		error_close_app();
 	color.x = ft_atoi(line);
 	if (color.x < 0 || color.x > 255)
-		error_close_app(app);
+		error_close_app();
 	while (ft_isdigit(*line))
 		line++;
 	if (*line != ',')
-		error_close_app(app);
+		error_close_app();
 	line++;
 	color.y = ft_atoi(line);
 	if (color.y < 0 || color.y > 255)
-		error_close_app(app);
+		error_close_app();
 	while (ft_isdigit(*line))
 		line++;
 	if (*line != ',')
-		error_close_app(app);
+		error_close_app();
 	line++;
 	color.z = ft_atoi(line);
 	if (color.z < 0 || color.z > 255)
-		error_close_app(app);
+		error_close_app();
 	return (color);
 }
 
-char	*parse_texture(t_mlx *app, char *line)
+char	*parse_texture(char *line)
 {
 	char	*path;
 	int		fd;
 
 	if (!*line)
-		error_close_app(app);
+		error_close_app();
 	path = gc_strdup(line);
 	fd = open(path, O_RDONLY);
 	if (!fd || fd == -1)
-		error_close_app(app);
+		error_close_app();
 	close(fd);
 	return (path);
 }
 
-void	add_map_row(t_mlx *app, t_map_info *infos, char *line)
+void	add_map_row(t_map_info *infos, char *line)
 {
 	infos->height++;
 	if (contains_illegal_char(infos, line))
-	{
-		printf("Illegal chars found in the map\n");
-		error_close_app(app);
-	}
+		error_close_app();
 	if (!infos->map_raw)
 		infos->map_raw = gc_strarray_init();
 	infos->map_raw = gc_strarray_append(infos->map_raw, line);

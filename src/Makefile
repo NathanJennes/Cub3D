@@ -6,7 +6,8 @@ DEBUG_NAME				:=	cub3dd
 
 SRCS_FILE		:=	main.c core.c hooks.c error_utils.c colors_utils.c draw.c	\
 					init.c gc.c parsing.c parsing_utils.c render_map.c			\
-					rendering_primitives.c
+					rendering_primitives.c	\
+					getters.c
 
 SRCS			:=	$(addprefix $(SRCS_DIR)/, $(SRCS_FILE))
 RELEASE_OBJS	:=	$(addprefix $(RELEASE_OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))

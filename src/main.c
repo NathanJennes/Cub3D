@@ -10,17 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "core.h"
 #include "leaky.h"
 
 int	main(int argc, char **argv)
 {
-	t_mlx	*app;
-
 	if (!is_legal_file(argc, argv))
 		return (error_code_msg(1, "Error"));
-	app = init_app(argv[1]);
+	init_app(argv[1]);
 	gc_clean();
 	return (0);
 }

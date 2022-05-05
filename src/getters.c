@@ -1,31 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rendering_primitives.c                             :+:      :+:    :+:   */
+/*   getters.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 14:49:16 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 14:51:59 by njennes          ###   ########.fr       */
+/*   Created: 2022/05/05 15:19:50 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/05 15:24:19 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 
-void	render_rect(t_vec2 pos, t_vec2 size, int color)
+t_mlx	*get_app(void)
 {
-	int y;
-	int x;
+	static t_mlx	app = {0};
 
-	y = 0;
-	while (y < size.y)
-	{
-		x = 0;
-		while (x < size.x)
-		{
-			mlx_pixel_put_img(x + pos.x, y + pos.y, color);
-			x++;
-		}
-		y++;
-	}
+	return (&app);
+}
+
+t_frame	*get_frame(void)
+{
+	t_mlx	*app;
+
+	app = get_app();
+	return (&app->frame);
+}
+
+t_map_info	*get_map_infos(void)
+{
+	t_mlx	*app;
+
+	app = get_app();
+	return (&app->map);
+}
+
+t_player	*get_player(void)
+{
+	t_mlx	*app;
+
+	app = get_app();
+	return (&app->player);
+}
+
+void	*get_mlx(void)
+{
+	t_mlx	*app;
+
+	app = get_app();
+	return (app->mlx);
 }
