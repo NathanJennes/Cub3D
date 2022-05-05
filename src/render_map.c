@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 13:11:29 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 13:38:19 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 14:05:14 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,21 @@ static void	draw_cells(t_mlx *app, int cell_size);
 static void	render_mmap_wall(t_mlx *app, int x, int y, int cell_size);
 static void	render_mmap_empty(t_mlx *app, int x, int y, int cell_size);
 
-void	render_map(t_mlx *app, int zoom)
+void	render_mmap(t_mlx *app, int zoom)
 {
 	int			cell_size;
+	t_vec2		player_pos;
 
 	cell_size = MMAP_ZOOM_FACTOR * zoom;
 	draw_cells(app, cell_size);
+	player_pos = app->player.pos;
+	player_pos.x = (player_pos.x / CELL_WIDTH) * cell_size + cell_size / 2
+		+ MMAP_PAD;
+	player_pos.y = (player_pos.y / CELL_HEIGHT) * cell_size + cell_size / 2
+		 + MMAP_PAD;
+	printf("Drawing player at %d %d\n", (int)player_pos.x, (int)player_pos.y);
+	render_circle(&app->frame, player_pos, MMAP_PLAYER_DIAM,
+		create_trgb(0, 255, 0, 0));
 }
 
 static void	draw_cells(t_mlx *app, int cell_size)
