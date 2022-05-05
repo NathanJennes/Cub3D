@@ -104,6 +104,9 @@ fclean: clean
 .PHONY: re
 re: fclean all
 
+.PHONY: debug_re
+debug_re: fclean debug
+
 # Misc
 # =====================
 

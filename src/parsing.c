@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 18:26:09 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 13:03:41 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,7 @@ void	init_map(t_mlx *app, char *file)
 	construct_map(&infos);
 	if (!infos.spawn_dir)
 		error_close_app(app);
-	for (size_t i = 0; i < infos.height; i++)
-	{
-		for (size_t j = 0; j < infos.width; j++)
-		{
-			printf("%d ", infos.map[i][j]);
-		}
-		printf("\n");
-	}
+	gc_strarray_free(infos.map_raw);
 }
 
 static void	parse_line(t_mlx *app, t_map_info *infos, char *line)
