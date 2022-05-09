@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include "core.h"
 #include "input_code.h"
+#include "ui.h"
 
 static void	handle_moving(int keycode, t_mlx *app);
 
