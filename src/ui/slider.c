@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   slider.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:50:41 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 16:38:18 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/09 16:31:23 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
+#include "ui.h"
+#include "render.h"
 
 void	show_slider(t_slider *slider)
 {

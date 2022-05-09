@@ -4,15 +4,28 @@ DEBUG_NAME				:=	cub3dd
 # Source files
 # ****************************************************************************
 
-SRCS_FILE		:=	main.c core.c main_loop.c error_utils.c						\
-					hooks.c														\
-					init.c gc.c													\
-					parsing.c parsing_utils.c									\
-					draw.c rendering_primitives.c colors_utils.c render_map.c	\
-					getters.c													\
-					slider.c
+CORE_DIR		:=	core
+CORE_FILE		:=	main.c core.c main_loop.c error_utils.c hooks.c init.c gc.c	\
+					getters.c
+CORE_SRCS		:=	$(addprefix $(CORE_DIR)/, $(CORE_FILE))
 
-SRCS			:=	$(addprefix $(SRCS_DIR)/, $(SRCS_FILE))
+PARSING_DIR		:=	parsing
+PARSING_FILE	:=	parsing.c parsing_utils.c
+PARSING_SRCS	:=	$(addprefix $(PARSING_DIR)/, $(PARSING_FILE))
+
+RENDER_DIR		:=	render
+RENDER_FILE		:=	draw.c rendering_primitives.c colors_utils.c render_map.c
+RENDER_SRCS		:=	$(addprefix $(RENDER_DIR)/, $(RENDER_FILE))
+
+UI_DIR			:=	ui
+UI_FILE			:=	fps_counter.c ui_helper.c slider.c
+UI_SRCS			:=	$(addprefix $(UI_DIR)/, $(UI_FILE))
+
+SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\
+					$(addprefix $(SRCS_DIR)/, $(PARSING_SRCS))					\
+					$(addprefix $(SRCS_DIR)/, $(UI_SRCS))						\
+					$(addprefix $(SRCS_DIR)/, $(RENDER_SRCS))
+
 RELEASE_OBJS	:=	$(addprefix $(RELEASE_OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
 DEBUG_OBJS		:=	$(addprefix $(DEBUG_OBJS_DIR)/, $(notdir $(SRCS:.c=d.o)))
 
@@ -30,7 +43,23 @@ debug: $(DEBUG_NAME)
 .PHONY: bonus
 bonus: all
 
-$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/%.c | $(RELEASE_OBJS_DIR)
+# --------------------------- #
+#           Release           #
+# --------------------------- #
+
+$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(CORE_DIR)/%.c | $(RELEASE_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(PARSING_DIR)/%.c | $(RELEASE_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(RENDER_DIR)/%.c | $(RELEASE_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(UI_DIR)/%.c | $(RELEASE_OBJS_DIR)
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
@@ -39,7 +68,23 @@ $(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(RELEASE_OBJS) $(RELEASE_LIBS) -o ../$@
 	@printf "$(_GREEN)Finish compiling $(RELEASE_NAME)!$(_END)\n"
 
-$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/%.c | $(DEBUG_OBJS_DIR)
+# --------------------------- #
+#           Debug             #
+# --------------------------- #
+
+$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(CORE_DIR)/%.c | $(DEBUG_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(PARSING_DIR)/%.c | $(DEBUG_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(RENDER_DIR)/%.c | $(DEBUG_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_DIR)/%.c | $(DEBUG_OBJS_DIR)
 	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
