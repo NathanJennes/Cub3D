@@ -12,7 +12,12 @@ SRCS_FILE		:=	main.c core.c main_loop.c error_utils.c						\
 					getters.c													\
 					slider.c
 
-SRCS			:=	$(addprefix $(SRCS_DIR)/, $(SRCS_FILE))
+TEXTURES_DIR	:=	textures
+TEXTURES		:=	xpm_loader.c
+
+SRCS			:=	$(addprefix $(SRCS_DIR)/, $(SRCS_FILE))	\
+					$(addprefix $(SRCS_DIR)/, $(addprefix $(TEXTURES_DIR)/, $(TEXTURES)))
+
 RELEASE_OBJS	:=	$(addprefix $(RELEASE_OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
 DEBUG_OBJS		:=	$(addprefix $(DEBUG_OBJS_DIR)/, $(notdir $(SRCS:.c=d.o)))
 
@@ -34,12 +39,20 @@ $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/%.c | $(RELEASE_OBJS_DIR)
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
+$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(TEXTURES_DIR)/%.c | $(RELEASE_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
 $(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
 	@printf "$(_BLUE)\nCompiled source files\n"
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(RELEASE_OBJS) $(RELEASE_LIBS) -o ../$@
 	@printf "$(_GREEN)Finish compiling $(RELEASE_NAME)!$(_END)\n"
 
 $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/%.c | $(DEBUG_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(TEXTURES_DIR)/%.c | $(DEBUG_OBJS_DIR)
 	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
