@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_loop.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 16:28:11 by njennes          ###   ########.fr       */
+/*   Created: 2022/01/16 18:35:28 by cybattis          #+#    #+#             */
+/*   Updated: 2022/05/02 14:36:21 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
+#include "leaky.h"
+#include "error_utils.h"
 
-int	main_loop()
+int	main(int argc, char **argv)
 {
-	t_mlx	*app;
-
-	app = get_app();
-	clear_screen(BKGD_COLOR);
-	render_mmap(app->map_scale_slider.value);
-	show_slider(&app->map_scale_slider);
-	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
+	if (!is_legal_file(argc, argv))
+		return (error_code_msg(1, "Error"));
+	init_app(argv[1]);
+	gc_clean();
 	return (0);
 }

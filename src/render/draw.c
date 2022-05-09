@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "core.h"
+#include "colors.h"
 
 static int	pixel_in_canvas(int x, int y);
 

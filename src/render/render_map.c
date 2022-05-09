@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 13:11:29 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 15:41:06 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/09 16:32:00 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
+#include "ui.h"
+#include "render.h"
 
 static void	draw_cells(int cell_size, t_vec2 offset);
 static void	render_mmap_wall(int x, int y, int cell_size);

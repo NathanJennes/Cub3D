@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "core.h"
+#include "render.h"
 
 void	render_rect(t_vec2 pos, t_vec2 size, int color)
 {

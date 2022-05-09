@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ui_helper.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/16 18:35:28 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/02 14:36:21 by njennes          ###   ########.fr       */
+/*   Created: 2022/05/09 15:36:50 by cybattis          #+#    #+#             */
+/*   Updated: 2022/05/09 17:04:51 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
-#include "leaky.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	put_text(t_mlx *app, t_vec2 pos, int color, char *str)
 {
-	if (!is_legal_file(argc, argv))
-		return (error_code_msg(1, "Error"));
-	init_app(argv[1]);
-	gc_clean();
-	return (0);
+	mlx_string_put(app->mlx, app->win, (int)pos.x, (int)pos.y, color, str);
+}
+
+int	str_px_size(char *str)
+{
+	return ((int)ft_strlen(str) * 6);
 }
