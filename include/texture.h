@@ -6,12 +6,14 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:38:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/09 22:36:53 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/09 22:59:40 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TEXTURE_H
 # define TEXTURE_H
+
+# include <stdint.h>
 
 typedef struct s_xpm_file
 {
@@ -42,5 +44,6 @@ typedef struct s_texture
 
 t_xpm_file	load_xpm(char *path);
 t_texture	create_texture_from_xpm_file(t_xpm_file file);
+void		free_texture(t_texture *texture);
 
 #endif
