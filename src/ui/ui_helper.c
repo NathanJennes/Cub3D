@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_loop.c                                        :+:      :+:    :+:   */
+/*   ui_helper.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/09 17:06:57 by cybattis         ###   ########.fr       */
+/*   Created: 2022/05/09 15:36:50 by cybattis          #+#    #+#             */
+/*   Updated: 2022/05/09 17:04:51 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
-#include "ui.h"
-#include "render.h"
+#include "libft.h"
 
-int	main_loop()
+void	put_text(t_mlx *app, t_vec2 pos, int color, char *str)
 {
-	t_mlx	*app;
+	mlx_string_put(app->mlx, app->win, (int)pos.x, (int)pos.y, color, str);
+}
 
-	app = get_app();
-	clear_screen(BKGD_COLOR);
-	render_mmap(app->map_scale_slider.value);
-	show_slider(&app->map_scale_slider);
-	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
-	if (app->ui_flags & DEBUG_UI)
-		fps_counter();
-	return (0);
+int	str_px_size(char *str)
+{
+	return ((int)ft_strlen(str) * 6);
 }

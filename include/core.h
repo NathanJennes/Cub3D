@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/09 16:29:43 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/09 16:58:16 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ typedef struct s_mlx
 	t_map_info	map;
 	t_player	player;
 	t_slider	map_scale_slider;
-	u_int64_t	start_time;
+	int64_t		start_time;
+	u_int8_t	ui_flags;
 }	t_mlx;
 
 /* core.c */
