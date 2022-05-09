@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:36:50 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/09 17:04:51 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/09 18:04:41 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,15 @@ void	put_text(t_mlx *app, t_vec2 pos, int color, char *str)
 int	str_px_size(char *str)
 {
 	return ((int)ft_strlen(str) * 6);
+}
+
+void	update_ui_flags(uint8_t flag)
+{
+	t_mlx *app;
+
+	app = get_app();
+	if (app->ui_flags & flag)
+		app->ui_flags ^= flag;
+	else
+		app->ui_flags |= flag;
 }

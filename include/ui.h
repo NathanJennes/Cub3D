@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/09 16:54:28 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/09 18:04:41 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void		show_slider(t_slider *slider);
 void		update_slider(t_slider *slider, int mx, int my);
 
 void		fps_counter(void);
+
+void		update_ui_flags(uint8_t flag);
 
 void		put_text(t_mlx *app, t_vec2 pos, int color, char *str);
 int			str_px_size(char *str);

@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:57:26 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/09 16:56:07 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/09 18:04:13 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,11 @@ int	key_hooks(int keycode)
 	else if (keycode == KEY_ESC)
 		close_app();
 	else if (keycode == KEY_F3)
-	{
-		if (app->ui_flags & DEBUG_UI)
-			app->ui_flags ^= DEBUG_UI;
-		else
-			app->ui_flags |= DEBUG_UI;
-	}
+		update_ui_flags(DEBUG_UI);
 	else
 		handle_moving(keycode, app);
 	return (0);
 }
-
-void	set_flags()
-{}
 
 static void	handle_moving(int keycode, t_mlx *app)
 {
