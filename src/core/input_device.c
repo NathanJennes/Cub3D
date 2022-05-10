@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_loop.c                                        :+:      :+:    :+:   */
+/*   input_device.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/10 21:39:18 by cybattis         ###   ########.fr       */
+/*   Created: 2022/05/10 21:37:34 by cybattis          #+#    #+#             */
+/*   Updated: 2022/05/10 21:43:09 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
-#include "ui.h"
-#include "render.h"
 
-int	main_loop()
+void	get_mouse_pos(t_mlx *app)
 {
-	t_mlx	*app;
-
-	app = get_app();
-	get_mouse_pos(app);
-	clear_screen(BKGD_COLOR);
-	if (app->ui_flags == 0)
-		ui_main_menu();
-	else
-	{
-		render_mmap(app->map_scale_slider.value);
-		show_slider(&app->map_scale_slider);
-		mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
-	}
-	if (app->ui_flags & DEBUG_UI)
-		fps_counter();
-	return (0);
+	mlx_mouse_get_pos(app->mlx, app->win, &app->mouse.pos_x, &app->mouse.pos_y);
+	if (MOUSE_DEBUG)
+		dprintf(STDERR_FILENO, "%d -- %d\n", app->mouse.pos_x, app->mouse.pos_y);
 }

@@ -6,7 +6,7 @@ DEBUG_NAME				:=	cub3dd
 
 CORE_DIR		:=	core
 CORE_FILE		:=	main.c core.c main_loop.c error_utils.c hooks.c init.c gc.c	\
-					getters.c
+					getters.c input_device.c
 CORE_SRCS		:=	$(addprefix $(CORE_DIR)/, $(CORE_FILE))
 
 PARSING_DIR		:=	parsing
@@ -18,7 +18,7 @@ RENDER_FILE		:=	draw.c rendering_primitives.c colors_utils.c render_map.c
 RENDER_SRCS		:=	$(addprefix $(RENDER_DIR)/, $(RENDER_FILE))
 
 UI_DIR			:=	ui
-UI_FILE			:=	fps_counter.c ui_helper.c slider.c
+UI_FILE			:=	fps_counter.c ui_helper.c slider.c ui_manager.c
 UI_SRCS			:=	$(addprefix $(UI_DIR)/, $(UI_FILE))
 
 SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\

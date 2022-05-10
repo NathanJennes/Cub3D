@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/09 18:04:41 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/10 20:01:06 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,11 @@
 typedef enum e_flags
 {
 	DEBUG_UI = 1,
-//	PAUSE_MENU = 2
+	START_GAME = 2,
+//	PAUSE_MENU = 4
 }	t_flags;
+
+int			ui_main_menu(void);
 
 void		show_slider(t_slider *slider);
 void		update_slider(t_slider *slider, int mx, int my);
@@ -48,5 +51,7 @@ void		update_ui_flags(uint8_t flag);
 
 void		put_text(t_mlx *app, t_vec2 pos, int color, char *str);
 int			str_px_size(char *str);
+
+int			put_img_to_window(char *path, int posx, int posy);
 
 #endif

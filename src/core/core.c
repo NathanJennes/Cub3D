@@ -32,6 +32,8 @@ void	init_window(char *win_name)
 			&app->frame.line_length, &app->frame.endian);
 	if (!app->frame.addr)
 		error_close_app();
+	app->width = WIN_W;
+	app->height = WIN_H;
 }
 
 int	close_app()

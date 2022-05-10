@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:57:26 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/09 18:04:13 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/10 21:31:13 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	key_hooks(int keycode)
 		close_app();
 	else if (keycode == KEY_F3)
 		update_ui_flags(DEBUG_UI);
+	else if (keycode == KEY_RETURN)
+		update_ui_flags(START_GAME);
 	else
 		handle_moving(keycode, app);
 	return (0);

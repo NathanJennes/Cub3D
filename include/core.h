@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/09 16:58:16 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/10 21:43:38 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@
 
 # define CELL_WIDTH		50
 # define CELL_HEIGHT	50
+
+# define MOUSE_DEBUG	0
+
+typedef struct s_mouse
+{
+	int pos_x;
+	int pos_y;
+}	t_mouse;
 
 typedef struct s_slider
 {
@@ -80,7 +88,10 @@ typedef struct s_mlx
 {
 	void		*mlx;
 	void		*win;
+	int			width;
+	int			height;
 	t_frame		frame;
+	t_mouse		mouse;
 	t_map_info	map;
 	t_player	player;
 	t_slider	map_scale_slider;
@@ -105,6 +116,8 @@ int			main_loop(void);
 /* hooks.c.c */
 int			key_hooks(int keycode);
 int			mouse_hooks(int mousecode, int x, int y);
+
+void		get_mouse_pos(t_mlx *app);
 
 /* getters */
 t_mlx		*get_app(void);
