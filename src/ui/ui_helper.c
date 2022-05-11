@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:36:50 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/09 18:04:41 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/11 19:12:20 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	str_px_size(char *str)
 
 void	update_ui_flags(uint8_t flag)
 {
-	t_mlx *app;
+	t_mlx	*app;
 
 	app = get_app();
-	if (app->ui_flags & flag)
-		app->ui_flags ^= flag;
+	if (app->ui.ui_flags & flag)
+		app->ui.ui_flags ^= flag;
 	else
-		app->ui_flags |= flag;
+		app->ui.ui_flags |= flag;
 }

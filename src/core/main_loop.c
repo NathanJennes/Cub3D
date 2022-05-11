@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/10 21:39:18 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/11 18:47:36 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 #include "ui.h"
 #include "render.h"
 
-int	main_loop()
+int	main_loop(void)
 {
 	t_mlx	*app;
 
 	app = get_app();
 	get_mouse_pos(app);
 	clear_screen(BKGD_COLOR);
-	if (app->ui_flags == 0)
+	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
+	if (app->ui.ui_flags == 0)
 		ui_main_menu();
 	else
 	{
@@ -29,7 +30,7 @@ int	main_loop()
 		show_slider(&app->map_scale_slider);
 		mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 	}
-	if (app->ui_flags & DEBUG_UI)
+	if (app->ui.ui_flags & DEBUG_UI)
 		fps_counter();
 	return (0);
 }

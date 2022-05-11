@@ -9,7 +9,7 @@ DEBUG_OBJS_DIR		:=		$(MAKE_DIR)/objd
 
 LIBFT_DIR		:=		$(MAKE_DIR)/Libft
 LEAKY_DIR		:=		$(LIBFT_DIR)/Leaky
-MLX_DIR			:=		$(MAKE_DIR)/minilibx-linux
+MLX_DIR			:=		$(MAKE_DIR)/minilibx
 
 INC_PATH		:=		-I$(LIBFT_DIR) -I$(LEAKY_DIR) -I$(MAKE_DIR)/include -I$(MLX_DIR)
 

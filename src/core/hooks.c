@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:57:26 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/10 21:31:13 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/11 19:40:18 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "input_code.h"
 #include "ui.h"
 
+static void	handle_main_menu(int keycode, t_mlx *app);
 static void	handle_moving(int keycode, t_mlx *app);
 
 int	mouse_hooks(int mousecode, int x, int y)
@@ -36,16 +37,37 @@ int	key_hooks(int keycode)
 	app = get_app();
 	if (keycode == KEY_LEFT || keycode == KEY_UP || keycode == KEY_RIGHT
 		|| keycode == KEY_DOWN)
-		dprintf(STDERR_FILENO, "Arrow: %d\n", keycode);
-	else if (keycode == KEY_ESC)
+	{
+		if (app->ui.ui_flags == MAIN_MENU)
+			handle_main_menu(keycode, app);
+	}
+	if (keycode == KEY_ESC)
 		close_app();
-	else if (keycode == KEY_F3)
+	if (keycode == KEY_F3)
 		update_ui_flags(DEBUG_UI);
-	else if (keycode == KEY_RETURN)
-		update_ui_flags(START_GAME);
+	if (keycode == KEY_RETURN)
+		update_ui_flags(NEW_GAME);
 	else
 		handle_moving(keycode, app);
 	return (0);
+}
+
+static void	handle_main_menu(int keycode, t_mlx *app)
+{
+	if (keycode == KEY_LEFT)
+		;
+	if (keycode == KEY_UP)
+	{
+		if (app->ui.select_bar_pos.y > 170)
+			app->ui.select_bar_pos.y -= 60;
+	}
+	if (keycode == KEY_RIGHT)
+		;
+	if (keycode == KEY_DOWN)
+	{
+		if (app->ui.select_bar_pos.y < 410)
+			app->ui.select_bar_pos.y += 60;
+	}
 }
 
 static void	handle_moving(int keycode, t_mlx *app)

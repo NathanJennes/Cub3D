@@ -6,14 +6,15 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/10 20:01:06 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/11 19:19:28 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UI_H
 # define UI_H
 
-#include "colors.h"
+# include "colors.h"
+# include "libft.h"
 
 # ifdef __linux__
 #  include <stdint.h>
@@ -35,9 +36,10 @@
 
 typedef enum e_flags
 {
+	MAIN_MENU = 0,
 	DEBUG_UI = 1,
-	START_GAME = 2,
-//	PAUSE_MENU = 4
+	NEW_GAME = 2,
+	PAUSE_MENU = 4
 }	t_flags;
 
 int			ui_main_menu(void);
@@ -52,6 +54,6 @@ void		update_ui_flags(uint8_t flag);
 void		put_text(t_mlx *app, t_vec2 pos, int color, char *str);
 int			str_px_size(char *str);
 
-int			put_img_to_window(char *path, int posx, int posy);
+int			put_xpm_to_window(char *path, t_vec2 pos);
 
 #endif

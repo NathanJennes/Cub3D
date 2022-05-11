@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 16:29:13 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/11 19:16:02 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static void	init_ui(void)
 	t_mlx	*app;
 
 	app = get_app();
+	app->ui.select_bar_pos = vec2(360, 170);
 	app->map_scale_slider.pos = vec2(WIN_W - 150, 10);
 	app->map_scale_slider.increment_size = 0.1f;
 	app->map_scale_slider.value = 1.0f;

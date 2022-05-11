@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/10 21:43:38 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/11 19:03:16 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,18 @@
 # define CELL_WIDTH		50
 # define CELL_HEIGHT	50
 
-# define MOUSE_DEBUG	0
+# define MOUSE_DEBUG	1
+
+typedef struct s_ui
+{
+	u_int8_t	ui_flags;
+	t_vec2		select_bar_pos;
+}	t_ui;
 
 typedef struct s_mouse
 {
-	int pos_x;
-	int pos_y;
+	int	pos_x;
+	int	pos_y;
 }	t_mouse;
 
 typedef struct s_slider
@@ -96,7 +102,7 @@ typedef struct s_mlx
 	t_player	player;
 	t_slider	map_scale_slider;
 	int64_t		start_time;
-	u_int8_t	ui_flags;
+	t_ui		ui;
 }	t_mlx;
 
 /* core.c */
