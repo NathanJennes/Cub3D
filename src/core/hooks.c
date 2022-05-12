@@ -54,15 +54,13 @@ int	key_hooks(int keycode)
 
 static void	handle_main_menu(int keycode, t_mlx *app)
 {
-	if (keycode == KEY_LEFT)
-		;
+	if (keycode == KEY_LEFT){};
 	if (keycode == KEY_UP)
 	{
 		if (app->ui.select_bar_pos.y > 170)
 			app->ui.select_bar_pos.y -= 60;
 	}
-	if (keycode == KEY_RIGHT)
-		;
+	if (keycode == KEY_RIGHT){};
 	if (keycode == KEY_DOWN)
 	{
 		if (app->ui.select_bar_pos.y < 410)

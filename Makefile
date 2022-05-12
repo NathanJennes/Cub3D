@@ -11,14 +11,16 @@ LIBFT_DIR		:=		$(MAKE_DIR)/Libft
 LEAKY_DIR		:=		$(LIBFT_DIR)/Leaky
 MLX_DIR			:=		$(MAKE_DIR)/minilibx
 
-INC_PATH		:=		-I$(LIBFT_DIR) -I$(LEAKY_DIR) -I$(MAKE_DIR)/include -I$(MLX_DIR)
+INC_PATH		:=		-I$(LIBFT_DIR) -I$(LEAKY_DIR) -I$(MAKE_DIR)/include
 
-LIB_PATH		:=		-L$(LIBFT_DIR) -L$(MLX_DIR) -L$(LEAKY_DIR)
+LIB_PATH		:=		-L$(LIBFT_DIR) -L$(LEAKY_DIR)
 
 OS				=	$(shell uname -s)
 ifeq ($(OS), Linux)
 	MLXFLAGS	=		-L /usr/local/lib -lmlx_Linux -L/usr/X11/lib -I/usr/local/include -lXext -lX11 -lz
 else
+	LIB_PATH	+=		-L $(MLX_DIR)
+	INC_PATH	+=		-I $(MLX_DIR)
 	MLXFLAGS	=		-lmlx -framework OpenGL -framework AppKit
 endif
 
