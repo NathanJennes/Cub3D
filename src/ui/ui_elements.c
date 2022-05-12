@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ui_helper.c                                        :+:      :+:    :+:   */
+/*   ui_elements.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 15:36:50 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/11 19:12:20 by cybattis         ###   ########.fr       */
+/*   Created: 2022/05/12 22:13:50 by cybattis          #+#    #+#             */
+/*   Updated: 2022/05/12 22:15:03 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
-#include "libft.h"
 
-void	put_text(t_mlx *app, t_vec2 pos, int color, char *str)
-{
-	mlx_string_put(app->mlx, app->win, (int)pos.x, (int)pos.y, color, str);
-}
-
-int	str_px_size(char *str)
-{
-	return ((int)ft_strlen(str) * 6);
-}
+//int	ui_button(char *path, t_vec2 pos, t_vec2 clic_zone, int (*event)(void))
+//{
+//	put_png_to_window(path, (int)pos.x, (int)pos.y);
+//	return (0);
+//}

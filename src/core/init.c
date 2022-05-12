@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/11 19:16:02 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/12 23:24:46 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void init_hooks(void)
 	t_mlx	*app;
 
 	app = get_app();
+	app->game_state = 0;
 	mlx_mouse_hook(app->win, mouse_hooks, app);
 	mlx_hook(app->win, 17, 0, close_app, app);
 	mlx_hook(app->win, 2, 1L << 0, key_hooks, app);
@@ -53,14 +54,15 @@ static void init_hooks(void)
 
 static void	init_ui(void)
 {
-	t_mlx	*app;
+	t_ui	*ui;
 
-	app = get_app();
-	app->ui.select_bar_pos = vec2(360, 170);
-	app->map_scale_slider.pos = vec2(WIN_W - 150, 10);
-	app->map_scale_slider.increment_size = 0.1f;
-	app->map_scale_slider.value = 1.0f;
-	app->map_scale_slider.min = 0.2f;
-	app->map_scale_slider.max = 5.0f;
-	app->map_scale_slider.displayed = 1;
+	ui = get_ui();
+	ui->select_bar_pos = vec2(360, 170);
+	ui->map_scale_slider.pos = vec2(WIN_W - 150, 10);
+	ui->map_scale_slider.increment_size = 0.1f;
+	ui->map_scale_slider.value = 1.0f;
+	ui->map_scale_slider.min = 0.2f;
+	ui->map_scale_slider.max = 5.0f;
+	ui->map_scale_slider.displayed = 1;
+	ui->flags = 1;
 }

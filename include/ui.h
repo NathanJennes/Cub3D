@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/11 19:19:28 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/12 23:24:06 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,20 @@
 # define SLIDER_W		75
 # define SLIDER_BTN2_XO	SLIDER_BTN_W + SLIDER_PAD * 2 + SLIDER_W
 
-typedef enum e_flags
+typedef enum e_state
 {
-	MAIN_MENU = 0,
-	DEBUG_UI = 1,
-	NEW_GAME = 2,
-	PAUSE_MENU = 4
-}	t_flags;
+	MAIN_MENU = 1,
+	NEW_GAME_MENU = 2,
+	PAUSE_MENU = 4,
+	LOAD_MENU = 8,
+	OPTION_MENU = 16,
+	EDITOR_MENU = 32,
+	DEBUG_UI = 64
+}	t_state;
 
-int			ui_main_menu(void);
+int			ui_manager(void);
 
+void		render_mmap(float zoom);
 void		show_slider(t_slider *slider);
 void		update_slider(t_slider *slider, int mx, int my);
 

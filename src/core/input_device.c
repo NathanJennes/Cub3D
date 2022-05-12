@@ -6,13 +6,13 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 21:37:34 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/12 11:31:32 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/12 21:55:30 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 
-void	get_mouse_pos(t_mlx *app)
+void	cub_get_mouse_pos(t_mlx *app)
 {
 #ifdef __linux__
 	mlx_mouse_get_pos(app->mlx, app->win, &app->mouse.pos_x, &app->mouse.pos_y);

@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ui_helper.c                                        :+:      :+:    :+:   */
+/*   getters_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 15:36:50 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/11 19:12:20 by cybattis         ###   ########.fr       */
+/*   Created: 2022/05/05 15:19:50 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/12 22:39:10 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
-#include "libft.h"
 
-void	put_text(t_mlx *app, t_vec2 pos, int color, char *str)
+t_ui	*get_ui(void)
 {
-	mlx_string_put(app->mlx, app->win, (int)pos.x, (int)pos.y, color, str);
-}
+	static t_mlx	app = {0};
 
-int	str_px_size(char *str)
-{
-	return ((int)ft_strlen(str) * 6);
+	return (&app.ui);
 }

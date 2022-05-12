@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/11 19:03:16 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/12 23:33:20 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,12 @@
 
 # define MOUSE_DEBUG	1
 
-typedef struct s_ui
+typedef enum e_game_state
 {
-	u_int8_t	ui_flags;
-	t_vec2		select_bar_pos;
-}	t_ui;
-
-typedef struct s_mouse
-{
-	int	pos_x;
-	int	pos_y;
-}	t_mouse;
+	MENU = 0,
+	IN_GAME = 2,
+	PAUSE = 4,
+}	t_game_state;
 
 typedef struct s_slider
 {
@@ -58,6 +53,19 @@ typedef struct s_slider
 	float	max;
 	float	value;
 }	t_slider;
+
+typedef struct s_ui
+{
+	u_int8_t	flags;
+	t_vec2		select_bar_pos;
+	t_slider	map_scale_slider;
+}	t_ui;
+
+typedef struct s_mouse
+{
+	int	pos_x;
+	int	pos_y;
+}	t_mouse;
 
 typedef struct s_map_info
 {
@@ -92,17 +100,17 @@ typedef struct s_player
 
 typedef struct s_mlx
 {
-	void		*mlx;
-	void		*win;
-	int			width;
-	int			height;
-	t_frame		frame;
-	t_mouse		mouse;
-	t_map_info	map;
-	t_player	player;
-	t_slider	map_scale_slider;
-	int64_t		start_time;
-	t_ui		ui;
+	void			*mlx;
+	void			*win;
+	int				width;
+	int				height;
+	t_frame			frame;
+	t_mouse			mouse;
+	t_map_info		map;
+	t_player		player;
+	int64_t			start_time;
+	t_game_state	game_state;
+	t_ui			ui;
 }	t_mlx;
 
 /* core.c */
@@ -123,7 +131,7 @@ int			main_loop(void);
 int			key_hooks(int keycode);
 int			mouse_hooks(int mousecode, int x, int y);
 
-void		get_mouse_pos(t_mlx *app);
+void		cub_get_mouse_pos(t_mlx *app);
 
 /* getters */
 t_mlx		*get_app(void);
@@ -131,5 +139,6 @@ t_frame		*get_frame(void);
 t_map_info	*get_map_infos(void);
 t_player	*get_player(void);
 void		*get_mlx(void);
+t_ui		*get_ui(void);
 
 #endif

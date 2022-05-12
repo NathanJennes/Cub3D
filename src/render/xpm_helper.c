@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ui_helper.c                                        :+:      :+:    :+:   */
+/*   xpm_helper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 15:36:50 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/11 19:12:20 by cybattis         ###   ########.fr       */
+/*   Created: 2022/05/12 22:20:46 by cybattis          #+#    #+#             */
+/*   Updated: 2022/05/12 22:20:46 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
-#include "libft.h"
 
-void	put_text(t_mlx *app, t_vec2 pos, int color, char *str)
+int	put_xpm_to_window(char *path, t_vec2 pos)
 {
-	mlx_string_put(app->mlx, app->win, (int)pos.x, (int)pos.y, color, str);
-}
+	int		img_width;
+	int		img_height;
+	void	*img;
+	t_mlx	*app;
 
-int	str_px_size(char *str)
-{
-	return ((int)ft_strlen(str) * 6);
+	app = get_app();
+	img = mlx_xpm_file_to_image(app->mlx, path, &img_width, &img_height);
+	if (!img)
+	{
+		dprintf(STDERR_FILENO, "Error img path\n");
+		error_close_app();
+	}
+	mlx_put_image_to_window(app->mlx, app->win, img, (int)pos.x, (int)pos.y);
+	mlx_destroy_image(app->mlx, img);
+	return (0);
 }
