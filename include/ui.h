@@ -34,7 +34,9 @@
 # define SLIDER_W		75
 # define SLIDER_BTN2_XO	SLIDER_BTN_W + SLIDER_PAD * 2 + SLIDER_W
 
-typedef enum e_state
+# define DEBUG_UI 255
+
+typedef enum e_ui_state
 {
 	MAIN_MENU = 1,
 	NEW_GAME_MENU = 2,
@@ -42,9 +44,9 @@ typedef enum e_state
 	LOAD_MENU = 8,
 	OPTION_MENU = 16,
 	EDITOR_MENU = 32,
-	DEBUG_UI = 64
-}	t_state;
+}	t_ui_state;
 
+void		init_ui(void);
 int			ui_manager(void);
 
 void		render_mmap(float zoom);

@@ -47,8 +47,9 @@ int	key_hooks(int keycode)
 		update_ui_flags(DEBUG_UI);
 	if (keycode == KEY_RETURN)
 	{
-		update_ui_flags(NEW_GAME_MENU);
-		app->game_state = IN_GAME;
+		app->ui.ui_state = OPTION_MENU;
+//		update_ui_flags(NEW_GAME_MENU);
+//		app->game_state = IN_GAME;
 	}
 	else
 		handle_moving(keycode, app);

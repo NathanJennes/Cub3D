@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:00:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/13 11:05:56 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/13 17:20:16 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,28 @@ int	ui_manager(void)
 
 	app = get_app();
 	ui = get_ui();
-	dprintf(STDERR_FILENO, "%d\n", app->ui.flags);
-	// HUD
+	/* HUD */
 	if (app->game_state == IN_GAME)
 	{
 		render_mmap(ui->map_scale_slider.value);
 		show_slider(&ui->map_scale_slider);
 		mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 	}
-	// Menu
-	if (app->game_state == MENU && ui->flags & MAIN_MENU)
+	/* Menu */
+	if (app->game_state == MENU)
 	{
-		put_xpm_to_window("assets/ui/select_bar.xpm", ui->select_bar_pos);
-		put_xpm_to_window("assets/ui/main_menu.xpm", vec2(0, 0));
+		if (ui->flags & MAIN_MENU)
+		{
+			put_xpm_to_window("assets/ui/select_bar.xpm", ui->select_bar_pos);
+			put_xpm_to_window("assets/ui/main_menu.xpm", vec2(0, 0));
+		}
+		if (ui->flags & OPTION_MENU)
+		{
+			put_xpm_to_window("assets/ui/select_bar.xpm", ui->select_bar_pos);
+			put_xpm_to_window("assets/ui/option_menu.xpm", vec2(0, 0));
+		}
 	}
-	// Debug
+	/* Debug */
 	if (app->ui.flags & DEBUG_UI)
 		fps_counter();
 	return (0);

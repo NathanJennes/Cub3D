@@ -15,6 +15,7 @@
 
 # include "mlx.h"
 # include "libft.h"
+# include "ui.h"
 
 # ifdef FULL_SCREEN
 #  define WIN_W		1920
@@ -53,6 +54,7 @@ typedef struct s_slider
 
 typedef struct s_ui
 {
+	t_ui_state	ui_state;
 	u_int8_t	flags;
 	t_vec2		select_bar_pos;
 	t_slider	map_scale_slider;
