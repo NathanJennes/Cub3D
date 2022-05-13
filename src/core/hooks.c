@@ -46,7 +46,10 @@ int	key_hooks(int keycode)
 	if (keycode == KEY_F3)
 		update_ui_flags(DEBUG_UI);
 	if (keycode == KEY_RETURN)
+	{
 		update_ui_flags(NEW_GAME_MENU);
+		app->game_state = IN_GAME;
+	}
 	else
 		handle_moving(keycode, app);
 	return (0);

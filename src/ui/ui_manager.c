@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:00:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/12 23:44:16 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/13 11:05:56 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ int	ui_manager(void)
 	ui = get_ui();
 	dprintf(STDERR_FILENO, "%d\n", app->ui.flags);
 	// HUD
-	if (app->game_state & IN_GAME)
+	if (app->game_state == IN_GAME)
 	{
 		render_mmap(ui->map_scale_slider.value);
 		show_slider(&ui->map_scale_slider);
 		mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 	}
 	// Menu
-	if (app->game_state & MENU && app->ui.flags & MAIN_MENU)
+	if (app->game_state == MENU && ui->flags & MAIN_MENU)
 	{
 		put_xpm_to_window("assets/ui/select_bar.xpm", ui->select_bar_pos);
 		put_xpm_to_window("assets/ui/main_menu.xpm", vec2(0, 0));

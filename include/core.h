@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/12 23:33:20 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/13 11:05:56 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,9 @@
 
 # define MOUSE_DEBUG	1
 
-typedef enum e_game_state
-{
-	MENU = 0,
-	IN_GAME = 2,
-	PAUSE = 4,
-}	t_game_state;
+# define MENU 		0
+# define IN_GAME	1
+# define PAUSE		2
 
 typedef struct s_slider
 {
@@ -100,17 +97,17 @@ typedef struct s_player
 
 typedef struct s_mlx
 {
-	void			*mlx;
-	void			*win;
-	int				width;
-	int				height;
-	t_frame			frame;
-	t_mouse			mouse;
-	t_map_info		map;
-	t_player		player;
-	int64_t			start_time;
-	t_game_state	game_state;
-	t_ui			ui;
+	void		*mlx;
+	void		*win;
+	int			width;
+	int			height;
+	t_frame		frame;
+	t_mouse		mouse;
+	t_map_info	map;
+	t_player	player;
+	int64_t		start_time;
+	int8_t		game_state;
+	t_ui		ui;
 }	t_mlx;
 
 /* core.c */

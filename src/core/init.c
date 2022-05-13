@@ -12,6 +12,7 @@
 
 #include "core.h"
 #include "parsing.h"
+#include "ui.h"
 
 static void init_hooks(void);
 static void	init_ui(void);
@@ -45,7 +46,7 @@ static void init_hooks(void)
 	t_mlx	*app;
 
 	app = get_app();
-	app->game_state = 0;
+	app->game_state = MENU;
 	mlx_mouse_hook(app->win, mouse_hooks, app);
 	mlx_hook(app->win, 17, 0, close_app, app);
 	mlx_hook(app->win, 2, 1L << 0, key_hooks, app);
@@ -64,5 +65,5 @@ static void	init_ui(void)
 	ui->map_scale_slider.min = 0.2f;
 	ui->map_scale_slider.max = 5.0f;
 	ui->map_scale_slider.displayed = 1;
-	ui->flags = 1;
+	ui->flags = MAIN_MENU;
 }
