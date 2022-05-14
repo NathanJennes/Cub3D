@@ -2,33 +2,33 @@
 
 cd Libft
 if (( $? != 0 )); then
-  echo "You must be in the root directory of the project to push!"
+  echo "You must be in the root directory of the project to pull!"
   exit 1
 fi
 cd ..
 
 git status | grep -q "Changes to be committed"
 if (( $? == 0 )); then
-  echo "Please commit your local changes before you commit"
+  echo "Please commit your local changes before you pull"
   exit 1
 fi
 
 cd Libft
 if (( $? != 0 )); then
-  echo "You must be in the root directory of the project to push!"
+  echo "You must be in the root directory of the project to pull!"
   exit 1
 fi
 
 git status | grep -q "Changes to be committed"
 if (( $? == 0 )); then
-  echo "Please commit your local changes in Libft before you commit"
+  echo "Please commit your local changes in Libft before you pull"
   exit 1
 fi
 
 cd Leaky
 git status | grep -q "Changes to be committed"
 if (( $? == 0 )); then
-  echo "Please commit your local changes in Leaky before you commit"
+  echo "Please commit your local changes in Leaky before you pull"
   exit 1
 fi
 
