@@ -20,7 +20,7 @@ void	init_ui(void)
 	t_ui	*ui;
 
 	ui = get_ui();
-	ui->ui_state = MAIN_MENU;
+	ui->state = MAIN_MENU;
 	ui->select_bar_pos = vec2(360, 170);
 	init_slider(ui);
 }

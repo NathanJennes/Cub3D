@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:57:26 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/12 22:41:34 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/14 13:22:41 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ int	mouse_hooks(int mousecode, int x, int y)
 	return (0);
 }
 
+int	mouse_move_hooks(int x, int y, void *param)
+{
+	(void)param;
+	cub_get_mouse_pos(x, y);
+	return (0);
+}
+
 int	key_hooks(int keycode)
 {
 	t_mlx	*app;
@@ -38,7 +45,6 @@ int	key_hooks(int keycode)
 	if (keycode == KEY_LEFT || keycode == KEY_UP || keycode == KEY_RIGHT
 		|| keycode == KEY_DOWN)
 	{
-		if (app->ui.flags == MAIN_MENU)
 			handle_main_menu(keycode, app);
 	}
 	if (keycode == KEY_ESC)
@@ -47,9 +53,7 @@ int	key_hooks(int keycode)
 		update_ui_flags(DEBUG_UI);
 	if (keycode == KEY_RETURN)
 	{
-		app->ui.ui_state = OPTION_MENU;
-//		update_ui_flags(NEW_GAME_MENU);
-//		app->game_state = IN_GAME;
+		app->game_state = IN_GAME;
 	}
 	else
 		handle_moving(keycode, app);
@@ -70,6 +74,7 @@ static void	handle_main_menu(int keycode, t_mlx *app)
 		if (app->ui.select_bar_pos.y < 410)
 			app->ui.select_bar_pos.y += 60;
 	}
+	dprintf(STDERR_FILENO, "%d -- %d\n", (int)app->ui.select_bar_pos.x, (int)app->ui.select_bar_pos.y);
 }
 
 static void	handle_moving(int keycode, t_mlx *app)

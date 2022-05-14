@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/12 23:24:06 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/14 13:11:53 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define UI_H
 
 # include "colors.h"
-# include "libft.h"
 
 # ifdef __linux__
 #  include <stdint.h>
@@ -36,6 +35,8 @@
 
 # define DEBUG_UI 255
 
+typedef struct s_mlx t_mlx;
+
 typedef enum e_ui_state
 {
 	MAIN_MENU = 1,
@@ -45,6 +46,24 @@ typedef enum e_ui_state
 	OPTION_MENU = 16,
 	EDITOR_MENU = 32,
 }	t_ui_state;
+
+typedef struct s_slider
+{
+	int		displayed;
+	t_vec2	pos;
+	float	increment_size;
+	float	min;
+	float	max;
+	float	value;
+}	t_slider;
+
+typedef struct s_ui
+{
+	t_ui_state	state;
+	u_int8_t	flags;
+	t_vec2		select_bar_pos;
+	t_slider	map_scale_slider;
+}	t_ui;
 
 void		init_ui(void);
 int			ui_manager(void);

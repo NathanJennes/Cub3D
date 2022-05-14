@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:00:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/13 17:20:16 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/14 13:26:16 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ int	ui_manager(void)
 	/* Menu */
 	if (app->game_state == MENU)
 	{
-		if (ui->flags & MAIN_MENU)
+		if (ui->state & MAIN_MENU)
 		{
 			put_xpm_to_window("assets/ui/select_bar.xpm", ui->select_bar_pos);
 			put_xpm_to_window("assets/ui/main_menu.xpm", vec2(0, 0));
 		}
-		if (ui->flags & OPTION_MENU)
+		else if (ui->state & OPTION_MENU)
 		{
 			put_xpm_to_window("assets/ui/select_bar.xpm", ui->select_bar_pos);
 			put_xpm_to_window("assets/ui/option_menu.xpm", vec2(0, 0));

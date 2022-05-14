@@ -14,8 +14,7 @@ PARSING_FILE	:=	parsing.c parsing_utils.c
 PARSING_SRCS	:=	$(addprefix $(PARSING_DIR)/, $(PARSING_FILE))
 
 RENDER_DIR		:=	render
-RENDER_FILE		:=	draw.c rendering_primitives.c colors_utils.c	\
-					xpm_helper.c
+RENDER_FILE		:=	draw.c rendering_primitives.c colors_utils.c
 RENDER_SRCS		:=	$(addprefix $(RENDER_DIR)/, $(RENDER_FILE))
 
 UI_DIR			:=	ui

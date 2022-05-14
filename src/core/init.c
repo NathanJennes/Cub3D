@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/13 18:21:30 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/14 12:39:54 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void	init_hooks(void)
 	app = get_app();
 	app->game_state = MENU;
 	mlx_mouse_hook(app->win, mouse_hooks, app);
+	mlx_hook(app->win, 6, 1L<<6, mouse_move_hooks, app);
 	mlx_hook(app->win, 17, 0, close_app, app);
 	mlx_hook(app->win, 2, 1L << 0, key_hooks, app);
 	mlx_loop_hook(app->mlx, main_loop, app);

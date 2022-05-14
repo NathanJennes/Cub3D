@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/13 11:05:56 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/14 12:35:12 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,6 @@
 # define MENU 		0
 # define IN_GAME	1
 # define PAUSE		2
-
-typedef struct s_slider
-{
-	int		displayed;
-	t_vec2	pos;
-	float	increment_size;
-	float	min;
-	float	max;
-	float	value;
-}	t_slider;
-
-typedef struct s_ui
-{
-	t_ui_state	ui_state;
-	u_int8_t	flags;
-	t_vec2		select_bar_pos;
-	t_slider	map_scale_slider;
-}	t_ui;
 
 typedef struct s_mouse
 {
@@ -129,8 +111,9 @@ int			main_loop(void);
 /* hooks.c.c */
 int			key_hooks(int keycode);
 int			mouse_hooks(int mousecode, int x, int y);
+int			mouse_move_hooks(int x, int y, void *param);
 
-void		cub_get_mouse_pos(t_mlx *app);
+void		cub_get_mouse_pos(int x, int y);
 
 /* getters */
 t_mlx		*get_app(void);

@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/12 22:51:42 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/14 12:15:00 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	main_loop(void)
 	t_mlx	*app;
 
 	app = get_app();
-	cub_get_mouse_pos(app);
 	if (app->game_state & IN_GAME){}
 		// game frame
 	clear_screen(BKGD_COLOR);
