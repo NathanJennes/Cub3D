@@ -14,17 +14,24 @@ PARSING_FILE	:=	parsing.c parsing_utils.c
 PARSING_SRCS	:=	$(addprefix $(PARSING_DIR)/, $(PARSING_FILE))
 
 RENDER_DIR		:=	render
-RENDER_FILE		:=	draw.c rendering_primitives.c colors_utils.c render_map.c
+RENDER_FILE		:=	draw.c rendering_primitives.c colors_utils.c render_map.c	\
+					render_ui_texture.c
 RENDER_SRCS		:=	$(addprefix $(RENDER_DIR)/, $(RENDER_FILE))
 
 UI_DIR			:=	ui
 UI_FILE			:=	fps_counter.c ui_helper.c slider.c
 UI_SRCS			:=	$(addprefix $(UI_DIR)/, $(UI_FILE))
 
+TEXTURES_DIR	:=	textures
+TEXTURES_FILE	:=	xpm_loader.c texture_generation.c ambiant_occlusion.c		\
+					texture_deletion.c texture_manager.c
+TEXTURE_SRCS	:=	$(addprefix $(TEXTURES_DIR)/, $(TEXTURES_FILE))
+
 SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\
 					$(addprefix $(SRCS_DIR)/, $(PARSING_SRCS))					\
 					$(addprefix $(SRCS_DIR)/, $(UI_SRCS))						\
-					$(addprefix $(SRCS_DIR)/, $(RENDER_SRCS))
+					$(addprefix $(SRCS_DIR)/, $(RENDER_SRCS))					\
+					$(addprefix $(SRCS_DIR)/, $(TEXTURE_SRCS))
 
 RELEASE_OBJS	:=	$(addprefix $(RELEASE_OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
 DEBUG_OBJS		:=	$(addprefix $(DEBUG_OBJS_DIR)/, $(notdir $(SRCS:.c=d.o)))
@@ -63,6 +70,10 @@ $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(UI_DIR)/%.c | $(RELEASE_OBJS_DIR)
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
+$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(TEXTURES_DIR)/%.c | $(RELEASE_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
 $(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
 	@printf "$(_BLUE)\nCompiled source files\n"
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(RELEASE_OBJS) $(RELEASE_LIBS) -o ../$@
@@ -85,6 +96,10 @@ $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(RENDER_DIR)/%.c | $(DEBUG_OBJS_DIR)
 	@printf "$(_GREEN)█$(_END)"
 
 $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_DIR)/%.c | $(DEBUG_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(TEXTURES_DIR)/%.c | $(DEBUG_OBJS_DIR)
 	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 

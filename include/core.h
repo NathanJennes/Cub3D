@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/09 16:58:16 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/14 13:10:23 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "mlx.h"
 # include "libft.h"
+# include "texture.h"
 
 # ifdef FULL_SCREEN
 #  define WIN_W		1920
@@ -78,14 +79,16 @@ typedef struct s_player
 
 typedef struct s_mlx
 {
-	void		*mlx;
-	void		*win;
-	t_frame		frame;
-	t_map_info	map;
-	t_player	player;
-	t_slider	map_scale_slider;
-	int64_t		start_time;
-	u_int8_t	ui_flags;
+<<<<<<< HEAD
+	void				*mlx;
+	void				*win;
+	t_frame				frame;
+	t_map_info			map;
+	t_player			player;
+	t_slider			map_scale_slider;
+	int64_t				start_time;
+	u_int8_t			ui_flags;
+	t_texture_manager	texture_manager;
 }	t_mlx;
 
 /* core.c */
