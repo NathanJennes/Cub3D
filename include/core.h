@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/14 11:45:00 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/14 13:10:23 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_player
 
 typedef struct s_mlx
 {
+<<<<<<< HEAD
 	void				*mlx;
 	void				*win;
 	t_frame				frame;
