@@ -79,7 +79,6 @@ typedef struct s_player
 
 typedef struct s_mlx
 {
-<<<<<<< HEAD
 	void				*mlx;
 	void				*win;
 	t_frame				frame;
