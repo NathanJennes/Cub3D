@@ -1,0 +1,17 @@
+PLAYER_POS 490 490 490
+MAP_START
+W 8
+H 5
+SPAWN 50 50 2
+CEILING 0 0 0
+FLOOR 0 0 0
+NO_TEX (null)
+EA_TEX (null)
+SO_TEX (null)
+WE_TEX (null)
+1 1 1 1 -1 1 1 1 
+1 0 0 1 -1 1 0 1 
+1 1 0 1 1 1 0 1 
+1 0 0 0 0 0 0 1 
+1 1 1 1 1 1 1 1 
+MAP_END

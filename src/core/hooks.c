@@ -57,11 +57,11 @@ void	set_flags()
 static void	handle_moving(int keycode, t_mlx *app)
 {
 	if (keycode == KEY_W)
-		app->player.pos.y -= PLAYER_SPEED;
+		app->gamestate.player.pos.y -= PLAYER_SPEED;
 	if (keycode == KEY_S)
-		app->player.pos.y += PLAYER_SPEED;
+		app->gamestate.player.pos.y += PLAYER_SPEED;
 	if (keycode == KEY_D)
-		app->player.pos.x += PLAYER_SPEED;
+		app->gamestate.player.pos.x += PLAYER_SPEED;
 	if (keycode == KEY_A)
-		app->player.pos.x -= PLAYER_SPEED;
+		app->gamestate.player.pos.x -= PLAYER_SPEED;
 }

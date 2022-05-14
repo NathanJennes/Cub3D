@@ -13,6 +13,7 @@
 #include <fcntl.h>
 #include "parsing.h"
 #include "leaky.h"
+#include "core.h"
 
 static void	parse_line(t_map_info *infos, char *line);
 static char	*skip_spaces(char *str);
@@ -43,8 +44,8 @@ void	init_map(char *file)
 	if (!infos.spawn_dir)
 		error_close_app();
 	gc_strarray_free(infos.map_raw);
-	app->map = infos;
-	app->player.pos = infos.spawn_pos;
+	app->gamestate.map = infos;
+	app->gamestate.player.pos = infos.spawn_pos;
 }
 
 static void	parse_line(t_map_info *infos, char *line)

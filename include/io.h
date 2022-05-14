@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   io.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/14 15:40:31 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/14 18:11:40 by njennes          ###   ########.fr       */
+/*   Created: 2022/05/14 17:45:17 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/14 19:00:12 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#ifndef IO_H
+# define IO_H
 
-typedef enum e_error
-{
-	NONE = 0,
-	RESSOURCE_NOT_FOUND = 1,
-	SAVE_ERROR = 2
-}	t_error;
+# define APPDATA_DIRECTORY "appdata"
 
-
-void	cub_set_error(t_error error);
-void	cub_unset_error(void);
-int		cub_has_error(void);
-int		cub_get_error(void);
-int		cub_consume_error(void);
+void	save_game(char *save_name);
 
 #endif

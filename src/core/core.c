@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:51:10 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/05 15:32:05 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/14 19:00:46 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ void	init_window(char *win_name)
 
 int	close_app()
 {
+	save_game("save.save");
+	if (cub_consume_error() == SAVE_ERROR)
+		printf("Could not save game\n");
 	check_leaky_errors();
 	mlx_destroy_image(get_mlx(), get_frame()->img);
 	mlx_destroy_window(get_mlx(), get_app()->win);

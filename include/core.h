@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/14 15:43:46 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/14 18:31:35 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "libft.h"
 # include "texture.h"
 #include "error.h"
+#include "io.h"
 
 # ifdef FULL_SCREEN
 #  define WIN_W		1920
@@ -78,13 +79,18 @@ typedef struct s_player
 	float	direction;
 }	t_player;
 
+typedef struct s_gamestate
+{
+	t_map_info	map;
+	t_player	player;
+}	t_gamestate;
+
 typedef struct s_mlx
 {
 	void				*mlx;
 	void				*win;
 	t_frame				frame;
-	t_map_info			map;
-	t_player			player;
+	t_gamestate			gamestate;
 	t_slider			map_scale_slider;
 	int64_t				start_time;
 	u_int8_t			ui_flags;

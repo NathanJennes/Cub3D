@@ -28,8 +28,8 @@ TEXTURES_FILE	:=	xpm_loader.c texture_generation.c ambiant_occlusion.c		\
 TEXTURE_SRCS	:=	$(addprefix $(TEXTURES_DIR)/, $(TEXTURES_FILE))
 
 IO_DIR			:=	io
-IO_FILE			:=
-IO_SRCS			:=	$(addprefix $(IO_DIR), $(IO_FILE))
+IO_FILE			:=	savegame.c serialization.c
+IO_SRCS			:=	$(addprefix $(IO_DIR)/, $(IO_FILE))
 
 SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\
 					$(addprefix $(SRCS_DIR)/, $(PARSING_SRCS))					\

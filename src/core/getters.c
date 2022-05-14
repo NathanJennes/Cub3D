@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:19:50 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 15:24:19 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/14 18:55:57 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_map_info	*get_map_infos(void)
 	t_mlx	*app;
 
 	app = get_app();
-	return (&app->map);
+	return (&app->gamestate.map);
 }
 
 t_player	*get_player(void)
@@ -40,7 +40,7 @@ t_player	*get_player(void)
 	t_mlx	*app;
 
 	app = get_app();
-	return (&app->player);
+	return (&app->gamestate.player);
 }
 
 void	*get_mlx(void)

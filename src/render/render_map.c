@@ -29,9 +29,9 @@ void	render_mmap(float zoom)
 	cell_size = MMAP_ZOOM_FACTOR * zoom;
 	player_pos.x = MMAP_W / 2 + MMAP_PAD;
 	player_pos.y = MMAP_H / 2 + MMAP_PAD;
-	offset.x = -(app->player.pos.x / CELL_WIDTH)
+	offset.x = -(app->gamestate.player.pos.x / CELL_WIDTH)
 		* cell_size - cell_size / 2 + player_pos.x;
-	offset.y = -(app->player.pos.y / CELL_HEIGHT)
+	offset.y = -(app->gamestate.player.pos.y / CELL_HEIGHT)
 		* cell_size - cell_size / 2 + player_pos.y;
 	render_rect((t_vec2){MMAP_PAD / 2, MMAP_PAD / 2},
 		(t_vec2){MMAP_W + MMAP_PAD, MMAP_H + MMAP_PAD},
