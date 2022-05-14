@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:51:10 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/14 19:00:46 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/14 19:49:18 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_window(char *win_name)
 		error_close_app();
 }
 
-int	close_app()
+int	close_app(void)
 {
 	save_game("save.save");
 	if (cub_consume_error() == SAVE_ERROR)
@@ -48,7 +48,7 @@ int	close_app()
 	exit(EXIT_SUCCESS);
 }
 
-void	error_close_app()
+void	error_close_app(void)
 {
 	check_leaky_errors();
 	if (get_mlx() && get_frame()->img)
@@ -59,6 +59,7 @@ void	error_close_app()
 	printf("Error\n");
 	exit(EXIT_FAILURE);
 }
+
 void	check_leaky_errors(void)
 {
 	size_t	i;

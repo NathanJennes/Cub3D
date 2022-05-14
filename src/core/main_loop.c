@@ -14,7 +14,7 @@
 #include "ui.h"
 #include "render.h"
 
-int	main_loop()
+int	main_loop(void)
 {
 	t_mlx	*app;
 

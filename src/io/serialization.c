@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 18:22:14 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/14 18:51:04 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/14 18:51:20 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ static void	serialize_map(int fd, t_map_info map)
 	ft_dprintf(fd, "W %d\n", (int)map.width);
 	ft_dprintf(fd, "H %d\n", (int)map.height);
 	ft_dprintf(fd, "SPAWN %d %d %c\n",
-			(int)map.spawn_pos.x, (int)map.spawn_pos.y, (char)map.spawn_dir);
+		(int)map.spawn_pos.x, (int)map.spawn_pos.y, (char)map.spawn_dir);
 	ft_dprintf(fd, "CEILING %d %d %d\n",
-			(int)map.ceiling_color.x, (int)map.ceiling_color.y,
-			(int)map.ceiling_color.z);
+		(int)map.ceiling_color.x, (int)map.ceiling_color.y,
+		(int)map.ceiling_color.z);
 	ft_dprintf(fd, "FLOOR %d %d %d\n",
-			(int)map.floor_color.x, (int)map.floor_color.y,
-			(int)map.floor_color.z);
+		(int)map.floor_color.x, (int)map.floor_color.y,
+		(int)map.floor_color.z);
 	ft_dprintf(fd, "NO_TEX %s\n", map.no_tex);
 	ft_dprintf(fd, "EA_TEX %s\n", map.ea_tex);
 	ft_dprintf(fd, "SO_TEX %s\n", map.so_tex);

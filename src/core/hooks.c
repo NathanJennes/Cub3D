@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:57:26 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/09 16:56:07 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/14 19:50:05 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ int	key_hooks(int keycode)
 	return (0);
 }
 
-void	set_flags()
-{}
+void	set_flags(void)
+{
+	return ;
+}
 
 static void	handle_moving(int keycode, t_mlx *app)
 {

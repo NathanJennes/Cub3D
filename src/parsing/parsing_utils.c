@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 15:37:33 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/14 20:02:00 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "leaky.h"
 
 static int	contains_illegal_char(t_map_info *infos, char *line);
+static int	is_illegal_char(char c, t_map_info *infos, int *saw_wall,
+				int *last_is_wall);
 
 t_vec3	parse_color(char *line)
 {
@@ -84,22 +86,30 @@ static int	contains_illegal_char(t_map_info *infos, char *line)
 	last_is_wall = 0;
 	while (line[i] && line[i] != '\n')
 	{
-		if (line[i] == '1')
-		{
-			saw_wall = 1;
-			last_is_wall = 1;
-		}
-		else if (ft_isalpha(line[i]) && (!(line[i] == 'W' || line[i] == 'S'
-				|| line[i] == 'N' || line[i] == 'E') || !saw_wall
-				|| infos->spawn_dir))
+		if (is_illegal_char(line[i], infos, &saw_wall, &last_is_wall))
 			return (1);
-		else if (line[i] != '0' && !ft_isalpha(line[i]) && line[i] != ' ')
-			return (1);
-		else
-			last_is_wall = 0;
 		i++;
 	}
 	if (!saw_wall || !last_is_wall)
 		return (1);
+	return (0);
+}
+
+static int	is_illegal_char(char c, t_map_info *infos, int *saw_wall,
+				int *last_is_wall)
+{
+	if (c == '1')
+	{
+		*saw_wall = 1;
+		*last_is_wall = 1;
+	}
+	else if (ft_isalpha(c) && (!(c == 'W' || c == 'S'
+				|| c == 'N' || c == 'E') || !saw_wall
+			|| infos->spawn_dir))
+		return (1);
+	else if (c != '0' && !ft_isalpha(c) && c != ' ')
+		return (1);
+	else
+		*last_is_wall = 0;
 	return (0);
 }

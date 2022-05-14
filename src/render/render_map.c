@@ -60,10 +60,10 @@ static void	draw_cells(int cell_size, t_vec2 offset)
 		{
 			if (map->map[i][j] == WALL)
 				render_mmap_wall(x_start + j * cell_size,
-						y_start + i * cell_size, cell_size);
+					y_start + i * cell_size, cell_size);
 			if (map->map[i][j] == EMPTY)
 				render_mmap_empty(x_start + j * cell_size,
-						y_start + i * cell_size, cell_size);
+					y_start + i * cell_size, cell_size);
 			j++;
 		}
 		i++;

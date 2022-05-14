@@ -15,8 +15,8 @@
 
 void	render_rect(t_vec2 pos, t_vec2 size, int color)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
 	y = 0;
 	while (y < size.y)

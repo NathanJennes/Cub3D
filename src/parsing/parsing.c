@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 15:38:03 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/14 19:55:26 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 static void	parse_line(t_map_info *infos, char *line);
 static char	*skip_spaces(char *str);
 static void	construct_map(t_map_info *infos);
+
+static void	read_map_content(t_map_info *infos, size_t i, size_t j, int *row);
 
 void	init_map(char *file)
 {
@@ -91,20 +93,24 @@ static void	construct_map(t_map_info *infos)
 		j = 0;
 		while (j < infos->width)
 		{
-			if (infos->map_raw[i][j] == ' ')
-				row[j] = VOID;
-			else if (infos->map_raw[i][j] == '1')
-				row[j] = WALL;
-			else
-				row[j] = EMPTY;
-			if (ft_isalpha(infos->map_raw[i][j]))
-			{
-				infos->spawn_dir = infos->map_raw[i][j];
-				infos->spawn_pos = (t_vec2){j * CELL_WIDTH, i * CELL_HEIGHT};
-			}
+			read_map_content(infos, i, j, row);
 			j++;
 		}
-		infos->map[i] = row;
-		i++;
+		infos->map[i++] = row;
+	}
+}
+
+static void	read_map_content(t_map_info *infos, size_t i, size_t j, int *row)
+{
+	if (infos->map_raw[i][j] == ' ')
+		row[j] = VOID;
+	else if (infos->map_raw[i][j] == '1')
+		row[j] = WALL;
+	else
+		row[j] = EMPTY;
+	if (ft_isalpha(infos->map_raw[i][j]))
+	{
+		infos->spawn_dir = infos->map_raw[i][j];
+		infos->spawn_pos = vec2(j * CELL_WIDTH, i * CELL_HEIGHT);
 	}
 }

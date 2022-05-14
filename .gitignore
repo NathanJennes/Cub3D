@@ -1,6 +1,7 @@
 .DS_Store
 obj/
 .idea/
+appdata/
 cub3d
 cub3dd
 

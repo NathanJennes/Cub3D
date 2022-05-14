@@ -6,14 +6,14 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 16:29:13 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/14 19:48:34 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "parsing.h"
 
-static void init_hooks(void);
+static void	init_hooks(void);
 static void	init_ui(void);
 
 int	is_legal_file(int argc, char **argv)
@@ -40,7 +40,7 @@ void	init_app(char *file)
 	mlx_loop(get_mlx());
 }
 
-static void init_hooks(void)
+static void	init_hooks(void)
 {
 	t_mlx	*app;
 

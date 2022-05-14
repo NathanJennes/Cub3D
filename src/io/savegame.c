@@ -6,14 +6,12 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:44:59 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/14 19:26:19 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/14 19:50:05 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <sys/stat.h>
-#include <string.h>
-#include <errno.h>
 #include "leaky.h"
 #include "core.h"
 
@@ -53,9 +51,9 @@ static int	open_save_file(char *save_name, int truncate)
 
 static void	create_appdata_directory(void)
 {
-	struct stat dir;
+	struct stat	dir;
 
 	ft_memset(&dir, 0, sizeof (struct stat));
-	if(stat(APPDATA_DIRECTORY, &dir) == -1)
+	if (stat(APPDATA_DIRECTORY, &dir) == -1)
 		mkdir(APPDATA_DIRECTORY, 0777);
 }

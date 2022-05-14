@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   slider.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:50:41 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/09 16:31:23 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/14 19:48:07 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,17 @@ void	show_slider(t_slider *slider)
 			slider->pos.y + SLIDER_H / 2);
 	line_end = vec2(slider->pos.x + SLIDER_BTN_W + SLIDER_PAD + SLIDER_W,
 			slider->pos.y + SLIDER_H / 2);
-	render_rect(slider->pos, (t_vec2){25, 25}, create_trgb(0, 150, 51, 51));
-	render_rect(btn2_pos, (t_vec2){25, 25}, create_trgb(0, 51, 51, 150));
+	render_rect(slider->pos, vec2(25, 25), create_trgb(0, 150, 51, 51));
+	render_rect(btn2_pos, vec2(25, 25), create_trgb(0, 51, 51, 150));
 	render_line(line_start, line_end, create_trgb(0, 150, 51, 51),
 		create_trgb(0, 51, 51, 150));
 	cursor_val = (slider->value - slider->min) / (slider->max - slider->min);
-	line_start = vec2(
-		slider->pos.x + SLIDER_BTN_W + SLIDER_PAD + SLIDER_W * cursor_val,
-		slider->pos.y);
-	line_end = vec2(
-		slider->pos.x + SLIDER_BTN_W + SLIDER_PAD + SLIDER_W * cursor_val,
-		slider->pos.y + SLIDER_H);
+	line_start = vec2(slider->pos.x + SLIDER_BTN_W
+			+ SLIDER_PAD + SLIDER_W * cursor_val, slider->pos.y);
+	line_end = vec2(slider->pos.x + SLIDER_BTN_W
+			+ SLIDER_PAD + SLIDER_W * cursor_val, slider->pos.y + SLIDER_H);
 	cursor_color = color_lerp(create_trgb(0, 150, 51, 51),
-		create_trgb(0, 51, 51, 150), cursor_val);
+			create_trgb(0, 51, 51, 150), cursor_val);
 	render_line(line_start, line_end, cursor_color, cursor_color);
 }
 

@@ -17,9 +17,9 @@ static int	pixel_in_canvas(int x, int y);
 
 void	clear_screen(int color)
 {
-	int	i;
-	int	total;
-	int	bytes_pp;
+	int		i;
+	int		total;
+	int		bytes_pp;
 	t_frame	*frame;
 
 	frame = get_frame();
