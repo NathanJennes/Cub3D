@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 11:36:36 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/14 12:24:09 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/14 12:28:25 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@ int64_t	load_texture(char *path)
 	new_texture = create_texture_from_xpm_file(xpm_file);
 	tex_id = add_texture_to_array(new_texture);
 	return (tex_id);
+}
+
+t_texture	*get_texture_from_id(int64_t tex_id)
+{
+	t_texture_manager	*tex_manager;
+
+	tex_manager = &get_app()->texture_manager;
+	if (tex_id >= tex_manager->tex_array_size)
+		return (NULL);
+	return (&tex_manager->tex_array[tex_id]);
 }
 
 void	unload_texture_manager(void)
