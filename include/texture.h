@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:38:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/09 22:59:40 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/14 12:24:34 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,17 @@ typedef struct s_texture
 	uint8_t	*ao_all;
 }	t_texture;
 
+typedef struct s_texture_manager
+{
+	t_texture	*tex_array;
+	int64_t		tex_array_size;
+}	t_texture_manager;
+
 t_xpm_file	load_xpm(char *path);
 t_texture	create_texture_from_xpm_file(t_xpm_file file);
 void		free_texture(t_texture *texture);
+
+int64_t		load_texture(char *path);
+void		unload_texture_manager(void);
 
 #endif

@@ -23,7 +23,7 @@ UI_SRCS			:=	$(addprefix $(UI_DIR)/, $(UI_FILE))
 
 TEXTURES_DIR	:=	textures
 TEXTURES_FILE	:=	xpm_loader.c texture_generation.c ambiant_occlusion.c		\
-					texture_deletion.c
+					texture_deletion.c texture_manager.c
 TEXTURE_SRCS	:=	$(addprefix $(TEXTURES_DIR)/, $(TEXTURES_FILE))
 
 SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\
