@@ -6,7 +6,7 @@ DEBUG_NAME				:=	cub3dd
 
 CORE_DIR		:=	core
 CORE_FILE		:=	main.c core.c main_loop.c error_utils.c hooks.c init.c gc.c	\
-					getters.c
+					getters.c error.c
 CORE_SRCS		:=	$(addprefix $(CORE_DIR)/, $(CORE_FILE))
 
 PARSING_DIR		:=	parsing
