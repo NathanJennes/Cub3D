@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 11:36:36 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/14 12:28:25 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/14 12:28:28 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_texture	*get_texture_from_id(int64_t tex_id)
 
 void	unload_texture_manager(void)
 {
-	int64_t 			i;
+	int64_t				i;
 	t_texture_manager	*tex_manager;
 
 	i = 0;
