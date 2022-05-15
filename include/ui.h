@@ -6,13 +6,14 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/14 13:11:53 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/15 16:04:45 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UI_H
 # define UI_H
 
+# include "texture.h"
 # include "colors.h"
 
 # ifdef __linux__
@@ -59,10 +60,10 @@ typedef struct s_slider
 
 typedef struct s_ui
 {
-	t_ui_state	state;
-	u_int8_t	flags;
-	t_vec2		select_bar_pos;
-	t_slider	map_scale_slider;
+	t_ui_state			state;
+	u_int8_t			flags;
+	t_vec2				select_bar_pos;
+	t_slider			map_scale_slider;
 }	t_ui;
 
 void		init_ui(void);

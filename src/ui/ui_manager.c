@@ -6,11 +6,12 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:00:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/14 13:26:16 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/15 16:25:00 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
+# include "render.h"
 #include "ui.h"
 
 int	ui_manager(void)
@@ -32,13 +33,13 @@ int	ui_manager(void)
 	{
 		if (ui->state & MAIN_MENU)
 		{
-			put_xpm_to_window("assets/ui/select_bar.xpm", ui->select_bar_pos);
-			put_xpm_to_window("assets/ui/main_menu.xpm", vec2(0, 0));
+			render_ui_texture(2, 360, 170);
+			render_ui_texture(0, 0, 0);
 		}
 		else if (ui->state & OPTION_MENU)
 		{
-			put_xpm_to_window("assets/ui/select_bar.xpm", ui->select_bar_pos);
-			put_xpm_to_window("assets/ui/option_menu.xpm", vec2(0, 0));
+			render_ui_texture(2, 360, 170);
+			render_ui_texture(1, 0, 0);
 		}
 	}
 	/* Debug */

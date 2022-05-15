@@ -15,6 +15,7 @@
 
 # include "mlx.h"
 # include "libft.h"
+# include "texture.h"
 # include "ui.h"
 
 # ifdef FULL_SCREEN
@@ -81,17 +82,16 @@ typedef struct s_player
 
 typedef struct s_mlx
 {
-	void		*mlx;
-	void		*win;
-	int			width;
-	int			height;
-	t_frame		frame;
-	t_mouse		mouse;
-	t_map_info	map;
-	t_player	player;
-	int64_t		start_time;
-	int8_t		game_state;
-	t_ui		ui;
+	void				*mlx;
+	void				*win;
+	t_frame				frame;
+	t_mouse				mouse;
+	t_map_info			map;
+	t_player			player;
+	int64_t				start_time;
+	int8_t				game_state;
+	t_ui				ui;
+	t_texture_manager	texture_manager;
 }	t_mlx;
 
 /* core.c */

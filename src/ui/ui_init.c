@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 18:21:25 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/13 18:28:24 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/15 16:41:51 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ void	init_ui(void)
 
 	ui = get_ui();
 	ui->state = MAIN_MENU;
+	load_texture("assets/ui/main_menu.xpm");
+	load_texture("assets/ui/option_menu.xpm");
+	load_texture("assets/ui/select_bar.xpm");
 	ui->select_bar_pos = vec2(360, 170);
 	init_slider(ui);
 }
