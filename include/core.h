@@ -104,6 +104,9 @@ int			close_app(void);
 void		error_close_app(void);
 void		check_leaky_errors(void);
 
+/* window.c */
+void destroy_window();
+
 /* initialization */
 int			is_legal_file(int argc, char **argv);
 void		init_app(char *file);
