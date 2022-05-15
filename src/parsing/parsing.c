@@ -15,10 +15,10 @@
 #include "leaky.h"
 #include "core.h"
 
+void		construct_map(t_map_info *infos);
+
 static void	parse_line(t_map_info *infos, char *line);
 static char	*skip_spaces(char *str);
-static void	construct_map(t_map_info *infos);
-
 static void	read_map_content(t_map_info *infos, size_t i, size_t j, int *row);
 
 void	init_map(char *file)
@@ -79,7 +79,7 @@ static char	*skip_spaces(char *str)
 	return (str);
 }
 
-static void	construct_map(t_map_info *infos)
+void	construct_map(t_map_info *infos)
 {
 	size_t	i;
 	size_t	j;

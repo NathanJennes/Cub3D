@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/14 19:48:34 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/15 13:02:39 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,18 @@ int	is_legal_file(int argc, char **argv)
 
 void	init_app(char *file)
 {
+	t_mlx	*app;
+
+	app = get_app();
 	init_gc();
 	init_ui();
-	init_map(file);
+	app->gamestate = load_game("save.save");
+	if (cub_get_error() == SAVE_ERROR || cub_get_error() == FILE_ERROR)
+	{
+		printf("Error in save file, loading new game from the map given\n");
+		cub_unset_error();
+		init_map(file);
+	}
 	init_window("Cub3d");
 	init_hooks();
 	mlx_loop(get_mlx());

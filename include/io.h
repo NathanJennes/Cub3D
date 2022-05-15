@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:45:17 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/14 19:00:12 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/15 12:37:05 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # define APPDATA_DIRECTORY "appdata"
 
-void	save_game(char *save_name);
+typedef struct s_gamestate	t_gamestate;
+
+void		save_game(char *save_name);
+t_gamestate	load_game(char *save_name);
 
 #endif

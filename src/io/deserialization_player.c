@@ -54,17 +54,17 @@ static int	parse_pos(char *line, t_gamestate *save)
 	if (!line_cursor)
 		return (0);
 	line_cursor += ft_strskip_space(line_cursor);
-	if (!ft_isdigit(*line_cursor))
+	if (!ft_isdigit(*line_cursor) && *line_cursor != '-')
 		return (0);
 	save->player.pos.x = (float)ft_atoi(line_cursor);
 	line_cursor += ft_strskip_digit(line_cursor);
 	line_cursor += ft_strskip_space(line_cursor);
-	if (!ft_isdigit(*line_cursor))
+	if (!ft_isdigit(*line_cursor) && *line_cursor != '-')
 		return (0);
 	save->player.pos.y = (float)ft_atoi(line_cursor);
 	line_cursor += ft_strskip_digit(line_cursor);
 	line_cursor += ft_strskip_space(line_cursor);
-	if (!ft_isdigit(*line_cursor))
+	if (!ft_isdigit(*line_cursor) && *line_cursor != '-')
 		return (0);
 	save->player.direction = (float)ft_atoi(line_cursor);
 	return (1);
