@@ -16,8 +16,8 @@
 # include "mlx.h"
 # include "libft.h"
 # include "texture.h"
-#include "error.h"
-#include "io.h"
+# include "error.h"
+# include "io.h"
 
 # ifdef FULL_SCREEN
 #  define WIN_W		1920

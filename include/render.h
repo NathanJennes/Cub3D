@@ -13,7 +13,7 @@
 #ifndef RENDER_H
 # define RENDER_H
 
-#include "colors.h"
+# include "colors.h"
 
 void		clear_screen(int color);
 void		mlx_pixel_put_img(int x, int y, int color);

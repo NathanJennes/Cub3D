@@ -21,7 +21,6 @@ typedef enum e_error
 	SAVE_ERROR = 3
 }	t_error;
 
-
 void	cub_set_error(t_error error);
 void	cub_unset_error(void);
 int		cub_has_error(void);

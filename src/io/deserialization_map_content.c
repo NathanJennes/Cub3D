@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 12:21:29 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/15 12:26:45 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/15 12:31:11 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 static int	contains_illegal_char(t_map_info *infos, char *line);
 static int	is_illegal_char(char c, t_map_info *infos, int *saw_wall,
-		int *last_is_wall);
+				int *last_is_wall);
 
-int			deserialize_map_parse_map_content(char *line, t_gamestate *save)
+int	deserialize_map_parse_map_content(char *line, t_gamestate *save)
 {
 	t_map_info	*infos;
 
@@ -61,9 +61,8 @@ static int	is_illegal_char(char c, t_map_info *infos, int *saw_wall,
 		*saw_wall = 1;
 		*last_is_wall = 1;
 	}
-	else if (ft_isalpha(c) && (!(c == 'W' || c == 'S'
-								 || c == 'N' || c == 'E') || !saw_wall
-							   || infos->spawn_dir))
+	else if (ft_isalpha(c) && (!(c == 'W' || c == 'S' || c == 'N' || c == 'E')
+			|| !saw_wall || infos->spawn_dir))
 		return (1);
 	else if (c != '0' && !ft_isalpha(c) && c != ' ')
 		return (1);

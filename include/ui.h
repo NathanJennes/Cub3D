@@ -13,7 +13,7 @@
 #ifndef UI_H
 # define UI_H
 
-#include "colors.h"
+# include "colors.h"
 
 # ifdef __linux__
 #  include <stdint.h>
