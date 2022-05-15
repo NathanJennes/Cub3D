@@ -1,5 +1,7 @@
 #!/bin/bash
 
+git fetch --all > /dev/null
+
 cd Libft
 if (( $? != 0 )); then
   echo "You must be in the root directory of the project to pull!"

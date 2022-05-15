@@ -6,16 +6,18 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:44:59 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/14 19:50:05 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/15 11:10:56 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <sys/stat.h>
+#include "bool.h"
 #include "leaky.h"
 #include "core.h"
 
 void		serialize_game(int fd);
+t_gamestate	deserialize_save(int fd);
 
 static int	open_save_file(char *save_name, int truncate);
 static void	create_appdata_directory(void);
@@ -28,6 +30,19 @@ void	save_game(char *save_name)
 	if (fd == -1)
 		return ;
 	serialize_game(fd);
+}
+
+t_gamestate	load_game(char *save_name)
+{
+	t_gamestate	save;
+	int			fd;
+
+	ft_memset(&save, 0, sizeof (t_gamestate));
+	fd = open_save_file(save_name, FALSE);
+	if (fd == -1)
+		return (save);
+	save = deserialize_save(fd);
+	return (save);
 }
 
 static int	open_save_file(char *save_name, int truncate)
@@ -44,7 +59,7 @@ static int	open_save_file(char *save_name, int truncate)
 	else
 		fd = open(save_file, O_CREAT | O_RDWR, 0777);
 	if (fd == -1)
-		cub_set_error(SAVE_ERROR);
+		cub_set_error(FILE_ERROR);
 	gc_free(save_file);
 	return (fd);
 }

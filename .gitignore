@@ -2,6 +2,8 @@
 obj/
 .idea/
 appdata/
+appdata
+appdata/*
 cub3d
 cub3dd
 

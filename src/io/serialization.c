@@ -65,7 +65,12 @@ static void	serialize_map_walls(int fd, t_map_info map)
 		j = 0;
 		while (j < map.width)
 		{
-			ft_dprintf(fd, "%d ", map.map[i][j]);
+			if (map.map[i][j] == WALL)
+				ft_dprintf(fd, "%d", 1);
+			if (map.map[i][j] == EMPTY)
+				ft_dprintf(fd, "%d", 0);
+			if (map.map[i][j] == VOID)
+				ft_dprintf(fd, " ");
 			j++;
 		}
 		ft_dprintf(fd, "\n");
