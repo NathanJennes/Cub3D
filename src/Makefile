@@ -14,7 +14,8 @@ PARSING_FILE	:=	parsing.c parsing_utils.c
 PARSING_SRCS	:=	$(addprefix $(PARSING_DIR)/, $(PARSING_FILE))
 
 RENDER_DIR		:=	render
-RENDER_FILE		:=	draw.c rendering_primitives.c colors_utils.c
+RENDER_FILE		:=	draw.c rendering_primitives.c colors_utils.c render_map.c	\
+					render_ui_texture.c
 RENDER_SRCS		:=	$(addprefix $(RENDER_DIR)/, $(RENDER_FILE))
 
 UI_DIR			:=	ui
@@ -24,7 +25,7 @@ UI_SRCS			:=	$(addprefix $(UI_DIR)/, $(UI_FILE))
 
 TEXTURES_DIR	:=	textures
 TEXTURES_FILE	:=	xpm_loader.c texture_generation.c ambiant_occlusion.c		\
-					texture_deletion.c
+					texture_deletion.c texture_manager.c
 TEXTURE_SRCS	:=	$(addprefix $(TEXTURES_DIR)/, $(TEXTURES_FILE))
 
 SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\
