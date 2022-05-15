@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/14 19:55:26 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/15 16:10:04 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,17 @@ void	construct_map(t_map_info *infos)
 
 static void	read_map_content(t_map_info *infos, size_t i, size_t j, int *row)
 {
-	if (infos->map_raw[i][j] == ' ')
+	if (j >= ft_strlen(infos->map_raw[i]))
+	{
 		row[j] = VOID;
-	else if (infos->map_raw[i][j] == '1')
+		return ;
+	}
+	if (infos->map_raw[i][j] == '1')
 		row[j] = WALL;
-	else
+	else if (infos->map_raw[i][j] == '0' || ft_isalpha(infos->map_raw[i][j]))
 		row[j] = EMPTY;
+	else if (infos->map_raw[i][j] == ' ')
+		row[j] = VOID;
 	if (ft_isalpha(infos->map_raw[i][j]))
 	{
 		infos->spawn_dir = infos->map_raw[i][j];

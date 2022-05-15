@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:44:59 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/15 11:10:56 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/15 16:15:19 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	save_game(char *save_name)
 	if (fd == -1)
 		return ;
 	serialize_game(fd);
+	close(fd);
 }
 
 t_gamestate	load_game(char *save_name)
@@ -42,6 +43,7 @@ t_gamestate	load_game(char *save_name)
 	if (fd == -1)
 		return (save);
 	save = deserialize_save(fd);
+	close(fd);
 	return (save);
 }
 

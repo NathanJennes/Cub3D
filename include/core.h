@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/14 18:31:35 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/15 14:55:43 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,10 @@ typedef struct s_mlx
 	void				*win;
 	t_frame				frame;
 	t_gamestate			gamestate;
+	t_gamestate			*savegames;
+	size_t				savegames_count;
+	t_gamestate			*maps;
+	size_t				maps_count;
 	t_slider			map_scale_slider;
 	int64_t				start_time;
 	u_int8_t			ui_flags;

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/15 13:02:39 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/15 16:12:10 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void	init_app(char *file)
 	app = get_app();
 	init_gc();
 	init_ui();
-	app->gamestate = load_game("save.save");
-	if (cub_get_error() == SAVE_ERROR || cub_get_error() == FILE_ERROR)
-	{
-		printf("Error in save file, loading new game from the map given\n");
-		cub_unset_error();
+	load_all_saves();
+	printf("loaded: %d\n", (int)app->savegames_count);
+	if (app->savegames_count == 0)
 		init_map(file);
-	}
+	else
+		app->gamestate = app->savegames[0];
+	printf("player pos: %f %f\n", app->gamestate.player.pos.x, app->gamestate.player.pos.y);
 	init_window("Cub3d");
 	init_hooks();
 	mlx_loop(get_mlx());

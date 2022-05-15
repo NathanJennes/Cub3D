@@ -65,6 +65,7 @@ char	*parse_texture(char *line)
 void	add_map_row(t_map_info *infos, char *line)
 {
 	infos->height++;
+	line = ft_trimr(line);
 	if (contains_illegal_char(infos, line))
 		error_close_app();
 	if (!infos->map_raw)
@@ -84,7 +85,7 @@ static int	contains_illegal_char(t_map_info *infos, char *line)
 	i = 0;
 	saw_wall = 0;
 	last_is_wall = 0;
-	while (line[i] && line[i] != '\n')
+	while (line[i])
 	{
 		if (is_illegal_char(line[i], infos, &saw_wall, &last_is_wall))
 			return (1);

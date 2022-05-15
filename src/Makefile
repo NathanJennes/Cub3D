@@ -32,7 +32,8 @@ IO_FILE			:=	savegame.c													\
 					serialization.c												\
 					deserialization.c deserialization_player.c					\
 					deserialization_map.c deserialization_map_specs.c			\
-					deserialization_map_textures.c deserialization_map_content.c
+					deserialization_map_textures.c deserialization_map_content.c\
+					saves_manager.c
 IO_SRCS			:=	$(addprefix $(IO_DIR)/, $(IO_FILE))
 
 SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\

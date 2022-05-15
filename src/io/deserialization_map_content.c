@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 12:21:29 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/15 12:53:40 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/15 16:06:03 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	deserialize_map_parse_map_content(char *line, t_gamestate *save)
 	t_map_info	*infos;
 
 	infos = &save->map;
+	line = ft_trimr(line);
 	if (contains_illegal_char(infos, line))
 		return (0);
 	if (!infos->map_raw)
 		infos->map_raw = gc_strarray_init();
 	infos->map_raw = gc_strarray_append(infos->map_raw, line);
-	line = ft_trimr(line);
 	if (ft_strlen(line) > infos->width)
 		return (0);
 	return (1);
@@ -42,7 +42,7 @@ static int	contains_illegal_char(t_map_info *infos, char *line)
 	i = 0;
 	saw_wall = 0;
 	last_is_wall = 0;
-	while (line[i] && line[i] != '\n')
+	while (line[i])
 	{
 		if (is_illegal_char(line[i], infos, &saw_wall, &last_is_wall))
 			return (1);
