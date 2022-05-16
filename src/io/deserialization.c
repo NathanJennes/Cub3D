@@ -37,11 +37,7 @@ t_gamestate	deserialize_save(int fd)
 	}
 	construct_map(&save.map);
 	if (!save.map.spawn_dir)
-	{
 		cub_set_error(SAVE_ERROR);
-		gc_strarray_free(save.map.map_raw);
-		return (save);
-	}
 	gc_strarray_free(save.map.map_raw);
 	return (save);
 }

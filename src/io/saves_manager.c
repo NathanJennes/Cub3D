@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 14:57:26 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/16 15:19:44 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 17:56:27 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static void	add_to_saves(char *save_name)
 	save = load_game(save_name);
 	if (cub_consume_error())
 		return ;
-	printf("adding %s\n", save_name);
 	grow_saves_array();
 	app = get_app();
 	app->savegames[app->savegames_count] = save;
@@ -76,7 +75,10 @@ static void	grow_saves_array(void)
 
 	app = get_app();
 	new = gc_calloc(app->savegames_count + 1, sizeof (t_gamestate));
-	ft_memmove(new, app->savegames, app->savegames_count);
-	gc_free(app->savegames);
+	if (app->savegames)
+	{
+		ft_memmove(new, app->savegames, app->savegames_count * sizeof (t_gamestate));
+		gc_free(app->savegames);
+	}
 	app->savegames = new;
 }

@@ -81,6 +81,7 @@ typedef struct s_player
 
 typedef struct s_gamestate
 {
+	char		*name;
 	t_map_info	map;
 	t_player	player;
 }	t_gamestate;
