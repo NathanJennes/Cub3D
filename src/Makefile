@@ -15,8 +15,8 @@ RENDER_FILE		:=	draw.c rendering_primitives.c colors_utils.c				\
 RENDER_SRCS		:=	$(addprefix $(RENDER_DIR)/, $(RENDER_FILE))
 
 UI_DIR			:=	ui
-UI_FILE			:=	fps_counter.c ui_helper.c slider.c ui_manager.c				\
-					render_minimap.c ui_init.c
+UI_FILE			:=	fps_counter.c ui_helper.c ui_manager.c						\
+					render_minimap.c ui_init.c ui_component.c
 UI_SRCS			:=	$(addprefix $(UI_DIR)/, $(UI_FILE))
 
 TEXTURES_DIR	:=	textures

@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 18:26:18 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/16 21:31:41 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_button
 	int64_t 	tex_id_hover;
 	t_bool		displayed;
 	t_bool		is_clickable;
-	t_vec2		pos;
+	t_vec2		position;
 	t_vec2		bounding_box;
 	int 		(*event)(struct s_button *button);
 }	t_button;
@@ -65,14 +65,14 @@ typedef struct s_label
 {
 	int64_t 	tex_id;
 	t_bool		displayed;
-	t_vec2		pos;
+	t_vec2		position;
 }	t_label;
 
 typedef struct s_img_box
 {
 	int64_t 	tex_id;
 	t_bool		displayed;
-	t_vec2		pos;
+	t_vec2		position;
 }	t_img_box;
 
 typedef struct s_slider
@@ -80,7 +80,7 @@ typedef struct s_slider
 	int64_t 	tex_id_bar;
 	int64_t 	tex_id_button;
 	t_bool		displayed;
-	t_vec2		pos;
+	t_vec2		position;
 	t_bool		is_clickable;
 	t_vec2		bounding_box;
 	float		min;
@@ -94,19 +94,32 @@ typedef struct s_text_box
 	int64_t 	tex_id;
 	t_bool		displayed;
 	t_bool		is_clickable;
-	t_vec2		pos;
+	t_vec2		position;
 	t_vec2		bounding_box;
+	char		*str;
 	int 		(*event)(struct s_text_box *button);
 }	t_text_box;
 
+typedef struct s_ui_main_menu
+{
+	t_img_box	title;
+	t_button	btn_continue;
+	t_button	btn_new_game;
+	t_button	btn_load;
+	t_button	btn_editor;
+	t_button	btn_option;
+	t_button	btn_exit;
+}	t_ui_main_menu;
+
 typedef struct s_ui
 {
-	t_ui_state	state;
-	uint8_t		debug_ui;
+	t_ui_state		state;
+	uint8_t			debug_ui;
+	t_ui_main_menu	main_menu;
 }	t_ui;
 
 void		init_ui(void);
-int			ui_manager(void);
+int			update_ui(void);
 
 void		render_mmap(float zoom);
 void		show_slider(t_slider *slider);

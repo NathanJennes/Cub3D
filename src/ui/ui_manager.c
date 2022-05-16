@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:00:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 18:57:26 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/16 22:09:00 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static void	display_hud(t_mlx *app, t_ui *ui);
 
-int	ui_manager(void)
+int	update_ui(void)
 {
 	t_mlx			*app;
 	t_ui			*ui;
@@ -26,21 +26,11 @@ int	ui_manager(void)
 	if (app->game_state == IN_GAME)
 		display_hud(app, ui);
 	if (app->game_state == MENU)
-	{}
+	{
+	}
 	if (app->ui.debug_ui & DEBUG_UI)
 		fps_counter();
 	return (0);
-}
-
-void	update_ui_flags(uint8_t flag)
-{
-	t_mlx	*app;
-
-	app = get_app();
-	if (app->ui.debug_ui & flag)
-		app->ui.debug_ui ^= flag;
-	else
-		app->ui.debug_ui |= flag;
 }
 
 static void	display_hud(t_mlx *app, t_ui *ui)

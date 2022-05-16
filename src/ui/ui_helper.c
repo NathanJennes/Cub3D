@@ -22,3 +22,14 @@ int	str_px_size(char *str)
 {
 	return ((int)ft_strlen(str) * 6);
 }
+
+void	update_ui_flags(uint8_t flag)
+{
+	t_mlx	*app;
+
+	app = get_app();
+	if (app->ui.debug_ui & flag)
+		app->ui.debug_ui ^= flag;
+	else
+		app->ui.debug_ui |= flag;
+}
