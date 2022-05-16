@@ -38,13 +38,12 @@ void	init_app(char *file)
 	init_gc();
 	init_window("Cub3d");
 	init_ui();
-	app->gamestate = load_game("save.save");
-	if (cub_get_error() == SAVE_ERROR || cub_get_error() == FILE_ERROR)
-	{
-		printf("Error in save file, loading new game from the map given\n");
-		cub_unset_error();
+	load_all_saves();
+	printf("loaded: %d\n", (int)app->savegames_count);
+	if (app->savegames_count == 0)
 		init_map(file);
-	}
+	else
+		app->gamestate = app->savegames[0];
 	init_hooks();
 	mlx_loop(get_mlx());
 }

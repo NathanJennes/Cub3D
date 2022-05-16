@@ -16,6 +16,7 @@
 # include "mlx.h"
 # include "libft.h"
 # include "texture.h"
+# include "ui.h"
 # include "io.h"
 
 # ifdef FULL_SCREEN

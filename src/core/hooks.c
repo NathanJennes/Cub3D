@@ -16,7 +16,6 @@
 #include "input_code.h"
 #include "ui.h"
 
-static void	handle_main_menu(int keycode, t_mlx *app);
 static void	handle_moving(int keycode, t_mlx *app);
 
 int	mouse_hooks(int mousecode, int x, int y)
