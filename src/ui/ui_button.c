@@ -39,6 +39,8 @@ void	ui_button_update(t_button *button, t_bool mouse_clicked)
 	if (mouse_pos.x >= button->position.x && mouse_pos.x <= button->position.x + button->bounding_box.x
 		&& mouse_pos.y >= button->position.y && mouse_pos.y <= button->position.y + button->bounding_box.y)
 		button->hovered = TRUE;
+	else
+		button->hovered = FALSE;
 	if (button->hovered && mouse_clicked)
 	{
 		button->clicked = TRUE;

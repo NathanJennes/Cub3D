@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 22:46:49 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 22:47:27 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ typedef enum e_ui_state
 typedef struct s_button
 {
 	int64_t 	tex_id;
-	int64_t 	tex_id_select;
-	int64_t 	tex_id_hover;
 	t_bool		displayed;
 	t_bool		is_clickable;
 	t_bool		hovered;

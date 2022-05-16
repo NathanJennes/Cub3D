@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:57:26 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 22:42:00 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 23:39:14 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	handle_moving(int keycode, t_mlx *app);
 
 int	mouse_hooks(int mousecode, int x, int y)
 {
+	(void)x;
+	(void)y;
 	if (mousecode)
 		dprintf(STDERR_FILENO, "Mouse: %d\n", mousecode);
 	update_ui(TRUE);

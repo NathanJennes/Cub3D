@@ -22,5 +22,8 @@ void	free_texture(t_texture *texture)
 	gc_free(texture->ao_left);
 	gc_free(texture->ao_flat);
 	mlx_destroy_image(get_mlx(), texture->original_handle);
+	mlx_destroy_image(get_mlx(), texture->grayscale_handle);
+	mlx_destroy_image(get_mlx(), texture->inversed_handle);
+	mlx_destroy_image(get_mlx(), texture->inversed_grayscale_handle);
 	gc_memset(texture, 0, sizeof(t_texture));
 }

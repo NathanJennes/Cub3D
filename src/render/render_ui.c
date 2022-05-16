@@ -29,9 +29,9 @@ void	render_ui_button(t_button *button)
 	if (!button->displayed)
 		return ;
 	if (button->clicked)
-		render_ui_texture(button->tex_id_select, button->position.x, button->position.y);
+		render_ui_texture_grayscale(button->tex_id, button->position.x, button->position.y);
 	else if (button->hovered)
-		render_ui_texture(button->tex_id_hover, button->position.x, button->position.y);
+		render_ui_texture_inversed(button->tex_id, button->position.x, button->position.y);
 	else
 		render_ui_texture(button->tex_id, button->position.x, button->position.y);
 }

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:38:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/14 12:24:45 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 23:16:28 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define TEXTURE_H
 
 # include <stdint.h>
+# include "libft.h"
 
 # define INVALID_TEXTURE -1
 
@@ -38,6 +39,12 @@ typedef struct s_texture
 	int		height;
 	void	*original_handle;
 	uint8_t	*original;
+	uint8_t	*grayscale;
+	void	*grayscale_handle;
+	uint8_t	*inversed_grayscale;
+	void	*inversed_grayscale_handle;
+	uint8_t	*inversed;
+	void	*inversed_handle;
 	uint8_t	*ao_flat;
 	uint8_t	*ao_right;
 	uint8_t	*ao_left;
