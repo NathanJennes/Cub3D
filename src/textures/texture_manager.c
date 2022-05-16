@@ -23,8 +23,7 @@ int64_t	load_texture(char *path)
 	t_texture	new_texture;
 	int64_t		tex_id;
 
-	xpm_file = load_xpm(path);
-	if (cub_get_error())
+	if (!load_xpm(&xpm_file, path))
 		return (INVALID_TEXTURE);
 	new_texture = create_texture_from_xpm_file(xpm_file);
 	tex_id = add_texture_to_array(new_texture);

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:44:59 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/16 17:52:40 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 18:52:21 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,24 @@
 #include "core.h"
 
 void		serialize_game(int fd);
-t_gamestate	deserialize_save(int fd);
+int			deserialize_save(t_gamestate *save_out, int fd);
 
 static int	open_save_file(char *save_name, int truncate);
 static void	create_appdata_directory(void);
 
-void	save_game(char *save_name)
+int	save_game(char *save_name)
 {
 	int	fd;
 
 	fd = open_save_file(save_name, TRUE);
 	if (fd == -1)
-		return ;
+		return (0);
 	serialize_game(fd);
 	close(fd);
+	return (1);
 }
 
-t_gamestate	load_game(char *save_name)
+int	load_game(t_gamestate *save_out, char *save_name)
 {
 	t_gamestate	save;
 	int			fd;
@@ -41,11 +42,13 @@ t_gamestate	load_game(char *save_name)
 	ft_memset(&save, 0, sizeof (t_gamestate));
 	fd = open_save_file(save_name, FALSE);
 	if (fd == -1)
-		return (save);
-	save = deserialize_save(fd);
+		return (0);
+	if (!deserialize_save(&save, fd))
+		return (0);
 	save.name = gc_strdup(save_name);
 	close(fd);
-	return (save);
+	*save_out = save;
+	return (1);
 }
 
 void	free_save(t_gamestate *save)
@@ -67,8 +70,6 @@ static int	open_save_file(char *save_name, int truncate)
 		fd = open(save_file, O_CREAT | O_RDWR | O_TRUNC, 0777);
 	else
 		fd = open(save_file, O_CREAT | O_RDWR, 0777);
-	if (fd == -1)
-		cub_set_error(FILE_ERROR);
 	gc_free(save_file);
 	return (fd);
 }

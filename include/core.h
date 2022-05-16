@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/15 14:55:43 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 18:47:35 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "mlx.h"
 # include "libft.h"
 # include "texture.h"
-# include "error.h"
 # include "io.h"
 
 # ifdef FULL_SCREEN
@@ -100,7 +99,6 @@ typedef struct s_mlx
 	int64_t				start_time;
 	u_int8_t			ui_flags;
 	t_texture_manager	texture_manager;
-	t_error				last_error;
 }	t_mlx;
 
 /* core.c */

@@ -50,7 +50,7 @@ typedef struct s_texture_manager
 	int64_t		tex_array_size;
 }	t_texture_manager;
 
-t_xpm_file	load_xpm(char *path);
+int			load_xpm(t_xpm_file *xpm_out, char *path);
 t_texture	create_texture_from_xpm_file(t_xpm_file file);
 void		free_texture(t_texture *texture);
 

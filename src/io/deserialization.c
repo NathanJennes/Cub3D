@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 11:05:43 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/15 12:56:25 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 18:44:19 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		construct_map(t_map_info *infos);
 
 static int	parse_line(int fd, char *line, t_gamestate *save);
 
-t_gamestate	deserialize_save(int fd)
+int	deserialize_save(t_gamestate *save_out, int fd)
 {
 	t_gamestate	save;
 	char		*line;
@@ -29,17 +29,15 @@ t_gamestate	deserialize_save(int fd)
 	while (line)
 	{
 		if (!parse_line(fd, line, &save))
-		{
-			cub_set_error(SAVE_ERROR);
-			return (save);
-		}
+			return (0);
 		line = gc_get_next_line(fd);
 	}
 	construct_map(&save.map);
-	if (!save.map.spawn_dir)
-		cub_set_error(SAVE_ERROR);
 	gc_strarray_free(save.map.map_raw);
-	return (save);
+	if (!save.map.spawn_dir)
+		return (0);
+	*save_out = save;
+	return (1);
 }
 
 static int	parse_line(int fd, char *line, t_gamestate *save)
