@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:44:59 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/15 16:15:19 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 15:04:54 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ t_gamestate	load_game(char *save_name)
 	save = deserialize_save(fd);
 	close(fd);
 	return (save);
+}
+
+void	free_save(t_gamestate *save)
+{
+	gc_free2d((void **) save->map.map, save->map.height);
 }
 
 static int	open_save_file(char *save_name, int truncate)

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 14:57:26 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/16 14:29:04 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 15:19:44 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,21 @@ void	load_all_saves(void)
 	}
 	closedir(dir);
 	cub_unset_error();
+}
+
+void	unload_saves(void)
+{
+	t_mlx	*app;
+	size_t	i;
+
+	app = get_app();
+	i = 0;
+	while (i < app->savegames_count)
+	{
+		free_save(&app->savegames[i]);
+		i++;
+	}
+	gc_free(app->savegames);
 }
 
 static void	add_to_saves(char *save_name)
