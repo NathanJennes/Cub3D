@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 18:26:18 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/16 21:03:14 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_button
 	int64_t 	tex_id_hover;
 	t_bool		displayed;
 	t_bool		is_clickable;
+	t_bool		hovered;
+	t_bool		clicked;
 	t_vec2		pos;
 	t_vec2		bounding_box;
 	int 		(*event)(struct s_button *button);
