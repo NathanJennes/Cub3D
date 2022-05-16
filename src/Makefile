@@ -9,10 +9,6 @@ CORE_FILE		:=	main.c exit.c main_loop.c error_utils.c hooks.c init.c gc.c	\
 					getters.c error.c window.c
 CORE_SRCS		:=	$(addprefix $(CORE_DIR)/, $(CORE_FILE))
 
-PARSING_DIR		:=	parsing
-PARSING_FILE	:=	parsing.c parsing_utils.c
-PARSING_SRCS	:=	$(addprefix $(PARSING_DIR)/, $(PARSING_FILE))
-
 RENDER_DIR		:=	render
 RENDER_FILE		:=	draw.c rendering_primitives.c colors_utils.c render_map.c	\
 					render_ui_texture.c
@@ -33,11 +29,12 @@ IO_FILE			:=	savegame.c													\
 					deserialization.c deserialization_player.c					\
 					deserialization_map.c deserialization_map_specs.c			\
 					deserialization_map_textures.c deserialization_map_content.c\
-					saves_manager.c
+					saves_manager.c	\
+					map_construction.c	\
+					parsing.c parsing_utils.c
 IO_SRCS			:=	$(addprefix $(IO_DIR)/, $(IO_FILE))
 
 SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\
-					$(addprefix $(SRCS_DIR)/, $(PARSING_SRCS))					\
 					$(addprefix $(SRCS_DIR)/, $(UI_SRCS))						\
 					$(addprefix $(SRCS_DIR)/, $(RENDER_SRCS))					\
 					$(addprefix $(SRCS_DIR)/, $(TEXTURE_SRCS))					\
@@ -68,10 +65,6 @@ $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(CORE_DIR)/%.c | $(RELEASE_OBJS_DIR)
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(PARSING_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
-	@printf "$(_GREEN)█$(_END)"
-
 $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(RENDER_DIR)/%.c | $(RELEASE_OBJS_DIR)
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
@@ -98,10 +91,6 @@ $(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
 # --------------------------- #
 
 $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(CORE_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
-	@printf "$(_GREEN)█$(_END)"
-
-$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(PARSING_DIR)/%.c | $(DEBUG_OBJS_DIR)
 	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 

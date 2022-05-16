@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 14:13:05 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/15 14:13:28 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 14:29:30 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_window(char *win_name)
 		error_close_app();
 }
 
-void destroy_window()
+void	destroy_window(void)
 {
 	if (get_mlx() && get_frame()->img)
 		mlx_destroy_image(get_mlx(), get_frame()->img);

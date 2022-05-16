@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 14:57:26 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/15 16:13:11 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 14:29:04 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,21 @@ static void	grow_saves_array(void);
 
 void	load_all_saves(void)
 {
-	t_mlx			*app;
 	DIR				*dir;
 	struct dirent	*curr_dir;
 
 	cub_unset_error();
-	app = get_app();
 	dir = opendir(APPDATA_DIRECTORY);
-	if(dir == NULL)
+	if (dir == NULL)
 		return ;
-	while ((curr_dir = readdir(dir)) != NULL)
+	curr_dir = readdir(dir);
+	while (curr_dir != NULL)
 	{
-		if(curr_dir->d_type == DT_REG && ft_strcmp(curr_dir->d_name, ".") != 0
-			&& ft_strcmp(curr_dir->d_name, "..") != 0 && ft_end_with(curr_dir->d_name, ".save"))
+		if (curr_dir->d_type == DT_REG && ft_strcmp(curr_dir->d_name, ".") != 0
+			&& ft_strcmp(curr_dir->d_name, "..") != 0
+			&& ft_end_with(curr_dir->d_name, ".save"))
 			add_to_saves(curr_dir->d_name);
+		curr_dir = readdir(dir);
 	}
 	closedir(dir);
 	cub_unset_error();

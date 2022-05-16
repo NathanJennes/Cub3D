@@ -43,7 +43,6 @@ void	init_app(char *file)
 		init_map(file);
 	else
 		app->gamestate = app->savegames[0];
-	printf("player pos: %f %f\n", app->gamestate.player.pos.x, app->gamestate.player.pos.y);
 	init_window("Cub3d");
 	init_hooks();
 	mlx_loop(get_mlx());
