@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 14:57:26 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/16 17:56:27 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 18:45:34 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	load_all_saves(void)
 	DIR				*dir;
 	struct dirent	*curr_dir;
 
-	cub_unset_error();
 	dir = opendir(APPDATA_DIRECTORY);
 	if (dir == NULL)
 		return ;
@@ -36,7 +35,12 @@ void	load_all_saves(void)
 		curr_dir = readdir(dir);
 	}
 	closedir(dir);
-	cub_unset_error();
+}
+
+void	reload_saves(void)
+{
+	unload_saves();
+	load_all_saves();
 }
 
 void	unload_saves(void)
@@ -59,8 +63,7 @@ static void	add_to_saves(char *save_name)
 	t_mlx		*app;
 	t_gamestate	save;
 
-	save = load_game(save_name);
-	if (cub_consume_error())
+	if (!load_game(&save, save_name))
 		return ;
 	grow_saves_array();
 	app = get_app();

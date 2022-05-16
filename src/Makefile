@@ -6,7 +6,7 @@ DEBUG_NAME				:=	cub3dd
 
 CORE_DIR		:=	core
 CORE_FILE		:=	main.c exit.c main_loop.c error_utils.c hooks.c init.c gc.c	\
-					getters.c error.c window.c getters_2.c input_device.c
+					getters.c window.c
 CORE_SRCS		:=	$(addprefix $(CORE_DIR)/, $(CORE_FILE))
 
 RENDER_DIR		:=	render

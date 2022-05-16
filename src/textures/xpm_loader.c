@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:48:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/14 15:56:33 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 18:50:32 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "texture.h"
 #include "leaky.h"
 
-t_xpm_file	load_xpm(char *path)
+int	load_xpm(t_xpm_file *xpm_out, char *path)
 {
 	t_xpm_file	file;
 
@@ -23,11 +23,9 @@ t_xpm_file	load_xpm(char *path)
 	file.handle = mlx_xpm_file_to_image(get_mlx(), path,
 			&file.width, &file.height);
 	if (!file.handle)
-	{
-		cub_set_error(RESSOURCE_NOT_FOUND);
-		return (file);
-	}
+		return (0);
 	file.data = (uint8_t *)mlx_get_data_addr(file.handle, &file.bpp,
 			&file.line_size, &file.endian);
-	return (file);
+	*xpm_out = file;
+	return (1);
 }
