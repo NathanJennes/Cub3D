@@ -23,5 +23,6 @@ void		free_save(t_gamestate *save);
 
 void		load_all_saves(void);
 void		unload_saves(void);
+void		reload_saves(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 14:57:26 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/16 17:56:27 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 18:35:22 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ void	load_all_saves(void)
 	}
 	closedir(dir);
 	cub_unset_error();
+}
+
+void	reload_saves(void)
+{
+	unload_saves();
+	load_all_saves();
 }
 
 void	unload_saves(void)
