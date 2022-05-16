@@ -27,6 +27,7 @@ int	update_ui(void)
 		display_hud(app, ui);
 	if (app->game_state == MENU)
 	{
+		render_ui_img_box(&ui->main_menu.title);
 	}
 	if (app->ui.debug_ui & DEBUG_UI)
 		fps_counter();

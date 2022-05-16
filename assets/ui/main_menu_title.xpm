@@ -1,8 +1,8 @@
 /* XPM */
 static char * main_menu_title_xpm[] = {
 "320 60 2 1",
-" 	c None",
-".	c #FFFFFF",
+" 	c #FF000000",
+".	c #00FFFFFF",
 "                                                                                                                                                                                                                                                                                                                                ",
 "                                                                                                                                                                                                                                                                                                                                ",
 "                                                                                                                                                                                                                                                                                                                                ",

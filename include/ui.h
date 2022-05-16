@@ -6,13 +6,14 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 18:26:18 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/16 22:11:36 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UI_H
 # define UI_H
 
+# include "libft.h"
 # include "texture.h"
 # include "colors.h"
 # include "bool.h"
