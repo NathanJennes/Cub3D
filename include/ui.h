@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/15 16:04:45 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:17:22 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define SLIDER_W		75
 # define SLIDER_BTN2_XO	SLIDER_BTN_W + SLIDER_PAD * 2 + SLIDER_W
 
-# define DEBUG_UI 255
+# define DEBUG_UI 1
 
 typedef struct s_mlx t_mlx;
 
@@ -60,10 +60,10 @@ typedef struct s_slider
 
 typedef struct s_ui
 {
-	t_ui_state			state;
-	u_int8_t			flags;
-	t_vec2				select_bar_pos;
-	t_slider			map_scale_slider;
+	t_ui_state		state;
+	uint8_t			flags;
+	t_vec2			select_bar_pos;
+	t_slider		map_scale_slider;
 }	t_ui;
 
 void		init_ui(void);

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 18:22:14 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/15 12:29:02 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 16:23:43 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ static void	serialize_map_walls(int fd, t_map_info map)
 		{
 			if (map.map[i][j] == WALL)
 				ft_dprintf(fd, "%d", 1);
-			if (map.map[i][j] == EMPTY)
+			else if (map.map[i][j] == EMPTY)
 				ft_dprintf(fd, "%d", 0);
-			if (map.map[i][j] == VOID)
+			else if (map.map[i][j] == VOID)
 				ft_dprintf(fd, " ");
 			j++;
 		}

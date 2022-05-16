@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core.c                                             :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:51:10 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/15 14:17:40 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 15:20:26 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	close_app(void)
 		printf("Could not save game\n");
 	destroy_window();
 	unload_texture_manager();
+	unload_saves();
 	gc_clean();
 	exit(EXIT_SUCCESS);
 }
@@ -30,6 +31,7 @@ void	error_close_app(void)
 	check_leaky_errors();
 	destroy_window();
 	unload_texture_manager();
+	unload_saves();
 	gc_clean();
 	printf("Error\n");
 	exit(EXIT_FAILURE);

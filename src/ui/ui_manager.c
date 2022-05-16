@@ -33,13 +33,13 @@ int	ui_manager(void)
 	{
 		if (ui->state & MAIN_MENU)
 		{
-			render_ui_texture(2, 360, 170);
-			render_ui_texture(0, 0, 0);
+//			render_ui_texture(2, 360, 170);
+//			render_ui_texture(0, 0, 0);
 		}
 		else if (ui->state & OPTION_MENU)
 		{
-			render_ui_texture(2, 360, 170);
-			render_ui_texture(1, 0, 0);
+//			render_ui_texture(2, 360, 170);
+//			render_ui_texture(1, 0, 0);
 		}
 	}
 	/* Debug */
