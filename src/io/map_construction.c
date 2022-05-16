@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_construction.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 14:24:49 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/16 14:26:15 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 16:40:24 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,13 @@ void	construct_map(t_map_info *infos)
 	while (i < infos->height)
 	{
 		row = gc_calloc(infos->width, sizeof (int));
-		gc_memseti(row, VOID, infos->width * sizeof (int));
+		gc_memseti(row, VOID, infos->width);
 		j = 0;
 		while (j < ft_strlen(infos->map_raw[i]))
 		{
-			printf("%d", (int)infos->map_raw[i][j]);
 			read_map_content(infos, i, j, row);
 			j++;
 		}
-		printf("\n");
 		infos->map[i++] = row;
 	}
 }
