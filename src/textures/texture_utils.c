@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_device.c                                     :+:      :+:    :+:   */
+/*   texture_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/10 21:37:34 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 22:42:39 by njennes          ###   ########.fr       */
+/*   Created: 2022/05/16 22:37:39 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/16 22:39:13 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core.h"
+#include "texture.h"
+#include "libft.h"
 
-void	cub_update_mouse_pos(int x, int y)
+t_vec2	get_texture_size(int64_t tex_id)
 {
-	t_mlx	*app;
+	t_texture	*texture;
 
-	app = get_app();
-	app->mouse.pos_x = x;
-	app->mouse.pos_y = y;
-	if (MOUSE_DEBUG)
-		dprintf(STDERR_FILENO, "%d -- %d\n", app->mouse.pos_x, app->mouse.pos_y);
-}
-
-t_vec2	cub_get_mouse_pos(void)
-{
-	t_mlx	*app;
-	t_vec2	pos;
-
-	app = get_app();
-	pos.x = app->mouse.pos_x;
-	pos.y = app->mouse.pos_y;
-	return (pos);
+	texture = get_texture_from_id(tex_id);
+	if (!texture)
+		return (vec2(0.0f, 0.0f));
+	return (vec2((float)texture->width, (float)texture->height));
 }

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 18:47:35 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 22:42:00 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void		error_close_app(void);
 void		check_leaky_errors(void);
 
 /* window.c */
-void destroy_window();
+void 		destroy_window();
 
 /* initialization */
 int			is_legal_file(int argc, char **argv);
@@ -127,7 +127,8 @@ int			key_hooks(int keycode);
 int			mouse_hooks(int mousecode, int x, int y);
 int			mouse_move_hooks(int x, int y, void *param);
 
-void		cub_get_mouse_pos(int x, int y);
+void		cub_update_mouse_pos(int x, int y);
+t_vec2		cub_get_mouse_pos(void);
 
 /* getters */
 t_mlx		*get_app(void);

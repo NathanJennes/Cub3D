@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 22:26:10 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 22:46:49 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ typedef struct s_ui
 
 void		init_ui(void);
 int			render_ui(void);
-void		update_ui(void);
+void		update_ui(t_bool mouse_clicked);
 
 void		render_mmap(float zoom);
 void		show_slider(t_slider *slider);
@@ -135,5 +135,12 @@ void		update_ui_flags(uint8_t flag);
 
 void		put_text(t_mlx *app, t_vec2 pos, int color, char *str);
 int			str_px_size(char *str);
+
+t_button	create_button(
+				int64_t tex_id,
+				t_vec2 pos,
+				int (*event)(struct s_button *button),
+				t_bool displayed);
+void		ui_button_update(t_button *button, t_bool mouse_clicked);
 
 #endif

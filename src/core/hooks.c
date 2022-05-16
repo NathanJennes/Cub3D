@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:57:26 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 22:26:10 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 22:42:00 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ int	mouse_hooks(int mousecode, int x, int y)
 {
 	if (mousecode)
 		dprintf(STDERR_FILENO, "Mouse: %d\n", mousecode);
-	update_ui();
+	update_ui(TRUE);
 	return (0);
 }
 
 int	mouse_move_hooks(int x, int y, void *param)
 {
 	(void)param;
-	cub_get_mouse_pos(x, y);
-	update_ui();
+	cub_update_mouse_pos(x, y);
+	update_ui(FALSE);
 	return (0);
 }
 
