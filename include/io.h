@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   io.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 13:32:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/15 12:31:57 by njennes          ###   ########.fr       */
+/*   Created: 2022/05/14 17:45:17 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/15 12:37:05 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef IO_H
+# define IO_H
 
-# include "libft.h"
+# define APPDATA_DIRECTORY "appdata"
 
-typedef struct s_map_info	t_map_info;
+typedef struct s_gamestate	t_gamestate;
 
-void	init_map(char *file);
-
-t_vec3	parse_color(char *line);
-char	*parse_texture(char *line);
-void	add_map_row(t_map_info *infos, char *line);
+void		save_game(char *save_name);
+t_gamestate	load_game(char *save_name);
 
 #endif

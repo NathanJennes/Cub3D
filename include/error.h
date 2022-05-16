@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 13:32:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/15 12:31:57 by njennes          ###   ########.fr       */
+/*   Created: 2022/05/14 15:40:31 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/14 18:11:40 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef ERROR_H
+# define ERROR_H
 
-# include "libft.h"
+typedef enum e_error
+{
+	NONE = 0,
+	RESSOURCE_NOT_FOUND = 1,
+	FILE_ERROR = 2,
+	SAVE_ERROR = 3
+}	t_error;
 
-typedef struct s_map_info	t_map_info;
-
-void	init_map(char *file);
-
-t_vec3	parse_color(char *line);
-char	*parse_texture(char *line);
-void	add_map_row(t_map_info *infos, char *line);
+void	cub_set_error(t_error error);
+void	cub_unset_error(void);
+int		cub_has_error(void);
+int		cub_get_error(void);
+int		cub_consume_error(void);
 
 #endif

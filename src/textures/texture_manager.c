@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 11:36:36 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/14 12:28:28 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/14 16:03:46 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int64_t	load_texture(char *path)
 	int64_t		tex_id;
 
 	xpm_file = load_xpm(path);
+	if (cub_get_error())
+		return (INVALID_TEXTURE);
 	new_texture = create_texture_from_xpm_file(xpm_file);
 	tex_id = add_texture_to_array(new_texture);
 	return (tex_id);
@@ -34,7 +36,7 @@ t_texture	*get_texture_from_id(int64_t tex_id)
 	t_texture_manager	*tex_manager;
 
 	tex_manager = &get_app()->texture_manager;
-	if (tex_id >= tex_manager->tex_array_size)
+	if (tex_id >= tex_manager->tex_array_size || tex_id < 0)
 		return (NULL);
 	return (&tex_manager->tex_array[tex_id]);
 }

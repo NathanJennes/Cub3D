@@ -5,8 +5,8 @@ DEBUG_NAME				:=	cub3dd
 # ****************************************************************************
 
 CORE_DIR		:=	core
-CORE_FILE		:=	main.c core.c main_loop.c error_utils.c hooks.c init.c gc.c	\
-					getters.c getters_2.c input_device.c
+CORE_FILE		:=	main.c exit.c main_loop.c error_utils.c hooks.c init.c gc.c	\
+					getters.c error.c window.c getters_2.c input_device.c
 CORE_SRCS		:=	$(addprefix $(CORE_DIR)/, $(CORE_FILE))
 
 PARSING_DIR		:=	parsing
@@ -28,11 +28,20 @@ TEXTURES_FILE	:=	xpm_loader.c texture_generation.c ambiant_occlusion.c		\
 					texture_deletion.c texture_manager.c
 TEXTURE_SRCS	:=	$(addprefix $(TEXTURES_DIR)/, $(TEXTURES_FILE))
 
+IO_DIR			:=	io
+IO_FILE			:=	savegame.c													\
+					serialization.c												\
+					deserialization.c deserialization_player.c					\
+					deserialization_map.c deserialization_map_specs.c			\
+					deserialization_map_textures.c deserialization_map_content.c
+IO_SRCS			:=	$(addprefix $(IO_DIR)/, $(IO_FILE))
+
 SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\
 					$(addprefix $(SRCS_DIR)/, $(PARSING_SRCS))					\
 					$(addprefix $(SRCS_DIR)/, $(UI_SRCS))						\
 					$(addprefix $(SRCS_DIR)/, $(RENDER_SRCS))					\
-					$(addprefix $(SRCS_DIR)/, $(TEXTURE_SRCS))
+					$(addprefix $(SRCS_DIR)/, $(TEXTURE_SRCS))					\
+					$(addprefix $(SRCS_DIR)/, $(IO_SRCS))
 
 RELEASE_OBJS	:=	$(addprefix $(RELEASE_OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
 DEBUG_OBJS		:=	$(addprefix $(DEBUG_OBJS_DIR)/, $(notdir $(SRCS:.c=d.o)))
@@ -75,6 +84,10 @@ $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(TEXTURES_DIR)/%.c | $(RELEASE_OBJS_DIR)
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
+$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(IO_DIR)/%.c | $(RELEASE_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
 $(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
 	@printf "$(_BLUE)\nCompiled source files\n"
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(RELEASE_OBJS) $(RELEASE_LIBS) -o ../$@
@@ -101,6 +114,10 @@ $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_DIR)/%.c | $(DEBUG_OBJS_DIR)
 	@printf "$(_GREEN)█$(_END)"
 
 $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(TEXTURES_DIR)/%.c | $(DEBUG_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(IO_DIR)/%.c | $(DEBUG_OBJS_DIR)
 	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 

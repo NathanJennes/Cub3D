@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:58:17 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/09 22:52:36 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/14 15:57:42 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_texture	create_texture_from_xpm_file(t_xpm_file file)
 {
 	t_texture	texture;
 
+	gc_memset(&texture, 0, sizeof (t_texture));
 	transfer_texture_data(&file, &texture);
 	create_texture_variations(&texture);
 	return (texture);

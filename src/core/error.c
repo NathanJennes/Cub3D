@@ -1,52 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   getters.c                                          :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/05 15:19:50 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/14 18:55:57 by njennes          ###   ########.fr       */
+/*   Created: 2022/05/14 15:40:07 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/14 15:48:52 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
+#include "error.h"
 
-t_mlx	*get_app(void)
-{
-	static t_mlx	app = {0};
-
-	return (&app);
-}
-
-t_frame	*get_frame(void)
+void	cub_set_error(t_error error)
 {
 	t_mlx	*app;
 
 	app = get_app();
-	return (&app->frame);
+	app->last_error = error;
 }
 
-t_map_info	*get_map_infos(void)
+void	cub_unset_error(void)
 {
 	t_mlx	*app;
 
 	app = get_app();
-	return (&app->gamestate.map);
+	app->last_error = NONE;
 }
 
-t_player	*get_player(void)
+int	cub_has_error(void)
 {
 	t_mlx	*app;
 
 	app = get_app();
-	return (&app->gamestate.player);
+	if (app->last_error == NONE)
+		return (0);
+	return (1);
 }
 
-void	*get_mlx(void)
+int	cub_get_error(void)
 {
 	t_mlx	*app;
 
 	app = get_app();
-	return (app->mlx);
+	return (app->last_error);
+}
+
+int	cub_consume_error(void)
+{
+	t_mlx	*app;
+	t_error	error;
+
+	app = get_app();
+	error = app->last_error;
+	cub_unset_error();
+	return (error);
 }

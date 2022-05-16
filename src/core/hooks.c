@@ -45,7 +45,7 @@ int	key_hooks(int keycode)
 	if (keycode == KEY_LEFT || keycode == KEY_UP || keycode == KEY_RIGHT
 		|| keycode == KEY_DOWN)
 	{
-			handle_main_menu(keycode, app);
+		handle_main_menu(keycode, app);
 	}
 	if (keycode == KEY_ESC)
 		close_app();
@@ -80,11 +80,11 @@ static void	handle_main_menu(int keycode, t_mlx *app)
 static void	handle_moving(int keycode, t_mlx *app)
 {
 	if (keycode == KEY_W)
-		app->player.pos.y -= PLAYER_SPEED;
+		app->gamestate.player.pos.y -= PLAYER_SPEED;
 	if (keycode == KEY_S)
-		app->player.pos.y += PLAYER_SPEED;
+		app->gamestate.player.pos.y += PLAYER_SPEED;
 	if (keycode == KEY_D)
-		app->player.pos.x += PLAYER_SPEED;
+		app->gamestate.player.pos.x += PLAYER_SPEED;
 	if (keycode == KEY_A)
-		app->player.pos.x -= PLAYER_SPEED;
+		app->gamestate.player.pos.x -= PLAYER_SPEED;
 }

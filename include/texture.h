@@ -15,6 +15,8 @@
 
 # include <stdint.h>
 
+# define INVALID_TEXTURE -1
+
 typedef struct s_xpm_file
 {
 	void	*handle;

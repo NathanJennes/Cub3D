@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/14 12:35:12 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/14 13:10:23 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "libft.h"
 # include "texture.h"
 # include "ui.h"
+# include "error.h"
+# include "io.h"
 
 # ifdef FULL_SCREEN
 #  define WIN_W		1920
@@ -80,18 +82,24 @@ typedef struct s_player
 	float	direction;
 }	t_player;
 
+typedef struct s_gamestate
+{
+	t_map_info	map;
+	t_player	player;
+}	t_gamestate;
+
 typedef struct s_mlx
 {
 	void				*mlx;
 	void				*win;
 	t_frame				frame;
+	t_gamestate			gamestate;
 	t_mouse				mouse;
-	t_map_info			map;
-	t_player			player;
 	int64_t				start_time;
 	int8_t				game_state;
 	t_ui				ui;
 	t_texture_manager	texture_manager;
+	t_error				last_error;
 }	t_mlx;
 
 /* core.c */
@@ -99,6 +107,9 @@ void		init_window(char *win_name);
 int			close_app(void);
 void		error_close_app(void);
 void		check_leaky_errors(void);
+
+/* window.c */
+void destroy_window();
 
 /* initialization */
 int			is_legal_file(int argc, char **argv);
