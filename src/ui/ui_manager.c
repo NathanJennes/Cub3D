@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_manager.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:00:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 22:09:00 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/16 22:27:40 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static void	display_hud(t_mlx *app, t_ui *ui);
 
-int	update_ui(void)
+int	render_ui(void)
 {
 	t_mlx			*app;
 	t_ui			*ui;
@@ -32,6 +32,11 @@ int	update_ui(void)
 	if (app->ui.debug_ui & DEBUG_UI)
 		fps_counter();
 	return (0);
+}
+
+void	update_ui(void)
+{
+
 }
 
 static void	display_hud(t_mlx *app, t_ui *ui)

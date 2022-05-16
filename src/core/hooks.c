@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:57:26 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/14 13:22:41 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/16 22:26:10 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	mouse_hooks(int mousecode, int x, int y)
 {
 	if (mousecode)
 		dprintf(STDERR_FILENO, "Mouse: %d\n", mousecode);
+	update_ui();
 	return (0);
 }
 
@@ -29,6 +30,7 @@ int	mouse_move_hooks(int x, int y, void *param)
 {
 	(void)param;
 	cub_get_mouse_pos(x, y);
+	update_ui();
 	return (0);
 }
 

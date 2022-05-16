@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 22:11:36 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/16 22:26:10 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,8 @@ typedef struct s_ui
 }	t_ui;
 
 void		init_ui(void);
-int			update_ui(void);
+int			render_ui(void);
+void		update_ui(void);
 
 void		render_mmap(float zoom);
 void		show_slider(t_slider *slider);
