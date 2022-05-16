@@ -36,6 +36,7 @@ void	init_app(char *file)
 
 	app = get_app();
 	init_gc();
+	init_window("Cub3d");
 	init_ui();
 	app->gamestate = load_game("save.save");
 	if (cub_get_error() == SAVE_ERROR || cub_get_error() == FILE_ERROR)
@@ -44,7 +45,6 @@ void	init_app(char *file)
 		cub_unset_error();
 		init_map(file);
 	}
-	init_window("Cub3d");
 	init_hooks();
 	mlx_loop(get_mlx());
 }
