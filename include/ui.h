@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 17:17:22 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/16 18:26:18 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "texture.h"
 # include "colors.h"
+# include "bool.h"
 
 # ifdef __linux__
 #  include <stdint.h>
@@ -48,22 +49,60 @@ typedef enum e_ui_state
 	EDITOR_MENU = 32,
 }	t_ui_state;
 
+typedef struct s_button
+{
+	int64_t 	tex_id;
+	int64_t 	tex_id_select;
+	int64_t 	tex_id_hover;
+	t_bool		displayed;
+	t_bool		is_clickable;
+	t_vec2		pos;
+	t_vec2		bounding_box;
+	int 		(*event)(struct s_button *button);
+}	t_button;
+
+typedef struct s_label
+{
+	int64_t 	tex_id;
+	t_bool		displayed;
+	t_vec2		pos;
+}	t_label;
+
+typedef struct s_img_box
+{
+	int64_t 	tex_id;
+	t_bool		displayed;
+	t_vec2		pos;
+}	t_img_box;
+
 typedef struct s_slider
 {
-	int		displayed;
-	t_vec2	pos;
-	float	increment_size;
-	float	min;
-	float	max;
-	float	value;
+	int64_t 	tex_id_bar;
+	int64_t 	tex_id_button;
+	t_bool		displayed;
+	t_vec2		pos;
+	t_bool		is_clickable;
+	t_vec2		bounding_box;
+	float		min;
+	float		max;
+	float		value;
+	float		increment_size;
 }	t_slider;
+
+typedef struct s_text_box
+{
+	int64_t 	tex_id;
+	t_bool		displayed;
+	t_bool		is_clickable;
+	t_vec2		pos;
+	t_vec2		bounding_box;
+	int 		(*event)(struct s_text_box *button);
+}	t_text_box;
 
 typedef struct s_ui
 {
-	t_ui_state		state;
-	uint8_t			flags;
-	t_vec2			select_bar_pos;
-	t_slider		map_scale_slider;
+	t_ui_state	state;
+	uint8_t		debug_ui;
 }	t_ui;
 
 void		init_ui(void);
@@ -79,7 +118,5 @@ void		update_ui_flags(uint8_t flag);
 
 void		put_text(t_mlx *app, t_vec2 pos, int color, char *str);
 int			str_px_size(char *str);
-
-int			put_xpm_to_window(char *path, t_vec2 pos);
 
 #endif

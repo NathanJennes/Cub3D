@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bool.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 11:08:26 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/15 11:08:26 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 17:44:56 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,7 @@
 
 # define TRUE 1
 # define FALSE 0
+
+typedef int t_bool;
 
 #endif
