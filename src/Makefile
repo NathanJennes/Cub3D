@@ -11,7 +11,8 @@ CORE_SRCS		:=	$(addprefix $(CORE_DIR)/, $(CORE_FILE))
 
 RENDER_DIR		:=	render
 RENDER_FILE		:=	draw.c rendering_primitives.c colors_utils.c				\
-					render_ui_texture.c render_ui.c
+					render_ui_texture.c render_ui.c	\
+					render_walls.c
 RENDER_SRCS		:=	$(addprefix $(RENDER_DIR)/, $(RENDER_FILE))
 
 UI_DIR			:=	ui
