@@ -24,6 +24,5 @@ int	main_loop(void)
 	clear_screen(BKGD_COLOR);
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 	render_ui();
-	render_walls(90);
 	return (0);
 }
