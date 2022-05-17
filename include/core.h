@@ -112,7 +112,7 @@ void		error_close_app(void);
 void		check_leaky_errors(void);
 
 /* window.c */
-void 		destroy_window();
+void		destroy_window(void);
 
 /* initialization */
 int			is_legal_file(int argc, char **argv);
