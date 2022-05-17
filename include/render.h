@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 23:17:19 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/17 14:25:16 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ void		render_ui_texture_inverse_grayscale(int64_t tex_id, int x, int y);
 void		render_ui_label(t_label *label);
 void		render_ui_img_box(t_img_box *img_box);
 void		render_ui_button(t_button *button);
+
+void		render_walls(int fov);
 
 #endif

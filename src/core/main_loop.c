@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/14 12:15:00 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/17 16:28:09 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int	main_loop(void)
 	clear_screen(BKGD_COLOR);
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 	render_ui();
+	render_walls(90);
 	return (0);
 }
