@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/18 13:08:50 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 13:29:17 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,9 @@ float	shoot_ray(t_vec2 ray, t_vec2 pos, t_ivec2 map_pos)
 	lengths = calculate_lengths(&ray);
 	step = calculate_step_dists(&ray, &dists, pos, map_pos);
 	vec2_multv2(&dists, lengths);
-	//print_vec("ray:", ray);
-	//print_vec("pos:", pos);
-	//print_vec("dists:", dists);
-	//print_vec("lengths:", lengths);
 	hit = FALSE;
 	side = 0;
-	while (!hit && dists.x < RAY_LENGTH && dists.y < RAY_LENGTH)
+	while (!hit && (dists.x < RAY_LENGTH || dists.y < RAY_LENGTH))
 	{
 		if (dists.x < dists.y)
 		{
@@ -89,8 +85,8 @@ float	shoot_ray(t_vec2 ray, t_vec2 pos, t_ivec2 map_pos)
 			hit = TRUE;
 	}
 	if (side == SIDE_X)
-		return (dists.x);
-	return (dists.y);
+		return (dists.x - lengths.x);
+	return (dists.y - lengths.y);
 }
 
 static t_vec2 calculate_lengths(t_vec2 *ray)
@@ -100,11 +96,11 @@ static t_vec2 calculate_lengths(t_vec2 *ray)
 	if (ray->x == 0)
 		lengths.x = MAXFLOAT;
 	else
-		lengths.x = 1.0f / ray->x;
+		lengths.x = (float)ft_abs(1.0f / ray->x);
 	if (ray->y == 0)
 		lengths.y = MAXFLOAT;
 	else
-		lengths.y = 1.0f / ray->y;
+		lengths.y = (float)ft_abs(1.0f / ray->y);
 	return (lengths);
 }
 
