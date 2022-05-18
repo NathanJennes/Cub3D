@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/18 14:59:58 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 15:12:54 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,22 +82,22 @@ typedef struct s_img_box
 typedef struct s_slider
 {
 	t_ui_component	infos;
-	int64_t		tex_id_bar;
-	int64_t		tex_id_button;
-	t_bool		is_clickable;
-	float		min;
-	float		max;
-	float		value;
-	float		increment_size;
+	int64_t			tex_id_bar;
+	int64_t			tex_id_button;
+	t_bool			is_clickable;
+	float			min;
+	float			max;
+	float			value;
+	float			increment_size;
 }	t_slider;
 
 typedef struct s_text_box
 {
 	t_ui_component	infos;
-	int64_t		tex_id;
-	t_bool		is_clickable;
-	char		*str;
-	int			(*event)(struct s_text_box *button);
+	int64_t			tex_id;
+	t_bool			is_clickable;
+	char			*str;
+	int				(*event)(struct s_text_box *button);
 }	t_text_box;
 
 typedef struct s_ui_main_menu
@@ -137,5 +137,8 @@ t_button	create_button(int64_t tex_id, t_ivec2 pos,
 				int (*event)(struct s_button *button), t_bool displayed);
 void		ui_button_update(t_button *button, t_bool mouse_clicked);
 void		render_ui_button(t_button *button);
+
+t_img_box	create_img_box(char *texture_path, t_ivec2 pos);
+void		render_ui_img_box(t_img_box *box);
 
 #endif
