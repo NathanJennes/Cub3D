@@ -35,7 +35,6 @@ void		render_ui_texture_inverse_grayscale(int64_t tex_id, int x, int y);
 
 void		render_ui_label(t_label *label);
 void		render_ui_img_box(t_img_box *img_box);
-void		render_ui_button(t_button *button);
 
 void		render_walls(int fov);
 float		shoot_ray(t_vec2 ray, t_vec2 pos, t_ivec2 map_pos);

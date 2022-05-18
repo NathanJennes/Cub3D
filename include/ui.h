@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/18 14:22:56 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 14:59:58 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,11 +133,9 @@ void		update_ui_flags(uint8_t flag);
 void		put_text(t_mlx *app, t_vec2 pos, int color, char *str);
 int			str_px_size(char *str);
 
-t_button	create_button(
-				int64_t tex_id,
-				t_ivec2 pos,
-				int (*event)(struct s_button *button),
-				t_bool displayed);
+t_button	create_button(int64_t tex_id, t_ivec2 pos,
+				int (*event)(struct s_button *button), t_bool displayed);
 void		ui_button_update(t_button *button, t_bool mouse_clicked);
+void		render_ui_button(t_button *button);
 
 #endif

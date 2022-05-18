@@ -6,12 +6,13 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:30:28 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/18 14:54:56 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 14:59:36 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ui.h"
 #include "core.h"
+#include "render.h"
 
 t_button	create_button(int64_t tex_id,
 		t_ivec2 pos,
@@ -53,4 +54,16 @@ void	ui_button_update(t_button *button, t_bool mouse_clicked)
 	}
 	else
 		button->clicked = FALSE;
+}
+
+void	render_ui_button(t_button *button)
+{
+	if (!button->infos.displayed)
+		return ;
+	if (button->clicked)
+		render_ui_texture_grayscale(button->tex_id, button->infos.pos.x, button->infos.pos.y);
+	else if (button->hovered)
+		render_ui_texture_inversed(button->tex_id, button->infos.pos.x, button->infos.pos.y);
+	else
+		render_ui_texture(button->tex_id, button->infos.pos.x, button->infos.pos.y);
 }
