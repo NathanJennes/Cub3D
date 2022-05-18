@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/18 15:23:20 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 16:04:54 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
 # include "colors.h"
 
 void		clear_screen(int color);
-void		mlx_pixel_put_img(int x, int y, int color);
+void		set_screen_pixel(int64_t x, int64_t y, int color);
 int			color_lerp(int col1, int col2, float value);
 
-void		render_circle(t_ivec2 pos, float diameter, int color);
-void		render_rect(t_ivec2 pos, t_ivec2 size, int color);
-void		render_line(t_ivec2 start, t_ivec2 end, int col1, int col2);
+void		draw_circle(t_ivec2 pos, float diameter, int color);
+void		draw_rect(t_ivec2 pos, t_ivec2 size, int color);
+void		draw_line(t_ivec2 start, t_ivec2 end, int col1, int col2);
 void		render_text(const char *text, t_ivec2 pos);
 int			outside_mmap_bounds(int x, int y);
 

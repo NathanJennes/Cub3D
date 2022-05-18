@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   colors_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 14:44:26 by cybattis          #+#    #+#             */
-/*   Updated: 2022/01/12 14:44:36 by cybattis         ###   ########.fr       */
+/*   Created: 2022/05/18 16:03:11 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/18 16:03:30 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
+#include "colors.h"
+#include "libft.h"
 
-int	get_t(int trgb)
+int	color_lerp(int col1, int col2, float value)
 {
-	return ((trgb >> 24) & 0xFF);
-}
+	t_vec3	new_color;
 
-int	get_r(int trgb)
-{
-	return ((trgb >> 16) & 0xFF);
-}
-
-int	get_g(int trgb)
-{
-	return ((trgb >> 8) & 0xFF);
-}
-
-int	get_b(int trgb)
-{
-	return (trgb & 0xFF);
+	new_color.x = get_r(col1) + value * (get_r(col2) - get_r(col1));
+	new_color.y = get_g(col1) + value * (get_g(col2) - get_g(col1));
+	new_color.z = get_b(col1) + value * (get_b(col2) - get_b(col1));
+	return (trgb(0, new_color.x, new_color.y, new_color.z));
 }

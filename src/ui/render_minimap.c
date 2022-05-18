@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 13:11:29 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/18 15:25:01 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 16:04:54 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,9 @@ void	render_mmap(float zoom)
 		* cell_size - cell_size / 2 + player_pos.x;
 	offset.y = -(app->gamestate.player.pos.y / CELL_HEIGHT)
 		* cell_size - cell_size / 2 + player_pos.y;
-	render_rect(ivec2(MMAP_PAD / 2, MMAP_PAD / 2),
-		ivec2(MMAP_W + MMAP_PAD, MMAP_H + MMAP_PAD), trgb(0, 51, 51, 51));
+	draw_rect(ivec2(MMAP_PAD / 2, MMAP_PAD / 2), ivec2(MMAP_W + MMAP_PAD, MMAP_H + MMAP_PAD), trgb(0, 51, 51, 51));
 	draw_cells(cell_size, offset);
-	render_circle(player_pos, MMAP_PLAYER_DIAM, trgb(0, 255, 0, 0));
+	draw_circle(player_pos, MMAP_PLAYER_DIAM, trgb(0, 255, 0, 0));
 }
 
 static void	draw_cells(int cell_size, t_vec2 offset)
@@ -80,7 +79,7 @@ static void	render_mmap_wall(int x, int y, int cell_size)
 		while (j < cell_size)
 		{
 			if (!outside_mmap_bounds(x + j, y + i))
-				mlx_pixel_put_img(x + j, y + i, trgb(0, 150, 150, 150));
+				set_screen_pixel(x + j, y + i, trgb(0, 150, 150, 150));
 			j++;
 		}
 		i++;
@@ -99,7 +98,7 @@ static void	render_mmap_empty(int x, int y, int cell_size)
 		while (j < cell_size)
 		{
 			if (!outside_mmap_bounds(x + j, y + i))
-				mlx_pixel_put_img(x + j, y + i, trgb(0, 250, 250, 250));
+				set_screen_pixel(x + j, y + i, trgb(0, 250, 250, 250));
 			j++;
 		}
 		i++;

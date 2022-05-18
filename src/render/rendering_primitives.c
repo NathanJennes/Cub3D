@@ -6,14 +6,14 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:49:16 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/18 15:21:45 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 16:04:54 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "render.h"
 
-void	render_rect(t_ivec2 pos, t_ivec2 size, int color)
+void	draw_rect(t_ivec2 pos, t_ivec2 size, int color)
 {
 	int	y;
 	int	x;
@@ -24,14 +24,14 @@ void	render_rect(t_ivec2 pos, t_ivec2 size, int color)
 		x = 0;
 		while (x < size.x)
 		{
-			mlx_pixel_put_img(x + pos.x, y + pos.y, color);
+			set_screen_pixel(x + pos.x, y + pos.y, color);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	render_circle(t_ivec2 pos, float diameter, int color)
+void	draw_circle(t_ivec2 pos, float diameter, int color)
 {
 	float	i;
 	float	j;
@@ -45,14 +45,14 @@ void	render_circle(t_ivec2 pos, float diameter, int color)
 		while (j < diameter / 2)
 		{
 			if (i * i + j * j < diameter_2)
-				mlx_pixel_put_img(pos.x + j, pos.y + i, color);
+				set_screen_pixel(pos.x + j, pos.y + i, color);
 			j++;
 		}
 		i++;
 	}
 }
 
-void	render_line(t_ivec2 start, t_ivec2 end, int col1, int col2)
+void	draw_line(t_ivec2 start, t_ivec2 end, int col1, int col2)
 {
 	double	pixels_to_draw;
 	double	pixels_drawn;
@@ -68,8 +68,7 @@ void	render_line(t_ivec2 start, t_ivec2 end, int col1, int col2)
 	while (pixels_drawn < pixels_to_draw)
 	{
 		vec2_add(&ppos, delta);
-		mlx_pixel_put_img(ppos.x, ppos.y,
-			color_lerp(col1, col2, pixels_drawn / pixels_to_draw));
+		set_screen_pixel(ppos.x, ppos.y, color_lerp(col1, col2, pixels_drawn / pixels_to_draw));
 		pixels_drawn++;
 	}
 }

@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   screen_rendering.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 15:56:16 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/05 15:44:11 by njennes          ###   ########.fr       */
+/*   Created: 2022/05/18 15:58:56 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/18 16:01:50 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
-#include "colors.h"
 
-static int	pixel_in_canvas(int x, int y);
+static int	pixel_in_screen(int64_t x, int64_t y);
 
 void	clear_screen(int color)
 {
@@ -33,32 +32,22 @@ void	clear_screen(int color)
 	}
 }
 
-void	mlx_pixel_put_img(int x, int y, int color)
+void	set_screen_pixel(int64_t x, int64_t y, int color)
 {
 	char	*dst;
 	t_frame	*frame;
 
-	if (!pixel_in_canvas(x, y))
+	if (!pixel_in_screen(x, y))
 		return ;
 	frame = get_frame();
 	dst = frame->addr
-		+ (y * frame->line_length + x * (frame->bits_pp / 8));
+		  + (y * frame->line_length + x * (frame->bits_pp / 8));
 	*(unsigned int *)dst = color;
 }
 
-static int	pixel_in_canvas(int x, int y)
+static int	pixel_in_screen(int64_t x, int64_t y)
 {
 	if (x < 0 || x >= WIN_W || y < 0 || y >= WIN_H)
 		return (0);
 	return (1);
-}
-
-int	color_lerp(int col1, int col2, float value)
-{
-	t_vec3	new_color;
-
-	new_color.x = get_r(col1) + value * (get_r(col2) - get_r(col1));
-	new_color.y = get_g(col1) + value * (get_g(col2) - get_g(col1));
-	new_color.z = get_b(col1) + value * (get_b(col2) - get_b(col1));
-	return (trgb(0, new_color.x, new_color.y, new_color.z));
 }
