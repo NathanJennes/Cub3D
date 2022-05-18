@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:30:28 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/16 22:48:30 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 14:54:56 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,35 @@
 #include "core.h"
 
 t_button	create_button(int64_t tex_id,
-		t_vec2 pos,
+		t_ivec2 pos,
 		int (*event)(struct s_button *button),
 		t_bool displayed)
 {
 	t_button	button;
 
+	ft_memset(&button, 0, sizeof (t_button));
+	button.infos.pos = pos;
+	button.infos.size = get_texture_size(tex_id);
+	button.infos.displayed = displayed;
 	button.tex_id = tex_id;
-	button.position = pos;
 	button.event = event;
-	button.displayed = displayed;
 	button.hovered = FALSE;
 	button.clicked = FALSE;
 	button.is_clickable = TRUE;
-	button.bounding_box = get_texture_size(tex_id);
 	return (button);
 }
 
 void	ui_button_update(t_button *button, t_bool mouse_clicked)
 {
-	t_vec2	mouse_pos;
+	t_ivec2			mouse_pos;
+	t_ui_component	*component;
 
-	mouse_pos = cub_get_mouse_pos();
-	if (mouse_pos.x >= button->position.x
-		&& mouse_pos.x <= button->position.x + button->bounding_box.x
-		&& mouse_pos.y >= button->position.y
-		&& mouse_pos.y <= button->position.y + button->bounding_box.y)
+	component = &button->infos;
+	mouse_pos = cub_get_mouse_position();
+	if (mouse_pos.x >= component->pos.x
+		&& mouse_pos.x <= component->pos.x + component->size.x
+		&& mouse_pos.y >= component->pos.y
+		&& mouse_pos.y <= component->pos.y + component->size.y)
 		button->hovered = TRUE;
 	else
 		button->hovered = FALSE;

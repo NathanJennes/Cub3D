@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 22:47:27 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 14:22:56 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,40 +50,41 @@ typedef enum e_ui_state
 	EDITOR_MENU = 32,
 }	t_ui_state;
 
+typedef struct s_ui_component
+{
+	t_ivec2	pos;
+	t_ivec2	size;
+	t_bool	displayed;
+}	t_ui_component;
+
 typedef struct s_button
 {
-	int64_t		tex_id;
-	t_bool		displayed;
-	t_bool		is_clickable;
-	t_bool		hovered;
-	t_bool		clicked;
-	t_vec2		position;
-	t_vec2		bounding_box;
-	int			(*event)(struct s_button *button);
+	t_ui_component	infos;
+	int64_t			tex_id;
+	t_bool			is_clickable;
+	t_bool			hovered;
+	t_bool			clicked;
+	int				(*event)(struct s_button *button);
 }	t_button;
 
 typedef struct s_label
 {
-	int64_t		tex_id;
-	t_bool		displayed;
-	t_vec2		position;
+	t_ui_component	infos;
+	int64_t			tex_id;
 }	t_label;
 
 typedef struct s_img_box
 {
-	int64_t		tex_id;
-	t_bool		displayed;
-	t_vec2		position;
+	t_ui_component	infos;
+	int64_t			tex_id;
 }	t_img_box;
 
 typedef struct s_slider
 {
+	t_ui_component	infos;
 	int64_t		tex_id_bar;
 	int64_t		tex_id_button;
-	t_bool		displayed;
-	t_vec2		position;
 	t_bool		is_clickable;
-	t_vec2		bounding_box;
 	float		min;
 	float		max;
 	float		value;
@@ -92,11 +93,9 @@ typedef struct s_slider
 
 typedef struct s_text_box
 {
+	t_ui_component	infos;
 	int64_t		tex_id;
-	t_bool		displayed;
 	t_bool		is_clickable;
-	t_vec2		position;
-	t_vec2		bounding_box;
 	char		*str;
 	int			(*event)(struct s_text_box *button);
 }	t_text_box;
@@ -136,7 +135,7 @@ int			str_px_size(char *str);
 
 t_button	create_button(
 				int64_t tex_id,
-				t_vec2 pos,
+				t_ivec2 pos,
 				int (*event)(struct s_button *button),
 				t_bool displayed);
 void		ui_button_update(t_button *button, t_bool mouse_clicked);

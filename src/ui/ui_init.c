@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 18:21:25 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 21:46:43 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/18 14:56:54 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static void	init_main_menu(void)
 
 	main_menu = &get_ui()->main_menu;
 	main_menu->title.tex_id = load_texture("assets/ui/main_menu_title.xpm");
-	main_menu->title.position = vec2(320.5f, 60.5f);
-	main_menu->title.displayed = TRUE;
+	main_menu->title.infos.pos = ivec2(320, 60);
+	main_menu->title.infos.displayed = TRUE;
 
 //	main_menu->btn_continue.tex_id = load_texture("assets/ui/btn_continue.xpm");
 ////	main_menu->btn_continue.tex_id = load_texture("assets/ui/btn_continue_select.xpm");

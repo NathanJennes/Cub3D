@@ -67,6 +67,6 @@ void		unload_texture_manager(void);
 t_texture	*get_texture_from_id(int64_t tex_id);
 
 /* Utils */
-t_vec2		get_texture_size(int64_t tex_id);
+t_ivec2		get_texture_size(int64_t tex_id);
 
 #endif
