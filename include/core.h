@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 22:42:00 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 14:27:55 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@
 
 typedef struct s_mouse
 {
-	int	pos_x;
-	int	pos_y;
+	t_ivec2	position;
 }	t_mouse;
 
 typedef struct s_map_info
@@ -128,7 +127,7 @@ int			mouse_hooks(int mousecode, int x, int y);
 int			mouse_move_hooks(int x, int y, void *param);
 
 void		cub_update_mouse_pos(int x, int y);
-t_vec2		cub_get_mouse_pos(void);
+t_ivec2		cub_get_mouse_position(void);
 
 /* getters */
 t_mlx		*get_app(void);

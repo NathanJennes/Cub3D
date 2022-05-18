@@ -6,12 +6,16 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/17 14:25:16 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 12:33:18 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
+
+# define RAY_LENGTH 1000
+# define SIDE_X 1
+# define SIDE_Y 2
 
 # include "colors.h"
 
@@ -34,5 +38,6 @@ void		render_ui_img_box(t_img_box *img_box);
 void		render_ui_button(t_button *button);
 
 void		render_walls(int fov);
+float		shoot_ray(t_vec2 ray, t_vec2 pos, t_ivec2 map_pos);
 
 #endif
