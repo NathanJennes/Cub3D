@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:38:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/16 23:16:28 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 17:18:42 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,11 @@ typedef struct s_texture_manager
 /* Core */
 int			load_xpm(t_xpm_file *xpm_out, char *path);
 t_texture	create_texture_from_xpm_file(t_xpm_file file);
+t_texture	create_blank_texture(int width, int height);
 void		free_texture(t_texture *texture);
 
 int64_t		load_texture(char *path);
+int64_t		new_texture(int width, int height);
 void		unload_texture_manager(void);
 t_texture	*get_texture_from_id(int64_t tex_id);
 

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:58:17 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/16 23:34:37 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 17:18:05 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "texture.h"
 #include "mlx.h"
 #include "core.h"
+#include "render.h"
 
 void		shade_ao_texture_flat(
 				uint8_t *data, int width, int height, int bpp);
@@ -37,6 +38,22 @@ t_texture	create_texture_from_xpm_file(t_xpm_file file)
 	gc_memset(&texture, 0, sizeof (t_texture));
 	transfer_texture_data(&file, &texture);
 	create_texture_variations(&texture);
+	return (texture);
+}
+
+t_texture	create_blank_texture(int width, int height)
+{
+	t_texture	texture;
+
+	gc_memset(&texture, 0, sizeof (t_texture));
+	texture.width = width;
+	texture.height = height;
+	texture.original_handle = mlx_new_image(get_mlx(), width, height);
+	if (!texture.original_handle)
+		return (texture);
+	texture.original = (uint8_t *)mlx_get_data_addr(texture.original_handle, &texture.bpp,
+					&texture.line_size, &texture.endian);
+	gc_memseti(texture.original, trgb(0, 80, 215, 50), texture.width * texture.height);
 	return (texture);
 }
 
