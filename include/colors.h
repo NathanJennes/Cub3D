@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:23:53 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/09 16:24:38 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/18 16:42:21 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,15 @@
 # define YELLOW		0x00FFFF00
 # define TURQUOISE	0x0000FFFF
 
-/* colors_utils.c */
+
+/* colors */
 int			trgb(int t, int r, int g, int b);
 int			get_t(int trgb);
 int			get_r(int trgb);
 int			get_g(int trgb);
 int			get_b(int trgb);
+
+/* colors utils */
+int			color_lerp(int col1, int col2, float value);
 
 #endif

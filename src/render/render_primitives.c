@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rendering_primitives.c                             :+:      :+:    :+:   */
+/*   render_primitives.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:49:16 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/18 16:04:54 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 16:48:36 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,20 @@ void	draw_rect(t_ivec2 pos, t_ivec2 size, int color)
 	}
 }
 
-void	draw_circle(t_ivec2 pos, float diameter, int color)
+void	draw_circle(t_ivec2 pos, int64_t diameter, int color)
 {
-	float	i;
-	float	j;
-	float	diameter_2;
+	int64_t	i;
+	int64_t	j;
+	int64_t	diameter_2;
+	int64_t radius;
 
-	i = -diameter / 2;
-	diameter_2 = (diameter / 2) * (diameter / 2);
-	while (i < diameter / 2)
+	radius = diameter / 2;
+	i = -radius;
+	diameter_2 = radius * radius;
+	while (i < radius)
 	{
-		j = -diameter / 2;
-		while (j < diameter / 2)
+		j = -radius;
+		while (j < radius)
 		{
 			if (i * i + j * j < diameter_2)
 				set_screen_pixel(pos.x + j, pos.y + i, color);
@@ -52,7 +54,28 @@ void	draw_circle(t_ivec2 pos, float diameter, int color)
 	}
 }
 
-void	draw_line(t_ivec2 start, t_ivec2 end, int col1, int col2)
+void	draw_line(t_ivec2 start, t_ivec2 end, int col)
+{
+	double	pixels_to_draw;
+	double	pixels_drawn;
+	t_vec2	ppos;
+	t_vec2	delta;
+
+	pixels_to_draw = ft_sqrt((ft_pow2(end.x - start.x)) + \
+			ft_pow2(end.y - start.y));
+	delta.x = ((float)end.x - (float)start.x) / (float)pixels_to_draw;
+	delta.y = ((float)end.y - (float)start.y) / (float)pixels_to_draw;
+	ppos = iv2_to_v2(start);
+	pixels_drawn = 0;
+	while (pixels_drawn < pixels_to_draw)
+	{
+		vec2_add(&ppos, delta);
+		set_screen_pixel(ppos.x, ppos.y, col);
+		pixels_drawn++;
+	}
+}
+
+void	draw_line_lerp(t_ivec2 start, t_ivec2 end, int col1, int col2)
 {
 	double	pixels_to_draw;
 	double	pixels_drawn;

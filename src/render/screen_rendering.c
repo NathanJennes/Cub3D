@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 15:58:56 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/18 16:01:50 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 16:01:53 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	clear_screen(int color)
 
 	frame = get_frame();
 	i = 0;
-	total = (WIN_W * WIN_H) - 1;
+	total = (WIN_W * WIN_H);
 	bytes_pp = frame->bits_pp / 8;
 	while (i < total)
 	{
