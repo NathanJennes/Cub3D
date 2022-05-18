@@ -109,6 +109,16 @@ re: fclean all
 .PHONY: debug_re
 debug_re: fclean debug
 
+.PHONY: cub_re
+cub_re:
+	@$(MAKE) -C $(SRCS_DIR) fclean
+	@$(MAKE) -C $(SRCS_DIR)
+
+.PHONY: cub_debug_re
+cub_debug_re:
+	@$(MAKE) -C $(SRCS_DIR) fclean
+	@$(MAKE) -C $(SRCS_DIR) debug
+
 # Misc
 # =====================
 
