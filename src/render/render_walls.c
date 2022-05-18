@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/17 17:03:08 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/17 22:24:21 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "render.h"
 
 static void		shoot_rays(float ray_angle, float ray_angle_base);
-static void		shoot_ray(float ray_angle, t_vec2 pos);
+static void		shoot_ray(t_vec2 ray, t_vec2 pos);
 static t_vec2	project_pos(float ray_angle, t_vec2 pos);
 static t_vec2	get_grid_pos(t_vec2 pos);
 static void		print_vec(const char *msg, t_vec2 vec);
@@ -41,13 +41,13 @@ static void	shoot_rays(float ray_angle, float ray_angle_base)
 	i = 0;
 	while (i < 1)
 	{
-		shoot_ray(ray_angle_base, pos);
+		shoot_ray(vec2(cos(ray_angle_base), sin(ray_angle_base)), pos);
 		ray_angle_base += ray_angle;
 		i++;
 	}
 }
 
-static void	shoot_ray(float ray_angle, t_vec2 pos)
+static void	shoot_ray(t_vec2 ray, t_vec2 pos)
 {
 	t_vec2	vertical_inc;
 	t_vec2	horizontal_inc;

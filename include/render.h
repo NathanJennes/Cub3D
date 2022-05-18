@@ -13,6 +13,8 @@
 #ifndef RENDER_H
 # define RENDER_H
 
+# define RAY_LENGTH 1000
+
 # include "colors.h"
 
 void		clear_screen(int color);
