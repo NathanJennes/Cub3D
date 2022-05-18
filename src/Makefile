@@ -11,14 +11,14 @@ CORE_SRCS		:=	$(addprefix $(CORE_DIR)/, $(CORE_FILE))
 
 RENDER_DIR		:=	render
 RENDER_FILE		:=	draw.c rendering_primitives.c colors_utils.c				\
-					render_ui_texture.c render_ui.c	\
+					render_ui_texture.c render_text.c	\
 					render_walls.c
 RENDER_SRCS		:=	$(addprefix $(RENDER_DIR)/, $(RENDER_FILE))
 
 UI_DIR			:=	ui
 UI_FILE			:=	fps_counter.c ui_helper.c ui_manager.c						\
 					render_minimap.c ui_init.c ui_component.c					\
-					ui_button.c ui_img_box.c
+					ui_button.c ui_img_box.c ui_label.c
 UI_SRCS			:=	$(addprefix $(UI_DIR)/, $(UI_FILE))
 
 TEXTURES_DIR	:=	textures

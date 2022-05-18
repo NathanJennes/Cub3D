@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_ui.c                                        :+:      :+:    :+:   */
+/*   ui_label.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/16 20:42:46 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/18 14:59:32 by njennes          ###   ########.fr       */
+/*   Created: 2022/05/18 15:30:08 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/18 15:45:31 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ui.h"
 #include "render.h"
 
-void	render_ui_label(t_label *label)
+t_label	create_label(t_ivec2 pos, const char *text)
 {
-	render_ui_texture(label->tex_id, label->infos.pos.x, label->infos.pos.y);
+	t_label	label;
+
+	ft_memset(&label, 0, sizeof (t_label));
+	label.infos.pos = pos;
+	label.infos.size = ivec2(10, 10);
+	label.infos.displayed = TRUE;
+	label.text = text;
+	return (label);
+}
+
+void	render_label(t_label *label)
+{
+	if (!label->infos.displayed)
+		return ;
+	render_text(label->text, label->infos.pos);
 }

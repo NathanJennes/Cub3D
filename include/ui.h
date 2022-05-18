@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/18 15:12:54 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 15:33:31 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct s_button
 typedef struct s_label
 {
 	t_ui_component	infos;
-	int64_t			tex_id;
+	const char		*text;
 }	t_label;
 
 typedef struct s_img_box
@@ -140,5 +140,8 @@ void		render_ui_button(t_button *button);
 
 t_img_box	create_img_box(char *texture_path, t_ivec2 pos);
 void		render_ui_img_box(t_img_box *box);
+
+t_label		create_label(t_ivec2 pos, const char *text);
+void		render_label(t_label *label);
 
 #endif

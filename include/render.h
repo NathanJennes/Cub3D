@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/18 15:05:12 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 15:23:20 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int			color_lerp(int col1, int col2, float value);
 void		render_circle(t_ivec2 pos, float diameter, int color);
 void		render_rect(t_ivec2 pos, t_ivec2 size, int color);
 void		render_line(t_ivec2 start, t_ivec2 end, int col1, int col2);
+void		render_text(const char *text, t_ivec2 pos);
 int			outside_mmap_bounds(int x, int y);
 
 void		render_ui_texture(int64_t tex_id, int64_t x, int64_t y);
