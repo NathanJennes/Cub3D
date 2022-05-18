@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/18 13:29:17 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 13:29:23 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,9 @@ float	shoot_ray(t_vec2 ray, t_vec2 pos, t_ivec2 map_pos)
 	}
 	if (side == SIDE_X)
 		return (dists.x - lengths.x);
-	return (dists.y - lengths.y);
+	if (side == SIDE_Y)
+		return (dists.y - lengths.y);
+	return (-1.0f);
 }
 
 static t_vec2 calculate_lengths(t_vec2 *ray)
