@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_map.c                                       :+:      :+:    :+:   */
+/*   render_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 13:11:29 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/09 16:32:00 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/18 15:25:01 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	render_mmap_empty(int x, int y, int cell_size);
 void	render_mmap(float zoom)
 {
 	int			cell_size;
-	t_vec2		player_pos;
+	t_ivec2		player_pos;
 	t_vec2		offset;
 	t_mlx		*app;
 
@@ -33,8 +33,8 @@ void	render_mmap(float zoom)
 		* cell_size - cell_size / 2 + player_pos.x;
 	offset.y = -(app->gamestate.player.pos.y / CELL_HEIGHT)
 		* cell_size - cell_size / 2 + player_pos.y;
-	render_rect((t_vec2){MMAP_PAD / 2, MMAP_PAD / 2},
-		(t_vec2){MMAP_W + MMAP_PAD, MMAP_H + MMAP_PAD},
+	render_rect(ivec2(MMAP_PAD / 2, MMAP_PAD / 2),
+		ivec2(MMAP_W + MMAP_PAD, MMAP_H + MMAP_PAD),
 		create_trgb(0, 51, 51, 51));
 	draw_cells(cell_size, offset);
 	render_circle(player_pos, MMAP_PLAYER_DIAM,
