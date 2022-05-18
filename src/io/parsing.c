@@ -18,7 +18,6 @@
 void		construct_map(t_map_info *infos);
 
 static void	parse_line(t_map_info *infos, char *line);
-static char	*skip_spaces(char *str);
 
 void	init_map(char *file)
 {
@@ -58,22 +57,15 @@ static void	parse_line(t_map_info *infos, char *line)
 	else if (infos->map)
 		error_close_app();
 	if (line[0] == 'C' && line[1] == ' ')
-		infos->ceiling_color = parse_color(skip_spaces(line + 1));
+		infos->ceiling_color = parse_color(ft_strskip_space(line + 1));
 	else if (line[0] == 'F' && line[1] == ' ')
-		infos->floor_color = parse_color(skip_spaces(line + 1));
+		infos->floor_color = parse_color(ft_strskip_space(line + 1));
 	else if (ft_strcmp(line, "NO") == 0 && line[3] == ' ')
-		infos->no_tex = parse_texture(skip_spaces(line + 3));
+		infos->no_tex = parse_texture(ft_strskip_space(line + 3));
 	else if (ft_strcmp(line, "SO") == 0 && line[3] == ' ')
-		infos->so_tex = parse_texture(skip_spaces(line + 3));
+		infos->so_tex = parse_texture(ft_strskip_space(line + 3));
 	else if (ft_strcmp(line, "EA") == 0 && line[3] == ' ')
-		infos->ea_tex = parse_texture(skip_spaces(line + 3));
+		infos->ea_tex = parse_texture(ft_strskip_space(line + 3));
 	else if (ft_strcmp(line, "WE") == 0 && line[3] == ' ')
-		infos->we_tex = parse_texture(skip_spaces(line + 3));
-}
-
-static char	*skip_spaces(char *str)
-{
-	while (*str == ' ')
-		str++;
-	return (str);
+		infos->we_tex = parse_texture(ft_strskip_space(line + 3));
 }
