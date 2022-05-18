@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:30:28 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/18 15:14:46 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 15:15:12 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "core.h"
 #include "render.h"
 
+//TODO: refactor to uniformize ui creation prototypes
 t_button	create_button(int64_t tex_id,
 		t_ivec2 pos,
 		int (*event)(struct s_button *button),

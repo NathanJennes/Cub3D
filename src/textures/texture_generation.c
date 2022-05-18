@@ -53,7 +53,7 @@ t_texture	create_blank_texture(int width, int height)
 		return (texture);
 	texture.original = (uint8_t *)mlx_get_data_addr(texture.original_handle, &texture.bpp,
 					&texture.line_size, &texture.endian);
-	gc_memseti(texture.original, trgb(0, 80, 215, 50), texture.width * texture.height);
+	gc_memseti(texture.original, trgb(255, 0, 0, 0), texture.width * texture.height);
 	return (texture);
 }
 

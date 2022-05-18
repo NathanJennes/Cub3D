@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/18 15:33:31 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 18:50:58 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,10 @@ typedef struct s_slider
 {
 	t_ui_component	infos;
 	int64_t			tex_id_bar;
-	int64_t			tex_id_button;
-	t_bool			is_clickable;
+	int64_t			tex_id_cursor;
 	float			min;
 	float			max;
 	float			value;
-	float			increment_size;
 }	t_slider;
 
 typedef struct s_text_box
@@ -143,5 +141,8 @@ void		render_ui_img_box(t_img_box *box);
 
 t_label		create_label(t_ivec2 pos, const char *text);
 void		render_label(t_label *label);
+
+t_slider	create_slider(t_ivec2 pos, t_ivec2 size, float min, float max);
+void		render_ui_slider(t_slider *slider);
 
 #endif

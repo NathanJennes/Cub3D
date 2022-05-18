@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:17:28 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/18 16:49:36 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 19:22:39 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ void	draw_circle_tex(t_ivec2 pos, int64_t diameter, int color, int64_t tex_id)
 	radius = diameter / 2;
 	i = -radius;
 	diameter_2 = radius * radius;
-	while (i < radius)
+	while (i <= radius)
 	{
 		j = -radius;
-		while (j < radius)
+		while (j <= radius)
 		{
-			if (i * i + j * j < diameter_2)
+			if (i * i + j * j <= diameter_2)
 				set_texture_pixel(pos.x + j, pos.y + i, color, tex_id);
 			j++;
 		}
