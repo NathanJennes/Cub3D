@@ -60,5 +60,5 @@ int	color_lerp(int col1, int col2, float value)
 	new_color.x = get_r(col1) + value * (get_r(col2) - get_r(col1));
 	new_color.y = get_g(col1) + value * (get_g(col2) - get_g(col1));
 	new_color.z = get_b(col1) + value * (get_b(col2) - get_b(col1));
-	return (create_trgb(0, new_color.x, new_color.y, new_color.z));
+	return (trgb(0, new_color.x, new_color.y, new_color.z));
 }

@@ -82,5 +82,5 @@ void	render_ui_texture_inversed(int64_t tex_id, int64_t x, int64_t y)
 
 void render_invalid_texture(int64_t x, int64_t y)
 {
-	render_rect(ivec2(x, y), ivec2(50, 50), create_trgb(0, 215, 50, 180));
+	render_rect(ivec2(x, y), ivec2(50, 50), trgb(0, 215, 50, 180));
 }

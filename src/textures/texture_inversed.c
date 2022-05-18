@@ -30,8 +30,8 @@ void	create_texture_inversed(t_texture *tex)
 	{
 		pixel = (int *) (tex->inversed + i * sizeof(int));
 		original_pixel = (int *) (tex->original + i * sizeof(int));
-		*pixel = create_trgb(get_t(*original_pixel), 255 - get_r(*original_pixel),
-				255 - get_g(*original_pixel), 255 - get_b(*original_pixel));
+		*pixel = trgb(get_t(*original_pixel), 255 - get_r(*original_pixel), 255 - get_g(*original_pixel),
+				255 - get_b(*original_pixel));
 		i++;
 	}
 }

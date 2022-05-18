@@ -23,7 +23,7 @@
 # define TURQUOISE	0x0000FFFF
 
 /* colors_utils.c */
-int			create_trgb(int t, int r, int g, int b);
+int			trgb(int t, int r, int g, int b);
 int			get_t(int trgb);
 int			get_r(int trgb);
 int			get_g(int trgb);

@@ -34,11 +34,9 @@ void	render_mmap(float zoom)
 	offset.y = -(app->gamestate.player.pos.y / CELL_HEIGHT)
 		* cell_size - cell_size / 2 + player_pos.y;
 	render_rect(ivec2(MMAP_PAD / 2, MMAP_PAD / 2),
-		ivec2(MMAP_W + MMAP_PAD, MMAP_H + MMAP_PAD),
-		create_trgb(0, 51, 51, 51));
+		ivec2(MMAP_W + MMAP_PAD, MMAP_H + MMAP_PAD), trgb(0, 51, 51, 51));
 	draw_cells(cell_size, offset);
-	render_circle(player_pos, MMAP_PLAYER_DIAM,
-		create_trgb(0, 255, 0, 0));
+	render_circle(player_pos, MMAP_PLAYER_DIAM, trgb(0, 255, 0, 0));
 }
 
 static void	draw_cells(int cell_size, t_vec2 offset)
@@ -82,8 +80,7 @@ static void	render_mmap_wall(int x, int y, int cell_size)
 		while (j < cell_size)
 		{
 			if (!outside_mmap_bounds(x + j, y + i))
-				mlx_pixel_put_img(x + j, y + i,
-					create_trgb(0, 150, 150, 150));
+				mlx_pixel_put_img(x + j, y + i, trgb(0, 150, 150, 150));
 			j++;
 		}
 		i++;
@@ -102,8 +99,7 @@ static void	render_mmap_empty(int x, int y, int cell_size)
 		while (j < cell_size)
 		{
 			if (!outside_mmap_bounds(x + j, y + i))
-				mlx_pixel_put_img(x + j, y + i,
-					create_trgb(0, 250, 250, 250));
+				mlx_pixel_put_img(x + j, y + i, trgb(0, 250, 250, 250));
 			j++;
 		}
 		i++;
