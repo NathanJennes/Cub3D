@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deserialization_player.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 11:27:47 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/15 11:49:57 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 17:27:30 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,17 @@ static int	parse_pos(char *line, t_gamestate *save)
 	line_cursor = ft_strchr(line_cursor, ' ');
 	if (!line_cursor)
 		return (0);
-	line_cursor += ft_strskip_space(line_cursor);
+	line_cursor = ft_strskip_space(line_cursor);
 	if (!ft_isdigit(*line_cursor) && *line_cursor != '-')
 		return (0);
 	save->player.pos.x = (float)ft_atoi(line_cursor);
-	line_cursor += ft_strskip_digit(line_cursor);
-	line_cursor += ft_strskip_space(line_cursor);
+	line_cursor = ft_strskip_digit(line_cursor);
+	line_cursor = ft_strskip_space(line_cursor);
 	if (!ft_isdigit(*line_cursor) && *line_cursor != '-')
 		return (0);
 	save->player.pos.y = (float)ft_atoi(line_cursor);
-	line_cursor += ft_strskip_digit(line_cursor);
-	line_cursor += ft_strskip_space(line_cursor);
+	line_cursor = ft_strskip_digit(line_cursor);
+	line_cursor = ft_strskip_space(line_cursor);
 	if (!ft_isdigit(*line_cursor) && *line_cursor != '-')
 		return (0);
 	save->player.direction = (float)ft_atoi(line_cursor);

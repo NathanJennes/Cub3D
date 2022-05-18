@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deserialization.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 11:05:43 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/16 18:44:19 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 19:24:25 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	deserialize_save(t_gamestate *save_out, int fd)
 	gc_strarray_free(save.map.map_raw);
 	if (!save.map.spawn_dir)
 		return (0);
+	update_player_forward_vec(&save.player);
+	update_player_right_vec(&save.player);
 	*save_out = save;
 	return (1);
 }

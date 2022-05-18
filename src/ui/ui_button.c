@@ -33,9 +33,9 @@ t_button	create_button(int64_t tex_id,
 
 void	ui_button_update(t_button *button, t_bool mouse_clicked)
 {
-	t_vec2	mouse_pos;
+	t_ivec2	mouse_pos;
 
-	mouse_pos = cub_get_mouse_pos();
+	mouse_pos = cub_get_mouse_position();
 	if (mouse_pos.x >= button->position.x && mouse_pos.x <= button->position.x + button->bounding_box.x
 		&& mouse_pos.y >= button->position.y && mouse_pos.y <= button->position.y + button->bounding_box.y)
 		button->hovered = TRUE;

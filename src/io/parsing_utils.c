@@ -72,8 +72,8 @@ void	add_map_row(t_map_info *infos, char *line)
 		infos->map_raw = gc_strarray_init();
 	infos->map_raw = gc_strarray_append(infos->map_raw, line);
 	line = ft_trimr(line);
-	if (ft_strlen(line) > infos->width)
-		infos->width = ft_strlen(line);
+	if ((int64_t)ft_strlen(line) > infos->width)
+		infos->width = (int64_t)ft_strlen(line);
 }
 
 static int	contains_illegal_char(t_map_info *infos, char *line)

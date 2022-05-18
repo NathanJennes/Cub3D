@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/16 14:25:33 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 17:12:31 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	init_map(char *file)
 	gc_strarray_free(infos.map_raw);
 	app->gamestate.map = infos;
 	app->gamestate.player.pos = infos.spawn_pos;
+	update_player_forward_vec(get_player());
+	update_player_right_vec(get_player());
 }
 
 static void	parse_line(t_map_info *infos, char *line)

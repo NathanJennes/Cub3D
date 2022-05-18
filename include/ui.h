@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 22:47:27 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 19:13:06 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,34 +52,34 @@ typedef enum e_ui_state
 
 typedef struct s_button
 {
-	int64_t 	tex_id;
+	int64_t		tex_id;
 	t_bool		displayed;
 	t_bool		is_clickable;
 	t_bool		hovered;
 	t_bool		clicked;
 	t_vec2		position;
 	t_vec2		bounding_box;
-	int 		(*event)(struct s_button *button);
+	int			(*event)(struct s_button *button);
 }	t_button;
 
 typedef struct s_label
 {
-	int64_t 	tex_id;
+	int64_t		tex_id;
 	t_bool		displayed;
 	t_vec2		position;
 }	t_label;
 
 typedef struct s_img_box
 {
-	int64_t 	tex_id;
+	int64_t		tex_id;
 	t_bool		displayed;
 	t_vec2		position;
 }	t_img_box;
 
 typedef struct s_slider
 {
-	int64_t 	tex_id_bar;
-	int64_t 	tex_id_button;
+	int64_t		tex_id_bar;
+	int64_t		tex_id_button;
 	t_bool		displayed;
 	t_vec2		position;
 	t_bool		is_clickable;
@@ -92,13 +92,13 @@ typedef struct s_slider
 
 typedef struct s_text_box
 {
-	int64_t 	tex_id;
+	int64_t		tex_id;
 	t_bool		displayed;
 	t_bool		is_clickable;
 	t_vec2		position;
 	t_vec2		bounding_box;
 	char		*str;
-	int 		(*event)(struct s_text_box *button);
+	int			(*event)(struct s_text_box *button);
 }	t_text_box;
 
 typedef struct s_ui_main_menu
@@ -140,5 +140,9 @@ t_button	create_button(
 				int (*event)(struct s_button *button),
 				t_bool displayed);
 void		ui_button_update(t_button *button, t_bool mouse_clicked);
+
+void		print_player_vector(void);
+void		test_ray(void);
+void		render_scene(const t_mlx *app);
 
 #endif

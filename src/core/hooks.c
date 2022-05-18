@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:57:26 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 23:39:14 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 18:18:33 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,23 @@ int	key_hooks(int keycode)
 static void	handle_moving(int keycode, t_mlx *app)
 {
 	if (keycode == KEY_W)
-		app->gamestate.player.pos.y -= PLAYER_SPEED;
+	{
+		app->gamestate.player.pos.y += PLAYER_SPEED * get_player()->forward.y;
+		app->gamestate.player.pos.x += PLAYER_SPEED * get_player()->forward.x;
+	}
 	if (keycode == KEY_S)
-		app->gamestate.player.pos.y += PLAYER_SPEED;
+	{
+		app->gamestate.player.pos.y -= PLAYER_SPEED * get_player()->forward.y;
+		app->gamestate.player.pos.x -= PLAYER_SPEED * get_player()->forward.x;
+	}
 	if (keycode == KEY_D)
-		app->gamestate.player.pos.x += PLAYER_SPEED;
+		app->gamestate.player.pos.x += PLAYER_SPEED * get_player()->forward.x;
 	if (keycode == KEY_A)
-		app->gamestate.player.pos.x -= PLAYER_SPEED;
+		app->gamestate.player.pos.x -= PLAYER_SPEED * get_player()->forward.x;
+	if (keycode == KEY_RIGHT)
+		get_player()->direction += 0.05;
+	if (keycode == KEY_LEFT)
+		get_player()->direction -= 0.05;
+	update_player_forward_vec(get_player());
+	update_player_right_vec(get_player());
 }

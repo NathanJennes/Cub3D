@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/18 14:27:55 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/18 18:20:58 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 #  define WIN_H		540
 # endif
 
-# define PLAYER_SPEED	10
+# define PLAYER_SPEED	5
 
 # define WALL		1
 # define EMPTY		0
@@ -51,8 +51,8 @@ typedef struct s_mouse
 
 typedef struct s_map_info
 {
-	size_t	width;
-	size_t	height;
+	int64_t	width;
+	int64_t	height;
 	t_vec2	spawn_pos;
 	char	spawn_dir;
 	t_vec3	ceiling_color;
@@ -78,6 +78,8 @@ typedef struct s_player
 {
 	t_vec2	pos;
 	float	direction;
+	t_vec2	forward;
+	t_vec2	right;
 }	t_player;
 
 typedef struct s_gamestate
@@ -128,6 +130,9 @@ int			mouse_move_hooks(int x, int y, void *param);
 
 void		cub_update_mouse_pos(int x, int y);
 t_ivec2		cub_get_mouse_position(void);
+
+void		update_player_forward_vec(t_player *player);
+void		update_player_right_vec(t_player *player);
 
 /* getters */
 t_mlx		*get_app(void);

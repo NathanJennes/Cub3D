@@ -19,7 +19,7 @@ int	deserialize_map_parse_no_tex(char *line, t_gamestate *save)
 
 	cursor = ft_trimr(line);
 	cursor += ft_strlen("NO_TEX");
-	cursor += ft_strskip_space(cursor);
+	cursor = ft_strskip_space(cursor);
 	if (ft_strlen(cursor) == 0)
 		return (0);
 	else if (ft_strncmp(cursor, "(null)", ft_strlen("(null)")) == 0)
@@ -35,7 +35,7 @@ int	deserialize_map_parse_ea_tex(char *line, t_gamestate *save)
 
 	cursor = ft_trimr(line);
 	cursor += ft_strlen("EA_TEX");
-	cursor += ft_strskip_space(cursor);
+	cursor = ft_strskip_space(cursor);
 	if (ft_strlen(cursor) == 0)
 		return (0);
 	else if (ft_strncmp(cursor, "(null)", ft_strlen("(null)")) == 0)
@@ -51,7 +51,7 @@ int	deserialize_map_parse_so_tex(char *line, t_gamestate *save)
 
 	cursor = ft_trimr(line);
 	cursor += ft_strlen("SO_TEX");
-	cursor += ft_strskip_space(cursor);
+	cursor = ft_strskip_space(cursor);
 	if (ft_strlen(cursor) == 0)
 		return (0);
 	else if (ft_strncmp(cursor, "(null)", ft_strlen("(null)")) == 0)
@@ -67,7 +67,7 @@ int	deserialize_map_parse_we_tex(char *line, t_gamestate *save)
 
 	cursor = ft_trimr(line);
 	cursor += ft_strlen("WE_TEX");
-	cursor += ft_strskip_space(cursor);
+	cursor = ft_strskip_space(cursor);
 	if (ft_strlen(cursor) == 0)
 		return (0);
 	else if (ft_strncmp(cursor, "(null)", ft_strlen("(null)")) == 0)

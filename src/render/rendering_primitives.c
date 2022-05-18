@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_primitives.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:49:16 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 16:04:43 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 14:23:49 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "render.h"
 
-void	render_rect(t_vec2 pos, t_vec2 size, int color)
+void	render_rect(t_ivec2 pos, t_ivec2 size, int color)
 {
 	int	y;
 	int	x;
@@ -31,7 +31,7 @@ void	render_rect(t_vec2 pos, t_vec2 size, int color)
 	}
 }
 
-void	render_circle(t_vec2 pos, float diameter, int color)
+void	render_circle(t_ivec2 pos, float diameter, int color)
 {
 	float	i;
 	float	j;
@@ -52,7 +52,7 @@ void	render_circle(t_vec2 pos, float diameter, int color)
 	}
 }
 
-void	render_line(t_vec2 start, t_vec2 end, int col1, int col2)
+void	render_line(t_ivec2 start, t_ivec2 end, int col1, int col2)
 {
 	double	pixels_to_draw;
 	double	pixels_drawn;
