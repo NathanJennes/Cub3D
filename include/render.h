@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/18 15:00:24 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 15:05:12 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void		clear_screen(int color);
 void		mlx_pixel_put_img(int x, int y, int color);
 int			color_lerp(int col1, int col2, float value);
 
-void		render_circle(t_vec2 pos, float diameter, int color);
-void		render_rect(t_vec2 pos, t_vec2 size, int color);
-void		render_line(t_vec2 start, t_vec2 end, int col1, int col2);
+void		render_circle(t_ivec2 pos, float diameter, int color);
+void		render_rect(t_ivec2 pos, t_ivec2 size, int color);
+void		render_line(t_ivec2 start, t_ivec2 end, int col1, int col2);
 int			outside_mmap_bounds(int x, int y);
 
 void		render_ui_texture(int64_t tex_id, int64_t x, int64_t y);
@@ -34,7 +34,6 @@ void		render_ui_texture_inversed(int64_t tex_id, int64_t x, int64_t y);
 void		render_ui_texture_inverse_grayscale(int64_t tex_id, int64_t x, int64_t y);
 
 void		render_ui_label(t_label *label);
-void		render_ui_img_box(t_img_box *img_box);
 
 void		render_walls(int fov);
 float		shoot_ray(t_vec2 ray, t_vec2 pos, t_ivec2 map_pos);

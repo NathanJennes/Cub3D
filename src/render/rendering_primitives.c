@@ -6,14 +6,14 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:49:16 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 16:04:43 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/18 15:21:45 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "render.h"
 
-void	render_rect(t_vec2 pos, t_vec2 size, int color)
+void	render_rect(t_ivec2 pos, t_ivec2 size, int color)
 {
 	int	y;
 	int	x;
@@ -31,7 +31,7 @@ void	render_rect(t_vec2 pos, t_vec2 size, int color)
 	}
 }
 
-void	render_circle(t_vec2 pos, float diameter, int color)
+void	render_circle(t_ivec2 pos, float diameter, int color)
 {
 	float	i;
 	float	j;
@@ -52,7 +52,7 @@ void	render_circle(t_vec2 pos, float diameter, int color)
 	}
 }
 
-void	render_line(t_vec2 start, t_vec2 end, int col1, int col2)
+void	render_line(t_ivec2 start, t_ivec2 end, int col1, int col2)
 {
 	double	pixels_to_draw;
 	double	pixels_drawn;
@@ -61,9 +61,9 @@ void	render_line(t_vec2 start, t_vec2 end, int col1, int col2)
 
 	pixels_to_draw = ft_sqrt((ft_pow2(end.x - start.x)) + \
 			ft_pow2(end.y - start.y));
-	delta.x = (end.x - start.x) / pixels_to_draw;
-	delta.y = (end.y - start.y) / pixels_to_draw;
-	ppos = vec2(start.x, start.y);
+	delta.x = ((float)end.x - (float)start.x) / (float)pixels_to_draw;
+	delta.y = ((float)end.y - (float)start.y) / (float)pixels_to_draw;
+	ppos = iv2_to_v2(start);
 	pixels_drawn = 0;
 	while (pixels_drawn < pixels_to_draw)
 	{
