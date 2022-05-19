@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/15 16:15:08 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/19 15:17:32 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ static void init_hooks(void)
 	mlx_hook(app->win, 6, 1L<<6, mouse_move_hooks, app);
 	mlx_hook(app->win, 17, 0, close_app, app);
 	mlx_hook(app->win, 2, 1L << 0, key_hooks, app);
+	mlx_hook(app->win, 2, 0, key_down_callback, NULL);
+	mlx_hook(app->win, 3, 0, key_up_callback, NULL);
 	mlx_loop_hook(app->mlx, main_loop, app);
 }

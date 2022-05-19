@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/18 14:27:55 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/19 15:45:08 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 #  define WIN_W		960
 #  define WIN_H		540
 # endif
+
+# define MAX_KEYCODE 1024
 
 # define PLAYER_SPEED	10
 
@@ -102,6 +104,7 @@ typedef struct s_mlx
 	int8_t				game_state;
 	t_ui				ui;
 	t_texture_manager	texture_manager;
+	t_bool				keys[MAX_KEYCODE];
 }	t_mlx;
 
 /* core.c */
@@ -122,9 +125,13 @@ void		init_gc(void);
 int			main_loop(void);
 
 /* hooks.c.c */
-int			key_hooks(int keycode);
 int			mouse_hooks(int mousecode, int x, int y);
 int			mouse_move_hooks(int x, int y, void *param);
+
+/* Keys */
+int			key_up_callback(int keycode);
+int			key_down_callback(int keycode);
+t_bool		is_key_down(int keycode);
 
 void		cub_update_mouse_pos(int x, int y);
 t_ivec2		cub_get_mouse_position(void);
