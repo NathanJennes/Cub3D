@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 15:49:53 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/18 19:27:22 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/19 17:50:59 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_slider	create_slider(t_ivec2 pos, t_ivec2 size, float min, float max)
 	slider.infos.pos = pos;
 	slider.infos.size = size;
 	slider.infos.displayed = TRUE;
+	slider.selected = FALSE;
 	slider.min = min;
 	slider.max = max;
 	slider.value = (max + min) / 2.0f;
@@ -62,6 +63,6 @@ void	render_ui_slider(t_slider *slider)
 	infos = &slider->infos;
 	render_ui_texture(slider->tex_id_bar, infos->pos.x, infos->pos.y);
 	render_ui_texture(slider->tex_id_cursor,
-		infos->pos.x + infos->size.x / 2 - infos->size.y,
+		infos->pos.x + slider->cursor_pos_x - infos->size.y / 2,
 		infos->pos.y - infos->size.y / 2);
 }

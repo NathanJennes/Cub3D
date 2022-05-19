@@ -41,7 +41,7 @@
 # define CELL_WIDTH		50
 # define CELL_HEIGHT	50
 
-# define MOUSE_DEBUG	1
+# define MOUSE_DEBUG	0
 
 # define MENU 		0
 # define IN_GAME	1
