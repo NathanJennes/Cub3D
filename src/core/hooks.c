@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:57:26 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/18 18:18:33 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/19 14:30:41 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,12 @@ int	mouse_hooks(int mousecode, int x, int y)
 int	mouse_move_hooks(int x, int y, void *param)
 {
 	(void)param;
-	cub_update_mouse_pos(x, y);
 	update_ui(FALSE);
+//	if (x > get_app()->mouse.position.x)
+//		get_player()->direction += 0.05;
+//	else
+//		get_player()->direction -= 0.05;
+	cub_update_mouse_pos(x, y);
 	return (0);
 }
 
@@ -68,13 +72,19 @@ static void	handle_moving(int keycode, t_mlx *app)
 		app->gamestate.player.pos.x -= PLAYER_SPEED * get_player()->forward.x;
 	}
 	if (keycode == KEY_D)
-		app->gamestate.player.pos.x += PLAYER_SPEED * get_player()->forward.x;
+	{
+		app->gamestate.player.pos.y -= PLAYER_SPEED * get_player()->right.y;
+		app->gamestate.player.pos.x -= PLAYER_SPEED * get_player()->right.x;
+	}
 	if (keycode == KEY_A)
-		app->gamestate.player.pos.x -= PLAYER_SPEED * get_player()->forward.x;
+	{
+		app->gamestate.player.pos.y += PLAYER_SPEED * get_player()->right.y;
+		app->gamestate.player.pos.x += PLAYER_SPEED * get_player()->right.x;
+	}
 	if (keycode == KEY_RIGHT)
-		get_player()->direction += 0.05;
-	if (keycode == KEY_LEFT)
 		get_player()->direction -= 0.05;
+	if (keycode == KEY_LEFT)
+		get_player()->direction += 0.05;
 	update_player_forward_vec(get_player());
 	update_player_right_vec(get_player());
 }

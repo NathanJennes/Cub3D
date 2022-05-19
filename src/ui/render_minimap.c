@@ -44,14 +44,14 @@ void	render_mmap(float zoom)
 static void	draw_cells(int cell_size, t_vec2 offset)
 {
 	t_map_info	*map;
-	size_t		i;
-	size_t		j;
-	int			x_start;
-	int			y_start;
+	int64_t		i;
+	int64_t		j;
+	int64_t		x_start;
+	int64_t		y_start;
 
 	map = get_map_infos();
-	x_start = offset.x;
-	y_start = offset.y;
+	x_start = (int64_t)offset.x;
+	y_start = (int64_t)offset.y;
 	i = 0;
 	while (i < map->height)
 	{

@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/18 19:13:06 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/19 16:50:00 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,9 +140,5 @@ t_button	create_button(
 				int (*event)(struct s_button *button),
 				t_bool displayed);
 void		ui_button_update(t_button *button, t_bool mouse_clicked);
-
-void		print_player_vector(void);
-void		test_ray(void);
-void		render_scene(const t_mlx *app);
 
 #endif

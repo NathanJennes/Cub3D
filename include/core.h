@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/18 18:20:58 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:00:09 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 #  define WIN_H		540
 # endif
 
+# define DFLT_SIZE	60
+
 # define PLAYER_SPEED	5
 
 # define WALL		1
@@ -35,10 +37,10 @@
 
 # define BKGD_COLOR	0x0037464B
 
-# define CELL_WIDTH		50
-# define CELL_HEIGHT	50
+# define CELL_WIDTH		20
+# define CELL_HEIGHT	20
 
-# define MOUSE_DEBUG	1
+# define MOUSE_DEBUG	0
 
 # define MENU 		0
 # define IN_GAME	1
@@ -87,6 +89,7 @@ typedef struct s_gamestate
 	char		*name;
 	t_map_info	map;
 	t_player	player;
+	int			fov;
 }	t_gamestate;
 
 typedef struct s_mlx

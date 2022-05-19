@@ -53,7 +53,7 @@ static void init_hooks(void)
 	t_mlx	*app;
 
 	app = get_app();
-	app->game_state = MENU;
+	app->game_state = IN_GAME;
 	mlx_mouse_hook(app->win, mouse_hooks, app);
 	mlx_hook(app->win, 6, 1L<<6, mouse_move_hooks, app);
 	mlx_hook(app->win, 17, 0, close_app, app);
