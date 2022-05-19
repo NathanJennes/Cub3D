@@ -22,7 +22,7 @@ UI_DIR			:=	ui
 UI_FILE			:=	fps_counter.c ui_helper.c ui_manager.c						\
 					render_minimap.c ui_init.c ui_component.c					\
 					ui_button.c ui_img_box.c ui_label.c ui_slider.c	\
-					ui_slider_update.c
+					ui_slider_update.c ui_button_update.c
 UI_SRCS			:=	$(addprefix $(UI_DIR)/, $(UI_FILE))
 
 TEXTURES_DIR	:=	textures

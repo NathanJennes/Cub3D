@@ -12,7 +12,6 @@
 
 #include "ui.h"
 #include "core.h"
-#include "render.h"
 #include "libft.h"
 
 void	update_ui_slider(t_slider *slider)
