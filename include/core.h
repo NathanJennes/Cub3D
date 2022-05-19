@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/19 15:45:08 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/19 16:03:54 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,8 @@ int			mouse_hooks(int mousecode, int x, int y);
 int			mouse_move_hooks(int x, int y, void *param);
 
 /* Keys */
-int			key_up_callback(int keycode);
-int			key_down_callback(int keycode);
+int			key_up_callback(int keycode, void *unused);
+int			key_down_callback(int keycode, void *unused);
 t_bool		is_key_down(int keycode);
 
 void		cub_update_mouse_pos(int x, int y);

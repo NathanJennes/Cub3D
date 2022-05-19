@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:07:56 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/19 15:44:58 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/19 16:05:12 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 int	key_pressed_listener(int keycode);
 
-int	key_up_callback(int keycode)
+int	key_up_callback(int keycode, void *unused)
 {
 	t_mlx	*app;
 
+	(void)unused;
 	app = get_app();
 	if (keycode < 0 || keycode >= MAX_KEYCODE)
 		return (0);
@@ -25,10 +26,11 @@ int	key_up_callback(int keycode)
 	return (0);
 }
 
-int	key_down_callback(int keycode)
+int	key_down_callback(int keycode, void *unused)
 {
 	t_mlx	*app;
 
+	(void)unused;
 	app = get_app();
 	if (keycode < 0 || keycode >= MAX_KEYCODE)
 		return (0);
