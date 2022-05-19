@@ -7,6 +7,8 @@ appdata/*
 cub3d
 cub3dd
 Libft
+Libft/
+Libft/*
 *.o
 *.d
 *.a
