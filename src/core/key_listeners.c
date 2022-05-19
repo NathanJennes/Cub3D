@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:42:50 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/19 15:44:33 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/19 15:44:39 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ int	key_pressed_listener(int keycode)
 	t_mlx	*app;
 
 	app = get_app();
-	if (keycode == KEY_LEFT || keycode == KEY_UP || keycode == KEY_RIGHT
-		|| keycode == KEY_DOWN)
-	{}
 	if (keycode == KEY_ESC)
 		close_app();
 	if (keycode == KEY_F3)
@@ -34,6 +31,7 @@ int	key_pressed_listener(int keycode)
 	return (0);
 }
 
+//TODO: handle this each frame in player_update()
 static void	handle_moving(int keycode, t_mlx *app)
 {
 	if (keycode == KEY_W)
