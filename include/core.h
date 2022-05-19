@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/19 16:03:54 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/19 16:42:56 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # endif
 
 # define MAX_KEYCODE 1024
+# define MAX_MOUSE_BUTTONS 5
 
 # define PLAYER_SPEED	10
 
@@ -49,6 +50,7 @@
 typedef struct s_mouse
 {
 	t_ivec2	position;
+	t_bool	buttons[MAX_MOUSE_BUTTONS];
 }	t_mouse;
 
 typedef struct s_map_info
@@ -126,12 +128,13 @@ int			main_loop(void);
 
 /* hooks.c.c */
 int			mouse_hooks(int mousecode, int x, int y);
-int			mouse_move_hooks(int x, int y, void *param);
+int			mouse_move_hooks(int x, int y, void *unused);
 
 /* Keys */
-int			key_up_callback(int keycode, void *unused);
-int			key_down_callback(int keycode, void *unused);
 t_bool		is_key_down(int keycode);
+
+/* Mouse */
+t_bool		is_mouse_down(int button);
 
 void		cub_update_mouse_pos(int x, int y);
 t_ivec2		cub_get_mouse_position(void);

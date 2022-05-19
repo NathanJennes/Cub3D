@@ -6,13 +6,18 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/19 15:17:32 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/19 16:43:22 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "parsing.h"
 #include "ui.h"
+
+int			key_up_callback(int keycode, void *unused);
+int			key_down_callback(int keycode, void *unused);
+int			mouse_down_callback(int button, int x, int y, void *unused);
+int			mouse_up_callback(int button, int x, int y, void *unused);
 
 static void	init_hooks(void);
 
@@ -54,10 +59,11 @@ static void init_hooks(void)
 
 	app = get_app();
 	app->game_state = MENU;
-	mlx_mouse_hook(app->win, mouse_hooks, app);
-	mlx_hook(app->win, 6, 1L<<6, mouse_move_hooks, app);
 	mlx_hook(app->win, 17, 0, close_app, app);
 	mlx_hook(app->win, 2, 0, key_down_callback, NULL);
 	mlx_hook(app->win, 3, 0, key_up_callback, NULL);
+	mlx_hook(app->win, 4, 0, mouse_down_callback, NULL);
+	mlx_hook(app->win, 5, 0, mouse_up_callback, NULL);
+	mlx_hook(app->win, 6, 1L<<6, mouse_move_hooks, app);
 	mlx_loop_hook(app->mlx, main_loop, app);
 }
