@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/19 17:03:20 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/19 18:12:03 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	render_walls(int fov)
 
 	ray_angle = ((float)fov / 180.0f) / (float)WIN_W;
 	ray_angle_base = get_player()->direction + ((float)fov / 360.0f);
-	if (ray_angle_base < 0.0f)
+	while (ray_angle_base < 0.0f)
 		ray_angle_base += 2.0f * PI;
 //	printf("ray_angle %f\n", ray_angle);
 //	printf("ray_angle_base %f\n", ray_angle_base);
@@ -52,8 +52,7 @@ static void	shoot_rays(float ray_angle, float ray_angle_base)
 	while (i < WIN_W)
 	{
 		dist = shoot_ray(vec2(cosf(ray_angle_base), sinf(ray_angle_base)), pos, map_pos);
-//		dist *= (float)cos(ray_angle_base);
-		draw_col_wall(dist, i);
+		draw_col_wall(dist * (float)cos(ray_angle_base), i);
 		ray_angle_base += ray_angle;
 		i++;
 	}
