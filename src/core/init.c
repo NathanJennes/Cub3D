@@ -57,7 +57,6 @@ static void init_hooks(void)
 	mlx_mouse_hook(app->win, mouse_hooks, app);
 	mlx_hook(app->win, 6, 1L<<6, mouse_move_hooks, app);
 	mlx_hook(app->win, 17, 0, close_app, app);
-	mlx_hook(app->win, 2, 1L << 0, key_hooks, app);
 	mlx_hook(app->win, 2, 0, key_down_callback, NULL);
 	mlx_hook(app->win, 3, 0, key_up_callback, NULL);
 	mlx_loop_hook(app->mlx, main_loop, app);
