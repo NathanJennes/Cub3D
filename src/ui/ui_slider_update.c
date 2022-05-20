@@ -6,13 +6,14 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:53:55 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/19 17:50:05 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 12:53:37 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ui.h"
 #include "core.h"
 #include "libft.h"
+#include "input_code.h"
 
 void	update_ui_slider(t_slider *slider)
 {
@@ -34,12 +35,12 @@ void	update_ui_slider(t_slider *slider)
 	slider->cursor_pos_x = mouse_pos.x;
 }
 
-void	update_ui_slider_click_begin(t_slider *slider)
+void	update_ui_slider_click_begin(t_slider *slider, int mouse_btn)
 {
 	t_ui_component	*infos;
 	t_ivec2			mouse_pos;
 
-	if (!slider->infos.displayed)
+	if (!slider->infos.displayed || mouse_btn != MOUSE_LEFT)
 		return ;
 	infos = &slider->infos;
 	mouse_pos = cub_get_mouse_position();
@@ -53,9 +54,9 @@ void	update_ui_slider_click_begin(t_slider *slider)
 	}
 }
 
-void	update_ui_slider_click_end(t_slider *slider)
+void	update_ui_slider_click_end(t_slider *slider, int mouse_btn)
 {
-	if (!slider->infos.displayed || !slider->selected)
+	if (!slider->infos.displayed || !slider->selected || mouse_btn != MOUSE_LEFT)
 		return ;
 	slider->selected = FALSE;
 }

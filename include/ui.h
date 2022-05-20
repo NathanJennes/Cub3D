@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/19 19:16:29 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 12:53:14 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,8 @@ t_button	create_button(char *texture_path, t_ivec2 pos,
 				int (*event)(struct s_button *button));
 void		update_ui_button(t_button *button);
 void		render_ui_button(t_button *button);
-void		update_ui_button_click_begin(t_button *button);
-void		update_ui_button_click_end(t_button *button);
+void		update_ui_button_click_begin(t_button *button, int mouse_btn);
+void		update_ui_button_click_end(t_button *button, int mouse_btn);
 
 t_img_box	create_img_box(char *texture_path, t_ivec2 pos);
 void		render_ui_img_box(t_img_box *box);
@@ -153,7 +153,7 @@ void		render_label(t_label *label);
 t_slider	create_slider(t_ivec2 pos, t_ivec2 size, float min, float max);
 void		render_ui_slider(t_slider *slider);
 void		update_ui_slider(t_slider *slider);
-void		update_ui_slider_click_begin(t_slider *slider);
-void		update_ui_slider_click_end(t_slider *slider);
+void		update_ui_slider_click_begin(t_slider *slider, int mouse_btn);
+void		update_ui_slider_click_end(t_slider *slider, int mouse_btn);
 
 #endif

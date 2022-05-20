@@ -6,20 +6,21 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:31:13 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/19 16:41:18 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 12:58:20 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core.h"
+void	update_ui_click_begin(int button);
+void	update_ui_click_end(int button);
 
 void	mouse_click_begin(int button)
 {
-	update_ui(TRUE);
+	update_ui_click_begin(button);
 }
 
 void	mouse_click_end(int button)
 {
-	update_ui(FALSE);
+	update_ui_click_end(button);
 }
 
 void	mouse_wheel_up(void)

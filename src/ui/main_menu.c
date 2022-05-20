@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 18:51:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/19 19:19:41 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 13:00:29 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,30 @@ void	update_main_menu(void)
 	update_ui_button(&main_menu->btn_editor);
 	update_ui_button(&main_menu->btn_option);
 	update_ui_button(&main_menu->btn_exit);
+}
+
+void	update_main_menu_click_begin(int mouse_btn)
+{
+	t_ui_main_menu	*main_menu;
+
+	main_menu = &get_app()->ui.main_menu;
+	update_ui_button_click_begin(&main_menu->btn_continue, mouse_btn);
+	update_ui_button_click_begin(&main_menu->btn_new_game, mouse_btn);
+	update_ui_button_click_begin(&main_menu->btn_load, mouse_btn);
+	update_ui_button_click_begin(&main_menu->btn_editor, mouse_btn);
+	update_ui_button_click_begin(&main_menu->btn_option, mouse_btn);
+	update_ui_button_click_begin(&main_menu->btn_exit, mouse_btn);
+}
+
+void	update_main_menu_click_end(int mouse_btn)
+{
+	t_ui_main_menu	*main_menu;
+
+	main_menu = &get_app()->ui.main_menu;
+	update_ui_button_click_end(&main_menu->btn_continue, mouse_btn);
+	update_ui_button_click_end(&main_menu->btn_new_game, mouse_btn);
+	update_ui_button_click_end(&main_menu->btn_load, mouse_btn);
+	update_ui_button_click_end(&main_menu->btn_editor, mouse_btn);
+	update_ui_button_click_end(&main_menu->btn_option, mouse_btn);
+	update_ui_button_click_end(&main_menu->btn_exit, mouse_btn);
 }
