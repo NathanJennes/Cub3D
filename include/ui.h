@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/20 12:53:14 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 13:35:40 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ typedef struct s_ui_component
 	t_ivec2	pos;
 	t_ivec2	size;
 	t_bool	displayed;
+	int64_t	pad_up;
+	int64_t	pad_right;
+	int64_t	pad_down;
+	int64_t	pad_left;
 }	t_ui_component;
 
 typedef struct s_button
@@ -118,42 +122,59 @@ typedef struct s_ui
 	t_ui_main_menu	main_menu;
 }	t_ui;
 
-void		init_ui(void);
-int			render_ui(void);
-void		update_ui(t_bool mouse_clicked);
+/* Core */
+void			init_ui(void);
+int				render_ui(void);
+void			update_ui(t_bool mouse_clicked);
 
-void		render_mmap(float zoom);
-void		show_slider(t_slider *slider);
-void		update_slider(t_slider *slider, int mx, int my);
+void			render_mmap(float zoom);
 
-void		fps_counter(void);
+void			fps_counter(void);
 
-void		update_ui_flags(uint8_t flag);
+void			update_ui_flags(uint8_t flag);
 
-void		put_text(t_mlx *app, t_vec2 pos, int color, char *str);
-int			str_px_size(char *str);
+void			put_text(t_mlx *app, t_vec2 pos, int color, char *str);
+int				str_px_size(char *str);
 
-void		init_main_menu(void);
-void		render_main_menu(void);
-void		update_main_menu(void);
+/* Main Menu */
+void			init_main_menu(void);
+void			render_main_menu(void);
+void			update_main_menu(void);
 
-t_button	create_button(char *texture_path, t_ivec2 pos,
-				int (*event)(struct s_button *button));
-void		update_ui_button(t_button *button);
-void		render_ui_button(t_button *button);
-void		update_ui_button_click_begin(t_button *button, int mouse_btn);
-void		update_ui_button_click_end(t_button *button, int mouse_btn);
+/* Ui elements */
+t_button		create_button(char *texture_path, t_ivec2 pos,
+					int (*event)(struct s_button *button));
+void			update_ui_button(t_button *button);
+void			render_ui_button(t_button *button);
+void			update_ui_button_click_begin(t_button *button, int mouse_btn);
+void			update_ui_button_click_end(t_button *button, int mouse_btn);
 
-t_img_box	create_img_box(char *texture_path, t_ivec2 pos);
-void		render_ui_img_box(t_img_box *box);
+t_img_box		create_img_box(char *texture_path, t_ivec2 pos);
+void			render_ui_img_box(t_img_box *box);
 
-t_label		create_label(t_ivec2 pos, const char *text);
-void		render_label(t_label *label);
+t_label			create_label(t_ivec2 pos, const char *text);
+void			render_label(t_label *label);
 
-t_slider	create_slider(t_ivec2 pos, t_ivec2 size, float min, float max);
-void		render_ui_slider(t_slider *slider);
-void		update_ui_slider(t_slider *slider);
-void		update_ui_slider_click_begin(t_slider *slider, int mouse_btn);
-void		update_ui_slider_click_end(t_slider *slider, int mouse_btn);
+t_slider		create_slider(t_ivec2 pos, t_ivec2 size, float min, float max);
+void			render_ui_slider(t_slider *slider);
+void			update_ui_slider(t_slider *slider);
+void			update_ui_slider_click_begin(t_slider *slider, int mouse_btn);
+void			update_ui_slider_click_end(t_slider *slider, int mouse_btn);
+
+/* Ui positionning */
+t_ui_component	*uic_center_win_w(t_ui_component *comp);
+t_ui_component	*uic_center_win_h(t_ui_component *comp);
+t_ui_component	*uic_center_win(t_ui_component *comp);
+
+t_ui_component	*uic_padding_up(t_ui_component *comp, int64_t pad);
+t_ui_component	*uic_padding_right(t_ui_component *comp, int64_t pad);
+t_ui_component	*uic_padding_down(t_ui_component *comp, int64_t pad);
+t_ui_component	*uic_padding_left(t_ui_component *comp, int64_t pad);
+t_ui_component	*uic_padding(t_ui_component *comp, t_ivec2 td, t_ivec2 lr);
+
+t_ui_component	*uic_below(t_ui_component *comp, t_ui_component *other);
+t_ui_component	*uic_above(t_ui_component *comp, t_ui_component *other);
+t_ui_component	*uic_side_left(t_ui_component *comp, t_ui_component *other);
+t_ui_component	*uic_side_right(t_ui_component *comp, t_ui_component *other);
 
 #endif
