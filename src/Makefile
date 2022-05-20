@@ -43,6 +43,11 @@ UI_MAIN_MENU_FILE	:=	main_menu.c main_menu_buttons.c main_menu_buttons2.c	\
 						main_menu_init.c
 UI_MAIN_MENU_SRCS	:= $(addprefix $(UI_MAIN_MENU_DIR)/, $(UI_MAIN_MENU_FILE))
 
+UI_NEW_GAME_MENU_DIR	:=	$(UI_DIR)/new_game_menu
+UI_NEW_GAME_MENU_FILE	:=	new_game_menu.c	new_game_menu_init.c	\
+							new_game_menu_buttons.c new_game_menu_buttons2.c
+UI_NEW_GAME_MENU_SRCS	:= $(addprefix $(UI_NEW_GAME_MENU_DIR)/, $(UI_NEW_GAME_MENU_FILE))
+
 TEXTURES_DIR	:=	textures
 TEXTURES_FILE	:=	xpm_loader.c texture_generation.c ambiant_occlusion.c		\
 					texture_deletion.c texture_manager.c	\
@@ -75,6 +80,7 @@ SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\
 					$(addprefix $(SRCS_DIR)/, $(UI_COMPONENT_SRCS))				\
 					$(addprefix $(SRCS_DIR)/, $(UI_LAYOUT_SRCS))				\
 					$(addprefix $(SRCS_DIR)/, $(UI_MAIN_MENU_SRCS))				\
+					$(addprefix $(SRCS_DIR)/, $(UI_NEW_GAME_MENU_SRCS))			\
 
 RELEASE_OBJS	:=	$(addprefix $(RELEASE_OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
 DEBUG_OBJS		:=	$(addprefix $(DEBUG_OBJS_DIR)/, $(notdir $(SRCS:.c=d.o)))
@@ -137,6 +143,10 @@ $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(UI_MAIN_MENU_DIR)/%.c | $(RELEASE_OBJS_DI
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
+$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(UI_NEW_GAME_MENU_DIR)/%.c | $(RELEASE_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
 $(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
 	@printf "$(_BLUE)\nCompiled source files\n"
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(RELEASE_OBJS) $(RELEASE_LIBS) -o ../$@
@@ -183,6 +193,10 @@ $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_LAYOUT_DIR)/%.c | $(DEBUG_OBJS_DIR)
 	@printf "$(_GREEN)█$(_END)"
 
 $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_MAIN_MENU_DIR)/%.c | $(DEBUG_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_NEW_GAME_MENU_DIR)/%.c | $(DEBUG_OBJS_DIR)
 	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 

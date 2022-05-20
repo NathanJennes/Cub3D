@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/20 15:33:25 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 19:52:56 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,23 @@ typedef struct s_ui_main_menu
 	t_button	btn_exit;
 }	t_ui_main_menu;
 
+typedef struct s_ui_new_game_menu
+{
+	int64_t		selected_save;
+	int64_t		first_save_offset;
+	t_button	btn_back;
+	t_button	btn_up;
+	t_button	btn_down;
+	t_button	btn_start;
+	t_button	btn_save[5];
+}	t_ui_new_game_menu;
+
 typedef struct s_ui
 {
-	t_ui_state		state;
-	uint8_t			debug_ui;
-	t_ui_main_menu	main_menu;
+	t_ui_state			state;
+	uint8_t				debug_ui;
+	t_ui_main_menu		main_menu;
+	t_ui_new_game_menu	new_game_menu;
 }	t_ui;
 
 /* Core */
@@ -133,6 +145,11 @@ int				str_px_size(char *str);
 void			init_main_menu(void);
 void			render_main_menu(void);
 void			update_main_menu(void);
+
+void			init_new_game_menu(void);
+void			render_new_game_menu(void);
+void			update_new_game_menu(void);
+void			refresh_new_game_menu(void);
 
 /* Ui elements */
 t_button		create_button(char *texture_path, t_ivec2 pos,

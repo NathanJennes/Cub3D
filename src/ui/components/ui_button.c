@@ -21,7 +21,10 @@ t_button	create_button(char *texture_path, t_ivec2 pos,
 
 	ft_memset(&button, 0, sizeof (t_button));
 	button.infos.pos = pos;
-	button.tex_id = load_texture(texture_path);
+	if (texture_path)
+		button.tex_id = load_texture(texture_path);
+	else
+		button.tex_id = INVALID_TEXTURE;
 	button.infos.size = get_texture_size(button.tex_id);
 	button.infos.displayed = TRUE;
 	button.event = event;

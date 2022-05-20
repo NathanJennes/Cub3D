@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:58:17 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 15:43:24 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 19:58:53 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "texture.h"
 #include "mlx.h"
 #include "core.h"
-#include "render.h"
 
 void		shade_ao_texture_flat(
 				uint8_t *data, int width, int height, int bpp);
@@ -57,6 +56,18 @@ t_texture	create_blank_texture(int width, int height)
 	gc_memseti(texture.original, trgb(255, 0, 0, 0),
 		texture.width * texture.height);
 	return (texture);
+}
+
+void	finish_new_texture(int64_t tex_id)
+{
+	t_texture	*tex;
+
+	if (tex_id == INVALID_TEXTURE)
+		return ;
+	tex = get_texture_from_id(tex_id);
+	if (!tex)
+		return ;
+	create_texture_variations(tex);
 }
 
 static void	create_texture_variations(t_texture *tex)

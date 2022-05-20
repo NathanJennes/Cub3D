@@ -65,6 +65,7 @@ void		free_texture(t_texture *texture);
 
 int64_t		load_texture(char *path);
 int64_t		new_texture(int width, int height);
+void		finish_new_texture(int64_t tex_id);
 void		unload_texture_manager(void);
 t_texture	*get_texture_from_id(int64_t tex_id);
 

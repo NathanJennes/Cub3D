@@ -42,6 +42,7 @@ static void	generate_cursor_texture(t_ivec2 size, t_slider *slider)
 		size.y * 2, trgb(0, 51, 51, 51), slider->tex_id_cursor);
 	draw_circle_tex(ivec2(size.y, size.y),
 		size.y * 2 - 2, trgb(0, 170, 170, 170), slider->tex_id_cursor);
+	finish_new_texture(slider->tex_id_cursor);
 }
 
 static void	generate_bar_texture(t_ivec2 size, t_slider *slider)
@@ -52,6 +53,7 @@ static void	generate_bar_texture(t_ivec2 size, t_slider *slider)
 		size.y, trgb(0, 200, 200, 200), slider->tex_id_bar);
 	draw_circle_tex(ivec2(size.x - size.y / 2, size.y / 2),
 		size.y, trgb(0, 200, 200, 200), slider->tex_id_bar);
+	finish_new_texture(slider->tex_id_bar);
 }
 
 void	render_ui_slider(t_slider *slider)

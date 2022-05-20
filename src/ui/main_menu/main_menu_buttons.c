@@ -30,8 +30,7 @@ int	btn_new_game(t_button *button)
 
 	(void)button;
 	app = get_app();
-	app->gamestate = app->maps[0];
-	app->game_state = IN_GAME;
+	app->ui.state = NEW_GAME_MENU;
 	return (0);
 }
 

@@ -20,4 +20,5 @@ void	init_ui(void)
 	ui = get_ui();
 	ui->state = MAIN_MENU;
 	init_main_menu();
+	init_new_game_menu();
 }

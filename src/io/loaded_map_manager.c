@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:58:37 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 17:22:57 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 19:53:44 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,13 @@ void	reload_maps(void)
 {
 	unload_maps();
 	load_all_maps();
+	refresh_new_game_menu();
 }
 
 void	unload_maps(void)
 {
 	t_mlx	*app;
-	size_t	i;
+	int64_t	i;
 
 	app = get_app();
 	i = 0;
