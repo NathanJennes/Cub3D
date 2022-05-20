@@ -58,8 +58,8 @@ static void	serialize_map(int fd, t_map_info map)
 
 static void	serialize_map_walls(int fd, t_map_info map)
 {
-	size_t	i;
-	size_t	j;
+	int64_t	i;
+	int64_t	j;
 
 	i = 0;
 	while (i < map.height)

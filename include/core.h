@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/19 17:00:09 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/20 09:01:32 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 # include "texture.h"
 # include "ui.h"
 # include "io.h"
+
+# ifdef __linux__
+#  include <inttypes.h>
+#  include <float.h>
+#  define MAXFLOAT FLT_MAX
+# endif
 
 # ifdef FULL_SCREEN
 #  define WIN_W		1920
@@ -90,6 +96,8 @@ typedef struct s_gamestate
 	t_map_info	map;
 	t_player	player;
 	int			fov;
+	float		ray_angle_inc;
+	float		ray_angle_base;
 }	t_gamestate;
 
 typedef struct s_mlx
