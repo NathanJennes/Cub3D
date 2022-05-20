@@ -13,7 +13,7 @@
 #include "ui.h"
 #include "render.h"
 
-t_label	create_label(t_ivec2 pos, const char *text)
+t_label	create_label(t_ivec2 pos, char *text)
 {
 	t_label	label;
 

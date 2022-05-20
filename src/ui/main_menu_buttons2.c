@@ -15,5 +15,6 @@
 
 int	btn_exit_app(t_button *button)
 {
+	(void)button;
 	return (close_app());
 }

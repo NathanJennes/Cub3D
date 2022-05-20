@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:00:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/20 12:58:38 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 12:59:09 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	render_ui(void)
 	return (0);
 }
 
-void	update_ui(t_bool mouse_clicked)
+void	update_ui()
 {
 	t_mlx	*app;
 

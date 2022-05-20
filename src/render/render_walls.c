@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/18 13:29:23 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 15:32:10 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 float			shoot_ray(t_vec2 ray, t_vec2 pos, t_ivec2 map_pos);
 static void		shoot_rays(float ray_angle, float ray_angle_base);
-static void		print_vec(const char *msg, t_vec2 vec);
 
 static t_vec2 calculate_lengths(t_vec2 *ray);
 static t_ivec2 calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos, t_ivec2 map_pos);
@@ -133,29 +132,10 @@ static t_ivec2 calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos, t_iv
 	return (step);
 }
 
-static float	fast_mag(t_vec2 vec)
-{
-	return (vec.x * vec.x + vec.y * vec.y);
-}
-
 static int	get_map_type(int64_t x, int64_t y)
 {
 	t_map_info	*map;
 
 	map = get_map_infos();
 	return (map->map[y][x]);
-}
-
-static t_vec2	get_grid_pos(t_vec2 pos)
-{
-	t_vec2	grid_pos;
-
-	grid_pos.x = (int)pos.x - ((int)pos.x % (int)CELL_WIDTH);
-	grid_pos.y = (int)pos.y - ((int)pos.y % (int)CELL_HEIGHT);
-	return (grid_pos);
-}
-
-static void	print_vec(const char *msg, t_vec2 vec)
-{
-	printf("%s %f %f\n", msg, vec.x, vec.y);
 }

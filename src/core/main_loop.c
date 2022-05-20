@@ -23,7 +23,7 @@ int	main_loop(void)
 		// game frame
 	clear_screen(BKGD_COLOR);
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
-	update_ui(TRUE);
+	update_ui();
 	render_ui();
 	return (0);
 }

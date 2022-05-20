@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 19:04:40 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/19 19:13:43 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 15:32:58 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	btn_continue(t_button *button)
 {
 	t_mlx	*app;
 
+	(void)button;
 	app = get_app();
 	app->gamestate = app->savegames[0];
 	app->game_state = IN_GAME;
@@ -27,6 +28,7 @@ int	btn_new_game(t_button *button)
 {
 	t_mlx	*app;
 
+	(void)button;
 	app = get_app();
 	app->game_state = IN_GAME;
 	return (0);
@@ -36,6 +38,7 @@ int	btn_load_game(t_button *button)
 {
 	t_mlx	*app;
 
+	(void)button;
 	app = get_app();
 	app->gamestate = app->savegames[0];
 	app->game_state = IN_GAME;
@@ -44,12 +47,14 @@ int	btn_load_game(t_button *button)
 
 int	btn_editor(t_button *button)
 {
+	(void)button;
 	printf("Editor button not implemented\n");
 	return (0);
 }
 
 int	btn_option(t_button *button)
 {
+	(void)button;
 	printf("Option button not implemented\n");
 	return (0);
 }

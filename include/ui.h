@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/20 13:35:40 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 15:32:42 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_button
 typedef struct s_label
 {
 	t_ui_component	infos;
-	const char		*text;
+	char			*text;
 }	t_label;
 
 typedef struct s_img_box
@@ -125,7 +125,7 @@ typedef struct s_ui
 /* Core */
 void			init_ui(void);
 int				render_ui(void);
-void			update_ui(t_bool mouse_clicked);
+void			update_ui(void);
 
 void			render_mmap(float zoom);
 
@@ -152,7 +152,7 @@ void			update_ui_button_click_end(t_button *button, int mouse_btn);
 t_img_box		create_img_box(char *texture_path, t_ivec2 pos);
 void			render_ui_img_box(t_img_box *box);
 
-t_label			create_label(t_ivec2 pos, const char *text);
+t_label			create_label(t_ivec2 pos, char *text);
 void			render_label(t_label *label);
 
 t_slider		create_slider(t_ivec2 pos, t_ivec2 size, float min, float max);

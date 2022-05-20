@@ -27,7 +27,7 @@ void		draw_circle(t_ivec2 pos, int64_t diameter, int color);
 void		draw_rect(t_ivec2 pos, t_ivec2 size, int color);
 void		draw_line(t_ivec2 start, t_ivec2 end, int col);
 void		draw_line_lerp(t_ivec2 start, t_ivec2 end, int col1, int col2);
-void		render_text(const char *text, t_ivec2 pos);
+void		render_text(char *text, t_ivec2 pos);
 
 /* Texture drawing */
 void		draw_rect_tex(t_ivec2 pos, t_ivec2 size, int color, int64_t tex_id);

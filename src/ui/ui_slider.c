@@ -14,7 +14,7 @@
 #include "render.h"
 
 static void	generate_cursor_texture(t_ivec2 size, t_slider *slider);
-static void	generate_bar_texture(t_ivec2 pos, t_ivec2 size, t_slider *slider);
+static void	generate_bar_texture(t_ivec2 size, t_slider *slider);
 
 t_slider	create_slider(t_ivec2 pos, t_ivec2 size, float min, float max)
 {
@@ -31,7 +31,7 @@ t_slider	create_slider(t_ivec2 pos, t_ivec2 size, float min, float max)
 	slider.tex_id_bar = new_texture((int)size.x, (int)size.y);
 	slider.tex_id_cursor = new_texture((int)size.y * 2, (int)size.y * 2);
 	generate_cursor_texture(size, &slider);
-	generate_bar_texture(pos, size, &slider);
+	generate_bar_texture(size, &slider);
 	return (slider);
 }
 
@@ -44,7 +44,7 @@ static void	generate_cursor_texture(t_ivec2 size, t_slider *slider)
 			size.y * 2 - 2, trgb(0, 170, 170, 170), slider->tex_id_cursor);
 }
 
-static void	generate_bar_texture(t_ivec2 pos, t_ivec2 size, t_slider *slider)
+static void	generate_bar_texture(t_ivec2 size, t_slider *slider)
 {
 	draw_rect_tex(ivec2(size.y / 2, 0), ivec2(size.x - size.y, size.y),
 		trgb(0, 200, 200, 200), slider->tex_id_bar);
