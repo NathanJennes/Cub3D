@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/20 15:52:11 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/20 09:01:32 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@
 
 typedef struct s_mouse
 {
-	t_ivec2		position;
+	t_ivec2	position;
 }	t_mouse;
 
 typedef struct s_map_info
@@ -75,11 +75,11 @@ typedef struct s_map_info
 
 typedef struct s_frame
 {
-	void		*img;
-	char		*addr;
-	int			bits_pp;
-	int			line_length;
-	int			endian;
+	void	*img;
+	char	*addr;
+	int		bits_pp;
+	int		line_length;
+	int		endian;
 }	t_frame;
 
 typedef struct s_ray

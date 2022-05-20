@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/20 20:00:36 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/20 11:41:52 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	print_player_vector(void)
 	t_vec2	fov_left;
 	t_vec2	fov_right;
 
-	player_pos = get_player()->world_pos;
+	player_pos = get_player()->pos;
 	forward = get_player()->forward;
 	right = get_player()->right;
 	render_line(v2_to_iv2(player_pos),
