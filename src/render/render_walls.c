@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 10:34:45 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/20 20:05:27 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,27 @@
 #include "core.h"
 #include "render.h"
 
-static void		print_rays(int64_t i, t_vec2 start, t_ivec2 end, float dist);
-static void		shoot_rays(float ray_angle, float ray_angle_base);
-
+static t_ray	populate_ray(float dist, t_ivec2 map_pos);
 static t_vec2	calculate_lengths(t_vec2 *ray);
 static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos, t_ivec2 map_pos);
 static int		get_map_type(int64_t x, int64_t y);
 void			draw_col_wall(float dist, int64_t col);
 
-void print_ray(t_vec2 *pos, t_ivec2 *map_pos);
-
-void	render_walls(int fov)
+void	render_walls(void)
 {
-	float		ray_angle;
-	float		ray_angle_base;
+	float		start_angle;
+	int64_t		i;
+	t_ray		ray;
+	t_player	*player;
 
-	ray_angle = ((float)fov) / 180.0f / (float)WIN_W;
-	ray_angle_base = get_player()->direction + ((float)fov / 360.0f);
-	while (ray_angle_base < 0.0f)
-		ray_angle_base += 2.0f * PI;
-	printf("Direction [%f]\n", get_player()->direction);
-	ft_print_vec2(get_player()->forward);
-	printf("angle_inc [%f]\n base [%f]\n", ray_angle, ray_angle_base);
-	shoot_rays(ray_angle, ray_angle_base);
-}
-
-static void	shoot_rays(float ray_angle, float ray_angle_base)
-{
-	float	dist;
-	int64_t	i;
-	t_vec2	pos;
-	t_ivec2	map_pos;
-
-	pos = get_player()->pos;
-	vec2_divf(&pos, CELL_WIDTH);
-	map_pos.x = (int)pos.x;
-	map_pos.y = (int)pos.y;
 	i = 0;
+	player = get_player();
+	start_angle = player->ray_angle;
 	while (i < WIN_W)
 	{
-		dist = shoot_ray(vec2(cosf(ray_angle_base), sinf(ray_angle_base)), pos, map_pos);
-//		draw_col_wall(dist * (float)cos(ray_angle_base), i);
-		ray_angle_base += ray_angle;
+		ray = shoot_ray(vec2(cosf(start_angle), sinf(start_angle)), player->map_pos);
+//		draw_col_wall(ray.distance * (float)cos(start_angle), i);
+		start_angle += player->ray_angle;
 		i++;
 	}
 }
@@ -77,7 +56,7 @@ void	draw_col_wall(float dist, int64_t col)
 		mlx_pixel_put_img(col, y++, BLACK);
 }
 
-float	shoot_ray(t_vec2 ray, t_vec2 pos, t_ivec2 map_pos)
+t_ray	shoot_ray(t_vec2 ray, t_ivec2 map_pos)
 {
 	t_ivec2	step;
 	t_vec2	lengths;
@@ -86,12 +65,9 @@ float	shoot_ray(t_vec2 ray, t_vec2 pos, t_ivec2 map_pos)
 	int		side;
 
 	if (get_map_type(map_pos.x, map_pos.y) == WALL)
-	{
-		print_ray(&pos, &map_pos);
-		return (0);
-	}
+		return (populate_ray(0.0f, map_pos));
 	lengths = calculate_lengths(&ray);
-	step = calculate_step_dists(&ray, &dists, pos, map_pos);
+	step = calculate_step_dists(&ray, &dists, get_player()->grid_pos, map_pos);
 	vec2_multv2(&dists, lengths);
 	hit = FALSE;
 	side = 0;
@@ -110,25 +86,24 @@ float	shoot_ray(t_vec2 ray, t_vec2 pos, t_ivec2 map_pos)
 			side = SIDE_Y;
 		}
 		if (get_map_type(map_pos.x, map_pos.y) == WALL)
-		{
 			hit = TRUE;
-			print_ray(&pos, &map_pos);
-		}
 	}
 	if (hit && side == SIDE_X)
-		return (dists.x - lengths.x);
+		return (populate_ray(dists.x - lengths.x, map_pos));
 	if (hit && side == SIDE_Y)
-		return (dists.y - lengths.y);
-	return (-1.0f);
+		return (populate_ray(dists.y - lengths.y, map_pos));
+	return (populate_ray(-1.0f, map_pos));
 }
 
-void print_ray(t_vec2 *pos, t_ivec2 *map_pos)
+static t_ray	populate_ray(float dist, t_ivec2 map_pos)
 {
-//	ft_print_ivec2((*map_pos));
-	t_vec2 start = vec2((*pos).x * CELL_WIDTH, (*pos).y * CELL_WIDTH);
-	t_ivec2 line_end = ivec2((*map_pos).x * CELL_WIDTH, (*map_pos).y * CELL_WIDTH);
-	render_line(v2_to_iv2(start), line_end, RED, RED);
-	render_circle(line_end, 5, YELLOW);
+	t_ray	ray;
+
+	ray.distance = dist;
+	ray.map_pos = map_pos;
+	ray.world_pos = ray.map_pos;
+	vec2_multf(&ray.world_pos, CELL_HEIGHT);
+	return (ray);
 }
 
 static t_vec2	calculate_lengths(t_vec2 *ray)

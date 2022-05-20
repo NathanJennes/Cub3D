@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   deserialization_player.c                           :+:      :+:    :+:   */
+/*   deserialization_settings.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/15 11:27:47 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/18 17:27:30 by cybattis         ###   ########.fr       */
+/*   Created: 2022/05/20 14:30:37 by cybattis          #+#    #+#             */
+/*   Updated: 2022/05/20 14:32:56 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "leaky.h"
+#include "io.h"
 
 static int	parse_line(char *line, t_gamestate *save);
-static int	parse_pos(char *line, t_gamestate *save);
+static int	parse_fov(char *line, t_gamestate *save);
 
-int	deserialize_player(int fd, char *line, t_gamestate *save)
+int	deserialize_settings(int fd, char *line, t_gamestate *save)
 {
 	gc_free(line);
 	line = gc_get_next_line(fd);
 	while (line)
 	{
-		if (ft_strncmp(line, "PLAYER_END", ft_strlen("PLAYER_END")) == 0)
+		if (ft_strncmp(line, "SETTINGS_END", ft_strlen("SETTINGS_END")) == 0)
 		{
 			gc_free(line);
 			return (1);
@@ -40,12 +41,12 @@ int	deserialize_player(int fd, char *line, t_gamestate *save)
 
 static int	parse_line(char *line, t_gamestate *save)
 {
-	if (ft_strncmp(line, "POS", ft_strlen("POS")) == 0)
-		return (parse_pos(line, save));
+	if (ft_strncmp(line, "FOV", ft_strlen("FOV")) == 0)
+		return (parse_fov(line, save));
 	return (0);
 }
 
-static int	parse_pos(char *line, t_gamestate *save)
+static int	parse_fov(char *line, t_gamestate *save)
 {
 	char	*line_cursor;
 
@@ -56,16 +57,6 @@ static int	parse_pos(char *line, t_gamestate *save)
 	line_cursor = ft_strskip_space(line_cursor);
 	if (!ft_isdigit(*line_cursor) && *line_cursor != '-')
 		return (0);
-	save->player.world_pos.x = (float)ft_atoi(line_cursor);
-	line_cursor = ft_strskip_digit(line_cursor);
-	line_cursor = ft_strskip_space(line_cursor);
-	if (!ft_isdigit(*line_cursor) && *line_cursor != '-')
-		return (0);
-	save->player.world_pos.y = (float)ft_atoi(line_cursor);
-	line_cursor = ft_strskip_digit(line_cursor);
-	line_cursor = ft_strskip_space(line_cursor);
-	if (!ft_isdigit(*line_cursor) && *line_cursor != '-')
-		return (0);
-	save->player.direction = (float)ft_atoi(line_cursor);
+	save->settings.fov = ft_atoi(line_cursor);
 	return (1);
 }

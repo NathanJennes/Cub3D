@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/20 09:01:32 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/20 15:52:11 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,50 +54,65 @@
 
 typedef struct s_mouse
 {
-	t_ivec2	position;
+	t_ivec2		position;
 }	t_mouse;
 
 typedef struct s_map_info
 {
-	int64_t	width;
-	int64_t	height;
-	t_vec2	spawn_pos;
-	char	spawn_dir;
-	t_vec3	ceiling_color;
-	t_vec3	floor_color;
-	char	*no_tex;
-	char	*ea_tex;
-	char	*so_tex;
-	char	*we_tex;
-	int		**map;
-	char	**map_raw;
+	int64_t		width;
+	int64_t		height;
+	t_vec2		spawn_pos;
+	char		spawn_dir;
+	t_vec3		ceiling_color;
+	t_vec3		floor_color;
+	char		*no_tex;
+	char		*ea_tex;
+	char		*so_tex;
+	char		*we_tex;
+	int			**map;
+	char		**map_raw;
 }	t_map_info;
 
 typedef struct s_frame
 {
-	void	*img;
-	char	*addr;
-	int		bits_pp;
-	int		line_length;
-	int		endian;
+	void		*img;
+	char		*addr;
+	int			bits_pp;
+	int			line_length;
+	int			endian;
 }	t_frame;
+
+typedef struct s_ray
+{
+	float		distance;
+	t_ivec2		map_pos;
+	t_ivec2		world_pos;
+}	t_ray;
 
 typedef struct s_player
 {
-	t_vec2	pos;
-	float	direction;
-	t_vec2	forward;
-	t_vec2	right;
+	t_vec2		world_pos;
+	t_vec2		grid_pos;
+	t_ivec2		map_pos;
+	float		direction;
+	t_vec2		forward;
+	t_vec2		right;
+	float		ray_increment;
+	float		ray_angle;
+	t_ray		last_ray;
 }	t_player;
+
+typedef struct s_settings
+{
+	int			fov;
+}	t_settings;
 
 typedef struct s_gamestate
 {
 	char		*name;
 	t_map_info	map;
 	t_player	player;
-	int			fov;
-	float		ray_angle_inc;
-	float		ray_angle_base;
+	t_settings	settings;
 }	t_gamestate;
 
 typedef struct s_mlx
@@ -142,8 +157,7 @@ int			mouse_move_hooks(int x, int y, void *param);
 void		cub_update_mouse_pos(int x, int y);
 t_ivec2		cub_get_mouse_position(void);
 
-void		update_player_forward_vec(t_player *player);
-void		update_player_right_vec(t_player *player);
+void		update_player(t_player *player);
 
 /* getters */
 t_mlx		*get_app(void);
@@ -152,5 +166,6 @@ t_map_info	*get_map_infos(void);
 t_player	*get_player(void);
 void		*get_mlx(void);
 t_ui		*get_ui(void);
+t_settings	*get_settings(void);
 
 #endif

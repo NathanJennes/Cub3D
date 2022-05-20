@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:36:18 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/09 17:06:32 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/20 17:20:06 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	fps_counter(void)
 	}
 	else
 		fps = gc_itoa(last_fps);
-	put_text(app, vec2(WIN_W - str_px_size(fps) - 10, 15), WHITE, fps);
+	put_text(ivec2(WIN_W - str_px_size(fps) - 10, 15), WHITE, fps);
 	gc_free(fps);
 }
 
