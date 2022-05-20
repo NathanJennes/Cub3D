@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   getters_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:19:50 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/12 22:39:10 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/19 19:30:44 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 t_ui	*get_ui(void)
 {
-	static t_mlx	app = {0};
+	t_mlx	*app;
 
-	return (&app.ui);
+	app = get_app();
+	return (&app->ui);
 }

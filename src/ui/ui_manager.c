@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:00:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/19 18:29:38 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/19 19:28:20 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	render_ui(void)
 		display_hud(app, ui);
 	if (app->game_state == MENU)
 	{
-		render_ui_img_box(&ui->main_menu.title);
+		if (app->ui.state == MAIN_MENU)
+			update_main_menu();
 	}
 	if (app->ui.debug_ui & DEBUG_UI)
 		fps_counter();
@@ -36,10 +37,11 @@ int	render_ui(void)
 
 void	update_ui(t_bool mouse_clicked)
 {
-	t_ui_main_menu	*main_menu;
+	t_mlx	*app;
 
-	main_menu = &get_ui()->main_menu;
-	update_ui_button(&main_menu->btn_continue);
+	app = get_app();
+	if (app->ui.state == MAIN_MENU)
+		update_main_menu();
 }
 
 static void	display_hud(t_mlx *app, t_ui *ui)

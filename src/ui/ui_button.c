@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:30:28 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/19 18:44:17 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/19 19:00:57 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,16 @@
 #include "render.h"
 
 //TODO: refactor to uniformize ui creation prototypes
-t_button	create_button(int64_t tex_id,
-		t_ivec2 pos,
+t_button	create_button(char *texture_path, t_ivec2 pos,
 		int (*event)(struct s_button *button))
 {
 	t_button	button;
 
 	ft_memset(&button, 0, sizeof (t_button));
 	button.infos.pos = pos;
-	button.infos.size = get_texture_size(tex_id);
+	button.tex_id = load_texture(texture_path);
+	button.infos.size = get_texture_size(button.tex_id);
 	button.infos.displayed = TRUE;
-	button.tex_id = tex_id;
 	button.event = event;
 	button.hovered = FALSE;
 	button.clicked = FALSE;

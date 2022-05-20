@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/19 16:43:22 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/19 19:12:05 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,10 @@ void	init_app(char *file)
 	app = get_app();
 	init_gc();
 	init_window("Cub3d");
-	init_ui();
 	load_all_saves();
 	printf("loaded: %d\n", (int)app->savegames_count);
-	if (app->savegames_count == 0)
-		init_map(file);
-	else
-		app->gamestate = app->savegames[0];
+	init_map(file);
+	init_ui();
 	init_hooks();
 	mlx_loop(get_mlx());
 }

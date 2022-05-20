@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/17 16:28:09 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/19 19:22:03 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main_loop(void)
 		// game frame
 	clear_screen(BKGD_COLOR);
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
+	update_ui(TRUE);
 	render_ui();
 	return (0);
 }

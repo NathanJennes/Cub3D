@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ui_init.c                                          :+:      :+:    :+:   */
+/*   main_menu_buttons2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/13 18:21:25 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/18 14:56:54 by njennes          ###   ########.fr       */
+/*   Created: 2022/05/19 19:05:09 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/19 19:14:02 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "ui.h"
 
-void	init_ui(void)
+int	btn_exit_app(t_button *button)
 {
-	t_ui	*ui;
-
-	ui = get_ui();
-	ui->state = MAIN_MENU;
-	init_main_menu();
-	// init_option_menu();
-	// init_load_menu();
-	// init_new_game_menu();
-	// init_editor_menu();
-	// init_pause_menu();
-	// init_hud();
+	return (close_app());
 }
