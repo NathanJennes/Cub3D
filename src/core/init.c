@@ -6,18 +6,19 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/19 19:12:05 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 15:23:59 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
-#include "parsing.h"
 #include "ui.h"
 
 int			key_up_callback(int keycode, void *unused);
 int			key_down_callback(int keycode, void *unused);
 int			mouse_down_callback(int button, int x, int y, void *unused);
 int			mouse_up_callback(int button, int x, int y, void *unused);
+
+void		init_map(char *file);
 
 static void	init_hooks(void);
 

@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   save_deserialization_mandatory.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/16 14:25:33 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 15:22:09 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
-#include "parsing.h"
 #include "leaky.h"
 #include "core.h"
 
 void		construct_map(t_map_info *infos);
+t_vec3		parse_color(char *line);
+char		*parse_texture(char *line);
+void		add_map_row(t_map_info *infos, char *line);
 
 static void	parse_line(t_map_info *infos, char *line);
 

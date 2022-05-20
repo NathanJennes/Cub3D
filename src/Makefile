@@ -36,21 +36,26 @@ TEXTURES_FILE	:=	xpm_loader.c texture_generation.c ambiant_occlusion.c		\
 TEXTURE_SRCS	:=	$(addprefix $(TEXTURES_DIR)/, $(TEXTURES_FILE))
 
 IO_DIR			:=	io
-IO_FILE			:=	savegame.c													\
-					serialization.c												\
-					deserialization.c deserialization_player.c					\
-					deserialization_map.c deserialization_map_specs.c			\
-					deserialization_map_textures.c deserialization_map_content.c\
-					saves_manager.c	\
-					map_construction.c	\
-					parsing.c parsing_utils.c
+IO_FILE			:=	savegame.c		\
+					saves_manager.c
 IO_SRCS			:=	$(addprefix $(IO_DIR)/, $(IO_FILE))
+
+SAVE_DIR		:=	$(IO_DIR)/save
+SAVE_FILE		:=	save_deserialization.c	\
+					save_deserialization_mandatory.c save_deserialization_mandatory_utils.c	\
+					save_deserialization_map.c save_deserialization_map_content.c	\
+					save_deserialization_map_specs.c save_deserialization_map_textures.c	\
+					save_deserialization_player.c	\
+					save_serialization.c	\
+					map_construction.c
+SAVE_SRCS		:=	$(addprefix $(SAVE_DIR)/, $(SAVE_FILE))
 
 SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\
 					$(addprefix $(SRCS_DIR)/, $(UI_SRCS))						\
 					$(addprefix $(SRCS_DIR)/, $(RENDER_SRCS))					\
 					$(addprefix $(SRCS_DIR)/, $(TEXTURE_SRCS))					\
-					$(addprefix $(SRCS_DIR)/, $(IO_SRCS))
+					$(addprefix $(SRCS_DIR)/, $(IO_SRCS))						\
+					$(addprefix $(SRCS_DIR)/, $(SAVE_SRCS))
 
 RELEASE_OBJS	:=	$(addprefix $(RELEASE_OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
 DEBUG_OBJS		:=	$(addprefix $(DEBUG_OBJS_DIR)/, $(notdir $(SRCS:.c=d.o)))
@@ -93,6 +98,10 @@ $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(IO_DIR)/%.c | $(RELEASE_OBJS_DIR)
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
+$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(SAVE_DIR)/%.c | $(RELEASE_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
 $(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
 	@printf "$(_BLUE)\nCompiled source files\n"
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(RELEASE_OBJS) $(RELEASE_LIBS) -o ../$@
@@ -122,6 +131,10 @@ $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(IO_DIR)/%.c | $(DEBUG_OBJS_DIR)
 	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
+$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(SAVE_DIR)/%.c | $(DEBUG_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
 $(DEBUG_NAME): $(DEBUG_OBJS) $(DEBUG_LIBFT_LIB) $(DEBUG_LEAKY_LIB)
 	@printf "$(_BLUE)\nCompiled source files\n"
 	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(DEBUG_OBJS) $(DEBUG_LIBS) -o ../$@
@@ -145,5 +158,9 @@ $(RELEASE_OBJS_DIR):
 
 $(DEBUG_OBJS_DIR):
 	@mkdir -p $(DEBUG_OBJS_DIR)
+
+info:
+	@echo $(RELEASE_OBJS)
+	@echo $(DEBUG_OBJS)
 
 -include $(DEPENDS)
