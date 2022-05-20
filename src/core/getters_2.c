@@ -14,7 +14,16 @@
 
 t_ui	*get_ui(void)
 {
-	static t_mlx	app = {0};
+	t_mlx	*app;
 
-	return (&app.ui);
+	app = get_app();
+	return (&app->ui);
+}
+
+t_settings	*get_settings(void)
+{
+	t_mlx	*app;
+
+	app = get_app();
+	return (&app->gamestate.settings);
 }

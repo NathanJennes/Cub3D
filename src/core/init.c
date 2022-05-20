@@ -44,6 +44,7 @@ void	init_app(char *file)
 		init_map(file);
 	else
 		app->gamestate = app->savegames[0];
+	update_player(get_player());
 	init_hooks();
 	mlx_loop(get_mlx());
 }

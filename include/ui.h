@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/19 16:50:00 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/20 17:55:18 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ typedef struct s_ui_main_menu
 typedef struct s_ui
 {
 	t_ui_state		state;
-	uint8_t			debug_ui;
+	t_bool			debug_ui;
 	t_ui_main_menu	main_menu;
 }	t_ui;
 
@@ -127,12 +127,17 @@ void		render_mmap(float zoom);
 void		show_slider(t_slider *slider);
 void		update_slider(t_slider *slider, int mx, int my);
 
+void		print_debug(void);
 void		fps_counter(void);
 
-void		update_ui_flags(uint8_t flag);
+void		switch_debug_ui(void);
 
-void		put_text(t_mlx *app, t_vec2 pos, int color, char *str);
+void		put_text(t_ivec2 pos, int color, char *str);
 int			str_px_size(char *str);
+void		print_float(float val, t_ivec2 pos, int color);
+void		print_ivec(t_ivec2 v, t_ivec2 pos, int color);
+void		print_vec(t_vec2 v, t_ivec2 pos, int color);
+void		print_int(int val, t_ivec2 pos, int color);
 
 t_button	create_button(
 				int64_t tex_id,

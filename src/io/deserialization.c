@@ -15,6 +15,7 @@
 
 int			deserialize_player(int fd, char *line, t_gamestate *save);
 int			deserialize_map(int fd, char *line, t_gamestate *save);
+int			deserialize_settings(int fd, char *line, t_gamestate *save);
 void		construct_map(t_map_info *infos);
 
 static int	parse_line(int fd, char *line, t_gamestate *save);
@@ -36,8 +37,7 @@ int	deserialize_save(t_gamestate *save_out, int fd)
 	gc_strarray_free(save.map.map_raw);
 	if (!save.map.spawn_dir)
 		return (0);
-	update_player_forward_vec(&save.player);
-	update_player_right_vec(&save.player);
+	update_player(&save.player);
 	*save_out = save;
 	return (1);
 }
@@ -49,5 +49,7 @@ static int	parse_line(int fd, char *line, t_gamestate *save)
 		return (deserialize_player(fd, line, save));
 	if (ft_strncmp(line, "MAP_START", ft_strlen("MAP_START")) == 0)
 		return (deserialize_map(fd, line, save));
+	if (ft_strncmp(line, "SETTINGS_START", ft_strlen("SETTINGS_START")) == 0)
+		return (deserialize_settings(fd, line, save));
 	return (0);
 }

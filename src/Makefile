@@ -17,7 +17,8 @@ RENDER_SRCS		:=	$(addprefix $(RENDER_DIR)/, $(RENDER_FILE))
 
 UI_DIR			:=	ui
 UI_FILE			:=	fps_counter.c ui_helper.c ui_manager.c						\
-					render_minimap.c ui_init.c ui_component.c ui_button.c
+					render_minimap.c ui_init.c ui_component.c ui_button.c		\
+					print_debug.c
 UI_SRCS			:=	$(addprefix $(UI_DIR)/, $(UI_FILE))
 
 TEXTURES_DIR	:=	textures
@@ -34,7 +35,7 @@ IO_FILE			:=	savegame.c													\
 					deserialization_map_textures.c deserialization_map_content.c\
 					saves_manager.c	\
 					map_construction.c	\
-					parsing.c parsing_utils.c
+					parsing.c parsing_utils.c deserialization_settings.c
 IO_SRCS			:=	$(addprefix $(IO_DIR)/, $(IO_FILE))
 
 SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\

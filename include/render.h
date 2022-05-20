@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/19 16:34:56 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/20 15:49:03 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define SIDE_Y 2
 
 # include "colors.h"
+# include "core.h"
 
 void		clear_screen(int color);
 void		mlx_pixel_put_img(int x, int y, int color);
@@ -37,7 +38,7 @@ void		render_ui_label(t_label *label);
 void		render_ui_img_box(t_img_box *img_box);
 void		render_ui_button(t_button *button);
 
-void		render_walls(int fov);
-float		shoot_ray(t_vec2 ray, t_vec2 pos, t_ivec2 map_pos);
+void		render_walls(void);
+t_ray		*shoot_ray(t_vec2 ray, t_vec2 map_pos);
 
 #endif

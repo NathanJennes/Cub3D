@@ -22,8 +22,10 @@ int	main_loop(void)
 	app = get_app();
 	clear_screen(BKGD_COLOR);
 	if (app->game_state & IN_GAME)
-		render_walls(60);
+		render_walls();
 	render_test_scene(app);
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
+	if (app->ui.debug_ui == TRUE)
+		print_debug();
 	return (0);
 }

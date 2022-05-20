@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:57:26 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/19 14:30:41 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/20 18:16:39 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	key_hooks(int keycode)
 	if (keycode == KEY_ESC)
 		close_app();
 	if (keycode == KEY_F3)
-		update_ui_flags(DEBUG_UI);
+		switch_debug_ui();
 	if (keycode == KEY_RETURN)
 		app->game_state = IN_GAME;
 	else
@@ -63,28 +63,27 @@ static void	handle_moving(int keycode, t_mlx *app)
 {
 	if (keycode == KEY_W)
 	{
-		app->gamestate.player.pos.y += PLAYER_SPEED * get_player()->forward.y;
-		app->gamestate.player.pos.x += PLAYER_SPEED * get_player()->forward.x;
+		app->gamestate.player.world_pos.y += PLAYER_SPEED * get_player()->forward.y;
+		app->gamestate.player.world_pos.x += PLAYER_SPEED * get_player()->forward.x;
 	}
 	if (keycode == KEY_S)
 	{
-		app->gamestate.player.pos.y -= PLAYER_SPEED * get_player()->forward.y;
-		app->gamestate.player.pos.x -= PLAYER_SPEED * get_player()->forward.x;
+		app->gamestate.player.world_pos.y -= PLAYER_SPEED * get_player()->forward.y;
+		app->gamestate.player.world_pos.x -= PLAYER_SPEED * get_player()->forward.x;
 	}
 	if (keycode == KEY_D)
 	{
-		app->gamestate.player.pos.y -= PLAYER_SPEED * get_player()->right.y;
-		app->gamestate.player.pos.x -= PLAYER_SPEED * get_player()->right.x;
+		app->gamestate.player.world_pos.y -= PLAYER_SPEED * get_player()->right.y;
+		app->gamestate.player.world_pos.x -= PLAYER_SPEED * get_player()->right.x;
 	}
 	if (keycode == KEY_A)
 	{
-		app->gamestate.player.pos.y += PLAYER_SPEED * get_player()->right.y;
-		app->gamestate.player.pos.x += PLAYER_SPEED * get_player()->right.x;
+		app->gamestate.player.world_pos.y += PLAYER_SPEED * get_player()->right.y;
+		app->gamestate.player.world_pos.x += PLAYER_SPEED * get_player()->right.x;
 	}
 	if (keycode == KEY_RIGHT)
-		get_player()->direction -= 0.05;
+		get_player()->direction -= PI / 20.0f;
 	if (keycode == KEY_LEFT)
-		get_player()->direction += 0.05;
-	update_player_forward_vec(get_player());
-	update_player_right_vec(get_player());
+		get_player()->direction += PI / 20.0f;
+	update_player(get_player());
 }
