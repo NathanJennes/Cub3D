@@ -23,6 +23,7 @@ void	serialize_game(int fd)
 
 	app = get_app();
 	game = &app->gamestate;
+	dprintf(fd, "CUB_SAVE\n");
 	serialize_player(fd, game->player);
 	serialize_map(fd, game->map);
 }

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/19 16:42:56 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 17:21:58 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,15 +119,13 @@ void		check_leaky_errors(void);
 void		destroy_window(void);
 
 /* initialization */
-int			is_legal_file(int argc, char **argv);
-void		init_app(char *file);
+void		init_app(void);
 void		init_gc(void);
 
 /* main_loop.c */
 int			main_loop(void);
 
 /* hooks.c.c */
-int			mouse_hooks(int mousecode, int x, int y);
 int			mouse_move_hooks(int x, int y, void *unused);
 
 /* Keys */

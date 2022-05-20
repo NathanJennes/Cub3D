@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 15:50:56 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 17:21:58 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,9 @@ int			key_down_callback(int keycode, void *unused);
 int			mouse_down_callback(int button, int x, int y, void *unused);
 int			mouse_up_callback(int button, int x, int y, void *unused);
 
-void		init_map(char *file);
-
 static void	init_hooks(void);
 
-int	is_legal_file(int argc, char **argv)
-{
-	char	*extension;
-
-	if (argc != 2)
-		return (0);
-	extension = ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]));
-	if (!extension)
-		return (0);
-	if (extension[4])
-		return (0);
-	return (1);
-}
-
-void	init_app(char *file)
+void	init_app(void)
 {
 	t_mlx	*app;
 
@@ -44,8 +28,9 @@ void	init_app(char *file)
 	init_gc();
 	init_window("Cub3d");
 	load_all_saves();
-	printf("loaded: %d\n", (int)app->savegames_count);
-	init_map(file);
+	load_all_maps();
+	printf("Saves loaded: %d\n", (int)app->savegames_count);
+	printf("Maps loaded: %d\n", (int)app->maps_count);
 	init_ui();
 	init_hooks();
 	mlx_loop(get_mlx());

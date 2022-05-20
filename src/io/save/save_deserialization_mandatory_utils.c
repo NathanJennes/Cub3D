@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*   save_deserialization_mandatory_utils.c             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/14 20:02:00 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 16:49:14 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,61 +18,59 @@ static int	contains_illegal_char(t_map_info *infos, char *line);
 static int	is_illegal_char(char c, t_map_info *infos, int *saw_wall,
 				int *last_is_wall);
 
-t_vec3	parse_color(char *line)
+int	parse_color(t_vec3 *color, char *line)
 {
-	t_vec3	color;
-
 	if (!ft_isdigit(*line))
-		error_close_app();
-	color.x = ft_atoi(line);
-	if (color.x < 0 || color.x > 255)
-		error_close_app();
+		return (0);
+	color->x = ft_atoi(line);
+	if (color->x < 0 || color->x > 255)
+		return (0);
 	while (ft_isdigit(*line))
 		line++;
 	if (*line != ',')
-		error_close_app();
+		return (0);
 	line++;
-	color.y = ft_atoi(line);
-	if (color.y < 0 || color.y > 255)
-		error_close_app();
+	color->y = ft_atoi(line);
+	if (color->y < 0 || color->y > 255)
+		return (0);
 	while (ft_isdigit(*line))
 		line++;
 	if (*line != ',')
-		error_close_app();
+		return (0);
 	line++;
-	color.z = ft_atoi(line);
-	if (color.z < 0 || color.z > 255)
-		error_close_app();
-	return (color);
+	color->z = ft_atoi(line);
+	if (color->z < 0 || color->z > 255)
+		return (0);
+	return (1);
 }
 
-char	*parse_texture(char *line)
+int	parse_texture(char **path, char *line)
 {
-	char	*path;
 	int		fd;
 
 	if (!*line)
-		error_close_app();
-	path = gc_strdup(line);
-	fd = open(path, O_RDONLY);
+		return (0);
+	*path = gc_strdup(line);
+	fd = open(*path, O_RDONLY);
 	if (!fd || fd == -1)
-		error_close_app();
+		return (0);
 	close(fd);
-	return (path);
+	return (1);
 }
 
-void	add_map_row(t_map_info *infos, char *line)
+int	add_map_row(t_map_info *infos, char *line)
 {
 	infos->height++;
 	line = ft_trimr(line);
 	if (contains_illegal_char(infos, line))
-		error_close_app();
+		return (0);
 	if (!infos->map_raw)
 		infos->map_raw = gc_strarray_init();
 	infos->map_raw = gc_strarray_append(infos->map_raw, line);
 	line = ft_trimr(line);
 	if (ft_strlen(line) > infos->width)
 		infos->width = ft_strlen(line);
+	return (1);
 }
 
 static int	contains_illegal_char(t_map_info *infos, char *line)

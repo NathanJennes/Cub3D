@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:37:39 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 15:39:39 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 17:25:39 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	init_main_menu(void)
 		main_menu->btn_continue.infos.displayed = FALSE;
 	main_menu->btn_new_game = create_button("assets/ui/new_game.xpm",
 			ivec2(0, 0), btn_new_game);
+	if (get_app()->maps_count == 0)
+		main_menu->btn_new_game.infos.displayed = FALSE;
 	main_menu->btn_load = create_button("assets/ui/load.xpm",
 			ivec2(0, 0), btn_load_game);
 	if (get_app()->savegames_count == 0)

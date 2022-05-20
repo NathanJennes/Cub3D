@@ -6,7 +6,7 @@ DEBUG_NAME				:=	cub3dd
 
 CORE_DIR		:=	core
 CORE_FILE		:=	main.c exit.c main_loop.c error_utils.c init.c gc.c			\
-					getters.c getters_2.c window.c savegame.c saves_manager.c
+					getters.c getters_2.c window.c
 CORE_SRCS		:=	$(addprefix $(CORE_DIR)/, $(CORE_FILE))
 
 INPUT_DIR		:=	$(CORE_DIR)/input
@@ -52,7 +52,7 @@ TEXTURES_FILE	:=	xpm_loader.c texture_generation.c ambiant_occlusion.c		\
 TEXTURE_SRCS	:=	$(addprefix $(TEXTURES_DIR)/, $(TEXTURES_FILE))
 
 IO_DIR			:=	io
-IO_FILE			:=
+IO_FILE			:=	savegame.c saves_manager.c loaded_map.c loaded_map_manager.c
 IO_SRCS			:=	$(addprefix $(IO_DIR)/, $(IO_FILE))
 
 SAVE_DIR		:=	$(IO_DIR)/save

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 19:04:40 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 15:32:58 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 17:26:34 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	btn_new_game(t_button *button)
 
 	(void)button;
 	app = get_app();
+	app->gamestate = app->maps[0];
 	app->game_state = IN_GAME;
 	return (0);
 }
