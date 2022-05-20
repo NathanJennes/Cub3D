@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:58:17 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/18 17:18:05 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 15:43:24 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,11 @@ t_texture	create_blank_texture(int width, int height)
 	texture.original_handle = mlx_new_image(get_mlx(), width, height);
 	if (!texture.original_handle)
 		return (texture);
-	texture.original = (uint8_t *)mlx_get_data_addr(texture.original_handle, &texture.bpp,
-					&texture.line_size, &texture.endian);
-	gc_memseti(texture.original, trgb(255, 0, 0, 0), texture.width * texture.height);
+	texture.original = (uint8_t *)mlx_get_data_addr(
+			texture.original_handle, &texture.bpp,
+			&texture.line_size, &texture.endian);
+	gc_memseti(texture.original, trgb(255, 0, 0, 0),
+		texture.width * texture.height);
 	return (texture);
 }
 
@@ -69,7 +71,8 @@ static void	create_texture_variations(t_texture *tex)
 	shade_ao_texture_all(tex->ao_all, tex->width, tex->height, tex->bpp);
 	tex->grayscale_handle = mlx_new_image(get_mlx(), tex->width, tex->height);
 	tex->inversed_handle = mlx_new_image(get_mlx(), tex->width, tex->height);
-	tex->inversed_grayscale_handle = mlx_new_image(get_mlx(), tex->width, tex->height);
+	tex->inversed_grayscale_handle = mlx_new_image(get_mlx(),
+			tex->width, tex->height);
 	create_texture_grayscale(tex);
 	create_texture_inversed(tex);
 	create_texture_inverse_grayscale(tex);

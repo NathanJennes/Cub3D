@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 15:49:53 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/19 17:50:59 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 15:31:29 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ t_slider	create_slider(t_ivec2 pos, t_ivec2 size, float min, float max)
 static void	generate_cursor_texture(t_ivec2 size, t_slider *slider)
 {
 	draw_circle_tex(ivec2(size.y, size.y),
-			size.y * 2, trgb(0, 51, 51, 51), slider->tex_id_cursor);
+		size.y * 2, trgb(0, 51, 51, 51), slider->tex_id_cursor);
 	draw_circle_tex(ivec2(size.y, size.y),
-			size.y * 2 - 2, trgb(0, 170, 170, 170), slider->tex_id_cursor);
+		size.y * 2 - 2, trgb(0, 170, 170, 170), slider->tex_id_cursor);
 }
 
 static void	generate_bar_texture(t_ivec2 size, t_slider *slider)

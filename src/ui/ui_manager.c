@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:00:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/20 12:59:09 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 15:26:13 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	render_ui(void)
 	return (0);
 }
 
-void	update_ui()
+void	update_ui(void)
 {
 	t_mlx	*app;
 
@@ -49,7 +49,6 @@ void	update_ui_click_begin(int button)
 	if (app->ui.state == MAIN_MENU)
 		update_main_menu_click_begin(button);
 }
-
 
 void	update_ui_click_end(int button)
 {

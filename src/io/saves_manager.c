@@ -80,7 +80,8 @@ static void	grow_saves_array(void)
 	new = gc_calloc(app->savegames_count + 1, sizeof (t_gamestate));
 	if (app->savegames)
 	{
-		ft_memmove(new, app->savegames, app->savegames_count * sizeof (t_gamestate));
+		ft_memmove(new, app->savegames,
+			app->savegames_count * sizeof (t_gamestate));
 		gc_free(app->savegames);
 	}
 	app->savegames = new;

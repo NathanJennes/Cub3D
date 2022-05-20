@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/20 15:32:42 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 15:33:25 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,9 @@
 # define MMAP_ZOOM_FACTOR	20
 # define MMAP_PLAYER_DIAM	10
 
-/* Zoom slider */
-# define SLIDER_PAD		5
-# define SLIDER_BTN_W	20
-# define SLIDER_H		20
-# define SLIDER_W		75
-# define SLIDER_BTN2_XO	SLIDER_BTN_W + SLIDER_PAD * 2 + SLIDER_W
-
 # define DEBUG_UI 1
 
-typedef struct s_mlx t_mlx;
+typedef struct s_mlx	t_mlx;
 
 typedef enum e_ui_state
 {

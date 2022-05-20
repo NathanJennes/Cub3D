@@ -37,7 +37,7 @@ void	clear_texture(int color, int64_t tex_id)
 
 void	set_texture_pixel(int64_t x, int64_t y, int color, int64_t tex_id)
 {
-	uint8_t	*dst;
+	uint8_t		*dst;
 	t_texture	*texture;
 
 	texture = get_texture_from_id(tex_id);
@@ -46,7 +46,7 @@ void	set_texture_pixel(int64_t x, int64_t y, int color, int64_t tex_id)
 	if (!pixel_in_texture(x, y, texture->width, texture->height))
 		return ;
 	dst = texture->original
-		  + (y * texture->line_size + x * (texture->bpp / 8));
+		+ (y * texture->line_size + x * (texture->bpp / 8));
 	*(unsigned int *)dst = color;
 }
 

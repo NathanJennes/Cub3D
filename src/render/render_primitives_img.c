@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:17:28 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/18 19:22:39 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 15:48:32 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	draw_rect_tex(t_ivec2 pos, t_ivec2 size, int color, int64_t tex_id)
 	}
 }
 
-void	draw_circle_tex(t_ivec2 pos, int64_t diameter, int color, int64_t tex_id)
+void	draw_circle_tex(t_ivec2 pos, int64_t diameter, int col, int64_t tex_id)
 {
 	int64_t	i;
 	int64_t	j;
 	int64_t	diameter_2;
-	int64_t radius;
+	int64_t	radius;
 
 	radius = diameter / 2;
 	i = -radius;
@@ -50,7 +50,7 @@ void	draw_circle_tex(t_ivec2 pos, int64_t diameter, int color, int64_t tex_id)
 		while (j <= radius)
 		{
 			if (i * i + j * j <= diameter_2)
-				set_texture_pixel(pos.x + j, pos.y + i, color, tex_id);
+				set_texture_pixel(pos.x + j, pos.y + i, col, tex_id);
 			j++;
 		}
 		i++;
@@ -78,7 +78,8 @@ void	draw_line_tex(t_ivec2 start, t_ivec2 end, int col, int64_t tex_id)
 	}
 }
 
-void	draw_line_lerp_tex(t_ivec2 start, t_ivec2 end, int col1, int col2, int64_t tex_id)
+void	draw_line_lerp_tex(t_ivec2 start, t_ivec2 end,
+			int col1, int col2, int64_t tex_id)
 {
 	double	pixels_to_draw;
 	double	pixels_drawn;
@@ -94,7 +95,8 @@ void	draw_line_lerp_tex(t_ivec2 start, t_ivec2 end, int col1, int col2, int64_t 
 	while (pixels_drawn < pixels_to_draw)
 	{
 		vec2_add(&ppos, delta);
-		set_texture_pixel(ppos.x, ppos.y, color_lerp(col1, col2, pixels_drawn / pixels_to_draw), tex_id);
+		set_texture_pixel(ppos.x, ppos.y,
+			color_lerp(col1, col2, pixels_drawn / pixels_to_draw), tex_id);
 		pixels_drawn++;
 	}
 }

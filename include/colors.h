@@ -22,7 +22,6 @@
 # define YELLOW		0x00FFFF00
 # define TURQUOISE	0x0000FFFF
 
-
 /* colors */
 int			trgb(int t, int r, int g, int b);
 int			get_t(int trgb);

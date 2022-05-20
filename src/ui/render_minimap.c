@@ -33,7 +33,9 @@ void	render_mmap(float zoom)
 		* cell_size - cell_size / 2 + player_pos.x;
 	offset.y = -(app->gamestate.player.pos.y / CELL_HEIGHT)
 		* cell_size - cell_size / 2 + player_pos.y;
-	draw_rect(ivec2(MMAP_PAD / 2, MMAP_PAD / 2), ivec2(MMAP_W + MMAP_PAD, MMAP_H + MMAP_PAD), trgb(0, 51, 51, 51));
+	draw_rect(ivec2(MMAP_PAD / 2, MMAP_PAD / 2),
+		ivec2(MMAP_W + MMAP_PAD, MMAP_H + MMAP_PAD),
+		trgb(0, 51, 51, 51));
 	draw_cells(cell_size, offset);
 	draw_circle(player_pos, MMAP_PLAYER_DIAM, trgb(0, 255, 0, 0));
 }

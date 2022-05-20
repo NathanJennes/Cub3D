@@ -36,7 +36,7 @@ void	draw_circle(t_ivec2 pos, int64_t diameter, int color)
 	int64_t	i;
 	int64_t	j;
 	int64_t	diameter_2;
-	int64_t radius;
+	int64_t	radius;
 
 	radius = diameter / 2;
 	i = -radius;
@@ -91,7 +91,8 @@ void	draw_line_lerp(t_ivec2 start, t_ivec2 end, int col1, int col2)
 	while (pixels_drawn < pixels_to_draw)
 	{
 		vec2_add(&ppos, delta);
-		set_screen_pixel(ppos.x, ppos.y, color_lerp(col1, col2, pixels_drawn / pixels_to_draw));
+		set_screen_pixel(ppos.x, ppos.y,
+			color_lerp(col1, col2, pixels_drawn / pixels_to_draw));
 		pixels_drawn++;
 	}
 }

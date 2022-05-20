@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:52:33 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/16 23:34:05 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 15:42:44 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ void	create_texture_grayscale(t_texture *tex)
 	tex_size = tex->width * tex->height;
 	while (i < tex_size)
 	{
-		original_pixel = (int *) (tex->original + i * sizeof(int));
-		pixel = (int *) (tex->grayscale + i * sizeof(int));
-		gray = (get_r(*original_pixel) + get_g(*original_pixel) + get_b(*original_pixel)) / 3;
+		original_pixel = (int *)(tex->original + i * sizeof(int));
+		pixel = (int *)(tex->grayscale + i * sizeof(int));
+		gray = (get_r(*original_pixel) + get_g(*original_pixel)
+				+ get_b(*original_pixel)) / 3;
 		*pixel = trgb(get_t(*pixel), gray, gray, gray);
 		i++;
 	}
@@ -45,15 +46,17 @@ void	create_texture_inverse_grayscale(t_texture *tex)
 	int			*original_pixel;
 	int			gray;
 
-	tex->inversed_grayscale = (uint8_t *)mlx_get_data_addr(tex->inversed_grayscale_handle,
-			&tex->bpp, &tex->line_size, &tex->endian);
+	tex->inversed_grayscale = (uint8_t *)mlx_get_data_addr(
+			tex->inversed_grayscale_handle, &tex->bpp,
+			&tex->line_size, &tex->endian);
 	i = 0;
 	tex_size = tex->width * tex->height;
 	while (i < tex_size)
 	{
-		original_pixel = (int *) (tex->original + i * sizeof(int));
-		pixel = (int *) (tex->inversed_grayscale + i * sizeof(int));
-		gray = (get_r(*original_pixel) + get_g(*original_pixel) + get_b(*original_pixel)) / 3;
+		original_pixel = (int *)(tex->original + i * sizeof(int));
+		pixel = (int *)(tex->inversed_grayscale + i * sizeof(int));
+		gray = (get_r(*original_pixel) + get_g(*original_pixel)
+				+ get_b(*original_pixel)) / 3;
 		*pixel = trgb(get_t(*pixel), 255 - gray, 255 - gray, 255 - gray);
 		i++;
 	}

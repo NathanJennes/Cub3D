@@ -24,7 +24,7 @@ UI_FILE			:=	fps_counter.c ui_helper.c ui_manager.c						\
 					ui_button.c ui_img_box.c ui_label.c ui_slider.c	\
 					ui_slider_update.c ui_button_update.c main_menu.c	\
 					main_menu_buttons.c main_menu_buttons2.c	\
-					ui_centering.c ui_padding.c ui_relative_pos.c
+					ui_centering.c ui_padding.c ui_relative_pos.c main_menu_init.c
 UI_SRCS			:=	$(addprefix $(UI_DIR)/, $(UI_FILE))
 
 TEXTURES_DIR	:=	textures

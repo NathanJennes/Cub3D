@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 15:32:10 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 15:46:13 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,22 @@
 float			shoot_ray(t_vec2 ray, t_vec2 pos, t_ivec2 map_pos);
 static void		shoot_rays(float ray_angle, float ray_angle_base);
 
-static t_vec2 calculate_lengths(t_vec2 *ray);
-static t_ivec2 calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos, t_ivec2 map_pos);
+static t_vec2	calculate_lengths(t_vec2 *ray);
+static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists,
+					t_vec2 pos, t_ivec2 map_pos);
 static int		get_map_type(int64_t x, int64_t y);
 
 void	render_walls(int fov)
 {
-	float	ray_angle;
-	float	ray_angle_base;
+	float		ray_angle;
+	float		ray_angle_base;
+	t_player	*player;
 	static int	val;
 
-	get_player()->pos = vec2(60, 60);
+	player = get_player();
+	player->pos = vec2(60, 60);
 	ray_angle = (float)WIN_W / (float)fov;
-	ray_angle_base = sin(val);//((float)PI - ((float)fov / 180.0f)) / 2.0f;
+	ray_angle_base = sin(val);
 	shoot_rays(ray_angle, ray_angle_base);
 	val++;
 }
@@ -47,7 +50,8 @@ static void	shoot_rays(float ray_angle, float ray_angle_base)
 	i = 0;
 	while (i < WIN_W)
 	{
-		shoot_ray(vec2(cosf(ray_angle_base), sinf(ray_angle_base)), pos, map_pos);
+		shoot_ray(vec2(cosf(ray_angle_base),
+				sinf(ray_angle_base)), pos, map_pos);
 		ray_angle_base += ray_angle;
 		i++;
 	}
@@ -90,7 +94,7 @@ float	shoot_ray(t_vec2 ray, t_vec2 pos, t_ivec2 map_pos)
 	return (-1.0f);
 }
 
-static t_vec2 calculate_lengths(t_vec2 *ray)
+static t_vec2	calculate_lengths(t_vec2 *ray)
 {
 	t_vec2	lengths;
 
@@ -105,7 +109,8 @@ static t_vec2 calculate_lengths(t_vec2 *ray)
 	return (lengths);
 }
 
-static t_ivec2 calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos, t_ivec2 map_pos)
+static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists,
+					t_vec2 pos, t_ivec2 map_pos)
 {
 	t_ivec2	step;
 

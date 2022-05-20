@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:53:55 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 12:53:37 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 15:34:47 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	update_ui_slider(t_slider *slider)
 {
 	t_ui_component	*infos;
 	t_ivec2			mouse_pos;
-	float			value_percent;
+	float			percent;
 
 	if (!slider->infos.displayed || !slider->selected)
 		return ;
@@ -30,8 +30,8 @@ void	update_ui_slider(t_slider *slider)
 	else if (mouse_pos.x > infos->pos.x + infos->size.x - infos->size.y / 2)
 		mouse_pos.x = infos->pos.x + infos->size.x - infos->size.y / 2;
 	mouse_pos.x -= infos->pos.x + infos->size.y / 2;
-	value_percent = (float)mouse_pos.x / (float)(infos->size.x - infos->size.y);
-	slider->value = slider->min + value_percent * (slider->max - slider->min);
+	percent = (float)mouse_pos.x / (float)(infos->size.x - infos->size.y);
+	slider->value = slider->min + percent * (slider->max - slider->min);
 	slider->cursor_pos_x = mouse_pos.x;
 }
 
@@ -56,7 +56,8 @@ void	update_ui_slider_click_begin(t_slider *slider, int mouse_btn)
 
 void	update_ui_slider_click_end(t_slider *slider, int mouse_btn)
 {
-	if (!slider->infos.displayed || !slider->selected || mouse_btn != MOUSE_LEFT)
+	if (!slider->infos.displayed || !slider->selected
+		|| mouse_btn != MOUSE_LEFT)
 		return ;
 	slider->selected = FALSE;
 }

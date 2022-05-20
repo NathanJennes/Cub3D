@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 15:58:56 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/18 16:01:53 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 15:44:17 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	set_screen_pixel(int64_t x, int64_t y, int color)
 		return ;
 	frame = get_frame();
 	dst = frame->addr
-		  + (y * frame->line_length + x * (frame->bits_pp / 8));
+		+ (y * frame->line_length + x * (frame->bits_pp / 8));
 	*(unsigned int *)dst = color;
 }
 

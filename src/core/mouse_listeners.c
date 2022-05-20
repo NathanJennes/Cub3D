@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:31:13 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 12:58:20 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/20 15:49:19 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ void	mouse_click_end(int button)
 
 void	mouse_wheel_up(void)
 {
-
+	return ;
 }
 
 void	mouse_wheel_down(void)
 {
-
+	return ;
 }
-
