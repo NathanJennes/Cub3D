@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:51:10 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/16 18:48:42 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/21 16:58:56 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 int	close_app(void)
 {
-	if (!save_game("save.save"))
-		printf("Could not save game!\n");
+	if (get_app()->gamestate.name)
+		save_game(get_app()->gamestate.name);
 	destroy_window();
 	unload_texture_manager();
 	unload_saves();
