@@ -17,13 +17,13 @@
 #include "libft.h"
 #include "error_utils.h"
 
-static int	load_font_infos(t_font_meta *font, int fd);
-static int	load_font_chars(t_font_meta *font, int fd);
+static int	load_font_infos(t_font *font, int fd);
+static int	load_font_chars(t_font *font, int fd);
 static int	parse_char_infos(t_char_meta *chars, char *line);
 static int	populate_char_info(t_char_meta *c, char *line,
 				char *field_name, int *field);
 
-int	load_font_meta(t_font_meta *font, char *path)
+int	load_font_meta(t_font *font, char *path)
 {
 	int	fd;
 	int	ret;
@@ -45,7 +45,7 @@ int	load_font_meta(t_font_meta *font, char *path)
 	return (1);
 }
 
-static int	load_font_infos(t_font_meta *font, int fd)
+static int	load_font_infos(t_font *font, int fd)
 {
 	char	*line;
 	char	*info_begin;
@@ -74,7 +74,7 @@ static int	load_font_infos(t_font_meta *font, int fd)
 	return (1);
 }
 
-static int	load_font_chars(t_font_meta *font, int fd)
+static int	load_font_chars(t_font *font, int fd)
 {
 	char	*line;
 

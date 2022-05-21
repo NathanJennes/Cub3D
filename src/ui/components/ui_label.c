@@ -29,5 +29,5 @@ void	render_label(t_label *label)
 {
 	if (!label->infos.displayed)
 		return ;
-	render_text(label->text, label->infos.pos);
+	mlx_render_text(label->text, label->infos.pos);
 }

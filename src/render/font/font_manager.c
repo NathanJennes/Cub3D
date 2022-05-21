@@ -22,7 +22,7 @@ void	init_font_manager(void)
 		"assets/ui/cube-export/test_font_2.png");
 }
 
-t_font_meta	*get_font(char *name)
+t_font	*get_font(char *name)
 {
 	t_font_manager	*manager;
 	int64_t	i;
@@ -55,11 +55,11 @@ void	unload_font_manager(void)
 
 static void	add_font(char *meta_path, char *bitmap_path)
 {
-	t_font_meta		new_font;
+	t_font		new_font;
 	t_font_manager	*manager;
 
 	manager = &get_app()->font_manager;
-	ft_memset(&new_font, 0, sizeof (t_font_meta));
+	ft_memset(&new_font, 0, sizeof (t_font));
 	new_font.bitmap = load_bitmap_font(bitmap_path);
 	if (!new_font.bitmap.data)
 		return ;
@@ -71,14 +71,14 @@ static void	add_font(char *meta_path, char *bitmap_path)
 
 static void	grow_font_array(t_font_manager *manager)
 {
-	t_font_meta	*new;
+	t_font	*new;
 
 	if (!manager->fonts)
-		manager->fonts = gc_calloc(1, sizeof (t_font_meta));
+		manager->fonts = gc_calloc(1, sizeof (t_font));
 	else
 	{
-		new =  gc_calloc(manager->font_count + 1, sizeof (t_font_meta));
-		gc_memmove(new, manager->fonts, manager->font_count * sizeof (t_font_meta));
+		new =  gc_calloc(manager->font_count + 1, sizeof (t_font));
+		gc_memmove(new, manager->fonts, manager->font_count * sizeof (t_font));
 		gc_free(manager->fonts);
 		manager->fonts = new;
 	}

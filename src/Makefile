@@ -23,7 +23,7 @@ RENDER_FILE		:=	render_primitives.c render_primitives_img.c	\
 RENDER_SRCS		:=	$(addprefix $(RENDER_DIR)/, $(RENDER_FILE))
 
 FONT_DIR		:=	$(RENDER_DIR)/font
-FONT_FILE		:=	load_font_bitmap.c load_font_meta.c test.c	\
+FONT_FILE		:=	load_font_bitmap.c load_font_meta.c render_font.c	\
 					font_manager.c
 FONT_SRCS		:=	$(addprefix $(FONT_DIR)/, $(FONT_FILE))
 

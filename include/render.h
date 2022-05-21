@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/21 16:46:31 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/21 17:04:57 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ typedef struct s_font_meta
 	t_char_meta		characters[MAX_CHARS_IN_FONT];
 	char			*name;
 	int				font_size;
-}	t_font_meta;
+}	t_font;
 
 typedef struct s_font_manager
 {
-	t_font_meta	*fonts;
+	t_font	*fonts;
 	int64_t		font_count;
 }	t_font_manager;
 
@@ -67,7 +67,7 @@ void			draw_circle(t_ivec2 pos, int64_t diameter, int color);
 void			draw_rect(t_ivec2 pos, t_ivec2 size, int color);
 void			draw_line(t_ivec2 start, t_ivec2 end, int col);
 void			draw_line_lerp(t_ivec2 start, t_ivec2 end, int col1, int col2);
-void			render_text(char *text, t_ivec2 pos);
+void			mlx_render_text(char *text, t_ivec2 pos);
 
 /* Texture drawing */
 void			draw_rect_tex(t_ivec2 pos, t_ivec2 size, int color, int64_t tex_id);
@@ -90,12 +90,12 @@ void			render_ui_texture_inverse_grayscale(int64_t tex_id,
 /* Font rendering */
 t_font_bitmap	load_bitmap_font(char *path);
 void			unload_bitmap_font(t_font_bitmap *font);
-int				load_font_meta(t_font_meta *font, char *path);
-void			render_font(void);
+int				load_font_meta(t_font *font, char *path);
+void			render_text(char *text, char *font_name, int size, t_ivec2 pos);
 
 void			init_font_manager(void);
 void			unload_font_manager(void);
-t_font_meta		*get_font(char *name);
+t_font		*get_font(char *name);
 
 /* Walls rendering */
 void			render_walls(int fov);
