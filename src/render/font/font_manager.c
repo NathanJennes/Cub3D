@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 15:40:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/21 16:55:32 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/21 20:13:10 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_font_manager(void)
 t_font	*get_font(char *name)
 {
 	t_font_manager	*manager;
-	int64_t	i;
+	int64_t			i;
 
 	manager = &get_app()->font_manager;
 	i = 0;
@@ -41,7 +41,7 @@ t_font	*get_font(char *name)
 void	unload_font_manager(void)
 {
 	t_font_manager	*manager;
-	int64_t	i;
+	int64_t			i;
 
 	manager = &get_app()->font_manager;
 	i = 0;
@@ -55,7 +55,7 @@ void	unload_font_manager(void)
 
 static void	add_font(char *meta_path, char *bitmap_path)
 {
-	t_font		new_font;
+	t_font			new_font;
 	t_font_manager	*manager;
 
 	manager = &get_app()->font_manager;
@@ -77,7 +77,7 @@ static void	grow_font_array(t_font_manager *manager)
 		manager->fonts = gc_calloc(1, sizeof (t_font));
 	else
 	{
-		new =  gc_calloc(manager->font_count + 1, sizeof (t_font));
+		new = gc_calloc(manager->font_count + 1, sizeof (t_font));
 		gc_memmove(new, manager->fonts, manager->font_count * sizeof (t_font));
 		gc_free(manager->fonts);
 		manager->fonts = new;

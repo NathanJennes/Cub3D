@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/21 19:30:44 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/21 20:30:47 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,17 @@ typedef struct s_font_meta
 	char			*name;
 	int				font_size;
 }	t_font;
+
+typedef struct s_text_render
+{
+	t_font			*font;
+	t_char_meta		*c;
+	t_font_bitmap	*bitmap;
+	float			ratio;
+	t_ivec2			xy;
+	t_ivec2			pos;
+	t_ivec2			px_size;
+}	t_text_render;
 
 typedef struct s_font_manager
 {

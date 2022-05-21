@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 14:33:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/21 19:45:37 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/21 20:41:49 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 static int	render_letter(char c, t_font *font, int size, t_ivec2 pos);
 static int	sample_pixel(uint8_t *data, t_vec2 pos, t_vec2 size, int line_size);
+static int	get_pixel_color(t_text_render *infos);
+static void	render_pixel(t_text_render *infos, int color);
 
 void	render_text(char *text, char *font_name, int size, t_ivec2 pos)
 {
@@ -41,74 +43,78 @@ void	render_text(char *text, char *font_name, int size, t_ivec2 pos)
 
 static int	render_letter(char c, t_font *font, int size, t_ivec2 pos)
 {
-	t_char_meta	infos;
-	t_ivec2		xy;
-	t_ivec2		px_size;
-	float		size_ratio;
+	t_text_render	infos;
+	int				color;
 
 	if (c < 0)
 		return (0);
-	infos = font->characters[(int)c];
-	size_ratio = (float)size / (float)font->font_size;
-	px_size = ivec2((int64_t)(size_ratio * (float)infos.width),
-		(int64_t)(size_ratio * (float)infos.height));
-	xy = ivec2(0, 0);
-	while (xy.y < px_size.y)
+	infos.c = &font->characters[(int)c];
+	infos.ratio = (float)size / (float)font->font_size;
+	infos.px_size = ivec2((int64_t)(infos.ratio * (float)infos.c->width),
+			(int64_t)(infos.ratio * (float)infos.c->height));
+	infos.xy = ivec2(0, 0);
+	infos.font = font;
+	infos.bitmap = &font->bitmap;
+	infos.pos = pos;
+	while (infos.xy.y < infos.px_size.y)
 	{
-		xy.x = 0;
-		while (xy.x < px_size.x)
+		infos.xy.x = 0;
+		while (infos.xy.x < infos.px_size.x)
 		{
-			int	color = sample_pixel(font->bitmap.data,
-					vec2((float)infos.x + (float)xy.x / size_ratio,
-					(float)infos.y + (float)xy.y / size_ratio),
-					vec2(1.0f / size_ratio, 1.0f / size_ratio),
-					font->bitmap.line_size);
-			if (get_t(color) < 255)
-				set_screen_pixel(infos.x_off * size_ratio + pos.x + xy.x,
-					infos.y_off * size_ratio + pos.y + xy.y, color);
-			xy.x++;
+			color = get_pixel_color(&infos);
+			render_pixel(&infos, color);
+			infos.xy.x++;
 		}
-		xy.y++;
+		infos.xy.y++;
 	}
-	return ((int)((float)infos.x_advance * size_ratio));
+	return ((int)((float)infos.c->x_advance * infos.ratio));
+}
+
+static int	get_pixel_color(t_text_render *infos)
+{
+	int	color;
+
+	color = sample_pixel(infos->font->bitmap.data,
+			vec2((float)infos->c->x + (float) infos->xy.x / infos->ratio,
+				(float)infos->c->y + (float) infos->xy.y / infos->ratio),
+			vec2(1.0f / infos->ratio, 1.0f / infos->ratio),
+			infos->bitmap->line_size);
+	return (color);
+}
+
+static void	render_pixel(t_text_render *infos, int color)
+{
+	if (get_t(color) < 255)
+		set_screen_pixel((int)((float)infos->c->x_off * infos->ratio)
+			+ infos->pos.x + infos->xy.x,
+			(int)((float)infos->c->y_off * infos->ratio)
+			+ infos->pos.y + infos->xy.y, color);
 }
 
 static int	sample_pixel(uint8_t *data, t_vec2 pos, t_vec2 size, int line_size)
 {
-	int		t;
-	int		r;
-	int		g;
-	int		b;
+	int64_t	t;
 	t_vec2	sample_dists;
 	t_vec2	sampling_pos;
 	t_ivec2	ij;
 
 	sample_dists = vec2(size.x / (FONT_SAMPLING + 1.0f),
-		size.y / (FONT_SAMPLING + 1.0f));
+			size.y / (FONT_SAMPLING + 1.0f));
 	t = 0;
-	r = 0;
-	g = 0;
-	b = 0;
 	ij = ivec2(0, 0);
 	while (ij.y < FONT_SAMPLING)
 	{
 		ij.x = 0;
 		while (ij.x < FONT_SAMPLING)
 		{
-			sampling_pos = vec2(pos.x + sample_dists.x + sample_dists.x * (float)ij.x,
-				pos.y + sample_dists.y + sample_dists.y * (float)ij.y);
-			t += get_t(*(int *)(data + (int)sampling_pos.x * sizeof (int)
-								+ (int)sampling_pos.y * line_size));
-			r += get_r(*(int *)(data + (int)sampling_pos.x * sizeof (int)
-								+ (int)sampling_pos.y * line_size));
-			g += get_g(*(int *)(data + (int)sampling_pos.x * sizeof (int)
-								+ (int)sampling_pos.y * line_size));
-			b += get_b(*(int *)(data + (int)sampling_pos.x * sizeof (int)
-								+ (int)sampling_pos.y * line_size));
+			sampling_pos = vec2(pos.x + sample_dists.x
+					+ sample_dists.x * (float)ij.x,
+					pos.y + sample_dists.y + sample_dists.y * (float)ij.y);
+			t += 255 - get_r(*(int *)(data + (int)sampling_pos.x * sizeof (int)
+						+ (int)sampling_pos.y * line_size));
 			ij.x++;
 		}
 		ij.y++;
 	}
-	return (trgb(t / (FONT_SAMPLING * FONT_SAMPLING), r / (FONT_SAMPLING * FONT_SAMPLING),
-		g / (FONT_SAMPLING * FONT_SAMPLING), b / (FONT_SAMPLING * FONT_SAMPLING)));
+	return (trgb((int)(t / (FONT_SAMPLING * FONT_SAMPLING)), 255, 255, 255));
 }

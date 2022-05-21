@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/21 18:45:51 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/21 20:03:42 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main_loop(void)
 	{
 	}
 	clear_screen(BKGD_COLOR);
+	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 	render_text("ceci est un text!", "HelveticaNeue", 72, ivec2(10, 10));
 	render_text("Ca fonctionne!!!", "HelveticaNeue", 30, ivec2(10, 110));
 	render_text("aaaa", "HelveticaNeue", 30, ivec2(10, 150));

@@ -31,10 +31,10 @@ int	print_cub_err(int err)
 		printf("ERROR: Couldn't get a char id when parsing meta font info\n");
 	else if (err == ERR_FONT_META_FIELD_NAME_NO_MATCH)
 		printf("ERROR: The field parsed didn't match the given one when "
-			   "parsing meta font info\n");
+			"parsing meta font info\n");
 	else if (err == ERR_FONT_META_NO_EQUAL_AFTER_FIELD)
 		printf("ERROR: Didn't found an equal sign after a field when "
-			   "parsing meta font info\n");
+			"parsing meta font info\n");
 	else if (err == ERR_FONT_META_REACHED_EOF)
 		printf("ERROR: Reached unexpected EOF when parsing meta font info\n");
 	return (0);
