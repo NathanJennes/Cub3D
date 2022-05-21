@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/21 17:04:57 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/21 19:30:44 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define SIDE_Y 2
 
 # define MAX_CHARS_IN_FONT 256
+# define FONT_SAMPLING 8
 
 # include <stddef.h>
 # include <stdint.h>
