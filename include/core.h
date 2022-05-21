@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/20 17:21:58 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/21 15:42:27 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "texture.h"
 # include "ui.h"
 # include "io.h"
+#include "render.h"
 
 # ifdef FULL_SCREEN
 #  define WIN_W		1920
@@ -106,6 +107,7 @@ typedef struct s_mlx
 	int8_t				game_state;
 	t_ui				ui;
 	t_texture_manager	texture_manager;
+	t_font_manager		font_manager;
 	t_bool				keys[MAX_KEYCODE];
 }	t_mlx;
 

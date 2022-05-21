@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/21 14:47:29 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/21 16:46:31 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ typedef struct s_font_meta
 	int				font_size;
 }	t_font_meta;
 
+typedef struct s_font_manager
+{
+	t_font_meta	*fonts;
+	int64_t		font_count;
+}	t_font_manager;
+
 /* Screen drawing */
 void			clear_screen(int color);
 void			set_screen_pixel(int64_t x, int64_t y, int color);
@@ -86,6 +92,10 @@ t_font_bitmap	load_bitmap_font(char *path);
 void			unload_bitmap_font(t_font_bitmap *font);
 int				load_font_meta(t_font_meta *font, char *path);
 void			render_font(void);
+
+void			init_font_manager(void);
+void			unload_font_manager(void);
+t_font_meta		*get_font(char *name);
 
 /* Walls rendering */
 void			render_walls(int fov);

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/21 14:39:53 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/21 16:49:01 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	init_app(void)
 	app = get_app();
 	init_gc();
 	init_window("Cub3d");
+	init_font_manager();
 	load_all_saves();
 	load_all_maps();
 	printf("Saves loaded: %d\n", (int)app->savegames_count);
 	printf("Maps loaded: %d\n", (int)app->maps_count);
-	render_font();
 	init_ui();
 	init_hooks();
 	mlx_loop(get_mlx());

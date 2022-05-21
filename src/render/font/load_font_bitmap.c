@@ -21,6 +21,7 @@ t_font_bitmap	load_bitmap_font(char *path)
 	void			*img;
 	char			*data;
 
+	ft_memset(&font, 0, sizeof (t_font_bitmap));
 	img = mlx_png_file_to_image(get_mlx(), path, &font.width, &font.height);
 	if (!img)
 	{
