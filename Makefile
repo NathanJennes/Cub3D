@@ -21,7 +21,7 @@ ifeq ($(OS), Linux)
 else
 	LIB_PATH	+=		-L $(MLX_DIR)
 	INC_PATH	+=		-I $(MLX_DIR)
-	MLXFLAGS	=		-lmlx -framework OpenGL -framework AppKit
+	MLXFLAGS	=		-lmlx -framework OpenGL -framework AppKit -lz
 endif
 
 RELEASE_LIBS		:=		$(MLXFLAGS) $(LIB_PATH) -lft -lleaky -lm

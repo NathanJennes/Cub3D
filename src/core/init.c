@@ -6,12 +6,13 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 17:21:58 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/21 14:39:53 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "ui.h"
+#include "render.h"
 
 int			key_up_callback(int keycode, void *unused);
 int			key_down_callback(int keycode, void *unused);
@@ -31,6 +32,7 @@ void	init_app(void)
 	load_all_maps();
 	printf("Saves loaded: %d\n", (int)app->savegames_count);
 	printf("Maps loaded: %d\n", (int)app->maps_count);
+	render_font();
 	init_ui();
 	init_hooks();
 	mlx_loop(get_mlx());
