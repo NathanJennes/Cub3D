@@ -6,14 +6,14 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/19 16:34:56 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/22 16:52:05 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
 
-# define RAY_LENGTH 10
+# define RAY_LENGTH 200
 # define SIDE_X 1
 # define SIDE_Y 2
 
@@ -39,6 +39,6 @@ void		render_ui_img_box(t_img_box *img_box);
 void		render_ui_button(t_button *button);
 
 void		render_walls(void);
-t_ray		shoot_ray(t_vec2 ray, t_ivec2 map_pos);
+t_ray		shoot_ray(t_vec2 ray, t_ivec2 hit_pos);
 
 #endif

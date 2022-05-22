@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/20 11:41:52 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/22 18:14:05 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "ui.h"
 #include "render.h"
 
-static void		print_ray(t_ivec2 map_pos);
+static void		print_ray(t_ivec2 hit_pos);
 static t_vec2	rotate_vector(t_vec2 v, float angle);
 static void		print_player_vector(void);
 static void		debug_rays(void);
@@ -40,7 +40,7 @@ void	render_test_scene(const t_mlx *app)
 				ivec2(CELL_WIDTH, CELL_WIDTH), color);
 		}
 	}
-	render_circle(v2_to_iv2(get_player()->world_pos), 10, YELLOW);
+	render_circle(v2_to_iv2(get_player()->world_pos), 7, BLACK);
 	print_player_vector();
 	debug_rays();
 }
@@ -49,34 +49,27 @@ static void	debug_rays(void)
 {
 	float		start_angle;
 	int64_t		i;
+	t_vec2		v_ray;
 	t_ray		ray;
 	t_player	*player;
 
 	i = 0;
 	player = get_player();
 	start_angle = player->ray_angle;
-	player->map_pos = ivec2(player->world_pos.x, player->world_pos.y);
 	while (i < WIN_W)
 	{
-		ray = shoot_ray(vec2(cosf(start_angle), sinf(start_angle)), player->map_pos);
-		if (i == WIN_W / 2)
-		{
-			printf("Ray distance %f\n", ray.distance);
-			ft_print_ivec2(ray.map_pos);
-			ft_print_ivec2(ray.world_pos);
-		}
-//		print_ray(get_player()->map_pos);
-		start_angle += player->ray_angle;
+		v_ray = vec2(sinf(start_angle), cosf(start_angle));
+		ray = shoot_ray(v_ray, player->map_pos);
+		print_ray(ray.hit_pos);
+		start_angle -= player->ray_increment;
 		i++;
 	}
 }
 
-void	print_ray(t_ivec2 map_pos)
+void	print_ray(t_ivec2 hit_pos)
 {
-	t_ivec2	line_end;
-
-	render_line(get_player()->map_pos, get_player()->last_ray.world_pos, RED, RED);
-	render_circle(line_end, 5, YELLOW);
+	render_line(get_player()->map_pos, hit_pos, RED, RED);
+	render_circle(hit_pos, 10, YELLOW);
 }
 
 void	print_player_vector(void)
@@ -87,7 +80,7 @@ void	print_player_vector(void)
 	t_vec2	fov_left;
 	t_vec2	fov_right;
 
-	player_pos = get_player()->pos;
+	player_pos = get_player()->world_pos;
 	forward = get_player()->forward;
 	right = get_player()->right;
 	render_line(v2_to_iv2(player_pos),

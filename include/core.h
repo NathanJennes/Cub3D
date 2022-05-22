@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/20 09:01:32 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/22 18:18:37 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 #  define WIN_H		540
 # endif
 
-# define DFLT_SIZE	60
+# define DFLT_SIZE	64
 
 # define PLAYER_SPEED	5
 
@@ -85,14 +85,14 @@ typedef struct s_frame
 typedef struct s_ray
 {
 	float		distance;
-	t_ivec2		map_pos;
-	t_ivec2		world_pos;
+	t_ivec2		hit_pos;
+//	t_ivec2		world_pos;
 }	t_ray;
 
 typedef struct s_player
 {
 	t_vec2		world_pos;
-	t_vec2		grid_pos;
+	t_vec2		cell_pos;
 	t_ivec2		map_pos;
 	float		direction;
 	t_vec2		forward;
@@ -112,7 +112,7 @@ typedef struct s_gamestate
 	char		*name;
 	t_map_info	map;
 	t_player	player;
-	t_settings	settings;
+	t_settings	settings;		//TODO change location of settings
 }	t_gamestate;
 
 typedef struct s_mlx

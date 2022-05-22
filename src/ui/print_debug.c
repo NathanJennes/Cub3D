@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:16:28 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/20 18:01:15 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/22 15:53:58 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	debug_player(void)
 		ivec2(start.x + str_px_size("World pos "), start.y), WHITE);
 	start.y += 20;
 	put_text(ivec2(start.x, start.y), WHITE, "Grid pos ");
-	print_vec(player->grid_pos,
+	print_vec(player->cell_pos,
 		ivec2(start.x + str_px_size("Grid pos "), start.y), WHITE);
 	start.y += 20;
 	put_text(ivec2(start.x, start.y), WHITE, "Map pos ");
