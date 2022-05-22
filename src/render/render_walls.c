@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/22 18:15:55 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/22 22:21:53 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 #include "core.h"
 #include "render.h"
 
-static t_ray	populate_ray(float dist, t_ivec2 hit_pos);
+static t_ray	populate_ray(float dist, t_ivec2 hit_pos, t_bool hit);
 static t_vec2	calculate_lengths(t_vec2 *ray);
 static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos, t_ivec2 map_pos);
 static int		get_map_type(int64_t x, int64_t y);
-void			draw_col_wall(float dist, int64_t col);
+void			draw_col_wall(int64_t col, float start_angle);
 
 void	render_walls(void)
 {
 	float		start_angle;
 	int64_t		i;
 	t_vec2		v_ray;
-	t_ray		ray;
 	t_player	*player;
+	int64_t		wall_size;
 
 	i = 0;
 	player = get_player();
@@ -34,8 +34,8 @@ void	render_walls(void)
 	while (i < WIN_W)
 	{
 		v_ray = vec2(sinf(start_angle), cosf(start_angle));
-		ray = shoot_ray(v_ray, player->map_pos);
-		draw_col_wall(ray.distance * (float)cos(start_angle), i);
+		player->last_ray = shoot_ray(v_ray, player->map_pos);
+		draw_col_wall(i, start_angle);
 		start_angle -= player->ray_increment;
 		i++;
 	}
@@ -50,7 +50,7 @@ t_ray	shoot_ray(t_vec2 ray, t_ivec2 hit_pos)
 	int		side;
 
 	if (get_map_type(hit_pos.x, hit_pos.y) == WALL)
-		return (populate_ray(0.0f, hit_pos));
+		return (populate_ray(0.0f, hit_pos, TRUE));
 	lengths = calculate_lengths(&ray);
 	step = calculate_step_dists(&ray, &dists, get_player()->world_pos, hit_pos);
 	vec2_multv2(&dists, lengths);
@@ -74,35 +74,45 @@ t_ray	shoot_ray(t_vec2 ray, t_ivec2 hit_pos)
 			hit = TRUE;
 	}
 	if (hit && side == SIDE_X)
-		return (populate_ray(dists.x - lengths.x, hit_pos));
+		return (populate_ray(dists.x - lengths.x, hit_pos, TRUE));
 	if (hit && side == SIDE_Y)
-		return (populate_ray(dists.y - lengths.y, hit_pos));
-	return (populate_ray(-1.0f, hit_pos));
+		return (populate_ray(dists.y - lengths.y, hit_pos, TRUE));
+	return (populate_ray(-1.0f, hit_pos, FALSE));
 }
 
-void	draw_col_wall(float dist, int64_t col)
+void	draw_col_wall(int64_t col, float start_angle)
 {
 	int64_t	y;
 	int64_t	out_size;
 	int64_t	wall_size;
 
 	y = 0;
-	wall_size = WIN_H - DFLT_SIZE * dist;
-	out_size = (WIN_H - wall_size) * 0.5;
+	wall_size = DFLT_SIZE / (get_player()->last_ray.distance * cos(start_angle)) * 415;
+	wall_size = abs(wall_size);
+	out_size = (WIN_H - wall_size) / 2;
 	while (y < out_size)
 		mlx_pixel_put_img(col, y++, BLACK);
-	while (y < wall_size)
-		mlx_pixel_put_img(col, y++, RED);
+	if (get_player()->last_ray.hit == TRUE)
+	{
+		while (y < out_size + wall_size)
+			mlx_pixel_put_img(col, y++, RED);
+	}
+	else
+	{
+		while (y < out_size + wall_size)
+			mlx_pixel_put_img(col, y++, BLACK);
+	}
 	while (y < WIN_H)
 		mlx_pixel_put_img(col, y++, BLACK);
 }
 
-static t_ray	populate_ray(float dist, t_ivec2 hit_pos)
+static t_ray	populate_ray(float dist, t_ivec2 hit_pos, t_bool hit)
 {
 	t_ray	ray;
 
 	ray.distance = dist;
 	ray.hit_pos = hit_pos;
+	ray.hit = hit;
 	return (ray);
 }
 

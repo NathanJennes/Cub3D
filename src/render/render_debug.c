@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/22 18:14:05 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/22 18:15:55 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	debug_rays(void)
 void	print_ray(t_ivec2 hit_pos)
 {
 	render_line(get_player()->map_pos, hit_pos, RED, RED);
-	render_circle(hit_pos, 10, YELLOW);
+	render_circle(hit_pos, 5, YELLOW);
 }
 
 void	print_player_vector(void)

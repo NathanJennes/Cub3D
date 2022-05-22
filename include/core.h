@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/22 18:18:37 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/22 21:47:09 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 #  define WIN_H		540
 # endif
 
-# define DFLT_SIZE	64
+# define DFLT_SIZE	50
 
 # define PLAYER_SPEED	5
 
@@ -86,7 +86,7 @@ typedef struct s_ray
 {
 	float		distance;
 	t_ivec2		hit_pos;
-//	t_ivec2		world_pos;
+	t_bool		hit;
 }	t_ray;
 
 typedef struct s_player
