@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/23 14:16:19 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/23 15:12:29 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define SIDE_Y 2
 
 # define MAX_CHARS_IN_FONT 256
-# define FONT_SAMPLING 8
+# define FONT_SAMPLING 1
 
 # include <stddef.h>
 # include <stdint.h>
@@ -84,10 +84,10 @@ void			mlx_render_text(char *text, t_ivec2 pos);
 /* Texture drawing */
 void			draw_rect_tex(t_ivec2 pos, t_ivec2 size, int color, int64_t tex_id);
 void			draw_circle_tex(t_ivec2 pos, int64_t diameter,
-				int col, int64_t tex_id);
+					int col, int64_t tex_id);
 void			draw_line_tex(t_ivec2 start, t_ivec2 end, int col, int64_t tex_id);
 void			draw_line_lerp_tex(t_ivec2 start, t_ivec2 end,
-				int col1, int col2, int64_t tex_id);
+					int col1, int col2, int64_t tex_id);
 
 void			clear_texture(int color, int64_t tex_id);
 void			set_texture_pixel(int64_t x, int64_t y, int color, int64_t tex_id);
@@ -97,7 +97,7 @@ void			render_ui_texture(int64_t tex_id, int64_t x, int64_t y);
 void			render_ui_texture_grayscale(int64_t tex_id, int64_t x, int64_t y);
 void			render_ui_texture_inversed(int64_t tex_id, int64_t x, int64_t y);
 void			render_ui_texture_inverse_grayscale(int64_t tex_id,
-				int64_t x, int64_t y);
+					int64_t x, int64_t y);
 
 /* Font rendering */
 t_font_bitmap	load_bitmap_font(char *path);
@@ -113,7 +113,16 @@ t_font			*get_font(char *name);
 
 int64_t			get_text_width(char *text, char *font_name, int size);
 int64_t			get_text_height(char *text, char *font_name, int size);
+int64_t			get_text_box_height(char *text, char *font_name, int size);
 t_ivec2			get_text_size(char *text, char *font_name, int size);
+t_ivec2			get_text_box_size(char *text, char *font_name, int size);
+
+t_ivec2			text_center_height(char *text, char *font_name,
+					int size, t_ivec2 pos);
+t_ivec2			text_center_width(char *text, char *font_name,
+					int size, t_ivec2 pos);
+t_ivec2			text_center(char *text, char *font_name,
+					int size, t_ivec2 pos);
 
 /* Walls rendering */
 void			render_walls(int fov);

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/21 20:03:42 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/23 15:58:24 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,17 @@ int	main_loop(void)
 	}
 	clear_screen(BKGD_COLOR);
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
-	render_text("ceci est un text!", "HelveticaNeue", 72, ivec2(10, 10));
-	render_text("Ca fonctionne!!!", "HelveticaNeue", 30, ivec2(10, 110));
-	render_text("aaaa", "HelveticaNeue", 30, ivec2(10, 150));
-	render_text("aa", "HelveticaNeue", 60, ivec2(10, 230));
+	t_ivec2 center = ivec2(WIN_W / 2, WIN_H / 2);
+
+	t_ivec2 text_size = get_text_size("ceci est un text!", "HelveticaNeue", cub_get_mouse_position().y / 2);
+	draw_circle(ivec2(center.x - text_size.x / 2, center.y - text_size.y / 2), 20, trgb(0, 255, 0, 0));
+	draw_rect(ivec2(center.x - text_size.x / 2, center.y - text_size.y / 2), text_size, trgb(0, 51, 51, 51));
+
+	t_ivec2 text_pos = text_center("ceci est un text!", "HelveticaNeue", cub_get_mouse_position().y / 2, center);
+
+	draw_circle(text_pos, 20, trgb(0, 0, 255, 0));
+	draw_circle(center, 20, trgb(0, 0, 0, 255));
+	render_text("ceci est un text!", "HelveticaNeue", cub_get_mouse_position().y / 2, text_pos);
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 	//update_ui();
 	//render_ui();

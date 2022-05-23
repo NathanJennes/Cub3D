@@ -6,11 +6,14 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 13:47:30 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/23 14:18:12 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/23 16:03:43 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
+
+static int64_t	get_min_y_offset(char *text, char *font_name, int size);
+static int64_t	get_max_y_offset(char *text, char *font_name, int size);
 
 int64_t	get_text_width(char *text, char *font_name, int size)
 {
@@ -40,10 +43,10 @@ int64_t	get_text_width(char *text, char *font_name, int size)
 	return ((int64_t)((float)width * ratio));
 }
 
-int64_t	get_text_height(char *text, char *font_name, int size)
+static int64_t	get_min_y_offset(char *text, char *font_name, int size)
 {
 	t_font	*font;
-	int64_t	height;
+	int64_t	y_offset;
 	size_t	len;
 	size_t	i;
 	float	ratio;
@@ -55,15 +58,53 @@ int64_t	get_text_height(char *text, char *font_name, int size)
 	if (!font || len == 0)
 		return (0);
 	ratio = (float)size / (float)font->font_size;
-	i = 0;
-	height = 0;
-	while (i < len - 1)
+	y_offset = font->characters[(int)text[0]].y_off;
+	i = 1;
+	while (i < len)
 	{
-		if (text[i] >= 0)
-			height = ft_maxi(height, font->characters[(int)text[i]].height);
+		if (text[i] > ' ')
+			y_offset = ft_mini(y_offset, font->characters[(int)text[i]].y_off);
 		i++;
 	}
-	return ((int64_t)((float)height * ratio));
+	return ((int64_t)((float)y_offset * ratio));
+}
+
+static int64_t	get_max_y_offset(char *text, char *font_name, int size)
+{
+	t_font	*font;
+	int64_t	y_offset;
+	size_t	len;
+	size_t	i;
+	float	ratio;
+
+	if (!text || !font_name || size <= 0)
+		return (0);
+	font = get_font(font_name);
+	len = ft_strlen(text);
+	if (!font || len == 0)
+		return (0);
+	ratio = (float)size / (float)font->font_size;
+	y_offset = font->characters[(int)text[0]].y_off
+		+ font->characters[(int)text[0]].height;
+	i = 1;
+	while (i < len)
+	{
+		if (text[i] > ' ')
+			y_offset = ft_maxi(y_offset, font->characters[(int)text[i]].y_off
+					+ font->characters[(int)text[i]].height);
+		i++;
+	}
+	return ((int64_t)((float)y_offset * ratio));
+}
+
+int64_t	get_text_height(char *text, char *font_name, int size)
+{
+	int64_t	min_off;
+	int64_t	max_off;
+
+	min_off = get_min_y_offset(text, font_name, size);
+	max_off = get_max_y_offset(text, font_name, size);
+	return (max_off - min_off);
 }
 
 t_ivec2	get_text_size(char *text, char *font_name, int size)
