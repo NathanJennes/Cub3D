@@ -24,7 +24,7 @@ RENDER_SRCS		:=	$(addprefix $(RENDER_DIR)/, $(RENDER_FILE))
 
 FONT_DIR		:=	$(RENDER_DIR)/font
 FONT_FILE		:=	load_font_bitmap.c load_font_meta.c render_font.c	\
-					font_manager.c render_font_texture.c
+					font_manager.c render_font_texture.c text_size.c
 FONT_SRCS		:=	$(addprefix $(FONT_DIR)/, $(FONT_FILE))
 
 UI_DIR			:=	ui

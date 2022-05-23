@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/23 13:46:37 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/23 14:16:19 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_text_render
 
 typedef struct s_font_manager
 {
-	t_font	*fonts;
+	t_font		*fonts;
 	int64_t		font_count;
 }	t_font_manager;
 
@@ -110,6 +110,10 @@ void			render_text_tex(char *text, char *font_name, t_ivec2 pos,
 void			init_font_manager(void);
 void			unload_font_manager(void);
 t_font			*get_font(char *name);
+
+int64_t			get_text_width(char *text, char *font_name, int size);
+int64_t			get_text_height(char *text, char *font_name, int size);
+t_ivec2			get_text_size(char *text, char *font_name, int size);
 
 /* Walls rendering */
 void			render_walls(int fov);
