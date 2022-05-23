@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:48:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 20:00:44 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/23 17:15:18 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ void	init_new_game_menu(void)
 
 	menu = &get_ui()->new_game_menu;
 	menu->selected_save = -1;
-	menu->btn_back = create_button("assets/ui/btn_new_game_back.xpm",
+	menu->btn_back = create_button("assets/placeholder.xpm",
 			ivec2(50, WIN_H - 50), btn_new_game_back);
-	menu->btn_down = create_button("assets/ui/btn_new_game_down.xpm",
+	menu->btn_down = create_button("assets/placeholder.xpm",
 			ivec2(0, 0), btn_new_game_down);
-	menu->btn_up = create_button("assets/ui/btn_new_game_up.xpm",
+	menu->btn_up = create_button("assets/placeholder.xpm",
 			ivec2(0, 0), btn_new_game_up);
-	menu->btn_start = create_button("assets/ui/btn_start_new_game.xpm",
+	menu->btn_start = create_button("assets/placeholder.xpm",
 			ivec2(0, 0), btn_start_new_game);
 	menu->btn_save[0] = create_button(NULL, ivec2(0, 100), btn_select_save1);
 	menu->btn_save[1] = create_button(NULL, ivec2(0, 0), btn_select_save2);
@@ -57,35 +57,44 @@ static void	init_positions(void)
 	t_ui_new_game_menu	*menu;
 
 	menu = &get_ui()->new_game_menu;
-	uic_padding(&menu->btn_save[0].infos, ivec2(50, 50), ivec2(50, 50));
+	uic_padding(&menu->btn_save[0].infos, ivec2(25, 50), ivec2(50, 50));
 	uic_padding(&menu->btn_save[1].infos, ivec2(50, 50), ivec2(50, 50));
 	uic_padding(&menu->btn_save[2].infos, ivec2(50, 50), ivec2(50, 50));
 	uic_padding(&menu->btn_save[3].infos, ivec2(50, 50), ivec2(50, 50));
 	uic_padding(&menu->btn_save[4].infos, ivec2(50, 50), ivec2(50, 50));
+	uic_padding(&menu->btn_down.infos, ivec2(50, 50), ivec2(50, 50));
 	uic_center_win_w(&menu->btn_save[0].infos);
+	uic_above(&menu->btn_start.infos, &menu->btn_save[0].infos);
 	uic_side_right(&menu->btn_up.infos, &menu->btn_save[0].infos);
+	uic_below(&menu->btn_down.infos, &menu->btn_up.infos);
 	uic_below(&menu->btn_save[1].infos, &menu->btn_save[0].infos);
 	uic_below(&menu->btn_save[2].infos, &menu->btn_save[1].infos);
 	uic_below(&menu->btn_save[3].infos, &menu->btn_save[2].infos);
 	uic_below(&menu->btn_save[4].infos, &menu->btn_save[3].infos);
-	uic_side_left(&menu->btn_down.infos, &menu->btn_save[4].infos);
 }
 
 void	init_textures(void)
 {
 	t_ui_new_game_menu	*menu;
 	t_button			*btn;
-	size_t				i;
+	int64_t				i;
+	t_mlx				*app;
 
 	menu = &get_ui()->new_game_menu;
 	i = 0;
+	app = get_app();
 	while (i < 5)
 	{
 		btn = &menu->btn_save[i];
-		if (btn->infos.displayed || btn->tex_id == INVALID_TEXTURE)
+		if (i < app->maps_count && (btn->infos.displayed
+				|| btn->tex_id == INVALID_TEXTURE))
 		{
-			btn->tex_id = new_texture(100, 50);
-			clear_texture(trgb(0, 150, 200, 150), btn->tex_id);
+			btn->tex_id = new_texture(250, 50);
+			clear_texture(trgb(0, 255, 51, 51), btn->tex_id);
+			render_text_tex(app->maps[i].name, "HelveticaNeue",
+				text_center(app->maps[i].name, "HelveticaNeue", 30,
+					ivec2(125, 25)),
+				ivec2(30, btn->tex_id));
 			finish_new_texture(btn->tex_id);
 			btn->infos.size = get_texture_size(btn->tex_id);
 		}
@@ -106,6 +115,8 @@ void	update_display_status(void)
 	{
 		if (i < app->maps_count)
 			menu->btn_save[i].infos.displayed = TRUE;
+		else
+			menu->btn_save[i].infos.displayed = FALSE;
 		i++;
 	}
 }

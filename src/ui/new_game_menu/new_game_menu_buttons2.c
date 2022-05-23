@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:09:40 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 20:03:26 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/23 17:13:57 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ int	btn_start_new_game(t_button *button)
 	if (menu->selected_save != -1)
 	{
 		app = get_app();
+		printf("Creating a new game from map: %s\n",
+			app->maps[menu->selected_save
+			+ menu->first_save_offset].name);
 		app->gamestate = app->maps[menu->selected_save
 			+ menu->first_save_offset];
 		app->game_state = IN_GAME;

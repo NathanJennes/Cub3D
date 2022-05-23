@@ -37,7 +37,7 @@ void	render_text_tex(char *text, char *font_name, t_ivec2 pos,
 	x_pos = pos.x;
 	while (i < len)
 	{
-		x_pos += render_letter(text[i], font, size_id, ivec2(x_pos, pos.y));
+		x_pos += render_letter(text[i], font, ivec2(x_pos, pos.y), size_id);
 		i++;
 	}
 }

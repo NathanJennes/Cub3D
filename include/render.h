@@ -18,7 +18,7 @@
 # define SIDE_Y 2
 
 # define MAX_CHARS_IN_FONT 256
-# define FONT_SAMPLING 1
+# define FONT_SAMPLING 2
 
 # include <stddef.h>
 # include <stdint.h>
