@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/23 11:34:56 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/23 21:51:44 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ typedef struct s_map_info
 
 typedef struct s_frame
 {
-	void	*img;
-	char	*addr;
-	int		bits_pp;
-	int		line_length;
-	int		endian;
+	void		*img;
+	char		*addr;
+	int			bits_pp;
+	int			line_length;
+	int			endian;
 }	t_frame;
 
 typedef struct s_ray
@@ -87,6 +87,7 @@ typedef struct s_ray
 	float		distance;
 	t_ivec2		hit_pos;
 	t_bool		hit;
+	int 		side;
 }	t_ray;
 
 typedef struct s_player

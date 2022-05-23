@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/23 11:40:00 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/23 21:54:56 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "core.h"
 #include "render.h"
 
-static t_ray	populate_ray(float dist, t_ivec2 hit_pos, t_bool hit);
+static t_ray	populate_ray(float dist, t_ivec2 hit_pos, t_bool hit, int side);
 static t_vec2	calculate_lengths(t_vec2 *ray);
 static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos, t_ivec2 map_pos);
 static int		get_map_type(int64_t x, int64_t y);
@@ -50,7 +50,7 @@ t_ray	shoot_ray(t_vec2 ray, t_ivec2 hit_pos)
 	int		side;
 
 	if (get_map_type(hit_pos.x, hit_pos.y) == WALL)
-		return (populate_ray(0.0f, hit_pos, TRUE));
+		return (populate_ray(0.0f, hit_pos, TRUE, NOSIDE));
 	lengths = calculate_lengths(&ray);
 	step = calculate_step_dists(&ray, &dists, get_player()->world_pos, hit_pos);
 	vec2_multv2(&dists, lengths);
@@ -74,10 +74,10 @@ t_ray	shoot_ray(t_vec2 ray, t_ivec2 hit_pos)
 			hit = TRUE;
 	}
 	if (hit && side == SIDE_X)
-		return (populate_ray(dists.x - lengths.x, hit_pos, TRUE));
+		return (populate_ray(dists.x - lengths.x, hit_pos, TRUE, side));
 	if (hit && side == SIDE_Y)
-		return (populate_ray(dists.y - lengths.y, hit_pos, TRUE));
-	return (populate_ray(-1.0f, hit_pos, FALSE));
+		return (populate_ray(dists.y - lengths.y, hit_pos, TRUE, side));
+	return (populate_ray(-1.0f, hit_pos, FALSE, side));
 }
 
 void	draw_col_wall(int64_t col, float start_angle)
@@ -99,23 +99,30 @@ void	draw_col_wall(int64_t col, float start_angle)
 	while (y < WIN_H)
 	{
 		if (y < wall_origin)
-			y++;
-		else if (y == WIN_H / 2)
-			mlx_pixel_put_img(col, y++, GREEN);
+			mlx_pixel_put_img(col, y, CEILLING);
+//		else if (y == WIN_H / 2)
+//			mlx_pixel_put_img(col, y, GREEN);
 		else if (y < (wall_origin + wall_size))
-			mlx_pixel_put_img(col, y++, RED);
-		else
-			y++;
+		{
+			if (get_player()->last_ray.side == SIDE_X)
+				mlx_pixel_put_img(col, y, WALL_COLOR_1);
+			else if (get_player()->last_ray.side == SIDE_Y)
+				mlx_pixel_put_img(col, y, WALL_COLOR_2);
+		}
+		else if (y < WIN_H && y > (wall_origin + wall_size))
+			mlx_pixel_put_img(col, y, FLOOR);
+		y++;
 	}
 }
 
-static t_ray	populate_ray(float dist, t_ivec2 hit_pos, t_bool hit)
+static t_ray	populate_ray(float dist, t_ivec2 hit_pos, t_bool hit, int side)
 {
 	t_ray	ray;
 
 	ray.distance = dist;
 	ray.hit_pos = hit_pos;
 	ray.hit = hit;
+	ray.side = side;
 	return (ray);
 }
 

@@ -14,6 +14,7 @@
 # define RENDER_H
 
 # define RAY_LENGTH 200
+# define NOSIDE 0
 # define SIDE_X 1
 # define SIDE_Y 2
 

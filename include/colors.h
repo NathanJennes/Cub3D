@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:23:53 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/09 16:24:38 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/23 21:57:16 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 # define PINK		0x00FF00FF
 # define YELLOW		0x00FFFF00
 # define TURQUOISE	0x0000FFFF
+
+# define CEILLING		0x000099CC
+# define FLOOR			0x00666666
+# define WALL_COLOR_1	0x00e65c00
+# define WALL_COLOR_2	0x00b34700
 
 /* colors_utils.c */
 int			create_trgb(int t, int r, int g, int b);
