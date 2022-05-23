@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/21 20:30:47 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/23 13:46:37 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,12 @@ t_font_bitmap	load_bitmap_font(char *path);
 void			unload_bitmap_font(t_font_bitmap *font);
 int				load_font_meta(t_font *font, char *path);
 void			render_text(char *text, char *font_name, int size, t_ivec2 pos);
+void			render_text_tex(char *text, char *font_name, t_ivec2 pos,
+					t_ivec2 size_id);
 
 void			init_font_manager(void);
 void			unload_font_manager(void);
-t_font		*get_font(char *name);
+t_font			*get_font(char *name);
 
 /* Walls rendering */
 void			render_walls(int fov);
