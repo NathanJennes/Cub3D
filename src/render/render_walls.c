@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/22 22:21:53 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/23 11:40:00 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,27 +83,30 @@ t_ray	shoot_ray(t_vec2 ray, t_ivec2 hit_pos)
 void	draw_col_wall(int64_t col, float start_angle)
 {
 	int64_t	y;
-	int64_t	out_size;
+	int64_t	wall_origin;
 	int64_t	wall_size;
 
 	y = 0;
-	wall_size = DFLT_SIZE / (get_player()->last_ray.distance * cos(start_angle)) * 415;
+	printf("Dist %f\n", get_player()->last_ray.distance);
+	wall_size = (DFLT_SIZE * WIN_H) / (get_player()->last_ray.distance);
 	wall_size = abs(wall_size);
-	out_size = (WIN_H - wall_size) / 2;
-	while (y < out_size)
-		mlx_pixel_put_img(col, y++, BLACK);
-	if (get_player()->last_ray.hit == TRUE)
-	{
-		while (y < out_size + wall_size)
-			mlx_pixel_put_img(col, y++, RED);
-	}
-	else
-	{
-		while (y < out_size + wall_size)
-			mlx_pixel_put_img(col, y++, BLACK);
-	}
+	wall_origin = (WIN_H / 2) - (wall_size / 2);
+	if (wall_size > WIN_H)
+		wall_size = WIN_H;
+	if (wall_origin < 0)
+		wall_origin = 0;
+	printf("%d -- %d\n", wall_size, wall_origin);
 	while (y < WIN_H)
-		mlx_pixel_put_img(col, y++, BLACK);
+	{
+		if (y < wall_origin)
+			y++;
+		else if (y == WIN_H / 2)
+			mlx_pixel_put_img(col, y++, GREEN);
+		else if (y < (wall_origin + wall_size))
+			mlx_pixel_put_img(col, y++, RED);
+		else
+			y++;
+	}
 }
 
 static t_ray	populate_ray(float dist, t_ivec2 hit_pos, t_bool hit)

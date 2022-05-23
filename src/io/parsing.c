@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/22 22:01:50 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/23 11:34:44 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	init_map(char *file)
 	gc_strarray_free(infos.map_raw);
 	app->gamestate.map = infos;
 	app->gamestate.player.world_pos = infos.spawn_pos;
-	app->gamestate.settings.fov = 60;
+	app->gamestate.settings.fov = 70;
 }
 
 static void	parse_line(t_map_info *infos, char *line)

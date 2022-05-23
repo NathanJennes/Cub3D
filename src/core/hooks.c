@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:57:26 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/20 18:16:39 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/23 11:19:42 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ static void	handle_moving(int keycode, t_mlx *app)
 		app->gamestate.player.world_pos.x += PLAYER_SPEED * get_player()->right.x;
 	}
 	if (keycode == KEY_RIGHT)
-		get_player()->direction -= PI / 20.0f;
+		get_player()->direction -= PI / 50.0f;
 	if (keycode == KEY_LEFT)
-		get_player()->direction += PI / 20.0f;
+		get_player()->direction += PI / 50.0f;
 	update_player(get_player());
 }
