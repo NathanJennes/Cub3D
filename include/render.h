@@ -6,14 +6,20 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/22 16:52:05 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/24 11:55:48 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
 
+# define FOV_RAD		1.2217304764
+# define HALFFOV_RAD	0.61086523819
+
+# define DFLT_SIZE	24
+
 # define RAY_LENGTH 200
+
 # define NOSIDE 0
 # define SIDE_X 1
 # define SIDE_Y 2

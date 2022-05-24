@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/23 21:54:56 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/24 17:59:07 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,28 @@ static t_ray	populate_ray(float dist, t_ivec2 hit_pos, t_bool hit, int side);
 static t_vec2	calculate_lengths(t_vec2 *ray);
 static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos, t_ivec2 map_pos);
 static int		get_map_type(int64_t x, int64_t y);
-void			draw_col_wall(int64_t col, float start_angle);
+void			draw_col_wall(int64_t col, float dist);
 
 void	render_walls(void)
 {
+	float 		angle_inc;
 	float		start_angle;
 	int64_t		i;
 	t_vec2		v_ray;
 	t_player	*player;
-	int64_t		wall_size;
 
 	i = 0;
+	angle_inc = 0;
 	player = get_player();
 	start_angle = player->ray_angle;
 	while (i < WIN_W)
 	{
 		v_ray = vec2(sinf(start_angle), cosf(start_angle));
 		player->last_ray = shoot_ray(v_ray, player->map_pos);
-		draw_col_wall(i, start_angle);
+		player->last_ray.distance *= cos(HALFFOV_RAD - angle_inc);
+		draw_col_wall(i, player->last_ray.distance);
 		start_angle -= player->ray_increment;
+		angle_inc += player->ray_increment;
 		i++;
 	}
 }
@@ -80,28 +83,24 @@ t_ray	shoot_ray(t_vec2 ray, t_ivec2 hit_pos)
 	return (populate_ray(-1.0f, hit_pos, FALSE, side));
 }
 
-void	draw_col_wall(int64_t col, float start_angle)
+void	draw_col_wall(int64_t col, float dist)
 {
 	int64_t	y;
 	int64_t	wall_origin;
 	int64_t	wall_size;
 
 	y = 0;
-	printf("Dist %f\n", get_player()->last_ray.distance);
-	wall_size = (DFLT_SIZE * WIN_H) / (get_player()->last_ray.distance);
+	wall_size = (DFLT_SIZE * WIN_H) / dist;
 	wall_size = abs(wall_size);
 	wall_origin = (WIN_H / 2) - (wall_size / 2);
 	if (wall_size > WIN_H)
 		wall_size = WIN_H;
 	if (wall_origin < 0)
 		wall_origin = 0;
-	printf("%d -- %d\n", wall_size, wall_origin);
 	while (y < WIN_H)
 	{
 		if (y < wall_origin)
 			mlx_pixel_put_img(col, y, CEILLING);
-//		else if (y == WIN_H / 2)
-//			mlx_pixel_put_img(col, y, GREEN);
 		else if (y < (wall_origin + wall_size))
 		{
 			if (get_player()->last_ray.side == SIDE_X)

@@ -36,7 +36,11 @@
 # define SLIDER_W		75
 # define SLIDER_BTN2_XO	SLIDER_BTN_W + SLIDER_PAD * 2 + SLIDER_W
 
-# define DEBUG_UI 1
+# define MENU 		0
+# define IN_GAME	1
+# define PAUSE		2
+
+# define DEBUG_UI 	1
 
 typedef struct s_mlx t_mlx;
 
