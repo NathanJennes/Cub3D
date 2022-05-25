@@ -103,6 +103,7 @@ typedef struct s_mlx
 	size_t				savegames_count;
 	t_gamestate			*maps;
 	int64_t				maps_count;
+	int64_t				last_time;
 	int64_t				start_time;
 	int8_t				game_state;
 	t_ui				ui;

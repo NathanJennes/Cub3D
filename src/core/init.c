@@ -6,10 +6,11 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/21 16:49:01 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/25 13:17:22 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/time.h>
 #include "core.h"
 #include "ui.h"
 #include "render.h"
@@ -20,12 +21,14 @@ int			mouse_down_callback(int button, int x, int y, void *unused);
 int			mouse_up_callback(int button, int x, int y, void *unused);
 
 static void	init_hooks(void);
+static void	init_start_time(void);
 
 void	init_app(void)
 {
 	t_mlx	*app;
 
 	app = get_app();
+	init_start_time();
 	init_gc();
 	init_window("Cub3d");
 	init_font_manager();
@@ -51,4 +54,14 @@ static void	init_hooks(void)
 	mlx_hook(app->win, 5, 0, mouse_up_callback, NULL);
 	mlx_hook(app->win, 6, 0, mouse_move_hooks, app);
 	mlx_loop_hook(app->mlx, main_loop, app);
+}
+
+static void	init_start_time(void)
+{
+	t_mlx			*app;
+	struct timeval	time;
+
+	app = get_app();
+	gettimeofday(&time, NULL);
+	app->start_time = time.tv_sec * 1000 + time.tv_usec / 1000;
 }

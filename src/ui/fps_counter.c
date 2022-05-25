@@ -29,12 +29,12 @@ void	fps_counter(void)
 	app = get_app();
 	nbr_frames++;
 	current_time = get_sec_time();
-	if ((current_time - app->start_time) >= 1)
+	if ((current_time - app->last_time) >= 1)
 	{
 		fps = gc_itoa(nbr_frames);
 		last_fps = nbr_frames;
 		nbr_frames = 0;
-		app->start_time = current_time;
+		app->last_time = current_time;
 	}
 	else
 		fps = gc_itoa(last_fps);

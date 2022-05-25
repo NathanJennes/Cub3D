@@ -6,6 +6,7 @@ SRCS_DIR		:=		$(MAKE_DIR)/src
 
 RELEASE_OBJS_DIR	:=		$(MAKE_DIR)/obj
 DEBUG_OBJS_DIR		:=		$(MAKE_DIR)/objd
+PROFILE_OBJS_DIR	:=		$(MAKE_DIR)/objp
 
 LIBFT_DIR		:=		$(MAKE_DIR)/Libft
 LEAKY_DIR		:=		$(LIBFT_DIR)/Leaky
@@ -40,10 +41,18 @@ DEBUG_BIN_CFLAGS		+=		-Wall -Wextra
 DEBUG_BIN_CFLAGS		+=		-g3 -fsanitize=address -DDEBUG
 DEBUG_BIN_CFLAGS		+=		$(INC_PATH)
 
+PROFILE_BIN_CFLAGS		:=
+PROFILE_BIN_CFLAGS		+=		-MD
+PROFILE_BIN_CFLAGS		+=		-Wall -Wextra
+PROFILE_BIN_CFLAGS		+=		-g3 -fsanitize=address -finstrument-functions
+PROFILE_BIN_CFLAGS		+=		$(INC_PATH)
+
 RELEASE_BIN_LDFLAGS		:=
 
 DEBUG_BIN_LDFLAGS		:=
 DEBUG_BIN_LDFLAGS		+=		-fsanitize=address
+
+PROFILE_BIN_LDFLAGS		:=		-fsanitize=address
 
 RELEASE_LIBFT_LIB	:=		$(LIBFT_DIR)/libft.a
 DEBUG_LIBFT_LIB		:=		$(LIBFT_DIR)/libftd.a
@@ -54,6 +63,7 @@ DEBUG_LEAKY_LIB		:=		$(LEAKY_DIR)/libleakyd.a
 export MAKE_DIR
 export RELEASE_OBJS_DIR
 export DEBUG_OBJS_DIR
+export PROFILE_OBJS_DIR
 export MASTER_MAKE
 export SRCS_DIR
 export OBJS_DIR
@@ -64,8 +74,10 @@ export DEBUG_LIBS
 export BIN_CC
 export RELEASE_BIN_CFLAGS
 export DEBUG_BIN_CFLAGS
+export PROFILE_BIN_CFLAGS
 export RELEASE_BIN_LDFLAGS
 export DEBUG_BIN_LDFLAGS
+export PROFILE_BIN_LDFLAGS
 export DEBUG_LIBFT_LIB
 export RELEASE_LIBFT_LIB
 export DEBUG_LEAKY_LIB
@@ -80,12 +92,21 @@ ifeq ($(OS), Darwin)
 endif
 	@$(MAKE) -j4 -C $(SRCS_DIR) -r -R --warn-undefined-variables
 
+.PHONY: debug
 debug: header
 	@$(MAKE) -j4 -C $(LIBFT_DIR) debug
 ifeq ($(OS), Darwin)
 	@$(MAKE) -j4 -C $(MLX_DIR)
 endif
 	@$(MAKE) -j4 -C $(SRCS_DIR) -r -R --warn-undefined-variables debug
+
+.PHONY: profile
+profile: header
+	@$(MAKE) -j4 -C $(LIBFT_DIR)
+ifeq ($(OS), Darwin)
+	@$(MAKE) -j4 -C $(MLX_DIR)
+endif
+	@$(MAKE) -j4 -C $(SRCS_DIR) -r -R --warn-undefined-variables profile
 
 .PHONY: bonus
 bonus: all
@@ -118,6 +139,9 @@ cub_re:
 cub_debug_re:
 	@$(MAKE) -C $(SRCS_DIR) fclean
 	@$(MAKE) -C $(SRCS_DIR) debug
+
+.PHONY: profile_re
+profile_re:	fclean profile
 
 # Misc
 # =====================

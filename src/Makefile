@@ -1,5 +1,6 @@
 RELEASE_NAME 			:=	cub3d
 DEBUG_NAME				:=	cub3dd
+PROFILE_NAME			:=	cub3dp
 
 # Source files
 # ****************************************************************************
@@ -8,6 +9,10 @@ CORE_DIR		:=	core
 CORE_FILE		:=	main.c exit.c main_loop.c error_utils.c init.c gc.c			\
 					getters.c getters_2.c window.c cub_error.c
 CORE_SRCS		:=	$(addprefix $(CORE_DIR)/, $(CORE_FILE))
+
+PROFILING_DIR	:=	profiling
+PROFILING_FILE	:=	profiling.c
+PROFILING_SRCS	:=	$(addprefix $(PROFILING_DIR)/, $(PROFILING_FILE))
 
 INPUT_DIR		:=	$(CORE_DIR)/input
 INPUT_FILE		:=	input_device.c key_listeners.c key_manager.c	\
@@ -87,12 +92,17 @@ SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\
 					$(addprefix $(SRCS_DIR)/, $(UI_LAYOUT_SRCS))				\
 					$(addprefix $(SRCS_DIR)/, $(UI_MAIN_MENU_SRCS))				\
 					$(addprefix $(SRCS_DIR)/, $(UI_NEW_GAME_MENU_SRCS))			\
-					$(addprefix $(SRCS_DIR)/, $(FONT_SRCS))			\
+					$(addprefix $(SRCS_DIR)/, $(FONT_SRCS))						\
+
+PROFILE_SRCS	:=	$(SRCS)	\
+					$(addprefix $(SRCS_DIR)/, $(PROFILING_SRCS))				\
+
 
 RELEASE_OBJS	:=	$(addprefix $(RELEASE_OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
 DEBUG_OBJS		:=	$(addprefix $(DEBUG_OBJS_DIR)/, $(notdir $(SRCS:.c=d.o)))
+PROFILE_OBJS	:=	$(addprefix $(PROFILE_OBJS_DIR)/, $(notdir $(PROFILE_SRCS:.c=p.o)))
 
-DEPENDS			:=	$(RELEASE_OBJS:.o=.d) $(DEBUG_OBJS:.o=.d)
+DEPENDS			:=	$(RELEASE_OBJS:.o=.d) $(DEBUG_OBJS:.o=.d) $(PROFILE_OBJS:.o=.d)
 
 # Recipe
 # ****************************************************************************
@@ -102,6 +112,9 @@ all: $(RELEASE_NAME)
 
 .PHONY: debug
 debug: $(DEBUG_NAME)
+
+.PHONY: profile
+profile: $(PROFILE_NAME)
 
 .PHONY: bonus
 bonus: all
@@ -160,7 +173,7 @@ $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(FONT_DIR)/%.c | $(RELEASE_OBJS_DIR)
 
 $(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
 	@printf "$(_BLUE)\nCompiled source files\n"
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(RELEASE_OBJS) $(RELEASE_LIBS) -o ../$@
+	@$(BIN_CC) $(RELEASE_BIN_LDFLAGS) $(RELEASE_OBJS) $(RELEASE_LIBS) -o ../$@
 	@printf "$(_GREEN)Finish compiling $(RELEASE_NAME)!$(_END)\n"
 
 # --------------------------- #
@@ -217,19 +230,82 @@ $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(FONT_DIR)/%.c | $(DEBUG_OBJS_DIR)
 
 $(DEBUG_NAME): $(DEBUG_OBJS) $(DEBUG_LIBFT_LIB) $(DEBUG_LEAKY_LIB)
 	@printf "$(_BLUE)\nCompiled source files\n"
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(DEBUG_OBJS) $(DEBUG_LIBS) -o ../$@
+	$(BIN_CC) $(DEBUG_BIN_LDFLAGS) $(DEBUG_OBJS) $(DEBUG_LIBS) -o ../$@
 	@printf "$(_GREEN)Finish compiling $(DEBUG_NAME)!$(_END)\n"
+
+# --------------------------- #
+#           PROFILE           #
+# --------------------------- #
+
+$(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(CORE_DIR)/%.c | $(PROFILE_OBJS_DIR)
+	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(RENDER_DIR)/%.c | $(PROFILE_OBJS_DIR)
+	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(UI_DIR)/%.c | $(PROFILE_OBJS_DIR)
+	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(TEXTURES_DIR)/%.c | $(PROFILE_OBJS_DIR)
+	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(IO_DIR)/%.c | $(PROFILE_OBJS_DIR)
+	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(SAVE_DIR)/%.c | $(PROFILE_OBJS_DIR)
+	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(INPUT_DIR)/%.c | $(PROFILE_OBJS_DIR)
+	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(UI_COMPONENT_DIR)/%.c | $(PROFILE_OBJS_DIR)
+	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(UI_LAYOUT_DIR)/%.c | $(PROFILE_OBJS_DIR)
+	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(UI_MAIN_MENU_DIR)/%.c | $(PROFILE_OBJS_DIR)
+	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(UI_NEW_GAME_MENU_DIR)/%.c | $(PROFILE_OBJS_DIR)
+	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(FONT_DIR)/%.c | $(PROFILE_OBJS_DIR)
+	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(PROFILING_DIR)/%.c | $(PROFILE_OBJS_DIR)
+	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(PROFILE_NAME): $(PROFILE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
+	@printf "$(_BLUE)\nCompiled source files\n"
+	@$(BIN_CC) $(PROFILE_BIN_LDFLAGS) $(PROFILE_OBJS) $(RELEASE_LIBS) -o ../$@
+	@printf "$(_GREEN)Finish compiling $(PROFILE_NAME)!$(_END)\n"
 
 clean:
 	@printf "$(_YELLOW)Removing object files ...$(_END)\n"
 	@rm -rf $(RELEASE_OBJS_DIR)
 	@rm -rf $(DEBUG_OBJS_DIR)
+	@rm -rf $(PROFILE_OBJS_DIR)
 	@rm -fr *.dSYM
 
 fclean:	clean
 	@printf "$(_RED)Removing Executable ...$(_END)\n"
 	@rm -rf ../$(RELEASE_NAME)
 	@rm -rf ../$(DEBUG_NAME)
+	@rm -rf ../$(PROFILE_NAME)
 
 re:		fclean all
 
@@ -239,8 +315,12 @@ $(RELEASE_OBJS_DIR):
 $(DEBUG_OBJS_DIR):
 	@mkdir -p $(DEBUG_OBJS_DIR)
 
+$(PROFILE_OBJS_DIR):
+	@mkdir -p $(PROFILE_OBJS_DIR)
+
 info:
 	@echo $(RELEASE_OBJS)
 	@echo $(DEBUG_OBJS)
+	@echo $(PROFILE_OBJS)
 
 -include $(DEPENDS)
