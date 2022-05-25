@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 13:11:29 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/18 16:04:54 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/25 17:44:21 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	render_mmap_empty(int x, int y, int cell_size);
 void	render_mmap(float zoom)
 {
 	int			cell_size;
-	t_ivec2		player_pos;
+	t_vec2		player_pos;
 	t_vec2		offset;
 	t_mlx		*app;
 
@@ -29,28 +29,29 @@ void	render_mmap(float zoom)
 	cell_size = MMAP_ZOOM_FACTOR * zoom;
 	player_pos.x = MMAP_W / 2 + MMAP_PAD;
 	player_pos.y = MMAP_H / 2 + MMAP_PAD;
-	offset.x = -(app->gamestate.player.pos.x / CELL_WIDTH)
+	offset.x = -(app->gamestate.player.world_pos.x / CELL_WIDTH)
 		* cell_size - cell_size / 2 + player_pos.x;
-	offset.y = -(app->gamestate.player.pos.y / CELL_HEIGHT)
+	offset.y = -(app->gamestate.player.world_pos.y / CELL_HEIGHT)
 		* cell_size - cell_size / 2 + player_pos.y;
-	draw_rect(ivec2(MMAP_PAD / 2, MMAP_PAD / 2),
-		ivec2(MMAP_W + MMAP_PAD, MMAP_H + MMAP_PAD),
+	draw_rect((t_ivec2){MMAP_PAD / 2, MMAP_PAD / 2},
+		(t_ivec2){MMAP_W + MMAP_PAD, MMAP_H + MMAP_PAD},
 		trgb(0, 51, 51, 51));
 	draw_cells(cell_size, offset);
-	draw_circle(player_pos, MMAP_PLAYER_DIAM, trgb(0, 255, 0, 0));
+	draw_circle(v2_to_iv2(player_pos), MMAP_PLAYER_DIAM,
+		trgb(0, 255, 0, 0));
 }
 
 static void	draw_cells(int cell_size, t_vec2 offset)
 {
 	t_map_info	*map;
-	size_t		i;
-	size_t		j;
-	int			x_start;
-	int			y_start;
+	int64_t		i;
+	int64_t		j;
+	int64_t		x_start;
+	int64_t		y_start;
 
 	map = get_map_infos();
-	x_start = offset.x;
-	y_start = offset.y;
+	x_start = (int64_t)offset.x;
+	y_start = (int64_t)offset.y;
 	i = 0;
 	while (i < map->height)
 	{

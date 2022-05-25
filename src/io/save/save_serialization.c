@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 18:22:14 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/16 17:27:33 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/20 14:32:56 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	serialize_player(int fd, t_player player)
 {
 	dprintf(fd, "PLAYER_START\n");
 	dprintf(fd, "POS %d %d %d\n",
-		(int)player.pos.x, (int)player.pos.y, (int)player.direction);
+		(int)player.world_pos.x, (int)player.world_pos.y, (int)player.direction);
 	dprintf(fd, "PLAYER_END\n");
 }
 
@@ -59,8 +59,8 @@ static void	serialize_map(int fd, t_map_info map)
 
 static void	serialize_map_walls(int fd, t_map_info map)
 {
-	size_t	i;
-	size_t	j;
+	int64_t	i;
+	int64_t	j;
 
 	i = 0;
 	while (i < map.height)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:23:53 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/18 16:42:21 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/23 21:57:16 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
 # define PINK		0x00FF00FF
 # define YELLOW		0x00FFFF00
 # define TURQUOISE	0x0000FFFF
+
+# define BKGD_COLOR		0x0037464B
+
+# define CEILLING		0x000099CC
+# define FLOOR			0x00666666
+# define WALL_COLOR_1	0x00e65c00
+# define WALL_COLOR_2	0x00b34700
 
 /* colors */
 int			trgb(int t, int r, int g, int b);

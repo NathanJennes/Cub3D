@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 14:24:49 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/16 16:40:24 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/18 18:21:28 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	read_map_content(t_map_info *infos, size_t i, size_t j, int *row);
 
 void	construct_map(t_map_info *infos)
 {
-	size_t	i;
-	size_t	j;
+	int64_t	i;
+	int64_t	j;
 	int		*row;
 
 	infos->map = gc_calloc(infos->height, sizeof (int *));
@@ -28,7 +28,7 @@ void	construct_map(t_map_info *infos)
 		row = gc_calloc(infos->width, sizeof (int));
 		gc_memseti(row, VOID, infos->width);
 		j = 0;
-		while (j < ft_strlen(infos->map_raw[i]))
+		while (j < (int64_t)ft_strlen(infos->map_raw[i]))
 		{
 			read_map_content(infos, i, j, row);
 			j++;

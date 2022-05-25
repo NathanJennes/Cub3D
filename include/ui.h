@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/20 19:52:56 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/25 17:38:00 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,11 +135,19 @@ void			update_ui(void);
 void			render_mmap(float zoom);
 
 void			fps_counter(void);
+void		print_debug(void);
+void		fps_counter(void);
 
 void			update_ui_flags(uint8_t flag);
+void			switch_debug_ui(void);
 
-void			put_text(t_mlx *app, t_vec2 pos, int color, char *str);
 int				str_px_size(char *str);
+void			put_text(t_ivec2 pos, int color, char *str);
+int				str_px_size(char *str);
+void			print_float(float val, t_ivec2 pos, int color);
+void			print_ivec(t_ivec2 v, t_ivec2 pos, int color);
+void			print_vec(t_vec2 v, t_ivec2 pos, int color);
+void			print_int(int val, t_ivec2 pos, int color);
 
 /* Main Menu */
 void			init_main_menu(void);

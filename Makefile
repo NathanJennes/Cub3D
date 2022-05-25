@@ -78,7 +78,7 @@ all: header
 ifeq ($(OS), Darwin)
 	@$(MAKE) -j4 -C $(MLX_DIR)
 endif
-	@$(MAKE) -j4 -C $(SRCS_DIR) -r -R --warn-undefined-variables
+	@$(MAKE) -C $(SRCS_DIR) -r -R --warn-undefined-variables
 
 debug: header
 	@$(MAKE) -j4 -C $(LIBFT_DIR) debug

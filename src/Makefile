@@ -6,7 +6,7 @@ DEBUG_NAME				:=	cub3dd
 
 CORE_DIR		:=	core
 CORE_FILE		:=	main.c exit.c main_loop.c error_utils.c init.c gc.c			\
-					getters.c getters_2.c window.c cub_error.c
+					getters.c getters_2.c window.c cub_error.c player.c player_update.c
 CORE_SRCS		:=	$(addprefix $(CORE_DIR)/, $(CORE_FILE))
 
 INPUT_DIR		:=	$(CORE_DIR)/input
@@ -19,7 +19,7 @@ RENDER_FILE		:=	render_primitives.c render_primitives_img.c	\
 					colors.c colors_utils.c	\
 					screen_rendering.c texture_rendering.c	\
 					render_ui_texture.c render_text.c	\
-					render_walls.c
+					render_walls.c render_debug.c
 RENDER_SRCS		:=	$(addprefix $(RENDER_DIR)/, $(RENDER_FILE))
 
 FONT_DIR		:=	$(RENDER_DIR)/font
@@ -30,7 +30,7 @@ FONT_SRCS		:=	$(addprefix $(FONT_DIR)/, $(FONT_FILE))
 
 UI_DIR			:=	ui
 UI_FILE			:=	fps_counter.c ui_helper.c ui_manager.c						\
-					render_minimap.c ui_init.c
+					render_minimap.c ui_init.c print_debug.c
 UI_SRCS			:=	$(addprefix $(UI_DIR)/, $(UI_FILE))
 
 UI_COMPONENT_DIR	:=	$(UI_DIR)/components

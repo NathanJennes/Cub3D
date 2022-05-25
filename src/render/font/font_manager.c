@@ -6,12 +6,13 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 15:40:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/21 20:13:10 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/25 17:55:39 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "leaky.h"
+#include "render.h"
 
 static void	add_font(char *meta_path, char *bitmap_path);
 static void	grow_font_array(t_font_manager *manager);

@@ -6,70 +6,27 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/23 15:12:29 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/25 19:02:34 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
 
-# define RAY_LENGTH 1000
-# define SIDE_X 1
-# define SIDE_Y 2
-
-# define MAX_CHARS_IN_FONT 256
-# define FONT_SAMPLING 2
-
 # include <stddef.h>
 # include <stdint.h>
 
 # include "libft.h"
+# include "core.h"
+# include "font.h"
 
-typedef struct s_font_bitmap
-{
-	int		width;
-	int		height;
-	int		bpp;
-	int		endian;
-	int		line_size;
-	uint8_t	*data;
-}	t_font_bitmap;
+# define DFLT_SIZE	164
 
-typedef struct s_char_meta
-{
-	int		x;
-	int		y;
-	int		width;
-	int		height;
-	int		x_off;
-	int		y_off;
-	int		x_advance;
-}	t_char_meta;
+# define RAY_LENGTH 50
 
-typedef struct s_font_meta
-{
-	t_font_bitmap	bitmap;
-	t_char_meta		characters[MAX_CHARS_IN_FONT];
-	char			*name;
-	int				font_size;
-}	t_font;
-
-typedef struct s_text_render
-{
-	t_font			*font;
-	t_char_meta		*c;
-	t_font_bitmap	*bitmap;
-	float			ratio;
-	t_ivec2			xy;
-	t_ivec2			pos;
-	t_ivec2			px_size;
-}	t_text_render;
-
-typedef struct s_font_manager
-{
-	t_font		*fonts;
-	int64_t		font_count;
-}	t_font_manager;
+# define NOSIDE 0
+# define SIDE_X 1
+# define SIDE_Y 2
 
 /* Screen drawing */
 void			clear_screen(int color);
@@ -125,8 +82,8 @@ t_ivec2			text_center(char *text, char *font_name,
 					int size, t_ivec2 pos);
 
 /* Walls rendering */
-void			render_walls(int fov);
-float			shoot_ray(t_vec2 ray, t_vec2 pos, t_ivec2 map_pos);
+void			render_walls(void);
+t_ray			shoot_ray(t_vec2 ray, t_ivec2 hit_pos);
 
 /* Utils */
 int				outside_mmap_bounds(int x, int y);
