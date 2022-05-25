@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/24 17:59:07 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/25 17:05:10 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,23 @@ void			draw_col_wall(int64_t col, float dist);
 
 void	render_walls(void)
 {
-	float 		angle_inc;
-	float		start_angle;
+	float		offset;
 	int64_t		i;
-	t_vec2		v_ray;
+	t_vec2		ray_direction;
 	t_player	*player;
+	float		half_width;
 
 	i = 0;
-	angle_inc = 0;
+	half_width = tan(HALFFOV_RAD);
 	player = get_player();
-	start_angle = player->ray_angle;
 	while (i < WIN_W)
 	{
-		v_ray = vec2(sinf(start_angle), cosf(start_angle));
-		player->last_ray = shoot_ray(v_ray, player->map_pos);
-		player->last_ray.distance *= cos(HALFFOV_RAD - angle_inc);
-		draw_col_wall(i, player->last_ray.distance);
-		start_angle -= player->ray_increment;
-		angle_inc += player->ray_increment;
+		offset = ((i * 2.0f / (WIN_W - 1.0f)) - 1.0f) * half_width;
+		ray_direction.x = player->forward.x - offset * player->right.x;
+		ray_direction.y = player->forward.y - offset * player->right.y;
+		player->last_ray = shoot_ray(ray_direction, player->map_pos);
+		if (player->last_ray.hit == TRUE)
+			draw_col_wall(i, player->last_ray.distance);
 		i++;
 	}
 }
@@ -90,7 +89,7 @@ void	draw_col_wall(int64_t col, float dist)
 	int64_t	wall_size;
 
 	y = 0;
-	wall_size = (DFLT_SIZE * WIN_H) / dist;
+	wall_size = DFLT_SIZE * DFLT_SIZE / dist;
 	wall_size = abs(wall_size);
 	wall_origin = (WIN_H / 2) - (wall_size / 2);
 	if (wall_size > WIN_H)

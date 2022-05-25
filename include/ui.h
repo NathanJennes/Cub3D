@@ -42,7 +42,7 @@
 
 # define DEBUG_UI 	1
 
-typedef struct s_mlx t_mlx;
+typedef struct s_mlx	t_mlx;
 
 typedef enum e_ui_state
 {

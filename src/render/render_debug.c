@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/24 17:49:54 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/25 17:00:55 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,22 @@ void	render_test_scene(const t_mlx *app)
 
 static void	debug_rays(void)
 {
-	float		start_angle;
+	float		offset;
 	int64_t		i;
-	t_vec2		v_ray;
-	t_ray		ray;
+	t_vec2		ray_direction;
 	t_player	*player;
+	float		half_width;
 
 	i = 0;
+	half_width = tan(HALFFOV_RAD);
 	player = get_player();
-	start_angle = player->ray_angle;
 	while (i < WIN_W)
 	{
-		v_ray = vec2(sinf(start_angle), cosf(start_angle));
-		ray = shoot_ray(v_ray, player->map_pos);
-		print_ray(ray.hit_pos);
-		start_angle -= player->ray_increment;
+		offset = ((i * 2.0f / (WIN_W - 1.0f)) - 1.0f) * half_width;
+		ray_direction.x = player->forward.x - offset * player->right.x;
+		ray_direction.y = player->forward.y - offset * player->right.y;
+		player->last_ray = shoot_ray(ray_direction, player->map_pos);
+		print_ray(player->last_ray.hit_pos);
 		i++;
 	}
 }
@@ -69,7 +70,7 @@ static void	debug_rays(void)
 void	print_ray(t_ivec2 hit_pos)
 {
 	render_line(get_player()->map_pos, hit_pos, RED, RED);
-	render_circle(hit_pos, 5, YELLOW);
+//	render_circle(hit_pos, 3, YELLOW);
 }
 
 void	print_player_vector(void)
