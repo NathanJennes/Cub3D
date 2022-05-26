@@ -24,7 +24,7 @@ RENDER_FILE		:=	render_primitives.c render_primitives_img.c	\
 					colors.c colors_utils.c	\
 					screen_rendering.c texture_rendering.c	\
 					render_ui_texture.c render_text.c	\
-					render_walls.c render_debug.c
+					render_walls.c render_debug.c raycasting.c
 RENDER_SRCS		:=	$(addprefix $(RENDER_DIR)/, $(RENDER_FILE))
 
 FONT_DIR		:=	$(RENDER_DIR)/font

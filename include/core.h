@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 12:49:15 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 15:48:55 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,13 @@
 # ifdef FULL_SCREEN
 #  define WIN_W		1920
 #  define WIN_H		1080
+#  define HALFW_W	960
+#  define HALFW_H	540
 # else
 #  define WIN_W		960
 #  define WIN_H		540
+#  define HALFW_W	480
+#  define HALFW_H	270
 # endif
 
 # define MAX_KEYCODE 1024
