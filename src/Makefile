@@ -21,6 +21,7 @@ INPUT_SRCS		:=	$(addprefix $(INPUT_DIR)/, $(INPUT_FILE))
 
 RENDER_DIR		:=	render
 RENDER_FILE		:=	render_primitives.c render_primitives_img.c	\
+					render_primitives_unsafe.c render_primitives_img_unsafe.c	\
 					colors.c colors_utils.c	\
 					screen_rendering.c texture_rendering.c	\
 					render_ui_texture.c render_text.c	\

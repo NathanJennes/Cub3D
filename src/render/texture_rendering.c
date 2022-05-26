@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:22:25 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/18 16:44:08 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 16:26:22 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	clear_texture(int color, int64_t tex_id)
 {
 	int			i;
 	int			total;
-	int			bytes_pp;
 	t_texture	*texture;
 
 	texture = get_texture_from_id(tex_id);
@@ -27,10 +26,9 @@ void	clear_texture(int color, int64_t tex_id)
 		return ;
 	i = 0;
 	total = (texture->width * texture->height);
-	bytes_pp = texture->bpp / 8;
 	while (i < total)
 	{
-		*((unsigned int *)(texture->original + i * bytes_pp)) = color;
+		*((unsigned int *)(texture->original + i * 4)) = color;
 		i++;
 	}
 }
@@ -46,7 +44,21 @@ void	set_texture_pixel(int64_t x, int64_t y, int color, int64_t tex_id)
 	if (!pixel_in_texture(x, y, texture->width, texture->height))
 		return ;
 	dst = texture->original
-		+ (y * texture->line_size + x * (texture->bpp / 8));
+		+ (y * texture->line_size + x * 4);
+	*(unsigned int *)dst = color;
+}
+
+void	set_texture_pixel_unsafe(int64_t x, int64_t y,
+	int color, int64_t tex_id)
+{
+	uint8_t		*dst;
+	t_texture	*texture;
+
+	texture = get_texture_from_id(tex_id);
+	if (!texture)
+		return ;
+	dst = texture->original
+		+ (y * texture->line_size + x * 4);
 	*(unsigned int *)dst = color;
 }
 

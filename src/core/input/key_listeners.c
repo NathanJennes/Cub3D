@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:42:50 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/25 17:59:58 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 16:33:31 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	key_pressed_listener(int keycode)
 	app = get_app();
 	if (keycode == KEY_LEFT || keycode == KEY_UP || keycode == KEY_RIGHT
 		|| keycode == KEY_DOWN)
-	{}
+	{
+	}
 	if (keycode == KEY_ESC)
 		close_app();
 	if (keycode == KEY_F3)

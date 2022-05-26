@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/25 19:46:47 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 16:41:03 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,17 @@ int	main_loop(void)
 
 	app = get_app();
 	update_player(&app->gamestate.player);
-	clear_screen(BKGD_COLOR);
-	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 	if (app->game_state & IN_GAME)
 	{
-		draw_rect(ivec2(0, 0), ivec2(WIN_W, WIN_H / 2), CEILLING);
-		draw_rect(ivec2(0, WIN_H / 2), ivec2(WIN_W, WIN_H / 2), FLOOR);
+		render_ui_texture(app->ceiling_tex, 0, 0);
+		render_ui_texture(app->floor_tex, 0, WIN_H / 2);
 		render_walls();
 		render_test_scene(app);
+	}
+	else
+	{
+		clear_screen(BKGD_COLOR);
+		mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 	}
 	if (app->ui.debug_ui == TRUE)
 		print_debug();

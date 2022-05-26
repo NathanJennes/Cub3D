@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 15:58:56 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 15:44:17 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 16:28:03 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,14 @@ void	clear_screen(int color)
 {
 	int		i;
 	int		total;
-	int		bytes_pp;
 	t_frame	*frame;
 
 	frame = get_frame();
 	i = 0;
 	total = (WIN_W * WIN_H);
-	bytes_pp = frame->bits_pp / 8;
 	while (i < total)
 	{
-		*((unsigned int *)(frame->addr + i * bytes_pp)) = color;
+		*((unsigned int *)(frame->addr + i * 4)) = color;
 		i++;
 	}
 }
@@ -41,7 +39,18 @@ void	set_screen_pixel(int64_t x, int64_t y, int color)
 		return ;
 	frame = get_frame();
 	dst = frame->addr
-		+ (y * frame->line_length + x * (frame->bits_pp / 8));
+		+ (y * frame->line_length + x * 4);
+	*(unsigned int *)dst = color;
+}
+
+void	set_screen_pixel_unsafe(int64_t x, int64_t y, int color)
+{
+	char	*dst;
+	t_frame	*frame;
+
+	frame = get_frame();
+	dst = frame->addr
+		+ (y * frame->line_length + x * 4);
 	*(unsigned int *)dst = color;
 }
 
