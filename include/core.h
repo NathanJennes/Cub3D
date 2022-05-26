@@ -30,9 +30,13 @@
 # ifdef FULL_SCREEN
 #  define WIN_W		1920
 #  define WIN_H		1080
+#  define HALFW_W	960
+#  define HALFW_H	540
 # else
 #  define WIN_W		960
 #  define WIN_H		540
+#  define HALFW_W	480
+#  define HALFW_H	270
 # endif
 
 # define MAX_KEYCODE 1024

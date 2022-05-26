@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 16:29:55 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 16:39:48 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # define DFLT_SIZE	300
 
-# define RAY_LENGTH 50
+# define RAY_LENGTH 10
 
 # define NOSIDE 0
 # define SIDE_X 1

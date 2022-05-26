@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_debug.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/25 19:08:25 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 13:40:53 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ NOPROF
 	player = get_player();
 	while (i < WIN_W)
 	{
-		offset = ((i * 2.0f / (WIN_W - 1.0f)) - 1.0f) * half_width;
+		offset = (((double)i * 2.0f / (WIN_W - 1.0f)) - 1.0f) * half_width;
 		ray_direction.x = player->forward.x - offset * player->right.x;
 		ray_direction.y = player->forward.y - offset * player->right.y;
 		player->last_ray = shoot_ray(ray_direction, player->map_pos);
@@ -111,7 +111,7 @@ NOPROF
 {
 	t_vec2	new_vector;
 
-	new_vector.x = v.x * cosf(angle) - v.y * sinf(angle);
-	new_vector.y = v.x * sinf(angle) + v.y * cosf(angle);
+	new_vector.x = v.x * cos(angle) - v.y * sin(angle);
+	new_vector.y = v.x * sin(angle) + v.y * cos(angle);
 	return (new_vector);
 }
