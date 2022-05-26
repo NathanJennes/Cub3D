@@ -14,4 +14,4 @@ Libft/*
 *.d
 *.a
 output.txt
-result.json
+result*.json

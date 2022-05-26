@@ -32,7 +32,9 @@ static void	serialize_player(int fd, t_player player)
 {
 	dprintf(fd, "PLAYER_START\n");
 	dprintf(fd, "POS %d %d %d\n",
-		(int)player.world_pos.x, (int)player.world_pos.y, (int)player.direction);
+		(int)player.world_pos.x,
+		(int)player.world_pos.y,
+		(int)player.direction);
 	dprintf(fd, "PLAYER_END\n");
 }
 

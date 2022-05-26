@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 15:44:35 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 16:29:55 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,41 @@
 /* Screen drawing */
 void			clear_screen(int color);
 void			set_screen_pixel(int64_t x, int64_t y, int color) NOPROF;
+void			set_screen_pixel_unsafe(int64_t x, int64_t y,
+					int color) NOPROF;
 
 void			draw_circle(t_ivec2 pos, int64_t diameter, int color);
+void			draw_circle_unsafe(t_ivec2 pos, int64_t diameter, int color);
 void			draw_rect(t_ivec2 pos, t_ivec2 size, int color);
+void			draw_rect_unsafe(t_ivec2 pos, t_ivec2 size, int color);
 void			draw_line(t_ivec2 start, t_ivec2 end, int col);
+void			draw_line_unsafe(t_ivec2 start, t_ivec2 end, int col);
 void			draw_line_lerp(t_ivec2 start, t_ivec2 end, int col1, int col2);
+void			draw_line_lerp_unsafe(t_ivec2 start, t_ivec2 end,
+					int col1, int col2);
 void			mlx_render_text(char *text, t_ivec2 pos);
 
 /* Texture drawing */
-void			draw_rect_tex(t_ivec2 pos, t_ivec2 size, int color, int64_t tex_id);
+void			draw_rect_tex(t_ivec2 pos, t_ivec2 size,
+					int color, int64_t tex_id);
+void			draw_rect_tex_unsafe(t_ivec2 pos, t_ivec2 size,
+					int color, int64_t tex_id);
 void			draw_circle_tex(t_ivec2 pos, int64_t diameter,
 					int col, int64_t tex_id);
-void			draw_line_tex(t_ivec2 start, t_ivec2 end, int col, int64_t tex_id);
+void			draw_circle_tex_unsafe(t_ivec2 pos, int64_t diameter,
+						int col, int64_t tex_id);
+void			draw_line_tex(t_ivec2 start, t_ivec2 end,
+					int col, int64_t tex_id);
+void			draw_line_tex_unsafe(t_ivec2 start, t_ivec2 end,
+					int col, int64_t tex_id);
 void			draw_line_lerp_tex(t_ivec2 start, t_ivec2 end,
-					int col1, int col2, int64_t tex_id);
+					t_ivec2 col, int64_t tex_id);
+void			draw_line_lerp_tex_unsafe(t_ivec2 start, t_ivec2 end,
+					t_ivec2 col, int64_t tex_id);
 
 void			clear_texture(int color, int64_t tex_id);
 void			set_texture_pixel(int64_t x, int64_t y, int color, int64_t tex_id) NOPROF;
+void			set_texture_pixel_unsafe(int64_t x, int64_t y, int color, int64_t tex_id) NOPROF;
 
 /* Texture rendering */
 void			render_ui_texture(int64_t tex_id, int64_t x, int64_t y);

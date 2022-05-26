@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_primitives_img.c                            :+:      :+:    :+:   */
+/*   render_primitives_img_unsafe.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:17:28 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/26 16:30:24 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 16:29:02 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "render.h"
 
-//TODO: optimize primitive draw functions
-//TODO: instead of checking for each pixel if it is outside bounds (in set_texture_pixels)
-//TODO: calculate beforehand the start position and end of the loop in x and y to only touch in-bounds pixels
-void	draw_rect_tex(t_ivec2 pos, t_ivec2 size, int color, int64_t tex_id)
+void	draw_rect_tex_unsafe(t_ivec2 pos, t_ivec2 size,
+	int color, int64_t tex_id)
 {
 	int	y;
 	int	x;
@@ -27,37 +25,42 @@ void	draw_rect_tex(t_ivec2 pos, t_ivec2 size, int color, int64_t tex_id)
 		x = 0;
 		while (x < size.x)
 		{
-			set_texture_pixel(x + pos.x, y + pos.y, color, tex_id);
+			set_texture_pixel_unsafe(x + pos.x, y + pos.y, color, tex_id);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	draw_circle_tex(t_ivec2 pos, int64_t diameter, int col, int64_t tex_id)
+void	draw_circle_tex_unsafe(t_ivec2 pos, int64_t diameter,
+	int col, int64_t tex_id)
 {
 	int64_t	i;
 	int64_t	j;
 	int64_t	diameter_2;
 	int64_t	radius;
+	t_ivec2	ij2;
 
 	radius = diameter / 2;
 	i = -radius;
 	diameter_2 = radius * radius;
-	while (i <= radius)
+	while (i < radius)
 	{
+		ij2.x = i * i;
 		j = -radius;
-		while (j <= radius)
+		while (j < radius)
 		{
-			if (i * i + j * j <= diameter_2)
-				set_texture_pixel(pos.x + j, pos.y + i, col, tex_id);
+			ij2.y = j * j;
+			if (ij2.x + ij2.y < diameter_2)
+				set_texture_pixel_unsafe(pos.x + j, pos.y + i, col, tex_id);
 			j++;
 		}
 		i++;
 	}
 }
 
-void	draw_line_tex(t_ivec2 start, t_ivec2 end, int col, int64_t tex_id)
+void	draw_line_tex_unsafe(t_ivec2 start, t_ivec2 end,
+	int col, int64_t tex_id)
 {
 	double	pixels_to_draw;
 	double	pixels_drawn;
@@ -73,12 +76,12 @@ void	draw_line_tex(t_ivec2 start, t_ivec2 end, int col, int64_t tex_id)
 	while (pixels_drawn < pixels_to_draw)
 	{
 		vec2_add(&ppos, delta);
-		set_texture_pixel(ppos.x, ppos.y, col, tex_id);
+		set_texture_pixel_unsafe(ppos.x, ppos.y, col, tex_id);
 		pixels_drawn++;
 	}
 }
 
-void	draw_line_lerp_tex(t_ivec2 start, t_ivec2 end,
+void	draw_line_lerp_tex_unsafe(t_ivec2 start, t_ivec2 end,
 			t_ivec2 col, int64_t tex_id)
 {
 	double	pixels_to_draw;
@@ -95,7 +98,7 @@ void	draw_line_lerp_tex(t_ivec2 start, t_ivec2 end,
 	while (pixels_drawn < pixels_to_draw)
 	{
 		vec2_add(&ppos, delta);
-		set_texture_pixel(ppos.x, ppos.y,
+		set_texture_pixel_unsafe(ppos.x, ppos.y,
 			color_lerp(col.x, col.y, pixels_drawn / pixels_to_draw), tex_id);
 		pixels_drawn++;
 	}
