@@ -13,9 +13,6 @@
 #include "core.h"
 #include "render.h"
 
-//TODO: optimize primitive draw functions
-//TODO: instead of checking for each pixel if it is outside bounds (in set_texture_pixels)
-//TODO: calculate beforehand the start position and end of the loop in x and y to only touch in-bounds pixels
 void	draw_rect_tex(t_ivec2 pos, t_ivec2 size, int color, int64_t tex_id)
 {
 	int	y;
