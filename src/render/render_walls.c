@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/26 20:03:24 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/26 20:11:58 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	draw_col_wall(int64_t col, double dist, t_vec2 ray)
 			/ (vec2_mag(*pf) * vec2_mag(ray)));
 	if (angle <= 1)
 		dist = dist * cos(angle);
-	double	plane_dist = HALFW_H / (get_math()->r_vfov / 2);
-	wall_size = (int64_t)fabs(DFLT_SIZE / (dist * DFLT_SIZE) * plane_dist);
+	double	plane_dist = HALFW_W / (get_math()->r_vfov / 2);
+	wall_size = (int64_t)fabs(CELL_WIDTH / (dist * CELL_WIDTH) * plane_dist);
 	if (wall_size > WIN_H)
 		wall_size = WIN_H;
 	else if (wall_size < 0)
