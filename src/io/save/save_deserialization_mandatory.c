@@ -6,20 +6,20 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 17:40:23 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 12:47:34 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "leaky.h"
 #include "core.h"
 
-void		construct_map(t_map_info *infos);
-int			parse_color(t_vec3 *color, char *line);
-int			parse_texture(char **path, char *line);
-int			add_map_row(t_map_info *infos, char *line);
+void		construct_map(t_map_info *infos)NOPROF;
+int			parse_color(t_vec3 *color, char *line)NOPROF;
+int			parse_texture(char **path, char *line)NOPROF;
+int			add_map_row(t_map_info *infos, char *line)NOPROF;
 
-static int	parse_line(t_map_info *infos, char *line);
-static void	setup_player(t_gamestate *save);
+static int	parse_line(t_map_info *infos, char *line)NOPROF;
+static void	setup_player(t_gamestate *save)NOPROF;
 
 int	load_mandatory_map(t_gamestate *save_out, int fd, char *line)
 {

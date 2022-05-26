@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/23 15:12:29 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 12:51:22 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <stdint.h>
 
 # include "libft.h"
+# include "profiling.h"
 
 typedef struct s_font_bitmap
 {
@@ -111,24 +112,24 @@ void			init_font_manager(void);
 void			unload_font_manager(void);
 t_font			*get_font(char *name);
 
-int64_t			get_text_width(char *text, char *font_name, int size);
-int64_t			get_text_height(char *text, char *font_name, int size);
-int64_t			get_text_box_height(char *text, char *font_name, int size);
-t_ivec2			get_text_size(char *text, char *font_name, int size);
-t_ivec2			get_text_box_size(char *text, char *font_name, int size);
+int64_t			get_text_width(char *text, char *font_name, int size) NOPROF;
+int64_t			get_text_height(char *text, char *font_name, int size) NOPROF;
+int64_t			get_text_box_height(char *text, char *font_name, int size) NOPROF;
+t_ivec2			get_text_size(char *text, char *font_name, int size) NOPROF;
+t_ivec2			get_text_box_size(char *text, char *font_name, int size) NOPROF;
 
 t_ivec2			text_center_height(char *text, char *font_name,
-					int size, t_ivec2 pos);
+					int size, t_ivec2 pos) NOPROF;
 t_ivec2			text_center_width(char *text, char *font_name,
-					int size, t_ivec2 pos);
+					int size, t_ivec2 pos) NOPROF;
 t_ivec2			text_center(char *text, char *font_name,
-					int size, t_ivec2 pos);
+					int size, t_ivec2 pos) NOPROF;
 
 /* Walls rendering */
 void			render_walls(int fov);
 float			shoot_ray(t_vec2 ray, t_vec2 pos, t_ivec2 map_pos);
 
 /* Utils */
-int				outside_mmap_bounds(int x, int y);
+int				outside_mmap_bounds(int x, int y) NOPROF;
 
 #endif

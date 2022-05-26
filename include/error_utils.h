@@ -6,12 +6,14 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:53:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/21 15:11:16 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 12:49:15 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERROR_UTILS_H
 # define ERROR_UTILS_H
+
+# include "profiling.h"
 
 # define RETURN_SUCCESS 1
 # define ERR_EMPTY_FILE -1
@@ -31,6 +33,6 @@ void		ft_error_msg(char *msg);
 void		ft_free_2d(void **ptr, int i);
 int			error_code_msg(int code, char *msg);
 
-int			print_cub_err(int err);
+int			print_cub_err(int err) NOPROF;
 
 #endif

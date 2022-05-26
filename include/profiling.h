@@ -1,43 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   profiling.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 14:44:26 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 13:34:24 by njennes          ###   ########.fr       */
+/*   Created: 2022/05/26 12:39:06 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/26 12:39:19 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "profiling.h"
+#ifndef PROFILING_H
+# define PROFILING_H
 
-int	trgb(int t, int r, int g, int b)
-NOPROF
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
+# ifdef DEBUG_PROFILE
+#  define NOPROF __attribute__((no_instrument_function))
+# else
+#  define NOPROF
+# endif
 
-int	get_t(int trgb)
-NOPROF
-{
-	return ((trgb >> 24) & 0xFF);
-}
-
-int	get_r(int trgb)
-NOPROF
-{
-	return ((trgb >> 16) & 0xFF);
-}
-
-int	get_g(int trgb)
-NOPROF
-{
-	return ((trgb >> 8) & 0xFF);
-}
-
-int	get_b(int trgb)
-NOPROF
-{
-	return (trgb & 0xFF);
-}
+#endif

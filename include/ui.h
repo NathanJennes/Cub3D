@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/20 19:52:56 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 12:49:15 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "texture.h"
 # include "colors.h"
 # include "bool.h"
+# include "profiling.h"
 
 # ifdef __linux__
 #  include <stdint.h>
@@ -136,7 +137,7 @@ void			render_mmap(float zoom);
 
 void			fps_counter(void);
 
-void			update_ui_flags(uint8_t flag);
+void			update_ui_flags(uint8_t flag) NOPROF;
 
 void			put_text(t_mlx *app, t_vec2 pos, int color, char *str);
 int				str_px_size(char *str);
@@ -172,19 +173,19 @@ void			update_ui_slider_click_begin(t_slider *slider, int mouse_btn);
 void			update_ui_slider_click_end(t_slider *slider, int mouse_btn);
 
 /* Ui positionning */
-t_ui_component	*uic_center_win_w(t_ui_component *comp);
-t_ui_component	*uic_center_win_h(t_ui_component *comp);
-t_ui_component	*uic_center_win(t_ui_component *comp);
+t_ui_component	*uic_center_win_w(t_ui_component *comp) NOPROF;
+t_ui_component	*uic_center_win_h(t_ui_component *comp) NOPROF;
+t_ui_component	*uic_center_win(t_ui_component *comp) NOPROF;
 
-t_ui_component	*uic_padding_up(t_ui_component *comp, int64_t pad);
-t_ui_component	*uic_padding_right(t_ui_component *comp, int64_t pad);
-t_ui_component	*uic_padding_down(t_ui_component *comp, int64_t pad);
-t_ui_component	*uic_padding_left(t_ui_component *comp, int64_t pad);
-t_ui_component	*uic_padding(t_ui_component *comp, t_ivec2 td, t_ivec2 lr);
+t_ui_component	*uic_padding_up(t_ui_component *comp, int64_t pad) NOPROF;
+t_ui_component	*uic_padding_right(t_ui_component *comp, int64_t pad) NOPROF;
+t_ui_component	*uic_padding_down(t_ui_component *comp, int64_t pad) NOPROF;
+t_ui_component	*uic_padding_left(t_ui_component *comp, int64_t pad) NOPROF;
+t_ui_component	*uic_padding(t_ui_component *comp, t_ivec2 td, t_ivec2 lr) NOPROF;
 
-t_ui_component	*uic_below(t_ui_component *comp, t_ui_component *other);
-t_ui_component	*uic_above(t_ui_component *comp, t_ui_component *other);
-t_ui_component	*uic_side_left(t_ui_component *comp, t_ui_component *other);
-t_ui_component	*uic_side_right(t_ui_component *comp, t_ui_component *other);
+t_ui_component	*uic_below(t_ui_component *comp, t_ui_component *other) NOPROF;
+t_ui_component	*uic_above(t_ui_component *comp, t_ui_component *other) NOPROF;
+t_ui_component	*uic_side_left(t_ui_component *comp, t_ui_component *other) NOPROF;
+t_ui_component	*uic_side_right(t_ui_component *comp, t_ui_component *other) NOPROF;
 
 #endif

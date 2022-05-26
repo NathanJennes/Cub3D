@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/21 20:01:52 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 12:49:15 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include "texture.h"
 # include "ui.h"
 # include "io.h"
-#include "render.h"
+# include "render.h"
+# include "profiling.h"
 
 # ifdef FULL_SCREEN
 #  define WIN_W		1920
@@ -132,20 +133,20 @@ int			main_loop(void);
 int			mouse_move_hooks(int x, int y, void *unused);
 
 /* Keys */
-t_bool		is_key_down(int keycode);
+t_bool		is_key_down(int keycode) NOPROF;
 
 /* Mouse */
-t_bool		is_mouse_down(int button);
+t_bool		is_mouse_down(int button) NOPROF;
 
-void		cub_update_mouse_pos(int x, int y);
-t_ivec2		cub_get_mouse_position(void);
+void		cub_update_mouse_pos(int x, int y) NOPROF;
+t_ivec2		cub_get_mouse_position(void) NOPROF;
 
 /* getters */
-t_mlx		*get_app(void);
-t_frame		*get_frame(void);
-t_map_info	*get_map_infos(void);
-t_player	*get_player(void);
-void		*get_mlx(void);
-t_ui		*get_ui(void);
+t_mlx		*get_app(void) NOPROF;
+t_frame		*get_frame(void) NOPROF;
+t_map_info	*get_map_infos(void) NOPROF;
+t_player	*get_player(void) NOPROF;
+void		*get_mlx(void) NOPROF;
+t_ui		*get_ui(void) NOPROF;
 
 #endif

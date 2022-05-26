@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 16:49:14 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 12:47:49 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "core.h"
 #include "leaky.h"
 
-static int	contains_illegal_char(t_map_info *infos, char *line);
+static int	contains_illegal_char(t_map_info *infos, char *line)NOPROF;
 static int	is_illegal_char(char c, t_map_info *infos, int *saw_wall,
-				int *last_is_wall);
+				int *last_is_wall)NOPROF;
 
 int	parse_color(t_vec3 *color, char *line)
 {
