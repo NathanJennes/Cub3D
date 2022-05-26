@@ -31,6 +31,7 @@ void	clear_screen(int color)
 }
 
 void	set_screen_pixel(int64_t x, int64_t y, int color)
+NOPROF
 {
 	char	*dst;
 	t_frame	*frame;
@@ -44,6 +45,7 @@ void	set_screen_pixel(int64_t x, int64_t y, int color)
 }
 
 void	set_screen_pixel_unsafe(int64_t x, int64_t y, int color)
+NOPROF
 {
 	char	*dst;
 	t_frame	*frame;
@@ -55,6 +57,7 @@ void	set_screen_pixel_unsafe(int64_t x, int64_t y, int color)
 }
 
 static int	pixel_in_screen(int64_t x, int64_t y)
+NOPROF
 {
 	if (x < 0 || x >= WIN_W || y < 0 || y >= WIN_H)
 		return (0);

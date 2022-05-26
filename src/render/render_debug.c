@@ -16,10 +16,10 @@
 #include "ui.h"
 #include "render.h"
 
-static void		print_ray(t_vec2 hit_pos);
-static t_vec2	rotate_vector(t_vec2 v, double angle);
-static void		print_player_vector(void);
-static void		debug_rays(void);
+static void		print_ray(t_vec2 hit_pos) NOPROF;
+static t_vec2	rotate_vector(t_vec2 v, double angle) NOPROF;
+static void		print_player_vector(void) NOPROF;
+static void		debug_rays(void) NOPROF;
 
 void	render_test_scene(const t_mlx *app)
 {
@@ -46,6 +46,7 @@ void	render_test_scene(const t_mlx *app)
 }
 
 static void	debug_rays(void)
+NOPROF
 {
 	double		offset;
 	int64_t		i;
@@ -68,12 +69,14 @@ static void	debug_rays(void)
 }
 
 void	print_ray(t_vec2 hit_pos)
+NOPROF
 {
 	draw_line(v2_to_iv2(get_player()->world_pos), v2_to_iv2(hit_pos), RED);
 	draw_circle(v2_to_iv2(hit_pos), 10, YELLOW);
 }
 
 void	print_player_vector(void)
+NOPROF
 {
 	t_vec2	player_pos;
 	t_vec2	forward;
@@ -104,6 +107,7 @@ void	print_player_vector(void)
 }
 
 static t_vec2	rotate_vector(t_vec2 v, double angle)
+NOPROF
 {
 	t_vec2	new_vector;
 
