@@ -7,7 +7,7 @@ PROFILE_NAME			:=	cub3dp
 
 CORE_DIR		:=	core
 CORE_FILE		:=	main.c exit.c main_loop.c error_utils.c init.c gc.c			\
-					getters.c getters_2.c window.c cub_error.c
+					getters.c getters_2.c window.c cub_error.c player.c player_update.c
 CORE_SRCS		:=	$(addprefix $(CORE_DIR)/, $(CORE_FILE))
 
 PROFILING_DIR	:=	profiling
@@ -24,7 +24,7 @@ RENDER_FILE		:=	render_primitives.c render_primitives_img.c	\
 					colors.c colors_utils.c	\
 					screen_rendering.c texture_rendering.c	\
 					render_ui_texture.c render_text.c	\
-					render_walls.c
+					render_walls.c render_debug.c
 RENDER_SRCS		:=	$(addprefix $(RENDER_DIR)/, $(RENDER_FILE))
 
 FONT_DIR		:=	$(RENDER_DIR)/font
@@ -35,7 +35,7 @@ FONT_SRCS		:=	$(addprefix $(FONT_DIR)/, $(FONT_FILE))
 
 UI_DIR			:=	ui
 UI_FILE			:=	fps_counter.c ui_helper.c ui_manager.c						\
-					render_minimap.c ui_init.c
+					render_minimap.c ui_init.c print_debug.c
 UI_SRCS			:=	$(addprefix $(UI_DIR)/, $(UI_FILE))
 
 UI_COMPONENT_DIR	:=	$(UI_DIR)/components
@@ -230,7 +230,7 @@ $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(FONT_DIR)/%.c | $(DEBUG_OBJS_DIR)
 
 $(DEBUG_NAME): $(DEBUG_OBJS) $(DEBUG_LIBFT_LIB) $(DEBUG_LEAKY_LIB)
 	@printf "$(_BLUE)\nCompiled source files\n"
-	$(BIN_CC) $(DEBUG_BIN_LDFLAGS) $(DEBUG_OBJS) $(DEBUG_LIBS) -o ../$@
+	@$(BIN_CC) $(DEBUG_BIN_LDFLAGS) $(DEBUG_OBJS) $(DEBUG_LIBS) -o ../$@
 	@printf "$(_GREEN)Finish compiling $(DEBUG_NAME)!$(_END)\n"
 
 # --------------------------- #
@@ -317,6 +317,18 @@ $(DEBUG_OBJS_DIR):
 
 $(PROFILE_OBJS_DIR):
 	@mkdir -p $(PROFILE_OBJS_DIR)
+
+$(RELEASE_LEAKY_LIB):
+	@$(MAKE) -j4 -C $(LEAKY_DIR) -r -R
+
+$(DEBUG_LEAKY_LIB):
+	@$(MAKE) -j4 -C $(LEAKY_DIR) -r -R
+
+$(RELEASE_LIBFT_LIB):
+	@$(MAKE) -j4 -C $(LIBFT_DIR) -r -R
+
+$(DEBUG_LIBFT_LIB):
+	@$(MAKE) -j4 -C $(LIBFT_DIR) -r -R
 
 info:
 	@echo $(RELEASE_OBJS)

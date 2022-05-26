@@ -133,14 +133,22 @@ void			init_ui(void);
 int				render_ui(void);
 void			update_ui(void);
 
-void			render_mmap(float zoom);
+void			render_mmap(double zoom);
 
+void			fps_counter(void);
+void			print_debug(void);
 void			fps_counter(void);
 
 void			update_ui_flags(uint8_t flag) NOPROF;
+void			switch_debug_ui(void);
 
-void			put_text(t_mlx *app, t_vec2 pos, int color, char *str);
 int				str_px_size(char *str);
+void			put_text(t_ivec2 pos, int color, char *str);
+int				str_px_size(char *str);
+void			print_float(double val, t_ivec2 pos, int color);
+void			print_ivec(t_ivec2 v, t_ivec2 pos, int color);
+void			print_vec(t_vec2 v, t_ivec2 pos, int color);
+void			print_int(int val, t_ivec2 pos, int color);
 
 /* Main Menu */
 void			init_main_menu(void);

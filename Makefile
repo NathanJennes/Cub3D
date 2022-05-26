@@ -42,7 +42,7 @@ DEBUG_BIN_CFLAGS		+=		-g3 -fsanitize=address -DDEBUG
 DEBUG_BIN_CFLAGS		+=		$(INC_PATH)
 
 PROFILE_BIN_CFLAGS		:=
-PROFILE_BIN_CFLAGS		+=		-MD
+PROFILE_BIN_CFLAGS		+=		-MD -DDEBUG_PROFILE
 PROFILE_BIN_CFLAGS		+=		-Wall -Wextra
 PROFILE_BIN_CFLAGS		+=		-g3 -fsanitize=address -finstrument-functions
 PROFILE_BIN_CFLAGS		+=		$(INC_PATH)
@@ -83,6 +83,8 @@ export RELEASE_LIBFT_LIB
 export DEBUG_LEAKY_LIB
 export RELEASE_LEAKY_LIB
 export LIB_PATH
+export LIBFT_DIR
+export LEAKY_DIR
 
 .PHONY: all
 all: header
@@ -90,7 +92,7 @@ all: header
 ifeq ($(OS), Darwin)
 	@$(MAKE) -j4 -C $(MLX_DIR)
 endif
-	@$(MAKE) -j4 -C $(SRCS_DIR) -r -R --warn-undefined-variables
+	@$(MAKE) -C $(SRCS_DIR) -r -R --warn-undefined-variables
 
 .PHONY: debug
 debug: header
@@ -107,6 +109,8 @@ ifeq ($(OS), Darwin)
 	@$(MAKE) -j4 -C $(MLX_DIR)
 endif
 	@$(MAKE) -j4 -C $(SRCS_DIR) -r -R --warn-undefined-variables profile
+	./cub3dp 2> output.txt
+	./profily cub3dp
 
 .PHONY: bonus
 bonus: all
@@ -140,8 +144,10 @@ cub_debug_re:
 	@$(MAKE) -C $(SRCS_DIR) fclean
 	@$(MAKE) -C $(SRCS_DIR) debug
 
-.PHONY: profile_re
-profile_re:	fclean profile
+.PHONY: cub_profile_re
+cub_profile_re:
+	@$(MAKE) -C $(SRCS_DIR) fclean
+	@$(MAKE) -C $(SRCS_DIR) profile
 
 # Misc
 # =====================

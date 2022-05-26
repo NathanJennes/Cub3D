@@ -12,7 +12,7 @@
 
 #include "core.h"
 
-static int	pixel_in_screen(int64_t x, int64_t y);
+static int	pixel_in_screen(int64_t x, int64_t y) NOPROF;
 
 void	clear_screen(int color)
 {

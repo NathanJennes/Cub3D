@@ -19,14 +19,14 @@ void	ft_ferror(int fd)
 {
 	if (fd < 0)
 	{
-		dprintf(2, "Error: %s\n", strerror(errno));
+		printf("Error: %s\n", strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 }
 
 void	ft_error_msg(char *msg)
 {
-	dprintf(2, "Error: %s\n", msg);
+	printf("Error: %s\n", msg);
 	exit(EXIT_FAILURE);
 }
 

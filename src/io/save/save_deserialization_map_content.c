@@ -28,7 +28,7 @@ int	deserialize_map_parse_map_content(char *line, t_gamestate *save)
 	if (!infos->map_raw)
 		infos->map_raw = gc_strarray_init();
 	infos->map_raw = gc_strarray_append(infos->map_raw, line);
-	if (ft_strlen(line) > infos->width)
+	if ((int64_t)ft_strlen(line) > infos->width)
 		return (0);
 	return (1);
 }

@@ -12,7 +12,6 @@
 
 #include "core.h"
 #include "leaky.h"
-#include "error_utils.h"
 
 int	main(void)
 {

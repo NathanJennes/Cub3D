@@ -19,7 +19,7 @@ void	cub_update_mouse_pos(int x, int y)
 	app = get_app();
 	app->mouse.position = ivec2(x, y);
 	if (MOUSE_DEBUG)
-		dprintf(STDERR_FILENO, "%lld -- %lld\n", app->mouse.position.x, \
+		printf("%lld -- %lld\n", app->mouse.position.x, \
 				app->mouse.position.y);
 }
 

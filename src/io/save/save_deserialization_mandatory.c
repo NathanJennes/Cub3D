@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/26 12:47:34 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 15:18:06 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	load_mandatory_map(t_gamestate *save_out, int fd, char *line)
 		return (0);
 	gc_strarray_free(infos->map_raw);
 	setup_player(save_out);
+	save_out->settings.fov = 90;
 	return (1);
 }
 
@@ -77,5 +78,6 @@ static void	setup_player(t_gamestate *save)
 		save->player.direction = 0.0f;
 	else if (save->map.spawn_dir == 'W')
 		save->player.direction = PI * 3.0f / 2.0f;
-	save->player.pos = save->map.spawn_pos;
+	save->player.world_pos = save->map.spawn_pos;
+	update_player(&save->player);
 }

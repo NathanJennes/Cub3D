@@ -19,3 +19,11 @@ t_ui	*get_ui(void)
 	app = get_app();
 	return (&app->ui);
 }
+
+t_settings	*get_settings(void)
+{
+	t_mlx	*app;
+
+	app = get_app();
+	return (&app->gamestate.settings);
+}

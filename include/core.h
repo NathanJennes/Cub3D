@@ -18,8 +18,14 @@
 # include "texture.h"
 # include "ui.h"
 # include "io.h"
-# include "render.h"
+# include "font.h"
 # include "profiling.h"
+
+# ifdef __linux__
+#  include <inttypes.h>
+#  include <float.h>
+#  define MAXFLOAT FLT_MAX
+# endif
 
 # ifdef FULL_SCREEN
 #  define WIN_W		1920
@@ -32,16 +38,14 @@
 # define MAX_KEYCODE 1024
 # define MAX_MOUSE_BUTTONS 5
 
-# define PLAYER_SPEED	10
+# define PLAYER_SPEED	0.5
 
 # define WALL		1
 # define EMPTY		0
 # define VOID		-1
 
-# define BKGD_COLOR	0x0037464B
-
-# define CELL_WIDTH		50
-# define CELL_HEIGHT	50
+# define CELL_WIDTH		20
+# define CELL_HEIGHT	20
 
 # define MOUSE_DEBUG	0
 
@@ -57,40 +61,62 @@ typedef struct s_mouse
 
 typedef struct s_map_info
 {
-	size_t	width;
-	size_t	height;
-	t_vec2	spawn_pos;
-	char	spawn_dir;
-	t_vec3	ceiling_color;
-	t_vec3	floor_color;
-	char	*no_tex;
-	char	*ea_tex;
-	char	*so_tex;
-	char	*we_tex;
-	int		**map;
-	char	**map_raw;
+	int64_t		width;
+	int64_t		height;
+	t_vec2		spawn_pos;
+	char		spawn_dir;
+	t_vec3		ceiling_color;
+	t_vec3		floor_color;
+	char		*no_tex;
+	char		*ea_tex;
+	char		*so_tex;
+	char		*we_tex;
+	int			**map;
+	char		**map_raw;
 }	t_map_info;
 
 typedef struct s_frame
 {
-	void	*img;
-	char	*addr;
-	int		bits_pp;
-	int		line_length;
-	int		endian;
+	void		*img;
+	char		*addr;
+	int			bits_pp;
+	int			line_length;
+	int			endian;
 }	t_frame;
+
+typedef struct s_ray
+{
+	double		distance;
+	t_vec2		hit_pos;
+	t_bool		hit;
+	int			side;
+	t_vec2		ray;
+}	t_ray;
 
 typedef struct s_player
 {
-	t_vec2	pos;
-	float	direction;
+	t_vec2		world_pos;
+	t_vec2		cell_pos;
+	t_ivec2		map_pos;
+	double		direction;
+	t_vec2		forward;
+	t_vec2		right;
+	double		ray_increment;
+	double		ray_angle;
+	t_ray		last_ray;
 }	t_player;
+
+typedef struct s_settings
+{
+	int			fov;
+}	t_settings;
 
 typedef struct s_gamestate
 {
 	char		*name;
 	t_map_info	map;
 	t_player	player;
+	t_settings	settings;		//TODO change location of settings
 }	t_gamestate;
 
 typedef struct s_mlx
@@ -141,6 +167,9 @@ t_bool		is_mouse_down(int button) NOPROF;
 void		cub_update_mouse_pos(int x, int y) NOPROF;
 t_ivec2		cub_get_mouse_position(void) NOPROF;
 
+void		update_player_vectors(t_player *player) NOPROF;
+void		update_player(t_player *player) NOPROF;
+
 /* getters */
 t_mlx		*get_app(void) NOPROF;
 t_frame		*get_frame(void) NOPROF;
@@ -148,5 +177,6 @@ t_map_info	*get_map_infos(void) NOPROF;
 t_player	*get_player(void) NOPROF;
 void		*get_mlx(void) NOPROF;
 t_ui		*get_ui(void) NOPROF;
+t_settings	*get_settings(void) NOPROF;
 
 #endif

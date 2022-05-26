@@ -21,7 +21,7 @@ int64_t	get_text_width(char *text, char *font_name, int size)
 	int64_t	width;
 	size_t	len;
 	size_t	i;
-	float	ratio;
+	double	ratio;
 
 	if (!text || !font_name || size <= 0)
 		return (0);
@@ -29,7 +29,7 @@ int64_t	get_text_width(char *text, char *font_name, int size)
 	len = ft_strlen(text);
 	if (!font || len == 0)
 		return (0);
-	ratio = (float)size / (float)font->font_size;
+	ratio = (double)size / (double)font->font_size;
 	i = 0;
 	width = 0;
 	while (i < len - 1)
@@ -40,7 +40,7 @@ int64_t	get_text_width(char *text, char *font_name, int size)
 	}
 	if (text[i] >= 0)
 		width += font->characters[(int)text[i]].width;
-	return ((int64_t)((float)width * ratio));
+	return ((int64_t)((double)width * ratio));
 }
 
 static int64_t	get_min_y_offset(char *text, char *font_name, int size)
@@ -49,7 +49,7 @@ static int64_t	get_min_y_offset(char *text, char *font_name, int size)
 	int64_t	y_offset;
 	size_t	len;
 	size_t	i;
-	float	ratio;
+	double	ratio;
 
 	if (!text || !font_name || size <= 0)
 		return (0);
@@ -57,7 +57,7 @@ static int64_t	get_min_y_offset(char *text, char *font_name, int size)
 	len = ft_strlen(text);
 	if (!font || len == 0)
 		return (0);
-	ratio = (float)size / (float)font->font_size;
+	ratio = (double)size / (double)font->font_size;
 	y_offset = font->characters[(int)text[0]].y_off;
 	i = 1;
 	while (i < len)
@@ -66,7 +66,7 @@ static int64_t	get_min_y_offset(char *text, char *font_name, int size)
 			y_offset = ft_mini(y_offset, font->characters[(int)text[i]].y_off);
 		i++;
 	}
-	return ((int64_t)((float)y_offset * ratio));
+	return ((int64_t)((double)y_offset * ratio));
 }
 
 static int64_t	get_max_y_offset(char *text, char *font_name, int size)
@@ -75,7 +75,7 @@ static int64_t	get_max_y_offset(char *text, char *font_name, int size)
 	int64_t	y_offset;
 	size_t	len;
 	size_t	i;
-	float	ratio;
+	double	ratio;
 
 	if (!text || !font_name || size <= 0)
 		return (0);
@@ -83,7 +83,7 @@ static int64_t	get_max_y_offset(char *text, char *font_name, int size)
 	len = ft_strlen(text);
 	if (!font || len == 0)
 		return (0);
-	ratio = (float)size / (float)font->font_size;
+	ratio = (double)size / (double)font->font_size;
 	y_offset = font->characters[(int)text[0]].y_off
 		+ font->characters[(int)text[0]].height;
 	i = 1;
@@ -94,7 +94,7 @@ static int64_t	get_max_y_offset(char *text, char *font_name, int size)
 					+ font->characters[(int)text[i]].height);
 		i++;
 	}
-	return ((int64_t)((float)y_offset * ratio));
+	return ((int64_t)((double)y_offset * ratio));
 }
 
 int64_t	get_text_height(char *text, char *font_name, int size)

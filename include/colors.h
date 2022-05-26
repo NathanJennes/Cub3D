@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:23:53 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 12:51:57 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 15:14:13 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@
 # define YELLOW		0x00FFFF00
 # define TURQUOISE	0x0000FFFF
 
+# define BKGD_COLOR		0x0037464B
+
+# define CEILLING		0x000099CC
+# define FLOOR			0x00666666
+# define WALL_COLOR_1	0x00e65c00
+# define WALL_COLOR_2	0x00b34700
+
 /* colors */
 int			trgb(int t, int r, int g, int b)
 NOPROF;
@@ -37,6 +44,6 @@ int			get_b(int trgb)
 NOPROF;
 
 /* colors utils */
-int			color_lerp(int col1, int col2, float value);
+int			color_lerp(int col1, int col2, double value);
 
 #endif

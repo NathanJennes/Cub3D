@@ -86,9 +86,9 @@ void	shade_ao_texture_all(
 
 static void	shade_pixel(uint8_t *data, int64_t row, int64_t total_row)
 {
-	float	shade_factor;
+	double	shade_factor;
 
-	shade_factor = (float)row / (float)total_row;
+	shade_factor = (double)row / (double)total_row;
 	data[0] *= shade_factor;
 	data[1] *= shade_factor;
 	data[2] *= shade_factor;

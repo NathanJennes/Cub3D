@@ -13,3 +13,5 @@ Libft/*
 *.o
 *.d
 *.a
+output.txt
+result.json
