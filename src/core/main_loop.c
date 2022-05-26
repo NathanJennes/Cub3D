@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/26 16:41:03 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 17:41:44 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	main_loop(void)
 	update_player(&app->gamestate.player);
 	if (app->game_state & IN_GAME)
 	{
-		render_ui_texture(app->ceiling_tex, 0, 0);
-		render_ui_texture(app->floor_tex, 0, WIN_H / 2);
+		draw_rect_unsafe(ivec2(0, 0), ivec2(WIN_W, HALFW_H), CEILLING);
+		draw_rect_unsafe(ivec2(0, HALFW_H), ivec2(WIN_W, HALFW_H), FLOOR);
 		render_walls();
 		render_test_scene(app);
 	}

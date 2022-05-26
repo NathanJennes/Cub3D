@@ -140,8 +140,6 @@ typedef struct s_mlx
 	t_ui				ui;
 	t_texture_manager	texture_manager;
 	t_font_manager		font_manager;
-	int64_t				ceiling_tex;
-	int64_t				floor_tex;
 	t_bool				keys[MAX_KEYCODE];
 }	t_mlx;
 
