@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:49:16 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/26 16:21:38 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 17:57:39 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,23 @@
 
 void	draw_rect_unsafe(t_ivec2 pos, t_ivec2 size, int color)
 {
-	int	y;
-	int	x;
+	int		y;
+	int		x;
+	int64_t	*pixels;
+	int64_t	col;
 
+	pixels = (int64_t *)get_frame()->addr;
+	size.x /= 2;
+	pos.x /= 2;
+	((int *)&col)[0] = color;
+	((int *)&col)[1] = color;
 	y = 0;
 	while (y < size.y)
 	{
 		x = 0;
 		while (x < size.x)
 		{
-			set_screen_pixel_unsafe(x + pos.x, y + pos.y, color);
+			pixels[pos.x + x + (pos.y + y) * HALFW_W] = col;
 			x++;
 		}
 		y++;
