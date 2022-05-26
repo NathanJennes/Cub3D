@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/25 13:17:22 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 16:39:24 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int			mouse_up_callback(int button, int x, int y, void *unused);
 
 static void	init_hooks(void);
 static void	init_start_time(void);
+static void	init_basic_textures(void);
 
 void	init_app(void)
 {
@@ -36,6 +37,7 @@ void	init_app(void)
 	load_all_maps();
 	printf("Saves loaded: %d\n", (int)app->savegames_count);
 	printf("Maps loaded: %d\n", (int)app->maps_count);
+	init_basic_textures();
 	init_ui();
 	init_hooks();
 	mlx_loop(get_mlx());
@@ -64,4 +66,17 @@ static void	init_start_time(void)
 	app = get_app();
 	gettimeofday(&time, NULL);
 	app->start_time = time.tv_sec * 1000 + time.tv_usec / 1000;
+}
+
+static void	init_basic_textures(void)
+{
+	t_mlx			*app;
+
+	app = get_app();
+	app->ceiling_tex = new_texture(WIN_W, WIN_H / 2);
+	clear_texture(CEILLING, app->ceiling_tex);
+	finish_new_texture(app->ceiling_tex);
+	app->floor_tex = new_texture(WIN_W, WIN_H / 2);
+	clear_texture(FLOOR, app->floor_tex);
+	finish_new_texture(app->floor_tex);
 }

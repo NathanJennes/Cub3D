@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 12:49:15 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 16:36:18 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,8 @@ typedef struct s_mlx
 	t_ui				ui;
 	t_texture_manager	texture_manager;
 	t_font_manager		font_manager;
+	int64_t				ceiling_tex;
+	int64_t				floor_tex;
 	t_bool				keys[MAX_KEYCODE];
 }	t_mlx;
 
