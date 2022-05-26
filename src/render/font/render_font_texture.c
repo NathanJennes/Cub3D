@@ -50,9 +50,9 @@ static int	render_letter(char c, t_font *font, t_ivec2 pos, t_ivec2 size_tex)
 	if (c < 0)
 		return (0);
 	infos.c = &font->characters[(int)c];
-	infos.ratio = (float)size_tex.x / (float)font->font_size;
-	infos.px_size = ivec2((int64_t)(infos.ratio * (float)infos.c->width),
-			(int64_t)(infos.ratio * (float)infos.c->height));
+	infos.ratio = (double)size_tex.x / (double)font->font_size;
+	infos.px_size = ivec2((int64_t)(infos.ratio * (double)infos.c->width),
+			(int64_t)(infos.ratio * (double)infos.c->height));
 	infos.xy = ivec2(0, 0);
 	infos.font = font;
 	infos.bitmap = &font->bitmap;
@@ -68,7 +68,7 @@ static int	render_letter(char c, t_font *font, t_ivec2 pos, t_ivec2 size_tex)
 		}
 		infos.xy.y++;
 	}
-	return ((int)((float)infos.c->x_advance * infos.ratio));
+	return ((int)((double)infos.c->x_advance * infos.ratio));
 }
 
 static int	get_pixel_color(t_text_render *infos)
@@ -76,8 +76,8 @@ static int	get_pixel_color(t_text_render *infos)
 	int	color;
 
 	color = sample_pixel(infos->font->bitmap.data,
-			vec2((float)infos->c->x + (float) infos->xy.x / infos->ratio,
-				(float)infos->c->y + (float) infos->xy.y / infos->ratio),
+			vec2((double)infos->c->x + (double) infos->xy.x / infos->ratio,
+				(double)infos->c->y + (double) infos->xy.y / infos->ratio),
 			vec2(1.0f / infos->ratio, 1.0f / infos->ratio),
 			infos->bitmap->line_size);
 	return (color);
@@ -86,9 +86,9 @@ static int	get_pixel_color(t_text_render *infos)
 static void	render_pixel(t_text_render *infos, int color, int64_t tex_id)
 {
 	if (get_t(color) < 255)
-		set_texture_pixel((int)((float)infos->c->x_off * infos->ratio)
+		set_texture_pixel((int)((double)infos->c->x_off * infos->ratio)
 			+ infos->pos.x + infos->xy.x,
-			(int)((float)infos->c->y_off * infos->ratio)
+			(int)((double)infos->c->y_off * infos->ratio)
 			+ infos->pos.y + infos->xy.y, color, tex_id);
 }
 
@@ -109,8 +109,8 @@ static int	sample_pixel(uint8_t *data, t_vec2 pos, t_vec2 size, int line_size)
 		while (ij.x < FONT_SAMPLING)
 		{
 			sampling_pos = vec2(pos.x + sample_dists.x
-					+ sample_dists.x * (float)ij.x,
-					pos.y + sample_dists.y + sample_dists.y * (float)ij.y);
+					+ sample_dists.x * (double)ij.x,
+					pos.y + sample_dists.y + sample_dists.y * (double)ij.y);
 			t += 255 - get_r(*(int *)(data + (int)sampling_pos.x * sizeof (int)
 						+ (int)sampling_pos.y * line_size));
 			ij.x++;

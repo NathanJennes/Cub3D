@@ -63,8 +63,8 @@ void	draw_line(t_ivec2 start, t_ivec2 end, int col)
 
 	pixels_to_draw = ft_sqrt((ft_pow2(end.x - start.x)) + \
 			ft_pow2(end.y - start.y));
-	delta.x = ((float)end.x - (float)start.x) / (float)pixels_to_draw;
-	delta.y = ((float)end.y - (float)start.y) / (float)pixels_to_draw;
+	delta.x = ((double)end.x - (double)start.x) / (double)pixels_to_draw;
+	delta.y = ((double)end.y - (double)start.y) / (float)pixels_to_draw;
 	ppos = iv2_to_v2(start);
 	pixels_drawn = 0;
 	while (pixels_drawn < pixels_to_draw)

@@ -17,7 +17,7 @@
 #include "render.h"
 
 static void		print_ray(t_vec2 hit_pos);
-static t_vec2	rotate_vector(t_vec2 v, float angle);
+static t_vec2	rotate_vector(t_vec2 v, double angle);
 static void		print_player_vector(void);
 static void		debug_rays(void);
 
@@ -47,11 +47,11 @@ void	render_test_scene(const t_mlx *app)
 
 static void	debug_rays(void)
 {
-	float		offset;
+	double		offset;
 	int64_t		i;
 	t_vec2		ray_direction;
 	t_player	*player;
-	float		half_width;
+	double		half_width;
 
 	i = 0;
 	half_width = tan(get_settings()->fov * PI / 360.0f);
@@ -93,8 +93,8 @@ void	print_player_vector(void)
 	draw_line(v2_to_iv2(player_pos),
 		ivec2(player_pos.x - right.x * CELL_WIDTH,
 			player_pos.y - right.y * CELL_WIDTH), GREEN);
-	fov_left = rotate_vector(forward, ((float)get_settings()->fov / 360.0f) * PI);
-	fov_right = rotate_vector(forward, -((float)get_settings()->fov / 360.0f) * PI);
+	fov_left = rotate_vector(forward, ((double)get_settings()->fov / 360.0f) * PI);
+	fov_right = rotate_vector(forward, -((double)get_settings()->fov / 360.0f) * PI);
 	draw_line(v2_to_iv2(player_pos),
 		ivec2(player_pos.x + fov_left.x * CELL_WIDTH,
 			player_pos.y + fov_left.y * CELL_WIDTH), PINK);
@@ -103,7 +103,7 @@ void	print_player_vector(void)
 			player_pos.y + fov_right.y * CELL_WIDTH), PINK);
 }
 
-static t_vec2	rotate_vector(t_vec2 v, float angle)
+static t_vec2	rotate_vector(t_vec2 v, double angle)
 {
 	t_vec2	new_vector;
 

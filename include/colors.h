@@ -37,6 +37,6 @@ int			get_g(int trgb);
 int			get_b(int trgb);
 
 /* colors utils */
-int			color_lerp(int col1, int col2, float value);
+int			color_lerp(int col1, int col2, double value);
 
 #endif

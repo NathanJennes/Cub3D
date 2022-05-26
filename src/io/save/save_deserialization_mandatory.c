@@ -40,7 +40,7 @@ int	load_mandatory_map(t_gamestate *save_out, int fd, char *line)
 		return (0);
 	gc_strarray_free(infos->map_raw);
 	setup_player(save_out);
-	save_out->settings.fov = 60;
+	save_out->settings.fov = 90;
 	return (1);
 }
 

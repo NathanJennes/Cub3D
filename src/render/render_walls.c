@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/25 19:47:38 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 15:04:57 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "core.h"
 #include "render.h"
 
-static t_ray	populate_ray(float dist, t_vec2 ray, t_bool hit, int side);
+static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side);
 static t_vec2	calculate_lengths(t_vec2 *ray);
 static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos, t_ivec2 map_pos);
 static int		get_map_type(int64_t x, int64_t y);
@@ -22,14 +22,14 @@ void			draw_col_wall(int64_t col, double dist, t_vec2 ray);
 
 void	render_walls(void)
 {
-	float		offset;
+	double		offset;
 	int64_t		i;
 	t_vec2		ray_direction;
 	t_player	*player;
-	float		half_width;
+	double		half_width;
 
 	i = 0;
-	half_width = tanf(get_settings()->fov * PI / 360.0f);
+	half_width = tan(get_settings()->fov * PI / 360.0f);
 	player = get_player();
 	while (i < WIN_W)
 	{
@@ -91,15 +91,15 @@ void	draw_col_wall(int64_t col, double dist, t_vec2 ray)
 	double	angle;
 	t_vec2	*pf;
 
-
 	pf = &get_player()->forward;
 	angle = acos((pf->x * ray.x + pf->y * ray.y) / (vec2_mag(*pf) * vec2_mag(ray)));
-	dist = dist * cos(angle);
+	if (angle < 1)
+		dist = dist * cos(angle);
 	y = 0;
 	wall_size = DFLT_SIZE / dist;
 	wall_size = llabs(wall_size);
 	if (wall_size < 0)
-		printf("> %f %f\n", pf->x * ray.x + pf->y * ray.y, (vec2_mag(*pf) * vec2_mag(ray)));
+		printf("> %lf %f %lf\n", pf->x * ray.x + pf->y * ray.y, (vec2_mag(*pf) * vec2_mag(ray)), angle);
 	wall_origin = (WIN_H / 2) - (wall_size / 2);
 	if (wall_size > WIN_H)
 		wall_size = WIN_H;
@@ -122,7 +122,7 @@ void	draw_col_wall(int64_t col, double dist, t_vec2 ray)
 	}
 }
 
-static t_ray	populate_ray(float dist, t_vec2 ray, t_bool hit, int side)
+static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side)
 {
 	t_ray		result;
 	t_player	*player;
@@ -147,11 +147,11 @@ static t_vec2	calculate_lengths(t_vec2 *ray)
 	if (ray->x == 0)
 		lengths.x = MAXFLOAT;
 	else
-		lengths.x = (float)ft_abs(1.0f / ray->x);
+		lengths.x = (double)ft_abs(1.0f / ray->x);
 	if (ray->y == 0)
 		lengths.y = MAXFLOAT;
 	else
-		lengths.y = (float)ft_abs(1.0f / ray->y);
+		lengths.y = (double)ft_abs(1.0f / ray->y);
 	return (lengths);
 }
 
@@ -162,22 +162,22 @@ static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos, t_iv
 	if (ray->x > 0)
 	{
 		step.x = 1;
-		dists->x = (float)map_pos.x + 1.0f - pos.x;
+		dists->x = (double)map_pos.x + 1.0f - pos.x;
 	}
 	else
 	{
 		step.x = -1;
-		dists->x = pos.x - (float)map_pos.x;
+		dists->x = pos.x - (double)map_pos.x;
 	}
 	if (ray->y > 0)
 	{
 		step.y = 1;
-		dists->y = (float)map_pos.y + 1.0f - pos.y;
+		dists->y = (double)map_pos.y + 1.0f - pos.y;
 	}
 	else
 	{
 		step.y = -1;
-		dists->y = pos.y - (float)map_pos.y;
+		dists->y = pos.y - (double)map_pos.y;
 	}
 	return (step);
 }

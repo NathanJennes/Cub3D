@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:36:50 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/20 17:55:35 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/26 13:53:46 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void	switch_debug_ui(void)
 		app->ui.debug_ui = TRUE;
 }
 
-void	print_float(float val, t_ivec2 pos, int color)
+void	print_float(double val, t_ivec2 pos, int color)
 {
 	char	buffer[9];
 
-	snprintf(buffer, sizeof(buffer), "%.6f", val);
+	snprintf(buffer, sizeof(buffer), "%.6lf", val);
 	put_text(pos, color, buffer);
 }
 

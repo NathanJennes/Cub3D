@@ -25,17 +25,17 @@ void	update_player_vectors(t_player *player)
 	update_player_cell_pos(player);
 	update_player_map_vec(player);
 	if (get_player()->direction < 0.0f)
-		get_player()->direction += (float)(TWO_PI);
+		get_player()->direction += TWO_PI;
 	else if (get_player()->direction > TWO_PI)
-		get_player()->direction -= (float)(TWO_PI);
+		get_player()->direction -= TWO_PI;
 	get_player()->ray_increment = \
-	((float)get_settings()->fov * (PI / 180.0f)) / (float)WIN_W;
+	(get_settings()->fov * (PI / 180.0f)) / WIN_W;
 	get_player()->ray_angle = \
-	get_player()->direction + ((float)get_settings()->fov / 360.0f) * PI;
+	get_player()->direction + (get_settings()->fov / 360.0f) * PI;
 	if (get_player()->ray_angle < 0.0f)
-		get_player()->ray_angle += (float)(TWO_PI);
+		get_player()->ray_angle += TWO_PI;
 	else if (get_player()->ray_angle > TWO_PI)
-		get_player()->ray_angle -= (float)(TWO_PI);
+		get_player()->ray_angle -= TWO_PI;
 }
 
 static void	update_player_forward_vec(t_player *player)

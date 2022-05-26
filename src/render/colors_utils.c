@@ -13,7 +13,7 @@
 #include "colors.h"
 #include "libft.h"
 
-int	color_lerp(int col1, int col2, float value)
+int	color_lerp(int col1, int col2, double value)
 {
 	t_vec3	new_color;
 

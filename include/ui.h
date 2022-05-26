@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/25 17:38:00 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 14:07:33 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,11 +132,11 @@ void			init_ui(void);
 int				render_ui(void);
 void			update_ui(void);
 
-void			render_mmap(float zoom);
+void			render_mmap(double zoom);
 
 void			fps_counter(void);
-void		print_debug(void);
-void		fps_counter(void);
+void			print_debug(void);
+void			fps_counter(void);
 
 void			update_ui_flags(uint8_t flag);
 void			switch_debug_ui(void);
@@ -144,7 +144,7 @@ void			switch_debug_ui(void);
 int				str_px_size(char *str);
 void			put_text(t_ivec2 pos, int color, char *str);
 int				str_px_size(char *str);
-void			print_float(float val, t_ivec2 pos, int color);
+void			print_float(double val, t_ivec2 pos, int color);
 void			print_ivec(t_ivec2 v, t_ivec2 pos, int color);
 void			print_vec(t_vec2 v, t_ivec2 pos, int color);
 void			print_int(int val, t_ivec2 pos, int color);

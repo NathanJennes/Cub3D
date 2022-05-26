@@ -85,7 +85,7 @@ typedef struct s_frame
 
 typedef struct s_ray
 {
-	float		distance;
+	double		distance;
 	t_vec2		hit_pos;
 	t_bool		hit;
 	int			side;
@@ -97,11 +97,11 @@ typedef struct s_player
 	t_vec2		world_pos;
 	t_vec2		cell_pos;
 	t_ivec2		map_pos;
-	float		direction;
+	double		direction;
 	t_vec2		forward;
 	t_vec2		right;
-	float		ray_increment;
-	float		ray_angle;
+	double		ray_increment;
+	double		ray_angle;
 	t_ray		last_ray;
 }	t_player;
 

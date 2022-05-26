@@ -52,7 +52,7 @@ typedef struct s_text_render
 	t_font			*font;
 	t_char_meta		*c;
 	t_font_bitmap	*bitmap;
-	float			ratio;
+	double			ratio;
 	t_ivec2			xy;
 	t_ivec2			pos;
 	t_ivec2			px_size;

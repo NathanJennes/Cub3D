@@ -18,7 +18,7 @@ static void	draw_cells(int cell_size, t_vec2 offset);
 static void	render_mmap_wall(int x, int y, int cell_size);
 static void	render_mmap_empty(int x, int y, int cell_size);
 
-void	render_mmap(float zoom)
+void	render_mmap(double zoom)
 {
 	int			cell_size;
 	t_vec2		player_pos;

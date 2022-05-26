@@ -27,7 +27,7 @@ int64_t	get_text_box_height(char *text, char *font_name, int size)
 	int64_t	height;
 	size_t	len;
 	size_t	i;
-	float	ratio;
+	double	ratio;
 
 	if (!text || !font_name || size <= 0)
 		return (0);
@@ -35,7 +35,7 @@ int64_t	get_text_box_height(char *text, char *font_name, int size)
 	len = ft_strlen(text);
 	if (!font || len == 0)
 		return (0);
-	ratio = (float)size / (float)font->font_size;
+	ratio = (double)size / (double)font->font_size;
 	i = 0;
 	height = 0;
 	while (i < len - 1)
@@ -45,5 +45,5 @@ int64_t	get_text_box_height(char *text, char *font_name, int size)
 					+ font->characters[(int)text[i]].y_off);
 		i++;
 	}
-	return ((int64_t)((float)height * ratio));
+	return ((int64_t)((double)height * ratio));
 }
