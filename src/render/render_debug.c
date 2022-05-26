@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 13:40:53 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/26 19:26:49 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,21 @@ void	render_test_scene(const t_mlx *app)
 static void	debug_rays(void)
 NOPROF
 {
-	double		offset;
 	int64_t		i;
 	t_vec2		ray_direction;
 	t_player	*player;
-	double		half_width;
+	double		start_angle;
 
 	i = 0;
-	half_width = tan(get_settings()->fov * PI / 360.0f);
 	player = get_player();
+	start_angle = get_math()->base_angle;
 	while (i < WIN_W)
 	{
-		offset = (((double)i * 2.0f / (WIN_W - 1.0f)) - 1.0f) * half_width;
-		ray_direction.x = player->forward.x - offset * player->right.x;
-		ray_direction.y = player->forward.y - offset * player->right.y;
+		ray_direction = vec2(sin(start_angle), cos(start_angle));
+		vec2_normalize(&ray_direction);
 		player->last_ray = shoot_ray(ray_direction, player->map_pos);
 		print_ray(player->last_ray.hit_pos);
+		start_angle -= get_math()->angle_inc;
 		i++;
 	}
 }
@@ -96,8 +95,8 @@ NOPROF
 	draw_line(v2_to_iv2(player_pos),
 		ivec2(player_pos.x - right.x * CELL_WIDTH,
 			player_pos.y - right.y * CELL_WIDTH), GREEN);
-	fov_left = rotate_vector(forward, ((double)get_settings()->fov / 360.0f) * PI);
-	fov_right = rotate_vector(forward, -((double)get_settings()->fov / 360.0f) * PI);
+	fov_left = rotate_vector(forward, get_math()->r_halffov);
+	fov_right = rotate_vector(forward, -get_math()->r_halffov);
 	draw_line(v2_to_iv2(player_pos),
 		ivec2(player_pos.x + fov_left.x * CELL_WIDTH,
 			player_pos.y + fov_left.y * CELL_WIDTH), PINK);

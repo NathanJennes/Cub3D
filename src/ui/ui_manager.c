@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_manager.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:00:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/20 19:49:31 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 18:41:02 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	render_ui(void)
 		else if (app->ui.state == NEW_GAME_MENU)
 			render_new_game_menu();
 	}
-	if (app->ui.debug_ui & DEBUG_UI)
-		fps_counter();
+	if (get_ui()->debug_ui)
+		print_debug();
 	return (0);
 }
 

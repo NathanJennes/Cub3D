@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 16:39:48 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/26 19:50:00 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "core.h"
 # include "font.h"
 
-# define DFLT_SIZE	300
+# define DFLT_SIZE	64
 
 # define RAY_LENGTH 10
 
@@ -53,7 +53,7 @@ void			draw_rect_tex_unsafe(t_ivec2 pos, t_ivec2 size,
 void			draw_circle_tex(t_ivec2 pos, int64_t diameter,
 					int col, int64_t tex_id);
 void			draw_circle_tex_unsafe(t_ivec2 pos, int64_t diameter,
-						int col, int64_t tex_id);
+					int col, int64_t tex_id);
 void			draw_line_tex(t_ivec2 start, t_ivec2 end,
 					int col, int64_t tex_id);
 void			draw_line_tex_unsafe(t_ivec2 start, t_ivec2 end,

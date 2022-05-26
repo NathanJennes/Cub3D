@@ -30,7 +30,7 @@
 # define MMAP_ZOOM_FACTOR	20
 # define MMAP_PLAYER_DIAM	10
 
-# define DEBUG_UI 1
+# define DEBUG_UI 0
 
 typedef struct s_mlx	t_mlx;
 
@@ -123,7 +123,7 @@ typedef struct s_ui_new_game_menu
 typedef struct s_ui
 {
 	t_ui_state			state;
-	uint8_t				debug_ui;
+	t_bool				debug_ui;
 	t_ui_main_menu		main_menu;
 	t_ui_new_game_menu	new_game_menu;
 }	t_ui;

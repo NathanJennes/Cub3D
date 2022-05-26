@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/26 16:21:18 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/26 20:03:24 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,21 @@ void	draw_col_wall(int64_t col, double dist, t_vec2 ray);
 
 void	render_walls(void)
 {
-	double		offset;
 	int64_t		i;
 	t_vec2		ray_direction;
 	t_player	*player;
-	double		half_width;
+	double		start_angle;
 
 	i = 0;
-	half_width = tan(get_settings()->fov * PI / 360.0f);
 	player = get_player();
+	start_angle = get_math()->base_angle;
 	while (i < WIN_W)
 	{
-		offset = (((double)i * 2.0f / (WIN_W - 1.0f)) - 1.0f) * half_width;
-		ray_direction.x = player->forward.x - offset * player->right.x;
-		ray_direction.y = player->forward.y - offset * player->right.y;
+		ray_direction = vec2(sin(start_angle), cos(start_angle));
 		vec2_normalize(&ray_direction);
 		player->last_ray = shoot_ray(ray_direction, player->map_pos);
-		if (player->last_ray.hit == TRUE)
-			draw_col_wall(i, player->last_ray.distance, player->last_ray.ray);
+		draw_col_wall(i, player->last_ray.distance, player->last_ray.ray);
+		start_angle -= get_math()->angle_inc;
 		i++;
 	}
 }
@@ -53,7 +50,8 @@ void	draw_col_wall(int64_t col, double dist, t_vec2 ray)
 			/ (vec2_mag(*pf) * vec2_mag(ray)));
 	if (angle <= 1)
 		dist = dist * cos(angle);
-	wall_size = (int64_t)fabs(DFLT_SIZE / dist);
+	double	plane_dist = HALFW_H / (get_math()->r_vfov / 2);
+	wall_size = (int64_t)fabs(DFLT_SIZE / (dist * DFLT_SIZE) * plane_dist);
 	if (wall_size > WIN_H)
 		wall_size = WIN_H;
 	else if (wall_size < 0)
@@ -63,9 +61,9 @@ void	draw_col_wall(int64_t col, double dist, t_vec2 ray)
 	while (y < wall_size)
 	{
 		if (get_player()->last_ray.side == SIDE_X)
-			set_screen_pixel(col, y + wall_origin, WALL_COLOR_1);
+			set_screen_pixel_unsafe(col, y + wall_origin, WALL_COLOR_1);
 		else if (get_player()->last_ray.side == SIDE_Y)
-			set_screen_pixel(col, y + wall_origin, WALL_COLOR_2);
+			set_screen_pixel_unsafe(col, y + wall_origin, WALL_COLOR_2);
 		y++;
 	}
 }
