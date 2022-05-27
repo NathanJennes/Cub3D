@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:11:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 19:21:54 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/27 12:40:07 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static void	update_player_forward_vec(t_player *player)
 
 static void	update_player_right_vec(t_player *player)
 {
-	player->right.x = cos(player->direction);
-	player->right.y = -sin(player->direction);
+	player->right.x = -cos(player->direction);
+	player->right.y = sin(player->direction);
 }
 
 static void	update_player_cell_pos(t_player *player)

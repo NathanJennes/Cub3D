@@ -22,7 +22,7 @@
 
 # define DFLT_SIZE	64
 
-# define RAY_LENGTH 10
+# define RAY_LENGTH 20
 
 # define NOSIDE 0
 # define SIDE_X 1

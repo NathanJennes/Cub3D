@@ -1,0 +1,917 @@
+Adress: 4294967296, Name: _mh_execute_header
+Adress: 4294974464, Name: main
+Adress: 4294974544, Name: asan.module_ctor
+Adress: 4294974560, Name: close_app
+Adress: 4294974768, Name: error_close_app
+Adress: 4294974864, Name: check_leaky_errors
+Adress: 4294975136, Name: asan.module_ctor
+Adress: 4294975168, Name: asan.module_dtor
+Adress: 4294975184, Name: main_loop
+Adress: 4294977776, Name: asan.module_ctor
+Adress: 4294977792, Name: ft_ferror
+Adress: 4294978000, Name: ft_error_msg
+Adress: 4294978080, Name: error_code_msg
+Adress: 4294978192, Name: ft_free_2d
+Adress: 4294978448, Name: asan.module_ctor
+Adress: 4294978480, Name: asan.module_dtor
+Adress: 4294978496, Name: init_app
+Adress: 4294978800, Name: init_start_time
+Adress: 4294979440, Name: init_hooks
+Adress: 4294980256, Name: asan.module_ctor
+Adress: 4294980288, Name: asan.module_dtor
+Adress: 4294980304, Name: init_gc
+Adress: 4294980384, Name: gc_callback
+Adress: 4294980464, Name: asan.module_ctor
+Adress: 4294980480, Name: get_app
+Adress: 4294980496, Name: get_frame
+Adress: 4294980528, Name: get_map_infos
+Adress: 4294980576, Name: get_player
+Adress: 4294980624, Name: get_mlx
+Adress: 4294980704, Name: asan.module_ctor
+Adress: 4294980736, Name: asan.module_dtor
+Adress: 4294980752, Name: get_ui
+Adress: 4294980800, Name: get_settings
+Adress: 4294980848, Name: asan.module_ctor
+Adress: 4294980864, Name: init_window
+Adress: 4294981792, Name: destroy_window
+Adress: 4294982176, Name: asan.module_ctor
+Adress: 4294982192, Name: print_cub_err
+Adress: 4294982576, Name: asan.module_ctor
+Adress: 4294982608, Name: asan.module_dtor
+Adress: 4294982624, Name: update_player_vectors
+Adress: 4294983792, Name: update_player_forward_vec
+Adress: 4294984160, Name: update_player_right_vec
+Adress: 4294984528, Name: update_player_cell_pos
+Adress: 4294984672, Name: update_player_map_vec
+Adress: 4294985376, Name: asan.module_ctor
+Adress: 4294985392, Name: update_player
+Adress: 4294986944, Name: asan.module_ctor
+Adress: 4294986960, Name: fps_counter
+Adress: 4294987952, Name: get_sec_time
+Adress: 4294988400, Name: asan.module_ctor
+Adress: 4294988432, Name: asan.module_dtor
+Adress: 4294988448, Name: put_text
+Adress: 4294989312, Name: str_px_size
+Adress: 4294989408, Name: switch_debug_ui
+Adress: 4294989776, Name: print_float
+Adress: 4294990512, Name: print_ivec
+Adress: 4294991552, Name: print_int
+Adress: 4294992304, Name: print_vec
+Adress: 4294993408, Name: asan.module_ctor
+Adress: 4294993440, Name: asan.module_dtor
+Adress: 4294993456, Name: render_ui
+Adress: 4294993952, Name: update_ui
+Adress: 4294994240, Name: update_ui_click_begin
+Adress: 4294994544, Name: update_ui_click_end
+Adress: 4294994848, Name: asan.module_ctor
+Adress: 4294994864, Name: render_mmap
+Adress: 4294997440, Name: draw_cells
+Adress: 4294998992, Name: outside_mmap_bounds
+Adress: 4294999072, Name: render_mmap_wall
+Adress: 4294999328, Name: render_mmap_empty
+Adress: 4294999584, Name: asan.module_ctor
+Adress: 4294999600, Name: init_ui
+Adress: 4294999760, Name: asan.module_ctor
+Adress: 4294999776, Name: print_debug
+Adress: 4294999840, Name: debug_player
+Adress: 4295009184, Name: asan.module_ctor
+Adress: 4295009216, Name: asan.module_dtor
+Adress: 4295009232, Name: draw_rect
+Adress: 4295010304, Name: draw_circle
+Adress: 4295011184, Name: draw_line
+Adress: 4295013616, Name: draw_line_lerp
+Adress: 4295016112, Name: asan.module_ctor
+Adress: 4295016128, Name: draw_rect_tex
+Adress: 4295017216, Name: draw_circle_tex
+Adress: 4295018112, Name: draw_line_tex
+Adress: 4295020560, Name: draw_line_lerp_tex
+Adress: 4295023376, Name: asan.module_ctor
+Adress: 4295023392, Name: draw_rect_unsafe
+Adress: 4295025136, Name: draw_circle_unsafe
+Adress: 4295026320, Name: draw_line_unsafe
+Adress: 4295028752, Name: draw_line_lerp_unsafe
+Adress: 4295031248, Name: asan.module_ctor
+Adress: 4295031264, Name: draw_rect_tex_unsafe
+Adress: 4295034000, Name: draw_circle_tex_unsafe
+Adress: 4295035232, Name: draw_line_tex_unsafe
+Adress: 4295037680, Name: draw_line_lerp_tex_unsafe
+Adress: 4295040496, Name: asan.module_ctor
+Adress: 4295040512, Name: trgb
+Adress: 4295040560, Name: get_t
+Adress: 4295040592, Name: get_r
+Adress: 4295040624, Name: get_g
+Adress: 4295040656, Name: get_b
+Adress: 4295040688, Name: asan.module_ctor
+Adress: 4295040704, Name: color_lerp
+Adress: 4295041920, Name: asan.module_ctor
+Adress: 4295041936, Name: clear_screen
+Adress: 4295042784, Name: set_screen_pixel
+Adress: 4295043184, Name: pixel_in_screen
+Adress: 4295043280, Name: set_screen_pixel_unsafe
+Adress: 4295043616, Name: asan.module_ctor
+Adress: 4295043632, Name: clear_texture
+Adress: 4295044176, Name: set_texture_pixel
+Adress: 4295044960, Name: pixel_in_texture
+Adress: 4295045152, Name: set_texture_pixel_unsafe
+Adress: 4295045648, Name: asan.module_ctor
+Adress: 4295045664, Name: render_ui_texture
+Adress: 4295046096, Name: render_invalid_texture
+Adress: 4295047168, Name: render_ui_texture_grayscale
+Adress: 4295047600, Name: render_ui_texture_inverse_grayscale
+Adress: 4295048032, Name: render_ui_texture_inversed
+Adress: 4295048464, Name: asan.module_ctor
+Adress: 4295048480, Name: mlx_render_text
+Adress: 4295049280, Name: asan.module_ctor
+Adress: 4295049296, Name: render_walls
+Adress: 4295051344, Name: draw_col_wall
+Adress: 4295053136, Name: asan.module_ctor
+Adress: 4295053152, Name: render_test_scene
+Adress: 4295055632, Name: print_player_vector
+Adress: 4295063312, Name: debug_rays
+Adress: 4295065088, Name: print_ray
+Adress: 4295067024, Name: rotate_vector
+Adress: 4295068192, Name: asan.module_ctor
+Adress: 4295068208, Name: shoot_ray
+Adress: 4295072512, Name: get_map_type
+Adress: 4295072976, Name: populate_ray
+Adress: 4295074832, Name: calculate_lengths
+Adress: 4295075824, Name: calculate_step_dists
+Adress: 4295078000, Name: asan.module_ctor
+Adress: 4295078016, Name: load_xpm
+Adress: 4295078912, Name: asan.module_ctor
+Adress: 4295078928, Name: create_texture_from_xpm_file
+Adress: 4295079408, Name: transfer_texture_data
+Adress: 4295080832, Name: create_texture_variations
+Adress: 4295085344, Name: create_blank_texture
+Adress: 4295086368, Name: finish_new_texture
+Adress: 4295086544, Name: asan.module_ctor
+Adress: 4295086560, Name: shade_ao_texture_flat
+Adress: 4295086976, Name: shade_pixel
+Adress: 4295087456, Name: shade_ao_texture_right
+Adress: 4295087760, Name: shade_ao_texture_left
+Adress: 4295088032, Name: shade_ao_texture_all
+Adress: 4295088192, Name: asan.module_ctor
+Adress: 4295088208, Name: free_texture
+Adress: 4295089232, Name: asan.module_ctor
+Adress: 4295089248, Name: load_texture
+Adress: 4295090160, Name: new_texture
+Adress: 4295090896, Name: get_texture_from_id
+Adress: 4295091184, Name: unload_texture_manager
+Adress: 4295091504, Name: asan.module_ctor
+Adress: 4295091520, Name: add_texture_to_array
+Adress: 4295092384, Name: grow_texture_array
+Adress: 4295092816, Name: asan.module_ctor
+Adress: 4295092832, Name: get_texture_size
+Adress: 4295093840, Name: asan.module_ctor
+Adress: 4295093856, Name: create_texture_grayscale
+Adress: 4295095104, Name: create_texture_inverse_grayscale
+Adress: 4295096384, Name: asan.module_ctor
+Adress: 4295096400, Name: create_texture_inversed
+Adress: 4295097664, Name: asan.module_ctor
+Adress: 4295097680, Name: save_game
+Adress: 4295097840, Name: open_save_file
+Adress: 4295098064, Name: load_game
+Adress: 4295099168, Name: free_save
+Adress: 4295099440, Name: create_appdata_directory
+Adress: 4295100000, Name: asan.module_ctor
+Adress: 4295100032, Name: asan.module_dtor
+Adress: 4295100048, Name: load_all_saves
+Adress: 4295100432, Name: add_to_saves
+Adress: 4295101328, Name: reload_saves
+Adress: 4295101392, Name: unload_saves
+Adress: 4295101712, Name: grow_saves_array
+Adress: 4295102240, Name: asan.module_ctor
+Adress: 4295102272, Name: asan.module_dtor
+Adress: 4295102288, Name: load_map
+Adress: 4295103392, Name: open_map_file
+Adress: 4295103568, Name: create_maps_directory
+Adress: 4295104128, Name: asan.module_ctor
+Adress: 4295104160, Name: asan.module_dtor
+Adress: 4295104176, Name: load_all_maps
+Adress: 4295104560, Name: add_to_maps
+Adress: 4295105456, Name: reload_maps
+Adress: 4295105520, Name: unload_maps
+Adress: 4295105840, Name: grow_maps_array
+Adress: 4295106368, Name: asan.module_ctor
+Adress: 4295106400, Name: asan.module_dtor
+Adress: 4295106416, Name: deserialize_save
+Adress: 4295106640, Name: deserialize_cub_save
+Adress: 4295107744, Name: parse_line
+Adress: 4295108016, Name: asan.module_ctor
+Adress: 4295108048, Name: asan.module_dtor
+Adress: 4295108064, Name: load_mandatory_map
+Adress: 4295108672, Name: parse_line
+Adress: 4295110416, Name: setup_player
+Adress: 4295111232, Name: asan.module_ctor
+Adress: 4295111264, Name: asan.module_dtor
+Adress: 4295111280, Name: parse_color
+Adress: 4295112784, Name: parse_texture
+Adress: 4295113184, Name: add_map_row
+Adress: 4295113856, Name: contains_illegal_char
+Adress: 4295114896, Name: is_illegal_char
+Adress: 4295115488, Name: asan.module_ctor
+Adress: 4295115504, Name: deserialize_map
+Adress: 4295115808, Name: parse_line
+Adress: 4295116688, Name: asan.module_ctor
+Adress: 4295116720, Name: asan.module_dtor
+Adress: 4295116736, Name: deserialize_map_parse_map_content
+Adress: 4295117296, Name: contains_illegal_char
+Adress: 4295118368, Name: is_illegal_char
+Adress: 4295119056, Name: asan.module_ctor
+Adress: 4295119072, Name: deserialize_map_parse_width
+Adress: 4295119408, Name: deserialize_map_parse_height
+Adress: 4295119760, Name: deserialize_map_parse_spawn
+Adress: 4295120944, Name: deserialize_map_parse_ceiling
+Adress: 4295122128, Name: deserialize_map_parse_floor
+Adress: 4295123312, Name: asan.module_ctor
+Adress: 4295123328, Name: deserialize_map_parse_no_tex
+Adress: 4295123728, Name: deserialize_map_parse_ea_tex
+Adress: 4295124128, Name: deserialize_map_parse_so_tex
+Adress: 4295124528, Name: deserialize_map_parse_we_tex
+Adress: 4295124928, Name: asan.module_ctor
+Adress: 4295124960, Name: asan.module_dtor
+Adress: 4295124976, Name: deserialize_player
+Adress: 4295125280, Name: parse_line
+Adress: 4295125456, Name: parse_pos
+Adress: 4295126688, Name: asan.module_ctor
+Adress: 4295126720, Name: asan.module_dtor
+Adress: 4295126736, Name: serialize_game
+Adress: 4295126944, Name: serialize_player
+Adress: 4295127664, Name: serialize_map
+Adress: 4295129712, Name: serialize_map_walls
+Adress: 4295131296, Name: asan.module_ctor
+Adress: 4295131328, Name: asan.module_dtor
+Adress: 4295131344, Name: construct_map
+Adress: 4295132176, Name: read_map_content
+Adress: 4295134976, Name: asan.module_ctor
+Adress: 4295134992, Name: cub_update_mouse_pos
+Adress: 4295135536, Name: cub_get_mouse_position
+Adress: 4295135968, Name: asan.module_ctor
+Adress: 4295135984, Name: key_pressed_listener
+Adress: 4295136240, Name: asan.module_ctor
+Adress: 4295136256, Name: key_up_callback
+Adress: 4295136528, Name: key_down_callback
+Adress: 4295137040, Name: is_key_down
+Adress: 4295137168, Name: asan.module_ctor
+Adress: 4295137184, Name: mouse_click_begin
+Adress: 4295137264, Name: mouse_click_end
+Adress: 4295137344, Name: mouse_wheel_up
+Adress: 4295137392, Name: mouse_wheel_down
+Adress: 4295137440, Name: asan.module_ctor
+Adress: 4295137456, Name: mouse_up_callback
+Adress: 4295137968, Name: mouse_down_callback
+Adress: 4295138512, Name: handle_scroll_wheel
+Adress: 4295138656, Name: mouse_move_hooks
+Adress: 4295138768, Name: is_mouse_down
+Adress: 4295138896, Name: asan.module_ctor
+Adress: 4295138912, Name: create_button
+Adress: 4295140560, Name: render_ui_button
+Adress: 4295141648, Name: asan.module_ctor
+Adress: 4295141664, Name: update_ui_button
+Adress: 4295143456, Name: update_ui_button_click_begin
+Adress: 4295145280, Name: update_ui_button_click_end
+Adress: 4295147312, Name: asan.module_ctor
+Adress: 4295147328, Name: create_img_box
+Adress: 4295148464, Name: render_ui_img_box
+Adress: 4295148832, Name: asan.module_ctor
+Adress: 4295148848, Name: create_label
+Adress: 4295149888, Name: render_label
+Adress: 4295150256, Name: asan.module_ctor
+Adress: 4295150272, Name: create_slider
+Adress: 4295152544, Name: generate_cursor_texture
+Adress: 4295154512, Name: generate_bar_texture
+Adress: 4295157696, Name: render_ui_slider
+Adress: 4295158592, Name: asan.module_ctor
+Adress: 4295158608, Name: update_ui_slider
+Adress: 4295161808, Name: update_ui_slider_click_begin
+Adress: 4295163536, Name: update_ui_slider_click_end
+Adress: 4295163920, Name: asan.module_ctor
+Adress: 4295163936, Name: uic_center_win_w
+Adress: 4295164112, Name: uic_center_win_h
+Adress: 4295164288, Name: uic_center_win
+Adress: 4295164336, Name: asan.module_ctor
+Adress: 4295164352, Name: uic_padding_up
+Adress: 4295164464, Name: uic_padding_right
+Adress: 4295164576, Name: uic_padding_down
+Adress: 4295164688, Name: uic_padding_left
+Adress: 4295164800, Name: uic_padding
+Adress: 4295166048, Name: asan.module_ctor
+Adress: 4295166064, Name: uic_below
+Adress: 4295166736, Name: uic_above
+Adress: 4295167408, Name: uic_side_left
+Adress: 4295168080, Name: uic_side_right
+Adress: 4295168752, Name: asan.module_ctor
+Adress: 4295168768, Name: render_main_menu
+Adress: 4295168960, Name: update_main_menu
+Adress: 4295169152, Name: update_main_menu_click_begin
+Adress: 4295169360, Name: update_main_menu_click_end
+Adress: 4295169568, Name: asan.module_ctor
+Adress: 4295169584, Name: btn_continue
+Adress: 4295169856, Name: btn_new_game
+Adress: 4295170032, Name: btn_load_game
+Adress: 4295170304, Name: btn_editor
+Adress: 4295170400, Name: btn_option
+Adress: 4295170496, Name: asan.module_ctor
+Adress: 4295170528, Name: asan.module_dtor
+Adress: 4295170544, Name: btn_exit_app
+Adress: 4295170640, Name: asan.module_ctor
+Adress: 4295170656, Name: init_main_menu
+Adress: 4295175504, Name: init_positions
+Adress: 4295179808, Name: asan.module_ctor
+Adress: 4295179840, Name: asan.module_dtor
+Adress: 4295179856, Name: render_new_game_menu
+Adress: 4295180112, Name: update_new_game_menu
+Adress: 4295180368, Name: update_new_game_menu_click_begin
+Adress: 4295180656, Name: update_new_game_menu_click_end
+Adress: 4295180944, Name: refresh_new_game_menu
+Adress: 4295181008, Name: asan.module_ctor
+Adress: 4295181024, Name: init_new_game_menu
+Adress: 4295186512, Name: update_display_status
+Adress: 4295186928, Name: init_textures
+Adress: 4295189712, Name: init_positions
+Adress: 4295194960, Name: asan.module_ctor
+Adress: 4295194992, Name: asan.module_dtor
+Adress: 4295195008, Name: btn_select_save1
+Adress: 4295195408, Name: btn_select_save2
+Adress: 4295195808, Name: btn_select_save3
+Adress: 4295196208, Name: btn_select_save4
+Adress: 4295196608, Name: btn_select_save5
+Adress: 4295197008, Name: asan.module_ctor
+Adress: 4295197024, Name: btn_new_game_back
+Adress: 4295197200, Name: btn_new_game_down
+Adress: 4295197520, Name: btn_new_game_up
+Adress: 4295197760, Name: btn_start_new_game
+Adress: 4295198560, Name: asan.module_ctor
+Adress: 4295198592, Name: asan.module_dtor
+Adress: 4295198608, Name: load_bitmap_font
+Adress: 4295199728, Name: unload_bitmap_font
+Adress: 4295199856, Name: asan.module_ctor
+Adress: 4295199888, Name: asan.module_dtor
+Adress: 4295199904, Name: load_font_meta
+Adress: 4295200192, Name: load_font_infos
+Adress: 4295201104, Name: load_font_chars
+Adress: 4295201568, Name: parse_char_infos
+Adress: 4295201968, Name: populate_char_info
+Adress: 4295203072, Name: asan.module_ctor
+Adress: 4295203104, Name: asan.module_dtor
+Adress: 4295203120, Name: render_text
+Adress: 4295204544, Name: render_letter
+Adress: 4295207808, Name: get_pixel_color
+Adress: 4295210080, Name: render_pixel
+Adress: 4295210992, Name: sample_pixel
+Adress: 4295214144, Name: asan.module_ctor
+Adress: 4295214160, Name: init_font_manager
+Adress: 4295214224, Name: add_font
+Adress: 4295215216, Name: get_font
+Adress: 4295215616, Name: unload_font_manager
+Adress: 4295216000, Name: grow_font_array
+Adress: 4295216656, Name: asan.module_ctor
+Adress: 4295216688, Name: asan.module_dtor
+Adress: 4295216704, Name: render_text_tex
+Adress: 4295218480, Name: render_letter
+Adress: 4295222032, Name: get_pixel_color
+Adress: 4295224304, Name: render_pixel
+Adress: 4295225248, Name: sample_pixel
+Adress: 4295228400, Name: asan.module_ctor
+Adress: 4295228416, Name: get_text_width
+Adress: 4295229504, Name: get_text_height
+Adress: 4295229584, Name: get_min_y_offset
+Adress: 4295230640, Name: get_max_y_offset
+Adress: 4295232208, Name: get_text_size
+Adress: 4295232832, Name: asan.module_ctor
+Adress: 4295232848, Name: text_center_height
+Adress: 4295233872, Name: text_center_width
+Adress: 4295234816, Name: text_center
+Adress: 4295236512, Name: asan.module_ctor
+Adress: 4295236528, Name: get_text_box_size
+Adress: 4295237152, Name: get_text_box_height
+Adress: 4295238144, Name: asan.module_ctor
+Adress: 4295238160, Name: __cyg_profile_func_enter
+Adress: 4295238720, Name: __cyg_profile_func_exit
+Adress: 4295239280, Name: asan.module_ctor
+Adress: 4295239312, Name: asan.module_dtor
+Adress: 4295239328, Name: display_log
+Adress: 4295239440, Name: mlx_shaders_pixel
+Adress: 4295240048, Name: mlx_shaders_image
+Adress: 4295240656, Name: mlx_shaders_font
+Adress: 4295241264, Name: mlx_shaders
+Adress: 4295241328, Name: get_mouse_button
+Adress: 4295241408, Name: [NSWindowEvent initWithContentRect:styleMask:backing:defer:]
+Adress: 4295241904, Name: [NSWindowEvent setEvent:andFunc:andParam:]
+Adress: 4295241984, Name: [NSWindowEvent setKeyRepeat:]
+Adress: 4295242000, Name: [NSWindowEvent acceptsFirstResponder]
+Adress: 4295242016, Name: [NSWindowEvent flagsChanged:]
+Adress: 4295242192, Name: [NSWindowEvent keyDown:]
+Adress: 4295242320, Name: [NSWindowEvent keyUp:]
+Adress: 4295242400, Name: [NSWindowEvent mouseDown:]
+Adress: 4295242608, Name: [NSWindowEvent rightMouseDown:]
+Adress: 4295242816, Name: [NSWindowEvent otherMouseDown:]
+Adress: 4295243024, Name: [NSWindowEvent mouseUp:]
+Adress: 4295243232, Name: [NSWindowEvent rightMouseUp:]
+Adress: 4295243440, Name: [NSWindowEvent otherMouseUp:]
+Adress: 4295243648, Name: [NSWindowEvent mouseMoved:]
+Adress: 4295243744, Name: [NSWindowEvent mouseDragged:]
+Adress: 4295243840, Name: [NSWindowEvent rightMouseDragged:]
+Adress: 4295243936, Name: [NSWindowEvent otherMouseDragged:]
+Adress: 4295244032, Name: [NSWindowEvent scrollWheel:]
+Adress: 4295244304, Name: [NSWindowEvent exposeNotification:]
+Adress: 4295244352, Name: [NSWindowEvent closeNotification:]
+Adress: 4295244400, Name: [NSWindowEvent deminiaturizeNotification:]
+Adress: 4295244432, Name: [MlxWin initWithRect:andTitle:pfaAttrs:]
+Adress: 4295245056, Name: [MlxWin pixel_management]
+Adress: 4295246112, Name: [MlxWin ctxNeedsUpdate]
+Adress: 4295246144, Name: [MlxWin selectGLContext]
+Adress: 4295246272, Name: [MlxWin flushGLContext]
+Adress: 4295246320, Name: [MlxWin ctx]
+Adress: 4295246352, Name: [MlxWin win]
+Adress: 4295246384, Name: [MlxWin pixelPutColor:X:Y:]
+Adress: 4295246544, Name: [MlxWin destroyPixelManagement]
+Adress: 4295246704, Name: [MlxWin destroyMe]
+Adress: 4295246848, Name: [MlxWin setEvent:andFunc:andParam:]
+Adress: 4295246880, Name: [MlxWin setKeyRepeat:]
+Adress: 4295246912, Name: [MlxWin clearWin]
+Adress: 4295246944, Name: [MlxWin mlx_gl_draw_img:andCtx:andX:andY:]
+Adress: 4295247312, Name: [MlxWin mlx_gl_draw_font:andCtx:andX:andY:andColor:glyphX:glyphY:]
+Adress: 4295247856, Name: [MlxWin mlx_gl_draw]
+Adress: 4295248208, Name: mlx_new_window
+Adress: 4295248496, Name: mlx_clear_window
+Adress: 4295248560, Name: mlx_expose_hook
+Adress: 4295248592, Name: mlx_key_hook
+Adress: 4295248624, Name: mlx_mouse_hook
+Adress: 4295248656, Name: mlx_hook
+Adress: 4295248688, Name: mlx_do_key_autorepeatoff
+Adress: 4295248784, Name: mlx_do_key_autorepeaton
+Adress: 4295248880, Name: mlx_destroy_window
+Adress: 4295249120, Name: do_loop_hook2
+Adress: 4295249136, Name: do_loop_flush
+Adress: 4295249248, Name: mlx_init
+Adress: 4295249792, Name: mlx_loop
+Adress: 4295249936, Name: mlx_pixel_put
+Adress: 4295250032, Name: mlx_int_loop_once
+Adress: 4295250256, Name: mlx_do_sync
+Adress: 4295250640, Name: mlx_loop_hook
+Adress: 4295250832, Name: mlx_new_image
+Adress: 4295251008, Name: add_img_to_ctx
+Adress: 4295251312, Name: mlx_put_image_to_window
+Adress: 4295251488, Name: mlx_get_data_addr
+Adress: 4295251520, Name: mlx_get_color_value
+Adress: 4295251536, Name: mlx_string_put
+Adress: 4295251776, Name: mlx_destroy_image
+Adress: 4295252080, Name: mlx_int_get_line
+Adress: 4295252240, Name: mlx_int_static_line
+Adress: 4295252416, Name: mlx_int_get_col_name
+Adress: 4295252560, Name: mlx_int_get_text_rgb
+Adress: 4295252784, Name: mlx_int_xpm_set_pixel
+Adress: 4295252800, Name: mlx_int_parse_xpm
+Adress: 4295254336, Name: mlx_int_file_get_rid_comment
+Adress: 4295254608, Name: mlx_xpm_file_to_image
+Adress: 4295254848, Name: mlx_xpm_to_image
+Adress: 4295254896, Name: mlx_int_str_str
+Adress: 4295255024, Name: mlx_int_str_str_cote
+Adress: 4295255184, Name: mlx_int_str_to_wordtab
+Adress: 4295255520, Name: mipng_is_type
+Adress: 4295255584, Name: mipng_defilter_none
+Adress: 4295255600, Name: mipng_defilter_sub
+Adress: 4295255616, Name: mipng_defilter_up
+Adress: 4295255632, Name: mipng_defilter_average
+Adress: 4295255664, Name: mipng_defilter_paeth
+Adress: 4295255776, Name: mipng_fill_img
+Adress: 4295256368, Name: mipng_data
+Adress: 4295257024, Name: mipng_magic
+Adress: 4295257088, Name: mipng_crc
+Adress: 4295257296, Name: mipng_structure
+Adress: 4295257872, Name: mipng_verif_hdr
+Adress: 4295258016, Name: mlx_int_parse_png
+Adress: 4295258384, Name: mlx_png_file_to_image
+Adress: 4295258640, Name: ft_calloc
+Adress: 4295258752, Name: ft_memcpy
+Adress: 4295258896, Name: ft_memmove
+Adress: 4295259088, Name: ft_memset
+Adress: 4295259184, Name: ft_atoi
+Adress: 4295259488, Name: ft_check
+Adress: 4295259600, Name: ft_isalnum
+Adress: 4295259664, Name: ft_isalpha
+Adress: 4295259744, Name: ft_isdigit
+Adress: 4295259808, Name: ft_strchr
+Adress: 4295259984, Name: ft_strlen
+Adress: 4295260048, Name: ft_strncmp
+Adress: 4295260272, Name: ft_strnstr
+Adress: 4295260576, Name: ft_strrnstr
+Adress: 4295260880, Name: ft_trimr
+Adress: 4295261040, Name: ft_triml
+Adress: 4295261216, Name: ft_trim
+Adress: 4295261264, Name: ft_isspace
+Adress: 4295261376, Name: ft_strcmp
+Adress: 4295261584, Name: ft_strskip_digit
+Adress: 4295261744, Name: ft_strskip_alpha
+Adress: 4295261904, Name: ft_strskip_space
+Adress: 4295262064, Name: ft_strskip_alnum
+Adress: 4295262224, Name: ft_end_with
+Adress: 4295262384, Name: ft_pow2
+Adress: 4295262416, Name: ft_abs
+Adress: 4295262480, Name: ft_sqrt
+Adress: 4295262704, Name: ft_maxui
+Adress: 4295262768, Name: ft_maxi
+Adress: 4295262832, Name: ft_maxf
+Adress: 4295262896, Name: ft_minui
+Adress: 4295262960, Name: ft_mini
+Adress: 4295263024, Name: ft_minf
+Adress: 4295263104, Name: vec2
+Adress: 4295263152, Name: vec2_copy
+Adress: 4295263200, Name: vec2_zero
+Adress: 4295263232, Name: vec2_set
+Adress: 4295263280, Name: vec2_add
+Adress: 4295263344, Name: vec2_divi
+Adress: 4295263424, Name: vec2_divf
+Adress: 4295263488, Name: vec2_divv2
+Adress: 4295263568, Name: vec2_mag
+Adress: 4295263648, Name: vec2_multi
+Adress: 4295263712, Name: vec2_multf
+Adress: 4295263776, Name: vec2_multv2
+Adress: 4295263840, Name: vec2_normalize
+Adress: 4295263936, Name: vec2_normalized
+Adress: 4295264032, Name: v2_to_iv2
+Adress: 4295264096, Name: v2_to_v3
+Adress: 4295264160, Name: v2_to_v4
+Adress: 4295264224, Name: ivec2
+Adress: 4295264272, Name: ivec2_copy
+Adress: 4295264320, Name: ivec2_zero
+Adress: 4295264352, Name: ivec2_set
+Adress: 4295264400, Name: iv2_to_v2
+Adress: 4295264464, Name: iv2_to_v3
+Adress: 4295264528, Name: iv2_to_v4
+Adress: 4295264608, Name: vec3
+Adress: 4295264672, Name: vec3_copy
+Adress: 4295264720, Name: vec3_zero
+Adress: 4295264752, Name: vec3_set
+Adress: 4295264800, Name: vec4
+Adress: 4295264880, Name: vec4_copy
+Adress: 4295264944, Name: vec4_zero
+Adress: 4295264976, Name: vec4_set
+Adress: 4295265040, Name: gc_memcpy
+Adress: 4295265440, Name: gc_memmove
+Adress: 4295265824, Name: gc_memset
+Adress: 4295265856, Name: gc_memseti
+Adress: 4295266176, Name: gc_strlcpy
+Adress: 4295266256, Name: gc_strlen
+Adress: 4295266288, Name: gc_memsetl
+Adress: 4295266608, Name: gc_get_next_line
+Adress: 4295267040, Name: gc_strappend
+Adress: 4295267152, Name: gc_calloc
+Adress: 4295267216, Name: gct_calloc
+Adress: 4295267280, Name: gc_icalloc
+Adress: 4295267344, Name: gc_itoa
+Adress: 4295267632, Name: gct_itoa
+Adress: 4295267920, Name: gc_strdup
+Adress: 4295268000, Name: gct_strdup
+Adress: 4295268080, Name: gc_istrdup
+Adress: 4295268160, Name: gc_strjoin
+Adress: 4295268336, Name: gct_strjoin
+Adress: 4295268512, Name: gc_strarray_append
+Adress: 4295268640, Name: gct_strarray_append
+Adress: 4295268768, Name: gc_istrarray_append
+Adress: 4295268896, Name: gc_strarray_free
+Adress: 4295268976, Name: gc_strarray_init
+Adress: 4295269008, Name: gct_strarray_init
+Adress: 4295269040, Name: gc_istrarray_init
+Adress: 4295269072, Name: gc_strarray_size
+Adress: 4295269120, Name: gc_get
+Adress: 4295269168, Name: gc_grow
+Adress: 4295269312, Name: gc_must_grow
+Adress: 4295269344, Name: gc_own
+Adress: 4295269472, Name: gct_own
+Adress: 4295269600, Name: gc_iown
+Adress: 4295269696, Name: gc_alloc
+Adress: 4295269776, Name: gct_alloc
+Adress: 4295269856, Name: gc_ialloc
+Adress: 4295269936, Name: gc_free
+Adress: 4295270032, Name: free_childs
+Adress: 4295270240, Name: update_parents
+Adress: 4295270368, Name: free_ptr
+Adress: 4295270640, Name: gct_free
+Adress: 4295270752, Name: gc_clean
+Adress: 4295270880, Name: gc_null_ptr
+Adress: 4295270912, Name: gc_get_internal_ptr
+Adress: 4295270992, Name: gc_contains_ptr
+Adress: 4295271088, Name: gc_get_current_parent
+Adress: 4295271136, Name: gc_has_global_parent
+Adress: 4295271168, Name: gc_ptr
+Adress: 4295271216, Name: gc_is_valid_ptr_index
+Adress: 4295271232, Name: gc_child_count
+Adress: 4295271280, Name: gc_parent_count
+Adress: 4295271328, Name: gc_init
+Adress: 4295271472, Name: gc_getfootprint
+Adress: 4295271664, Name: gc_get_malloc_calls
+Adress: 4295271680, Name: gc_failed
+Adress: 4295271712, Name: gc_get_last_error
+Adress: 4295271728, Name: gc_get_errors
+Adress: 4295271744, Name: gc_error_allocation
+Adress: 4295271760, Name: gc_error_scope_overflow
+Adress: 4295271776, Name: gc_error_scope_underflow
+Adress: 4295271792, Name: gc_error_errors_overflow
+Adress: 4295271808, Name: gc_error_clean_empty
+Adress: 4295271824, Name: gc_error_detach_wrong_pointer
+Adress: 4295271840, Name: gc_error_too_much_parents
+Adress: 4295271856, Name: gc_error_attach_same_parent
+Adress: 4295271872, Name: gc_error_detach_not_parent
+Adress: 4295271888, Name: gc_error_own_twice
+Adress: 4295271904, Name: gc_error
+Adress: 4295271984, Name: gc_free2d
+Adress: 4295272048, Name: gc_set_callback
+Adress: 4295272096, Name: gc_set_callback_param
+Adress: 4295272128, Name: gc_clean_on_error
+Adress: 4295272160, Name: gc_set_default_capacity
+Adress: 4295272272, Name: can_change_settings
+Adress: 4295272304, Name: gc_attach
+Adress: 4295272400, Name: gc_detach
+Adress: 4295272496, Name: gc_add_child
+Adress: 4295273120, Name: gc_remove_child
+Adress: 4295273392, Name: gc_can_insert
+Adress: 4295273472, Name: gc_insert_ptr
+Adress: 4295273568, Name: gc_create_generic_ptr
+Adress: 4295273664, Name: gc_create_temporary_ptr
+Adress: 4295273760, Name: gc_create_internal_ptr
+[init_start_time] Was used and profiled
+[init_gc] Was used and profiled
+[init_window] Was used and profiled
+[load_bitmap_font] Was used and profiled
+[load_font_infos] Was used and profiled
+[populate_char_info] Was used and profiled
+[parse_char_infos] Was used and profiled
+[load_font_chars] Was used and profiled
+[load_font_meta] Was used and profiled
+[grow_font_array] Was used and profiled
+[add_font] Was used and profiled
+[init_font_manager] Was used and profiled
+[create_appdata_directory] Was used and profiled
+[open_save_file] Was used and profiled
+[update_player_forward_vec] Was used and profiled
+[update_player_right_vec] Was used and profiled
+[update_player_cell_pos] Was used and profiled
+[update_player_map_vec] Was used and profiled
+[parse_pos] Was used and profiled
+[parse_line] Was used and profiled
+[deserialize_player] Was used and profiled
+[deserialize_map_parse_width] Was used and profiled
+[deserialize_map_parse_height] Was used and profiled
+[deserialize_map_parse_spawn] Was used and profiled
+[deserialize_map_parse_ceiling] Was used and profiled
+[deserialize_map_parse_floor] Was used and profiled
+[deserialize_map_parse_no_tex] Was used and profiled
+[deserialize_map_parse_ea_tex] Was used and profiled
+[deserialize_map_parse_so_tex] Was used and profiled
+[deserialize_map_parse_we_tex] Was used and profiled
+[is_illegal_char] Was used and profiled
+[contains_illegal_char] Was used and profiled
+[deserialize_map_parse_map_content] Was used and profiled
+[deserialize_map] Was used and profiled
+[deserialize_cub_save] Was used and profiled
+[deserialize_save] Was used and profiled
+[load_game] Was used and profiled
+[add_to_saves] Was used and profiled
+[load_all_saves] Was used and profiled
+[create_maps_directory] Was used and profiled
+[open_map_file] Was used and profiled
+[add_map_row] Was used and profiled
+[read_map_content] Was used and profiled
+[construct_map] Was used and profiled
+[load_mandatory_map] Was used and profiled
+[load_map] Was used and profiled
+[grow_maps_array] Was used and profiled
+[add_to_maps] Was used and profiled
+[load_all_maps] Was used and profiled
+[load_xpm] Was used and profiled
+[transfer_texture_data] Was used and profiled
+[shade_pixel] Was used and profiled
+[shade_ao_texture_flat] Was used and profiled
+[shade_ao_texture_right] Was used and profiled
+[shade_ao_texture_left] Was used and profiled
+[shade_ao_texture_all] Was used and profiled
+[create_texture_grayscale] Was used and profiled
+[create_texture_inversed] Was used and profiled
+[create_texture_inverse_grayscale] Was used and profiled
+[create_texture_variations] Was used and profiled
+[create_texture_from_xpm_file] Was used and profiled
+[add_texture_to_array] Was used and profiled
+[load_texture] Was used and profiled
+[get_texture_from_id] Was used and profiled
+[create_img_box] Was used and profiled
+[grow_texture_array] Was used and profiled
+[create_button] Was used and profiled
+[init_positions] Was used and profiled
+[init_main_menu] Was used and profiled
+[update_display_status] Was used and profiled
+[create_blank_texture] Was used and profiled
+[new_texture] Was used and profiled
+[clear_texture] Was used and profiled
+[get_min_y_offset] Was used and profiled
+[get_max_y_offset] Was used and profiled
+[sample_pixel] Was used and profiled
+[get_pixel_color] Was used and profiled
+[render_pixel] Was used and profiled
+[pixel_in_texture] Was used and profiled
+[set_texture_pixel] Was used and profiled
+[render_letter] Was used and profiled
+[render_text_tex] Was used and profiled
+[finish_new_texture] Was used and profiled
+[init_textures] Was used and profiled
+[init_new_game_menu] Was used and profiled
+[init_ui] Was used and profiled
+[init_hooks] Was used and profiled
+[clear_screen] Was used and profiled
+[update_ui_button] Was used and profiled
+[update_main_menu] Was used and profiled
+[update_ui] Was used and profiled
+[render_ui_texture] Was used and profiled
+[render_ui_img_box] Was used and profiled
+[render_ui_button] Was used and profiled
+[draw_rect] Was used and profiled
+[render_invalid_texture] Was used and profiled
+[render_ui_texture_grayscale] Was used and profiled
+[render_main_menu] Was used and profiled
+[render_ui] Was used and profiled
+[main_loop] Was used and profiled
+[mouse_move_hooks] Was used and profiled
+[handle_scroll_wheel] Was used and profiled
+[update_ui_button_click_begin] Was used and profiled
+[update_main_menu_click_begin] Was used and profiled
+[update_ui_click_begin] Was used and profiled
+[mouse_click_begin] Was used and profiled
+[mouse_down_callback] Was used and profiled
+[render_ui_texture_inverse_grayscale] Was used and profiled
+[update_ui_button_click_end] Was used and profiled
+[btn_new_game] Was used and profiled
+[update_main_menu_click_end] Was used and profiled
+[update_ui_click_end] Was used and profiled
+[mouse_click_end] Was used and profiled
+[mouse_up_callback] Was used and profiled
+[update_new_game_menu] Was used and profiled
+[render_new_game_menu] Was used and profiled
+[update_new_game_menu_click_begin] Was used and profiled
+[btn_select_save1] Was used and profiled
+[update_new_game_menu_click_end] Was used and profiled
+[btn_start_new_game] Was used and profiled
+[draw_rect_unsafe] Was used and profiled
+[shoot_ray] Was used and profiled
+[draw_col_wall] Was used and profiled
+[render_walls] Was used and profiled
+[draw_circle] Was used and profiled
+[draw_line] Was used and profiled
+[render_test_scene] Was used and profiled
+[key_pressed_listener] Was used and profiled
+[key_down_callback] Was used and profiled
+[key_up_callback] Was used and profiled
+[serialize_player] Was used and profiled
+[serialize_map_walls] Was used and profiled
+[serialize_map] Was used and profiled
+[serialize_game] Was used and profiled
+[save_game] Was used and profiled
+[destroy_window] Was used and profiled
+[free_texture] Was used and profiled
+[unload_texture_manager] Was used and profiled
+[unload_saves] Was used and profiled
+[close_app] Was used and profiled
+[init_app] Was used and profiled
+[main] Was used and profiled
+[unload_saves] Took: 1us
+[deserialize_map_parse_width] Took: 2us
+[deserialize_map_parse_height] Took: 2us
+[deserialize_map_parse_spawn] Took: 2us
+[deserialize_map_parse_floor] Took: 2us
+[deserialize_map_parse_no_tex] Took: 2us
+[deserialize_map_parse_ea_tex] Took: 2us
+[deserialize_map_parse_so_tex] Took: 2us
+[deserialize_map_parse_we_tex] Took: 2us
+[update_display_status] Took: 2us
+[btn_select_save1] Took: 2us
+[init_start_time] Took: 4us
+[deserialize_map_parse_ceiling] Took: 4us
+[handle_scroll_wheel] Took: 5us
+[get_min_y_offset] Took: 7us
+[get_max_y_offset] Took: 7us
+[grow_font_array] Took: 8us
+[init_positions] Took: 8us
+[grow_maps_array] Took: 11us
+[btn_start_new_game] Took: 13us
+[serialize_player] Took: 13us
+[btn_new_game] Took: 16us
+[create_maps_directory] Took: 18us
+[transfer_texture_data] Took: 19us
+[update_main_menu_click_begin] Took: 22us
+[create_appdata_directory] Took: 29us
+[parse_pos] Took: 31us
+[deserialize_player] Took: 44us
+[init_gc] Took: 45us
+[key_up_callback] Took: 57us
+[update_ui_button_click_begin] Took: 68us
+[init_hooks] Took: 76us
+[open_map_file] Took: 87us
+[is_illegal_char] Took: 106us
+[grow_texture_array] Took: 106us
+[add_map_row] Took: 111us
+[update_new_game_menu_click_end] Took: 119us
+[open_save_file] Took: 123us
+[update_new_game_menu_click_begin] Took: 129us
+[clear_texture] Took: 134us
+[update_main_menu_click_end] Took: 140us
+[add_texture_to_array] Took: 159us
+[update_ui_click_begin] Took: 160us
+[update_ui_button_click_end] Took: 178us
+[create_blank_texture] Took: 179us
+[mouse_click_begin] Took: 185us
+[serialize_map_walls] Took: 187us
+[serialize_map] Took: 208us
+[contains_illegal_char] Took: 228us
+[new_texture] Took: 250us
+[mouse_down_callback] Took: 268us
+[deserialize_map_parse_map_content] Took: 269us
+[update_ui_click_end] Took: 269us
+[mouse_click_end] Took: 280us
+[mouse_up_callback] Took: 334us
+[deserialize_map] Took: 404us
+[read_map_content] Took: 407us
+[render_ui_texture_inverse_grayscale] Took: 469us
+[deserialize_cub_save] Took: 488us
+[construct_map] Took: 838us
+[parse_line] Took: 848us
+[load_font_infos] Took: 858us
+[serialize_game] Took: 896us
+[save_game] Took: 1018us
+[load_mandatory_map] Took: 1107us
+[update_player_map_vec] Took: 1139us
+[update_player_right_vec] Took: 1237us
+[load_game] Took: 1262us
+[update_player_cell_pos] Took: 1268us
+[add_to_saves] Took: 1268us
+[load_all_saves] Took: 1338us
+[update_player_forward_vec] Took: 1460us
+[free_texture] Took: 1508us
+[unload_texture_manager] Took: 1544us
+[create_texture_inversed] Took: 1910us
+[create_texture_grayscale] Took: 2052us
+[create_texture_inverse_grayscale] Took: 2120us
+[parse_char_infos] Took: 2556us
+[load_map] Took: 3167us
+[add_to_maps] Took: 3196us
+[load_all_maps] Took: 3247us
+[destroy_window] Took: 3509us
+[mouse_move_hooks] Took: 3903us
+[load_font_chars] Took: 4048us
+[deserialize_save] Took: 4257us
+[update_main_menu] Took: 4750us
+[load_font_meta] Took: 4933us
+[pixel_in_texture] Took: 6088us
+[close_app] Took: 6091us
+[key_pressed_listener] Took: 6112us
+[key_down_callback] Took: 6676us
+[render_invalid_texture] Took: 8074us
+[get_texture_from_id] Took: 8303us
+[populate_char_info] Took: 8424us
+[update_ui_button] Took: 8925us
+[render_ui_texture_grayscale] Took: 9578us
+[load_bitmap_font] Took: 9815us
+[load_xpm] Took: 12398us
+[update_new_game_menu] Took: 13724us
+[add_font] Took: 14792us
+[init_font_manager] Took: 14796us
+[sample_pixel] Took: 17255us
+[render_new_game_menu] Took: 23362us
+[update_ui] Took: 24589us
+[set_texture_pixel] Took: 30016us
+[render_ui_button] Took: 45772us
+[get_pixel_color] Took: 47459us
+[render_pixel] Took: 50977us
+[create_img_box] Took: 60179us
+[shade_ao_texture_right] Took: 81376us
+[shade_ao_texture_left] Took: 84172us
+[finish_new_texture] Took: 110861us
+[render_letter] Took: 128063us
+[render_text_tex] Took: 128144us
+[clear_screen] Took: 151693us
+[shade_pixel] Took: 161371us
+[shade_ao_texture_flat] Took: 165699us
+[shade_ao_texture_all] Took: 165816us
+[render_ui_img_box] Took: 174035us
+[create_button] Took: 189208us
+[render_main_menu] Took: 200058us
+[render_ui_texture] Took: 202595us
+[init_main_menu] Took: 215759us
+[render_ui] Took: 224742us
+[create_texture_from_xpm_file] Took: 236596us
+[init_textures] Took: 239479us
+[load_texture] Took: 249267us
+[init_new_game_menu] Took: 273175us
+[draw_rect] Took: 292926us
+[init_window] Took: 325385us
+[create_texture_variations] Took: 347358us
+[init_ui] Took: 488939us
+[draw_rect_unsafe] Took: 361090us
+[draw_circle] Took: 817711us
+[draw_line] Took: 905467us
+[shoot_ray] Took: 1233258us
+[draw_col_wall] Took: 1774073us
+[render_walls] Took: 3636530us
+[render_test_scene] Took: 4175846us
+[main_loop] Took: 9786365us
+[init_app] Took: 12921230us
+[main] Took: 12921259us
