@@ -52,7 +52,7 @@ static void	update_player_right_vec(t_player *player)
 static void	update_player_cell_pos(t_player *player)
 {
 	player->cell_pos = player->world_pos;
-	vec2_divf(&player->cell_pos, CELL_HEIGHT);
+	vec2_divf(&player->cell_pos, CELL_SIZE);
 }
 
 static void	update_player_map_vec(t_player *player)

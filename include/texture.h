@@ -32,7 +32,7 @@ typedef struct s_xpm_file
 
 typedef struct s_texture
 {
-	int		id;
+	int64_t	id;
 	int		bpp;
 	int		line_size;
 	int		endian;

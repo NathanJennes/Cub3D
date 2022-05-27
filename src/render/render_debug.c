@@ -36,8 +36,8 @@ void	render_test_scene(const t_mlx *app)
 				color = trgb(0, 200, 200, 200);
 			else
 				color = trgb(0, 0, 0, 0);
-			draw_rect(ivec2(j * CELL_WIDTH, i * CELL_WIDTH),
-				ivec2(CELL_WIDTH, CELL_WIDTH), color);
+			draw_rect(ivec2(j * CELL_SIZE, i * CELL_SIZE),
+				ivec2(CELL_SIZE, CELL_SIZE), color);
 		}
 	}
 	draw_circle(v2_to_iv2(get_player()->world_pos), 7, BLACK);
@@ -88,22 +88,22 @@ NOPROF
 	forward = get_player()->forward;
 	right = get_player()->right;
 	draw_line(v2_to_iv2(player_pos),
-		ivec2(player_pos.x + forward.x * CELL_WIDTH,
-			player_pos.y + forward.y * CELL_WIDTH), BLACK);
+		ivec2(player_pos.x + forward.x * CELL_SIZE,
+			player_pos.y + forward.y * CELL_SIZE), BLACK);
 	draw_line(v2_to_iv2(player_pos),
-		ivec2(player_pos.x + right.x * CELL_WIDTH,
-			player_pos.y + right.y * CELL_WIDTH), BLUE);
+		ivec2(player_pos.x + right.x * CELL_SIZE,
+			player_pos.y + right.y * CELL_SIZE), BLUE);
 	draw_line(v2_to_iv2(player_pos),
-		ivec2(player_pos.x - right.x * CELL_WIDTH,
-			player_pos.y - right.y * CELL_WIDTH), GREEN);
+		ivec2(player_pos.x - right.x * CELL_SIZE,
+			player_pos.y - right.y * CELL_SIZE), GREEN);
 	fov_left = rotate_vector(forward, get_math()->r_halffov);
 	fov_right = rotate_vector(forward, -get_math()->r_halffov);
 	draw_line(v2_to_iv2(player_pos),
-		ivec2(player_pos.x + fov_left.x * CELL_WIDTH,
-			player_pos.y + fov_left.y * CELL_WIDTH), PINK);
+		ivec2(player_pos.x + fov_left.x * CELL_SIZE,
+			player_pos.y + fov_left.y * CELL_SIZE), PINK);
 	draw_line(v2_to_iv2(player_pos),
-		ivec2(player_pos.x + fov_right.x * CELL_WIDTH,
-			player_pos.y + fov_right.y * CELL_WIDTH), PINK);
+		ivec2(player_pos.x + fov_right.x * CELL_SIZE,
+			player_pos.y + fov_right.y * CELL_SIZE), PINK);
 }
 
 static t_vec2	rotate_vector(t_vec2 v, double angle)

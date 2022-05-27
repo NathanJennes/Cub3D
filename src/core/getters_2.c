@@ -13,7 +13,6 @@
 #include "core.h"
 
 t_ui	*get_ui(void)
-NOPROF
 {
 	t_mlx	*app;
 
@@ -22,7 +21,6 @@ NOPROF
 }
 
 t_settings	*get_settings(void)
-NOPROF
 {
 	t_mlx	*app;
 
@@ -31,10 +29,17 @@ NOPROF
 }
 
 t_math	*get_math(void)
-NOPROF
 {
 	t_mlx	*app;
 
 	app = get_app();
 	return (&app->pc);
+}
+
+t_texture_manager	*get_texture_manager(void)
+{
+	t_mlx	*app;
+
+	app = get_app();
+	return (&app->texture_manager);
 }

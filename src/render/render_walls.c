@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/27 14:36:38 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/27 16:58:15 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include "core.h"
 #include "render.h"
 
-void	draw_col_wall(int64_t col, double dist, t_vec2 ray);
+static uint8_t	get_texture_pixel_color(int64_t pos_col, double ratio);
+static void		draw_col_wall(int64_t col, double dist, t_vec2 ray);
 
 void	render_walls(void)
 {
@@ -38,20 +39,19 @@ void	render_walls(void)
 	}
 }
 
-void	draw_col_wall(int64_t col, double dist, t_vec2 ray)
+static void	draw_col_wall(int64_t col, double dist, t_vec2 ray)
 {
 	int64_t	y;
 	int64_t	wall_origin;
 	int64_t	wall_size;
+	uint8_t	px_color;
 	double	angle;
-	t_vec2	*pf;
-	double	plane_dist;
 
-	pf = &get_player()->forward;
-	angle = acos(ft_minf(pf->x * ray.x + pf->y * ray.y, 1.0));
+	angle = acos(ft_minf(get_player()->forward.x * ray.x
+				+ get_player()->forward.y * ray.y, 1.0));
 	dist = dist * cos(angle);
-	plane_dist = HALFW_W / (get_math()->r_vfov / 2);
-	wall_size = (int64_t)fabs(CELL_WIDTH / (dist * CELL_WIDTH) * plane_dist);
+	wall_size = (int64_t)
+		fabs(CELL_SIZE / (dist * CELL_SIZE) * get_math()->plane_dist);
 	if (wall_size > WIN_H)
 		wall_size = WIN_H;
 	else if (wall_size < 0)
@@ -60,10 +60,32 @@ void	draw_col_wall(int64_t col, double dist, t_vec2 ray)
 	y = 0;
 	while (y < wall_size)
 	{
-		if (get_player()->last_ray.side == SIDE_X)
-			set_screen_pixel_unsafe(col, y + wall_origin, WALL_COLOR_1);
-		else if (get_player()->last_ray.side == SIDE_Y)
-			set_screen_pixel_unsafe(col, y + wall_origin, WALL_COLOR_2);
+		px_color = get_texture_pixel_color(y, 0);
+		set_screen_pixel_unsafe(col, y + wall_origin, px_color);
 		y++;
 	}
+}
+
+static uint8_t	get_texture_pixel_color(int64_t pos_col, double ratio)
+{
+	t_texture			*texture;
+	uint8_t				px_color;
+	t_ray				ray;
+	int64_t				offset;
+
+	(void)ratio;
+	ray = get_player()->last_ray;
+	if (get_player()->last_ray.side == SIDE_X)
+	{
+		texture = get_texture_from_id(1);
+		offset = (int64_t)ray.hit_pos.y % CELL_SIZE;
+		px_color = texture->ao_flat[offset + pos_col * texture->line_size];
+	}
+	else if (get_player()->last_ray.side == SIDE_Y)
+	{
+		texture = get_texture_from_id(2);
+		offset = (int64_t)ray.hit_pos.x % CELL_SIZE;
+		px_color = texture->ao_flat[offset + pos_col * texture->line_size];
+	}
+	return (px_color);
 }

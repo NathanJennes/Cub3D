@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/27 14:15:49 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/27 16:19:03 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	init_app(void)
 	init_math();
 	init_ui();
 	init_hooks();
+	load_texture("assets/prototype_textures/Orange/o_proto_1.xpm");
+	load_texture("assets/prototype_textures/Orange/o_proto_2.xpm");
 	mlx_loop(get_mlx());
 }
 
@@ -82,4 +84,5 @@ static void	init_math(void)
 	pc->r_halffov = settings->fov * (PI / 360.0);
 	pc->r_vfov = 2 * atan(tan(pc->r_halffov) * ((double)WIN_W / (double)WIN_H));
 	pc->plane_len = tan(pc->r_halffov);
+	pc->plane_dist = HALFW_W / (get_math()->r_vfov / 2);
 }

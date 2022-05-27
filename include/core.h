@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/27 14:08:02 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/27 16:24:32 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@
 # define EMPTY		0
 # define VOID		-1
 
-# define CELL_WIDTH		20
-# define CELL_HEIGHT	20
+# define CELL_SIZE	20
 
 # define MOUSE_DEBUG	0
 
@@ -128,6 +127,7 @@ typedef struct s_math
 	double		r_halffov;
 	double		base_angle;
 	double		plane_len;
+	double		plane_dist;
 }	t_math;
 
 typedef struct s_mlx
@@ -184,13 +184,14 @@ void		update_player_vectors(t_player *player) NOPROF;
 void		update_player(t_player *player) NOPROF;
 
 /* getters */
-t_mlx		*get_app(void) NOPROF;
-t_frame		*get_frame(void) NOPROF;
-t_map_info	*get_map_infos(void) NOPROF;
-t_player	*get_player(void) NOPROF;
-void		*get_mlx(void) NOPROF;
-t_ui		*get_ui(void) NOPROF;
-t_settings	*get_settings(void) NOPROF;
-t_math		*get_math(void);
+t_mlx				*get_app(void) NOPROF;
+t_frame				*get_frame(void) NOPROF;
+t_map_info			*get_map_infos(void) NOPROF;
+t_player			*get_player(void) NOPROF;
+void				*get_mlx(void) NOPROF;
+t_ui				*get_ui(void) NOPROF;
+t_settings			*get_settings(void) NOPROF;
+t_math				*get_math(void) NOPROF;
+t_texture_manager	*get_texture_manager(void) NOPROF;
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 13:11:29 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/25 17:44:21 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/27 15:59:46 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	render_mmap(double zoom)
 	cell_size = MMAP_ZOOM_FACTOR * zoom;
 	player_pos.x = MMAP_W / 2 + MMAP_PAD;
 	player_pos.y = MMAP_H / 2 + MMAP_PAD;
-	offset.x = -(app->gamestate.player.world_pos.x / CELL_WIDTH)
+	offset.x = -(app->gamestate.player.world_pos.x / CELL_SIZE)
 		* cell_size - cell_size / 2 + player_pos.x;
-	offset.y = -(app->gamestate.player.world_pos.y / CELL_HEIGHT)
+	offset.y = -(app->gamestate.player.world_pos.y / CELL_SIZE)
 		* cell_size - cell_size / 2 + player_pos.y;
 	draw_rect((t_ivec2){MMAP_PAD / 2, MMAP_PAD / 2},
 		(t_ivec2){MMAP_W + MMAP_PAD, MMAP_H + MMAP_PAD},

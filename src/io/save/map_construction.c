@@ -48,6 +48,6 @@ static void	read_map_content(t_map_info *infos, size_t i, size_t j, int *row)
 	if (ft_isalpha(infos->map_raw[i][j]))
 	{
 		infos->spawn_dir = infos->map_raw[i][j];
-		infos->spawn_pos = vec2(j * CELL_WIDTH, i * CELL_HEIGHT);
+		infos->spawn_pos = vec2(j * CELL_SIZE, i * CELL_SIZE);
 	}
 }

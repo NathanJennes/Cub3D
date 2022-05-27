@@ -66,8 +66,8 @@ static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side)
 	player = get_player();
 	result.distance = dist;
 	if (hit)
-		result.hit_pos = vec2(player->world_pos.x + ray.x * dist * CELL_WIDTH,
-				player->world_pos.y + ray.y * dist * CELL_WIDTH);
+		result.hit_pos = vec2(player->world_pos.x + ray.x * dist * CELL_SIZE,
+				player->world_pos.y + ray.y * dist * CELL_SIZE);
 	else
 		result.hit_pos = vec2_zero();
 	result.hit = hit;
