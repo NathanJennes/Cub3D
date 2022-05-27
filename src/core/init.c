@@ -29,6 +29,7 @@ void	init_app(void)
 {
 	t_mlx	*app;
 
+	srand(time(0));
 	app = get_app();
 	init_start_time();
 	init_gc();

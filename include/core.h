@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 18:59:05 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/27 15:52:39 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,15 @@ typedef struct s_settings
 	int			fov;
 }	t_settings;
 
+typedef struct s_light	t_light;
+
 typedef struct s_gamestate
 {
 	char		*name;
 	t_map_info	map;
 	t_player	player;
+	t_light		*lights;
+	int64_t		light_count;
 }	t_gamestate;
 
 typedef struct s_math
@@ -190,6 +194,7 @@ t_player	*get_player(void) NOPROF;
 void		*get_mlx(void) NOPROF;
 t_ui		*get_ui(void) NOPROF;
 t_settings	*get_settings(void) NOPROF;
-t_math		*get_math(void);
+t_math		*get_math(void) NOPROF;
+t_light		*get_lights(void) NOPROF;
 
 #endif

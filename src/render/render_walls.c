@@ -35,7 +35,7 @@ void	render_walls(void)
 	{
 		ray_direction = vec2(start.x - player->world_pos.x, start.y - player->world_pos.y);
 		vec2_normalize(&ray_direction);
-		player->last_ray = shoot_ray(ray_direction, player->map_pos);
+		player->last_ray = shoot_ray(ray_direction, player->world_pos, player->map_pos);
 		draw_col_wall(i, player->last_ray.distance, player->last_ray.ray);
 		vec2_add(&start, inc);
 		i++;

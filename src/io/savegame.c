@@ -15,6 +15,7 @@
 #include "bool.h"
 #include "leaky.h"
 #include "core.h"
+#include "render.h"
 
 void		serialize_game(int fd);
 int			deserialize_save(t_gamestate *save_out, int fd);
@@ -59,6 +60,7 @@ void	free_save(t_gamestate *save)
 {
 	gc_free2d((void **) save->map.map, save->map.height);
 	gc_free(save->name);
+	free_lights(save);
 }
 
 static int	open_save_file(char *save_name, int truncate)

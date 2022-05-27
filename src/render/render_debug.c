@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_debug.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 19:26:49 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/27 16:10:31 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,22 @@ void	render_test_scene(const t_mlx *app)
 				ivec2(CELL_WIDTH, CELL_WIDTH), color);
 		}
 	}
+
+	for (int64_t i = 0; i < app->gamestate.light_count; i++)
+	{
+		t_light *l = &app->gamestate.lights[i];
+		int col = trgb(0, l->color.x, l->color.y, l->color.z);
+		draw_circle(ivec2(l->pos.x, l->pos.y), 7, col);
+	}
+
 	draw_circle(v2_to_iv2(get_player()->world_pos), 7, BLACK);
 	print_player_vector();
-	debug_rays();
+	t_ivec2 mouse_pos = cub_get_mouse_position();
+	t_player *player = get_player();
+	t_ivec3 light = get_lighting_level(vec3(mouse_pos.x, mouse_pos.y, 0),
+		vec3(player->forward.x, player->forward.y, 0.0));
+	draw_circle(mouse_pos, 10, trgb(0, light.x, light.y, light.z));
+	//debug_rays();
 }
 
 static void	debug_rays(void)
@@ -65,7 +78,7 @@ NOPROF
 	{
 		ray_direction = vec2(start.x - player->world_pos.x, start.y - player->world_pos.y);
 		vec2_normalize(&ray_direction);
-		player->last_ray = shoot_ray(ray_direction, player->map_pos);
+		player->last_ray = shoot_ray(ray_direction, player->world_pos, player->map_pos);
 		print_ray(player->last_ray.hit_pos);
 		vec2_add(&start, inc);
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 19:50:00 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/27 16:39:49 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@
 # define NOSIDE 0
 # define SIDE_X 1
 # define SIDE_Y 2
+
+typedef struct s_light
+{
+	t_vec3	pos;
+	t_ivec3	color;
+	double	intensity;
+}			t_light;
 
 /* Screen drawing */
 void			clear_screen(int color);
@@ -101,7 +108,12 @@ t_ivec2			text_center(char *text, char *font_name,
 
 /* Walls rendering */
 void			render_walls(void);
-t_ray			shoot_ray(t_vec2 ray, t_ivec2 hit_pos);
+t_ray			shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos);
+
+/* Lights */
+t_ivec3			get_lighting_level(t_vec3 pos, t_vec3 normal);
+void			add_light(t_vec3 pos, t_ivec3 color, double intensity);
+void			free_lights(t_gamestate *gamestate);
 
 /* Utils */
 int				outside_mmap_bounds(int x, int y) NOPROF;
