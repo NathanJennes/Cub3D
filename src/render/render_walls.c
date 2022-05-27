@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/27 12:34:53 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/27 14:36:38 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,18 @@ void	render_walls(void)
 	t_vec2		ray_direction;
 	t_player	*player;
 	t_vec2		start;
-	t_vec2		inc;
-	double		plane_len;
 
 	i = 0;
 	player = get_player();
-	plane_len = tan((double)get_settings()->fov / 2.0);
-	start = vec2(player->world_pos.x + player->forward.x - player->right.x * plane_len,
-					player->world_pos.y + player->forward.y - player->right.y * plane_len);
-	inc = vec2((player->right.x * plane_len) / HALFW_W, (player->right.y * plane_len) / HALFW_W);
+	start = vec2(player->world_pos.x + player->forward.x - player->right.x * get_math()->plane_len,
+			player->world_pos.y + player->forward.y - player->right.y * get_math()->plane_len);
 	while (i < WIN_W)
 	{
 		ray_direction = vec2(start.x - player->world_pos.x, start.y - player->world_pos.y);
 		vec2_normalize(&ray_direction);
 		player->last_ray = shoot_ray(ray_direction, player->map_pos);
 		draw_col_wall(i, player->last_ray.distance, player->last_ray.ray);
-		vec2_add(&start, inc);
+		vec2_add(&start, player->plane_inc);
 		i++;
 	}
 }
@@ -49,11 +45,12 @@ void	draw_col_wall(int64_t col, double dist, t_vec2 ray)
 	int64_t	wall_size;
 	double	angle;
 	t_vec2	*pf;
+	double	plane_dist;
 
 	pf = &get_player()->forward;
-	angle = acos((pf->x * ray.x + pf->y * ray.y));
+	angle = acos(ft_minf(pf->x * ray.x + pf->y * ray.y, 1.0));
 	dist = dist * cos(angle);
-	double	plane_dist = HALFW_W / (get_math()->r_vfov / 2);
+	plane_dist = HALFW_W / (get_math()->r_vfov / 2);
 	wall_size = (int64_t)fabs(CELL_WIDTH / (dist * CELL_WIDTH) * plane_dist);
 	if (wall_size > WIN_H)
 		wall_size = WIN_H;
