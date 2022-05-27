@@ -25,5 +25,13 @@ t_settings	*get_settings(void)
 	t_mlx	*app;
 
 	app = get_app();
-	return (&app->gamestate.settings);
+	return (&app->settings);
+}
+
+t_math	*get_math(void)
+{
+	t_mlx	*app;
+
+	app = get_app();
+	return (&app->pc);
 }

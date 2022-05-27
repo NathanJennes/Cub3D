@@ -51,7 +51,6 @@ static int	deserialize_cub_save(t_gamestate *save_out, int fd)
 	gc_strarray_free(save.map.map_raw);
 	if (!save.map.spawn_dir)
 		return (0);
-	save.settings.fov = 90;
 	*save_out = save;
 	return (1);
 }

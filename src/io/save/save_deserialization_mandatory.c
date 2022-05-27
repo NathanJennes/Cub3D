@@ -40,7 +40,6 @@ int	load_mandatory_map(t_gamestate *save_out, int fd, char *line)
 		return (0);
 	gc_strarray_free(infos->map_raw);
 	setup_player(save_out);
-	save_out->settings.fov = 90;
 	return (1);
 }
 
@@ -73,11 +72,11 @@ static void	setup_player(t_gamestate *save)
 	if (save->map.spawn_dir == 'N')
 		save->player.direction = PI;
 	else if (save->map.spawn_dir == 'E')
-		save->player.direction = PI / 2.0f;
+		save->player.direction = PI / 2.0;
 	else if (save->map.spawn_dir == 'S')
-		save->player.direction = 0.0f;
+		save->player.direction = 0.0;
 	else if (save->map.spawn_dir == 'W')
-		save->player.direction = PI * 3.0f / 2.0f;
+		save->player.direction = PI * 3.0 / 2.0;
 	save->player.world_pos = save->map.spawn_pos;
 	update_player(&save->player);
 }

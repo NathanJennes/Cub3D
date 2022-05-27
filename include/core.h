@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 16:36:18 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 18:59:05 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,6 @@ typedef struct s_player
 	double		direction;
 	t_vec2		forward;
 	t_vec2		right;
-	double		ray_increment;
-	double		ray_angle;
 	t_ray		last_ray;
 }	t_player;
 
@@ -120,8 +118,16 @@ typedef struct s_gamestate
 	char		*name;
 	t_map_info	map;
 	t_player	player;
-	t_settings	settings;		//TODO change location of settings
 }	t_gamestate;
+
+typedef struct s_math
+{
+	double	r_fov;
+	double	r_vfov;
+	double	r_halffov;
+	double	angle_inc;
+	double	base_angle;
+}	t_math;
 
 typedef struct s_mlx
 {
@@ -129,6 +135,7 @@ typedef struct s_mlx
 	void				*win;
 	t_frame				frame;
 	t_gamestate			gamestate;
+	t_settings			settings;
 	t_mouse				mouse;
 	t_gamestate			*savegames;
 	size_t				savegames_count;
@@ -141,6 +148,7 @@ typedef struct s_mlx
 	t_texture_manager	texture_manager;
 	t_font_manager		font_manager;
 	t_bool				keys[MAX_KEYCODE];
+	t_math				pc;
 }	t_mlx;
 
 /* core.c */
@@ -182,5 +190,6 @@ t_player	*get_player(void) NOPROF;
 void		*get_mlx(void) NOPROF;
 t_ui		*get_ui(void) NOPROF;
 t_settings	*get_settings(void) NOPROF;
+t_math		*get_math(void);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/26 16:39:24 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 19:45:52 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "core.h"
 #include "ui.h"
 #include "render.h"
+#include <math.h>
 
 int			key_up_callback(int keycode, void *unused);
 int			key_down_callback(int keycode, void *unused);
@@ -22,6 +23,7 @@ int			mouse_up_callback(int button, int x, int y, void *unused);
 
 static void	init_hooks(void);
 static void	init_start_time(void);
+static void	init_math(void);
 
 void	init_app(void)
 {
@@ -36,6 +38,7 @@ void	init_app(void)
 	load_all_maps();
 	printf("Saves loaded: %d\n", (int)app->savegames_count);
 	printf("Maps loaded: %d\n", (int)app->maps_count);
+	init_math();
 	init_ui();
 	init_hooks();
 	mlx_loop(get_mlx());
@@ -64,4 +67,18 @@ static void	init_start_time(void)
 	app = get_app();
 	gettimeofday(&time, NULL);
 	app->start_time = time.tv_sec * 1000 + time.tv_usec / 1000;
+}
+
+static void	init_math(void)
+{
+	t_math		*pc;
+	t_settings	*settings;
+
+	settings = get_settings();
+	settings->fov = 90;
+	pc = get_math();
+	pc->r_fov = settings->fov * (PI / 180.0);
+	pc->r_halffov = settings->fov * (PI / 360.0);
+	pc->r_vfov = 2 * atan(tan(pc->r_halffov) * ((double)WIN_W / (double)WIN_H));
+	pc->angle_inc = pc->r_fov / WIN_W;
 }
