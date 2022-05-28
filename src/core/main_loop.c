@@ -57,7 +57,8 @@ void	debug_print_texture(void)
 		j = 0;
 		while (j < tx->width / 2)
 		{
-			set_screen_pixel(i, j, *(int *)(tx->original + (i * tx->line_size * 2) + (j * 4 * 2)));
+			set_screen_pixel(i, j, *(int *)(tx->original
+					+ (i * tx->line_size * 2) + (j * 4 * 2)));
 			j++;
 		}
 		i++;
