@@ -120,6 +120,12 @@ typedef struct s_gamestate
 	t_player	player;
 }	t_gamestate;
 
+typedef struct s_wall
+{
+	int64_t		origin;
+	int64_t		size;
+}	t_wall;
+
 typedef struct s_math
 {
 	double		r_fov;
