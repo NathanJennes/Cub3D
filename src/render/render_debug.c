@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/27 16:10:31 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/28 16:24:57 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,51 @@ static t_vec2	rotate_vector(t_vec2 v, double angle) NOPROF;
 static void		print_player_vector(void) NOPROF;
 static void		debug_rays(void) NOPROF;
 
+static void	render_debug_floor_cell(int64_t i, int64_t j)
+{
+	for (int64_t y = 0; y < CELL_WIDTH; y++)
+	{
+		for (int64_t x = 0; x < CELL_WIDTH; x++)
+		{
+			t_vec3 normal = vec3(0.0, 0.0, 1.0);
+			t_vec3 pos = vec3(x + j * CELL_WIDTH, y + i * CELL_WIDTH, 0.0);
+			t_ivec3 color = get_lighting_level(pos, normal);
+			set_screen_pixel(x + j * CELL_WIDTH, y + i * CELL_WIDTH, trgb(0, color.x, color.y, color.z));
+		}
+	}
+}
+
 void	render_test_scene(const t_mlx *app)
 {
 	int					color;
 	const t_map_info	*map = &app->gamestate.map;
+
+	//for (int64_t i = 0; i < map->height; i++)
+	//{
+	//	for (int64_t j = 0; j < map->width; j++)
+	//	{
+	//		if (map->map[i][j] == WALL)
+	//			color = trgb(0, 51, 51, 51);
+	//		else if (map->map[i][j] == EMPTY)
+	//			color = trgb(0, 200, 200, 200);
+	//		else
+	//			color = trgb(0, 0, 0, 0);
+	//		draw_rect(ivec2(j * CELL_WIDTH, i * CELL_WIDTH),
+	//			ivec2(CELL_WIDTH, CELL_WIDTH), color);
+	//	}
+	//}
 
 	for (int64_t i = 0; i < map->height; i++)
 	{
 		for (int64_t j = 0; j < map->width; j++)
 		{
 			if (map->map[i][j] == WALL)
-				color = trgb(0, 51, 51, 51);
+			{
+				draw_rect(ivec2(j * CELL_WIDTH, i * CELL_WIDTH),
+					ivec2(CELL_WIDTH, CELL_WIDTH), trgb(0, 51, 51, 51));
+			}
 			else if (map->map[i][j] == EMPTY)
-				color = trgb(0, 200, 200, 200);
-			else
-				color = trgb(0, 0, 0, 0);
-			draw_rect(ivec2(j * CELL_WIDTH, i * CELL_WIDTH),
-				ivec2(CELL_WIDTH, CELL_WIDTH), color);
+				render_debug_floor_cell(i, j);
 		}
 	}
 

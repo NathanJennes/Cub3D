@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:31:13 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/27 16:03:16 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/28 16:27:57 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	update_ui_click_end(int button);
 void	mouse_click_begin(int button)
 {
 	update_ui_click_begin(button);
-	add_light(vec3(cub_get_mouse_position().x, cub_get_mouse_position().y, 0),
+	add_light(vec3(cub_get_mouse_position().x, cub_get_mouse_position().y, CELL_WIDTH / 4),
 		ivec3(rand() % (255 - 1) + 1, rand() % (255 - 1) + 1, rand() % (255 - 1) + 1),
 		1.0);
 }
