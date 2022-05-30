@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/28 15:26:11 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/30 17:20:47 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ void	init_app(void)
 	init_math();
 	init_ui();
 	init_hooks();
-	printf("%lld\n", load_texture("assets/prototype_textures/Orange/o_proto_1.xpm"));
-	printf("%lld\n", load_texture("assets/prototype_textures/Orange/o_proto_2.xpm"));
+	printf("%lld\n", load_texture("assets/texture_06.xpm"));
+	printf("%lld\n", load_texture("assets/texture_09.xpm"));
+	printf("%lld\n", load_texture("assets/wall_texture_01.xpm"));
+	printf("%lld\n", load_texture("assets/wall_texture_02.xpm"));
 	mlx_loop(get_mlx());
 }
 

@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/27 16:24:32 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/30 15:57:25 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ typedef struct s_wall
 {
 	int64_t		origin;
 	int64_t		size;
+	int64_t		offset;
+	int64_t		real_size;
 }	t_wall;
 
 typedef struct s_math
