@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/31 16:17:43 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/31 19:06:12 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,17 @@ typedef struct s_button
 	t_bool			clicked;
 	int				(*event)(struct s_button *button);
 }	t_button;
+
+typedef struct s_checkbox
+{
+	t_ui_component	infos;
+	int64_t			tex_id;
+	t_bool			is_clickable;
+	t_bool			hovered;
+	t_bool			clicked;
+	t_bool			checked;
+	int				(*event)(struct s_checkbox *checkbox);
+}	t_checkbox;
 
 typedef struct s_label
 {

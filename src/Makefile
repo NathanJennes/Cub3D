@@ -44,7 +44,8 @@ UI_COMPONENT_DIR	:=	$(UI_DIR)/components
 UI_COMPONENT_FILE	:=	ui_button.c ui_button_update.c	\
 						ui_img_box.c	\
 						ui_label.c		\
-						ui_slider.c ui_slider_update.c
+						ui_slider.c ui_slider_update.c	\
+						ui_checkbox.c ui_checkbox_update.c
 UI_COMPONENT_SRCS	:=	$(addprefix $(UI_COMPONENT_DIR)/, $(UI_COMPONENT_FILE))
 
 UI_LAYOUT_DIR	:=	$(UI_DIR)/layout
