@@ -22,4 +22,5 @@ void	render_settings_menu(void)
 	render_ui_slider(&menu->slid_win_w);
 	render_ui_slider(&menu->slid_win_h);
 	render_ui_button(&menu->btn_back);
+	render_ui_label(&menu->lbl_fov);
 }

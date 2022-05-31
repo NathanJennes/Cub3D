@@ -16,7 +16,7 @@
 # include "libft.h"
 
 # define MAX_CHARS_IN_FONT 256
-# define FONT_SAMPLING 2
+# define FONT_SAMPLING 1
 
 typedef struct s_font_bitmap
 {

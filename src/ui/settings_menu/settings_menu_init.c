@@ -6,12 +6,13 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:36:08 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/31 15:38:43 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/31 16:20:22 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "ui.h"
+#include "leaky.h"
 
 int	btn_settings_back(t_button *button);
 
@@ -25,6 +26,7 @@ void	init_settings_menu(void)
 	menu->slid_fov = create_slider(ivec2_zero(),
 		ivec2(350, 30), vec3(10.0, 170.0,
 			(float)get_settings()->fov));
+	menu->lbl_fov = create_label(ivec2_zero(), gc_itoa(get_settings()->fov), ivec2(200, 100));
 	menu->slid_win_w = create_slider(ivec2_zero(),
 		ivec2(350, 30), vec3(960.0, 3000.0,
 			(float)get_settings()->win_w));
@@ -41,8 +43,10 @@ static void	init_positions(t_ui_settings_menu *menu)
 	menu->slid_fov.infos.pos.y = 50;
 	uic_center_win_w(&menu->slid_fov.infos);
 	uic_padding_down(&menu->slid_fov.infos, 50);
+	uic_padding_right(&menu->slid_fov.infos, 50);
 	uic_padding_down(&menu->slid_win_w.infos, 50);
 	uic_padding_down(&menu->slid_win_h.infos, 50);
 	uic_below(&menu->slid_win_w.infos, &menu->slid_fov.infos);
 	uic_below(&menu->slid_win_h.infos, &menu->slid_win_w.infos);
+	uic_side_right(&menu->lbl_fov.infos, &menu->slid_fov.infos);
 }

@@ -74,8 +74,8 @@ NOPROF
 
 	texture = NULL;
 	if (get_player()->last_ray.side == SIDE_X)
-		texture = get_texture_from_id(17);
-	else if (get_player()->last_ray.side == SIDE_Y)
 		texture = get_texture_from_id(16);
+	else if (get_player()->last_ray.side == SIDE_Y)
+		texture = get_texture_from_id(17);
 	return (texture);
 }

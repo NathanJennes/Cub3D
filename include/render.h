@@ -26,6 +26,8 @@
 # define SIDE_X 1
 # define SIDE_Y 2
 
+# define DEFAULT_FONT "HelveticaNeue"
+
 typedef struct s_light
 {
 	t_vec3	pos;

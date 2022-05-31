@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/31 15:36:18 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/31 16:17:43 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_label
 {
 	t_ui_component	infos;
 	char			*text;
+	int64_t			tex_id;
 }	t_label;
 
 typedef struct s_img_box
@@ -123,6 +124,7 @@ typedef struct s_ui_new_game_menu
 typedef struct s_ui_settings_menu
 {
 	t_slider	slid_fov;
+	t_label		lbl_fov;
 	t_slider	slid_win_w;
 	t_slider	slid_win_h;
 	t_button	btn_back;
@@ -186,8 +188,9 @@ void			update_ui_button_click_end(t_button *button, int mouse_btn);
 t_img_box		create_img_box(char *texture_path, t_ivec2 pos);
 void			render_ui_img_box(t_img_box *box);
 
-t_label			create_label(t_ivec2 pos, char *text);
-void			render_label(t_label *label);
+t_label			create_label(t_ivec2 pos, char *text, t_ivec2 size);
+void			render_ui_label(t_label *label);
+void			update_ui_label_text(t_label *label, char *text);
 
 t_slider		create_slider(t_ivec2 pos, t_ivec2 size, t_vec3 min_max_val);
 void			render_ui_slider(t_slider *slider);

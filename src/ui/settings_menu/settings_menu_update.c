@@ -6,12 +6,13 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:36:24 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/31 14:56:02 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/31 17:39:41 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "ui.h"
+#include "leaky.h"
 
 void	update_settings_menu(void)
 {
@@ -22,6 +23,8 @@ void	update_settings_menu(void)
 	update_ui_slider(&menu->slid_win_w);
 	update_ui_slider(&menu->slid_win_h);
 	update_ui_button(&menu->btn_back);
+	gc_free(menu->lbl_fov.text);
+	update_ui_label_text(&menu->lbl_fov, gc_itoa((int)menu->slid_fov.value));
 }
 
 void	update_settings_menu_click_begin(int button)
