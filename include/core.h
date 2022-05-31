@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/31 13:15:26 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/31 17:11:22 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@
 # define IN_GAME	1
 # define PAUSE		2
 
+# define M_3_PI_2	4.7123889803846899
+
 typedef struct s_mouse
 {
 	t_ivec2	position;
@@ -61,12 +63,10 @@ typedef struct s_map_info
 	int64_t		height;
 	t_vec2		spawn_pos;
 	char		spawn_dir;
-	t_vec3		ceiling_color;
-	t_vec3		floor_color;
-	char		*no_tex;
-	char		*ea_tex;
-	char		*so_tex;
-	char		*we_tex;
+	t_ivec3		ceiling_color;
+	t_ivec3		floor_color;
+	int64_t		*tx_list;
+	int64_t		tx_count;
 	int			**map;
 	char		**map_raw;
 }	t_map_info;
@@ -87,6 +87,7 @@ typedef struct s_ray
 	t_bool		hit;
 	int			side;
 	t_vec2		ray;
+	t_vec2		direction;
 }	t_ray;
 
 typedef struct s_player

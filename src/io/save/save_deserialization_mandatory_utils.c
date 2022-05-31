@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_deserialization_mandatory_utils.c             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/26 12:47:49 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/31 19:01:53 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	contains_illegal_char(t_map_info *infos, char *line)NOPROF;
 static int	is_illegal_char(char c, t_map_info *infos, int *saw_wall,
 				int *last_is_wall)NOPROF;
 
-int	parse_color(t_vec3 *color, char *line)
+int	parse_color(t_ivec3 *color, char *line)
 {
 	if (!ft_isdigit(*line))
 		return (0);
@@ -44,17 +44,25 @@ int	parse_color(t_vec3 *color, char *line)
 	return (1);
 }
 
-int	parse_texture(char **path, char *line)
+int	parse_texture(t_map_info *info, char *line)
 {
-	int		fd;
+	int64_t	*temp;
 
 	if (!*line)
 		return (0);
-	*path = gc_strdup(line);
-	fd = open(*path, O_RDONLY);
-	if (!fd || fd == -1)
+	if (!info->tx_list)
+		info->tx_list = gc_alloc(sizeof(int64_t));
+	else
+	{
+		temp = gc_alloc(sizeof(int64_t) * (info->tx_count + 1));
+		gc_memmove(temp, info->tx_list, info->tx_count * sizeof(int64_t));
+		gc_free(info->tx_list);
+		info->tx_list = temp;
+	}
+	info->tx_list[info->tx_count] = load_texture(line);
+	if (info->tx_list[info->tx_count] == INVALID_TEXTURE)
 		return (0);
-	close(fd);
+	info->tx_count++;
 	return (1);
 }
 

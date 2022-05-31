@@ -6,15 +6,16 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/31 13:42:59 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/31 19:26:34 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "render.h"
+#include <math.h>
 
 static t_texture	*get_face_texture(void);
-static double		get_texture_position(t_texture *texture);
+static int64_t		get_texture_position(t_texture *texture);
 static int32_t		get_pixel_color_from_texture(int64_t tx, int64_t y,
 						t_texture *texture);
 
@@ -23,11 +24,16 @@ void	draw_col_wall(int64_t xcol, t_wall wall)
 	double		y;
 	t_texture	*texture;
 	int64_t		tx;
-	double		ratio;
+	int			ratio;
 	int			px_color;
 
 	y = 0.0;
 	texture = get_face_texture();
+	if (!texture)
+	{
+		printf("Texture NULL\n");
+		return ;
+	}
 	tx = get_texture_position(texture);
 	ratio = (double)texture->width / (double)wall.real_size;
 	while (y < wall.size)
@@ -48,7 +54,7 @@ NOPROF
 	return (px_color);
 }
 
-static double	get_texture_position(t_texture *texture)
+static int64_t	get_texture_position(t_texture *texture)
 {
 	double		pos_x;
 	int64_t		ratio;
@@ -64,18 +70,27 @@ static double	get_texture_position(t_texture *texture)
 		ratio = (int64_t)get_player()->last_ray.hit_pos.x / CELL_SIZE;
 		pos_x = get_player()->last_ray.hit_pos.x - (double)(ratio * CELL_SIZE);
 	}
-	return ((pos_x / (double)CELL_SIZE) * (double)texture->width);
+	return ((pos_x / CELL_SIZE) * texture->width);
 }
 
 static t_texture	*get_face_texture(void)
-NOPROF
 {
-	t_texture	*texture;
+	double	direction;
 
-	texture = NULL;
+	printf("side %d\n", get_player()->last_ray.side);
+	direction = atan2(sin(get_player()->last_ray.direction.x),
+			cos(get_player()->last_ray.direction.y));
 	if (get_player()->last_ray.side == SIDE_X)
-		texture = get_texture_from_id(17);
+	{
+		if (direction > PI)
+			return (get_texture_from_id(get_map_infos()->tx_list[3]));
+		return (get_texture_from_id(get_map_infos()->tx_list[2]));
+	}
 	else if (get_player()->last_ray.side == SIDE_Y)
-		texture = get_texture_from_id(16);
-	return (texture);
+	{
+		if (direction > HALF_PI && direction < M_3_PI_2)
+			return (get_texture_from_id(get_map_infos()->tx_list[1]));
+		return (get_texture_from_id(get_map_infos()->tx_list[0]));
+	}
+	return (NULL);
 }

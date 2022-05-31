@@ -51,10 +51,10 @@ static void	serialize_map(int fd, t_map_info map)
 	dprintf(fd, "FLOOR %d %d %d\n",
 		(int)map.floor_color.x, (int)map.floor_color.y,
 		(int)map.floor_color.z);
-	dprintf(fd, "NO_TEX %s\n", map.no_tex);
-	dprintf(fd, "EA_TEX %s\n", map.ea_tex);
-	dprintf(fd, "SO_TEX %s\n", map.so_tex);
-	dprintf(fd, "WE_TEX %s\n", map.we_tex);
+//	dprintf(fd, "NO_TEX %s\n", map.no_tex);
+//	dprintf(fd, "EA_TEX %s\n", map.ea_tex);
+//	dprintf(fd, "SO_TEX %s\n", map.so_tex);
+//	dprintf(fd, "WE_TEX %s\n", map.we_tex);
 	serialize_map_walls(fd, map);
 	dprintf(fd, "MAP_END\n");
 }
