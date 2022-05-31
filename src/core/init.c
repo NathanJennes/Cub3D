@@ -23,7 +23,6 @@ int			mouse_up_callback(int button, int x, int y, void *unused);
 
 static void	init_hooks(void);
 static void	init_start_time(void);
-static void	init_math(void);
 
 void	init_app(void)
 {
@@ -76,7 +75,7 @@ static void	init_start_time(void)
 	app->start_time = time.tv_sec * 1000 + time.tv_usec / 1000;
 }
 
-static void	init_math(void)
+void	init_math(void)
 {
 	t_math		*pc;
 	t_settings	*settings;

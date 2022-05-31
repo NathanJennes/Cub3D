@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ui_init.c                                          :+:      :+:    :+:   */
+/*   settings_menu_buttons.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/13 18:21:25 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/18 14:56:54 by njennes          ###   ########.fr       */
+/*   Created: 2022/05/31 14:50:46 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/31 15:42:49 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "ui.h"
 
-void	init_ui(void)
+int	btn_settings_back(t_button *button)
 {
-	t_ui	*ui;
+	t_ui		*ui;
+	t_settings	*settings;
 
+	(void)button;
 	ui = get_ui();
 	ui->state = MAIN_MENU;
-	init_main_menu();
-	init_new_game_menu();
-	init_settings_menu();
+	settings = get_settings();
+	settings->fov = (int)ui->settings_menu.slid_fov.value;
+	settings->win_w = (int)ui->settings_menu.slid_win_w.value;
+	settings->win_h = (int)ui->settings_menu.slid_win_h.value;
+	init_math();
+	return (0);
 }

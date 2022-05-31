@@ -54,7 +54,10 @@ int	btn_editor(t_button *button)
 
 int	btn_option(t_button *button)
 {
+	t_ui	*ui;
+
 	(void)button;
-	printf("Option button not implemented\n");
+	ui = get_ui();
+	ui->state = OPTION_MENU;
 	return (0);
 }

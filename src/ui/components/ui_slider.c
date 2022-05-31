@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 15:49:53 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 15:31:29 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/31 15:40:52 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 static void	generate_cursor_texture(t_ivec2 size, t_slider *slider);
 static void	generate_bar_texture(t_ivec2 size, t_slider *slider);
+static void	update_cursor_pos(t_slider *slider);
 
-t_slider	create_slider(t_ivec2 pos, t_ivec2 size, float min, float max)
+t_slider	create_slider(t_ivec2 pos, t_ivec2 size, t_vec3 min_max_val)
 {
 	t_slider	slider;
 
@@ -25,13 +26,14 @@ t_slider	create_slider(t_ivec2 pos, t_ivec2 size, float min, float max)
 	slider.infos.size = size;
 	slider.infos.displayed = TRUE;
 	slider.selected = FALSE;
-	slider.min = min;
-	slider.max = max;
-	slider.value = (max + min) / 2.0f;
+	slider.min = min_max_val.x;
+	slider.max = min_max_val.y;
+	slider.value = min_max_val.z;
 	slider.tex_id_bar = new_texture((int)size.x, (int)size.y);
 	slider.tex_id_cursor = new_texture((int)size.y * 2, (int)size.y * 2);
 	generate_cursor_texture(size, &slider);
 	generate_bar_texture(size, &slider);
+	update_cursor_pos(&slider);
 	return (slider);
 }
 
@@ -54,6 +56,16 @@ static void	generate_bar_texture(t_ivec2 size, t_slider *slider)
 	draw_circle_tex(ivec2(size.x - size.y / 2, size.y / 2),
 		size.y, trgb(0, 200, 200, 200), slider->tex_id_bar);
 	finish_new_texture(slider->tex_id_bar);
+}
+
+static void	update_cursor_pos(t_slider *slider)
+{
+	t_ui_component	*infos;
+	int64_t			pos;
+
+	infos = &slider->infos;
+	pos = (int64_t)(ft_ilerpf(slider->min, slider->max, slider->value) * infos->size.x);
+	slider->cursor_pos_x = pos;
 }
 
 void	render_ui_slider(t_slider *slider)

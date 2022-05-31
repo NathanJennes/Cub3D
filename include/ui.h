@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 12:49:15 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/31 15:36:18 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ typedef struct s_slider
 	t_ui_component	infos;
 	int64_t			tex_id_bar;
 	int64_t			tex_id_cursor;
-	float			min;
-	float			max;
-	float			value;
+	double			min;
+	double			max;
+	double			value;
 	int64_t			cursor_pos_x;
 	t_bool			selected;
 }	t_slider;
@@ -120,12 +120,21 @@ typedef struct s_ui_new_game_menu
 	t_button	btn_save[5];
 }	t_ui_new_game_menu;
 
+typedef struct s_ui_settings_menu
+{
+	t_slider	slid_fov;
+	t_slider	slid_win_w;
+	t_slider	slid_win_h;
+	t_button	btn_back;
+}	t_ui_settings_menu;
+
 typedef struct s_ui
 {
 	t_ui_state			state;
 	t_bool				debug_ui;
 	t_ui_main_menu		main_menu;
 	t_ui_new_game_menu	new_game_menu;
+	t_ui_settings_menu	settings_menu;
 }	t_ui;
 
 /* Core */
@@ -155,10 +164,16 @@ void			init_main_menu(void);
 void			render_main_menu(void);
 void			update_main_menu(void);
 
+/* New game menu */
 void			init_new_game_menu(void);
 void			render_new_game_menu(void);
 void			update_new_game_menu(void);
 void			refresh_new_game_menu(void);
+
+/* Settings menu */
+void			init_settings_menu(void);
+void			render_settings_menu(void);
+void			update_settings_menu(void);
 
 /* Ui elements */
 t_button		create_button(char *texture_path, t_ivec2 pos,
@@ -174,7 +189,7 @@ void			render_ui_img_box(t_img_box *box);
 t_label			create_label(t_ivec2 pos, char *text);
 void			render_label(t_label *label);
 
-t_slider		create_slider(t_ivec2 pos, t_ivec2 size, float min, float max);
+t_slider		create_slider(t_ivec2 pos, t_ivec2 size, t_vec3 min_max_val);
 void			render_ui_slider(t_slider *slider);
 void			update_ui_slider(t_slider *slider);
 void			update_ui_slider_click_begin(t_slider *slider, int mouse_btn);

@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ui_init.c                                          :+:      :+:    :+:   */
+/*   settings_menu.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/13 18:21:25 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/18 14:56:54 by njennes          ###   ########.fr       */
+/*   Created: 2022/05/31 14:35:58 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/31 15:03:45 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core.h"
 #include "ui.h"
+#include "core.h"
 
-void	init_ui(void)
+void	render_settings_menu(void)
 {
-	t_ui	*ui;
+	t_ui_settings_menu	*menu;
 
-	ui = get_ui();
-	ui->state = MAIN_MENU;
-	init_main_menu();
-	init_new_game_menu();
-	init_settings_menu();
+	menu = &get_app()->ui.settings_menu;
+	render_ui_slider(&menu->slid_fov);
+	render_ui_slider(&menu->slid_win_w);
+	render_ui_slider(&menu->slid_win_h);
+	render_ui_button(&menu->btn_back);
 }
