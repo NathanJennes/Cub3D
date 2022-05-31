@@ -15,3 +15,4 @@ Libft/*
 *.a
 output.txt
 result*.json
+profile_log.txt

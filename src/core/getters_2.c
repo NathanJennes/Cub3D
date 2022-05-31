@@ -14,6 +14,7 @@
 #include "render.h"
 
 t_ui	*get_ui(void)
+NOPROF
 {
 	t_mlx	*app;
 
@@ -22,6 +23,7 @@ t_ui	*get_ui(void)
 }
 
 t_settings	*get_settings(void)
+NOPROF
 {
 	t_mlx	*app;
 
@@ -30,6 +32,7 @@ t_settings	*get_settings(void)
 }
 
 t_math	*get_math(void)
+NOPROF
 {
 	t_mlx	*app;
 

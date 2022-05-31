@@ -13,6 +13,7 @@
 #include "core.h"
 
 t_mlx	*get_app(void)
+NOPROF
 {
 	static t_mlx	app = {0};
 
@@ -20,6 +21,7 @@ t_mlx	*get_app(void)
 }
 
 t_frame	*get_frame(void)
+NOPROF
 {
 	t_mlx	*app;
 
@@ -28,6 +30,7 @@ t_frame	*get_frame(void)
 }
 
 t_map_info	*get_map_infos(void)
+NOPROF
 {
 	t_mlx	*app;
 
@@ -36,6 +39,7 @@ t_map_info	*get_map_infos(void)
 }
 
 t_player	*get_player(void)
+NOPROF
 {
 	t_mlx	*app;
 
@@ -44,6 +48,7 @@ t_player	*get_player(void)
 }
 
 void	*get_mlx(void)
+NOPROF
 {
 	t_mlx	*app;
 

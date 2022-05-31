@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:17:28 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/26 16:29:02 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/26 18:32:34 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,31 @@
 void	draw_rect_tex_unsafe(t_ivec2 pos, t_ivec2 size,
 	int color, int64_t tex_id)
 {
-	int	y;
-	int	x;
+	t_ivec2		iter;
+	int64_t		*pixels;
+	int64_t		col;
+	t_texture	*tex;
+	int64_t		width2;
 
-	y = 0;
-	while (y < size.y)
+	tex = get_texture_from_id(tex_id);
+	if (!tex)
+		return ;
+	pixels = (int64_t *)tex->original;
+	size.x /= 2;
+	pos.x /= 2;
+	((int *)&col)[0] = color;
+	((int *)&col)[1] = color;
+	width2 = tex->width / 2;
+	iter = ivec2_zero();
+	while (iter.y < size.y)
 	{
-		x = 0;
-		while (x < size.x)
+		iter.x = 0;
+		while (iter.x < size.x)
 		{
-			set_texture_pixel_unsafe(x + pos.x, y + pos.y, color, tex_id);
-			x++;
+			pixels[pos.x + iter.x + (pos.y + iter.y) * width2] = col;
+			iter.x++;
 		}
-		y++;
+		iter.y++;
 	}
 }
 

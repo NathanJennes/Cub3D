@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/26 19:45:52 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/27 14:15:49 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,10 @@ static void	init_math(void)
 
 	settings = get_settings();
 	settings->fov = 90;
+	update_player_vectors(get_player());
 	pc = get_math();
 	pc->r_fov = settings->fov * (PI / 180.0);
 	pc->r_halffov = settings->fov * (PI / 360.0);
 	pc->r_vfov = 2 * atan(tan(pc->r_halffov) * ((double)WIN_W / (double)WIN_H));
-	pc->angle_inc = pc->r_fov / WIN_W;
+	pc->plane_len = tan(pc->r_halffov);
 }

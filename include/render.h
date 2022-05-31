@@ -20,8 +20,6 @@
 # include "core.h"
 # include "font.h"
 
-# define DFLT_SIZE	64
-
 # define RAY_LENGTH 20
 
 # define NOSIDE 0

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 18:00:21 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/25 18:04:15 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/27 13:51:45 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	update_player(t_player *player)
 	}
 	if (is_key_down(KEY_D))
 	{
-		player->world_pos.y -= PLAYER_SPEED * get_player()->right.y;
-		player->world_pos.x -= PLAYER_SPEED * get_player()->right.x;
+		player->world_pos.y += PLAYER_SPEED * get_player()->right.y;
+		player->world_pos.x += PLAYER_SPEED * get_player()->right.x;
 	}
 	if (is_key_down(KEY_A))
 	{
-		player->world_pos.y += PLAYER_SPEED * get_player()->right.y;
-		player->world_pos.x += PLAYER_SPEED * get_player()->right.x;
+		player->world_pos.y -= PLAYER_SPEED * get_player()->right.y;
+		player->world_pos.x -= PLAYER_SPEED * get_player()->right.x;
 	}
 	if (is_key_down(KEY_RIGHT))
 		get_player()->direction -= PI / 100.0f;
