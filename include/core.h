@@ -104,13 +104,19 @@ typedef struct s_player
 typedef struct s_settings
 {
 	int			fov;
+	int			win_h;
+	int			win_w;
 }	t_settings;
+
+typedef struct s_light	t_light;
 
 typedef struct s_gamestate
 {
 	char		*name;
 	t_map_info	map;
 	t_player	player;
+	t_light		*lights;
+	int64_t		light_count;
 }	t_gamestate;
 
 typedef struct s_wall
@@ -194,5 +200,6 @@ t_ui				*get_ui(void) NOPROF;
 t_settings			*get_settings(void) NOPROF;
 t_math				*get_math(void) NOPROF;
 t_texture_manager	*get_texture_manager(void) NOPROF;
+t_light				*get_lights(void) NOPROF;
 
 #endif

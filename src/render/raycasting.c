@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 15:52:09 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 16:14:27 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/27 16:39:39 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_vec2	calculate_lengths(t_vec2 *ray) NOPROF;
 static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos, t_ivec2 map_pos) NOPROF;
 static int		get_map_type(int64_t x, int64_t y) NOPROF;
 
-t_ray	shoot_ray(t_vec2 ray, t_ivec2 hit_pos)
+t_ray	shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos)
 {
 	t_ivec2	step;
 	t_vec2	lengths;
@@ -27,10 +27,11 @@ t_ray	shoot_ray(t_vec2 ray, t_ivec2 hit_pos)
 	t_bool	hit;
 	int		side;
 
-	if (get_map_type(hit_pos.x, hit_pos.y) == WALL)
+	if (get_map_type(map_pos.x, map_pos.y) == WALL)
 		return (populate_ray(-1.0f, ray, TRUE, NOSIDE));
+	vec2_divf(&ray_world_pos, CELL_SIZE);
 	lengths = calculate_lengths(&ray);
-	step = calculate_step_dists(&ray, &dists, get_player()->cell_pos, hit_pos);
+	step = calculate_step_dists(&ray, &dists, ray_world_pos, map_pos);
 	vec2_multv2(&dists, lengths);
 	hit = FALSE;
 	side = 0;
@@ -39,16 +40,16 @@ t_ray	shoot_ray(t_vec2 ray, t_ivec2 hit_pos)
 		if (dists.x < dists.y)
 		{
 			dists.x += lengths.x;
-			hit_pos.x += step.x;
+			map_pos.x += step.x;
 			side = SIDE_X;
 		}
 		else
 		{
 			dists.y += lengths.y;
-			hit_pos.y += step.y;
+			map_pos.y += step.y;
 			side = SIDE_Y;
 		}
-		if (get_map_type(hit_pos.x, hit_pos.y) == WALL)
+		if (get_map_type(map_pos.x, map_pos.y) == WALL)
 			hit = TRUE;
 	}
 	if (hit && side == SIDE_X)

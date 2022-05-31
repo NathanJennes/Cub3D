@@ -110,7 +110,7 @@ ifeq ($(OS), Darwin)
 endif
 	@$(MAKE) -j4 -C $(SRCS_DIR) -r -R --warn-undefined-variables profile
 	./cub3dp 2> output.txt
-	./profily cub3dp
+	./profily cub3dp > profile_log.txt
 
 .PHONY: bonus
 bonus: all

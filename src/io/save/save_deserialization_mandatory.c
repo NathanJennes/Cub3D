@@ -6,11 +6,12 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/26 15:18:06 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/27 15:42:46 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "leaky.h"
+#include "render.h"
 #include "core.h"
 
 void		construct_map(t_map_info *infos)NOPROF;
@@ -40,6 +41,7 @@ int	load_mandatory_map(t_gamestate *save_out, int fd, char *line)
 		return (0);
 	gc_strarray_free(infos->map_raw);
 	setup_player(save_out);
+	save_out->lights = gc_calloc(1, sizeof (t_light));
 	return (1);
 }
 

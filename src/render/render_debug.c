@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/27 14:21:52 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/31 14:23:42 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,21 @@ static t_vec2	rotate_vector(t_vec2 v, double angle) NOPROF;
 static void		print_player_vector(void) NOPROF;
 static void		debug_rays(void) NOPROF;
 
+static void	render_debug_floor_cell(int64_t i, int64_t j)
+{
+	for (int64_t y = 0; y < CELL_SIZE; y++)
+	{
+		for (int64_t x = 0; x < CELL_SIZE; x++)
+		{
+			t_vec3 normal = vec3(0.0, 0.0, 1.0);
+			t_vec3 pos = vec3(x + j * CELL_SIZE, y + i * CELL_SIZE, 0.0);
+			t_ivec3 color = get_lighting_level(pos, normal);
+			set_screen_pixel(x + j * CELL_SIZE, y + i * CELL_SIZE,
+				trgb(0, color.x, color.y, color.z));
+		}
+	}
+}
+
 void	render_test_scene(const t_mlx *app)
 {
 	int					color;
@@ -31,17 +46,28 @@ void	render_test_scene(const t_mlx *app)
 		for (int64_t j = 0; j < map->width; j++)
 		{
 			if (map->map[i][j] == WALL)
+			{
 				color = trgb(0, 51, 51, 51);
+				draw_rect(ivec2(j * CELL_SIZE, i * CELL_SIZE),
+					ivec2(CELL_SIZE, CELL_SIZE), color);
+			}
 			else if (map->map[i][j] == EMPTY)
-				color = trgb(0, 200, 200, 200);
-			else
-				color = trgb(0, 0, 0, 0);
-			draw_rect(ivec2(j * CELL_SIZE, i * CELL_SIZE),
-				ivec2(CELL_SIZE, CELL_SIZE), color);
+				render_debug_floor_cell(i, j);
 		}
+	}
+	for (int64_t i = 0; i < app->gamestate.light_count; i++)
+	{
+		t_light *l = &app->gamestate.lights[i];
+		int col = trgb(0, l->color.x, l->color.y, l->color.z);
+		draw_circle(ivec2(l->pos.x, l->pos.y), 7, col);
 	}
 	draw_circle(v2_to_iv2(get_player()->world_pos), 7, BLACK);
 	print_player_vector();
+	t_ivec2 mouse_pos = cub_get_mouse_position();
+	t_player *player = get_player();
+	t_ivec3 light = get_lighting_level(vec3(mouse_pos.x, mouse_pos.y, 0),
+		vec3(player->forward.x, player->forward.y, 0.0));
+	draw_circle(mouse_pos, 10, trgb(0, light.x, light.y, light.z));
 	debug_rays();
 }
 
@@ -61,7 +87,7 @@ NOPROF
 	{
 		ray_direction = vec2(start.x - player->world_pos.x, start.y - player->world_pos.y);
 		vec2_normalize(&ray_direction);
-		player->last_ray = shoot_ray(ray_direction, player->map_pos);
+		player->last_ray = shoot_ray(ray_direction, player->world_pos, player->map_pos);
 		print_ray(player->last_ray.hit_pos);
 		vec2_add(&start, player->plane_inc);
 		i++;

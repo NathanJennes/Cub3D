@@ -18,6 +18,7 @@ int	close_app(void)
 {
 	if (get_app()->gamestate.name)
 		save_game(get_app()->gamestate.name);
+	save_settings(get_settings());
 	destroy_window();
 	unload_texture_manager();
 	unload_saves();

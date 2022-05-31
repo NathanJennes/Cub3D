@@ -6,10 +6,11 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 11:05:43 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/25 18:43:47 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/27 15:43:35 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "render.h"
 #include "core.h"
 #include "leaky.h"
 
@@ -51,6 +52,7 @@ static int	deserialize_cub_save(t_gamestate *save_out, int fd)
 	gc_strarray_free(save.map.map_raw);
 	if (!save.map.spawn_dir)
 		return (0);
+	save.lights = gc_calloc(1, sizeof (t_light));
 	*save_out = save;
 	return (1);
 }
