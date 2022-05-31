@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 18:59:05 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/27 14:08:02 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct s_player
 	t_vec2		forward;
 	t_vec2		right;
 	t_ray		last_ray;
+	t_vec2		plane_inc;
 }	t_player;
 
 typedef struct s_settings
@@ -122,11 +123,11 @@ typedef struct s_gamestate
 
 typedef struct s_math
 {
-	double	r_fov;
-	double	r_vfov;
-	double	r_halffov;
-	double	angle_inc;
-	double	base_angle;
+	double		r_fov;
+	double		r_vfov;
+	double		r_halffov;
+	double		base_angle;
+	double		plane_len;
 }	t_math;
 
 typedef struct s_mlx

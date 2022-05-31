@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:11:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 19:21:54 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/27 12:40:07 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,17 @@ void	update_player_vectors(t_player *player)
 	update_player_right_vec(player);
 	update_player_cell_pos(player);
 	update_player_map_vec(player);
-	if (get_player()->direction < 0.0)
-		get_player()->direction += TWO_PI;
-	else if (get_player()->direction > TWO_PI)
-		get_player()->direction -= TWO_PI;
-	get_math()->base_angle = get_player()->direction + get_math()->r_halffov;
+	if (player->direction < 0.0)
+		player->direction += TWO_PI;
+	else if (player->direction > TWO_PI)
+		player->direction -= TWO_PI;
+	get_math()->base_angle = player->direction + get_math()->r_halffov;
 	if (get_math()->base_angle < 0.0)
 		get_math()->base_angle += TWO_PI;
 	else if (get_math()->base_angle > TWO_PI)
 		get_math()->base_angle -= TWO_PI;
+	player->plane_inc = vec2((player->right.x * get_math()->plane_len) \
+			/ HALFW_W, (player->right.y * get_math()->plane_len) / HALFW_W);
 }
 
 static void	update_player_forward_vec(t_player *player)
@@ -43,8 +45,8 @@ static void	update_player_forward_vec(t_player *player)
 
 static void	update_player_right_vec(t_player *player)
 {
-	player->right.x = cos(player->direction);
-	player->right.y = -sin(player->direction);
+	player->right.x = -cos(player->direction);
+	player->right.y = sin(player->direction);
 }
 
 static void	update_player_cell_pos(t_player *player)

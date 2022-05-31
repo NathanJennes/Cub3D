@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:16:28 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 18:44:39 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/27 14:16:03 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@
 static void	debug_player(void);
 
 void	print_debug(void)
+NOPROF
 {
 	fps_counter();
 	debug_player();
 }
 
 static void	debug_player(void)
+NOPROF
 {
 	t_ivec2		start;
 	t_player	*player;
@@ -33,8 +35,8 @@ static void	debug_player(void)
 		ivec2(start.x + str_px_size("Ray angle "), start.y), WHITE);
 	start.y += 20;
 	put_text(ivec2(start.x, start.y), WHITE, "Ray increment ");
-	print_float(get_math()->angle_inc,
-		ivec2(start.x + str_px_size("Ray increment "), start.y), WHITE);
+	print_vec(player->plane_inc,
+		ivec2(start.x + str_px_size("Plane increment "), start.y), WHITE);
 	start.y += 20;
 	put_text(ivec2(start.x, start.y), WHITE, "Direction ");
 	print_float(player->direction,
