@@ -34,7 +34,8 @@ void	render_walls(void)
 			- player->right.y * get_math()->plane_len);
 	while (i < WIN_W)
 	{
-		ray_direction = vec2(start.x - player->world_pos.x, start.y - player->world_pos.y);
+		ray_direction = \
+			vec2(start.x - player->world_pos.x, start.y - player->world_pos.y);
 		vec2_normalize(&ray_direction);
 		player->last_ray = shoot_ray(ray_direction, player->map_pos);
 		draw_col_wall(i, get_wall_info());

@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/30 15:57:25 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/31 13:15:26 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,10 @@
 #  define MAXFLOAT FLT_MAX
 # endif
 
-# ifdef FULL_SCREEN
-#  define WIN_W		1920
-#  define WIN_H		1080
-#  define HALFW_W	960
-#  define HALFW_H	540
-# else
-#  define WIN_W		960
-#  define WIN_H		540
-#  define HALFW_W	480
-#  define HALFW_H	270
-# endif
+# define WIN_W		1920
+# define WIN_H		1080
+# define HALFW_W	960
+# define HALFW_H	540
 
 # define MAX_KEYCODE 1024
 # define MAX_MOUSE_BUTTONS 5

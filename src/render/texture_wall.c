@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/30 17:30:11 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/31 13:42:59 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,19 @@ NOPROF
 static double	get_texture_position(t_texture *texture)
 {
 	double		pos_x;
+	int64_t		ratio;
 
 	pos_x = 0;
 	if (get_player()->last_ray.side == SIDE_X)
-		pos_x = (int64_t)get_player()->last_ray.hit_pos.y % CELL_SIZE;
+	{
+		ratio = (int64_t)get_player()->last_ray.hit_pos.y / CELL_SIZE;
+		pos_x = get_player()->last_ray.hit_pos.y - (double)(ratio * CELL_SIZE);
+	}
 	else if (get_player()->last_ray.side == SIDE_Y)
-		pos_x = (int64_t)get_player()->last_ray.hit_pos.x % CELL_SIZE;
+	{
+		ratio = (int64_t)get_player()->last_ray.hit_pos.x / CELL_SIZE;
+		pos_x = get_player()->last_ray.hit_pos.x - (double)(ratio * CELL_SIZE);
+	}
 	return ((pos_x / (double)CELL_SIZE) * (double)texture->width);
 }
 
@@ -67,7 +74,7 @@ NOPROF
 
 	texture = NULL;
 	if (get_player()->last_ray.side == SIDE_X)
-		texture = get_texture_from_id(15);
+		texture = get_texture_from_id(17);
 	else if (get_player()->last_ray.side == SIDE_Y)
 		texture = get_texture_from_id(16);
 	return (texture);
