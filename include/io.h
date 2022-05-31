@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:45:17 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/31 12:42:37 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/31 12:58:40 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ void		unload_maps(void);
 void		reload_maps(void);
 
 t_settings	load_settings(void);
+void		save_settings(t_settings *settings);
 
 #endif

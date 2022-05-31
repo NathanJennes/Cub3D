@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 14:30:37 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/31 12:41:44 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/31 12:58:14 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@ int	deserialize_settings(t_settings *settings_out, int fd)
 	while (line)
 	{
 		line = ft_trimr(line);
-		if (ft_strncmp(line, "SETTINGS_END", ft_strlen(line)) == 0)
-		{
-			gc_free(line);
-			return (1);
-		}
 		if (!parse_line(line, settings_out))
 		{
 			gc_free(line);
@@ -42,8 +37,12 @@ int	deserialize_settings(t_settings *settings_out, int fd)
 		line = gc_get_next_line(fd);
 		line_num++;
 	}
-	printf("Settings file currupted at line: %d\n", line_num);
-	return (0);
+	if (line_num != 2)
+	{
+		printf("Settings file currupted at line: %d\n", line_num);
+		return (0);
+	}
+	return (1);
 }
 
 static int	parse_line(char *line, t_settings *settings)

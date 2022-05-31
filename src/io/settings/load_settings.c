@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 12:42:37 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/31 12:48:00 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/31 13:06:23 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_settings	load_settings(void)
 	ft_memset(&settings, 0, sizeof (t_settings));
 	if (try_open_settings(&settings))
 		return (settings);
+	printf("Loading default settings\n");
 	ft_memset(&settings, 0, sizeof (t_settings));
 	return (load_default_settings());
 }
@@ -33,7 +34,7 @@ static int			try_open_settings(t_settings *settings_out)
 {
 	int	fd;
 
-	fd = open("settings.txt", O_RDONLY);
+	fd = open(APPDATA_DIRECTORY"/settings.txt", O_RDWR, 777);
 	if (fd <= 0)
 		return (0);
 	return (deserialize_settings(settings_out, fd));
