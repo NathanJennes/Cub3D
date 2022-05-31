@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:45:17 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 17:08:52 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/31 12:42:37 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define MAPS_DIRECTORY "maps"
 
 typedef struct s_gamestate	t_gamestate;
+typedef struct s_settings	t_settings;
 
 int			save_game(char *save_name);
 int			load_game(t_gamestate *save_out, char *save_name);
@@ -30,5 +31,7 @@ void		reload_saves(void);
 void		load_all_maps(void);
 void		unload_maps(void);
 void		reload_maps(void);
+
+t_settings	load_settings(void);
 
 #endif

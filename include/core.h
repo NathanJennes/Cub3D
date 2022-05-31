@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/27 15:52:39 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/31 12:35:56 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ typedef struct s_player
 typedef struct s_settings
 {
 	int			fov;
+	int			win_h;
+	int			win_w;
 }	t_settings;
 
 typedef struct s_light	t_light;

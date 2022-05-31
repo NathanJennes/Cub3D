@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/27 14:15:49 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/05/31 12:49:11 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	init_app(void)
 
 	srand(time(0));
 	app = get_app();
+	app->settings = load_settings();
 	init_start_time();
 	init_gc();
 	init_window("Cub3d");
@@ -76,7 +77,6 @@ static void	init_math(void)
 	t_settings	*settings;
 
 	settings = get_settings();
-	settings->fov = 90;
 	update_player_vectors(get_player());
 	pc = get_math();
 	pc->r_fov = settings->fov * (PI / 180.0);
