@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 14:16:11 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 14:20:56 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ typedef struct s_mlx
 	int64_t				maps_count;
 	int64_t				last_time;
 	int64_t				start_time;
+	double				delta_time;
 	int8_t				game_state;
 	t_ui				ui;
 	t_texture_manager	texture_manager;

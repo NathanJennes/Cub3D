@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:16:28 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 14:20:33 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 14:46:18 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	debug_player(void);
 void	print_debug(void)
 NOPROF
 {
-	fps_counter();
 	debug_player();
 }
 

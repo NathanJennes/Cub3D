@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 14:20:33 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 14:48:12 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main_loop(void)
 		clear_screen(BKGD_COLOR);
 	if (app->ui.debug_ui == TRUE)
 		print_debug();
+	fps_counter();
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 	update_ui();
 	render_ui();

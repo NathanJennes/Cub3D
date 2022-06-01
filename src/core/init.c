@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 14:20:33 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 14:21:18 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static void	init_start_time(void)
 	app = get_app();
 	gettimeofday(&time, NULL);
 	app->start_time = time.tv_sec * 1000 + time.tv_usec / 1000;
+	app->last_time = app->start_time;
 }
 
 void	init_math(void)
