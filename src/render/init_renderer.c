@@ -6,12 +6,15 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 16:36:31 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 17:04:56 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 17:35:41 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "render.h"
+
+static void	render_multithreaded(t_renderer *renderer);
+static void	render_singlethreaded(void);
 
 void	init_renderer(void)
 {
@@ -21,6 +24,7 @@ void	init_renderer(void)
 	renderer = &get_app()->renderer;
 	i = 0;
 	renderer->running = TRUE;
+	renderer->multithreading = TRUE;
 	pthread_mutex_init(&renderer->running_lock, NULL);
 	while (i < RENDER_WORKER_COUNT)
 	{
@@ -53,10 +57,19 @@ void	shutdown_renderer(void)
 
 void	renderer_render(void)
 {
-	int64_t		i;
 	t_renderer	*renderer;
 
 	renderer = &get_app()->renderer;
+	if (renderer->multithreading)
+		render_multithreaded(renderer);
+	else
+		render_singlethreaded();
+}
+
+static void	render_multithreaded(t_renderer *renderer)
+{
+	int64_t	i;
+
 	i = 0;
 	while (i < RENDER_WORKER_COUNT)
 	{
@@ -70,4 +83,9 @@ void	renderer_render(void)
 		pthread_mutex_lock(&renderer->locks[i]);
 		i++;
 	}
+}
+
+static void	render_singlethreaded(void)
+{
+	render_walls(0, get_settings()->win_w - 1);
 }

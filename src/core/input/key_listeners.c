@@ -26,6 +26,8 @@ int	key_pressed_listener(int keycode)
 		switch_debug_ui();
 	else if (keycode == KEY_ESC)
 		handle_escape();
+	else if (keycode == KEY_F4)
+		app->renderer.multithreading = !app->renderer.multithreading;
 	return (0);
 }
 

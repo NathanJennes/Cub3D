@@ -6,22 +6,37 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:16:28 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 14:46:18 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 17:41:16 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "ui.h"
+#include "render.h"
 
-static void	debug_player(void);
+static t_ivec2	debug_player(void);
 
 void	print_debug(void)
 NOPROF
 {
-	debug_player();
+	t_ivec2	debug_pos;
+
+	debug_pos = debug_player();
+	if (get_app()->renderer.multithreading)
+	{
+		render_text("multithreaded", DEFAULT_FONT, 20,
+			text_center_height("singlethreaded", DEFAULT_FONT, 20,
+				ivec2(debug_pos.x, debug_pos.y)));
+	}
+	else
+	{
+		render_text("singlethreaded", DEFAULT_FONT, 20,
+			text_center_height("singlethreaded", DEFAULT_FONT, 20,
+				ivec2(debug_pos.x, debug_pos.y)));
+	}
 }
 
-static void	debug_player(void)
+static t_ivec2	debug_player(void)
 NOPROF
 {
 	t_ivec2		start;
@@ -58,4 +73,6 @@ NOPROF
 	put_text(ivec2(start.x, start.y), WHITE, "FOV ");
 	print_int(get_settings()->fov,
 		ivec2(start.x + str_px_size("FOV "), start.y), WHITE);
+	start.y += 20;
+	return (start);
 }

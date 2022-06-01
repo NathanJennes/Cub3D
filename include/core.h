@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 16:45:05 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 17:09:15 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ typedef enum e_app_state
 
 typedef struct s_renderer
 {
+	t_bool			multithreading;
 	t_bool			running;
 	pthread_mutex_t	running_lock;
 	pthread_mutex_t	locks[RENDER_WORKER_COUNT];
