@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:00:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/31 15:03:01 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 15:41:31 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	render_ui(void)
 	t_mlx			*app;
 
 	app = get_app();
-	if (app->game_state == MENU)
+	if (app->app_state == IN_MENU)
 	{
 		if (app->ui.state == MAIN_MENU)
 			render_main_menu();

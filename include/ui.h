@@ -137,6 +137,8 @@ typedef struct s_ui_settings_menu
 {
 	t_slider	slid_fov;
 	t_label		lbl_fov;
+	t_slider	slid_sens;
+	t_label		lbl_sens;
 	t_checkbox	chk_res_min;
 	t_checkbox	chk_res_med;
 	t_checkbox	chk_res_high;

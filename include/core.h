@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 15:07:36 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 15:41:16 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,6 @@
 # define CELL_SIZE	20
 
 # define MOUSE_DEBUG	0
-
-# define MENU 		0
-# define IN_GAME	1
-# define PAUSE		2
 
 typedef struct s_mouse
 {
@@ -110,6 +106,7 @@ typedef struct s_settings
 	int			halfw_w;
 	int			desired_win_h;
 	int			desired_win_w;
+	double		cam_sensitivity;
 }	t_settings;
 
 typedef struct s_light	t_light;
@@ -141,6 +138,12 @@ typedef struct s_math
 	double		plane_dist;
 }	t_math;
 
+typedef enum e_app_state
+{
+	IN_MENU,
+	IN_GAME
+}	t_app_state;
+
 typedef struct s_mlx
 {
 	void				*mlx;
@@ -156,7 +159,7 @@ typedef struct s_mlx
 	int64_t				last_time;
 	int64_t				start_time;
 	double				delta_time;
-	int8_t				game_state;
+	t_app_state 		app_state;
 	t_ui				ui;
 	t_texture_manager	texture_manager;
 	t_font_manager		font_manager;

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:36:18 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 15:02:16 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 15:03:20 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "core.h"
 #include "leaky.h"
 #include "ui.h"
-#include "colors.h"
 #include "render.h"
 
 static int64_t	get_time(void);
