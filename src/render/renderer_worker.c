@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 16:41:11 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 17:02:21 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 18:46:03 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,23 @@ void	*renderer_worker_loop(void *param_id)
 {
 	int64_t			id;
 	pthread_mutex_t	*lock;
+	pthread_mutex_t	*working_lock;
 	int64_t			col_start;
 	int64_t			col_end;
+	t_renderer		*renderer;
 
 	id = (int64_t)param_id;
-	lock = &get_app()->renderer.locks[id];
+	renderer = &get_app()->renderer;
+	lock = &renderer->locks[id];
+	working_lock = &renderer->working_lock[id];
 	init_cols(&col_start, &col_end, id);
 	while (is_game_running())
 	{
+		pthread_mutex_lock(working_lock);
 		pthread_mutex_lock(lock);
+		pthread_mutex_unlock(working_lock);
 		render_walls(col_start, col_end);
 		pthread_mutex_unlock(lock);
-		usleep(100);
 	}
 	return (EXIT_SUCCESS);
 }

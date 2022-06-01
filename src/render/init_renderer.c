@@ -6,15 +6,15 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 16:36:31 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 17:35:41 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 18:49:48 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "render.h"
 
-static void	render_multithreaded(t_renderer *renderer);
-static void	render_singlethreaded(void);
+static void		render_multithreaded(t_renderer *renderer);
+static void		render_singlethreaded(void);
 
 void	init_renderer(void)
 {
@@ -29,6 +29,7 @@ void	init_renderer(void)
 	while (i < RENDER_WORKER_COUNT)
 	{
 		pthread_mutex_init(&renderer->locks[i], NULL);
+		pthread_mutex_init(&renderer->working_lock[i], NULL);
 		pthread_mutex_lock(&renderer->locks[i]);
 		pthread_create(&renderer->workers[i], NULL, renderer_worker_loop, (void *)i);
 		pthread_detach(renderer->workers[i]);
@@ -50,6 +51,7 @@ void	shutdown_renderer(void)
 	{
 		pthread_join(renderer->workers[i], NULL);
 		pthread_mutex_destroy(&renderer->locks[i]);
+		pthread_mutex_destroy(&renderer->working_lock[i]);
 		i++;
 	}
 	pthread_mutex_destroy(&renderer->running_lock);
@@ -72,17 +74,16 @@ static void	render_multithreaded(t_renderer *renderer)
 
 	i = 0;
 	while (i < RENDER_WORKER_COUNT)
-	{
-		pthread_mutex_unlock(&renderer->locks[i]);
-		i++;
-	}
-	usleep(100);
+		pthread_mutex_unlock(&renderer->locks[i++]);
 	i = 0;
 	while (i < RENDER_WORKER_COUNT)
-	{
-		pthread_mutex_lock(&renderer->locks[i]);
-		i++;
-	}
+		pthread_mutex_lock(&renderer->working_lock[i++]);
+	i = 0;
+	while (i < RENDER_WORKER_COUNT)
+		pthread_mutex_lock(&renderer->locks[i++]);
+	i = 0;
+	while (i < RENDER_WORKER_COUNT)
+		pthread_mutex_unlock(&renderer->working_lock[i++]);
 }
 
 static void	render_singlethreaded(void)

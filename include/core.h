@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 17:09:15 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 18:43:36 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ typedef struct s_renderer
 	t_bool			running;
 	pthread_mutex_t	running_lock;
 	pthread_mutex_t	locks[RENDER_WORKER_COUNT];
+	pthread_mutex_t	working_lock[RENDER_WORKER_COUNT];
 	pthread_t		workers[RENDER_WORKER_COUNT];
 }	t_renderer;
 
