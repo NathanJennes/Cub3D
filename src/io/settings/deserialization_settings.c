@@ -42,6 +42,8 @@ int	deserialize_settings(t_settings *settings_out, int fd)
 		printf("Settings file currupted at line: %d\n", line_num);
 		return (0);
 	}
+	settings_out->desired_win_w = settings_out->win_w;
+	settings_out->desired_win_h = settings_out->win_h;
 	return (1);
 }
 

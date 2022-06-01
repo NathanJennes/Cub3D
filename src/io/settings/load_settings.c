@@ -48,5 +48,7 @@ static t_settings	load_default_settings(void)
 	settings.fov = 90;
 	settings.win_w = 960;
 	settings.win_h = 540;
+	settings.desired_win_w = 960;
+	settings.desired_win_h = 540;
 	return (settings);
 }

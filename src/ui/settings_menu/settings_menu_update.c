@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:36:24 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/31 17:39:41 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 14:10:50 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 void	update_settings_menu(void)
 {
+	static int			last_fov;
 	t_ui_settings_menu	*menu;
 
 	menu = &get_app()->ui.settings_menu;
@@ -25,8 +26,12 @@ void	update_settings_menu(void)
 	update_ui_checkbox(&menu->chk_res_high);
 	update_ui_checkbox(&menu->chk_res_fullscreen);
 	update_ui_button(&menu->btn_back);
-	gc_free(menu->lbl_fov.text);
-	update_ui_label_text(&menu->lbl_fov, gc_itoa((int)menu->slid_fov.value));
+	if (last_fov != (int)menu->slid_fov.value)
+	{
+		gc_free(menu->lbl_fov.text);
+		update_ui_label_text(&menu->lbl_fov, gc_itoa((int)menu->slid_fov.value));
+		last_fov = (int)menu->slid_fov.value;
+	}
 }
 
 void	update_settings_menu_click_begin(int button)
