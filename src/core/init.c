@@ -42,6 +42,7 @@ void	init_app(void)
 	init_math();
 	init_ui();
 	init_hooks();
+	init_renderer();
 	printf("%lld\n", load_texture("assets/texture_06.xpm"));
 	printf("%lld\n", load_texture("assets/texture_09.xpm"));
 	printf("%lld\n", load_texture("assets/wall_texture_01.xpm"));

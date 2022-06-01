@@ -6,12 +6,14 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 15:41:16 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 16:45:05 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CORE_H
 # define CORE_H
+
+#include <pthread.h>
 
 # include "mlx.h"
 # include "libft.h"
@@ -44,6 +46,8 @@
 # define CELL_SIZE	20
 
 # define MOUSE_DEBUG	0
+
+# define RENDER_WORKER_COUNT 4
 
 typedef struct s_mouse
 {
@@ -93,7 +97,6 @@ typedef struct s_player
 	double		direction;
 	t_vec2		forward;
 	t_vec2		right;
-	t_ray		last_ray;
 	t_vec2		plane_inc;
 }	t_player;
 
@@ -144,6 +147,14 @@ typedef enum e_app_state
 	IN_GAME
 }	t_app_state;
 
+typedef struct s_renderer
+{
+	t_bool			running;
+	pthread_mutex_t	running_lock;
+	pthread_mutex_t	locks[RENDER_WORKER_COUNT];
+	pthread_t		workers[RENDER_WORKER_COUNT];
+}	t_renderer;
+
 typedef struct s_mlx
 {
 	void				*mlx;
@@ -165,6 +176,7 @@ typedef struct s_mlx
 	t_font_manager		font_manager;
 	t_bool				keys[MAX_KEYCODE];
 	t_math				pc;
+	t_renderer			renderer;
 }	t_mlx;
 
 /* core.c */

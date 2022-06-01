@@ -1,0 +1,73 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_renderer.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/01 16:36:31 by njennes           #+#    #+#             */
+/*   Updated: 2022/06/01 17:04:56 by njennes          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "core.h"
+#include "render.h"
+
+void	init_renderer(void)
+{
+	int64_t		i;
+	t_renderer	*renderer;
+
+	renderer = &get_app()->renderer;
+	i = 0;
+	renderer->running = TRUE;
+	pthread_mutex_init(&renderer->running_lock, NULL);
+	while (i < RENDER_WORKER_COUNT)
+	{
+		pthread_mutex_init(&renderer->locks[i], NULL);
+		pthread_mutex_lock(&renderer->locks[i]);
+		pthread_create(&renderer->workers[i], NULL, renderer_worker_loop, (void *)i);
+		pthread_detach(renderer->workers[i]);
+		i++;
+	}
+}
+
+void	shutdown_renderer(void)
+{
+	size_t		i;
+	t_renderer	*renderer;
+
+	renderer = &get_app()->renderer;
+	i = 0;
+	pthread_mutex_lock(&renderer->running_lock);
+	renderer->running = FALSE;
+	pthread_mutex_unlock(&renderer->running_lock);
+	while (i < RENDER_WORKER_COUNT)
+	{
+		pthread_join(renderer->workers[i], NULL);
+		pthread_mutex_destroy(&renderer->locks[i]);
+		i++;
+	}
+	pthread_mutex_destroy(&renderer->running_lock);
+}
+
+void	renderer_render(void)
+{
+	int64_t		i;
+	t_renderer	*renderer;
+
+	renderer = &get_app()->renderer;
+	i = 0;
+	while (i < RENDER_WORKER_COUNT)
+	{
+		pthread_mutex_unlock(&renderer->locks[i]);
+		i++;
+	}
+	usleep(100);
+	i = 0;
+	while (i < RENDER_WORKER_COUNT)
+	{
+		pthread_mutex_lock(&renderer->locks[i]);
+		i++;
+	}
+}

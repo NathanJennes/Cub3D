@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 14:48:12 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 17:04:47 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main_loop(void)
 		draw_rect_unsafe(ivec2(0, 0), ivec2(settings->win_w, settings->halfw_h), CEILLING);
 		draw_rect_unsafe(ivec2(0, settings->halfw_h), ivec2(settings->win_w, settings->halfw_h), FLOOR);
 		mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
-		render_walls();
+		renderer_render();
 		render_test_scene(app);
 	}
 	else

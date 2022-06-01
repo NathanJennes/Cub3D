@@ -6,16 +6,18 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:51:10 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/21 16:58:56 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 16:49:25 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "core.h"
 #include "leaky.h"
+#include "render.h"
 
 int	close_app(void)
 {
+	shutdown_renderer();
 	if (get_app()->gamestate.name)
 		save_game(get_app()->gamestate.name);
 	save_settings(get_settings());
@@ -28,6 +30,7 @@ int	close_app(void)
 
 void	error_close_app(void)
 {
+	shutdown_renderer();
 	check_leaky_errors();
 	destroy_window();
 	unload_texture_manager();
