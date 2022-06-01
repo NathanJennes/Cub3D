@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 18:35:53 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 12:51:10 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 12:54:44 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	render_ui_checkbox(t_checkbox *checkbox)
 	if (!checkbox->infos.displayed)
 		return ;
 	infos = &checkbox->infos;
-	if (!checkbox->is_clickable || checkbox->checked)
+	if (!checkbox->is_clickable || checkbox->clicked)
 		render_ui_texture_inverse_grayscale(checkbox->tex_id,
 			infos->pos.x, infos->pos.y);
-	else if (checkbox->hovered)
+	else if (checkbox->hovered || checkbox->checked)
 		render_ui_texture_grayscale(checkbox->tex_id, infos->pos.x, infos->pos.y);
 	else
 		render_ui_texture(checkbox->tex_id, infos->pos.x, infos->pos.y);

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 12:49:37 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 13:04:30 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_checkbox
 	t_bool			is_clickable;
 	t_bool			hovered;
 	t_bool			checked;
+	t_bool			clicked;
 	int				(*event_checked)(struct s_checkbox *checkbox);
 	int				(*event_unchecked)(struct s_checkbox *checkbox);
 }	t_checkbox;
@@ -129,7 +130,7 @@ typedef struct s_ui_new_game_menu
 	t_button	btn_up;
 	t_button	btn_down;
 	t_button	btn_start;
-	t_button	btn_save[5];
+	t_checkbox	btn_save[5];
 }	t_ui_new_game_menu;
 
 typedef struct s_ui_settings_menu
@@ -198,7 +199,7 @@ void			update_ui_button_click_end(t_button *button, int mouse_btn);
 
 t_checkbox		create_checkbox(char *texture_path, t_ivec2 pos,
 				int (*event_checked)(struct s_checkbox *checkbox),
-				int (*event_unchecked)(struct s_checkbox *checkbox))
+				int (*event_unchecked)(struct s_checkbox *checkbox));
 void			update_ui_checkbox(t_checkbox *checkbox);
 void			render_ui_checkbox(t_checkbox *checkbox);
 void			update_ui_checkbox_click_begin(t_checkbox *checkbox, int mouse_btn);

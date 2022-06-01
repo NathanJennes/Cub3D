@@ -59,7 +59,8 @@ UI_MAIN_MENU_SRCS	:= $(addprefix $(UI_MAIN_MENU_DIR)/, $(UI_MAIN_MENU_FILE))
 
 UI_NEW_GAME_MENU_DIR	:=	$(UI_DIR)/new_game_menu
 UI_NEW_GAME_MENU_FILE	:=	new_game_menu.c	new_game_menu_init.c	\
-							new_game_menu_buttons.c new_game_menu_buttons2.c
+							new_game_menu_buttons.c new_game_menu_buttons2.c	\
+							new_game_menu_buttons3.c
 UI_NEW_GAME_MENU_SRCS	:= $(addprefix $(UI_NEW_GAME_MENU_DIR)/, $(UI_NEW_GAME_MENU_FILE))
 
 UI_SETTINGS_MENU_DIR	:=	$(UI_DIR)/settings_menu
