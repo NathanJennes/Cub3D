@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/31 19:06:12 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 12:49:37 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ typedef struct s_checkbox
 	int64_t			tex_id;
 	t_bool			is_clickable;
 	t_bool			hovered;
-	t_bool			clicked;
 	t_bool			checked;
-	int				(*event)(struct s_checkbox *checkbox);
+	int				(*event_checked)(struct s_checkbox *checkbox);
+	int				(*event_unchecked)(struct s_checkbox *checkbox);
 }	t_checkbox;
 
 typedef struct s_label
@@ -190,11 +190,19 @@ void			update_settings_menu(void);
 
 /* Ui elements */
 t_button		create_button(char *texture_path, t_ivec2 pos,
-					int (*event)(struct s_button *button));
+	int (*event)(struct s_button *button));
 void			update_ui_button(t_button *button);
 void			render_ui_button(t_button *button);
 void			update_ui_button_click_begin(t_button *button, int mouse_btn);
 void			update_ui_button_click_end(t_button *button, int mouse_btn);
+
+t_checkbox		create_checkbox(char *texture_path, t_ivec2 pos,
+				int (*event_checked)(struct s_checkbox *checkbox),
+				int (*event_unchecked)(struct s_checkbox *checkbox))
+void			update_ui_checkbox(t_checkbox *checkbox);
+void			render_ui_checkbox(t_checkbox *checkbox);
+void			update_ui_checkbox_click_begin(t_checkbox *checkbox, int mouse_btn);
+void			update_ui_checkbox_click_end(t_checkbox *checkbox, int mouse_btn);
 
 t_img_box		create_img_box(char *texture_path, t_ivec2 pos);
 void			render_ui_img_box(t_img_box *box);

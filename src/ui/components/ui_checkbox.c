@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 18:35:53 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/31 19:05:10 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 12:51:10 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include "ui.h"
 
 t_checkbox	create_checkbox(char *texture_path, t_ivec2 pos,
-	int (*event)(struct s_checkbox *button))
+	int (*event_checked)(struct s_checkbox *checkbox),
+	int (*event_unchecked)(struct s_checkbox *checkbox))
 {
 	t_checkbox	checkbox;
 
@@ -26,9 +27,9 @@ t_checkbox	create_checkbox(char *texture_path, t_ivec2 pos,
 		checkbox.tex_id = INVALID_TEXTURE;
 	checkbox.infos.size = get_texture_size(checkbox.tex_id);
 	checkbox.infos.displayed = TRUE;
-	checkbox.event = event;
+	checkbox.event_checked = event_checked;
+	checkbox.event_unchecked = event_unchecked;
 	checkbox.hovered = FALSE;
-	checkbox.clicked = FALSE;
 	checkbox.is_clickable = TRUE;
 	checkbox.checked = FALSE;
 	return (checkbox);
@@ -41,7 +42,7 @@ void	render_ui_checkbox(t_checkbox *checkbox)
 	if (!checkbox->infos.displayed)
 		return ;
 	infos = &checkbox->infos;
-	if (checkbox->clicked || !checkbox->is_clickable)
+	if (!checkbox->is_clickable || checkbox->checked)
 		render_ui_texture_inverse_grayscale(checkbox->tex_id,
 			infos->pos.x, infos->pos.y);
 	else if (checkbox->hovered)

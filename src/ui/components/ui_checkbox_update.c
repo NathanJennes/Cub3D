@@ -6,63 +6,72 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 18:36:40 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/31 18:36:47 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 12:53:54 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	update_ui_button(t_button *button)
+#include "ui.h"
+#include "core.h"
+#include "input_code.h"
+
+void	update_ui_checkbox(t_checkbox *checkbox)
 {
 	t_ivec2			mouse_pos;
 	t_ui_component	*component;
 
-	if (!button->infos.displayed)
+	if (!checkbox->infos.displayed)
 		return ;
-	component = &button->infos;
+	component = &checkbox->infos;
 	mouse_pos = cub_get_mouse_position();
 	if (mouse_pos.x >= component->pos.x
 		&& mouse_pos.x <= component->pos.x + component->size.x
 		&& mouse_pos.y >= component->pos.y
 		&& mouse_pos.y <= component->pos.y + component->size.y)
-		button->hovered = TRUE;
+		checkbox->hovered = TRUE;
 	else
-		button->hovered = FALSE;
+		checkbox->hovered = FALSE;
 }
 
-void	update_ui_button_click_begin(t_button *button, int mouse_btn)
+void	update_ui_checkbox_click_begin(t_checkbox *checkbox, int mouse_btn)
 {
 	t_ivec2			mouse_pos;
 	t_ui_component	*component;
 
-	if (!button->infos.displayed || mouse_btn != MOUSE_LEFT)
+	if (!checkbox->infos.displayed || mouse_btn != MOUSE_LEFT)
 		return ;
-	component = &button->infos;
+	component = &checkbox->infos;
 	mouse_pos = cub_get_mouse_position();
 	if (mouse_pos.x >= component->pos.x
 		&& mouse_pos.x <= component->pos.x + component->size.x
 		&& mouse_pos.y >= component->pos.y
 		&& mouse_pos.y <= component->pos.y + component->size.y)
-		button->clicked = TRUE;
+	{
+		checkbox->checked = TRUE;
+		if (checkbox->event_checked)
+			checkbox->event_checked(checkbox);
+	}
 	else
-		button->clicked = FALSE;
+		checkbox->checked = FALSE;
 }
 
-void	update_ui_button_click_end(t_button *button, int mouse_btn)
+void	update_ui_checkbox_click_end(t_checkbox *checkbox, int mouse_btn)
 {
 	t_ivec2			mouse_pos;
 	t_ui_component	*component;
 
-	if (!button->infos.displayed || mouse_btn != MOUSE_LEFT)
+	if (!checkbox->infos.displayed || mouse_btn != MOUSE_LEFT)
 		return ;
-	component = &button->infos;
+	component = &checkbox->infos;
 	mouse_pos = cub_get_mouse_position();
 	if (mouse_pos.x >= component->pos.x
 		&& mouse_pos.x <= component->pos.x + component->size.x
 		&& mouse_pos.y >= component->pos.y
 		&& mouse_pos.y <= component->pos.y + component->size.y
-		&& button->clicked)
+		&& checkbox->checked)
 	{
-		button->clicked = FALSE;
-		button->event(button);
+		checkbox->checked = FALSE;
+		if (checkbox->event_unchecked)
+			checkbox->event_unchecked(checkbox);
 	}
-	button->clicked = FALSE;
+	checkbox->checked = FALSE;
 }
