@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:36:08 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 13:59:35 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 14:03:35 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	chk_unselect_res_fullscreen(t_checkbox *checkbox);
 
 static void	init_positions(t_ui_settings_menu *menu);
 static void	init_textures(t_ui_settings_menu *menu);
+static void	init_current_res_checkbox(t_ui_settings_menu *menu);
 
 void	init_settings_menu(void)
 {
@@ -46,8 +47,7 @@ void	init_settings_menu(void)
 		ivec2(50, WIN_H - 50), btn_settings_back);
 	init_textures(menu);
 	init_positions(menu);
-	ft_print_ivec2(menu->chk_res_min.infos.pos);
-	ft_print_ivec2(menu->chk_res_min.infos.size);
+	init_current_res_checkbox(menu);
 }
 
 static void	init_positions(t_ui_settings_menu *menu)
@@ -97,4 +97,17 @@ static void	init_textures(t_ui_settings_menu *menu)
 		ivec2(22, menu->chk_res_fullscreen.tex_id));
 	finish_new_texture(menu->chk_res_fullscreen.tex_id);
 	menu->chk_res_fullscreen.infos.size = get_texture_size(menu->chk_res_fullscreen.tex_id);
+}
+
+static void	init_current_res_checkbox(t_ui_settings_menu *menu)
+{
+	t_settings	*settings;
+
+	settings = get_settings();
+	if (settings->win_w == 960)
+		menu->chk_res_min.checked = TRUE;
+	else if (settings->win_w == 1280)
+		menu->chk_res_med.checked = TRUE;
+	else
+		menu->chk_res_high.checked = TRUE;
 }
