@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 12:51:53 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/31 13:04:54 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 15:19:28 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "core.h"
 #include "leaky.h"
 
-static void	save_fov(t_settings *settings, int fd);
+static void	save_player(t_settings *settings, int fd);
 static void	save_win(t_settings *settings, int fd);
 
 static int	open_settings_file(char *save_name);
@@ -31,14 +31,18 @@ void	save_settings(t_settings *settings)
 		printf("Could not save the settings\n");
 		return ;
 	}
-	save_fov(settings, fd);
+	save_player(settings, fd);
 	save_win(settings, fd);
 }
 
-static void	save_fov(t_settings *settings, int fd)
+static void	save_player(t_settings *settings, int fd)
 {
 	dprintf(fd, "FOV ");
 	dprintf(fd, "%d\n", settings->fov);
+	dprintf(fd, "SENS ");
+	dprintf(fd, "%d.%d\n", (int)settings->cam_sensitivity,
+		(int)((settings->cam_sensitivity
+			- (double)((int)settings->cam_sensitivity)) * 100));
 }
 
 static void	save_win(t_settings *settings, int fd)

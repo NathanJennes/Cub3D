@@ -23,6 +23,7 @@ int	btn_settings_back(t_button *button)
 	ui->state = MAIN_MENU;
 	settings = get_settings();
 	settings->fov = (int)ui->settings_menu.slid_fov.value;
+	settings->cam_sensitivity = ui->settings_menu.slid_sens.value;
 	init_math();
 	return (0);
 }

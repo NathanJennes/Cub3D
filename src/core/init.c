@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 14:21:18 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 15:41:31 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	init_hooks(void)
 	t_mlx	*app;
 
 	app = get_app();
-	app->game_state = MENU;
+	app->app_state = IN_MENU;
 	mlx_hook(app->win, 17, 0, close_app, app);
 	mlx_hook(app->win, 2, 0, key_down_callback, NULL);
 	mlx_hook(app->win, 3, 0, key_up_callback, NULL);

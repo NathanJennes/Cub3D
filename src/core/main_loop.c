@@ -24,7 +24,7 @@ int	main_loop(void)
 	app = get_app();
 	settings = get_settings();
 	update_player(&app->gamestate.player);
-	if (app->game_state & IN_GAME)
+	if (app->app_state & IN_GAME)
 	{
 		draw_rect_unsafe(ivec2(0, 0), ivec2(settings->win_w, settings->halfw_h), CEILLING);
 		draw_rect_unsafe(ivec2(0, settings->halfw_h), ivec2(settings->win_w, settings->halfw_h), FLOOR);

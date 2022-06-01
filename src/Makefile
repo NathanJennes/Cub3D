@@ -92,7 +92,7 @@ SAVE_SRCS		:=	$(addprefix $(SAVE_DIR)/, $(SAVE_FILE))
 
 SETTINGS_DIR		:=	$(IO_DIR)/settings
 SETTINGS_FILE		:=	deserialization_settings.c load_settings.c	\
-						save_settings.c
+						save_settings.c deserialization_settings_player.c
 SETTINGS_SRCS		:=	$(addprefix $(SETTINGS_DIR)/, $(SETTINGS_FILE))
 
 SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\
