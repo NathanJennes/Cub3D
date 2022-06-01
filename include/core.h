@@ -106,6 +106,8 @@ typedef struct s_settings
 	int			fov;
 	int			win_h;
 	int			win_w;
+	int			desired_win_h;
+	int			desired_win_w;
 }	t_settings;
 
 typedef struct s_light	t_light;

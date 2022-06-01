@@ -44,7 +44,7 @@ static void	save_fov(t_settings *settings, int fd)
 static void	save_win(t_settings *settings, int fd)
 {
 	dprintf(fd, "WIN ");
-	dprintf(fd, "%d %d\n", settings->win_w, settings->win_h);
+	dprintf(fd, "%d %d\n", settings->desired_win_w, settings->desired_win_h);
 }
 
 static int	open_settings_file(char *save_name)

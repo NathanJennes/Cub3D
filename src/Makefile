@@ -64,7 +64,8 @@ UI_NEW_GAME_MENU_FILE	:=	new_game_menu.c	new_game_menu_init.c	\
 UI_NEW_GAME_MENU_SRCS	:= $(addprefix $(UI_NEW_GAME_MENU_DIR)/, $(UI_NEW_GAME_MENU_FILE))
 
 UI_SETTINGS_MENU_DIR	:=	$(UI_DIR)/settings_menu
-UI_SETTINGS_MENU_FILE	:=	settings_menu.c settings_menu_init.c settings_menu_update.c settings_menu_buttons.c
+UI_SETTINGS_MENU_FILE	:=	settings_menu.c settings_menu_init.c settings_menu_update.c	\
+							settings_menu_buttons.c settings_menu_buttons2.c
 UI_SETTINGS_MENU_SRCS	:= $(addprefix $(UI_SETTINGS_MENU_DIR)/, $(UI_SETTINGS_MENU_FILE))
 
 TEXTURES_DIR	:=	textures

@@ -20,8 +20,10 @@ void	update_settings_menu(void)
 
 	menu = &get_app()->ui.settings_menu;
 	update_ui_slider(&menu->slid_fov);
-	update_ui_slider(&menu->slid_win_w);
-	update_ui_slider(&menu->slid_win_h);
+	update_ui_checkbox(&menu->chk_res_min);
+	update_ui_checkbox(&menu->chk_res_med);
+	update_ui_checkbox(&menu->chk_res_high);
+	update_ui_checkbox(&menu->chk_res_fullscreen);
 	update_ui_button(&menu->btn_back);
 	gc_free(menu->lbl_fov.text);
 	update_ui_label_text(&menu->lbl_fov, gc_itoa((int)menu->slid_fov.value));
@@ -33,8 +35,10 @@ void	update_settings_menu_click_begin(int button)
 
 	menu = &get_app()->ui.settings_menu;
 	update_ui_slider_click_begin(&menu->slid_fov, button);
-	update_ui_slider_click_begin(&menu->slid_win_w, button);
-	update_ui_slider_click_begin(&menu->slid_win_h, button);
+	update_ui_checkbox_click_begin(&menu->chk_res_min, button);
+	update_ui_checkbox_click_begin(&menu->chk_res_med, button);
+	update_ui_checkbox_click_begin(&menu->chk_res_high, button);
+	update_ui_checkbox_click_begin(&menu->chk_res_fullscreen, button);
 	update_ui_button_click_begin(&menu->btn_back, button);
 }
 
@@ -44,7 +48,9 @@ void	update_settings_menu_click_end(int button)
 
 	menu = &get_app()->ui.settings_menu;
 	update_ui_slider_click_end(&menu->slid_fov, button);
-	update_ui_slider_click_end(&menu->slid_win_w, button);
-	update_ui_slider_click_end(&menu->slid_win_h, button);
+	update_ui_checkbox_click_end(&menu->chk_res_min, button);
+	update_ui_checkbox_click_end(&menu->chk_res_med, button);
+	update_ui_checkbox_click_end(&menu->chk_res_high, button);
+	update_ui_checkbox_click_end(&menu->chk_res_fullscreen, button);
 	update_ui_button_click_end(&menu->btn_back, button);
 }

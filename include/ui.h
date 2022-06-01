@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 13:04:30 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 13:05:37 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,10 @@ typedef struct s_ui_settings_menu
 {
 	t_slider	slid_fov;
 	t_label		lbl_fov;
-	t_slider	slid_win_w;
-	t_slider	slid_win_h;
+	t_checkbox	chk_res_min;
+	t_checkbox	chk_res_med;
+	t_checkbox	chk_res_high;
+	t_checkbox	chk_res_fullscreen;
 	t_button	btn_back;
 }	t_ui_settings_menu;
 
