@@ -29,7 +29,8 @@ void	update_settings_menu(void)
 	if (last_fov != (int)menu->slid_fov.value)
 	{
 		gc_free(menu->lbl_fov.text);
-		update_ui_label_text(&menu->lbl_fov, gc_itoa((int)menu->slid_fov.value));
+		update_ui_label_text(&menu->lbl_fov,
+			gc_itoa((int)menu->slid_fov.value));
 		last_fov = (int)menu->slid_fov.value;
 	}
 }

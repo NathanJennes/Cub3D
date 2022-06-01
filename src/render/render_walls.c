@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/30 16:55:54 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/01 14:23:05 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,16 @@ void	render_walls(void)
 	t_vec2		ray_direction;
 	t_player	*player;
 	t_vec2		start;
+	t_settings	*settings;
 
+	settings = get_settings();
 	i = 0;
 	player = get_player();
 	start = vec2(player->world_pos.x + player->forward.x
 			- player->right.x * get_math()->plane_len,
 			player->world_pos.y + player->forward.y
 			- player->right.y * get_math()->plane_len);
-	while (i < WIN_W)
+	while (i < settings->win_w)
 	{
 		ray_direction = \
 			vec2(start.x - player->world_pos.x, start.y - player->world_pos.y);
@@ -47,20 +49,22 @@ void	render_walls(void)
 static	t_wall	get_wall_info(void)
 {
 	t_wall	wall;
+	t_settings	*settings;
 
+	settings = get_settings();
 	get_correct_distance();
 	wall.size = (int64_t)
 		fabs(CELL_SIZE / (get_player()->last_ray.distance * CELL_SIZE)
 			* get_math()->plane_dist);
 	wall.real_size = wall.size;
-	wall.offset = (wall.real_size - WIN_H) / 2;
+	wall.offset = (wall.real_size - settings->win_h) / 2;
 	if (wall.offset < 0)
 		wall.offset = 0;
-	if (wall.size > WIN_H)
-		wall.size = WIN_H;
+	if (wall.size > settings->win_h)
+		wall.size = settings->win_h;
 	else if (wall.size < 0)
 		wall.size = 0;
-	wall.origin = HALFW_H - (wall.size / 2);
+	wall.origin = settings->halfw_h - (wall.size / 2);
 	return (wall);
 }
 

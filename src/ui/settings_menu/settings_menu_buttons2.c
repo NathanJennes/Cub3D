@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 13:36:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 13:52:31 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 13:52:34 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ int	chk_unselect_res_high(t_checkbox *checkbox)
 
 int	chk_select_res_fullscreen(t_checkbox *checkbox)
 {
+	(void)checkbox;
 	return (0);
 }
 
 int	chk_unselect_res_fullscreen(t_checkbox *checkbox)
 {
+	(void)checkbox;
 	return (0);
 }

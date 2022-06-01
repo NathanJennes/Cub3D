@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 14:30:37 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/31 12:58:14 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 14:17:00 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	deserialize_settings(t_settings *settings_out, int fd)
 	}
 	settings_out->desired_win_w = settings_out->win_w;
 	settings_out->desired_win_h = settings_out->win_h;
+	settings_out->halfw_w = settings_out->win_w / 2;
+	settings_out->halfw_h = settings_out->win_h / 2;
 	return (1);
 }
 

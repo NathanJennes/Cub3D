@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:48:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 12:59:58 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 14:23:36 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ void		update_display_status(void);
 void	init_new_game_menu(void)
 {
 	t_ui_new_game_menu	*menu;
+	t_settings	*settings;
 
+	settings = get_settings();
 	menu = &get_ui()->new_game_menu;
 	menu->selected_save = -1;
 	menu->btn_back = create_button("assets/placeholder.xpm",
-			ivec2(50, WIN_H - 50), btn_new_game_back);
+			ivec2(50, settings->win_h - 50), btn_new_game_back);
 	menu->btn_down = create_button("assets/placeholder.xpm",
 			ivec2(0, 0), btn_new_game_down);
 	menu->btn_up = create_button("assets/placeholder.xpm",
@@ -48,11 +50,16 @@ void	init_new_game_menu(void)
 	menu->btn_start = create_button("assets/placeholder.xpm",
 			ivec2(0, 0), btn_start_new_game);
 	menu->btn_start.is_clickable = FALSE;
-	menu->btn_save[0] = create_checkbox(NULL, ivec2(0, 100), btn_select_save1, btn_unselect_save1);
-	menu->btn_save[1] = create_checkbox(NULL, ivec2(0, 0), btn_select_save2, btn_unselect_save2);
-	menu->btn_save[2] = create_checkbox(NULL, ivec2(0, 0), btn_select_save3, btn_unselect_save3);
-	menu->btn_save[3] = create_checkbox(NULL, ivec2(0, 0), btn_select_save4, btn_unselect_save4);
-	menu->btn_save[4] = create_checkbox(NULL, ivec2(0, 0), btn_select_save5, btn_unselect_save5);
+	menu->btn_save[0] = create_checkbox(NULL, ivec2(0, 100),
+		btn_select_save1, btn_unselect_save1);
+	menu->btn_save[1] = create_checkbox(NULL, ivec2(0, 0),
+		btn_select_save2, btn_unselect_save2);
+	menu->btn_save[2] = create_checkbox(NULL, ivec2(0, 0),
+		btn_select_save3, btn_unselect_save3);
+	menu->btn_save[3] = create_checkbox(NULL, ivec2(0, 0),
+		btn_select_save4, btn_unselect_save4);
+	menu->btn_save[4] = create_checkbox(NULL, ivec2(0, 0),
+		btn_select_save5, btn_unselect_save5);
 	update_display_status();
 	init_textures();
 	init_positions();

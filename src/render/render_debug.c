@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_debug.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/31 14:23:42 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/01 14:20:33 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,14 @@ NOPROF
 	t_vec2		ray_direction;
 	t_player	*player;
 	t_vec2		start;
+	t_settings	*settings;
 
+	settings = get_settings();
 	i = 0;
 	player = get_player();
 	start = vec2(player->world_pos.x + player->forward.x - player->right.x * get_math()->plane_len,
 		player->world_pos.y + player->forward.y - player->right.y * get_math()->plane_len);
-	while (i < WIN_W)
+	while (i < settings->win_w)
 	{
 		ray_direction = vec2(start.x - player->world_pos.x, start.y - player->world_pos.y);
 		vec2_normalize(&ray_direction);

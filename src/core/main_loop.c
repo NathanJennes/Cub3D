@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/31 16:08:41 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 14:20:33 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,16 @@ void	render_test_scene(const t_mlx *app);
 
 int	main_loop(void)
 {
-	t_mlx	*app;
+	t_mlx		*app;
+	t_settings	*settings;
 
 	app = get_app();
+	settings = get_settings();
 	update_player(&app->gamestate.player);
 	if (app->game_state & IN_GAME)
 	{
-		draw_rect_unsafe(ivec2(0, 0), ivec2(WIN_W, HALFW_H), CEILLING);
-		draw_rect_unsafe(ivec2(0, HALFW_H), ivec2(WIN_W, HALFW_H), FLOOR);
+		draw_rect_unsafe(ivec2(0, 0), ivec2(settings->win_w, settings->halfw_h), CEILLING);
+		draw_rect_unsafe(ivec2(0, settings->halfw_h), ivec2(settings->win_w, settings->halfw_h), FLOOR);
 		mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 		render_walls();
 		render_test_scene(app);

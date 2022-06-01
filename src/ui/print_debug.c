@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_debug.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:16:28 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/27 14:16:03 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/01 14:20:33 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ NOPROF
 	t_player	*player;
 
 	player = get_player();
-	start = ivec2(20, WIN_H / 2 - 100);
+	start = ivec2(20, get_settings()->win_h / 2 - 100);
 	put_text(start, WHITE, "Ray angle ");
 	print_float(get_math()->base_angle,
 		ivec2(start.x + str_px_size("Ray angle "), start.y), WHITE);

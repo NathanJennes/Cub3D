@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 14:13:05 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/16 14:29:30 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 14:18:43 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 
 void	init_window(char *win_name)
 {
-	t_mlx	*app;
+	t_mlx		*app;
+	t_settings	*settings;
 
 	app = get_app();
+	settings = get_settings();
 	app->mlx = mlx_init();
 	if (!app->mlx)
 		error_close_app();
-	app->win = mlx_new_window(app->mlx, WIN_W, WIN_H, win_name);
+	app->win = mlx_new_window(app->mlx, settings->win_w, settings->win_h, win_name);
 	if (!app->win)
 		error_close_app();
-	app->frame.img = mlx_new_image(app->mlx, WIN_W, WIN_H);
+	app->frame.img = mlx_new_image(app->mlx, settings->win_w, settings->win_h);
 	if (!app->frame.img)
 		error_close_app();
 	app->frame.addr = mlx_get_data_addr(app->frame.img, &app->frame.bits_pp,

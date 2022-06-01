@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/31 12:49:11 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 14:20:33 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	init_math(void)
 	pc = get_math();
 	pc->r_fov = settings->fov * (PI / 180.0);
 	pc->r_halffov = settings->fov * (PI / 360.0);
-	pc->r_vfov = 2 * atan(tan(pc->r_halffov) * ((double)WIN_W / (double)WIN_H));
+	pc->r_vfov = 2 * atan(tan(pc->r_halffov) * ((double)settings->win_w / (double)settings->win_h));
 	pc->plane_len = tan(pc->r_halffov);
-	pc->plane_dist = HALFW_W / (get_math()->r_vfov / 2);
+	pc->plane_dist = settings->halfw_w / (get_math()->r_vfov / 2);
 }

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:11:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/27 12:40:07 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 14:21:32 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ static void	update_player_map_vec(t_player *player);
 
 void	update_player_vectors(t_player *player)
 {
+	t_settings	*settings;
+
+	settings = get_settings();
 	update_player_forward_vec(player);
 	update_player_right_vec(player);
 	update_player_cell_pos(player);
@@ -34,7 +37,7 @@ void	update_player_vectors(t_player *player)
 	else if (get_math()->base_angle > TWO_PI)
 		get_math()->base_angle -= TWO_PI;
 	player->plane_inc = vec2((player->right.x * get_math()->plane_len) \
-			/ HALFW_W, (player->right.y * get_math()->plane_len) / HALFW_W);
+			/ settings->halfw_w, (player->right.y * get_math()->plane_len) / settings->halfw_w);
 }
 
 static void	update_player_forward_vec(t_player *player)
