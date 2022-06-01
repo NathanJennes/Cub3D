@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 14:20:56 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 15:07:36 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define MAX_KEYCODE 1024
 # define MAX_MOUSE_BUTTONS 5
 
-# define PLAYER_SPEED	0.5
+# define PLAYER_SPEED	40
 
 # define WALL		1
 # define EMPTY		0
