@@ -15,6 +15,14 @@
 #include "core.h"
 #include "leaky.h"
 
+#ifdef __linux__
+
+static void	*mlx_png_file_to_image(void *p_void, char *path, int *p, int *p1)
+{
+	return (NULL);
+}
+#endif
+
 t_font_bitmap	load_bitmap_font(char *path)
 {
 	t_font_bitmap	font;

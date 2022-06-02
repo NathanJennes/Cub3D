@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loaded_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: stb47 <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:07:45 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 17:21:37 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/02 15:53:40 by stb47            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	load_map(t_gamestate *map_out, char *map_name)
 	fd = open_map_file(map_name);
 	if (fd == -1)
 		return (0);
+	printf("hey!\n");
 	if (!deserialize_save(&save, fd))
 	{
 		gc_strarray_free(save.map.map_raw);

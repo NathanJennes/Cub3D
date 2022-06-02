@@ -47,6 +47,8 @@ void	update_ui(void)
 	t_mlx	*app;
 
 	app = get_app();
+	if (app->app_state == IN_GAME)
+		return ;
 	if (app->ui.state == MAIN_MENU)
 		update_main_menu();
 	else if (app->ui.state == NEW_GAME_MENU)

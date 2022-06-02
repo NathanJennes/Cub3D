@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: stb47 <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 15:41:31 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/02 15:50:53 by stb47            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/time.h>
 #include "core.h"
+#include "io.h"
 #include "ui.h"
 #include "render.h"
 #include <math.h>
@@ -43,6 +44,29 @@ void	init_app(void)
 	init_ui();
 	init_hooks();
 	init_renderer();
+	printf("%lld\n", load_texture("assets/texture_06.xpm"));
+	printf("%lld\n", load_texture("assets/texture_09.xpm"));
+	printf("%lld\n", load_texture("assets/wall_texture_01.xpm"));
+	printf("%lld\n", load_texture("assets/wall_texture_02.xpm"));
+	printf("%lld\n", load_texture("assets/wall_texture_03.xpm"));
+}
+
+void	init_app_linux(char *path)
+{
+	t_mlx	*app;
+
+	srand(time(0));
+	app = get_app();
+	app->settings = load_settings();
+	init_start_time();
+	init_gc();
+	init_window("Cub3d");
+	if (!load_map(&app->gamestate, path))
+		exit(1);
+	init_math();
+	init_hooks();
+	init_renderer();
+	app->app_state = IN_GAME;
 	printf("%lld\n", load_texture("assets/texture_06.xpm"));
 	printf("%lld\n", load_texture("assets/texture_09.xpm"));
 	printf("%lld\n", load_texture("assets/wall_texture_01.xpm"));

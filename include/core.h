@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: stb47 <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 18:43:36 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/02 15:22:52 by stb47            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CORE_H
 # define CORE_H
 
-#include <pthread.h>
-
+# include <pthread.h>
 # include "mlx.h"
 # include "libft.h"
 # include "texture.h"
@@ -172,7 +171,7 @@ typedef struct s_mlx
 	int64_t				last_time;
 	int64_t				start_time;
 	double				delta_time;
-	t_app_state 		app_state;
+	t_app_state			app_state;
 	t_ui				ui;
 	t_texture_manager	texture_manager;
 	t_font_manager		font_manager;
@@ -193,6 +192,7 @@ void		destroy_window(void);
 
 /* initialization */
 void		init_app(void);
+void		init_app_linux(char *path);
 void		init_gc(void);
 
 /* main_loop.c */

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <printf.h>
+#include <stdio.h>
 #include "error_utils.h"
 
 int	print_cub_err(int err)

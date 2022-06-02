@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_wall.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: stb47 <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 17:12:58 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/02 15:49:21 by stb47            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ void	draw_col_wall(int64_t xcol, t_wall wall, t_ray *ray)
 
 	y = 0.0;
 	texture = get_face_texture(ray);
+	if (!texture)
+	{
+		printf("Texture NULL\n");
+		return ;
+	}
 	tx = (int64_t)get_texture_position(texture, ray);
 	ratio = (double)texture->width / (double)wall.real_size;
 	while (y < wall.size)
@@ -74,8 +79,8 @@ NOPROF
 
 	texture = NULL;
 	if (ray->side == SIDE_X)
-		texture = get_texture_from_id(27);
+		texture = get_texture_from_id(0);
 	else if (ray->side == SIDE_Y)
-		texture = get_texture_from_id(28);
+		texture = get_texture_from_id(1);
 	return (texture);
 }

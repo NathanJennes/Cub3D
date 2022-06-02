@@ -13,9 +13,12 @@
 #include "core.h"
 #include "leaky.h"
 
-int	main(void)
+int	main(int argc, char *argv[])
 {
-	init_app();
+	if (argc == 2)
+		init_app_linux(argv[1]);
+	else
+		init_app();
 	mlx_loop(get_mlx());
 	gc_clean();
 	return (0);

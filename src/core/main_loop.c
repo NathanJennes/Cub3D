@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: stb47 <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 18:59:01 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/02 15:48:26 by stb47            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 #include "ui.h"
 #include "render.h"
 
-void	render_test_scene(const t_mlx *app);
-
-static void 	render_game(t_mlx *app, const t_settings *settings, struct timeval time[4]);
+void		render_test_scene(const t_mlx *app);
+static void	render_game(t_mlx *app,
+				const t_settings *settings, struct timeval time[4]);
 
 int	main_loop(void)
 {
-	t_mlx		*app;
-	t_settings	*settings;
-	struct timeval time[4];
+	t_mlx			*app;
+	t_settings		*settings;
+	struct timeval	time[4];
 
 	app = get_app();
 	settings = get_settings();
@@ -39,6 +39,7 @@ int	main_loop(void)
 	update_ui();
 	render_ui();
 	return (0);
+
 }
 
 static void render_game(t_mlx *app, const t_settings *settings, struct timeval time[4])
