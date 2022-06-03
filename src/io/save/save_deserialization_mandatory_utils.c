@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_deserialization_mandatory_utils.c             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/31 19:01:53 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/03 16:53:56 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

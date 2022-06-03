@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/31 16:25:16 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/03 17:16:51 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@ static void			get_correct_distance(void);
 static	t_wall		get_wall_info(void);
 void				draw_col_wall(int64_t col, t_wall wall);
 
-
 void	render_walls(void)
 {
 	int64_t		i;
-	t_vec2		ray_direction;
 	t_player	*player;
 	t_vec2		start;
 
@@ -36,9 +34,9 @@ void	render_walls(void)
 	{
 		player->last_ray.direction = \
 			vec2(start.x - player->world_pos.x, start.y - player->world_pos.y);
-		vec2_normalize(&ray_direction);
+		vec2_normalize(&player->last_ray.direction);
 		player->last_ray = \
-			shoot_ray(ray_direction, player->world_pos, player->map_pos);
+			shoot_ray(player->last_ray.direction, player->world_pos, player->map_pos);
 		draw_col_wall(i, get_wall_info());
 		vec2_add(&start, player->plane_inc);
 		i++;

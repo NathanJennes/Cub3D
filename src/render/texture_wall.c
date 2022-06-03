@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_wall.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/31 19:26:34 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/03 17:35:08 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,16 @@ static int32_t		get_pixel_color_from_texture(int64_t tx, int64_t y,
 
 void	draw_col_wall(int64_t xcol, t_wall wall)
 {
-	double		y;
+	int64_t		y;
 	t_texture	*texture;
 	int64_t		tx;
-	int			ratio;
+	double		ratio;
 	int			px_color;
 
-	y = 0.0;
+	y = 0;
 	texture = get_face_texture();
 	if (!texture)
-	{
-		printf("Texture NULL\n");
 		return ;
-	}
 	tx = get_texture_position(texture);
 	ratio = (double)texture->width / (double)wall.real_size;
 	while (y < wall.size)
@@ -75,20 +72,18 @@ static int64_t	get_texture_position(t_texture *texture)
 
 static t_texture	*get_face_texture(void)
 {
-	double	direction;
+	t_player	*player;
 
-	printf("side %d\n", get_player()->last_ray.side);
-	direction = atan2(sin(get_player()->last_ray.direction.x),
-			cos(get_player()->last_ray.direction.y));
+	player = get_player();
 	if (get_player()->last_ray.side == SIDE_X)
 	{
-		if (direction > PI)
+		if (player->last_ray.hit_pos.x < player->world_pos.x)
 			return (get_texture_from_id(get_map_infos()->tx_list[3]));
 		return (get_texture_from_id(get_map_infos()->tx_list[2]));
 	}
 	else if (get_player()->last_ray.side == SIDE_Y)
 	{
-		if (direction > HALF_PI && direction < M_3_PI_2)
+		if (player->last_ray.hit_pos.y < player->world_pos.y)
 			return (get_texture_from_id(get_map_infos()->tx_list[1]));
 		return (get_texture_from_id(get_map_infos()->tx_list[0]));
 	}

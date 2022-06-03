@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 15:52:09 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/31 16:05:35 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/03 17:21:54 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_ray	shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos)
 	step = calculate_step_dists(&ray, &dists, ray_world_pos, map_pos);
 	vec2_multv2(&dists, lengths);
 	hit = FALSE;
-	side = 0;
+	side = NOSIDE;
 	while (!hit && (dists.x < RAY_LENGTH || dists.y < RAY_LENGTH))
 	{
 		if (dists.x < dists.y)
@@ -56,7 +56,7 @@ t_ray	shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos)
 		return (populate_ray(dists.x - lengths.x, ray, TRUE, side));
 	if (hit && side == SIDE_Y)
 		return (populate_ray(dists.y - lengths.y, ray, TRUE, side));
-	return (populate_ray(-1.0f, ray, FALSE, side));
+	return (populate_ray(-1.0f, ray, FALSE, NOSIDE));
 }
 
 static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side)
@@ -65,6 +65,7 @@ static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side)
 	t_player	*player;
 
 	player = get_player();
+	result.direction = ray;
 	result.distance = dist;
 	if (hit)
 		result.hit_pos = vec2(player->world_pos.x + ray.x * dist * CELL_SIZE,
