@@ -3,33 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   print_debug.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:16:28 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/27 14:16:03 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/01 17:41:16 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "ui.h"
+#include "render.h"
 
-static void	debug_player(void);
+static t_ivec2	debug_player(void);
 
 void	print_debug(void)
 NOPROF
 {
-	fps_counter();
-	debug_player();
+	t_ivec2	debug_pos;
+
+	debug_pos = debug_player();
+	if (get_app()->renderer.multithreading)
+	{
+		render_text("multithreaded", DEFAULT_FONT, 20,
+			text_center_height("singlethreaded", DEFAULT_FONT, 20,
+				ivec2(debug_pos.x, debug_pos.y)));
+	}
+	else
+	{
+		render_text("singlethreaded", DEFAULT_FONT, 20,
+			text_center_height("singlethreaded", DEFAULT_FONT, 20,
+				ivec2(debug_pos.x, debug_pos.y)));
+	}
 }
 
-static void	debug_player(void)
+static t_ivec2	debug_player(void)
 NOPROF
 {
 	t_ivec2		start;
 	t_player	*player;
 
 	player = get_player();
-	start = ivec2(20, WIN_H / 2 - 100);
+	start = ivec2(20, get_settings()->win_h / 2 - 100);
 	put_text(start, WHITE, "Ray angle ");
 	print_float(get_math()->base_angle,
 		ivec2(start.x + str_px_size("Ray angle "), start.y), WHITE);
@@ -59,4 +73,6 @@ NOPROF
 	put_text(ivec2(start.x, start.y), WHITE, "FOV ");
 	print_int(get_settings()->fov,
 		ivec2(start.x + str_px_size("FOV "), start.y), WHITE);
+	start.y += 20;
+	return (start);
 }

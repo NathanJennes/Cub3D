@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 15:58:56 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/26 18:34:30 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 14:22:47 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ void	clear_screen(int color)
 	int64_t	total;
 	int64_t	*pixels;
 	int64_t	col;
+	t_settings	*settings;
 
+	settings = get_settings();
 	pixels = (int64_t *)get_frame()->addr;
 	((int *)&col)[0] = color;
 	((int *)&col)[1] = color;
-	total = WIN_W * WIN_H / 2;
+	total = settings->win_w * settings->win_h / 2;
 	i = 0;
 	while (i < total)
 	{
@@ -62,7 +64,10 @@ NOPROF
 static int	pixel_in_screen(int64_t x, int64_t y)
 NOPROF
 {
-	if (x < 0 || x >= WIN_W || y < 0 || y >= WIN_H)
+	t_settings	*settings;
+
+	settings = get_settings();
+	if (x < 0 || x >= settings->win_w || y < 0 || y >= settings->win_h)
 		return (0);
 	return (1);
 }

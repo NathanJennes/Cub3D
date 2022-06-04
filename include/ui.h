@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 12:49:15 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 13:05:37 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,23 @@ typedef struct s_button
 	int				(*event)(struct s_button *button);
 }	t_button;
 
+typedef struct s_checkbox
+{
+	t_ui_component	infos;
+	int64_t			tex_id;
+	t_bool			is_clickable;
+	t_bool			hovered;
+	t_bool			checked;
+	t_bool			clicked;
+	int				(*event_checked)(struct s_checkbox *checkbox);
+	int				(*event_unchecked)(struct s_checkbox *checkbox);
+}	t_checkbox;
+
 typedef struct s_label
 {
 	t_ui_component	infos;
 	char			*text;
+	int64_t			tex_id;
 }	t_label;
 
 typedef struct s_img_box
@@ -82,9 +95,9 @@ typedef struct s_slider
 	t_ui_component	infos;
 	int64_t			tex_id_bar;
 	int64_t			tex_id_cursor;
-	float			min;
-	float			max;
-	float			value;
+	double			min;
+	double			max;
+	double			value;
 	int64_t			cursor_pos_x;
 	t_bool			selected;
 }	t_slider;
@@ -117,8 +130,21 @@ typedef struct s_ui_new_game_menu
 	t_button	btn_up;
 	t_button	btn_down;
 	t_button	btn_start;
-	t_button	btn_save[5];
+	t_checkbox	btn_save[5];
 }	t_ui_new_game_menu;
+
+typedef struct s_ui_settings_menu
+{
+	t_slider	slid_fov;
+	t_label		lbl_fov;
+	t_slider	slid_sens;
+	t_label		lbl_sens;
+	t_checkbox	chk_res_min;
+	t_checkbox	chk_res_med;
+	t_checkbox	chk_res_high;
+	t_checkbox	chk_res_fullscreen;
+	t_button	btn_back;
+}	t_ui_settings_menu;
 
 typedef struct s_ui
 {
@@ -126,6 +152,7 @@ typedef struct s_ui
 	t_bool				debug_ui;
 	t_ui_main_menu		main_menu;
 	t_ui_new_game_menu	new_game_menu;
+	t_ui_settings_menu	settings_menu;
 }	t_ui;
 
 /* Core */
@@ -155,26 +182,41 @@ void			init_main_menu(void);
 void			render_main_menu(void);
 void			update_main_menu(void);
 
+/* New game menu */
 void			init_new_game_menu(void);
 void			render_new_game_menu(void);
 void			update_new_game_menu(void);
 void			refresh_new_game_menu(void);
 
+/* Settings menu */
+void			init_settings_menu(void);
+void			render_settings_menu(void);
+void			update_settings_menu(void);
+
 /* Ui elements */
 t_button		create_button(char *texture_path, t_ivec2 pos,
-					int (*event)(struct s_button *button));
+	int (*event)(struct s_button *button));
 void			update_ui_button(t_button *button);
 void			render_ui_button(t_button *button);
 void			update_ui_button_click_begin(t_button *button, int mouse_btn);
 void			update_ui_button_click_end(t_button *button, int mouse_btn);
 
+t_checkbox		create_checkbox(char *texture_path, t_ivec2 pos,
+				int (*event_checked)(struct s_checkbox *checkbox),
+				int (*event_unchecked)(struct s_checkbox *checkbox));
+void			update_ui_checkbox(t_checkbox *checkbox);
+void			render_ui_checkbox(t_checkbox *checkbox);
+void			update_ui_checkbox_click_begin(t_checkbox *checkbox, int mouse_btn);
+void			update_ui_checkbox_click_end(t_checkbox *checkbox, int mouse_btn);
+
 t_img_box		create_img_box(char *texture_path, t_ivec2 pos);
 void			render_ui_img_box(t_img_box *box);
 
-t_label			create_label(t_ivec2 pos, char *text);
-void			render_label(t_label *label);
+t_label			create_label(t_ivec2 pos, char *text, t_ivec2 size);
+void			render_ui_label(t_label *label);
+void			update_ui_label_text(t_label *label, char *text);
 
-t_slider		create_slider(t_ivec2 pos, t_ivec2 size, float min, float max);
+t_slider		create_slider(t_ivec2 pos, t_ivec2 size, t_vec3 min_max_val);
 void			render_ui_slider(t_slider *slider);
 void			update_ui_slider(t_slider *slider);
 void			update_ui_slider_click_begin(t_slider *slider, int mouse_btn);

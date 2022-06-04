@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 12:42:37 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/31 13:06:23 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 14:21:10 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,10 @@ static t_settings	load_default_settings(void)
 	settings.fov = 90;
 	settings.win_w = 960;
 	settings.win_h = 540;
+	settings.desired_win_w = 960;
+	settings.desired_win_h = 540;
+	settings.halfw_w = 960 / 2;
+	settings.halfw_h = 540 / 2;
+	settings.cam_sensitivity = 2.0;
 	return (settings);
 }

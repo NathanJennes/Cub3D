@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 18:21:25 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/18 14:56:54 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/31 17:52:18 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ void	init_ui(void)
 	ui->state = MAIN_MENU;
 	init_main_menu();
 	init_new_game_menu();
+	init_settings_menu();
 }

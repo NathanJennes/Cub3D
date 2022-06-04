@@ -13,6 +13,8 @@
 #ifndef CORE_H
 # define CORE_H
 
+#include <pthread.h>
+
 # include "mlx.h"
 # include "libft.h"
 # include "texture.h"
@@ -42,7 +44,7 @@
 # define MAX_KEYCODE 1024
 # define MAX_MOUSE_BUTTONS 5
 
-# define PLAYER_SPEED	0.5
+# define PLAYER_SPEED	40
 
 # define WALL		1
 # define EMPTY		0
@@ -52,11 +54,7 @@
 
 # define MOUSE_DEBUG	0
 
-# define MENU 		0
-# define IN_GAME	1
-# define PAUSE		2
-
-# define M_3_PI_2	4.7123889803846899
+# define RENDER_WORKER_COUNT 4
 
 typedef struct s_mouse
 {
@@ -113,6 +111,11 @@ typedef struct s_settings
 	int			fov;
 	int			win_h;
 	int			win_w;
+	int			halfw_h;
+	int			halfw_w;
+	int			desired_win_h;
+	int			desired_win_w;
+	double		cam_sensitivity;
 }	t_settings;
 
 typedef struct s_light	t_light;
@@ -144,6 +147,22 @@ typedef struct s_math
 	double		plane_dist;
 }	t_math;
 
+typedef enum e_app_state
+{
+	IN_MENU,
+	IN_GAME
+}	t_app_state;
+
+typedef struct s_renderer
+{
+	t_bool			multithreading;
+	t_bool			running;
+	pthread_mutex_t	running_lock;
+	pthread_mutex_t	locks[RENDER_WORKER_COUNT];
+	pthread_mutex_t	working_lock[RENDER_WORKER_COUNT];
+	pthread_t		workers[RENDER_WORKER_COUNT];
+}	t_renderer;
+
 typedef struct s_mlx
 {
 	void				*mlx;
@@ -158,12 +177,14 @@ typedef struct s_mlx
 	int64_t				maps_count;
 	int64_t				last_time;
 	int64_t				start_time;
-	int8_t				game_state;
+	double				delta_time;
+	t_app_state 		app_state;
 	t_ui				ui;
 	t_texture_manager	texture_manager;
 	t_font_manager		font_manager;
 	t_bool				keys[MAX_KEYCODE];
 	t_math				pc;
+	t_renderer			renderer;
 }	t_mlx;
 
 /* core.c */
@@ -171,6 +192,7 @@ void		init_window(char *win_name);
 int			close_app(void);
 void		error_close_app(void);
 void		check_leaky_errors(void);
+void		init_math(void);
 
 /* window.c */
 void		destroy_window(void);

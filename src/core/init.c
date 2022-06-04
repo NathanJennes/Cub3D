@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/31 12:49:11 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/01 15:41:31 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int			mouse_up_callback(int button, int x, int y, void *unused);
 
 static void	init_hooks(void);
 static void	init_start_time(void);
-static void	init_math(void);
 
 void	init_app(void)
 {
@@ -43,6 +42,7 @@ void	init_app(void)
 	init_math();
 	init_ui();
 	init_hooks();
+	init_renderer();
 	mlx_loop(get_mlx());
 }
 
@@ -51,7 +51,7 @@ static void	init_hooks(void)
 	t_mlx	*app;
 
 	app = get_app();
-	app->game_state = MENU;
+	app->app_state = IN_MENU;
 	mlx_hook(app->win, 17, 0, close_app, app);
 	mlx_hook(app->win, 2, 0, key_down_callback, NULL);
 	mlx_hook(app->win, 3, 0, key_up_callback, NULL);
@@ -69,9 +69,10 @@ static void	init_start_time(void)
 	app = get_app();
 	gettimeofday(&time, NULL);
 	app->start_time = time.tv_sec * 1000 + time.tv_usec / 1000;
+	app->last_time = app->start_time;
 }
 
-static void	init_math(void)
+void	init_math(void)
 {
 	t_math		*pc;
 	t_settings	*settings;
@@ -81,7 +82,7 @@ static void	init_math(void)
 	pc = get_math();
 	pc->r_fov = settings->fov * (PI / 180.0);
 	pc->r_halffov = settings->fov * (PI / 360.0);
-	pc->r_vfov = 2 * atan(tan(pc->r_halffov) * ((double)WIN_W / (double)WIN_H));
+	pc->r_vfov = 2 * atan(tan(pc->r_halffov) * ((double)settings->win_w / (double)settings->win_h));
 	pc->plane_len = tan(pc->r_halffov);
-	pc->plane_dist = HALFW_W / (get_math()->r_vfov / 2);
+	pc->plane_dist = settings->halfw_w / (get_math()->r_vfov / 2);
 }

@@ -26,7 +26,8 @@ RENDER_FILE		:=	render_primitives.c render_primitives_img.c	\
 					screen_rendering.c texture_rendering.c	\
 					render_ui_texture.c render_text.c	\
 					render_walls.c render_debug.c raycasting.c	\
-					lighting.c light_manager.c texture_wall.c
+					lighting.c light_manager.c texture_wall.c	\
+					init_renderer.c renderer_worker.c
 RENDER_SRCS		:=	$(addprefix $(RENDER_DIR)/, $(RENDER_FILE))
 
 FONT_DIR		:=	$(RENDER_DIR)/font
@@ -44,7 +45,8 @@ UI_COMPONENT_DIR	:=	$(UI_DIR)/components
 UI_COMPONENT_FILE	:=	ui_button.c ui_button_update.c	\
 						ui_img_box.c	\
 						ui_label.c		\
-						ui_slider.c ui_slider_update.c
+						ui_slider.c ui_slider_update.c	\
+						ui_checkbox.c ui_checkbox_update.c
 UI_COMPONENT_SRCS	:=	$(addprefix $(UI_COMPONENT_DIR)/, $(UI_COMPONENT_FILE))
 
 UI_LAYOUT_DIR	:=	$(UI_DIR)/layout
@@ -58,8 +60,14 @@ UI_MAIN_MENU_SRCS	:= $(addprefix $(UI_MAIN_MENU_DIR)/, $(UI_MAIN_MENU_FILE))
 
 UI_NEW_GAME_MENU_DIR	:=	$(UI_DIR)/new_game_menu
 UI_NEW_GAME_MENU_FILE	:=	new_game_menu.c	new_game_menu_init.c	\
-							new_game_menu_buttons.c new_game_menu_buttons2.c
+							new_game_menu_buttons.c new_game_menu_buttons2.c	\
+							new_game_menu_buttons3.c
 UI_NEW_GAME_MENU_SRCS	:= $(addprefix $(UI_NEW_GAME_MENU_DIR)/, $(UI_NEW_GAME_MENU_FILE))
+
+UI_SETTINGS_MENU_DIR	:=	$(UI_DIR)/settings_menu
+UI_SETTINGS_MENU_FILE	:=	settings_menu.c settings_menu_init.c settings_menu_update.c	\
+							settings_menu_buttons.c settings_menu_buttons2.c
+UI_SETTINGS_MENU_SRCS	:= $(addprefix $(UI_SETTINGS_MENU_DIR)/, $(UI_SETTINGS_MENU_FILE))
 
 TEXTURES_DIR	:=	textures
 TEXTURES_FILE	:=	xpm_loader.c texture_generation.c ambiant_occlusion.c		\
@@ -85,7 +93,7 @@ SAVE_SRCS		:=	$(addprefix $(SAVE_DIR)/, $(SAVE_FILE))
 
 SETTINGS_DIR		:=	$(IO_DIR)/settings
 SETTINGS_FILE		:=	deserialization_settings.c load_settings.c	\
-						save_settings.c
+						save_settings.c deserialization_settings_player.c
 SETTINGS_SRCS		:=	$(addprefix $(SETTINGS_DIR)/, $(SETTINGS_FILE))
 
 SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\
@@ -101,6 +109,7 @@ SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\
 					$(addprefix $(SRCS_DIR)/, $(UI_NEW_GAME_MENU_SRCS))			\
 					$(addprefix $(SRCS_DIR)/, $(FONT_SRCS))						\
 					$(addprefix $(SRCS_DIR)/, $(SETTINGS_SRCS))					\
+					$(addprefix $(SRCS_DIR)/, $(UI_SETTINGS_MENU_SRCS))			\
 
 PROFILE_SRCS	:=	$(SRCS)	\
 					$(addprefix $(SRCS_DIR)/, $(PROFILING_SRCS))				\
@@ -183,6 +192,10 @@ $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(SETTINGS_DIR)/%.c | $(RELEASE_OBJS_DIR)
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
+$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(UI_SETTINGS_MENU_DIR)/%.c | $(RELEASE_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
 $(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
 	@printf "$(_BLUE)\nCompiled source files\n"
 	@$(BIN_CC) $(RELEASE_BIN_LDFLAGS) $(RELEASE_OBJS) $(RELEASE_LIBS) -o ../$@
@@ -241,6 +254,10 @@ $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(FONT_DIR)/%.c | $(DEBUG_OBJS_DIR)
 	@printf "$(_GREEN)█$(_END)"
 
 $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(SETTINGS_DIR)/%.c | $(DEBUG_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_SETTINGS_MENU_DIR)/%.c | $(DEBUG_OBJS_DIR)
 	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
@@ -306,6 +323,10 @@ $(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(PROFILING_DIR)/%.c | $(PROFILE_OBJS_DIR)
 	@printf "$(_GREEN)█$(_END)"
 
 $(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(SETTINGS_DIR)/%.c | $(PROFILE_OBJS_DIR)
+	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(UI_SETTINGS_MENU_DIR)/%.c | $(PROFILE_OBJS_DIR)
 	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 

@@ -15,13 +15,19 @@
 
 t_ui_component	*uic_center_win_w(t_ui_component *comp)
 {
-	comp->pos.x = WIN_W / 2 - comp->size.x / 2;
+	t_settings	*settings;
+
+	settings = get_settings();
+	comp->pos.x = settings->win_w / 2 - comp->size.x / 2;
 	return (comp);
 }
 
 t_ui_component	*uic_center_win_h(t_ui_component *comp)
 {
-	comp->pos.y = WIN_H / 2 - comp->size.y / 2;
+	t_settings	*settings;
+
+	settings = get_settings();
+	comp->pos.y = settings->win_h / 2 - comp->size.y / 2;
 	return (comp);
 }
 

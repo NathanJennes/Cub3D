@@ -13,7 +13,6 @@
 #include "ui.h"
 #include "render.h"
 
-//TODO: refactor to uniformize ui creation prototypes
 t_button	create_button(char *texture_path, t_ivec2 pos,
 		int (*event)(struct s_button *button))
 {
@@ -41,7 +40,7 @@ void	render_ui_button(t_button *button)
 	if (!button->infos.displayed)
 		return ;
 	infos = &button->infos;
-	if (button->clicked)
+	if (button->clicked || !button->is_clickable)
 		render_ui_texture_inverse_grayscale(button->tex_id,
 			infos->pos.x, infos->pos.y);
 	else if (button->hovered)

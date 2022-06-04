@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:37:39 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 17:25:39 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/31 15:02:26 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	init_main_menu(void)
 		main_menu->btn_load.infos.displayed = FALSE;
 	main_menu->btn_editor = create_button("assets/ui/editor.xpm",
 			ivec2(0, 0), btn_editor);
-	main_menu->btn_option = create_button("assets/ui/option.xpm",
+	main_menu->btn_option = create_button("assets/placeholder.xpm",
 			ivec2(0, 0), btn_option);
 	main_menu->btn_exit = create_button("assets/ui/exit.xpm",
 			ivec2(0, 0), btn_exit_app);
@@ -56,11 +56,13 @@ static void	init_positions(t_ui_main_menu *main_menu)
 	uic_padding(&main_menu->btn_new_game.infos, ivec2(20, 20), ivec2(0, 0));
 	uic_padding(&main_menu->btn_load.infos, ivec2(20, 20), ivec2(0, 0));
 	uic_padding(&main_menu->btn_editor.infos, ivec2(20, 20), ivec2(0, 0));
+	uic_padding(&main_menu->btn_option.infos, ivec2(20, 20), ivec2(0, 0));
 	uic_padding(&main_menu->btn_exit.infos, ivec2(20, 20), ivec2(0, 0));
 	uic_center_win_w(&main_menu->title.infos);
 	uic_below(&main_menu->btn_continue.infos, &main_menu->title.infos);
 	uic_below(&main_menu->btn_new_game.infos, &main_menu->btn_continue.infos);
 	uic_below(&main_menu->btn_load.infos, &main_menu->btn_new_game.infos);
 	uic_below(&main_menu->btn_editor.infos, &main_menu->btn_load.infos);
-	uic_below(&main_menu->btn_exit.infos, &main_menu->btn_editor.infos);
+	uic_below(&main_menu->btn_option.infos, &main_menu->btn_editor.infos);
+	uic_below(&main_menu->btn_exit.infos, &main_menu->btn_option.infos);
 }

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
 /*   Updated: 2022/06/03 17:07:59 by Cyril            ###   ########.fr       */
@@ -26,12 +26,20 @@
 # define SIDE_X 1
 # define SIDE_Y 2
 
+# define DEFAULT_FONT "HelveticaNeue"
+
 typedef struct s_light
 {
 	t_vec3	pos;
 	t_ivec3	color;
 	double	intensity;
 }			t_light;
+
+/* Renderer */
+void			init_renderer(void);
+void			shutdown_renderer(void);
+void			*renderer_worker_loop(void *id);
+void			renderer_render(void);
 
 /* Screen drawing */
 void			clear_screen(int color);
@@ -105,7 +113,7 @@ t_ivec2			text_center(char *text, char *font_name,
 					int size, t_ivec2 pos) NOPROF;
 
 /* Walls rendering */
-void			render_walls(void);
+void			render_walls(int64_t col_start, int64_t col_end);
 t_ray			shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos);
 
 /* Lights */

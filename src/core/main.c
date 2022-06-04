@@ -16,6 +16,7 @@
 int	main(void)
 {
 	init_app();
+	mlx_loop(get_mlx());
 	gc_clean();
 	return (0);
 }
