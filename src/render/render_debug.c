@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_debug.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 17:13:23 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/04 17:16:51 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,16 @@ void	render_test_scene(const t_mlx *app)
 		int col = trgb(0, l->color.x, l->color.y, l->color.z);
 		draw_circle(ivec2(l->pos.x, l->pos.y), 7, col);
 	}
-	draw_circle(v2_to_iv2(get_player()->world_pos), 7, BLACK);
-	print_player_vector();
+	draw_circle(v2_to_iv2(get_player()->world_pos), 10, GREEN);
+	if (app->ui.debug_ui == TRUE)
+		print_player_vector();
 	t_ivec2 mouse_pos = cub_get_mouse_position();
 	t_player *player = get_player();
 	t_ivec3 light = get_lighting_level(vec3(mouse_pos.x, mouse_pos.y, 0),
 		vec3(player->forward.x, player->forward.y, 0.0));
 	draw_circle(mouse_pos, 10, trgb(0, light.x, light.y, light.z));
-	debug_rays();
+	if (app->ui.debug_ui == TRUE)
+		debug_rays();
 }
 
 static void	debug_rays(void)
