@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 15:52:09 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/03 17:21:54 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/03 17:29:21 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side)
 	t_player	*player;
 
 	player = get_player();
-	result.direction = ray;
 	result.distance = dist;
 	if (hit)
 		result.hit_pos = vec2(player->world_pos.x + ray.x * dist * CELL_SIZE,

@@ -6,13 +6,12 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/03 17:35:08 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/03 17:35:58 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "render.h"
-#include <math.h>
 
 static t_texture	*get_face_texture(void);
 static int64_t		get_texture_position(t_texture *texture);

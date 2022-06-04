@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/03 17:16:51 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/03 17:21:19 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	render_walls(void)
 	int64_t		i;
 	t_player	*player;
 	t_vec2		start;
+	t_vec2		direction;
 
 	i = 0;
 	player = get_player();
@@ -32,11 +33,11 @@ void	render_walls(void)
 			- player->right.y * get_math()->plane_len);
 	while (i < WIN_W)
 	{
-		player->last_ray.direction = \
+		direction = \
 			vec2(start.x - player->world_pos.x, start.y - player->world_pos.y);
-		vec2_normalize(&player->last_ray.direction);
+		vec2_normalize(&direction);
 		player->last_ray = \
-			shoot_ray(player->last_ray.direction, player->world_pos, player->map_pos);
+			shoot_ray(direction, player->world_pos, player->map_pos);
 		draw_col_wall(i, get_wall_info());
 		vec2_add(&start, player->plane_inc);
 		i++;

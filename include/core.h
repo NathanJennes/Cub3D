@@ -94,7 +94,6 @@ typedef struct s_ray
 	t_bool		hit;
 	int			side;
 	t_vec2		ray;
-	t_vec2		direction;
 }	t_ray;
 
 typedef struct s_player
