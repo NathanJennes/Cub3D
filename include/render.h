@@ -118,6 +118,7 @@ t_ray			shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos);
 
 /* Lights */
 t_ivec3			get_lighting_level(t_vec3 pos, t_vec3 normal);
+int				apply_light_to_color(int color, t_ivec3 light);
 void			add_light(t_vec3 pos, t_ivec3 color, double intensity);
 void			free_lights(t_gamestate *gamestate);
 
