@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/03 16:33:01 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/05 16:43:02 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,6 @@
 #  include <inttypes.h>
 #  include <float.h>
 #  define MAXFLOAT FLT_MAX
-# endif
-
-# ifdef FULL_HD
-# define WIN_W		1920
-# define WIN_H		1080
-# define HALFW_W	960
-# define HALFW_H	540
-# else
-# define WIN_W		960
-# define WIN_H		540
-# define HALFW_W	480
-# define HALFW_H	270
 # endif
 
 # define MAX_KEYCODE 1024
@@ -102,7 +90,6 @@ typedef struct s_player
 	double		direction;
 	t_vec2		forward;
 	t_vec2		right;
-	t_ray		last_ray;
 	t_vec2		plane_inc;
 }	t_player;
 
