@@ -42,6 +42,7 @@ int	apply_light_to_color(int color, t_ivec3 light)
 	result.x = (double)get_r(color) * ((double)light.x / 255.0);
 	result.y = (double)get_g(color) * ((double)light.y / 255.0);
 	result.z = (double)get_b(color) * ((double)light.z / 255.0);
+	vec3_clamp_max(&result, 255, 255, 255);
 	return (trgb(get_t(color), (int)result.x, (int)result.y, (int)result.z));
 }
 
@@ -52,6 +53,7 @@ static void	process_light(t_light *light, t_ivec3 *lighting,
 	t_vec3	light_dir;
 	t_vec3	dir_normalized;
 	double	dot_product;
+	double	distance;
 
 	light_dir = vec3(light->pos.x - pos->x, light->pos.y - pos->y, light->pos.z - pos->z);
 	dir_normalized = vec3_normalized(light_dir);
@@ -63,9 +65,9 @@ static void	process_light(t_light *light, t_ivec3 *lighting,
 	dot_product = dir_normalized.x * normal->x + dir_normalized.y * normal->y + dir_normalized.z * normal->z;
 	if (dot_product <= 0.0)
 		return ;
-	ivec3_add(lighting, ivec3(
-		(int64_t)((double)light->color.x * dot_product),
-		(int64_t)((double)light->color.y * dot_product),
-		(int64_t)((double)light->color.z * dot_product)));
-	ivec3_clamp_max(lighting, 255, 255, 255);
+	distance = ft_pow2(light_dir.x) + ft_pow2(light_dir.y) + ft_pow2(light_dir.z);
+		ivec3_add(lighting, ivec3(
+		(int64_t)((double)light->color.x * dot_product / distance * light->intensity),
+		(int64_t)((double)light->color.y * dot_product / distance * light->intensity),
+		(int64_t)((double)light->color.z * dot_product / distance * light->intensity)));
 }
