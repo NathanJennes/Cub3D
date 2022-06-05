@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/03 17:21:19 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/05 16:46:31 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 static void			get_correct_distance(t_ray *ray);
 static t_wall		get_wall_info(t_ray *ray);
 void				draw_col_wall(int64_t col, t_wall wall, t_ray *ray);
-
 
 void	render_walls(int64_t col_start, int64_t col_end)
 {
@@ -49,7 +48,7 @@ void	render_walls(int64_t col_start, int64_t col_end)
 
 static	t_wall	get_wall_info(t_ray *ray)
 {
-	t_wall	wall;
+	t_wall		wall;
 	t_settings	*settings;
 
 	settings = get_settings();
@@ -72,9 +71,7 @@ static	t_wall	get_wall_info(t_ray *ray)
 static void	get_correct_distance(t_ray *ray)
 {
 	double		angle;
-	t_player	*player;
 
-	player = get_player();
 	angle = acos(ft_minf(get_player()->forward.x * ray->ray.x
 				+ get_player()->forward.y * ray->ray.y, 1.0));
 	ray->distance *= cos(angle);
