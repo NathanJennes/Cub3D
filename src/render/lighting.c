@@ -37,7 +37,7 @@ t_ivec3	get_lighting_level(t_vec3 pos, t_vec3 normal)
 
 int	apply_light_to_color(int color, t_ivec3 light)
 {
-	t_vec3 	result;
+	t_vec3	result;
 
 	result.x = (double)get_r(color) * ((double)light.x / 255.0);
 	result.y = (double)get_g(color) * ((double)light.y / 255.0);

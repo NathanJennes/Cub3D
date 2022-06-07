@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/07 12:57:03 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/07 15:07:32 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static void	render_game(t_mlx *app, const t_settings *settings, struct timeval t
 {
 	gettimeofday(&time[0], NULL);
 	draw_rect_unsafe(ivec2(0, 0),
-		ivec2(settings->win_w, settings->halfw_h), );
+		ivec2(settings->win_w, settings->halfw_h), get_map_infos()->ceiling.color);
 	draw_rect_unsafe(ivec2(0, settings->halfw_h),
-		ivec2(settings->win_w, settings->halfw_h), get_map_infos()->floor_color);
+		ivec2(settings->win_w, settings->halfw_h), get_map_infos()->floor.color);
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 	gettimeofday(&time[1], NULL);
 	renderer_render();

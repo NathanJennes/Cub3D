@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_deserialization_mandatory_utils.c             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/03 16:53:56 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/07 17:15:37 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,23 @@ static int	contains_illegal_char(t_map_info *infos, char *line)NOPROF;
 static int	is_illegal_char(char c, t_map_info *infos, int *saw_wall,
 		int *last_is_wall)NOPROF;
 
-int	parse_color(t_ivec3 *color, char *line)
+int	parse_color(t_rgb *color, char *line)
 {
 	if (!ft_isdigit(*line))
 		return (0);
-	color->x = ft_atoi(line);
-	if (color->x < 0 || color->x > 255)
-		return (0);
+	color->r = ft_atoi(line);
 	while (ft_isdigit(*line))
 		line++;
 	if (*line != ',')
 		return (0);
 	line++;
-	color->y = ft_atoi(line);
-	if (color->y < 0 || color->y > 255)
-		return (0);
+	color->g = ft_atoi(line);
 	while (ft_isdigit(*line))
 		line++;
 	if (*line != ',')
 		return (0);
 	line++;
-	color->z = ft_atoi(line);
-	if (color->z < 0 || color->z > 255)
-		return (0);
+	color->b = ft_atoi(line);
 	return (1);
 }
 

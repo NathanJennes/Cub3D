@@ -46,11 +46,11 @@ static void	serialize_map(int fd, t_map_info map)
 	dprintf(fd, "SPAWN %d %d %c\n",
 		(int)map.spawn_pos.x, (int)map.spawn_pos.y, (char)map.spawn_dir);
 	dprintf(fd, "CEILING %d %d %d\n",
-		(int)map.ceiling_color.x, (int)map.ceiling_color.y,
-		(int)map.ceiling_color.z);
+		(int)map.ceiling.r, (int)map.ceiling.g,
+		(int)map.ceiling.b);
 	dprintf(fd, "FLOOR %d %d %d\n",
-		(int)map.floor_color.x, (int)map.floor_color.y,
-		(int)map.floor_color.z);
+		(int)map.floor.r, (int)map.floor.g,
+		(int)map.floor.b);
 //	dprintf(fd, "NO_TEX %s\n", map.no_tex);
 //	dprintf(fd, "EA_TEX %s\n", map.ea_tex);
 //	dprintf(fd, "SO_TEX %s\n", map.so_tex);

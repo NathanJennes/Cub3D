@@ -7,8 +7,8 @@
 10110000011001
 10000010000001
 11111111111111
-C 0,0,1164,216
-F 0,102,102,102
+C 51,51,51
+F 51,51,51
 NO assets/textures/proto_wall/proto_north.xpm
 SO assets/textures/proto_wall/proto_south.xpm
 EA assets/textures/proto_wall/proto_east.xpm

@@ -70,17 +70,17 @@ int	deserialize_map_parse_ceiling(char *line, t_gamestate *save)
 	cursor = ft_strskip_space(cursor);
 	if (!ft_isdigit(*cursor) && *cursor != '-')
 		return (0);
-	save->map.ceiling_color.x = (float)ft_atoi(cursor);
+	save->map.ceiling.r = (float)ft_atoi(cursor);
 	cursor = ft_strskip_digit(cursor);
 	cursor = ft_strskip_space(cursor);
 	if (!ft_isdigit(*cursor) && *cursor != '-')
 		return (0);
-	save->map.ceiling_color.y = (float)ft_atoi(cursor);
+	save->map.ceiling.g = (float)ft_atoi(cursor);
 	cursor = ft_strskip_digit(cursor);
 	cursor = ft_strskip_space(cursor);
 	if (!ft_isdigit(*cursor) && *cursor != '-')
 		return (0);
-	save->map.ceiling_color.z = (float)ft_atoi(cursor);
+	save->map.ceiling.b = (float)ft_atoi(cursor);
 	return (1);
 }
 
@@ -93,16 +93,16 @@ int	deserialize_map_parse_floor(char *line, t_gamestate *save)
 	cursor = ft_strskip_space(cursor);
 	if (!ft_isdigit(*cursor) && *cursor != '-')
 		return (0);
-	save->map.floor_color.x = (float)ft_atoi(cursor);
+	save->map.floor.r = (float)ft_atoi(cursor);
 	cursor = ft_strskip_digit(cursor);
 	cursor = ft_strskip_space(cursor);
 	if (!ft_isdigit(*cursor) && *cursor != '-')
 		return (0);
-	save->map.floor_color.y = (float)ft_atoi(cursor);
+	save->map.floor.b = (float)ft_atoi(cursor);
 	cursor = ft_strskip_digit(cursor);
 	cursor = ft_strskip_space(cursor);
 	if (!ft_isdigit(*cursor) && *cursor != '-')
 		return (0);
-	save->map.floor_color.z = (float)ft_atoi(cursor);
+	save->map.floor.b = (float)ft_atoi(cursor);
 	return (1);
 }

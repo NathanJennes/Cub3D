@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/31 18:59:39 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/07 17:10:49 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "core.h"
 
 void		construct_map(t_map_info *infos)NOPROF;
-int			parse_color(t_ivec3 *color, char *line)NOPROF;
+int			parse_color(t_rgb *color, char *line)NOPROF;
 int			parse_texture(t_map_info *info, char *line)NOPROF;
 int			add_map_row(t_map_info *infos, char *line)NOPROF;
 
@@ -58,10 +58,9 @@ static int	parse_line(t_map_info *infos, char *line)
 	else if (infos->map)
 		return (0);
 	if (line[0] == 'C' && line[1] == ' ')
-		return (parse_color(&infos->ceiling_color,
-				ft_strskip_space(line + 1)));
+		return (parse_color(&infos->ceiling, ft_strskip_space(line + 1)));
 	else if (line[0] == 'F' && line[1] == ' ')
-		return (parse_color(&infos->floor_color, ft_strskip_space(line + 1)));
+		return (parse_color(&infos->floor, ft_strskip_space(line + 1)));
 	else if (ft_strncmp(line, "NO", 2) == 0)
 		return (parse_texture(infos, ft_strskip_space(line + 2)));
 	else if (ft_strncmp(line, "SO", 2) == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/07 11:32:13 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/07 17:17:00 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,18 @@
 
 # define RENDER_WORKER_COUNT 4
 
+typedef union s_rgb
+{
+	struct
+	{
+		uint8_t	b;
+		uint8_t	g;
+		uint8_t	r;
+		uint8_t	t;
+	};
+	int	color;
+}	t_rgb;
+
 typedef struct s_mouse
 {
 	t_ivec2	position;
@@ -56,8 +68,8 @@ typedef struct s_map_info
 	int64_t		height;
 	t_vec2		spawn_pos;
 	char		spawn_dir;
-	t_ivec3		ceiling_color;
-	t_ivec3		floor_color;
+	t_rgb		ceiling;
+	t_rgb		floor;
 	int64_t		*tx_list;
 	int64_t		tx_count;
 	int			**map;

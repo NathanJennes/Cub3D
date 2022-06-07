@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_wall.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/06 20:06:37 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/07 14:51:44 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,8 @@ void	render_column(int64_t xcol, t_wall wall, t_ray *ray)
 
 	pos = ivec2(xcol, 0);
 	lighting = get_lighting_at_col(ray);
-	pos.y = (wall.size - get_settings()->win_h) / 2;
-	if (pos.y < 0)
-		pos.y = 0;
 	render_wall(pos, wall, ray, lighting);
-	render_floor(pos, wall, ray, lighting);
+//	render_floor(pos, wall, ray, lighting);
 }
 
 static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_ivec3 lighting)
