@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/05 16:43:02 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/07 16:23:29 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ typedef struct s_mouse
 	t_ivec2	position;
 	t_bool	buttons[MAX_MOUSE_BUTTONS];
 }	t_mouse;
+
+typedef struct s_sprite
+{
+	t_vec2	pos;
+	t_ivec2	size;
+	int64_t	tex_id;
+}	t_sprite;
 
 typedef struct s_map_info
 {
@@ -172,6 +179,7 @@ typedef struct s_mlx
 	t_bool				keys[MAX_KEYCODE];
 	t_math				pc;
 	t_renderer			renderer;
+	t_sprite			sprite;
 }	t_mlx;
 
 /* core.c */

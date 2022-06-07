@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_debug.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/04 17:16:51 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/07 17:05:48 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_vec2	rotate_vector(t_vec2 v, double angle) NOPROF;
 static void		print_player_vector(void) NOPROF;
 static void		debug_rays(void) NOPROF;
 
-void	render_test_scene(const t_mlx *app)
+void	render_test_scene(t_mlx *app)
 {
 	int					color;
 	const t_map_info	*map = &app->gamestate.map;
@@ -60,6 +60,11 @@ void	render_test_scene(const t_mlx *app)
 	draw_circle(mouse_pos, 10, trgb(0, light.x, light.y, light.z));
 	if (app->ui.debug_ui == TRUE)
 		debug_rays();
+
+	render_sprite(&app->sprite);
+	draw_rect(ivec2(app->sprite.pos.x - app->sprite.size.x / 2, app->sprite.pos.y - app->sprite.size.y / 2),
+				ivec2(10, 10), trgb(0, 100, 255, 100));
+
 }
 
 static void	debug_rays(void)

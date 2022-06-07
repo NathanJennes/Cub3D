@@ -50,5 +50,7 @@ static void	handle_escape(void)
 			app->ui.state = MAIN_MENU;
 		else if (app->ui.state == OPTION_MENU)
 			app->ui.state = MAIN_MENU;
+		else if (app->ui.state == MAIN_MENU)
+			close_app();
 	}
 }
