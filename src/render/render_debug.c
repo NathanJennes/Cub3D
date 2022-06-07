@@ -116,8 +116,8 @@ NOPROF
 	draw_line(v2_to_iv2(player_pos),
 		ivec2(player_pos.x - right.x * CELL_SIZE,
 			player_pos.y - right.y * CELL_SIZE), GREEN);
-	fov_left = rotate_vector(forward, get_math()->r_halffov);
-	fov_right = rotate_vector(forward, -get_math()->r_halffov);
+	fov_left = rotate_vector(forward, get_math()->r_half_fov);
+	fov_right = rotate_vector(forward, -get_math()->r_half_fov);
 	draw_line(v2_to_iv2(player_pos),
 		ivec2(player_pos.x + fov_left.x * CELL_SIZE,
 			player_pos.y + fov_left.y * CELL_SIZE), PINK);

@@ -16,7 +16,7 @@
 
 static int	contains_illegal_char(t_map_info *infos, char *line)NOPROF;
 static int	is_illegal_char(char c, t_map_info *infos, int *saw_wall,
-				int *last_is_wall)NOPROF;
+		int *last_is_wall)NOPROF;
 
 int	parse_color(t_ivec3 *color, char *line)
 {

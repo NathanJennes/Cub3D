@@ -31,7 +31,7 @@ void	update_player_vectors(t_player *player)
 		player->direction += TWO_PI;
 	else if (player->direction > TWO_PI)
 		player->direction -= TWO_PI;
-	get_math()->base_angle = player->direction + get_math()->r_halffov;
+	get_math()->base_angle = player->direction + get_math()->r_half_fov;
 	if (get_math()->base_angle < 0.0)
 		get_math()->base_angle += TWO_PI;
 	else if (get_math()->base_angle > TWO_PI)

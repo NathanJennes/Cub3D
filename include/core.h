@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/05 16:43:02 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/07 11:32:13 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_frame
 typedef struct s_ray
 {
 	double		distance;
+	t_vec2		direction;
 	t_vec2		hit_pos;
 	t_bool		hit;
 	int			side;
@@ -128,7 +129,8 @@ typedef struct s_math
 {
 	double		r_fov;
 	double		r_vfov;
-	double		r_halffov;
+	double		r_half_vfov;
+	double		r_half_fov;
 	double		base_angle;
 	double		plane_len;
 	double		plane_dist;

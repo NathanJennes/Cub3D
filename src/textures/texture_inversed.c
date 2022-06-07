@@ -10,15 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
 #include "texture.h"
 #include "mlx.h"
 #include "colors.h"
 
 void	create_texture_inversed(t_texture *tex)
 {
-	size_t		tex_size;
-	size_t		i;
+	int64_t		tex_size;
+	int64_t		i;
 	int			*pixel;
 	int			*original_pixel;
 

@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/05 16:46:31 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/06 14:24:27 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@
 
 static void			get_correct_distance(t_ray *ray);
 static t_wall		get_wall_info(t_ray *ray);
-void				draw_col_wall(int64_t col, t_wall wall, t_ray *ray);
+void				render_column(int64_t xcol, t_wall wall, t_ray *ray);
 
 void	render_walls(int64_t col_start, int64_t col_end)
 {
 	int64_t		i;
-	t_vec2		ray_direction;
 	t_player	*player;
 	t_vec2		start;
 	t_ray		ray;
@@ -36,11 +35,11 @@ void	render_walls(int64_t col_start, int64_t col_end)
 			- player->right.y * (get_math()->plane_len * offset));
 	while (i <= col_end)
 	{
-		ray_direction = \
+		ray.direction = \
 			vec2(start.x - player->world_pos.x, start.y - player->world_pos.y);
-		vec2_normalize(&ray_direction);
-		ray = shoot_ray(ray_direction, player->world_pos, player->map_pos);
-		draw_col_wall(i, get_wall_info(&ray), &ray);
+		vec2_normalize(&ray.direction);
+		ray = shoot_ray(ray.direction, player->world_pos, player->map_pos);
+		render_column(i, get_wall_info(&ray), &ray);
 		vec2_add(&start, player->plane_inc);
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_generation.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:58:17 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 19:58:53 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/06 00:30:09 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void		shade_ao_texture_all(
 void		create_texture_grayscale(t_texture *tex);
 void		create_texture_inversed(t_texture *tex);
 void		create_texture_inverse_grayscale(t_texture *tex);
+void		create_texture_vflip(t_texture *tex);
 
 static void	transfer_texture_data(t_xpm_file *file, t_texture *texture);
 static void	create_texture_variations(t_texture *tex);
@@ -72,10 +73,11 @@ void	finish_new_texture(int64_t tex_id)
 
 static void	create_texture_variations(t_texture *tex)
 {
-	tex->ao_flat = gc_calloc(tex->width * tex->height, tex->bpp);
-	tex->ao_right = gc_calloc(tex->width * tex->height, tex->bpp);
-	tex->ao_left = gc_calloc(tex->width * tex->height, tex->bpp);
-	tex->ao_all = gc_calloc(tex->width * tex->height, tex->bpp);
+	tex->ao_flat = gc_calloc(tex->width * tex->height, tex->bpp / 8);
+	tex->ao_right = gc_calloc(tex->width * tex->height, tex->bpp / 8);
+	tex->ao_left = gc_calloc(tex->width * tex->height, tex->bpp / 8);
+	tex->ao_all = gc_calloc(tex->width * tex->height, tex->bpp / 8);
+	tex->vflip = gc_calloc(tex->width * tex->height, tex->bpp / 8);
 	shade_ao_texture_flat(tex->ao_flat, tex->width, tex->height, tex->bpp);
 	shade_ao_texture_right(tex->ao_right, tex->width, tex->height, tex->bpp);
 	shade_ao_texture_left(tex->ao_left, tex->width, tex->height, tex->bpp);
@@ -84,6 +86,7 @@ static void	create_texture_variations(t_texture *tex)
 	tex->inversed_handle = mlx_new_image(get_mlx(), tex->width, tex->height);
 	tex->inversed_grayscale_handle = mlx_new_image(get_mlx(),
 			tex->width, tex->height);
+	create_texture_vflip(tex);
 	create_texture_grayscale(tex);
 	create_texture_inversed(tex);
 	create_texture_inverse_grayscale(tex);

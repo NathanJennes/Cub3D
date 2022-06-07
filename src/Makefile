@@ -70,11 +70,11 @@ UI_SETTINGS_MENU_FILE	:=	settings_menu.c settings_menu_init.c settings_menu_upda
 UI_SETTINGS_MENU_SRCS	:= $(addprefix $(UI_SETTINGS_MENU_DIR)/, $(UI_SETTINGS_MENU_FILE))
 
 TEXTURES_DIR	:=	textures
-TEXTURES_FILE	:=	xpm_loader.c texture_generation.c ambiant_occlusion.c		\
-					texture_deletion.c texture_manager.c	\
-					texture_manager_helper.c	\
-					texture_utils.c		\
-					texture_grayscale.c texture_inversed.c
+TEXTURES_FILE	:=	xpm_loader.c texture_generation.c ambiant_occlusion.c	\
+					texture_deletion.c texture_utils.c	\
+					texture_manager.c texture_manager_helper.c	\
+					texture_grayscale.c texture_inversed.c texture_inverted.c	\
+					texture_floor_ceilling.c
 TEXTURE_SRCS	:=	$(addprefix $(TEXTURES_DIR)/, $(TEXTURES_FILE))
 
 IO_DIR			:=	io
