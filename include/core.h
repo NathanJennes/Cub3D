@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/08 11:02:07 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/08 17:14:51 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@
 # define VOID		-1
 
 # define CELL_SIZE	20
+# define HALF_CELL	10
+# define CELL_BOX	25
+# define MAX_DIST	15
+# define SQRT_R 	2.2360679774998
 
 # define RENDER_WORKER_COUNT 4
 
@@ -102,6 +106,7 @@ typedef struct s_player
 	t_vec2		forward;
 	t_vec2		right;
 	t_vec2		plane_inc;
+	t_ivec2		wall_pos;
 }	t_player;
 
 typedef struct s_settings

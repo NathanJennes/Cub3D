@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/04 17:16:51 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/08 22:35:22 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ static void		debug_rays(void) NOPROF;
 
 void	render_test_scene(const t_mlx *app)
 {
+	int64_t				j;
 	int					color;
 	const t_map_info	*map = &app->gamestate.map;
 
 	for (int64_t i = 0; i < map->height; i++)
 	{
-		for (int64_t j = 0; j < map->width; j++)
+		for (j = 0; j < map->width; j++)
 		{
 			if (map->map[i][j] == WALL)
 			{
@@ -42,6 +43,10 @@ void	render_test_scene(const t_mlx *app)
 				draw_rect(ivec2(j * CELL_SIZE, i * CELL_SIZE),
 					ivec2(CELL_SIZE, CELL_SIZE), color);
 			}
+			draw_line(ivec2(j * CELL_SIZE, i * CELL_SIZE),
+					ivec2(j * CELL_SIZE, (i + 1) * CELL_SIZE), GREY);
+			draw_line(ivec2(j * CELL_SIZE, i * CELL_SIZE),
+					ivec2((j + 1) * CELL_SIZE, i * CELL_SIZE), GREY);
 		}
 	}
 	for (int64_t i = 0; i < app->gamestate.light_count; i++)
@@ -51,13 +56,16 @@ void	render_test_scene(const t_mlx *app)
 		draw_circle(ivec2(l->pos.x, l->pos.y), 7, col);
 	}
 	draw_circle(v2_to_iv2(get_player()->world_pos), 10, GREEN);
+	draw_circle(v2_to_iv2(get_player()->world_pos), 5, BLUE);
 	if (app->ui.debug == TRUE)
 		print_player_vector();
-	t_ivec2 mouse_pos = get_mouse_position();
 	t_player *player = get_player();
+	t_ivec2 mouse_pos = get_mouse_position();
 	t_ivec3 light = get_lighting_level(vec3(mouse_pos.x, mouse_pos.y, 0),
 		vec3(player->forward.x, player->forward.y, 0.0));
 	draw_circle(mouse_pos, 10, trgb(0, light.x, light.y, light.z));
+	draw_circle(player->wall_pos, 5, RED);
+//	ft_print_ivec2(player->wall_pos);
 	if (app->ui.debug == TRUE)
 		debug_rays();
 }

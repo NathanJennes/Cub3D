@@ -20,6 +20,7 @@
 # define GREEN		0x0000FF00
 # define BLUE		0x000000FF
 # define WHITE		0x00FFFFFF
+# define GREY		0x00AAAAAA
 # define PINK		0x00FF00FF
 # define YELLOW		0x00FFFF00
 # define TURQUOISE	0x0000FFFF
