@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 16:25:27 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/07 19:53:18 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/08 18:03:35 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ void	render_sprite(t_sprite *sprite)
 	angle += math->r_halffov;
 	if (angle < 0.0 || angle > math->r_fov)
 		return ;
+	double a = 40;
+	double b = 4;
+	double c = 6;
+	double d = math->r_fov / 6;
 	x_screen_pos = get_settings()->win_w * (angle / math->r_fov);
+	x_screen_pos += a * sin(angle * 4);
+	x_screen_pos += b * sin(angle * 8);
+	if (angle < d || angle > math->r_fov - d)
+	{
+		x_screen_pos += c * sin(angle * 8);
+		//printf("after c: %f\n", x_screen_pos);
+	}
 	draw_circle(ivec2((int)x_screen_pos, get_settings()->halfw_h), 10, trgb(0, 200, 100, 200));
 }
