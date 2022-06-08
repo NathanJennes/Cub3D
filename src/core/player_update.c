@@ -16,7 +16,7 @@
 void	update_player(t_player *player)
 {
 	t_settings	*settings;
-	double	delta_time;
+	double		delta_time;
 
 	settings = get_settings();
 	delta_time = get_app()->delta_time;

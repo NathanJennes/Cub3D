@@ -24,7 +24,7 @@ void	update_ui_slider(t_slider *slider)
 	if (!slider->infos.displayed || !slider->selected)
 		return ;
 	infos = &slider->infos;
-	mouse_pos = cub_get_mouse_position();
+	mouse_pos = get_mouse_position();
 	if (mouse_pos.x < infos->pos.x + infos->size.y / 2)
 		mouse_pos.x = infos->pos.x + infos->size.y / 2;
 	else if (mouse_pos.x > infos->pos.x + infos->size.x - infos->size.y / 2)
@@ -43,7 +43,7 @@ void	update_ui_slider_click_begin(t_slider *slider, int mouse_btn)
 	if (!slider->infos.displayed || mouse_btn != MOUSE_LEFT)
 		return ;
 	infos = &slider->infos;
-	mouse_pos = cub_get_mouse_position();
+	mouse_pos = get_mouse_position();
 	if (mouse_pos.x >= infos->pos.x
 		&& mouse_pos.x <= infos->pos.x + infos->size.x
 		&& mouse_pos.y >= infos->pos.y

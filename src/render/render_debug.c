@@ -51,14 +51,14 @@ void	render_test_scene(const t_mlx *app)
 		draw_circle(ivec2(l->pos.x, l->pos.y), 7, col);
 	}
 	draw_circle(v2_to_iv2(get_player()->world_pos), 10, GREEN);
-	if (app->ui.debug_ui == TRUE)
+	if (app->ui.debug == TRUE)
 		print_player_vector();
-	t_ivec2 mouse_pos = cub_get_mouse_position();
+	t_ivec2 mouse_pos = get_mouse_position();
 	t_player *player = get_player();
 	t_ivec3 light = get_lighting_level(vec3(mouse_pos.x, mouse_pos.y, 0),
 		vec3(player->forward.x, player->forward.y, 0.0));
 	draw_circle(mouse_pos, 10, trgb(0, light.x, light.y, light.z));
-	if (app->ui.debug_ui == TRUE)
+	if (app->ui.debug == TRUE)
 		debug_rays();
 }
 

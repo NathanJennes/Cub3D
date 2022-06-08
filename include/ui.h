@@ -149,7 +149,7 @@ typedef struct s_ui_settings_menu
 typedef struct s_ui
 {
 	t_ui_state			state;
-	t_bool				debug_ui;
+	t_bool				debug;
 	t_ui_main_menu		main_menu;
 	t_ui_new_game_menu	new_game_menu;
 	t_ui_settings_menu	settings_menu;

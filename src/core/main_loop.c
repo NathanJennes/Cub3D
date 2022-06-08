@@ -32,7 +32,7 @@ int	main_loop(void)
 		render_game(app, settings, time);
 	else
 		clear_screen(BKGD_COLOR);
-	if (app->ui.debug_ui == TRUE)
+	if (app->ui.debug == TRUE)
 		print_debug();
 	fps_counter();
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
@@ -57,7 +57,7 @@ static void	render_game(t_mlx *app, const t_settings *settings,
 	gettimeofday(&time[2], NULL);
 	render_test_scene(app);
 	gettimeofday(&time[3], NULL);
-	if (app->ui.debug_ui == TRUE)
+	if (app->ui.debug == TRUE)
 		printf("[FRAME - RENDER]: background: %lldms, walls: "
 			"%lldms, test_scene: %lldms, total %lldms\n",
 			(int64_t)((time[1].tv_sec * 1000 + time[1].tv_usec / 1000)

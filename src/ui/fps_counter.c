@@ -17,8 +17,7 @@
 #include "render.h"
 
 static int64_t	get_time(void);
-
-void display_fps(int64_t time_diff);
+void			display_fps(int64_t time_diff);
 
 void	fps_counter(void)
 {
@@ -31,11 +30,11 @@ void	fps_counter(void)
 	time_diff = current_time - app->last_time;
 	app->last_time = current_time;
 	app->delta_time = (double)time_diff / 1000.0;
-	if (app->ui.debug_ui == TRUE)
+	if (app->ui.debug == TRUE)
 		display_fps(time_diff);
 }
 
-void display_fps(int64_t time_diff)
+void	display_fps(int64_t time_diff)
 {
 	static int64_t	elapsed;
 	static char		*fps;

@@ -22,7 +22,7 @@ void	update_ui_button(t_button *button)
 	if (!button->infos.displayed)
 		return ;
 	component = &button->infos;
-	mouse_pos = cub_get_mouse_position();
+	mouse_pos = get_mouse_position();
 	if (mouse_pos.x >= component->pos.x
 		&& mouse_pos.x <= component->pos.x + component->size.x
 		&& mouse_pos.y >= component->pos.y
@@ -40,7 +40,7 @@ void	update_ui_button_click_begin(t_button *button, int mouse_btn)
 	if (!button->infos.displayed || !button->is_clickable ||  mouse_btn != MOUSE_LEFT)
 		return ;
 	component = &button->infos;
-	mouse_pos = cub_get_mouse_position();
+	mouse_pos = get_mouse_position();
 	if (mouse_pos.x >= component->pos.x
 		&& mouse_pos.x <= component->pos.x + component->size.x
 		&& mouse_pos.y >= component->pos.y
@@ -58,7 +58,7 @@ void	update_ui_button_click_end(t_button *button, int mouse_btn)
 	if (!button->infos.displayed || !button->is_clickable || mouse_btn != MOUSE_LEFT)
 		return ;
 	component = &button->infos;
-	mouse_pos = cub_get_mouse_position();
+	mouse_pos = get_mouse_position();
 	if (mouse_pos.x >= component->pos.x
 		&& mouse_pos.x <= component->pos.x + component->size.x
 		&& mouse_pos.y >= component->pos.y

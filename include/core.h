@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/07 17:17:00 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/08 11:02:07 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CORE_H
 # define CORE_H
 
-#include <pthread.h>
+# include <pthread.h>
 
 # include "mlx.h"
 # include "libft.h"
@@ -39,8 +39,6 @@
 # define VOID		-1
 
 # define CELL_SIZE	20
-
-# define MOUSE_DEBUG	0
 
 # define RENDER_WORKER_COUNT 4
 
@@ -179,7 +177,7 @@ typedef struct s_mlx
 	int64_t				last_time;
 	int64_t				start_time;
 	double				delta_time;
-	t_app_state 		app_state;
+	t_app_state			app_state;
 	t_ui				ui;
 	t_texture_manager	texture_manager;
 	t_font_manager		font_manager;
@@ -215,7 +213,7 @@ t_bool		is_key_down(int keycode) NOPROF;
 t_bool		is_mouse_down(int button) NOPROF;
 
 void		cub_update_mouse_pos(int x, int y) NOPROF;
-t_ivec2		cub_get_mouse_position(void) NOPROF;
+t_ivec2		get_mouse_position(void) NOPROF;
 
 void		update_player_vectors(t_player *player) NOPROF;
 void		update_player(t_player *player) NOPROF;

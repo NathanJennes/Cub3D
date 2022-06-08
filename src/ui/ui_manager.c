@@ -37,7 +37,7 @@ int	render_ui(void)
 		else if (app->ui.state == OPTION_MENU)
 			render_settings_menu();
 	}
-	if (get_ui()->debug_ui)
+	if (get_ui()->debug)
 		print_debug();
 	return (0);
 }

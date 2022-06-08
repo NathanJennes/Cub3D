@@ -22,7 +22,7 @@ void	update_ui_checkbox(t_checkbox *checkbox)
 	if (!checkbox->infos.displayed)
 		return ;
 	component = &checkbox->infos;
-	mouse_pos = cub_get_mouse_position();
+	mouse_pos = get_mouse_position();
 	if (mouse_pos.x >= component->pos.x
 		&& mouse_pos.x <= component->pos.x + component->size.x
 		&& mouse_pos.y >= component->pos.y
@@ -40,7 +40,7 @@ void	update_ui_checkbox_click_begin(t_checkbox *checkbox, int mouse_btn)
 	if (!checkbox->infos.displayed || !checkbox->is_clickable || mouse_btn != MOUSE_LEFT)
 		return ;
 	component = &checkbox->infos;
-	mouse_pos = cub_get_mouse_position();
+	mouse_pos = get_mouse_position();
 	if (mouse_pos.x >= component->pos.x
 		&& mouse_pos.x <= component->pos.x + component->size.x
 		&& mouse_pos.y >= component->pos.y
@@ -60,7 +60,7 @@ void	update_ui_checkbox_click_end(t_checkbox *checkbox, int mouse_btn)
 	if (!checkbox->infos.displayed || !checkbox->is_clickable || mouse_btn != MOUSE_LEFT)
 		return ;
 	component = &checkbox->infos;
-	mouse_pos = cub_get_mouse_position();
+	mouse_pos = get_mouse_position();
 	if (mouse_pos.x >= component->pos.x
 		&& mouse_pos.x <= component->pos.x + component->size.x
 		&& mouse_pos.y >= component->pos.y

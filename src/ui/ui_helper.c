@@ -31,10 +31,10 @@ void	switch_debug_ui(void)
 	t_mlx	*app;
 
 	app = get_app();
-	if (app->ui.debug_ui == TRUE)
-		app->ui.debug_ui = FALSE;
+	if (app->ui.debug == TRUE)
+		app->ui.debug = FALSE;
 	else
-		app->ui.debug_ui = TRUE;
+		app->ui.debug = TRUE;
 }
 
 void	print_float(double val, t_ivec2 pos, int color)
