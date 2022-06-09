@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:11:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 14:21:32 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/09 16:33:40 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ void	update_player_vectors(t_player *player)
 		get_math()->base_angle += TWO_PI;
 	else if (get_math()->base_angle > TWO_PI)
 		get_math()->base_angle -= TWO_PI;
-	player->plane_inc = vec2((player->right.x * get_math()->plane_len) \
-			/ settings->halfw_w, (player->right.y * get_math()->plane_len) / settings->halfw_w);
+	player->plane_inc = \
+			vec2((player->right.x * get_math()->plane_len) / settings->halfw_w,
+			(player->right.y * get_math()->plane_len) / settings->halfw_w);
 }
 
 static void	update_player_forward_vec(t_player *player)

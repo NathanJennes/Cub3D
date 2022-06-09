@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/08 22:35:22 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/09 17:09:55 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ void	render_test_scene(const t_mlx *app)
 	t_ivec3 light = get_lighting_level(vec3(mouse_pos.x, mouse_pos.y, 0),
 		vec3(player->forward.x, player->forward.y, 0.0));
 	draw_circle(mouse_pos, 10, trgb(0, light.x, light.y, light.z));
-	draw_circle(player->wall_pos, 5, RED);
-//	ft_print_ivec2(player->wall_pos);
+//	ft_print_ivec2(player->collision);
 	if (app->ui.debug == TRUE)
 		debug_rays();
 }
