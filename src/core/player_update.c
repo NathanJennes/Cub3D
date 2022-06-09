@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 18:00:21 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/09 17:44:15 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/09 20:09:54 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "render.h"
 
 static t_bool	test_collision(t_vec2 future_pos, t_ivec2 cell);
-static void	is_colliding(t_vec2 future_pos);
+static void		is_colliding(t_vec2 future_pos);
 
 void	update_player(t_player *player)
 {
@@ -61,12 +61,24 @@ void	update_player(t_player *player)
 
 static void	is_colliding(t_vec2 future_pos)
 {
+	t_vec2		offset_pos;
+	t_vec2		cell;
 	t_player	*player;
 
 	player = get_player();
-	if (get_map_infos()->map[player->map_pos.y][(int)(future_pos.x / CELL_SIZE)] == EMPTY)
+	cell = vec2(future_pos.x - player->world_pos.x, future_pos.y - player->world_pos.y);
+	ft_print_vec2(cell);
+	if (cell.x > 0)
+		offset_pos.x = future_pos.x + 5;
+	else
+		offset_pos.x = future_pos.x - 5;
+	if (cell.y > 0)
+		offset_pos.y = future_pos.y + 5;
+	else
+		offset_pos.y = future_pos.y - 5;
+	if (get_map_infos()->map[player->map_pos.y][(int)(offset_pos.x / CELL_SIZE)] == EMPTY)
 		get_player()->world_pos.x = future_pos.x;
-	if (get_map_infos()->map[(int)(future_pos.y / CELL_SIZE)][player->map_pos.x] == EMPTY)
+	if (get_map_infos()->map[(int)(offset_pos.y / CELL_SIZE)][player->map_pos.x] == EMPTY)
 		get_player()->world_pos.y = future_pos.y;
 }
 
