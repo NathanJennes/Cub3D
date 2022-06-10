@@ -79,7 +79,6 @@ void	init_math(void)
 	t_settings	*settings;
 
 	settings = get_settings();
-	update_player_vectors(get_player());
 	pc = get_math();
 	pc->r_fov = settings->fov * (PI / 180.0);
 	pc->r_halffov = settings->fov * (PI / 360.0);

@@ -64,6 +64,8 @@ int	btn_start_new_game(t_button *button)
 			+ menu->first_save_offset].name);
 		app->gamestate = app->maps[menu->selected_save
 			+ menu->first_save_offset];
+		update_player_vectors(get_player());
+		init_sprite_manager();
 		app->app_state = IN_GAME;
 	}
 	return (0);
