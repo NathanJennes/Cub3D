@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 13:37:13 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/10 14:00:23 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/10 14:00:30 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,6 @@ static void	generate_lookup_table(double *table)
 		vec2_normalize(&ray);
 		angle = atan2(player->forward.x * ray.y - player->forward.y * ray.x, player->forward.x * ray.x + player->forward.y * ray.y);
 		table[i] = angle;
-		ft_print_vec2(player->forward);
-		ft_print_vec2(ray);
-		printf("column: %lld -> angle: %f\n", i, angle);
 		vec2_add(&start, player->plane_inc);
 		i++;
 	}

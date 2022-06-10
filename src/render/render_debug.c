@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/07 17:05:48 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/10 13:54:06 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,10 @@ void	render_test_scene(t_mlx *app)
 	if (app->ui.debug_ui == TRUE)
 		debug_rays();
 
-	//render_sprite(&app->sprite);
-	//draw_rect(ivec2(app->sprite.pos.x - app->sprite.size.x / 2, app->sprite.pos.y - app->sprite.size.y / 2),
-	//			ivec2(10, 10), trgb(0, 100, 255, 100));
+	t_sprite	*sprite = &app->sprite_manager.sprites[0];
+	render_sprite(sprite);
+	draw_rect(ivec2(sprite->pos.x - sprite->size.x / 2, sprite->pos.y - sprite->size.y / 2),
+				ivec2(10, 10), trgb(0, 100, 255, 100));
 
 }
 
