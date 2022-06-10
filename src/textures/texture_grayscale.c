@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:52:33 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 15:42:44 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/10 19:47:52 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ void	create_texture_grayscale(t_texture *tex)
 		pixel = (int *)(tex->grayscale + i * sizeof(int));
 		gray = (get_r(*original_pixel) + get_g(*original_pixel)
 				+ get_b(*original_pixel)) / 3;
-		*pixel = trgb(get_t(*pixel), gray, gray, gray);
+		*pixel = trgb(get_t(*original_pixel), gray, gray, gray);
 		i++;
 	}
 }
 
 void	create_texture_inverse_grayscale(t_texture *tex)
 {
-	size_t		tex_size;
-	size_t		i;
-	int			*pixel;
-	int			*original_pixel;
-	int			gray;
+	size_t	tex_size;
+	size_t	i;
+	int		*pixel;
+	int		*original_pixel;
+	int		gray;
 
 	tex->inversed_grayscale = (uint8_t *)mlx_get_data_addr(
 			tex->inversed_grayscale_handle, &tex->bpp,
@@ -57,7 +57,7 @@ void	create_texture_inverse_grayscale(t_texture *tex)
 		pixel = (int *)(tex->inversed_grayscale + i * sizeof(int));
 		gray = (get_r(*original_pixel) + get_g(*original_pixel)
 				+ get_b(*original_pixel)) / 3;
-		*pixel = trgb(get_t(*pixel), 255 - gray, 255 - gray, 255 - gray);
+		*pixel = trgb(get_t(*original_pixel), 255 - gray, 255 - gray, 255 - gray);
 		i++;
 	}
 }
