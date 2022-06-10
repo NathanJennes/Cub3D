@@ -43,7 +43,7 @@ void	init_app(void)
 	init_ui();
 	init_hooks();
 	init_renderer();
-	app->sprite = (t_sprite){{120, 80}, {10, 10}, 0};
+	init_sprite_manager();
 	mlx_loop(get_mlx());
 }
 

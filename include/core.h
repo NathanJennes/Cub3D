@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/07 16:23:29 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/10 13:41:42 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,13 @@ typedef struct s_sprite
 	t_ivec2	size;
 	int64_t	tex_id;
 }	t_sprite;
+
+typedef struct s_sprite_manager
+{
+	t_sprite	*sprites;
+	int64_t		sprite_count;
+	int			*angle_lookup;
+}	t_sprite_manager;
 
 typedef struct s_map_info
 {
@@ -176,10 +183,10 @@ typedef struct s_mlx
 	t_ui				ui;
 	t_texture_manager	texture_manager;
 	t_font_manager		font_manager;
+	t_sprite_manager	sprite_manager;
 	t_bool				keys[MAX_KEYCODE];
 	t_math				pc;
 	t_renderer			renderer;
-	t_sprite			sprite;
 }	t_mlx;
 
 /* core.c */
@@ -213,6 +220,10 @@ t_ivec2		cub_get_mouse_position(void) NOPROF;
 
 void		update_player_vectors(t_player *player) NOPROF;
 void		update_player(t_player *player) NOPROF;
+
+/* Sprites */
+void		init_sprite_manager(void) NOPROF;
+void		clear_sprite_manager(void) NOPROF;
 
 /* getters */
 t_mlx				*get_app(void) NOPROF;
