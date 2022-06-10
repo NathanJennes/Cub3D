@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/06 14:24:27 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/10 16:27:20 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	render_walls(int64_t col_start, int64_t col_end)
 		ray.direction = \
 			vec2(start.x - player->world_pos.x, start.y - player->world_pos.y);
 		vec2_normalize(&ray.direction);
-		ray = shoot_ray(ray.direction, player->world_pos, player->map_pos);
+		ray = shoot_ray(ray.direction, player->world_pos, player->map_pos, RAY_LENGTH);
 		render_column(i, get_wall_info(&ray), &ray);
 		vec2_add(&start, player->plane_inc);
 		i++;
@@ -52,9 +52,7 @@ static	t_wall	get_wall_info(t_ray *ray)
 
 	settings = get_settings();
 	get_correct_distance(ray);
-	wall.size = (int64_t)
-		fabs(CELL_SIZE / (ray->distance * CELL_SIZE)
-			* get_math()->plane_dist);
+	wall.size = (int64_t)fabs(1 / ray->distance * get_math()->plane_dist);
 	wall.real_size = wall.size;
 	wall.offset = (wall.real_size - settings->win_h) / 2;
 	if (wall.offset < 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/03 17:07:59 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/10 17:45:25 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ t_ivec2			text_center(char *text, char *font_name,
 
 /* Walls rendering */
 void			render_walls(int64_t col_start, int64_t col_end);
-t_ray			shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos);
+t_ray			shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos, double max_dist);
 
 /* Lights */
 t_ivec3			get_lighting_level(t_vec3 pos, t_vec3 normal);

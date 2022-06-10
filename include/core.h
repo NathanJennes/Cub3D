@@ -39,11 +39,6 @@
 # define VOID		-1
 
 # define CELL_SIZE	20
-# define HALF_CELL	10
-# define CELL_BOX	25
-# define MAX_DIST	15
-
-# define SQRT_R 	2.2360679774998
 
 # define RENDER_WORKER_COUNT 4
 

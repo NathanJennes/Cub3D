@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 15:52:09 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/03 17:29:21 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/10 17:45:25 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 #include "core.h"
 #include "render.h"
 
-static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side) NOPROF;
-static t_vec2	calculate_lengths(t_vec2 *ray) NOPROF;
-static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos, t_ivec2 map_pos) NOPROF;
-static int		get_map_type(int64_t x, int64_t y) NOPROF;
+static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side);
+static t_vec2	calculate_lengths(t_vec2 *ray);
+static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos,
+		t_ivec2 map_pos);
+static int	get_map_type(int64_t x, int64_t y);
 
-t_ray	shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos)
+t_ray	shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos, double max_dist)
 {
 	t_ivec2	step;
 	t_vec2	lengths;
@@ -35,7 +36,7 @@ t_ray	shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos)
 	vec2_multv2(&dists, lengths);
 	hit = FALSE;
 	side = NOSIDE;
-	while (!hit && (dists.x < RAY_LENGTH || dists.y < RAY_LENGTH))
+	while (!hit && (dists.x < max_dist || dists.y < max_dist))
 	{
 		if (dists.x < dists.y)
 		{
@@ -60,6 +61,7 @@ t_ray	shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos)
 }
 
 static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side)
+NOPROF
 {
 	t_ray		result;
 	t_player	*player;
@@ -68,7 +70,7 @@ static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side)
 	result.distance = dist;
 	if (hit)
 		result.hit_pos = vec2(player->world_pos.x + ray.x * dist * CELL_SIZE,
-				player->world_pos.y + ray.y * dist * CELL_SIZE);
+			player->world_pos.y + ray.y * dist * CELL_SIZE);
 	else
 		result.hit_pos = vec2_zero();
 	result.hit = hit;
@@ -78,6 +80,7 @@ static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side)
 }
 
 static t_vec2	calculate_lengths(t_vec2 *ray)
+NOPROF
 {
 	t_vec2	lengths;
 
@@ -94,6 +97,7 @@ static t_vec2	calculate_lengths(t_vec2 *ray)
 
 static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos,
 		t_ivec2 map_pos)
+NOPROF
 {
 	t_ivec2	step;
 
@@ -121,6 +125,7 @@ static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos,
 }
 
 static int	get_map_type(int64_t x, int64_t y)
+NOPROF
 {
 	t_map_info	*map;
 

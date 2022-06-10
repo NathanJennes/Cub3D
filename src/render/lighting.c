@@ -58,7 +58,7 @@ static void	process_light(t_light *light, t_ivec3 *lighting,
 	light_dir = vec3(light->pos.x - pos->x, light->pos.y - pos->y, light->pos.z - pos->z);
 	dir_normalized = vec3_normalized(light_dir);
 	ray = shoot_ray(vec2(dir_normalized.x, dir_normalized.y), vec2(pos->x, pos->y),
-		ivec2((int64_t)pos->x / CELL_SIZE, (int64_t)pos->y / CELL_SIZE));
+		ivec2((int64_t)pos->x / CELL_SIZE, (int64_t)pos->y / CELL_SIZE), RAY_LENGTH);
 	ray.distance *= CELL_SIZE;
 	if (ray.distance >= 0.0 && ray.distance * ray.distance < light_dir.x * light_dir.x + light_dir.y * light_dir.y)
 		return ;
