@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/10 13:58:06 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/10 16:15:50 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,5 @@ void	init_math(void)
 	pc->r_halffov = settings->fov * (PI / 360.0);
 	pc->r_vfov = 2 * atan(tan(pc->r_halffov) * ((double)settings->win_w / (double)settings->win_h));
 	pc->plane_len = tan(pc->r_halffov);
-	pc->plane_dist = settings->halfw_w / (get_math()->r_vfov / 2);
+	pc->plane_dist = settings->halfw_w / (pc->r_vfov / 2);
 }
