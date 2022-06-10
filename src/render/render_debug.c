@@ -61,9 +61,9 @@ void	render_test_scene(t_mlx *app)
 	if (app->ui.debug_ui == TRUE)
 		debug_rays();
 
-	render_sprite(&app->sprite);
-	draw_rect(ivec2(app->sprite.pos.x - app->sprite.size.x / 2, app->sprite.pos.y - app->sprite.size.y / 2),
-				ivec2(10, 10), trgb(0, 100, 255, 100));
+	//render_sprite(&app->sprite);
+	//draw_rect(ivec2(app->sprite.pos.x - app->sprite.size.x / 2, app->sprite.pos.y - app->sprite.size.y / 2),
+	//			ivec2(10, 10), trgb(0, 100, 255, 100));
 
 }
 

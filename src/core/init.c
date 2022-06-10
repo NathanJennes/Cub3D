@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/08 17:08:23 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/10 13:58:06 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	init_app(void)
 	init_ui();
 	init_hooks();
 	init_renderer();
-	init_sprite_manager();
 	mlx_loop(get_mlx());
 }
 

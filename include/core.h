@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/10 13:41:42 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/10 13:41:50 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_sprite_manager
 {
 	t_sprite	*sprites;
 	int64_t		sprite_count;
-	int			*angle_lookup;
+	double		*angle_lookup;
 }	t_sprite_manager;
 
 typedef struct s_map_info
