@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 15:49:53 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/31 15:40:52 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/10 19:42:35 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,16 @@ void	render_ui_slider(t_slider *slider)
 		return ;
 	infos = &slider->infos;
 	render_ui_texture(slider->tex_id_bar, infos->pos.x, infos->pos.y);
-	render_ui_texture(slider->tex_id_cursor,
-		infos->pos.x + slider->cursor_pos_x - infos->size.y / 2,
-		infos->pos.y - infos->size.y / 2);
+	if (!slider->hovered)
+	{
+		render_ui_texture(slider->tex_id_cursor,
+			infos->pos.x + slider->cursor_pos_x - infos->size.y / 2,
+			infos->pos.y - infos->size.y / 2);
+	}
+	else
+	{
+		render_ui_texture_inverse_grayscale(slider->tex_id_cursor,
+			infos->pos.x + slider->cursor_pos_x - infos->size.y / 2,
+			infos->pos.y - infos->size.y / 2);
+	}
 }

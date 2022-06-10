@@ -100,6 +100,7 @@ typedef struct s_slider
 	double			value;
 	int64_t			cursor_pos_x;
 	t_bool			selected;
+	t_bool			hovered;
 }	t_slider;
 
 typedef struct s_text_box
