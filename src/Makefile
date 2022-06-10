@@ -37,7 +37,7 @@ FONT_FILE		:=	load_font_bitmap.c load_font_meta.c render_font.c	\
 FONT_SRCS		:=	$(addprefix $(FONT_DIR)/, $(FONT_FILE))
 
 SPRITE_DIR		:=	$(RENDER_DIR)/sprites
-SPRITE_FILE		:=	render_sprite.c sprite_manager.c
+SPRITE_FILE		:=	render_sprite.c sprite_manager.c depth_control.c
 SPRITE_SRCS		:=	$(addprefix $(SPRITE_DIR)/, $(SPRITE_FILE))
 
 UI_DIR			:=	ui

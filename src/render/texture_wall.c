@@ -28,6 +28,7 @@ void	draw_col_wall(int64_t xcol, t_wall wall, t_ray *ray)
 	int			px_color;
 	t_ivec3		lighting;
 
+	set_depth_at(xcol, ray->distance * CELL_SIZE);
 	y = 0;
 	texture = get_face_texture(ray);
 	tx = (int64_t)get_texture_position(texture, ray);

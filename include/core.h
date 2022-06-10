@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/10 16:15:50 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/10 17:27:55 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ typedef struct s_renderer
 	pthread_mutex_t	locks[RENDER_WORKER_COUNT];
 	pthread_mutex_t	working_lock[RENDER_WORKER_COUNT];
 	pthread_t		workers[RENDER_WORKER_COUNT];
+	double			*depth_buffer;
 }	t_renderer;
 
 typedef struct s_mlx
@@ -224,6 +225,9 @@ void		update_player(t_player *player) NOPROF;
 /* Sprites */
 void		init_sprite_manager(void) NOPROF;
 void		clear_sprite_manager(void) NOPROF;
+
+double		get_depth_at(int64_t i) NOPROF;
+void		set_depth_at(int64_t i, double distance) NOPROF;
 
 /* getters */
 t_mlx				*get_app(void) NOPROF;

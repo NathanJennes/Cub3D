@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 13:37:13 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/10 14:00:30 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/10 17:49:52 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_sprite_manager(void)
 	manager = &get_app()->sprite_manager;
 	manager->sprite_count = 1;
 	manager->sprites = gc_calloc(1, sizeof (t_sprite));
-	manager->sprites[0] = (t_sprite){{120, 80}, {10, 10}, 0};
+	manager->sprites[0] = (t_sprite){{120, 75}, {10, 10}, 0};
 	manager->angle_lookup = gc_calloc(get_settings()->win_w, sizeof (double));
 	generate_lookup_table(manager->angle_lookup);
 }

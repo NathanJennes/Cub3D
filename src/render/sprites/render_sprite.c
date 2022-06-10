@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 16:25:27 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/10 16:54:56 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/10 17:43:55 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static void		draw_sprite(t_sprite *sprite, int64_t x_pos, double distance)
 	tex_x = 0;
 	while (i < size_x)
 	{
-		draw_col_sprite(sprite, x_base + i, (int64_t)tex_x, distance);
+		if (get_depth_at(x_base + i) >= distance)
+			draw_col_sprite(sprite, x_base + i, (int64_t)tex_x, distance);
 		i++;
 		tex_x += ratio;
 	}
@@ -67,6 +68,7 @@ static void		draw_col_sprite(t_sprite *sprite, int64_t x_pos, int64_t tex_x, dou
 	double		tex_y;
 	t_texture	*texture;
 
+	set_depth_at(x_pos, distance);
 	texture = get_texture_from_id(sprite->tex_id);
 	size_h = (int64_t)fabs((double)sprite->size.y / (distance * 1) * get_math()->plane_dist);
 	ratio = (double)texture->height / (double)size_h;
