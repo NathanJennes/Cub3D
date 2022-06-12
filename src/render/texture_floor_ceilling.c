@@ -29,7 +29,7 @@ void	render_floor(t_ivec2 pos, t_wall wall, t_ray *ray, t_ivec3 lighting)
 	while (pos.y < get_settings()->win_h)
 	{
 		dist = tan(get_math()->r_vfov / 2) * CELL_SIZE / 2;
-		printf("Dist %ls\n", dist);
+		printf("Dist %lf\n", dist);
 		px = (int64_t)get_texture_position(tx_floor, floor_pos);
 		px_color = get_pixel_color_from_texture(px, pos.y,
 				tx_floor, tx_floor->original);

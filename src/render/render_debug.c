@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/09 17:09:55 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/13 00:47:00 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	render_test_scene(const t_mlx *app)
 		vec3(player->forward.x, player->forward.y, 0.0));
 	draw_circle(mouse_pos, 10, trgb(0, light.x, light.y, light.z));
 //	ft_print_ivec2(player->collision);
-	if (app->ui.debug == TRUE)
-		debug_rays();
+//	if (app->ui.debug == TRUE)
+//		debug_rays();
 }
 
 static void	debug_rays(void)
@@ -116,7 +116,7 @@ NOPROF
 	right = get_player()->right;
 	draw_line(v2_to_iv2(player_pos),
 		ivec2(player_pos.x + forward.x * CELL_SIZE,
-			player_pos.y + forward.y * CELL_SIZE), BLACK);
+			player_pos.y + forward.y * CELL_SIZE), YELLOW);
 	draw_line(v2_to_iv2(player_pos),
 		ivec2(player_pos.x + right.x * CELL_SIZE,
 			player_pos.y + right.y * CELL_SIZE), BLUE);

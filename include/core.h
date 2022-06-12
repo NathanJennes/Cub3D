@@ -38,7 +38,8 @@
 # define EMPTY		0
 # define VOID		-1
 
-# define CELL_SIZE	20
+# define CELL_SIZE		20
+# define COLLISION_PAD	5
 
 # define RENDER_WORKER_COUNT 4
 

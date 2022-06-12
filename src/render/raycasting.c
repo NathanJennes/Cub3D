@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 15:52:09 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/10 17:45:25 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/13 00:33:32 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side);
 static t_vec2	calculate_lengths(t_vec2 *ray);
 static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos,
 		t_ivec2 map_pos);
-static int	get_map_type(int64_t x, int64_t y);
 
 t_ray	shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos, double max_dist)
 {
@@ -124,7 +123,7 @@ NOPROF
 	return (step);
 }
 
-static int	get_map_type(int64_t x, int64_t y)
+int	get_map_type(int64_t x, int64_t y)
 NOPROF
 {
 	t_map_info	*map;

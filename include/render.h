@@ -115,6 +115,7 @@ t_ivec2			text_center(char *text, char *font_name,
 /* Walls rendering */
 void			render_walls(int64_t col_start, int64_t col_end);
 t_ray			shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos, double max_dist);
+int				get_map_type(int64_t x, int64_t y);
 
 /* Lights */
 t_ivec3			get_lighting_level(t_vec3 pos, t_vec3 normal);
