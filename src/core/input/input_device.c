@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_device.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 21:37:34 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/18 14:27:55 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/14 00:09:22 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,12 @@ void	cub_update_mouse_pos(int x, int y)
 t_ivec2	get_mouse_position(void)
 {
 	return (get_app()->mouse.position);
+}
+
+void	reset_mouse_pos(void)
+{
+	t_mlx	*app;
+
+	app = get_app();
+	mlx_mouse_move(app->win, app->settings.halfw_w, app->settings.halfw_h);
 }

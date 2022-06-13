@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_manager.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:00:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 15:41:31 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/13 23:31:13 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,11 @@ void	update_ui_click_end(int button)
 	if (app->ui.state == MAIN_MENU)
 		update_main_menu_click_end(button);
 	else if (app->ui.state == NEW_GAME_MENU)
+	{
 		update_new_game_menu_click_end(button);
+		if (app->ui.new_game_menu.btn_start.clicked == TRUE)
+			reset_mouse_pos();
+	}
 	else if (app->ui.state == OPTION_MENU)
 		update_settings_menu_click_end(button);
 }

@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/13 00:47:00 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/13 15:09:33 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,16 @@ void	render_test_scene(const t_mlx *app)
 		int col = trgb(0, l->color.x, l->color.y, l->color.z);
 		draw_circle(ivec2(l->pos.x, l->pos.y), 7, col);
 	}
-	draw_circle(v2_to_iv2(get_player()->world_pos), 10, GREEN);
-	draw_circle(v2_to_iv2(get_player()->world_pos), 5, BLUE);
+	draw_circle(v2_to_iv2(get_player()->world_pos), 6, GREEN);
 	if (app->ui.debug == TRUE)
 		print_player_vector();
 	t_player *player = get_player();
+	draw_line(v2_to_iv2(player->world_pos), app->debug.dx, BLUE);
+	draw_line(v2_to_iv2(player->world_pos), app->debug.dy, RED);
 	t_ivec2 mouse_pos = get_mouse_position();
 	t_ivec3 light = get_lighting_level(vec3(mouse_pos.x, mouse_pos.y, 0),
 		vec3(player->forward.x, player->forward.y, 0.0));
 	draw_circle(mouse_pos, 10, trgb(0, light.x, light.y, light.z));
-//	ft_print_ivec2(player->collision);
 //	if (app->ui.debug == TRUE)
 //		debug_rays();
 }

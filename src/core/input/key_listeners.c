@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_listeners.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:42:50 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 15:45:45 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/13 23:16:16 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	handle_escape(void)
 	t_mlx	*app;
 
 	app = get_app();
+	mlx_mouse_show();
 	if (app->app_state == IN_GAME)
 	{
 		save_game(app->gamestate.name);

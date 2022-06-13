@@ -6,14 +6,13 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 18:00:21 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/13 01:17:06 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/14 00:24:14 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "input_code.h"
 #include "render.h"
-#include <math.h>
 
 static void		is_colliding(t_vec2 future_pos);
 
@@ -92,5 +91,44 @@ static void	is_colliding(t_vec2 future_pos)
 		if (ray.hit == FALSE)
 			player->world_pos.y = future_pos.y;
 	}
-//	ft_print_vec2(player->world_pos);
 }
+
+//static void	check_xpos(t_vec2 direction, t_vec2 future_pos)
+//{
+//	t_player	*player;
+//
+//	player = get_player();
+//	if (direction.x > 0 && \
+//		get_map_type((int64_t)(future_pos.x + COLLISION_PAD) / CELL_SIZE,
+//			(int64_t)(player->world_pos.y / CELL_SIZE) == EMPTY))
+//	{
+//		get_app()->debug.dx = ivec2((int64_t)(future_pos.x + COLLISION_PAD), (int64_t)player->world_pos.y);
+//		player->world_pos.x = future_pos.x;
+//	}
+//	else if (direction.x < 0 && \
+//		get_map_type((int64_t)(future_pos.x - COLLISION_PAD) / CELL_SIZE,
+//			(int64_t)(player->world_pos.y / CELL_SIZE) == EMPTY))
+//	{
+//		get_app()->debug.dx = ivec2((int64_t)(future_pos.x - COLLISION_PAD), (int64_t)player->world_pos.y);
+//		player->world_pos.x = future_pos.x;
+//	}
+//}
+//
+//static void	check_ypos(t_vec2 direction, t_vec2 future_pos)
+//{
+//	t_player	*player;
+//
+//	player = get_player();
+//	if (direction.y > 0 && get_map_type((int64_t)(player->world_pos.x / CELL_SIZE),
+//			(int64_t)(future_pos.y + COLLISION_PAD) / CELL_SIZE) == EMPTY)
+//	{
+//		get_app()->debug.dy = ivec2((int64_t)player->world_pos.x, (int64_t)(future_pos.y + COLLISION_PAD));
+//		player->world_pos.y = future_pos.y;
+//	}
+//	else if (direction.y < 0 && get_map_type((int64_t)(player->world_pos.x / CELL_SIZE),
+//			(int64_t)(future_pos.y - COLLISION_PAD) / CELL_SIZE) == EMPTY)
+//	{
+//		get_app()->debug.dy = ivec2((int64_t)player->world_pos.x, (int64_t)(future_pos.y - COLLISION_PAD));
+//		player->world_pos.y = future_pos.y;
+//	}
+//}

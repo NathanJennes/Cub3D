@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/09 17:09:55 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/13 23:44:17 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,15 @@
 # define VOID		-1
 
 # define CELL_SIZE		20
-# define COLLISION_PAD	5
+# define COLLISION_PAD	3
 
 # define RENDER_WORKER_COUNT 4
+
+typedef struct s_debug
+{
+	t_ivec2	dx;
+	t_ivec2	dy;
+}	t_debug;
 
 typedef union s_rgb
 {
@@ -59,6 +65,7 @@ typedef struct s_mouse
 {
 	t_ivec2	position;
 	t_bool	buttons[MAX_MOUSE_BUTTONS];
+	t_ivec2	delta;
 }	t_mouse;
 
 typedef struct s_map_info
@@ -185,6 +192,7 @@ typedef struct s_mlx
 	t_bool				keys[MAX_KEYCODE];
 	t_math				pc;
 	t_renderer			renderer;
+	t_debug				debug;
 }	t_mlx;
 
 /* core.c */
@@ -215,7 +223,7 @@ t_bool		is_mouse_down(int button) NOPROF;
 
 void		cub_update_mouse_pos(int x, int y) NOPROF;
 t_ivec2		get_mouse_position(void) NOPROF;
-
+void		reset_mouse_pos(void);
 void		update_player_vectors(t_player *player) NOPROF;
 void		update_player(t_player *player) NOPROF;
 
