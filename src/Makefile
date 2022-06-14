@@ -36,6 +36,10 @@ FONT_FILE		:=	load_font_bitmap.c load_font_meta.c render_font.c	\
 					text_position.c text_box_size.c
 FONT_SRCS		:=	$(addprefix $(FONT_DIR)/, $(FONT_FILE))
 
+SPRITE_DIR		:=	$(RENDER_DIR)/sprites
+SPRITE_FILE		:=	render_sprite.c sprite_manager.c depth_control.c
+SPRITE_SRCS		:=	$(addprefix $(SPRITE_DIR)/, $(SPRITE_FILE))
+
 UI_DIR			:=	ui
 UI_FILE			:=	fps_counter.c ui_helper.c ui_manager.c						\
 					render_minimap.c ui_init.c print_debug.c
@@ -110,6 +114,7 @@ SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\
 					$(addprefix $(SRCS_DIR)/, $(FONT_SRCS))						\
 					$(addprefix $(SRCS_DIR)/, $(SETTINGS_SRCS))					\
 					$(addprefix $(SRCS_DIR)/, $(UI_SETTINGS_MENU_SRCS))			\
+					$(addprefix $(SRCS_DIR)/, $(SPRITE_SRCS))					\
 
 PROFILE_SRCS	:=	$(SRCS)	\
 					$(addprefix $(SRCS_DIR)/, $(PROFILING_SRCS))				\
@@ -196,6 +201,10 @@ $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(UI_SETTINGS_MENU_DIR)/%.c | $(RELEASE_OBJ
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
+$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(SPRITE_DIR)/%.c | $(RELEASE_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
 $(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
 	@printf "$(_BLUE)\nCompiled source files\n"
 	@$(BIN_CC) $(RELEASE_BIN_LDFLAGS) $(RELEASE_OBJS) $(RELEASE_LIBS) -o ../$@
@@ -258,6 +267,10 @@ $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(SETTINGS_DIR)/%.c | $(DEBUG_OBJS_DIR)
 	@printf "$(_GREEN)█$(_END)"
 
 $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_SETTINGS_MENU_DIR)/%.c | $(DEBUG_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(SPRITE_DIR)/%.c | $(DEBUG_OBJS_DIR)
 	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
@@ -327,6 +340,10 @@ $(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(SETTINGS_DIR)/%.c | $(PROFILE_OBJS_DIR)
 	@printf "$(_GREEN)█$(_END)"
 
 $(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(UI_SETTINGS_MENU_DIR)/%.c | $(PROFILE_OBJS_DIR)
+	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(SPRITE_DIR)/%.c | $(PROFILE_OBJS_DIR)
 	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 

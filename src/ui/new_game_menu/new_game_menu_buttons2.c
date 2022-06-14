@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:09:40 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/23 17:13:57 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/10 13:58:33 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int	btn_start_new_game(t_button *button)
 			+ menu->first_save_offset].name);
 		app->gamestate = app->maps[menu->selected_save
 			+ menu->first_save_offset];
+		update_player_vectors(get_player());
+		init_sprite_manager();
 		app->app_state = IN_GAME;
 	}
 	return (0);

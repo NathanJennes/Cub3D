@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:52:33 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 15:42:44 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/10 19:47:52 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ void	create_texture_grayscale(t_texture *tex)
 
 void	create_texture_inverse_grayscale(t_texture *tex)
 {
-	size_t		tex_size;
-	size_t		i;
-	int			*pixel;
-	int			*original_pixel;
-	int			gray;
+	size_t	tex_size;
+	size_t	i;
+	int		*pixel;
+	int		*original_pixel;
+	int		gray;
 
 	tex->inversed_grayscale = (uint8_t *)mlx_get_data_addr(
 			tex->inversed_grayscale_handle, &tex->bpp,

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:51:10 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 16:49:25 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/10 13:43:15 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	close_app(void)
 	destroy_window();
 	unload_texture_manager();
 	unload_saves();
+	clear_sprite_manager();
 	gc_clean();
 	exit(EXIT_SUCCESS);
 }
@@ -35,6 +36,7 @@ void	error_close_app(void)
 	destroy_window();
 	unload_texture_manager();
 	unload_saves();
+	clear_sprite_manager();
 	gc_clean();
 	printf("Error\n");
 	exit(EXIT_FAILURE);

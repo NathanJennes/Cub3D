@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
 /*   Updated: 2022/06/10 17:45:25 by cybattis         ###   ########.fr       */
@@ -122,6 +122,9 @@ t_ivec3			get_lighting_level(t_vec3 pos, t_vec3 normal);
 int				apply_light_to_color(int color, t_ivec3 light);
 void			add_light(t_vec3 pos, t_ivec3 color, double intensity);
 void			free_lights(t_gamestate *gamestate);
+
+/* Sprite */
+void			render_sprite(t_sprite *sprite);
 
 /* Utils */
 int				outside_mmap_bounds(int x, int y) NOPROF;

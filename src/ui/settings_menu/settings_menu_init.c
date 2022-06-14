@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:36:08 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 15:36:37 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/07 19:28:50 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	init_settings_menu(void)
 	menu->lbl_fov = create_label(ivec2_zero(),
 			gc_itoa(get_settings()->fov), ivec2(200, 100));
 	menu->slid_sens = create_slider(ivec2_zero(),
-			ivec2(350, 20), vec3(0.5, 10.0,
+			ivec2(350, 20), vec3(0.1, 10.0,
 				(float)get_settings()->cam_sensitivity));
 	menu->lbl_sens = create_label(ivec2_zero(),
 			gc_itoa(get_settings()->cam_sensitivity), ivec2(200, 100));

@@ -6,12 +6,14 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 16:36:31 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 18:49:48 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/10 17:36:27 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <float.h>
 #include "core.h"
 #include "render.h"
+#include "leaky.h"
 
 static void		render_multithreaded(t_renderer *renderer);
 static void		render_singlethreaded(void);
@@ -22,10 +24,12 @@ void	init_renderer(void)
 	t_renderer	*renderer;
 
 	renderer = &get_app()->renderer;
-	i = 0;
+	renderer->depth_buffer = gc_calloc(get_settings()->win_w, sizeof (double));
+	ft_memsetd(renderer->depth_buffer, DBL_MAX, get_settings()->win_w);
 	renderer->running = TRUE;
 	renderer->multithreading = TRUE;
 	pthread_mutex_init(&renderer->running_lock, NULL);
+	i = 0;
 	while (i < RENDER_WORKER_COUNT)
 	{
 		pthread_mutex_init(&renderer->locks[i], NULL);
@@ -63,6 +67,7 @@ void	renderer_render(void)
 	t_renderer	*renderer;
 
 	renderer = &get_app()->renderer;
+	ft_memsetd(renderer->depth_buffer, DBL_MAX, get_settings()->win_w);
 	if (renderer->multithreading)
 		render_multithreaded(renderer);
 	else

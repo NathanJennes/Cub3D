@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_wall.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/07 14:51:44 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/14 10:55:28 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 #include "render.h"
 #include "texture.h"
 
-void		render_floor(t_ivec2 pos, t_wall wall, t_ray *ray, t_ivec3 lighting);
-static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_ivec3 lighting);
+void				render_floor(t_ivec2 pos, t_wall wall, t_ray *ray,
+						t_ivec3 lighting);
+static void			render_wall(t_ivec2 pos, t_wall wall, t_ray *ray,
+						t_ivec3 lighting);
 
 static t_texture	*get_face_texture(t_ray *ray, uint8_t **tx_data);
 static double		get_texture_position(t_texture *texture, t_ray *ray);
@@ -40,6 +42,7 @@ static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_ivec3 lighting)
 	int64_t		tx;
 	int			px_color;
 
+	set_depth_at(pos.x, ray->distance * CELL_SIZE);
 	texture = get_face_texture(ray, &tx_data);
 	tx = (int64_t)get_texture_position(texture, ray);
 	ratio = (double)texture->width / (double)wall.real_size;
