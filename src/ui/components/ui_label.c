@@ -25,7 +25,7 @@ t_label	create_label(t_ivec2 pos, char *text, t_ivec2 size)
 	label.tex_id = new_texture(size.x, size.y);
 	render_text_tex(label.text, DEFAULT_FONT,
 		text_center(label.text, DEFAULT_FONT, 30,
-			ivec2(size.x / 2, + size.y / 2)),
+			ivec2(size.x / 2, size.y / 2)),
 		ivec2(30, label.tex_id));
 	finish_new_texture(label.tex_id);
 	return (label);

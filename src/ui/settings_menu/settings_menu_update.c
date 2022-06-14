@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings_menu_update.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:36:24 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 15:47:27 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/14 10:42:15 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include "ui.h"
 #include "leaky.h"
 
-void update_labels(int *last_fov, double *last_sens, t_ui_settings_menu *menu);
+void	update_labels(int *last_fov, double *last_sens,
+			t_ui_settings_menu *menu);
 
 void	update_settings_menu(void)
 {
@@ -33,8 +34,11 @@ void	update_settings_menu(void)
 	update_labels(&last_fov, &last_sens, menu);
 }
 
-void update_labels(int *last_fov, double *last_sens, t_ui_settings_menu *menu)
+void	update_labels(int *last_fov, double *last_sens,
+			t_ui_settings_menu *menu)
 {
+	char	*text;
+
 	if (*last_fov != (int)menu->slid_fov.value)
 	{
 		gc_free(menu->lbl_fov.text);
@@ -44,11 +48,12 @@ void update_labels(int *last_fov, double *last_sens, t_ui_settings_menu *menu)
 	}
 	if (*last_sens != menu->slid_sens.value)
 	{
-		char	*text;
-
 		text = gc_itoa((int)menu->slid_sens.value);
 		text = gc_strappend(text, '.', TRUE);
-		text = gc_strjoin(text, gc_itoa((int)((menu->slid_sens.value - (double)((int)menu->slid_sens.value)) * 10.0)), FREE_BOTH);
+		text = gc_strjoin(text,
+				gc_itoa((int)((menu->slid_sens.value - \
+					(double)((int)menu->slid_sens.value)) * 10.0)),
+				FREE_BOTH);
 		gc_free(menu->lbl_sens.text);
 		update_ui_label_text(&menu->lbl_sens, text);
 		*last_sens = menu->slid_sens.value;

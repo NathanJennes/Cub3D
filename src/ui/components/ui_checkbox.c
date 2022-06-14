@@ -46,8 +46,8 @@ void	render_ui_checkbox(t_checkbox *checkbox)
 		render_ui_texture_inverse_grayscale(checkbox->tex_id,
 			infos->pos.x, infos->pos.y);
 	else if (checkbox->hovered || checkbox->checked)
-		render_ui_texture_grayscale(checkbox->tex_id, infos->pos.x, infos->pos.y);
+		render_ui_texture_grayscale(checkbox->tex_id, infos->pos.x,
+			infos->pos.y);
 	else
 		render_ui_texture(checkbox->tex_id, infos->pos.x, infos->pos.y);
 }
-

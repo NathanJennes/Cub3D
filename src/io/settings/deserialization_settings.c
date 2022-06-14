@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   deserialization_settings.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 14:30:37 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 15:13:28 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/14 10:27:39 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "leaky.h"
 
-int	parse_fov(char *line, t_settings *settings);
-int	parse_sens(char *line, t_settings *settings);
+int			parse_fov(char *line, t_settings *settings);
+int			parse_sens(char *line, t_settings *settings);
 
+static void	set_settings_out(t_settings *settings_out);
 static int	parse_line(char *line, t_settings *settings);
 static int	parse_win(char *line, t_settings *settings);
 
@@ -44,11 +45,16 @@ int	deserialize_settings(t_settings *settings_out, int fd)
 		printf("Settings file currupted at line: %d\n", line_num);
 		return (0);
 	}
+	set_settings_out(settings_out);
+	return (1);
+}
+
+static void	set_settings_out(t_settings *settings_out)
+{
 	settings_out->desired_win_w = settings_out->win_w;
 	settings_out->desired_win_h = settings_out->win_h;
 	settings_out->halfw_w = settings_out->win_w / 2;
 	settings_out->halfw_h = settings_out->win_h / 2;
-	return (1);
 }
 
 static int	parse_line(char *line, t_settings *settings)

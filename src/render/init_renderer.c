@@ -31,7 +31,8 @@ void	init_renderer(void)
 		pthread_mutex_init(&renderer->locks[i], NULL);
 		pthread_mutex_init(&renderer->working_lock[i], NULL);
 		pthread_mutex_lock(&renderer->locks[i]);
-		pthread_create(&renderer->workers[i], NULL, renderer_worker_loop, (void *)i);
+		pthread_create(&renderer->workers[i], NULL,
+			renderer_worker_loop, (void *)i);
 		pthread_detach(renderer->workers[i]);
 		i++;
 	}

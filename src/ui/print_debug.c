@@ -33,14 +33,14 @@ NOPROF
 	if (get_app()->renderer.multithreading)
 	{
 		render_text("multithreaded", DEFAULT_FONT, 20,
-			text_center_height("singlethreaded", DEFAULT_FONT, 20,
-				ivec2(debug_pos.x, debug_pos.y)));
+		text_center_height("singlethreaded", DEFAULT_FONT, 20,
+			ivec2(debug_pos.x, debug_pos.y)));
 	}
 	else
 	{
 		render_text("singlethreaded", DEFAULT_FONT, 20,
-			text_center_height("singlethreaded", DEFAULT_FONT, 20,
-				ivec2(debug_pos.x, debug_pos.y)));
+		text_center_height("singlethreaded", DEFAULT_FONT, 20,
+			ivec2(debug_pos.x, debug_pos.y)));
 	}
 }
 
@@ -51,11 +51,11 @@ static void	debug_rays(t_ivec2 *pos)
 	player = get_player();
 	put_text(ivec2(pos->x, pos->y), WHITE, "Ray angle ");
 	print_float(get_math()->base_angle,
-			ivec2(pos->x + str_px_size("Ray angle "), pos->y), WHITE);
+		ivec2(pos->x + str_px_size("Ray angle "), pos->y), WHITE);
 	pos->y += 20;
 	put_text(ivec2(pos->x, pos->y), WHITE, "Ray increment ");
 	print_vec(player->plane_inc,
-			ivec2(pos->x + str_px_size("Plane increment "), pos->y), WHITE);
+		ivec2(pos->x + str_px_size("Plane increment "), pos->y), WHITE);
 	pos->y += 20;
 }
 
@@ -93,5 +93,5 @@ NOPROF
 	pos->y += 20;
 	put_text(ivec2(pos->x, pos->y), WHITE, "FOV ");
 	print_int(get_settings()->fov,
-			ivec2(pos->x + str_px_size("FOV "), pos->y), WHITE);
+		ivec2(pos->x + str_px_size("FOV "), pos->y), WHITE);
 }

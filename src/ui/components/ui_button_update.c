@@ -37,7 +37,8 @@ void	update_ui_button_click_begin(t_button *button, int mouse_btn)
 	t_ivec2			mouse_pos;
 	t_ui_component	*component;
 
-	if (!button->infos.displayed || !button->is_clickable ||  mouse_btn != MOUSE_LEFT)
+	if (!button->infos.displayed || !button->is_clickable
+		|| mouse_btn != MOUSE_LEFT)
 		return ;
 	component = &button->infos;
 	mouse_pos = get_mouse_position();
@@ -55,7 +56,8 @@ void	update_ui_button_click_end(t_button *button, int mouse_btn)
 	t_ivec2			mouse_pos;
 	t_ui_component	*component;
 
-	if (!button->infos.displayed || !button->is_clickable || mouse_btn != MOUSE_LEFT)
+	if (!button->infos.displayed || !button->is_clickable
+		|| mouse_btn != MOUSE_LEFT)
 		return ;
 	component = &button->infos;
 	mouse_pos = get_mouse_position();

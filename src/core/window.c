@@ -22,7 +22,8 @@ void	init_window(char *win_name)
 	app->mlx = mlx_init();
 	if (!app->mlx)
 		error_close_app();
-	app->win = mlx_new_window(app->mlx, settings->win_w, settings->win_h, win_name);
+	app->win = \
+		mlx_new_window(app->mlx, settings->win_w, settings->win_h, win_name);
 	if (!app->win)
 		error_close_app();
 	app->frame.img = mlx_new_image(app->mlx, settings->win_w, settings->win_h);

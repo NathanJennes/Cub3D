@@ -15,10 +15,10 @@
 
 void	draw_rect_unsafe(t_ivec2 pos, t_ivec2 size, int color)
 {
-	int		y;
-	int		x;
-	int64_t	*pixels;
-	int64_t	col;
+	int			y;
+	int			x;
+	int64_t		*pixels;
+	int64_t		col;
 	t_settings	*settings;
 
 	settings = get_settings();

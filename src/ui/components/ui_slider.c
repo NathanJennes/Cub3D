@@ -64,7 +64,9 @@ static void	update_cursor_pos(t_slider *slider)
 	int64_t			pos;
 
 	infos = &slider->infos;
-	pos = (int64_t)(ft_ilerpf(slider->min, slider->max, slider->value) * infos->size.x);
+	pos = (int64_t)
+		(ft_ilerpf(slider->min, slider->max, slider->value)
+			* (double)infos->size.x);
 	slider->cursor_pos_x = pos;
 }
 

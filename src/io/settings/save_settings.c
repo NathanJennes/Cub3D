@@ -42,7 +42,7 @@ static void	save_player(t_settings *settings, int fd)
 	dprintf(fd, "SENS ");
 	dprintf(fd, "%d.%d\n", (int)settings->cam_sensitivity,
 		(int)((settings->cam_sensitivity
-			- (double)((int)settings->cam_sensitivity)) * 100));
+				- (double)((int)settings->cam_sensitivity)) * 100));
 }
 
 static void	save_win(t_settings *settings, int fd)

@@ -37,7 +37,8 @@ void	update_ui_checkbox_click_begin(t_checkbox *checkbox, int mouse_btn)
 	t_ivec2			mouse_pos;
 	t_ui_component	*component;
 
-	if (!checkbox->infos.displayed || !checkbox->is_clickable || mouse_btn != MOUSE_LEFT)
+	if (!checkbox->infos.displayed || !checkbox->is_clickable
+		|| mouse_btn != MOUSE_LEFT)
 		return ;
 	component = &checkbox->infos;
 	mouse_pos = get_mouse_position();
@@ -57,7 +58,8 @@ void	update_ui_checkbox_click_end(t_checkbox *checkbox, int mouse_btn)
 	t_ivec2			mouse_pos;
 	t_ui_component	*component;
 
-	if (!checkbox->infos.displayed || !checkbox->is_clickable || mouse_btn != MOUSE_LEFT)
+	if (!checkbox->infos.displayed || !checkbox->is_clickable
+		|| mouse_btn != MOUSE_LEFT)
 		return ;
 	component = &checkbox->infos;
 	mouse_pos = get_mouse_position();

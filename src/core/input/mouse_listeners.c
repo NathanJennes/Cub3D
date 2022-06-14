@@ -19,8 +19,10 @@ void	update_ui_click_end(int button);
 void	mouse_click_begin(int button)
 {
 	update_ui_click_begin(button);
-	add_light(vec3(get_mouse_position().x, get_mouse_position().y, CELL_SIZE / 2),
-		ivec3(rand() % (255 - 1) + 1, rand() % (255 - 1) + 1, rand() % (255 - 1) + 1),
+	add_light(
+		vec3(get_mouse_position().x, get_mouse_position().y, CELL_SIZE / 2),
+		ivec3(rand() % (255 - 1) + 1, rand() % (255 - 1) + 1,
+			rand() % (255 - 1) + 1),
 		1000.0);
 }
 

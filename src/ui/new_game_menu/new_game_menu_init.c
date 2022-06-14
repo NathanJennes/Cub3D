@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_game_menu_init.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:48:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 14:23:36 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/14 10:43:12 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		update_display_status(void);
 void	init_new_game_menu(void)
 {
 	t_ui_new_game_menu	*menu;
-	t_settings	*settings;
+	t_settings			*settings;
 
 	settings = get_settings();
 	menu = &get_ui()->new_game_menu;
@@ -51,15 +51,15 @@ void	init_new_game_menu(void)
 			ivec2(0, 0), btn_start_new_game);
 	menu->btn_start.is_clickable = FALSE;
 	menu->btn_save[0] = create_checkbox(NULL, ivec2(0, 100),
-		btn_select_save1, btn_unselect_save1);
+			btn_select_save1, btn_unselect_save1);
 	menu->btn_save[1] = create_checkbox(NULL, ivec2(0, 0),
-		btn_select_save2, btn_unselect_save2);
+			btn_select_save2, btn_unselect_save2);
 	menu->btn_save[2] = create_checkbox(NULL, ivec2(0, 0),
-		btn_select_save3, btn_unselect_save3);
+			btn_select_save3, btn_unselect_save3);
 	menu->btn_save[3] = create_checkbox(NULL, ivec2(0, 0),
-		btn_select_save4, btn_unselect_save4);
+			btn_select_save4, btn_unselect_save4);
 	menu->btn_save[4] = create_checkbox(NULL, ivec2(0, 0),
-		btn_select_save5, btn_unselect_save5);
+			btn_select_save5, btn_unselect_save5);
 	update_display_status();
 	init_textures();
 	init_positions();
@@ -100,7 +100,7 @@ void	init_textures(void)
 	{
 		checkbox = &menu->btn_save[i];
 		if (i < app->maps_count && (checkbox->infos.displayed
-			|| checkbox->tex_id == INVALID_TEXTURE))
+				|| checkbox->tex_id == INVALID_TEXTURE))
 		{
 			checkbox->tex_id = new_texture(250, 50);
 			clear_texture(trgb(0, 255, 51, 51), checkbox->tex_id);

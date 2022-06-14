@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 18:00:21 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/14 10:05:36 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/14 10:25:13 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,26 @@
 #include "input_code.h"
 #include "render.h"
 
-static void		is_colliding(t_vec2 future_pos);
+static void	update_player_position(t_player *player, t_vec2 future_pos,
+				double delta_time);
+static void	update_player_direction(t_player *player, double delta_time);
+static void	is_colliding(t_vec2 future_pos);
 
 void	update_player(t_player *player)
 {
 	t_vec2		future_pos;
-	t_settings	*settings;
 	double		delta_time;
 
-	settings = get_settings();
 	delta_time = get_app()->delta_time;
 	future_pos = get_player()->world_pos;
+	update_player_position(player, future_pos, delta_time);
+	update_player_direction(player, delta_time);
+	update_player_vectors(player);
+}
+
+static void	update_player_position(t_player *player, t_vec2 future_pos,
+		double delta_time)
+{
 	if (is_key_down(KEY_W))
 	{
 		future_pos.y += PLAYER_SPEED * player->forward.y * delta_time;
@@ -47,17 +56,23 @@ void	update_player(t_player *player)
 	{
 		future_pos.y -= PLAYER_SPEED * player->right.y * delta_time;
 		future_pos.x -= PLAYER_SPEED * player->right.x * delta_time;
-		ft_print_vec2(future_pos);
 		is_colliding(future_pos);
 	}
-	get_app()->mouse.delta.x = get_mouse_position().x - get_app()->settings.halfw_w;
+}
+
+static void	update_player_direction(t_player *player, double delta_time)
+{
+	t_settings	*settings;
+
+	settings = get_settings();
+	get_app()->mouse.delta.x = \
+		get_mouse_position().x - get_app()->settings.halfw_w;
 	get_player()->direction -= 0.0025 * (get_settings()->cam_sensitivity
 		* (double)get_app()->mouse.delta.x);
 	if (is_key_down(KEY_RIGHT))
 		player->direction -= PI / 4.0 * settings->cam_sensitivity * delta_time;
 	if (is_key_down(KEY_LEFT))
 		player->direction += PI / 4.0 * settings->cam_sensitivity * delta_time;
-	update_player_vectors(player);
 }
 
 static void	is_colliding(t_vec2 future_pos)
@@ -80,58 +95,21 @@ static void	is_colliding(t_vec2 future_pos)
 	}
 	else
 	{
-		direction = vec2(future_pos.x - player->world_pos.x, player->world_pos.y);
+		direction = \
+			vec2(future_pos.x - player->world_pos.x, player->world_pos.y);
 		max_dist = vec2_mag(direction);
 		vec2_normalize(&direction);
-		ray = shoot_ray(direction, player->world_pos, player->map_pos, (max_dist + COLLISION_PAD) / CELL_SIZE);
+		ray = shoot_ray(direction, player->world_pos, player->map_pos,
+				(max_dist + COLLISION_PAD) / CELL_SIZE);
 		if (ray.hit == FALSE)
 			player->world_pos.x = future_pos.x;
-
-		direction = vec2(player->world_pos.x, future_pos.y - player->world_pos.y);
+		direction = \
+			vec2(player->world_pos.x, future_pos.y - player->world_pos.y);
 		max_dist = vec2_mag(direction);
 		vec2_normalize(&direction);
-		ray = shoot_ray(direction, player->world_pos, player->map_pos, (max_dist + COLLISION_PAD) / CELL_SIZE);
+		ray = shoot_ray(direction, player->world_pos, player->map_pos,
+				(max_dist + COLLISION_PAD) / CELL_SIZE);
 		if (ray.hit == FALSE)
 			player->world_pos.y = future_pos.y;
 	}
 }
-
-//static void	check_xpos(t_vec2 direction, t_vec2 future_pos)
-//{
-//	t_player	*player;
-//
-//	player = get_player();
-//	if (direction.x > 0 && \
-//		get_map_type((int64_t)(future_pos.x + COLLISION_PAD) / CELL_SIZE,
-//			(int64_t)(player->world_pos.y / CELL_SIZE) == EMPTY))
-//	{
-//		get_app()->debug.dx = ivec2((int64_t)(future_pos.x + COLLISION_PAD), (int64_t)player->world_pos.y);
-//		player->world_pos.x = future_pos.x;
-//	}
-//	else if (direction.x < 0 && \
-//		get_map_type((int64_t)(future_pos.x - COLLISION_PAD) / CELL_SIZE,
-//			(int64_t)(player->world_pos.y / CELL_SIZE) == EMPTY))
-//	{
-//		get_app()->debug.dx = ivec2((int64_t)(future_pos.x - COLLISION_PAD), (int64_t)player->world_pos.y);
-//		player->world_pos.x = future_pos.x;
-//	}
-//}
-//
-//static void	check_ypos(t_vec2 direction, t_vec2 future_pos)
-//{
-//	t_player	*player;
-//
-//	player = get_player();
-//	if (direction.y > 0 && get_map_type((int64_t)(player->world_pos.x / CELL_SIZE),
-//			(int64_t)(future_pos.y + COLLISION_PAD) / CELL_SIZE) == EMPTY)
-//	{
-//		get_app()->debug.dy = ivec2((int64_t)player->world_pos.x, (int64_t)(future_pos.y + COLLISION_PAD));
-//		player->world_pos.y = future_pos.y;
-//	}
-//	else if (direction.y < 0 && get_map_type((int64_t)(player->world_pos.x / CELL_SIZE),
-//			(int64_t)(future_pos.y - COLLISION_PAD) / CELL_SIZE) == EMPTY)
-//	{
-//		get_app()->debug.dy = ivec2((int64_t)player->world_pos.x, (int64_t)(future_pos.y - COLLISION_PAD));
-//		player->world_pos.y = future_pos.y;
-//	}
-//}

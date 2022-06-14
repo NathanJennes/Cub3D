@@ -29,7 +29,7 @@ void	create_texture_vflip(t_texture *tex)
 		{
 			pixel = (int *)(tex->vflip + px * sizeof(int));
 			original_pixel = (int *)
-					(tex->original + (i * tex->line_size) + j * sizeof(int));
+				(tex->original + (i * tex->line_size) + j * sizeof(int));
 			*pixel = *original_pixel;
 			j--;
 			px++;

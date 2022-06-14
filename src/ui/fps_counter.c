@@ -50,9 +50,11 @@ void	display_fps(int64_t time_diff)
 		elapsed -= 500;
 	}
 	render_text(fps, DEFAULT_FONT, 20,
-		text_center_width(fps, DEFAULT_FONT, 20, ivec2(get_settings()->win_w - str_px_size(fps) - 10, 15)));
+		text_center_width(fps, DEFAULT_FONT, 20,
+			ivec2(get_settings()->win_w - str_px_size(fps) - 10, 15)));
 	render_text(ms, DEFAULT_FONT, 20,
-		text_center_width(ms, DEFAULT_FONT, 20, ivec2(get_settings()->win_w - str_px_size(ms) - 10, 35)));
+		text_center_width(ms, DEFAULT_FONT, 20,
+			ivec2(get_settings()->win_w - str_px_size(ms) - 10, 35)));
 	elapsed += time_diff;
 }
 
