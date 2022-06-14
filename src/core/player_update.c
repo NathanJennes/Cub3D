@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 18:00:21 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/14 00:24:14 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/14 10:05:36 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ void	update_player(t_player *player)
 		ft_print_vec2(future_pos);
 		is_colliding(future_pos);
 	}
+	get_app()->mouse.delta.x = get_mouse_position().x - get_app()->settings.halfw_w;
+	get_player()->direction -= 0.0025 * (get_settings()->cam_sensitivity
+		* (double)get_app()->mouse.delta.x);
 	if (is_key_down(KEY_RIGHT))
 		player->direction -= PI / 4.0 * settings->cam_sensitivity * delta_time;
 	if (is_key_down(KEY_LEFT))

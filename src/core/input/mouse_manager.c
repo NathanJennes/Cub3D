@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:09:40 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/14 00:24:14 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/14 09:57:17 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,6 @@ int	mouse_move_hooks(int x, int y, void *unused)
 {
 	(void)unused;
 	cub_update_mouse_pos(x, y);
-	get_app()->mouse.delta.x = get_mouse_position().x - get_app()->settings.halfw_w;
-	get_player()->direction -= 0.01 * (get_settings()->cam_sensitivity
-									   * (double)get_app()->mouse.delta.x);
 	update_ui();
 	return (0);
 }

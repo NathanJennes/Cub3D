@@ -31,4 +31,5 @@ void	reset_mouse_pos(void)
 
 	app = get_app();
 	mlx_mouse_move(app->win, app->settings.halfw_w, app->settings.halfw_h);
+	cub_update_mouse_pos(app->settings.halfw_w, app->settings.halfw_h);
 }
