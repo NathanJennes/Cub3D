@@ -33,7 +33,7 @@ void	create_texture_grayscale(t_texture *tex)
 		pixel = (int *)(tex->grayscale + i * sizeof(int));
 		gray = (get_r(*original_pixel) + get_g(*original_pixel)
 				+ get_b(*original_pixel)) / 3;
-		*pixel = trgb(get_t(*pixel), gray, gray, gray);
+		*pixel = trgb(get_t(*original_pixel), gray, gray, gray);
 		i++;
 	}
 }
@@ -57,7 +57,7 @@ void	create_texture_inverse_grayscale(t_texture *tex)
 		pixel = (int *)(tex->inversed_grayscale + i * sizeof(int));
 		gray = (get_r(*original_pixel) + get_g(*original_pixel)
 				+ get_b(*original_pixel)) / 3;
-		*pixel = trgb(get_t(*pixel), 255 - gray, 255 - gray, 255 - gray);
+		*pixel = trgb(get_t(*original_pixel), 255 - gray, 255 - gray, 255 - gray);
 		i++;
 	}
 }
