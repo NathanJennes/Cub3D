@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:04:44 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/28 16:45:11 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/15 18:11:09 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ t_ivec3	get_lighting_level(t_vec3 pos, t_vec3 normal)
 	return (lighting);
 }
 
-int	apply_light_to_color(int color, t_ivec3 light)
+int	apply_light_to_color(t_rgb color, t_vec3 light)
 {
 	t_vec3	result;
 
-	result.x = (double)get_r(color) * ((double)light.x / 255.0);
-	result.y = (double)get_g(color) * ((double)light.y / 255.0);
-	result.z = (double)get_b(color) * ((double)light.z / 255.0);
+	result.x = (double)color.r * light.x;
+	result.y = (double)color.g * light.y;
+	result.z = (double)color.b * light.z;
 	vec3_clamp_max(&result, 255, 255, 255);
-	return (trgb(get_t(color), (int)result.x, (int)result.y, (int)result.z));
+	return (trgb(color.t, (int)result.x, (int)result.y, (int)result.z));
 }
 
 static void	process_light(t_light *light, t_ivec3 *lighting,

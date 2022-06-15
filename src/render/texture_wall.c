@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/15 15:34:14 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/15 18:30:00 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void				render_floor(t_ivec2 pos, t_wall wall, t_ray *ray,
 						t_ivec3 lighting);
 static void			render_wall(t_ivec2 pos, t_wall wall, t_ray *ray,
-						t_ivec3 lighting);
+						t_vec3 lighting);
 
 static t_texture	*get_face_texture(t_ray *ray, t_rgb ***tx_data);
 static double		get_texture_position(t_texture *texture, t_ray *ray);
@@ -27,33 +27,48 @@ void	render_column(int64_t xcol, t_wall wall, t_ray *ray)
 {
 	t_ivec2		pos;
 	t_ivec3		lighting;
+	t_vec3		real_light;
 
-	pos = ivec2(xcol, 0);
+	pos = ivec2(xcol, wall.screen_origin);
 	lighting = get_lighting_at_col(ray);
-	render_wall(pos, wall, ray, lighting);
+	real_light = vec3((double)lighting.x / 255.0, (double)lighting.y / 255.0, (double)lighting.z / 255.0);
+	render_wall(pos, wall, ray, real_light);
 //	render_floor(pos, wall, ray, lighting);
 }
 
-static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_ivec3 lighting)
+static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_vec3 lighting)
 {
 	double		ratio;
 	t_texture	*texture;
 	t_rgb		**tx_data;
+	t_rgb		*data;
+	t_rgb		color;
+	t_vec3		result;
 	int64_t		tx;
 	double		ty;
 	int			px_color;
 
+	(void)lighting;
 	set_depth_at(pos.x, ray->distance * CELL_SIZE);
 	texture = get_face_texture(ray, &tx_data);
 	tx = (int64_t)get_texture_position(texture, ray);
+	data = tx_data[tx];
 	ratio = (double)texture->height / (double)wall.real_size;
 	ty = (double)wall.wall_origin * ratio;
-	pos.y += wall.screen_origin;
 	wall.size += wall.screen_origin;
 	while (pos.y < wall.size)
 	{
-		px_color = tx_data[tx][(int64_t)ty].color;
-		px_color = apply_light_to_color(px_color, lighting);
+		color = data[(int64_t)ty];
+		result.x = (double)color.r * lighting.x;
+		result.y = (double)color.g * lighting.y;
+		result.z = (double)color.b * lighting.z;
+		if (result.x > 255.0)
+			result.x = 255.0;
+		if (result.y > 255.0)
+			result.y = 255.0;
+		if (result.z > 255.0)
+			result.z = 255.0;
+		px_color = trgb(color.t, (int)result.x, (int)result.y, (int)result.z);
 		set_screen_pixel_unsafe(pos.x, pos.y, px_color);
 		pos.y++;
 		ty += ratio;
