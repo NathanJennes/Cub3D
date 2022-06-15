@@ -13,7 +13,7 @@
 #include <stdint.h>
 #include "core.h"
 
-static void	shade_pixel(t_rgb *data, int64_t row, int64_t total_row);
+inline static void	shade_pixel(t_rgb *data, int64_t row, int64_t total_row);
 
 void	shade_ao_texture_flat(t_rgb **data, int width, int height)
 {
@@ -81,7 +81,7 @@ void	shade_ao_texture_all(t_rgb **data, int width, int height)
 	shade_ao_texture_left(data, width, height);
 }
 
-static void	shade_pixel(t_rgb *data, int64_t row, int64_t total_row)
+inline static void	shade_pixel(t_rgb *data, int64_t row, int64_t total_row)
 {
 	double	shade_factor;
 

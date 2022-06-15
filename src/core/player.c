@@ -13,10 +13,10 @@
 #include "core.h"
 #include <math.h>
 
-static void	update_player_forward_vec(t_player *player);
-static void	update_player_right_vec(t_player *player);
-static void	update_player_cell_pos(t_player *player);
-static void	update_player_map_vec(t_player *player);
+inline static void	update_player_forward_vec(t_player *player);
+inline static void	update_player_right_vec(t_player *player);
+inline static void	update_player_cell_pos(t_player *player);
+inline static void	update_player_map_vec(t_player *player);
 
 void	update_player_vectors(t_player *player)
 {
@@ -41,25 +41,25 @@ void	update_player_vectors(t_player *player)
 			(player->right.y * get_math()->plane_len) / settings->halfw_w);
 }
 
-static void	update_player_forward_vec(t_player *player)
+inline static void	update_player_forward_vec(t_player *player)
 {
 	player->forward.x = sin(player->direction);
 	player->forward.y = cos(player->direction);
 }
 
-static void	update_player_right_vec(t_player *player)
+inline static void	update_player_right_vec(t_player *player)
 {
 	player->right.x = -cos(player->direction);
 	player->right.y = sin(player->direction);
 }
 
-static void	update_player_cell_pos(t_player *player)
+inline static void	update_player_cell_pos(t_player *player)
 {
 	player->cell_pos = player->world_pos;
 	vec2_divf(&player->cell_pos, CELL_SIZE);
 }
 
-static void	update_player_map_vec(t_player *player)
+inline static void	update_player_map_vec(t_player *player)
 {
 	player->map_pos = v2_to_iv2(player->cell_pos);
 }

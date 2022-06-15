@@ -15,8 +15,8 @@
 #include "render.h"
 #include "leaky.h"
 
-static void		render_multithreaded(t_renderer *renderer);
-static void		render_singlethreaded(void);
+inline static void		render_multithreaded(t_renderer *renderer);
+inline static void		render_singlethreaded(void);
 
 void	init_renderer(void)
 {
@@ -74,7 +74,7 @@ void	renderer_render(void)
 		render_singlethreaded();
 }
 
-static void	render_multithreaded(t_renderer *renderer)
+inline static void	render_multithreaded(t_renderer *renderer)
 {
 	int64_t	i;
 
@@ -92,7 +92,7 @@ static void	render_multithreaded(t_renderer *renderer)
 		pthread_mutex_unlock(&renderer->working_lock[i++]);
 }
 
-static void	render_singlethreaded(void)
+inline static void	render_singlethreaded(void)
 {
 	render_walls(0, get_settings()->win_w - 1);
 }

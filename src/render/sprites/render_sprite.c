@@ -14,10 +14,10 @@
 #include "core.h"
 #include "render.h"
 
-static int64_t	get_x_position(t_sprite *sprite, double *distance);
-static int64_t	get_x_from_angle(double angle);
-static void		draw_sprite(t_sprite *sprite, int64_t x_pos, double distance);
-static void		draw_col_sprite(t_sprite *sprite, int64_t x_pos, int64_t tex_x, double distance);
+inline static int64_t	get_x_position(t_sprite *sprite, double *distance);
+inline static int64_t	get_x_from_angle(double angle);
+inline static void		draw_sprite(t_sprite *sprite, int64_t x_pos, double distance);
+inline static void		draw_col_sprite(t_sprite *sprite, int64_t x_pos, int64_t tex_x, double distance);
 
 void	render_sprite(t_sprite *sprite)
 {
@@ -33,7 +33,7 @@ void	render_sprite(t_sprite *sprite)
 	draw_sprite(sprite, x_pos, distance);
 }
 
-static void		draw_sprite(t_sprite *sprite, int64_t x_pos, double distance)
+inline static void		draw_sprite(t_sprite *sprite, int64_t x_pos, double distance)
 {
 	int64_t		i;
 	int64_t		size_x;
@@ -59,7 +59,7 @@ static void		draw_sprite(t_sprite *sprite, int64_t x_pos, double distance)
 	}
 }
 
-static void		draw_col_sprite(t_sprite *sprite, int64_t x_pos, int64_t tex_x, double distance)
+inline static void		draw_col_sprite(t_sprite *sprite, int64_t x_pos, int64_t tex_x, double distance)
 {
 	int64_t		i;
 	int64_t		size_h;
@@ -83,7 +83,7 @@ static void		draw_col_sprite(t_sprite *sprite, int64_t x_pos, int64_t tex_x, dou
 	}
 }
 
-static int64_t	get_x_position(t_sprite *sprite, double *distance)
+inline static int64_t	get_x_position(t_sprite *sprite, double *distance)
 {
 	t_player	*player;
 	t_math		*math;
@@ -103,7 +103,7 @@ static int64_t	get_x_position(t_sprite *sprite, double *distance)
 	return (x_screen_pos);
 }
 
-static int64_t	get_x_from_angle(double angle)
+inline static int64_t	get_x_from_angle(double angle)
 {
 	int64_t		start;
 	int64_t		end;

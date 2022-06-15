@@ -19,8 +19,8 @@ int			parse_color(t_rgb *color, char *line)NOPROF;
 int			parse_texture(t_map_info *info, char *line)NOPROF;
 int			add_map_row(t_map_info *infos, char *line)NOPROF;
 
-static int	parse_line(t_map_info *infos, char *line)NOPROF;
-static void	setup_player(t_gamestate *save)NOPROF;
+inline static int	parse_line(t_map_info *infos, char *line)NOPROF;
+inline static void	setup_player(t_gamestate *save)NOPROF;
 
 int	load_mandatory_map(t_gamestate *save_out, int fd, char *line)
 {
@@ -49,7 +49,7 @@ int	load_mandatory_map(t_gamestate *save_out, int fd, char *line)
 	return (1);
 }
 
-static int	parse_line(t_map_info *infos, char *line)
+inline static int	parse_line(t_map_info *infos, char *line)
 {
 	if (line[0] == '\n')
 		return (1);
@@ -72,7 +72,7 @@ static int	parse_line(t_map_info *infos, char *line)
 	return (0);
 }
 
-static void	setup_player(t_gamestate *save)
+inline static void	setup_player(t_gamestate *save)
 {
 	if (save->map.spawn_dir == 'N')
 		save->player.direction = PI;

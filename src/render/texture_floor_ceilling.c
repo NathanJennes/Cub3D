@@ -15,7 +15,7 @@
 #include "render.h"
 #include <math.h>
 
-//static double	get_texture_position(t_texture *texture, t_vec2 hit);
+//inline static double	get_texture_position(t_texture *texture, t_vec2 hit);
 
 //void	render_floor(t_ivec2 pos, t_wall wall, t_ivec3 lighting)
 //{
@@ -38,7 +38,7 @@
 //	}
 //}
 
-//static double	get_texture_position(t_texture *texture, t_vec2 hit)
+//inline static double	get_texture_position(t_texture *texture, t_vec2 hit)
 //{
 //	double		pos_x;
 //	int64_t		ratio;

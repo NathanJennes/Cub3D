@@ -12,8 +12,8 @@
 
 #include "render.h"
 
-static int64_t	get_min_y_offset(char *text, char *font_name, int size);
-static int64_t	get_max_y_offset(char *text, char *font_name, int size);
+inline static int64_t	get_min_y_offset(char *text, char *font_name, int size);
+inline static int64_t	get_max_y_offset(char *text, char *font_name, int size);
 
 int64_t	get_text_width(char *text, char *font_name, int size)
 {
@@ -43,7 +43,7 @@ int64_t	get_text_width(char *text, char *font_name, int size)
 	return ((int64_t)((double)width * ratio));
 }
 
-static int64_t	get_min_y_offset(char *text, char *font_name, int size)
+inline static int64_t	get_min_y_offset(char *text, char *font_name, int size)
 {
 	t_font	*font;
 	int64_t	y_offset;
@@ -69,7 +69,7 @@ static int64_t	get_min_y_offset(char *text, char *font_name, int size)
 	return ((int64_t)((double)y_offset * ratio));
 }
 
-static int64_t	get_max_y_offset(char *text, char *font_name, int size)
+inline static int64_t	get_max_y_offset(char *text, char *font_name, int size)
 {
 	t_font	*font;
 	int64_t	y_offset;

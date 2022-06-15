@@ -6,14 +6,14 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:04:44 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/15 18:11:09 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/15 18:11:18 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "render.h"
 
-static void	process_light(t_light *light, t_ivec3 *lighting,
+inline static void	process_light(t_light *light, t_ivec3 *lighting,
 	t_vec3 *pos, t_vec3 *normal);
 
 t_ivec3	get_lighting_level(t_vec3 pos, t_vec3 normal)
@@ -46,7 +46,7 @@ int	apply_light_to_color(t_rgb color, t_vec3 light)
 	return (trgb(color.t, (int)result.x, (int)result.y, (int)result.z));
 }
 
-static void	process_light(t_light *light, t_ivec3 *lighting,
+inline static void	process_light(t_light *light, t_ivec3 *lighting,
 	t_vec3 *pos, t_vec3 *normal)
 {
 	t_ray	ray;

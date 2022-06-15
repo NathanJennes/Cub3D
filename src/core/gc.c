@@ -13,7 +13,7 @@
 #include "core.h"
 #include "leaky.h"
 
-static int	gc_callback(void *ptr);
+inline static int	gc_callback(void *ptr);
 
 void	init_gc(void)
 {
@@ -22,7 +22,7 @@ void	init_gc(void)
 	gc_set_default_capacity(1);
 }
 
-static int	gc_callback(void *ptr)
+inline static int	gc_callback(void *ptr)
 {
 	(void)ptr;
 	error_close_app();

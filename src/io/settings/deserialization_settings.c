@@ -16,9 +16,9 @@
 int			parse_fov(char *line, t_settings *settings);
 int			parse_sens(char *line, t_settings *settings);
 
-static void	set_settings_out(t_settings *settings_out);
-static int	parse_line(char *line, t_settings *settings);
-static int	parse_win(char *line, t_settings *settings);
+inline static void	set_settings_out(t_settings *settings_out);
+inline static int	parse_line(char *line, t_settings *settings);
+inline static int	parse_win(char *line, t_settings *settings);
 
 int	deserialize_settings(t_settings *settings_out, int fd)
 {
@@ -49,7 +49,7 @@ int	deserialize_settings(t_settings *settings_out, int fd)
 	return (1);
 }
 
-static void	set_settings_out(t_settings *settings_out)
+inline static void	set_settings_out(t_settings *settings_out)
 {
 	settings_out->desired_win_w = settings_out->win_w;
 	settings_out->desired_win_h = settings_out->win_h;
@@ -57,7 +57,7 @@ static void	set_settings_out(t_settings *settings_out)
 	settings_out->halfw_h = settings_out->win_h / 2;
 }
 
-static int	parse_line(char *line, t_settings *settings)
+inline static int	parse_line(char *line, t_settings *settings)
 {
 	if (ft_strncmp(line, "FOV", ft_strlen("FOV")) == 0)
 		return (parse_fov(line, settings));
@@ -68,7 +68,7 @@ static int	parse_line(char *line, t_settings *settings)
 	return (0);
 }
 
-static int	parse_win(char *line, t_settings *settings)
+inline static int	parse_win(char *line, t_settings *settings)
 {
 	char	*line_cursor;
 

@@ -16,7 +16,7 @@
 #include "render.h"
 
 void		render_test_scene(const t_mlx *app);
-static void	render_game(t_mlx *app, const t_settings *settings,
+inline static void	render_game(t_mlx *app, const t_settings *settings,
 				struct timeval time[4]);
 
 int	main_loop(void)
@@ -46,7 +46,7 @@ int	main_loop(void)
 	return (0);
 }
 
-static void	render_game(t_mlx *app, const t_settings *settings,
+inline static void	render_game(t_mlx *app, const t_settings *settings,
 		struct timeval time[4])
 {
 	gettimeofday(&time[0], NULL);

@@ -14,8 +14,8 @@
 #include "core.h"
 #include "leaky.h"
 
-static void	add_to_saves(char *save_name);
-static void	grow_saves_array(void);
+inline static void	add_to_saves(char *save_name);
+inline static void	grow_saves_array(void);
 
 void	load_all_saves(void)
 {
@@ -58,7 +58,7 @@ void	unload_saves(void)
 	gc_free(app->savegames);
 }
 
-static void	add_to_saves(char *save_name)
+inline static void	add_to_saves(char *save_name)
 {
 	t_mlx		*app;
 	t_gamestate	save;
@@ -71,7 +71,7 @@ static void	add_to_saves(char *save_name)
 	app->savegames_count++;
 }
 
-static void	grow_saves_array(void)
+inline static void	grow_saves_array(void)
 {
 	t_mlx		*app;
 	t_gamestate	*new;

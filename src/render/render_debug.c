@@ -16,10 +16,10 @@
 #include "ui.h"
 #include "render.h"
 
-//static void		print_ray(t_vec2 hit_pos) NOPROF;
-//static void		debug_rays(void) NOPROF;
-static t_vec2	rotate_vector(t_vec2 v, double angle) NOPROF;
-static void		print_player_vector(void) NOPROF;
+//inline static void		print_ray(t_vec2 hit_pos) NOPROF;
+//inline static void		debug_rays(void) NOPROF;
+inline static t_vec2	rotate_vector(t_vec2 v, double angle) NOPROF;
+inline static void		print_player_vector(void) NOPROF;
 
 void	render_test_scene(t_mlx *app)
 {
@@ -73,7 +73,7 @@ void	render_test_scene(t_mlx *app)
 				ivec2(10, 10), trgb(0, 100, 255, 100));
 }
 
-//static void	debug_rays(void)
+//inline static void	debug_rays(void)
 //NOPROF
 //{
 //	int64_t		i;
@@ -137,7 +137,7 @@ NOPROF
 			player_pos.y + fov_right.y * CELL_SIZE), PINK);
 }
 
-static t_vec2	rotate_vector(t_vec2 v, double angle)
+inline static t_vec2	rotate_vector(t_vec2 v, double angle)
 NOPROF
 {
 	t_vec2	new_vector;

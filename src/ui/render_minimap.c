@@ -14,9 +14,9 @@
 #include "ui.h"
 #include "render.h"
 
-static void	draw_cells(int cell_size, t_vec2 offset);
-static void	render_mmap_wall(int x, int y, int cell_size);
-static void	render_mmap_empty(int x, int y, int cell_size);
+inline static void	draw_cells(int cell_size, t_vec2 offset);
+inline static void	render_mmap_wall(int x, int y, int cell_size);
+inline static void	render_mmap_empty(int x, int y, int cell_size);
 
 void	render_mmap(double zoom)
 {
@@ -41,7 +41,7 @@ void	render_mmap(double zoom)
 		trgb(0, 255, 0, 0));
 }
 
-static void	draw_cells(int cell_size, t_vec2 offset)
+inline static void	draw_cells(int cell_size, t_vec2 offset)
 {
 	t_map_info	*map;
 	int64_t		i;
@@ -70,7 +70,7 @@ static void	draw_cells(int cell_size, t_vec2 offset)
 	}
 }
 
-static void	render_mmap_wall(int x, int y, int cell_size)
+inline static void	render_mmap_wall(int x, int y, int cell_size)
 {
 	int	i;
 	int	j;
@@ -89,7 +89,7 @@ static void	render_mmap_wall(int x, int y, int cell_size)
 	}
 }
 
-static void	render_mmap_empty(int x, int y, int cell_size)
+inline static void	render_mmap_empty(int x, int y, int cell_size)
 {
 	int	i;
 	int	j;

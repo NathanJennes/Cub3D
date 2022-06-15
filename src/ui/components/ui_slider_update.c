@@ -15,7 +15,7 @@
 #include "libft.h"
 #include "input_code.h"
 
-static int64_t	simple_dist(int64_t x1, int64_t y1, int64_t x2, int64_t y2);
+inline static int64_t	simple_dist(int64_t x1, int64_t y1, int64_t x2, int64_t y2);
 
 
 void	update_ui_slider(t_slider *slider)
@@ -73,7 +73,7 @@ void	update_ui_slider_click_end(t_slider *slider, int mouse_btn)
 	slider->selected = FALSE;
 }
 
-static int64_t	simple_dist(int64_t x1, int64_t y1, int64_t x2, int64_t y2)
+inline static int64_t	simple_dist(int64_t x1, int64_t y1, int64_t x2, int64_t y2)
 {
 	int64_t	dist;
 	int64_t	x;

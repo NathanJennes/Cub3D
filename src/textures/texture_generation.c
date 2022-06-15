@@ -17,7 +17,7 @@
 
 void	create_texture_variations(t_texture *tex);
 
-static void	transfer_texture_data(t_xpm_file *file, t_texture *texture);
+inline static void	transfer_texture_data(t_xpm_file *file, t_texture *texture);
 
 t_texture	create_texture_from_xpm_file(t_xpm_file file)
 {
@@ -59,7 +59,7 @@ void	finish_new_texture(int64_t tex_id)
 	create_texture_variations(tex);
 }
 
-static void	transfer_texture_data(t_xpm_file *file, t_texture *texture)
+inline static void	transfer_texture_data(t_xpm_file *file, t_texture *texture)
 {
 	texture->original_handle = file->handle;
 	texture->original = file->data;

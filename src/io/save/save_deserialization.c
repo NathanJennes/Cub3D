@@ -19,8 +19,8 @@ int			deserialize_map(int fd, char *line, t_gamestate *save);
 void		construct_map(t_map_info *infos);
 int			load_mandatory_map(t_gamestate *save_out, int fd, char *line);
 
-static int	parse_line(int fd, char *line, t_gamestate *save);
-static int	deserialize_cub_save(t_gamestate *save_out, int fd);
+inline static int	parse_line(int fd, char *line, t_gamestate *save);
+inline static int	deserialize_cub_save(t_gamestate *save_out, int fd);
 
 int	deserialize_save(t_gamestate *save_out, int fd)
 {
@@ -35,7 +35,7 @@ int	deserialize_save(t_gamestate *save_out, int fd)
 	return (load_mandatory_map(save_out, fd, line));
 }
 
-static int	deserialize_cub_save(t_gamestate *save_out, int fd)
+inline static int	deserialize_cub_save(t_gamestate *save_out, int fd)
 {
 	t_gamestate	save;
 	char		*line;
@@ -57,7 +57,7 @@ static int	deserialize_cub_save(t_gamestate *save_out, int fd)
 	return (1);
 }
 
-static int	parse_line(int fd, char *line, t_gamestate *save)
+inline static int	parse_line(int fd, char *line, t_gamestate *save)
 {
 	line = ft_trimr(line);
 	if (ft_strncmp(line, "PLAYER_START", ft_strlen("PLAYER_START")) == 0)

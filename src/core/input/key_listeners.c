@@ -13,7 +13,7 @@
 #include "core.h"
 #include "input_code.h"
 
-static void	handle_escape(void);
+inline static void	handle_escape(void);
 
 int	key_pressed_listener(int keycode)
 {
@@ -31,7 +31,7 @@ int	key_pressed_listener(int keycode)
 	return (0);
 }
 
-static void	handle_escape(void)
+inline static void	handle_escape(void)
 {
 	t_mlx	*app;
 

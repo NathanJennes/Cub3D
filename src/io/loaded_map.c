@@ -18,8 +18,8 @@
 void		serialize_game(int fd);
 int			deserialize_save(t_gamestate *save_out, int fd);
 
-static int	open_map_file(char *map_name);
-static void	create_maps_directory(void);
+inline static int	open_map_file(char *map_name);
+inline static void	create_maps_directory(void);
 
 int	load_map(t_gamestate *map_out, char *map_name)
 {
@@ -42,7 +42,7 @@ int	load_map(t_gamestate *map_out, char *map_name)
 	return (1);
 }
 
-static int	open_map_file(char *map_name)
+inline static int	open_map_file(char *map_name)
 {
 	int		fd;
 	char	*map_file;
@@ -56,7 +56,7 @@ static int	open_map_file(char *map_name)
 	return (fd);
 }
 
-static void	create_maps_directory(void)
+inline static void	create_maps_directory(void)
 {
 	struct stat	dir;
 

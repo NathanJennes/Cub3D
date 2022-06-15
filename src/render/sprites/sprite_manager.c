@@ -14,7 +14,7 @@
 #include "core.h"
 #include "leaky.h"
 
-static void	generate_lookup_table(double *table);
+inline static void	generate_lookup_table(double *table);
 
 void	init_sprite_manager(void)
 {
@@ -37,7 +37,7 @@ void	clear_sprite_manager(void)
 	gc_free(manager->angle_lookup);
 }
 
-static void	generate_lookup_table(double *table)
+inline static void	generate_lookup_table(double *table)
 {
 	t_settings	*settings;
 	t_player	*player;

@@ -13,9 +13,9 @@
 #include "ui.h"
 #include "render.h"
 
-static void	generate_cursor_texture(t_ivec2 size, t_slider *slider);
-static void	generate_bar_texture(t_ivec2 size, t_slider *slider);
-static void	update_cursor_pos(t_slider *slider);
+inline static void	generate_cursor_texture(t_ivec2 size, t_slider *slider);
+inline static void	generate_bar_texture(t_ivec2 size, t_slider *slider);
+inline static void	update_cursor_pos(t_slider *slider);
 
 t_slider	create_slider(t_ivec2 pos, t_ivec2 size, t_vec3 min_max_val)
 {
@@ -38,7 +38,7 @@ t_slider	create_slider(t_ivec2 pos, t_ivec2 size, t_vec3 min_max_val)
 }
 
 //TODO: try this style: https://lh3.googleusercontent.com/RYCWIG5RchIPW4uv1OoOp6XshQ7TbRmj1vlf46rbV1uXlFj9k8M3eAQpN-Qg8ePE7CqG6OSXUJhED1tfbF8yiv_su1Mvbz2LEl70Tw=w1064-v0
-static void	generate_cursor_texture(t_ivec2 size, t_slider *slider)
+inline static void	generate_cursor_texture(t_ivec2 size, t_slider *slider)
 {
 	draw_circle_tex(ivec2(size.y, size.y),
 		size.y * 2, trgb(0, 51, 51, 51), slider->tex_id_cursor);
@@ -47,7 +47,7 @@ static void	generate_cursor_texture(t_ivec2 size, t_slider *slider)
 	finish_new_texture(slider->tex_id_cursor);
 }
 
-static void	generate_bar_texture(t_ivec2 size, t_slider *slider)
+inline static void	generate_bar_texture(t_ivec2 size, t_slider *slider)
 {
 	draw_rect_tex(ivec2(size.y / 2, 0), ivec2(size.x - size.y, size.y),
 		trgb(0, 200, 200, 200), slider->tex_id_bar);
@@ -58,7 +58,7 @@ static void	generate_bar_texture(t_ivec2 size, t_slider *slider)
 	finish_new_texture(slider->tex_id_bar);
 }
 
-static void	update_cursor_pos(t_slider *slider)
+inline static void	update_cursor_pos(t_slider *slider)
 {
 	t_ui_component	*infos;
 	int64_t			pos;

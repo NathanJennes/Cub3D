@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/15 18:30:00 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/15 18:33:45 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 
 void				render_floor(t_ivec2 pos, t_wall wall, t_ray *ray,
 						t_ivec3 lighting);
-static void			render_wall(t_ivec2 pos, t_wall wall, t_ray *ray,
+inline static void			render_wall(t_ivec2 pos, t_wall wall, t_ray *ray,
 						t_vec3 lighting);
 
-static t_texture	*get_face_texture(t_ray *ray, t_rgb ***tx_data);
-static double		get_texture_position(t_texture *texture, t_ray *ray);
-static t_ivec3		get_lighting_at_col(t_ray *ray);
+inline static t_texture	*get_face_texture(t_ray *ray, t_rgb ***tx_data);
+inline static double		get_texture_position(t_texture *texture, t_ray *ray);
+inline static t_ivec3		get_lighting_at_col(t_ray *ray);
 
 void	render_column(int64_t xcol, t_wall wall, t_ray *ray)
 {
@@ -36,7 +36,7 @@ void	render_column(int64_t xcol, t_wall wall, t_ray *ray)
 //	render_floor(pos, wall, ray, lighting);
 }
 
-static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_vec3 lighting)
+inline static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_vec3 lighting)
 {
 	double		ratio;
 	t_texture	*texture;
@@ -75,7 +75,7 @@ static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_vec3 lighting)
 	}
 }
 
-static t_ivec3	get_lighting_at_col(t_ray *ray)
+inline static t_ivec3	get_lighting_at_col(t_ray *ray)
 {
 	t_ivec3	result;
 	t_vec3	normal;
@@ -99,7 +99,7 @@ static t_ivec3	get_lighting_at_col(t_ray *ray)
 	return (result);
 }
 
-static double	get_texture_position(t_texture *texture, t_ray *ray)
+inline static double	get_texture_position(t_texture *texture, t_ray *ray)
 {
 	double		pos_x;
 	int64_t		ratio;
@@ -118,7 +118,7 @@ static double	get_texture_position(t_texture *texture, t_ray *ray)
 	return ((pos_x / (double)CELL_SIZE) * (double)texture->width);
 }
 
-static t_texture	*get_face_texture(t_ray *ray, t_rgb ***tx_data)
+inline static t_texture	*get_face_texture(t_ray *ray, t_rgb ***tx_data)
 NOPROF
 {
 	t_texture	*texture;

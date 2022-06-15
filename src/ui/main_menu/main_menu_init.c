@@ -20,7 +20,7 @@ int			btn_editor(t_button *button);
 int			btn_option(t_button *button);
 int			btn_exit_app(t_button *button);
 
-static void	init_positions(t_ui_main_menu *main_menu);
+inline static void	init_positions(t_ui_main_menu *main_menu);
 
 void	init_main_menu(void)
 {
@@ -50,7 +50,7 @@ void	init_main_menu(void)
 	init_positions(main_menu);
 }
 
-static void	init_positions(t_ui_main_menu *main_menu)
+inline static void	init_positions(t_ui_main_menu *main_menu)
 {
 	uic_padding(&main_menu->btn_continue.infos, ivec2(20, 20), ivec2(0, 0));
 	uic_padding(&main_menu->btn_new_game.infos, ivec2(20, 20), ivec2(0, 0));

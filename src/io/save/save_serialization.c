@@ -12,9 +12,9 @@
 
 #include "core.h"
 
-static void	serialize_player(int fd, t_player player);
-static void	serialize_map(int fd, t_map_info map);
-static void	serialize_map_walls(int fd, t_map_info map);
+inline static void	serialize_player(int fd, t_player player);
+inline static void	serialize_map(int fd, t_map_info map);
+inline static void	serialize_map_walls(int fd, t_map_info map);
 
 void	serialize_game(int fd)
 {
@@ -28,7 +28,7 @@ void	serialize_game(int fd)
 	serialize_map(fd, game->map);
 }
 
-static void	serialize_player(int fd, t_player player)
+inline static void	serialize_player(int fd, t_player player)
 {
 	dprintf(fd, "PLAYER_START\n");
 	dprintf(fd, "POS %d %d %d\n",
@@ -38,7 +38,7 @@ static void	serialize_player(int fd, t_player player)
 	dprintf(fd, "PLAYER_END\n");
 }
 
-static void	serialize_map(int fd, t_map_info map)
+inline static void	serialize_map(int fd, t_map_info map)
 {
 	dprintf(fd, "MAP_START\n");
 	dprintf(fd, "W %d\n", (int)map.width);
@@ -59,7 +59,7 @@ static void	serialize_map(int fd, t_map_info map)
 	dprintf(fd, "MAP_END\n");
 }
 
-static void	serialize_map_walls(int fd, t_map_info map)
+inline static void	serialize_map_walls(int fd, t_map_info map)
 {
 	int64_t	i;
 	int64_t	j;

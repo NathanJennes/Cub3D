@@ -29,7 +29,7 @@ int			btn_unselect_save3(t_checkbox *checkbox);
 int			btn_unselect_save4(t_checkbox *checkbox);
 int			btn_unselect_save5(t_checkbox *checkbox);
 
-static void	init_positions(void);
+inline static void	init_positions(void);
 void		init_textures(void);
 void		update_display_status(void);
 
@@ -65,7 +65,7 @@ void	init_new_game_menu(void)
 	init_positions();
 }
 
-static void	init_positions(void)
+inline static void	init_positions(void)
 {
 	t_ui_new_game_menu	*menu;
 

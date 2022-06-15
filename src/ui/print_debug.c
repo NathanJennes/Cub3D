@@ -14,9 +14,9 @@
 #include "ui.h"
 #include "render.h"
 
-static void	debug_player(t_ivec2 *pos);
-static void	debug_rays(t_ivec2 *pos);
-static void	debug_settings(t_ivec2 *pos);
+inline static void	debug_player(t_ivec2 *pos);
+inline static void	debug_rays(t_ivec2 *pos);
+inline static void	debug_settings(t_ivec2 *pos);
 
 void	print_debug(void)
 NOPROF
@@ -44,7 +44,7 @@ NOPROF
 	}
 }
 
-static void	debug_rays(t_ivec2 *pos)
+inline static void	debug_rays(t_ivec2 *pos)
 {
 	t_player	*player;
 
@@ -59,7 +59,7 @@ static void	debug_rays(t_ivec2 *pos)
 	pos->y += 20;
 }
 
-static void	debug_player(t_ivec2 *pos)
+inline static void	debug_player(t_ivec2 *pos)
 NOPROF
 {
 	t_player	*player;
@@ -86,7 +86,7 @@ NOPROF
 		ivec2(pos->x + str_px_size("Mouse pos "), pos->y), WHITE);
 }
 
-static void	debug_settings(t_ivec2 *pos)
+inline static void	debug_settings(t_ivec2 *pos)
 NOPROF
 {
 	put_text(ivec2(pos->x, pos->y), WHITE, "Settings");

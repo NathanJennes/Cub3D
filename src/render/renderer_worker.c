@@ -13,8 +13,8 @@
 #include "core.h"
 #include "render.h"
 
-static t_bool	is_game_running(void);
-static void		init_cols(int64_t *col_start, int64_t *col_end, int64_t id);
+inline static t_bool	is_game_running(void);
+inline static void		init_cols(int64_t *col_start, int64_t *col_end, int64_t id);
 
 void	*renderer_worker_loop(void *param_id)
 {
@@ -41,7 +41,7 @@ void	*renderer_worker_loop(void *param_id)
 	return (EXIT_SUCCESS);
 }
 
-static t_bool	is_game_running(void)
+inline static t_bool	is_game_running(void)
 {
 	t_renderer	*renderer;
 	t_bool		running;
@@ -53,7 +53,7 @@ static t_bool	is_game_running(void)
 	return (running);
 }
 
-static void		init_cols(int64_t *col_start, int64_t *col_end, int64_t id)
+inline static void		init_cols(int64_t *col_start, int64_t *col_end, int64_t id)
 {
 	int64_t		section;
 	t_settings	*settings;

@@ -15,8 +15,8 @@
 
 int					deserialize_settings(t_settings *settings_out, int fd);
 
-static int			try_open_settings(t_settings *settings_out);
-static t_settings	load_default_settings(void);
+inline static int			try_open_settings(t_settings *settings_out);
+inline static t_settings	load_default_settings(void);
 
 t_settings	load_settings(void)
 {
@@ -30,7 +30,7 @@ t_settings	load_settings(void)
 	return (load_default_settings());
 }
 
-static int	try_open_settings(t_settings *settings_out)
+inline static int	try_open_settings(t_settings *settings_out)
 {
 	int	fd;
 
@@ -40,7 +40,7 @@ static int	try_open_settings(t_settings *settings_out)
 	return (deserialize_settings(settings_out, fd));
 }
 
-static t_settings	load_default_settings(void)
+inline static t_settings	load_default_settings(void)
 {
 	t_settings	settings;
 
