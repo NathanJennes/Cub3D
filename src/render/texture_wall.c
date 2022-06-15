@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/15 14:55:09 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/15 15:34:14 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,23 @@ static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_ivec3 lighting)
 	t_texture	*texture;
 	t_rgb		**tx_data;
 	int64_t		tx;
+	double		ty;
 	int			px_color;
 
 	set_depth_at(pos.x, ray->distance * CELL_SIZE);
 	texture = get_face_texture(ray, &tx_data);
 	tx = (int64_t)get_texture_position(texture, ray);
-	ratio = (double)texture->width / (double)wall.real_size;
+	ratio = (double)texture->height / (double)wall.real_size;
+	ty = (double)wall.wall_origin * ratio;
+	pos.y += wall.screen_origin;
+	wall.size += wall.screen_origin;
 	while (pos.y < wall.size)
 	{
-		px_color = tx_data[tx][(int64_t)((pos.y + wall.offset) * ratio)].color;
+		px_color = tx_data[tx][(int64_t)ty].color;
 		px_color = apply_light_to_color(px_color, lighting);
-		set_screen_pixel(pos.x, pos.y + wall.origin, px_color);
+		set_screen_pixel_unsafe(pos.x, pos.y, px_color);
 		pos.y++;
+		ty += ratio;
 	}
 }
 

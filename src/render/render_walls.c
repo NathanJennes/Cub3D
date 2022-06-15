@@ -55,14 +55,14 @@ static	t_wall	get_wall_info(t_ray *ray)
 	get_correct_distance(ray);
 	wall.size = (int64_t)fabs(1 / ray->distance * get_math()->plane_dist);
 	wall.real_size = wall.size;
-	wall.offset = (wall.real_size - settings->win_h) / 2;
-	if (wall.offset < 0)
-		wall.offset = 0;
+	wall.wall_origin = (wall.real_size - settings->win_h) / 2;
+	if (wall.wall_origin < 0)
+		wall.wall_origin = 0;
 	if (wall.size > settings->win_h)
 		wall.size = settings->win_h;
 	else if (wall.size < 0)
 		wall.size = 0;
-	wall.origin = settings->halfw_h - (wall.size / 2);
+	wall.screen_origin = settings->halfw_h - (wall.size / 2);
 	return (wall);
 }
 
