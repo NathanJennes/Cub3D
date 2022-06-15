@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/13 15:09:33 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/15 14:00:46 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 #include "ui.h"
 #include "render.h"
 
-static void		print_ray(t_vec2 hit_pos) NOPROF;
+//static void		print_ray(t_vec2 hit_pos) NOPROF;
+//static void		debug_rays(void) NOPROF;
 static t_vec2	rotate_vector(t_vec2 v, double angle) NOPROF;
 static void		print_player_vector(void) NOPROF;
-static void		debug_rays(void) NOPROF;
 
 void	render_test_scene(t_mlx *app)
 {
@@ -73,38 +73,38 @@ void	render_test_scene(t_mlx *app)
 				ivec2(10, 10), trgb(0, 100, 255, 100));
 }
 
-static void	debug_rays(void)
-NOPROF
-{
-	int64_t		i;
-	t_vec2		ray_direction;
-	t_player	*player;
-	t_vec2		start;
-	t_settings	*settings;
-	t_ray		ray;
+//static void	debug_rays(void)
+//NOPROF
+//{
+//	int64_t		i;
+//	t_vec2		ray_direction;
+//	t_player	*player;
+//	t_vec2		start;
+//	t_settings	*settings;
+//	t_ray		ray;
+//
+//	settings = get_settings();
+//	i = 0;
+//	player = get_player();
+//	start = vec2(player->world_pos.x + player->forward.x - player->right.x * get_math()->plane_len,
+//		player->world_pos.y + player->forward.y - player->right.y * get_math()->plane_len);
+//	while (i < settings->win_w)
+//	{
+//		ray_direction = vec2(start.x - player->world_pos.x, start.y - player->world_pos.y);
+//		vec2_normalize(&ray_direction);
+//		ray = shoot_ray(ray_direction, player->world_pos, player->map_pos, RAY_LENGTH);
+//		print_ray(ray.hit_pos);
+//		vec2_add(&start, player->plane_inc);
+//		i++;
+//	}
+//}
 
-	settings = get_settings();
-	i = 0;
-	player = get_player();
-	start = vec2(player->world_pos.x + player->forward.x - player->right.x * get_math()->plane_len,
-		player->world_pos.y + player->forward.y - player->right.y * get_math()->plane_len);
-	while (i < settings->win_w)
-	{
-		ray_direction = vec2(start.x - player->world_pos.x, start.y - player->world_pos.y);
-		vec2_normalize(&ray_direction);
-		ray = shoot_ray(ray_direction, player->world_pos, player->map_pos, RAY_LENGTH);
-		print_ray(ray.hit_pos);
-		vec2_add(&start, player->plane_inc);
-		i++;
-	}
-}
-
-void	print_ray(t_vec2 hit_pos)
-NOPROF
-{
-	draw_line(v2_to_iv2(get_player()->world_pos), v2_to_iv2(hit_pos), RED);
-	draw_circle(v2_to_iv2(hit_pos), 10, YELLOW);
-}
+//void	print_ray(t_vec2 hit_pos)
+//NOPROF
+//{
+//	draw_line(v2_to_iv2(get_player()->world_pos), v2_to_iv2(hit_pos), RED);
+//	draw_circle(v2_to_iv2(hit_pos), 10, YELLOW);
+//}
 
 void	print_player_vector(void)
 NOPROF

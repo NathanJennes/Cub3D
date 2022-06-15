@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_debug.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:16:28 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/08 11:17:26 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/15 14:00:21 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "ui.h"
 #include "render.h"
 
-static t_ivec2	debug_player(t_ivec2 *pos);
-static void		debug_rays(t_ivec2 *pos);
-static t_ivec2	debug_settings(t_ivec2 *pos);
+static void	debug_player(t_ivec2 *pos);
+static void	debug_rays(t_ivec2 *pos);
+static void	debug_settings(t_ivec2 *pos);
 
 void	print_debug(void)
 NOPROF
@@ -59,7 +59,7 @@ static void	debug_rays(t_ivec2 *pos)
 	pos->y += 20;
 }
 
-static t_ivec2	debug_player(t_ivec2 *pos)
+static void	debug_player(t_ivec2 *pos)
 NOPROF
 {
 	t_player	*player;
@@ -86,7 +86,7 @@ NOPROF
 		ivec2(pos->x + str_px_size("Mouse pos "), pos->y), WHITE);
 }
 
-static t_ivec2	debug_settings(t_ivec2 *pos)
+static void	debug_settings(t_ivec2 *pos)
 NOPROF
 {
 	put_text(ivec2(pos->x, pos->y), WHITE, "Settings");

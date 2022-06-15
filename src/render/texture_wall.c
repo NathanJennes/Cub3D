@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_wall.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/14 10:55:28 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/15 14:55:09 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void				render_floor(t_ivec2 pos, t_wall wall, t_ray *ray,
 static void			render_wall(t_ivec2 pos, t_wall wall, t_ray *ray,
 						t_ivec3 lighting);
 
-static t_texture	*get_face_texture(t_ray *ray, uint8_t **tx_data);
+static t_texture	*get_face_texture(t_ray *ray, t_rgb ***tx_data);
 static double		get_texture_position(t_texture *texture, t_ray *ray);
 static t_ivec3		get_lighting_at_col(t_ray *ray);
 
@@ -38,7 +38,7 @@ static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_ivec3 lighting)
 {
 	double		ratio;
 	t_texture	*texture;
-	uint8_t		*tx_data;
+	t_rgb		**tx_data;
 	int64_t		tx;
 	int			px_color;
 
@@ -48,9 +48,7 @@ static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_ivec3 lighting)
 	ratio = (double)texture->width / (double)wall.real_size;
 	while (pos.y < wall.size)
 	{
-		px_color = get_pixel_color_from_texture(tx,
-				(pos.y + wall.offset) * ratio,
-				texture, tx_data);
+		px_color = tx_data[tx][(int64_t)((pos.y + wall.offset) * ratio)].color;
 		px_color = apply_light_to_color(px_color, lighting);
 		set_screen_pixel(pos.x, pos.y + wall.origin, px_color);
 		pos.y++;
@@ -81,16 +79,6 @@ static t_ivec3	get_lighting_at_col(t_ray *ray)
 	return (result);
 }
 
-int32_t	get_pixel_color_from_texture(int64_t x, int64_t y,
-		t_texture *texture, const uint8_t *tx_handler)
-NOPROF
-{
-	int32_t		px_color;
-
-	px_color = *(int *)(tx_handler + (x * 4) + (y * texture->line_size));
-	return (px_color);
-}
-
 static double	get_texture_position(t_texture *texture, t_ray *ray)
 {
 	double		pos_x;
@@ -110,7 +98,7 @@ static double	get_texture_position(t_texture *texture, t_ray *ray)
 	return ((pos_x / (double)CELL_SIZE) * (double)texture->width);
 }
 
-static t_texture	*get_face_texture(t_ray *ray, uint8_t **tx_data)
+static t_texture	*get_face_texture(t_ray *ray, t_rgb ***tx_data)
 NOPROF
 {
 	t_texture	*texture;
@@ -127,13 +115,13 @@ NOPROF
 			return (texture);
 		}
 		texture = get_texture_from_id(get_map_infos()->tx_list[2]);
-		*tx_data = texture->original;
+		*tx_data = texture->ao_flat;
 		return (texture);
 	}
 	if (ray->hit_pos.y < player->world_pos.y)
 	{
 		texture = get_texture_from_id(get_map_infos()->tx_list[1]);
-		*tx_data = texture->original;
+		*tx_data = texture->ao_flat;
 		return (texture);
 	}
 	texture = get_texture_from_id(get_map_infos()->tx_list[0]);

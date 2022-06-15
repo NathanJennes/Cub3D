@@ -32,12 +32,12 @@ BIN_CC				:=		gcc
 
 RELEASE_BIN_CFLAGS		:=
 RELEASE_BIN_CFLAGS		+=		-MD
-RELEASE_BIN_CFLAGS		+=		-Wall -Wextra -O2
+RELEASE_BIN_CFLAGS		+=		-Wall -Wextra -Werror -O2
 RELEASE_BIN_CFLAGS		+=		$(INC_PATH)
 
 DEBUG_BIN_CFLAGS		:=
 DEBUG_BIN_CFLAGS		+=		-MD
-DEBUG_BIN_CFLAGS		+=		-Wall -Wextra
+DEBUG_BIN_CFLAGS		+=		-Wall -Wextra -Werror
 DEBUG_BIN_CFLAGS		+=		-g3 -fsanitize=address -DDEBUG
 DEBUG_BIN_CFLAGS		+=		$(INC_PATH)
 
