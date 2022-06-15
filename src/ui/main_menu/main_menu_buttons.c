@@ -20,7 +20,7 @@ int	btn_continue(t_button *button)
 	(void)button;
 	app = get_app();
 	app->gamestate = app->savegames[0];
-	app->app_state = IN_GAME;
+	app->state = IN_GAME;
 	return (0);
 }
 
@@ -41,7 +41,7 @@ int	btn_load_game(t_button *button)
 	(void)button;
 	app = get_app();
 	app->gamestate = app->savegames[0];
-	app->app_state = IN_GAME;
+	app->state = IN_GAME;
 	return (0);
 }
 

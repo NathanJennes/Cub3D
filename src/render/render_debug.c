@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_debug.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/13 15:09:33 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/15 16:17:44 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	render_test_scene(t_mlx *app)
 {
 	int64_t				j;
 	int					color;
+	t_player			*player = get_player();
 	const t_map_info	*map = &app->gamestate.map;
 
 	for (int64_t i = 0; i < map->height; i++)
@@ -58,7 +59,6 @@ void	render_test_scene(t_mlx *app)
 	draw_circle(v2_to_iv2(get_player()->world_pos), 6, GREEN);
 	if (app->ui.debug == TRUE)
 		print_player_vector();
-	t_player *player = get_player();
 	draw_line(v2_to_iv2(player->world_pos), app->debug.dx, BLUE);
 	draw_line(v2_to_iv2(player->world_pos), app->debug.dy, RED);
 	t_ivec2 mouse_pos = get_mouse_position();
@@ -68,9 +68,13 @@ void	render_test_scene(t_mlx *app)
 //	if (app->ui.debug == TRUE)
 //		debug_rays();
 	t_sprite	*sprite = &app->sprite_manager.sprites[0];
-	render_sprite(sprite);
-	draw_rect(ivec2(sprite->pos.x - sprite->size.x / 2, sprite->pos.y - sprite->size.y / 2),
-				ivec2(10, 10), trgb(0, 100, 255, 100));
+	if (sprite)
+	{
+		render_sprite(sprite);
+		draw_rect(ivec2(sprite->pos.x - sprite->size.x / 2,
+				sprite->pos.y - sprite->size.y / 2), ivec2(10, 10),
+			trgb(0, 100, 255, 100));
+	}
 }
 
 static void	debug_rays(void)

@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/10 16:15:50 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/15 14:27:34 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int			mouse_up_callback(int button, int x, int y, void *unused);
 static void	init_hooks(void);
 static void	init_start_time(void);
 
-void	init_app(void)
+void	init_app(char *path)
 {
 	t_mlx	*app;
 
@@ -37,13 +37,18 @@ void	init_app(void)
 	init_font_manager();
 	load_all_saves();
 	load_all_maps();
-	printf("Saves loaded: %d\n", (int)app->savegames_count);
-	printf("Maps loaded: %d\n", (int)app->maps_count);
+	printf("Saves loaded: %d\n", (int) app->savegames_count);
+	printf("Maps loaded: %d\n", (int) app->maps_count);
 	init_math();
 	init_ui();
 	init_hooks();
 	init_renderer();
-	mlx_loop(get_mlx());
+	if (load_map(&app->gamestate, path))
+	{
+		app->state = IN_GAME;
+		app->renderer.multithreading = FALSE;
+		mlx_mouse_hide();
+	}
 }
 
 static void	init_hooks(void)
@@ -51,7 +56,6 @@ static void	init_hooks(void)
 	t_mlx	*app;
 
 	app = get_app();
-	app->app_state = IN_MENU;
 	mlx_hook(app->win, 17, 0, close_app, app);
 	mlx_hook(app->win, 2, 0, key_down_callback, NULL);
 	mlx_hook(app->win, 3, 0, key_up_callback, NULL);

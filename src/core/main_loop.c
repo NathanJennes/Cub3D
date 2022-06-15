@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/14 10:02:29 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/15 16:01:05 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,15 @@ int	main_loop(void)
 
 	app = get_app();
 	settings = get_settings();
-	mlx_mouse_show();
-	if (app->app_state & IN_GAME)
+	if (app->state & IN_GAME)
 	{
-		mlx_mouse_hide();
 		update_player(&app->gamestate.player);
 		render_game(app, settings, time);
 		reset_mouse_pos();
 	}
 	else
 		clear_screen(BKGD_COLOR);
-	if (app->ui.debug == TRUE)
+	if (get_ui()->debug)
 		print_debug();
 	fps_counter();
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);

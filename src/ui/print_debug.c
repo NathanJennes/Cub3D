@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_debug.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:16:28 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/08 11:17:26 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/15 16:00:14 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ static void	debug_rays(t_ivec2 *pos)
 	t_player	*player;
 
 	player = get_player();
-	put_text(ivec2(pos->x, pos->y), WHITE, "Ray angle ");
-	print_float(get_math()->base_angle,
-		ivec2(pos->x + str_px_size("Ray angle "), pos->y), WHITE);
+	render_text("Ray angle ", DEFAULT_FONT, 15, ivec2(pos->x, pos->y));
+	print_double(get_math()->base_angle, DEFAULT_FONT, 15,
+		ivec2(pos->x + str_px_size("Ray angle ") + 30, pos->y));
 	pos->y += 20;
-	put_text(ivec2(pos->x, pos->y), WHITE, "Ray increment ");
-	print_vec(player->plane_inc,
-		ivec2(pos->x + str_px_size("Plane increment "), pos->y), WHITE);
-	pos->y += 20;
+	render_text("Plane increment ", DEFAULT_FONT, 15, ivec2(pos->x, pos->y));
+	print_vec2(player->plane_inc, DEFAULT_FONT, 15,
+		ivec2(pos->x + str_px_size("Plane increment ") + 25, pos->y));
+	pos->y += 40;
 }
 
 static t_ivec2	debug_player(t_ivec2 *pos)
@@ -65,33 +65,34 @@ NOPROF
 	t_player	*player;
 
 	player = get_player();
-	put_text(ivec2(pos->x, pos->y), WHITE, "Direction ");
-	print_float(player->direction,
-		ivec2(pos->x + str_px_size("Direction "), pos->y), WHITE);
+	render_text("Direction ", DEFAULT_FONT, 15, ivec2(pos->x, pos->y));
+	print_double(player->direction, DEFAULT_FONT, 15,
+		ivec2(pos->x + str_px_size("Direction ") + 25, pos->y));
 	pos->y += 20;
-	put_text(ivec2(pos->x, pos->y), WHITE, "World pos ");
-	print_vec(player->world_pos,
-		ivec2(pos->x + str_px_size("World pos "), pos->y), WHITE);
+	render_text("World pos ", DEFAULT_FONT, 15, ivec2(pos->x, pos->y));
+	print_vec2(player->world_pos, DEFAULT_FONT, 15,
+		ivec2(pos->x + str_px_size("World pos ") + 25, pos->y));
 	pos->y += 20;
-	put_text(ivec2(pos->x, pos->y), WHITE, "Grid pos ");
-	print_vec(player->cell_pos,
-		ivec2(pos->x + str_px_size("Grid pos "), pos->y), WHITE);
+	render_text("Grid pos ", DEFAULT_FONT, 15, ivec2(pos->x, pos->y));
+	print_vec2(player->cell_pos, DEFAULT_FONT, 15,
+		ivec2(pos->x + str_px_size("Grid pos ") + 25, pos->y));
 	pos->y += 20;
-	put_text(ivec2(pos->x, pos->y), WHITE, "Map pos ");
-	print_ivec(player->map_pos,
-		ivec2(pos->x + str_px_size("Map pos "), pos->y), WHITE);
-	pos->y += 20;
-	put_text(ivec2(pos->x, pos->y), WHITE, "Mouse pos ");
-	print_ivec(get_mouse_position(),
-		ivec2(pos->x + str_px_size("Mouse pos "), pos->y), WHITE);
+	render_text("Map pos ", DEFAULT_FONT, 15, ivec2(pos->x, pos->y));
+	print_ivec2(player->map_pos, DEFAULT_FONT, 15,
+		ivec2(pos->x + str_px_size("Map pos ") + 25, pos->y));
+	pos->y += 40;
+	render_text("Mouse pos ", DEFAULT_FONT, 15, ivec2(pos->x, pos->y));
+	print_ivec2(get_mouse_position(), DEFAULT_FONT, 15,
+			ivec2(pos->x + str_px_size("Mouse pos ") + 25, pos->y));
+	pos->y += 10;
 }
 
 static t_ivec2	debug_settings(t_ivec2 *pos)
 NOPROF
 {
-	put_text(ivec2(pos->x, pos->y), WHITE, "Settings");
+	render_text("Settings", DEFAULT_FONT, 15, ivec2(pos->x, pos->y));
 	pos->y += 20;
-	put_text(ivec2(pos->x, pos->y), WHITE, "FOV ");
-	print_int(get_settings()->fov,
-		ivec2(pos->x + str_px_size("FOV "), pos->y), WHITE);
+	render_text("FOV ", DEFAULT_FONT, 15, ivec2(pos->x, pos->y));
+	print_int(get_settings()->fov, DEFAULT_FONT, 15,
+		ivec2(pos->x + str_px_size("FOV ") + 25, pos->y));
 }

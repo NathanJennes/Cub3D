@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 13:05:37 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/15 15:46:43 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@
 # define MMAP_PAD			20
 # define MMAP_ZOOM_FACTOR	20
 # define MMAP_PLAYER_DIAM	10
-
-# define DEBUG_UI 0
 
 typedef struct s_mlx	t_mlx;
 
@@ -170,13 +168,13 @@ void			fps_counter(void);
 void			update_ui_flags(uint8_t flag) NOPROF;
 void			switch_debug_ui(void);
 
-int				str_px_size(char *str);
+int64_t str_px_size(char *str);
 void			put_text(t_ivec2 pos, int color, char *str);
-int				str_px_size(char *str);
-void			print_float(double val, t_ivec2 pos, int color);
-void			print_ivec(t_ivec2 v, t_ivec2 pos, int color);
-void			print_vec(t_vec2 v, t_ivec2 pos, int color);
-void			print_int(int val, t_ivec2 pos, int color);
+int64_t str_px_size(char *str);
+void print_double(double val, char *font, int size, t_ivec2 pos);
+void print_int(int val, char *font, int size, t_ivec2 pos);
+void print_vec2(t_vec2 v, char *font, int size, t_ivec2 pos);
+void print_ivec2(t_ivec2 v, char *font, int size, t_ivec2 pos);
 
 /* Main Menu */
 void			init_main_menu(void);

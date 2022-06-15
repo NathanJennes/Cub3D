@@ -41,6 +41,8 @@ void	update_new_game_menu(void)
 	update_ui_button(&menu->btn_down);
 	update_ui_button(&menu->btn_up);
 	update_ui_button(&menu->btn_start);
+	if (menu->btn_start.clicked == TRUE)
+		mlx_mouse_hide();
 	update_ui_checkbox(&menu->btn_save[0]);
 	update_ui_checkbox(&menu->btn_save[1]);
 	update_ui_checkbox(&menu->btn_save[2]);
