@@ -40,6 +40,7 @@ void			init_renderer(void);
 void			shutdown_renderer(void);
 void			*renderer_worker_loop(void *id);
 void			renderer_render(void);
+void			render_debug(t_mlx *app);
 
 /* Screen drawing */
 void			clear_screen(int color);

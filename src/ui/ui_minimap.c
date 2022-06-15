@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_minimap.c                                   :+:      :+:    :+:   */
+/*   ui_minimap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 13:11:29 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/27 15:59:46 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/15 17:48:58 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,26 @@ static void	draw_cells(int cell_size, t_vec2 offset);
 static void	render_mmap_wall(int x, int y, int cell_size);
 static void	render_mmap_empty(int x, int y, int cell_size);
 
-void	render_mmap(double zoom)
+void	render_minimap(double zoom)
 {
-	int			cell_size;
-	t_vec2		player_pos;
+	t_player	*player;
+	t_mmap		*minimap;
+	int64_t		cell_size;
+	t_ivec2		player_pos;
 	t_vec2		offset;
-	t_mlx		*app;
 
-	app = get_app();
+	player = get_player();
+	minimap = &get_ui()->minimap;
 	cell_size = MMAP_ZOOM_FACTOR * zoom;
-	player_pos.x = MMAP_W / 2 + MMAP_PAD;
-	player_pos.y = MMAP_H / 2 + MMAP_PAD;
-	offset.x = -(app->gamestate.player.world_pos.x / CELL_SIZE)
-		* cell_size - cell_size / 2 + player_pos.x;
-	offset.y = -(app->gamestate.player.world_pos.y / CELL_SIZE)
-		* cell_size - cell_size / 2 + player_pos.y;
-	draw_rect((t_ivec2){MMAP_PAD / 2, MMAP_PAD / 2},
-		(t_ivec2){MMAP_W + MMAP_PAD, MMAP_H + MMAP_PAD},
-		trgb(0, 51, 51, 51));
+	player_pos.x = minimap->mmap_halfw + MMAP_PAD;
+	player_pos.y = minimap->mmap_halfh + MMAP_PAD;
+	offset.x = -player->cell_pos.x * cell_size + player_pos.x;
+	offset.y = -player->cell_pos.y * cell_size + player_pos.y;
+	draw_rect(ivec2(MMAP_PAD / 2, MMAP_PAD / 2),
+		ivec2(minimap->mmap_w + MMAP_PAD, minimap->mmap_h + MMAP_PAD),
+		BLACK);
 	draw_cells(cell_size, offset);
-	draw_circle(v2_to_iv2(player_pos), MMAP_PLAYER_DIAM,
-		trgb(0, 255, 0, 0));
+	draw_circle(player_pos, MMAP_PLAYER_DIAM, GREEN);
 }
 
 static void	draw_cells(int cell_size, t_vec2 offset)
@@ -110,8 +109,8 @@ static void	render_mmap_empty(int x, int y, int cell_size)
 
 int	outside_mmap_bounds(int x, int y)
 {
-	if (x < MMAP_PAD || x > MMAP_PAD + MMAP_W || y < MMAP_PAD || y > MMAP_PAD
-		+ MMAP_H)
+	if (x < MMAP_PAD || x > MMAP_PAD + get_ui()->minimap.mmap_w || y < MMAP_PAD || y > MMAP_PAD
+		+ get_ui()->minimap.mmap_h)
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/15 16:01:05 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/15 17:24:14 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "ui.h"
 #include "render.h"
 
-void		render_test_scene(const t_mlx *app);
 static void	render_game(t_mlx *app, const t_settings *settings,
 				struct timeval time[4]);
 
@@ -58,7 +57,9 @@ static void	render_game(t_mlx *app, const t_settings *settings,
 	gettimeofday(&time[1], NULL);
 	renderer_render();
 	gettimeofday(&time[2], NULL);
-	render_test_scene(app);
+	render_minimap(1);
+	if (get_ui()->debug)
+		render_debug(app);
 	gettimeofday(&time[3], NULL);
 	if (app->ui.debug == TRUE)
 		printf("[FRAME - RENDER]: background: %lldms, walls: "

@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/15 15:46:43 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/15 17:35:51 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,9 @@
 # endif
 
 /* Minimap */
-# define MMAP_W				100
-# define MMAP_H				50
 # define MMAP_PAD			20
-# define MMAP_ZOOM_FACTOR	20
-# define MMAP_PLAYER_DIAM	10
+# define MMAP_ZOOM_FACTOR	30
+# define MMAP_PLAYER_DIAM	6
 
 typedef struct s_mlx	t_mlx;
 
@@ -41,6 +39,14 @@ typedef enum e_ui_state
 	OPTION_MENU = 16,
 	EDITOR_MENU = 32,
 }	t_ui_state;
+
+typedef struct s_mmap
+{
+	int64_t		mmap_w;
+	int64_t		mmap_h;
+	int64_t		mmap_halfw;
+	int64_t		mmap_halfh;
+}	t_mmap;
 
 typedef struct s_ui_component
 {
@@ -152,6 +158,7 @@ typedef struct s_ui
 	t_ui_main_menu		main_menu;
 	t_ui_new_game_menu	new_game_menu;
 	t_ui_settings_menu	settings_menu;
+	t_mmap				minimap;
 }	t_ui;
 
 /* Core */
@@ -159,22 +166,17 @@ void			init_ui(void);
 int				render_ui(void);
 void			update_ui(void);
 
-void			render_mmap(double zoom);
-
 void			fps_counter(void);
 void			print_debug(void);
-void			fps_counter(void);
 
-void			update_ui_flags(uint8_t flag) NOPROF;
 void			switch_debug_ui(void);
 
-int64_t str_px_size(char *str);
-void			put_text(t_ivec2 pos, int color, char *str);
-int64_t str_px_size(char *str);
-void print_double(double val, char *font, int size, t_ivec2 pos);
-void print_int(int val, char *font, int size, t_ivec2 pos);
-void print_vec2(t_vec2 v, char *font, int size, t_ivec2 pos);
-void print_ivec2(t_ivec2 v, char *font, int size, t_ivec2 pos);
+int64_t			str_px_size(char *str);
+int64_t			str_px_size(char *str);
+void			print_double(double val, char *font, int size, t_ivec2 pos);
+void			print_int(int val, char *font, int size, t_ivec2 pos);
+void			print_vec2(t_vec2 v, char *font, int size, t_ivec2 pos);
+void			print_ivec2(t_ivec2 v, char *font, int size, t_ivec2 pos);
 
 /* Main Menu */
 void			init_main_menu(void);
@@ -192,17 +194,20 @@ void			init_settings_menu(void);
 void			render_settings_menu(void);
 void			update_settings_menu(void);
 
+/* Minimap */
+void			render_minimap(double zoom);
+
 /* Ui elements */
 t_button		create_button(char *texture_path, t_ivec2 pos,
-	int (*event)(struct s_button *button));
+					int (*event)(struct s_button *button));
 void			update_ui_button(t_button *button);
 void			render_ui_button(t_button *button);
 void			update_ui_button_click_begin(t_button *button, int mouse_btn);
 void			update_ui_button_click_end(t_button *button, int mouse_btn);
 
 t_checkbox		create_checkbox(char *texture_path, t_ivec2 pos,
-				int (*event_checked)(struct s_checkbox *checkbox),
-				int (*event_unchecked)(struct s_checkbox *checkbox));
+					int (*event_checked)(struct s_checkbox *checkbox),
+					int (*event_unchecked)(struct s_checkbox *checkbox));
 void			update_ui_checkbox(t_checkbox *checkbox);
 void			render_ui_checkbox(t_checkbox *checkbox);
 void			update_ui_checkbox_click_begin(t_checkbox *checkbox, int mouse_btn);

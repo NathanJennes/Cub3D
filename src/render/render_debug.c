@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/15 16:17:44 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/15 16:28:44 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_vec2	rotate_vector(t_vec2 v, double angle) NOPROF;
 static void		print_player_vector(void) NOPROF;
 static void		debug_rays(void) NOPROF;
 
-void	render_test_scene(t_mlx *app)
+void	render_debug(t_mlx *app)
 {
 	int64_t				j;
 	int					color;
@@ -50,23 +50,25 @@ void	render_test_scene(t_mlx *app)
 					ivec2((j + 1) * CELL_SIZE, i * CELL_SIZE), GREY);
 		}
 	}
+
 	for (int64_t i = 0; i < app->gamestate.light_count; i++)
 	{
 		t_light *l = &app->gamestate.lights[i];
 		int col = trgb(0, l->color.x, l->color.y, l->color.z);
 		draw_circle(ivec2(l->pos.x, l->pos.y), 7, col);
 	}
-	draw_circle(v2_to_iv2(get_player()->world_pos), 6, GREEN);
-	if (app->ui.debug == TRUE)
-		print_player_vector();
-	draw_line(v2_to_iv2(player->world_pos), app->debug.dx, BLUE);
-	draw_line(v2_to_iv2(player->world_pos), app->debug.dy, RED);
-	t_ivec2 mouse_pos = get_mouse_position();
-	t_ivec3 light = get_lighting_level(vec3(mouse_pos.x, mouse_pos.y, 0),
+	t_ivec3 light = get_lighting_level
+		(vec3(get_mouse_position().x, get_mouse_position().y, 0),
 		vec3(player->forward.x, player->forward.y, 0.0));
-	draw_circle(mouse_pos, 10, trgb(0, light.x, light.y, light.z));
+	draw_circle(get_mouse_position(), 10, trgb(0, light.x, light.y, light.z));
+
 //	if (app->ui.debug == TRUE)
 //		debug_rays();
+
+	draw_line(v2_to_iv2(player->world_pos), app->debug.dx, BLUE);
+	draw_line(v2_to_iv2(player->world_pos), app->debug.dy, RED);
+	print_player_vector();
+
 	t_sprite	*sprite = &app->sprite_manager.sprites[0];
 	if (sprite)
 	{
