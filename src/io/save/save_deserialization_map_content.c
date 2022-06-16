@@ -13,8 +13,8 @@
 #include "core.h"
 #include "leaky.h"
 
-static int	contains_illegal_char(t_map_info *infos, char *line);
-static int	is_illegal_char(char c, t_map_info *infos, int *saw_wall,
+inline static int	contains_illegal_char(t_map_info *infos, char *line);
+inline static int	is_illegal_char(char c, t_map_info *infos, int *saw_wall,
 				int *last_is_wall);
 
 int	deserialize_map_parse_map_content(char *line, t_gamestate *save)
@@ -33,7 +33,7 @@ int	deserialize_map_parse_map_content(char *line, t_gamestate *save)
 	return (1);
 }
 
-static int	contains_illegal_char(t_map_info *infos, char *line)
+inline static int	contains_illegal_char(t_map_info *infos, char *line)
 {
 	size_t	i;
 	int		saw_wall;
@@ -53,7 +53,7 @@ static int	contains_illegal_char(t_map_info *infos, char *line)
 	return (0);
 }
 
-static int	is_illegal_char(char c, t_map_info *infos, int *saw_wall,
+inline static int	is_illegal_char(char c, t_map_info *infos, int *saw_wall,
 		int *last_is_wall)
 {
 	if (c == '1')

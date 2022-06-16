@@ -15,11 +15,11 @@
 #include "core.h"
 #include "leaky.h"
 
-static void	save_player(t_settings *settings, int fd);
-static void	save_win(t_settings *settings, int fd);
+inline static void	save_player(t_settings *settings, int fd);
+inline static void	save_win(t_settings *settings, int fd);
 
-static int	open_settings_file(char *save_name);
-static void	create_appdata_directory(void);
+inline static int	open_settings_file(char *save_name);
+inline static void	create_appdata_directory(void);
 
 void	save_settings(t_settings *settings)
 {
@@ -35,7 +35,7 @@ void	save_settings(t_settings *settings)
 	save_win(settings, fd);
 }
 
-static void	save_player(t_settings *settings, int fd)
+inline static void	save_player(t_settings *settings, int fd)
 {
 	dprintf(fd, "FOV ");
 	dprintf(fd, "%d\n", settings->fov);
@@ -45,13 +45,13 @@ static void	save_player(t_settings *settings, int fd)
 				- (double)((int)settings->cam_sensitivity)) * 100));
 }
 
-static void	save_win(t_settings *settings, int fd)
+inline static void	save_win(t_settings *settings, int fd)
 {
 	dprintf(fd, "WIN ");
 	dprintf(fd, "%d %d\n", settings->desired_win_w, settings->desired_win_h);
 }
 
-static int	open_settings_file(char *save_name)
+inline static int	open_settings_file(char *save_name)
 {
 	int		fd;
 	char	*save_file;
@@ -65,7 +65,7 @@ static int	open_settings_file(char *save_name)
 	return (fd);
 }
 
-static void	create_appdata_directory(void)
+inline static void	create_appdata_directory(void)
 {
 	struct stat	dir;
 

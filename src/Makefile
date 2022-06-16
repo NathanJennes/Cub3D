@@ -79,7 +79,7 @@ TEXTURES_FILE	:=	xpm_loader.c texture_generation.c ambiant_occlusion.c	\
 					texture_deletion.c texture_utils.c	\
 					texture_manager.c texture_manager_helper.c	\
 					texture_grayscale.c texture_inversed.c texture_flip.c	\
-					texture_floor_ceilling.c
+					texture_floor_ceilling.c texture_walls_generation.c
 TEXTURE_SRCS	:=	$(addprefix $(TEXTURES_DIR)/, $(TEXTURES_FILE))
 
 IO_DIR			:=	io

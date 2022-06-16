@@ -17,10 +17,10 @@
 #include "libft.h"
 #include "error_utils.h"
 
-static int	load_font_infos(t_font *font, int fd);
-static int	load_font_chars(t_font *font, int fd);
-static int	parse_char_infos(t_char_meta *chars, char *line);
-static int	populate_char_info(t_char_meta *c, char *line,
+inline static int	load_font_infos(t_font *font, int fd);
+inline static int	load_font_chars(t_font *font, int fd);
+inline static int	parse_char_infos(t_char_meta *chars, char *line);
+inline static int	populate_char_info(t_char_meta *c, char *line,
 				char *field_name, int *field);
 
 int	load_font_meta(t_font *font, char *path)
@@ -45,7 +45,7 @@ int	load_font_meta(t_font *font, char *path)
 	return (1);
 }
 
-static int	load_font_infos(t_font *font, int fd)
+inline static int	load_font_infos(t_font *font, int fd)
 {
 	char	*line;
 	char	*info_begin;
@@ -74,7 +74,7 @@ static int	load_font_infos(t_font *font, int fd)
 	return (1);
 }
 
-static int	load_font_chars(t_font *font, int fd)
+inline static int	load_font_chars(t_font *font, int fd)
 {
 	char	*line;
 
@@ -103,7 +103,7 @@ static int	load_font_chars(t_font *font, int fd)
 	return (RETURN_SUCCESS);
 }
 
-static int	parse_char_infos(t_char_meta *chars, char *line)
+inline static int	parse_char_infos(t_char_meta *chars, char *line)
 {
 	int	value;
 
@@ -120,7 +120,7 @@ static int	parse_char_infos(t_char_meta *chars, char *line)
 	return (populate_char_info(&chars[value], line, "x", &chars[value].x));
 }
 
-static int	populate_char_info(t_char_meta *c, char *line,
+inline static int	populate_char_info(t_char_meta *c, char *line,
 		char *field_name, int *field)
 {
 	if (ft_strncmp(line, field_name, ft_strlen(field_name)) != 0)

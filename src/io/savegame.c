@@ -20,8 +20,8 @@
 void		serialize_game(int fd);
 int			deserialize_save(t_gamestate *save_out, int fd);
 
-static int	open_save_file(char *save_name, int truncate);
-static void	create_appdata_directory(void);
+inline static int	open_save_file(char *save_name, int truncate);
+inline static void	create_appdata_directory(void);
 
 int	save_game(char *save_name)
 {
@@ -63,7 +63,7 @@ void	free_save(t_gamestate *save)
 	free_lights(save);
 }
 
-static int	open_save_file(char *save_name, int truncate)
+inline static int	open_save_file(char *save_name, int truncate)
 {
 	int		fd;
 	char	*save_file;
@@ -80,7 +80,7 @@ static int	open_save_file(char *save_name, int truncate)
 	return (fd);
 }
 
-static void	create_appdata_directory(void)
+inline static void	create_appdata_directory(void)
 {
 	struct stat	dir;
 

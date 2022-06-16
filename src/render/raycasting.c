@@ -14,9 +14,9 @@
 #include "core.h"
 #include "render.h"
 
-static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side);
-static t_vec2	calculate_lengths(t_vec2 *ray);
-static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos,
+inline static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side);
+inline static t_vec2	calculate_lengths(t_vec2 *ray);
+inline static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos,
 		t_ivec2 map_pos);
 
 t_ray	shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos, double max_dist)
@@ -59,7 +59,7 @@ t_ray	shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos, double max_di
 	return (populate_ray(-1.0f, ray, FALSE, NOSIDE));
 }
 
-static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side)
+inline static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side)
 NOPROF
 {
 	t_ray		result;
@@ -78,7 +78,7 @@ NOPROF
 	return (result);
 }
 
-static t_vec2	calculate_lengths(t_vec2 *ray)
+inline static t_vec2	calculate_lengths(t_vec2 *ray)
 NOPROF
 {
 	t_vec2	lengths;
@@ -94,7 +94,7 @@ NOPROF
 	return (lengths);
 }
 
-static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos,
+inline static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos,
 		t_ivec2 map_pos)
 NOPROF
 {

@@ -17,6 +17,7 @@ int	deserialize_map_parse_no_tex(char *line, t_gamestate *save)
 {
 	char	*cursor;
 
+	(void)save;
 	cursor = ft_trimr(line);
 	cursor += ft_strlen("NO_TEX");
 	cursor = ft_strskip_space(cursor);
@@ -33,6 +34,7 @@ int	deserialize_map_parse_ea_tex(char *line, t_gamestate *save)
 {
 	char	*cursor;
 
+	(void)save;
 	cursor = ft_trimr(line);
 	cursor += ft_strlen("EA_TEX");
 	cursor = ft_strskip_space(cursor);
@@ -49,6 +51,7 @@ int	deserialize_map_parse_so_tex(char *line, t_gamestate *save)
 {
 	char	*cursor;
 
+	(void)save;
 	cursor = ft_trimr(line);
 	cursor += ft_strlen("SO_TEX");
 	cursor = ft_strskip_space(cursor);
@@ -65,6 +68,7 @@ int	deserialize_map_parse_we_tex(char *line, t_gamestate *save)
 {
 	char	*cursor;
 
+	(void)save;
 	cursor = ft_trimr(line);
 	cursor += ft_strlen("WE_TEX");
 	cursor = ft_strskip_space(cursor);

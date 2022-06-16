@@ -12,7 +12,7 @@
 
 #include "core.h"
 
-static int	pixel_in_screen(int64_t x, int64_t y) NOPROF;
+inline static int	pixel_in_screen(int64_t x, int64_t y) NOPROF;
 
 void	clear_screen(int color)
 {
@@ -61,7 +61,7 @@ NOPROF
 	*(unsigned int *)dst = color;
 }
 
-static int	pixel_in_screen(int64_t x, int64_t y)
+inline static int	pixel_in_screen(int64_t x, int64_t y)
 NOPROF
 {
 	t_settings	*settings;

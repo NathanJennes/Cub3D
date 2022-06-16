@@ -24,7 +24,7 @@ int			deserialize_map_parse_so_tex(char *line, t_gamestate *save);
 int			deserialize_map_parse_we_tex(char *line, t_gamestate *save);
 int			deserialize_map_parse_map_content(char *line, t_gamestate *save);
 
-static int	parse_line(char *line, t_gamestate *save);
+inline static int	parse_line(char *line, t_gamestate *save);
 
 int	deserialize_map(int fd, char *line, t_gamestate *save)
 {
@@ -48,7 +48,7 @@ int	deserialize_map(int fd, char *line, t_gamestate *save)
 	return (0);
 }
 
-static int	parse_line(char *line, t_gamestate *save)
+inline static int	parse_line(char *line, t_gamestate *save)
 {
 	if (ft_strncmp(line, "W ", ft_strlen("W ")) == 0)
 		return (deserialize_map_parse_width(line, save));

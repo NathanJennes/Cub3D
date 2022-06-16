@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 13:37:13 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/10 17:49:52 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/15 14:35:59 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "core.h"
 #include "leaky.h"
 
-static void	generate_lookup_table(double *table);
+inline static void	generate_lookup_table(double *table);
 
 void	init_sprite_manager(void)
 {
@@ -37,7 +37,7 @@ void	clear_sprite_manager(void)
 	gc_free(manager->angle_lookup);
 }
 
-static void	generate_lookup_table(double *table)
+inline static void	generate_lookup_table(double *table)
 {
 	t_settings	*settings;
 	t_player	*player;

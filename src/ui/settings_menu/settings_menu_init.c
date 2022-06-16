@@ -25,9 +25,9 @@ int			chk_unselect_res_high(t_checkbox *checkbox);
 int			chk_select_res_fullscreen(t_checkbox *checkbox);
 int			chk_unselect_res_fullscreen(t_checkbox *checkbox);
 
-static void	init_positions(t_ui_settings_menu *menu);
-static void	init_textures(t_ui_settings_menu *menu);
-static void	init_current_res_checkbox(t_ui_settings_menu *menu);
+inline static void	init_positions(t_ui_settings_menu *menu);
+inline static void	init_textures(t_ui_settings_menu *menu);
+inline static void	init_current_res_checkbox(t_ui_settings_menu *menu);
 
 void	init_settings_menu(void)
 {
@@ -62,7 +62,7 @@ void	init_settings_menu(void)
 	init_current_res_checkbox(menu);
 }
 
-static void	init_positions(t_ui_settings_menu *menu)
+inline static void	init_positions(t_ui_settings_menu *menu)
 {
 	menu->slid_fov.infos.pos.y = 50;
 	uic_center_win_w(&menu->slid_fov.infos);
@@ -83,7 +83,7 @@ static void	init_positions(t_ui_settings_menu *menu)
 	uic_side_right(&menu->lbl_sens.infos, &menu->slid_sens.infos);
 }
 
-static void	init_textures(t_ui_settings_menu *menu)
+inline static void	init_textures(t_ui_settings_menu *menu)
 {
 	menu->chk_res_min.tex_id = new_texture(200, 60);
 	clear_texture(RED, menu->chk_res_min.tex_id);
@@ -117,7 +117,7 @@ static void	init_textures(t_ui_settings_menu *menu)
 		get_texture_size(menu->chk_res_fullscreen.tex_id);
 }
 
-static void	init_current_res_checkbox(t_ui_settings_menu *menu)
+inline static void	init_current_res_checkbox(t_ui_settings_menu *menu)
 {
 	t_settings	*settings;
 

@@ -13,8 +13,8 @@
 #include "core.h"
 #include "leaky.h"
 
-static int	parse_line(char *line, t_gamestate *save);
-static int	parse_pos(char *line, t_gamestate *save);
+inline static int	parse_line(char *line, t_gamestate *save);
+inline static int	parse_pos(char *line, t_gamestate *save);
 
 int	deserialize_player(int fd, char *line, t_gamestate *save)
 {
@@ -38,14 +38,14 @@ int	deserialize_player(int fd, char *line, t_gamestate *save)
 	return (0);
 }
 
-static int	parse_line(char *line, t_gamestate *save)
+inline static int	parse_line(char *line, t_gamestate *save)
 {
 	if (ft_strncmp(line, "POS", ft_strlen("POS")) == 0)
 		return (parse_pos(line, save));
 	return (0);
 }
 
-static int	parse_pos(char *line, t_gamestate *save)
+inline static int	parse_pos(char *line, t_gamestate *save)
 {
 	char	*line_cursor;
 

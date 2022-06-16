@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 16:36:31 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/10 17:36:27 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/15 14:38:07 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #include "render.h"
 #include "leaky.h"
 
-static void		render_multithreaded(t_renderer *renderer);
-static void		render_singlethreaded(void);
+inline static void		render_multithreaded(t_renderer *renderer);
+inline static void		render_singlethreaded(void);
 
 void	init_renderer(void)
 {
@@ -27,7 +27,7 @@ void	init_renderer(void)
 	renderer->depth_buffer = gc_calloc(get_settings()->win_w, sizeof (double));
 	ft_memsetd(renderer->depth_buffer, DBL_MAX, get_settings()->win_w);
 	renderer->running = TRUE;
-	renderer->multithreading = TRUE;
+	renderer->multithreading = FALSE;
 	pthread_mutex_init(&renderer->running_lock, NULL);
 	i = 0;
 	while (i < RENDER_WORKER_COUNT)
@@ -74,7 +74,7 @@ void	renderer_render(void)
 		render_singlethreaded();
 }
 
-static void	render_multithreaded(t_renderer *renderer)
+inline static void	render_multithreaded(t_renderer *renderer)
 {
 	int64_t	i;
 
@@ -92,7 +92,7 @@ static void	render_multithreaded(t_renderer *renderer)
 		pthread_mutex_unlock(&renderer->working_lock[i++]);
 }
 
-static void	render_singlethreaded(void)
+inline static void	render_singlethreaded(void)
 {
 	render_walls(0, get_settings()->win_w - 1);
 }

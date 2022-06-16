@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 15:40:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/25 17:55:39 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/15 14:35:59 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "leaky.h"
 #include "render.h"
 
-static void	add_font(char *meta_path, char *bitmap_path);
-static void	grow_font_array(t_font_manager *manager);
+inline static void	add_font(char *meta_path, char *bitmap_path);
+inline static void	grow_font_array(t_font_manager *manager);
 
 void	init_font_manager(void)
 {
@@ -54,7 +54,7 @@ void	unload_font_manager(void)
 	}
 }
 
-static void	add_font(char *meta_path, char *bitmap_path)
+inline static void	add_font(char *meta_path, char *bitmap_path)
 {
 	t_font			new_font;
 	t_font_manager	*manager;
@@ -70,7 +70,7 @@ static void	add_font(char *meta_path, char *bitmap_path)
 	manager->fonts[manager->font_count - 1] = new_font;
 }
 
-static void	grow_font_array(t_font_manager *manager)
+inline static void	grow_font_array(t_font_manager *manager)
 {
 	t_font	*new;
 

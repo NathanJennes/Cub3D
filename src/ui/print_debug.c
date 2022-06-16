@@ -14,9 +14,9 @@
 #include "ui.h"
 #include "render.h"
 
-static t_ivec2	debug_player(t_ivec2 *pos);
-static void		debug_rays(t_ivec2 *pos);
-static t_ivec2	debug_settings(t_ivec2 *pos);
+inline static void	debug_player(t_ivec2 *pos);
+inline static void	debug_rays(t_ivec2 *pos);
+inline static void	debug_settings(t_ivec2 *pos);
 
 void	print_debug(void)
 NOPROF
@@ -44,7 +44,7 @@ NOPROF
 	}
 }
 
-static void	debug_rays(t_ivec2 *pos)
+inline static void	debug_rays(t_ivec2 *pos)
 {
 	t_player	*player;
 
@@ -59,7 +59,7 @@ static void	debug_rays(t_ivec2 *pos)
 	pos->y += 40;
 }
 
-static t_ivec2	debug_player(t_ivec2 *pos)
+inline static void	debug_player(t_ivec2 *pos)
 NOPROF
 {
 	t_player	*player;
@@ -87,7 +87,7 @@ NOPROF
 	pos->y += 10;
 }
 
-static t_ivec2	debug_settings(t_ivec2 *pos)
+inline static void	debug_settings(t_ivec2 *pos)
 NOPROF
 {
 	render_text("Settings", DEFAULT_FONT, 15, ivec2(pos->x, pos->y));

@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture_inverted.c                                 :+:      :+:    :+:   */
+/*   texture_flip.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 23:11:31 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/06 01:18:01 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/15 14:18:57 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "texture.h"
+#include "core.h"
 
-void	create_texture_vflip(t_texture *tex)
+void	create_texture_vflip(t_rgb **original, t_rgb **vflip, int width, int height)
 {
-	int64_t		i;
-	int64_t		j;
-	int64_t		px;
-	int			*pixel;
-	int			*original_pixel;
+	int64_t		column;
+	int64_t		row;
+	t_rgb		px;
 
-	i = 0;
-	px = 0;
-	while (i < tex->height)
+	column = 0;
+	while (column < width)
 	{
-		j = tex->width - 1;
-		while (j >= 0)
+		row = 0;
+		while (row < height)
 		{
-			pixel = (int *)(tex->vflip + px * sizeof(int));
-			original_pixel = (int *)
-				(tex->original + (i * tex->line_size) + j * sizeof(int));
-			*pixel = *original_pixel;
-			j--;
-			px++;
+			px = original[width - column - 1][row];
+			vflip[column][row] = px;
+			row++;
 		}
-		i++;
+		column++;
 	}
 }

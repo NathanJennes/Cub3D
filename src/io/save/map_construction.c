@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   map_construction.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 14:24:49 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/07 17:06:37 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/15 14:35:59 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "leaky.h"
 
-static void	read_map_content(t_map_info *infos, size_t i, size_t j, int *row);
+inline static void	read_map_content(t_map_info *infos, size_t i, size_t j, int *row);
 
 void	construct_map(t_map_info *infos)
 {
@@ -37,7 +37,7 @@ void	construct_map(t_map_info *infos)
 	}
 }
 
-static void	read_map_content(t_map_info *infos, size_t i, size_t j, int *row)
+inline static void	read_map_content(t_map_info *infos, size_t i, size_t j, int *row)
 {
 	if (infos->map_raw[i][j] == '1')
 		row[j] = WALL;

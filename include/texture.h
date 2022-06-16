@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:38:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/06 13:30:28 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/15 14:04:33 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "profiling.h"
 
 # define INVALID_TEXTURE -1
+
+typedef union s_rgb	t_rgb;
 
 typedef struct s_xpm_file
 {
@@ -46,11 +48,11 @@ typedef struct s_texture
 	void	*inversed_grayscale_handle;
 	uint8_t	*inversed;
 	void	*inversed_handle;
-	uint8_t	*vflip;
-	uint8_t	*ao_flat;
-	uint8_t	*ao_right;
-	uint8_t	*ao_left;
-	uint8_t	*ao_all;
+	t_rgb	**vflip;
+	t_rgb	**ao_flat;
+	t_rgb	**ao_right;
+	t_rgb	**ao_left;
+	t_rgb	**ao_all;
 }	t_texture;
 
 typedef struct s_texture_manager
@@ -73,8 +75,5 @@ t_texture	*get_texture_from_id(int64_t tex_id);
 
 /* Utils */
 t_ivec2		get_texture_size(int64_t tex_id) NOPROF;
-
-int32_t	get_pixel_color_from_texture(int64_t x, int64_t y,
-		t_texture *texture, const uint8_t *tx_handler);
 
 #endif

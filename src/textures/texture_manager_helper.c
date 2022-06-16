@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:19:14 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/18 17:20:43 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/15 14:35:59 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "core.h"
 #include "leaky.h"
 
-static void	grow_texture_array(void);
+inline static void	grow_texture_array(void);
 
 int64_t	add_texture_to_array(t_texture texture)
 {
@@ -34,7 +34,7 @@ int64_t	add_texture_to_array(t_texture texture)
 	return (tex_id);
 }
 
-static void	grow_texture_array(void)
+inline static void	grow_texture_array(void)
 {
 	t_texture			*new_array;
 	t_texture_manager	*tex_manager;

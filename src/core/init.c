@@ -21,8 +21,8 @@ int			key_down_callback(int keycode, void *unused);
 int			mouse_down_callback(int button, int x, int y, void *unused);
 int			mouse_up_callback(int button, int x, int y, void *unused);
 
-static void	init_hooks(void);
-static void	init_start_time(void);
+inline static void	init_hooks(void);
+inline static void	init_start_time(void);
 
 void	init_app(char *path)
 {
@@ -54,7 +54,7 @@ void	init_app(char *path)
 		printf("Error: couldn't load specified map.\n");
 }
 
-static void	init_hooks(void)
+inline static void	init_hooks(void)
 {
 	t_mlx	*app;
 
@@ -68,7 +68,7 @@ static void	init_hooks(void)
 	mlx_loop_hook(app->mlx, main_loop, app);
 }
 
-static void	init_start_time(void)
+inline static void	init_start_time(void)
 {
 	t_mlx			*app;
 	struct timeval	time;

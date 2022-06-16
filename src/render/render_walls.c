@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:20:12 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/10 17:43:12 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/15 19:09:48 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 #include "core.h"
 #include "render.h"
 
-static void			get_correct_distance(t_ray *ray);
-static t_wall		get_wall_info(t_ray *ray);
+inline static void			get_correct_distance(t_ray *ray);
+inline static t_wall		get_wall_info(t_ray *ray);
 void				render_column(int64_t xcol, t_wall wall, t_ray *ray);
 
+//TODO: inline functions that are in the loop with the inline keyword
+//TODO: (Group them in the same .c file)
 void	render_walls(int64_t col_start, int64_t col_end)
 {
 	int64_t		i;
@@ -46,7 +48,7 @@ void	render_walls(int64_t col_start, int64_t col_end)
 	}
 }
 
-static	t_wall	get_wall_info(t_ray *ray)
+inline static	t_wall	get_wall_info(t_ray *ray)
 {
 	t_wall		wall;
 	t_settings	*settings;
@@ -55,18 +57,18 @@ static	t_wall	get_wall_info(t_ray *ray)
 	get_correct_distance(ray);
 	wall.size = (int64_t)fabs(1 / ray->distance * get_math()->plane_dist);
 	wall.real_size = wall.size;
-	wall.offset = (wall.real_size - settings->win_h) / 2;
-	if (wall.offset < 0)
-		wall.offset = 0;
+	wall.wall_origin = (wall.real_size - settings->win_h) / 2;
+	if (wall.wall_origin < 0)
+		wall.wall_origin = 0;
 	if (wall.size > settings->win_h)
 		wall.size = settings->win_h;
 	else if (wall.size < 0)
 		wall.size = 0;
-	wall.origin = settings->halfw_h - (wall.size / 2);
+	wall.screen_origin = settings->halfw_h - (wall.size / 2);
 	return (wall);
 }
 
-static void	get_correct_distance(t_ray *ray)
+inline static void	get_correct_distance(t_ray *ray)
 {
 	double		angle;
 

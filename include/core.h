@@ -151,9 +151,9 @@ typedef struct s_gamestate
 
 typedef struct s_wall
 {
-	int64_t		origin;
+	int64_t		screen_origin;
 	int64_t		size;
-	int64_t		offset;
+	int64_t		wall_origin;
 	int64_t		real_size;
 }	t_wall;
 

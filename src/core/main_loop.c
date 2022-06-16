@@ -15,7 +15,7 @@
 #include "ui.h"
 #include "render.h"
 
-static void	render_game(t_mlx *app, const t_settings *settings,
+inline static void	render_game(t_mlx *app, const t_settings *settings,
 				struct timeval time[4]);
 
 int	main_loop(void)
@@ -43,7 +43,7 @@ int	main_loop(void)
 	return (0);
 }
 
-static void	render_game(t_mlx *app, const t_settings *settings,
+inline static void	render_game(t_mlx *app, const t_settings *settings,
 		struct timeval time[4])
 {
 	gettimeofday(&time[0], NULL);

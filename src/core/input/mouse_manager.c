@@ -18,7 +18,7 @@ void		mouse_click_end(int button);
 void		mouse_wheel_up(void);
 void		mouse_wheel_down(void);
 
-static int	handle_scroll_wheel(int button);
+inline static int	handle_scroll_wheel(int button);
 
 int	mouse_up_callback(int button, int x, int y, void *unused)
 {
@@ -69,7 +69,7 @@ t_bool	is_mouse_down(int button)
 	return (get_app()->mouse.buttons[button]);
 }
 
-static int	handle_scroll_wheel(int button)
+inline static int	handle_scroll_wheel(int button)
 {
 	if (button == MOUSE_WHEELUP)
 	{

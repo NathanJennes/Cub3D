@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:58:37 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 19:53:44 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/15 14:35:59 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "core.h"
 #include "leaky.h"
 
-static void	add_to_maps(char *save_name);
-static void	grow_maps_array(void);
+inline static void	add_to_maps(char *save_name);
+inline static void	grow_maps_array(void);
 
 void	load_all_maps(void)
 {
@@ -59,7 +59,7 @@ void	unload_maps(void)
 	gc_free(app->maps);
 }
 
-static void	add_to_maps(char *save_name)
+inline static void	add_to_maps(char *save_name)
 {
 	t_mlx		*app;
 	t_gamestate	save;
@@ -72,7 +72,7 @@ static void	add_to_maps(char *save_name)
 	app->maps_count++;
 }
 
-static void	grow_maps_array(void)
+inline static void	grow_maps_array(void)
 {
 	t_mlx		*app;
 	t_gamestate	*new;

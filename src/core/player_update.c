@@ -14,9 +14,9 @@
 #include "input_code.h"
 #include "render.h"
 
-static void	update_player_position(t_player *player, t_vec2 future_pos,
+inline static void	update_player_position(t_player *player, t_vec2 future_pos,
 				double delta_time);
-static void	update_player_direction(t_player *player, double delta_time);
+inline static void	update_player_direction(t_player *player, double delta_time);
 
 void	update_player(t_player *player)
 {
@@ -30,7 +30,7 @@ void	update_player(t_player *player)
 	update_player_vectors(player);
 }
 
-static void	update_player_position(t_player *player, t_vec2 future_pos,
+inline static void	update_player_position(t_player *player, t_vec2 future_pos,
 		double delta_time)
 {
 	if (is_key_down(KEY_W))
@@ -59,7 +59,7 @@ static void	update_player_position(t_player *player, t_vec2 future_pos,
 	}
 }
 
-static void	update_player_direction(t_player *player, double delta_time)
+inline static void	update_player_direction(t_player *player, double delta_time)
 {
 	t_settings	*settings;
 

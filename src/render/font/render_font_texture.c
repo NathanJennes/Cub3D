@@ -14,10 +14,10 @@
 #include "render.h"
 #include "colors.h"
 
-static int	render_letter(char c, t_font *font, t_ivec2 pos, t_ivec2 size_tex);
-static int	sample_pixel(uint8_t *data, t_vec2 pos, t_vec2 size, int line_size);
-static int	get_pixel_color(t_text_render *infos);
-static void	render_pixel(t_text_render *infos, int color, int64_t tex_id);
+inline static int	render_letter(char c, t_font *font, t_ivec2 pos, t_ivec2 size_tex);
+inline static int	sample_pixel(uint8_t *data, t_vec2 pos, t_vec2 size, int line_size);
+inline static int	get_pixel_color(t_text_render *infos);
+inline static void	render_pixel(t_text_render *infos, int color, int64_t tex_id);
 
 void	render_text_tex(char *text, char *font_name, t_ivec2 pos,
 			t_ivec2 size_id)
@@ -42,7 +42,7 @@ void	render_text_tex(char *text, char *font_name, t_ivec2 pos,
 	}
 }
 
-static int	render_letter(char c, t_font *font, t_ivec2 pos, t_ivec2 size_tex)
+inline static int	render_letter(char c, t_font *font, t_ivec2 pos, t_ivec2 size_tex)
 {
 	t_text_render	infos;
 	int				color;
@@ -71,7 +71,7 @@ static int	render_letter(char c, t_font *font, t_ivec2 pos, t_ivec2 size_tex)
 	return ((int)((double)infos.c->x_advance * infos.ratio));
 }
 
-static int	get_pixel_color(t_text_render *infos)
+inline static int	get_pixel_color(t_text_render *infos)
 {
 	int	color;
 
@@ -83,7 +83,7 @@ static int	get_pixel_color(t_text_render *infos)
 	return (color);
 }
 
-static void	render_pixel(t_text_render *infos, int color, int64_t tex_id)
+inline static void	render_pixel(t_text_render *infos, int color, int64_t tex_id)
 {
 	if (get_t(color) < 255)
 		set_texture_pixel((int)((double)infos->c->x_off * infos->ratio)
@@ -92,7 +92,7 @@ static void	render_pixel(t_text_render *infos, int color, int64_t tex_id)
 			+ infos->pos.y + infos->xy.y, color, tex_id);
 }
 
-static int	sample_pixel(uint8_t *data, t_vec2 pos, t_vec2 size, int line_size)
+inline static int	sample_pixel(uint8_t *data, t_vec2 pos, t_vec2 size, int line_size)
 {
 	int64_t	t;
 	t_vec2	sample_dists;

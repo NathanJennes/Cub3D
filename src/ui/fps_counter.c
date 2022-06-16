@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:36:18 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/01 15:03:20 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/15 18:36:55 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "ui.h"
 #include "render.h"
 
-static int64_t	get_time(void);
+inline static int64_t	get_time(void);
 void			display_fps(int64_t time_diff);
 
 void	fps_counter(void)
@@ -58,7 +58,7 @@ void	display_fps(int64_t time_diff)
 	elapsed += time_diff;
 }
 
-static int64_t	get_time(void)
+inline static int64_t	get_time(void)
 {
 	struct timeval	time;
 
