@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/15 17:01:45 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/16 17:06:43 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@
 # define COLLISION_PAD	3
 
 # define RENDER_WORKER_COUNT 4
+
+# define NORTH 0
+# define EAST 1
+# define SOUTH 2
+# define WEST 4
 
 typedef struct s_debug
 {
@@ -90,8 +95,7 @@ typedef struct s_map_info
 	char		spawn_dir;
 	t_rgb		ceiling;
 	t_rgb		floor;
-	int64_t		*tx_list;
-	int64_t		tx_count;
+	int64_t		tx_list[4];
 	int			**map;
 	char		**map_raw;
 }	t_map_info;

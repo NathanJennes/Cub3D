@@ -83,7 +83,8 @@ TEXTURES_FILE	:=	xpm_loader.c texture_generation.c ambiant_occlusion.c	\
 TEXTURE_SRCS	:=	$(addprefix $(TEXTURES_DIR)/, $(TEXTURES_FILE))
 
 IO_DIR			:=	io
-IO_FILE			:=	savegame.c saves_manager.c loaded_map.c loaded_map_manager.c
+IO_FILE			:=	savegame.c saves_manager.c loaded_map.c loaded_map_manager.c\
+					map_error.c
 IO_SRCS			:=	$(addprefix $(IO_DIR)/, $(IO_FILE))
 
 SAVE_DIR		:=	$(IO_DIR)/save
