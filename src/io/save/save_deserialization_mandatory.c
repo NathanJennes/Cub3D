@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/16 17:34:04 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/16 18:41:10 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@
 void		construct_map(t_map_info *infos) NOPROF;
 int			parse_color(t_rgb *color, t_map_parser *parser, char *line) NOPROF;
 int			parse_texture(t_map_info *info, t_map_parser *parser, char *line, int direction) NOPROF;
-int			add_map_row(t_map_info *infos, char *line) NOPROF;
+int			add_map_row(t_map_info *infos, t_map_parser *parser, char *line) NOPROF;
+t_bool		is_legal_map(t_map_info *infos, t_map_parser *parser) NOPROF;
 
 inline static int	parse_line(t_map_info *infos, t_map_parser *parser, char *line) NOPROF;
 inline static void	setup_player(t_gamestate *save) NOPROF;
 
-int	load_mandatory_map(t_gamestate *save_out, int fd, char *line)
+int	load_mandatory_map(t_gamestate *save_out, int fd, char *line, char *filename)
 {
 	t_map_info		*infos;
 	t_map_parser	parser;
@@ -32,6 +33,8 @@ int	load_mandatory_map(t_gamestate *save_out, int fd, char *line)
 	ft_memset(&parser, 0, sizeof (t_map_parser));
 	infos = &save_out->map;
 	ft_memsetl(&infos->tx_list, INVALID_TEXTURE, 4);
+	parser.filename = filename;
+	parser.map_line_offset = -1;
 	while (line)
 	{
 		parser.line = line;
@@ -39,7 +42,7 @@ int	load_mandatory_map(t_gamestate *save_out, int fd, char *line)
 		if (!parse_line(infos, &parser, line))
 		{
 			gc_free(line);
-			return (0);
+			return (map_print_error(&parser));
 		}
 		gc_free(line);
 		line = ft_trimr(gc_get_next_line(fd));
@@ -59,10 +62,9 @@ inline static int	parse_line(t_map_info *infos, t_map_parser *parser, char *line
 {
 	static int	map_status = MEMPTY;
 
-	line = ft_strskip_space(line);
-	if (!line[0])
+	if (ft_strlen(ft_strskip_space(line)) == 0)
 		return (1);
-	if (ft_isdigit(line[0]) || line[0] == ' ')
+	if (ft_isdigit(line[0]) || ft_isdigit(*ft_strskip_space(line)))
 	{
 		if (map_status == MFINISHED)
 		{
@@ -71,7 +73,7 @@ inline static int	parse_line(t_map_info *infos, t_map_parser *parser, char *line
 			return (0);
 		}
 		map_status = MWIP;
-		return (add_map_row(infos, line));
+		return (add_map_row(infos, parser, line));
 	}
 	else if (map_status == MWIP && !is_map_legal(infos, parser))
 		return (0);

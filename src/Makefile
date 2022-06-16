@@ -94,7 +94,7 @@ SAVE_FILE		:=	save_deserialization.c	\
 					save_deserialization_map_specs.c save_deserialization_map_textures.c	\
 					save_deserialization_player.c	\
 					save_serialization.c	\
-					map_construction.c
+					map_construction.c map_checking.c
 SAVE_SRCS		:=	$(addprefix $(SAVE_DIR)/, $(SAVE_FILE))
 
 SETTINGS_DIR		:=	$(IO_DIR)/settings

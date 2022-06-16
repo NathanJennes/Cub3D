@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:07:45 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 17:21:37 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/16 17:44:52 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "leaky.h"
 
 void		serialize_game(int fd);
-int			deserialize_save(t_gamestate *save_out, int fd);
+int			deserialize_save(t_gamestate *save_out, int fd, char *filename);
 
 inline static int	open_map_file(char *map_name);
 inline static void	create_maps_directory(void);
@@ -30,7 +30,7 @@ int	load_map(t_gamestate *map_out, char *map_name)
 	fd = open_map_file(map_name);
 	if (fd == -1)
 		return (0);
-	if (!deserialize_save(&save, fd))
+	if (!deserialize_save(&save, fd, map_name))
 	{
 		gc_strarray_free(save.map.map_raw);
 		gc_free2d((void **)save.map.map, save.map.height);

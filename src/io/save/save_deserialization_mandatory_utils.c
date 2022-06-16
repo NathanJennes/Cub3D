@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/16 17:29:45 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/16 17:35:32 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ int	parse_texture(t_map_info *info, t_map_parser *parser, char *line, int direct
 	return (1);
 }
 
-int	add_map_row(t_map_info *infos, char *line)
+int	add_map_row(t_map_info *infos, t_map_parser *parser, char *line)
 {
+	if (parser->map_line_offset == -1)
+		parser->map_line_offset = parser->line_number;
 	infos->height++;
 	line = ft_trimr(line);
 	if (!infos->map_raw)
