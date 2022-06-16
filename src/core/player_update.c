@@ -67,7 +67,7 @@ static void	update_player_direction(t_player *player, double delta_time)
 	settings = get_settings();
 	get_app()->mouse.delta.x = \
 		get_mouse_position().x - get_app()->settings.halfw_w;
-	get_player()->direction -= 0.0025 * (get_settings()->cam_sensitivity
+	get_player()->direction -= 0.0005 * (get_settings()->cam_sensitivity
 		* (double)get_app()->mouse.delta.x);
 	if (is_key_down(KEY_RIGHT))
 		player->direction -= PI / 4.0 * settings->cam_sensitivity * delta_time;
