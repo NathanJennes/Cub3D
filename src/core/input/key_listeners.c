@@ -37,13 +37,14 @@ inline static void	handle_escape(void)
 
 	app = get_app();
 	mlx_mouse_show();
-	if (app->app_state == IN_GAME)
+	if (app->state == IN_GAME)
 	{
 		save_game(app->gamestate.name);
-		app->app_state = IN_MENU;
+		app->state = IN_MENU;
 		app->ui.state = MAIN_MENU;
+		mlx_mouse_show();
 	}
-	else if (app->app_state == IN_MENU)
+	else if (app->state == IN_MENU)
 	{
 		if (app->ui.state == NEW_GAME_MENU)
 			app->ui.state = MAIN_MENU;

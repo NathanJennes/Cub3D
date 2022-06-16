@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_manager.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:00:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/13 23:31:13 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/15 15:42:18 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ int	render_ui(void)
 	t_mlx			*app;
 
 	app = get_app();
-	if (app->app_state == IN_MENU)
+	if (app->state == IN_MENU)
 	{
+		mlx_mouse_show();
 		if (app->ui.state == MAIN_MENU)
 			render_main_menu();
 		else if (app->ui.state == NEW_GAME_MENU)
@@ -37,8 +38,6 @@ int	render_ui(void)
 		else if (app->ui.state == OPTION_MENU)
 			render_settings_menu();
 	}
-	if (get_ui()->debug)
-		print_debug();
 	return (0);
 }
 
@@ -47,12 +46,15 @@ void	update_ui(void)
 	t_mlx	*app;
 
 	app = get_app();
-	if (app->ui.state == MAIN_MENU)
-		update_main_menu();
-	else if (app->ui.state == NEW_GAME_MENU)
-		update_new_game_menu();
-	else if (app->ui.state == OPTION_MENU)
-		update_settings_menu();
+	if (app->state == IN_MENU)
+	{
+		if (app->ui.state == MAIN_MENU)
+			update_main_menu();
+		else if (app->ui.state == NEW_GAME_MENU)
+			update_new_game_menu();
+		else if (app->ui.state == OPTION_MENU)
+			update_settings_menu();
+	}
 }
 
 void	update_ui_click_begin(int button)

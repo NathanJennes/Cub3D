@@ -3,19 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 18:35:28 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/20 17:22:10 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/15 13:42:24 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "leaky.h"
 
-int	main(void)
+int	main(int argc, char *argv[])
 {
-	init_app();
+	if (argc == 2)
+		init_app(argv[1]);
+	else
+		init_app(NULL);
 	mlx_loop(get_mlx());
 	gc_clean();
 	return (0);

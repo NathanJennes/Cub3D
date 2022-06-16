@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/13 23:44:17 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/15 17:01:45 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,7 @@ typedef struct s_mlx
 	int64_t				last_time;
 	int64_t				start_time;
 	double				delta_time;
-	t_app_state			app_state;
+	t_app_state			state;
 	t_ui				ui;
 	t_texture_manager	texture_manager;
 	t_font_manager		font_manager;
@@ -222,7 +222,7 @@ void		init_math(void);
 void		destroy_window(void);
 
 /* initialization */
-void		init_app(void);
+void		init_app(char *path);
 void		init_gc(void);
 
 /* main_loop.c */
@@ -233,6 +233,8 @@ int			mouse_move_hooks(int x, int y, void *unused);
 
 /* Keys */
 t_bool		is_key_down(int keycode) NOPROF;
+
+void		is_colliding(t_vec2 future_pos);
 
 /* Mouse */
 t_bool		is_mouse_down(int button) NOPROF;
