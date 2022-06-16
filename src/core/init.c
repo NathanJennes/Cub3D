@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/15 14:27:34 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/16 21:08:29 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,25 @@ void	init_app(char *path)
 	app->settings = load_settings();
 	init_start_time();
 	init_gc();
-	init_window("Cub3d");
+	init_mlx(app);
 	init_font_manager();
-	load_all_saves();
-	load_all_maps();
-	printf("Saves loaded: %d\n", (int) app->savegames_count);
-	printf("Maps loaded: %d\n", (int) app->maps_count);
-	init_math();
-	init_ui();
-	init_hooks();
-	init_renderer();
-	if (load_map(&app->gamestate, path))
+	if (path && load_map(&app->gamestate, path))
 	{
 		app->state = IN_GAME;
 		app->renderer.multithreading = FALSE;
 		mlx_mouse_hide();
 	}
+	else if (path)
+		close_app();
+	load_all_saves();
+	load_all_maps();
+	printf("Saves loaded: %d\n", (int) app->savegames_count);
+	printf("Maps loaded: %d\n", (int) app->maps_count);
+	init_window("Cub3d");
+	init_math();
+	init_ui();
+	init_hooks();
+	init_renderer();
 }
 
 inline static void	init_hooks(void)

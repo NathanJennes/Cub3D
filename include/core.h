@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/16 17:27:34 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/16 21:06:34 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,10 @@ typedef struct s_mlx
 	t_debug				debug;
 }	t_mlx;
 
+//TODO: quand on se deplace en diagonale, la minimap shake
+
 /* core.c */
+void 		init_mlx(t_mlx *app);
 void		init_window(char *win_name);
 int			close_app(void);
 void		error_close_app(void);
