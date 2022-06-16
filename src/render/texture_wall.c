@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_wall.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <cybattis@student.42lyon.fr>         +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/15 18:33:45 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/16 15:49:44 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,22 @@ inline static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_vec3 ligh
 	while (pos.y < wall.size)
 	{
 		color = data[(int64_t)ty];
-		result.x = (double)color.r * lighting.x;
-		result.y = (double)color.g * lighting.y;
-		result.z = (double)color.b * lighting.z;
-		if (result.x > 255.0)
-			result.x = 255.0;
-		if (result.y > 255.0)
-			result.y = 255.0;
-		if (result.z > 255.0)
-			result.z = 255.0;
-		px_color = trgb(color.t, (int)result.x, (int)result.y, (int)result.z);
-		set_screen_pixel_unsafe(pos.x, pos.y, px_color);
+		if (!get_app()->mandatory)
+		{
+			result.x = (double) color.r * lighting.x;
+			result.y = (double) color.g * lighting.y;
+			result.z = (double) color.b * lighting.z;
+			if (result.x > 255.0)
+				result.x = 255.0;
+			if (result.y > 255.0)
+				result.y = 255.0;
+			if (result.z > 255.0)
+				result.z = 255.0;
+			px_color = trgb(color.t, (int) result.x, (int) result.y, (int) result.z);
+			set_screen_pixel_unsafe(pos.x, pos.y, px_color);
+		}
+		else
+			set_screen_pixel_unsafe(pos.x, pos.y, color.color);
 		pos.y++;
 		ty += ratio;
 	}

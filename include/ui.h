@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/15 17:35:51 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/16 16:07:04 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ typedef struct s_mmap
 
 typedef struct s_ui_component
 {
-	t_ivec2	pos;
-	t_ivec2	size;
-	t_bool	displayed;
-	int64_t	pad_up;
-	int64_t	pad_right;
-	int64_t	pad_down;
-	int64_t	pad_left;
+	t_ivec2		pos;
+	t_ivec2		size;
+	t_bool		displayed;
+	int64_t		pad_up;
+	int64_t		pad_right;
+	int64_t		pad_down;
+	int64_t		pad_left;
 }	t_ui_component;
 
 typedef struct s_button
@@ -159,6 +159,7 @@ typedef struct s_ui
 	t_ui_new_game_menu	new_game_menu;
 	t_ui_settings_menu	settings_menu;
 	t_mmap				minimap;
+	int64_t				tx_crosshair;
 }	t_ui;
 
 /* Core */

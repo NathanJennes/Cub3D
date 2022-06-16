@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/15 17:24:14 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/16 16:30:09 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 #include "ui.h"
 #include "render.h"
 
+inline static void	render_crosshair(void);
+inline static void	debug_time_frame(const t_mlx *app, struct timeval *time);
 inline static void	render_game(t_mlx *app, const t_settings *settings,
-				struct timeval time[4]);
+						struct timeval time[4]);
 
 int	main_loop(void)
 {
@@ -38,6 +40,8 @@ int	main_loop(void)
 		print_debug();
 	fps_counter();
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
+	if (app->state & IN_GAME)
+		render_crosshair();
 	update_ui();
 	render_ui();
 	return (0);
@@ -61,6 +65,21 @@ inline static void	render_game(t_mlx *app, const t_settings *settings,
 	if (get_ui()->debug)
 		render_debug(app);
 	gettimeofday(&time[3], NULL);
+	debug_time_frame(app, time);
+}
+
+inline static void	render_crosshair(void)
+{
+	t_texture *crosshair;
+
+	crosshair = get_texture_from_id(get_ui()->tx_crosshair);
+	render_ui_texture(get_ui()->tx_crosshair,
+		get_settings()->halfw_w - crosshair->width / 2,
+		get_settings()->halfw_h - crosshair->height / 2);
+}
+
+inline static void	debug_time_frame(const t_mlx *app, struct timeval *time)
+{
 	if (app->ui.debug == TRUE)
 		printf("[FRAME - RENDER]: background: %lldms, walls: "
 			"%lldms, test_scene: %lldms, total %lldms\n",

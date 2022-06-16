@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 18:00:21 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/16 15:43:26 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/16 16:48:34 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "render.h"
 
 inline static void	update_player_position(t_player *player, t_vec2 future_pos,
-				double delta_time);
+						double delta_time);
 inline static void	update_player_direction(t_player *player, double delta_time);
 
 void	update_player(t_player *player)
@@ -33,18 +33,6 @@ void	update_player(t_player *player)
 inline static void	update_player_position(t_player *player, t_vec2 future_pos,
 		double delta_time)
 {
-	if (is_key_down(KEY_W))
-	{
-		future_pos.y += PLAYER_SPEED * player->forward.y * delta_time;
-		future_pos.x += PLAYER_SPEED * player->forward.x * delta_time;
-		is_colliding(future_pos);
-	}
-	if (is_key_down(KEY_S))
-	{
-		future_pos.y -= PLAYER_SPEED * player->forward.y * delta_time;
-		future_pos.x -= PLAYER_SPEED * player->forward.x * delta_time;
-		is_colliding(future_pos);
-	}
 	if (is_key_down(KEY_D))
 	{
 		future_pos.y += PLAYER_SPEED * player->right.y * delta_time;
@@ -55,6 +43,18 @@ inline static void	update_player_position(t_player *player, t_vec2 future_pos,
 	{
 		future_pos.y -= PLAYER_SPEED * player->right.y * delta_time;
 		future_pos.x -= PLAYER_SPEED * player->right.x * delta_time;
+		is_colliding(future_pos);
+	}
+	if (is_key_down(KEY_W))
+	{
+		future_pos.y += PLAYER_SPEED * player->forward.y * delta_time;
+		future_pos.x += PLAYER_SPEED * player->forward.x * delta_time;
+		is_colliding(future_pos);
+	}
+	if (is_key_down(KEY_S))
+	{
+		future_pos.y -= PLAYER_SPEED * player->forward.y * delta_time;
+		future_pos.x -= PLAYER_SPEED * player->forward.x * delta_time;
 		is_colliding(future_pos);
 	}
 }

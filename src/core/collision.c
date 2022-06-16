@@ -25,7 +25,6 @@ void	is_colliding(t_vec2 future_pos)
 	direction = vec2(future_pos.x - player->world_pos.x,
 			future_pos.y - player->world_pos.y);
 	vec2_normalize(&direction);
-	ft_print_vec2(direction);
 	check_xpos(direction, future_pos);
 	check_ypos(direction, future_pos);
 }

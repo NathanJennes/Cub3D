@@ -6,14 +6,14 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 18:21:25 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/15 17:25:32 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/16 16:37:30 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "ui.h"
 
-static void	init_mmap(void);
+static void	init_hud(t_ui *ui);
 
 void	init_ui(void)
 {
@@ -24,10 +24,10 @@ void	init_ui(void)
 	init_main_menu();
 	init_new_game_menu();
 	init_settings_menu();
-	init_mmap();
+	init_hud(ui);
 }
 
-static void	init_mmap(void)
+static void	init_hud(t_ui *ui)
 {
 	t_settings	*settings;
 	t_mmap		*minimap;
@@ -38,4 +38,5 @@ static void	init_mmap(void)
 	minimap->mmap_w = settings->win_w / 8;
 	minimap->mmap_halfh = minimap->mmap_h / 2;
 	minimap->mmap_halfw = minimap->mmap_w / 2;
+	ui->tx_crosshair = load_texture("assets/crosshair7.xpm");
 }
