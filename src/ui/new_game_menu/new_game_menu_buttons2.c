@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_game_menu_buttons2.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:09:40 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/10 13:58:33 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/16 17:11:39 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ int	btn_start_new_game(t_button *button)
 		update_player_vectors(get_player());
 		init_sprite_manager();
 		app->state = IN_GAME;
+		mlx_mouse_hide();
+		app->ui.lock_crosshair = TRUE;
+		reset_mouse_pos();
 	}
 	return (0);
 }

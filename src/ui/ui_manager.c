@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:00:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/15 15:42:18 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/16 17:00:39 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,7 @@ void	update_ui_click_end(int button)
 	if (app->ui.state == MAIN_MENU)
 		update_main_menu_click_end(button);
 	else if (app->ui.state == NEW_GAME_MENU)
-	{
 		update_new_game_menu_click_end(button);
-		if (app->ui.new_game_menu.btn_start.clicked == TRUE)
-			reset_mouse_pos();
-	}
 	else if (app->ui.state == OPTION_MENU)
 		update_settings_menu_click_end(button);
 }

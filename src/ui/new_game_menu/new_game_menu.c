@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_game_menu.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:50:34 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 12:55:31 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/16 17:07:54 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	update_new_game_menu(void)
 	update_ui_button(&menu->btn_down);
 	update_ui_button(&menu->btn_up);
 	update_ui_button(&menu->btn_start);
-	if (menu->btn_start.clicked == TRUE)
-		mlx_mouse_hide();
 	update_ui_checkbox(&menu->btn_save[0]);
 	update_ui_checkbox(&menu->btn_save[1]);
 	update_ui_checkbox(&menu->btn_save[2]);

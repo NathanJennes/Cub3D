@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_deserialization_mandatory.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/15 14:35:59 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/16 18:02:15 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ inline static int	parse_line(t_map_info *infos, char *line)
 		return (parse_texture(infos, ft_strskip_space(line + 2)));
 	else if (ft_strncmp(line, "WE", 2) == 0)
 		return (parse_texture(infos, ft_strskip_space(line + 2)));
+	else if (ft_strncmp(line, "L", 1) == 0)
+		// TODO implement;
 	return (0);
 }
 

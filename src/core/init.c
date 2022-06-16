@@ -48,6 +48,7 @@ void	init_app(char *path)
 		app->state = IN_GAME;
 		app->renderer.multithreading = FALSE;
 		app->mandatory = TRUE;
+		app->ui.lock_crosshair = TRUE;
 		mlx_mouse_hide();
 	}
 	else if (path)

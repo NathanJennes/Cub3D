@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/16 16:07:04 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/16 16:08:20 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ typedef struct s_ui
 	t_ui_new_game_menu	new_game_menu;
 	t_ui_settings_menu	settings_menu;
 	t_mmap				minimap;
+	t_bool				lock_crosshair;
 	int64_t				tx_crosshair;
 }	t_ui;
 

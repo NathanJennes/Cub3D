@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_listeners.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:42:50 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/13 23:16:16 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/16 17:15:59 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@ int	key_pressed_listener(int keycode)
 		close_app();
 	else if (keycode == KEY_F3)
 		switch_debug_ui();
+	else if (keycode == KEY_TAB)
+	{
+		app->ui.lock_crosshair = !app->ui.lock_crosshair;
+		if (app->ui.lock_crosshair == TRUE)
+			mlx_mouse_hide();
+		else
+			mlx_mouse_show();
+	}
 	else if (keycode == KEY_ESC)
 		handle_escape();
 	else if (keycode == KEY_F4)

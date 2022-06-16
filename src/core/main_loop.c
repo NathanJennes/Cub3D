@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/16 16:30:09 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/16 17:15:59 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ int	main_loop(void)
 	settings = get_settings();
 	if (app->state & IN_GAME)
 	{
-		update_player(&app->gamestate.player);
+		if (app->ui.lock_crosshair == TRUE)
+			update_player(&app->gamestate.player);
 		render_game(app, settings, time);
-		reset_mouse_pos();
+		if (app->ui.lock_crosshair == TRUE)
+			reset_mouse_pos();
 	}
 	else
 		clear_screen(BKGD_COLOR);
