@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/16 17:35:32 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/16 18:41:40 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	parse_color(t_rgb *color, t_map_parser *parser, char *line)
 	line = ft_strskip_digit(line);
 	if (*line != ',')
 		return (map_error(line, parser, MERR_COLOR_EXPECTED_COMMA));
-	if (ft_isdigit(*(++line)))
+	if (!ft_isdigit(*(++line)))
 		return (map_error(line, parser, MERR_COLOR_EXPECTED_G));
 	if (!is_color_value_legal(line))
 		return (map_error(line, parser, MERR_COLOR_WRONG_VALUE));
@@ -34,7 +34,7 @@ int	parse_color(t_rgb *color, t_map_parser *parser, char *line)
 	line = ft_strskip_digit(line);
 	if (*line != ',')
 		return (map_error(line, parser, MERR_COLOR_EXPECTED_COMMA));
-	if (ft_isdigit(*(++line)))
+	if (!ft_isdigit(*(++line)))
 		return (map_error(line, parser, MERR_COLOR_EXPECTED_B));
 	if (!is_color_value_legal(line))
 		return (map_error(line, parser, MERR_COLOR_WRONG_VALUE));

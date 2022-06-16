@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/16 17:06:43 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/16 17:27:34 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # define NORTH 0
 # define EAST 1
 # define SOUTH 2
-# define WEST 4
+# define WEST 3
 
 typedef struct s_debug
 {

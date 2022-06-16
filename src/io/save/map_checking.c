@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 17:50:21 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/16 19:12:20 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/16 20:50:11 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 inline static t_bool	check_rows(t_map_info *infos, t_map_parser *parser);
 inline static t_bool	check_edges(t_map_info *infos, t_map_parser *parser);
 inline static t_bool	check_edges_2(t_map_info *infos, t_map_parser *parser);
-inline static t_bool	is_spawn_char(char c, t_bool *has_spawn_out);
+inline static t_bool	is_spawn_char(char c, int64_t *has_spawn_out);
 
-t_bool	is_legal_map(t_map_info *infos, t_map_parser *parser)
+t_bool	is_map_legal(t_map_info *infos, t_map_parser *parser)
 {
 	if (!infos->map_raw)
 		return (map_error(NULL, parser, MERR_MAP_EMPTY));
 	if (infos->width <= 2 || infos->height <= 2)
-		return (map_error_layout(NULL, parser, MERR_MAP_SIZE, ivec2_zero()));
+		return (map_error_layout(NULL, parser, MERR_MAP_SIZE, ivec2(-1, -1)));
 	if (!check_rows(infos, parser))
 		return (FALSE);
 	if (!check_edges(infos, parser))
@@ -35,35 +35,39 @@ t_bool	is_legal_map(t_map_info *infos, t_map_parser *parser)
 inline static t_bool	check_rows(t_map_info *infos, t_map_parser *parser)
 {
 	t_ivec2	pos;
-	int64_t	is_inside;
-	t_bool	last_was_wall;
-	t_bool	has_spawn;
+	t_bool	is_inside;
+	int64_t	spawn_count;
 
 	pos = ivec2(0, 0);
+	spawn_count = 0;
 	while (infos->map_raw[pos.y] && pos.y < infos->height)
 	{
 		pos.x = 0;
-		is_inside = 0;
-		last_was_wall = FALSE;
+		is_inside = FALSE;
 		while (infos->map_raw[pos.y][pos.x] && pos.x < infos->width)
 		{
-			if (has_spawn && is_spawn_char(infos->map_raw[pos.y][pos.x], &has_spawn))
-				return (map_error_layout(infos, parser, MERR_MAP_SPAWN_REDEFINITION, pos));
-			else if (infos->map_raw[pos.y][pos.x] == '0' && !is_inside)
-				return (map_error_layout(infos, parser, MERR_MAP_INVALID_LINE_SIDES, pos));
-			else if (infos->map_raw[pos.y][pos.x] == '1')
+			if (is_spawn_char(infos->map_raw[pos.y][pos.x], &spawn_count))
 			{
-				is_inside = TRUE;
-				if (!last_was_wall)
-					is_inside = FALSE;
-				last_was_wall = TRUE;
+				if (spawn_count > 1)
+					return (map_error_layout(infos, parser, MERR_MAP_SPAWN_REDEFINITION, pos));
 			}
-			else if (infos->map_raw[pos.y][pos.x] != ' ')
+			else if (infos->map_raw[pos.y][pos.x] == '0')
+			{
+				if (!is_inside)
+					return (map_error_layout(infos, parser, MERR_MAP_INVALID_LINE_SIDES, pos));
+			}
+			else if (infos->map_raw[pos.y][pos.x] == '1')
+				is_inside = TRUE;
+			else if (infos->map_raw[pos.y][pos.x] == ' ')
+				is_inside = FALSE;
+			else
 				return (map_error_layout(infos, parser, MERR_MAP_WRONG_CHAR, pos));
 			pos.x++;
 		}
 		pos.y++;
 	}
+	if (spawn_count == 0)
+		return (map_error_layout(infos, parser, MERR_MAP_NO_SPAWN, ivec2(-1, -1)));
 	return (TRUE);
 }
 
@@ -88,7 +92,7 @@ inline static t_bool	check_edges_2(t_map_info *infos, t_map_parser *parser)
 		}
 		pos.y++;
 	}
-	return (check_edges(infos, parser));
+	return (TRUE);
 }
 
 inline static t_bool	check_edges(t_map_info *infos, t_map_parser *parser)
@@ -102,21 +106,23 @@ inline static t_bool	check_edges(t_map_info *infos, t_map_parser *parser)
 			return (map_error_layout(infos, parser, MERR_MAP_EDGE_NOT_WALL, ivec2(i, 0)));
 		i++;
 	}
+	if (!check_edges_2(infos, parser))
+		return (FALSE);
 	i = 0;
-	while (infos->map_raw[1][i] && i < infos->width)
+	while (infos->map_raw[infos->height - 1][i] && i < infos->width)
 	{
-		if (infos->map_raw[1][i] == '0')
-			return (map_error_layout(infos, parser, MERR_MAP_EDGE_NOT_WALL, ivec2(i, 1)));
+		if (infos->map_raw[infos->height - 1][i] == '0')
+			return (map_error_layout(infos, parser, MERR_MAP_EDGE_NOT_WALL, ivec2(i, infos->height - 1)));
 		i++;
 	}
 	return (TRUE);
 }
 
-inline static t_bool	is_spawn_char(char c, t_bool *has_spawn_out)
+inline static t_bool	is_spawn_char(char c, int64_t *has_spawn_out)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
-		*has_spawn_out = TRUE;
+		(*has_spawn_out)++;
 		return (TRUE);
 	}
 	return (FALSE);

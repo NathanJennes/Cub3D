@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:45:17 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/16 19:18:53 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/16 19:37:41 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdint.h>
 # include <stddef.h>
+# include "bool.h"
 
 # define APPDATA_DIRECTORY "appdata"
 # define MAPS_DIRECTORY "maps"
@@ -37,6 +38,7 @@ typedef struct s_map_parser
 	char		*line;
 	char		*filename;
 	t_bool		error_layout;
+	t_bool		error_layout_global;
 	t_map_info	*infos;
 }			t_map_parser;
 

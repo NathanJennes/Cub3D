@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:17:43 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/16 19:15:49 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/16 19:33:58 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,16 @@ typedef struct s_map_info	t_map_info;
 # define MERR_TEXTURE_WRONG_FILE "Couldn't load the texture"
 # define MERR_TEXTURE_REDEFINITION "A texture for this side was already defined"
 
-# define MERR_MAP_EMPTY "No map was given in the file"
+# define MERR_MAP_EMPTY "No map layout was given in the file"
+# define MERR_MAP_SIZE "Invalid map size: this map doesn't allow any valid spawn position"
 # define MERR_MAP_REDEFINITION "The map layout cannot be split into multiple part in the map file"
-# define MERR_MAP_SPAWN_REDEFINITION "A map cannot contain more than one spawn"
-# define MERR_MAP_INVALID_LINE_SIDES "Invalid line: the map layout contains tiles that are not closed by walls"
 # define MERR_MAP_WRONG_CHAR "Invalid character in the map layout definition"
+# define MERR_MAP_INVALID_LINE_SIDES "Invalid line: the map layout contains tiles that are not closed by walls"
 # define MERR_MAP_HOLE_NORTH "This tile should have a wall above it"
 # define MERR_MAP_HOLE_SOUTH "This tile should have a wall below it"
 # define MERR_MAP_EDGE_NOT_WALL "Invalid tile: there may only be walls surrounding the map"
-# define MERR_MAP_SIZE "Invalid map size: this map doesn't allow any valid spawn position"
+# define MERR_MAP_SPAWN_REDEFINITION "A map cannot contain more than one spawn"
+# define MERR_MAP_NO_SPAWN "A map needs to contain a spawn point"
 
 int	map_error(char *line, t_map_parser *parser, const char *error);
 int	map_error_layout(t_map_info *infos, t_map_parser *parser, const char *error, t_ivec2 pos);
