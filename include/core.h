@@ -234,6 +234,8 @@ int			mouse_move_hooks(int x, int y, void *unused);
 /* Keys */
 t_bool		is_key_down(int keycode) NOPROF;
 
+void		is_colliding(t_vec2 future_pos);
+
 /* Mouse */
 t_bool		is_mouse_down(int button) NOPROF;
 

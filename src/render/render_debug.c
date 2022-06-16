@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/15 16:28:44 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/16 13:17:10 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,17 @@ static void		debug_rays(void) NOPROF;
 
 void	render_debug(t_mlx *app)
 {
+	int64_t				i;
 	int64_t				j;
 	int					color;
 	t_player			*player = get_player();
 	const t_map_info	*map = &app->gamestate.map;
 
-	for (int64_t i = 0; i < map->height; i++)
+	i = 0;
+	while (i < map->height)
 	{
-		for (j = 0; j < map->width; j++)
+		j = 0;
+		while (j < map->width)
 		{
 			if (map->map[i][j] == WALL)
 			{
@@ -45,17 +48,20 @@ void	render_debug(t_mlx *app)
 					ivec2(CELL_SIZE, CELL_SIZE), color);
 			}
 			draw_line(ivec2(j * CELL_SIZE, i * CELL_SIZE),
-					ivec2(j * CELL_SIZE, (i + 1) * CELL_SIZE), GREY);
+				ivec2(j * CELL_SIZE, (i + 1) * CELL_SIZE), GREY);
 			draw_line(ivec2(j * CELL_SIZE, i * CELL_SIZE),
-					ivec2((j + 1) * CELL_SIZE, i * CELL_SIZE), GREY);
+				ivec2((j + 1) * CELL_SIZE, i * CELL_SIZE), GREY);
+			j++;
 		}
+		i++;
 	}
-
-	for (int64_t i = 0; i < app->gamestate.light_count; i++)
+	i = 0;
+	while (i < app->gamestate.light_count)
 	{
 		t_light *l = &app->gamestate.lights[i];
 		int col = trgb(0, l->color.x, l->color.y, l->color.z);
 		draw_circle(ivec2(l->pos.x, l->pos.y), 7, col);
+		i++;
 	}
 	t_ivec3 light = get_lighting_level
 		(vec3(get_mouse_position().x, get_mouse_position().y, 0),
@@ -65,8 +71,8 @@ void	render_debug(t_mlx *app)
 //	if (app->ui.debug == TRUE)
 //		debug_rays();
 
-	draw_line(v2_to_iv2(player->world_pos), app->debug.dx, BLUE);
-	draw_line(v2_to_iv2(player->world_pos), app->debug.dy, RED);
+	draw_circle(app->debug.dx, 5, BLUE);
+	draw_circle(app->debug.dy, 5, BLUE);
 	print_player_vector();
 
 	t_sprite	*sprite = &app->sprite_manager.sprites[0];

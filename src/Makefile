@@ -7,7 +7,8 @@ PROFILE_NAME			:=	cub3dp
 
 CORE_DIR		:=	core
 CORE_FILE		:=	main.c exit.c main_loop.c error_utils.c init.c gc.c			\
-					getters.c getters_2.c window.c cub_error.c player.c player_update.c
+					getters.c getters_2.c window.c cub_error.c player.c player_update.c	\
+					collision.c
 CORE_SRCS		:=	$(addprefix $(CORE_DIR)/, $(CORE_FILE))
 
 PROFILING_DIR	:=	profiling
