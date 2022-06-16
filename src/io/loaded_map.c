@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loaded_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:07:45 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 17:21:37 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/16 15:34:11 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	load_map(t_gamestate *map_out, char *map_name)
 	t_gamestate	save;
 	int			fd;
 
+	if (!map_name)
+		return (0);
 	ft_memset(&save, 0, sizeof (t_gamestate));
 	fd = open_map_file(map_name);
 	if (fd == -1)
@@ -51,7 +53,7 @@ static int	open_map_file(char *map_name)
 	map_file = gc_strdup(MAPS_DIRECTORY);
 	map_file = gc_strappend(map_file, '/', LK_TRUE);
 	map_file = gc_strjoin(map_file, map_name, FREE_FIRST);
-	fd = open(map_file, O_CREAT | O_RDWR, 0777);
+	fd = open(map_file, O_RDWR, 0777);
 	gc_free(map_file);
 	return (fd);
 }

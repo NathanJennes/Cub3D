@@ -51,7 +51,8 @@ static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_ivec3 lighting)
 		px_color = get_pixel_color_from_texture(tx,
 				(pos.y + wall.offset) * ratio,
 				texture, tx_data);
-		px_color = apply_light_to_color(px_color, lighting);
+		if (!get_app()->mandatory)
+			px_color = apply_light_to_color(px_color, lighting);
 		set_screen_pixel(pos.x, pos.y + wall.origin, px_color);
 		pos.y++;
 	}

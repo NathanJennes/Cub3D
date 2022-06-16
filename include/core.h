@@ -209,6 +209,7 @@ typedef struct s_mlx
 	t_math				pc;
 	t_renderer			renderer;
 	t_debug				debug;
+	t_bool				mandatory;
 }	t_mlx;
 
 /* core.c */

@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/15 14:27:34 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/16 15:38:15 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,11 @@ void	init_app(char *path)
 	{
 		app->state = IN_GAME;
 		app->renderer.multithreading = FALSE;
+		app->mandatory = TRUE;
 		mlx_mouse_hide();
 	}
+	else if (path)
+		printf("Error: couldn't load specified map.\n");
 }
 
 static void	init_hooks(void)
