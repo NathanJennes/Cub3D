@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 18:22:14 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/17 14:59:35 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/17 15:03:13 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	serialize_game(int fd)
 inline static void	serialize_player(int fd, t_player player)
 {
 	dprintf(fd, "PLAYER_START\n");
-	dprintf(fd, "POS %d %d %d\n",
+	dprintf(fd, "POS %d %d %f\n",
 		(int)player.world_pos.x,
 		(int)player.world_pos.y,
-		(int)player.direction);
+		player.direction);
 	dprintf(fd, "PLAYER_END\n");
 }
 
