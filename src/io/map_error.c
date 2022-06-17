@@ -26,7 +26,6 @@ int	map_error(char *line, t_map_parser *parser, const char *error)
 	parser->error_layout_global = TRUE;
 	if (line)
 		parser->error_layout_global = FALSE;
-	printf("map_error\n");
 	return (0);
 }
 
@@ -49,7 +48,6 @@ int	map_error_layout(t_map_info *infos, t_map_parser *parser, const char *error,
 		parser->error_line_number = parser->map_line_offset + pos.y;
 		parser->error_layout_global = FALSE;
 	}
-	printf("map_error_layout\n");
 	return (0);
 }
 
