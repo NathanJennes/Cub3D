@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:30:18 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/16 20:08:27 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/17 13:56:02 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,37 @@
 int	map_error(char *line, t_map_parser *parser, const char *error)
 {
 	parser->error_message = error;
-	parser->column = ft_strlen(parser->line) - ft_strlen(line);
+	if (line)
+		parser->column = ft_strlen(parser->line) - ft_strlen(line);
 	parser->error_line_number = parser->line_number;
 	parser->error_layout = FALSE;
-	parser->error_layout_global = FALSE;
+	parser->error_layout_global = TRUE;
+	if (line)
+		parser->error_layout_global = FALSE;
+	printf("map_error\n");
 	return (0);
 }
 
 int	map_error_layout(t_map_info *infos, t_map_parser *parser, const char *error, t_ivec2 pos)
 {
 	parser->error_message = error;
-	parser->column = ft_strlen(infos->map_raw[pos.y]) - ft_strlen(infos->map_raw[pos.y] + pos.x);
-	parser->error_line_number = parser->map_line_offset + pos.y;
 	parser->infos = infos;
 	parser->error_layout = TRUE;
-	parser->line = infos->map_raw[pos.y];
 	if (pos.x == -1 || pos.y == -1)
+	{
+		parser->column = 0;
+		parser->line = NULL;
+		parser->error_line_number = 0;
 		parser->error_layout_global = TRUE;
+	}
 	else
+	{
+		parser->column = ft_strlen(infos->map_raw[pos.y]) - ft_strlen(infos->map_raw[pos.y] + pos.x);
+		parser->line = infos->map_raw[pos.y];
+		parser->error_line_number = parser->map_line_offset + pos.y;
 		parser->error_layout_global = FALSE;
+	}
+	printf("map_error_layout\n");
 	return (0);
 }
 
@@ -48,7 +60,7 @@ int	map_print_error(t_map_parser *parser)
 	if (parser->error_layout)
 		return (map_print_error_layout(parser));
 	printf("Error while loading: %s\n", parser->filename);
-	if (parser->line)
+	if (!parser->error_layout_global && parser->line)
 	{
 		printf("Line %lld: %s\n", parser->error_line_number + 1, parser->line);
 		i = 0;
@@ -59,7 +71,7 @@ int	map_print_error(t_map_parser *parser)
 		}
 		printf("~~^~~\n");
 	}
-	printf("%s\n", parser->error_message);
+	printf("%s\n\n", parser->error_message);
 	gc_free(parser->line);
 	return (0);
 }
@@ -69,12 +81,13 @@ int	map_print_error_layout(t_map_parser *parser)
 	t_ivec2	it;
 
 	printf("Error while loading: %s\n", parser->filename);
-	printf("Line %lld: %s\n", parser->error_line_number, parser->line);
+	if (parser->line)
+		printf("Line %lld: %s\n", parser->error_line_number + 1, parser->line);
 	it = ivec2_zero();
 	while (it.y < parser->infos->height)
 	{
 		printf("  %s\n", parser->infos->map_raw[it.y]);
-		if (it.y + parser->map_line_offset == parser->error_line_number && !parser->error_layout_global)
+		if (!parser->error_layout_global && it.y + parser->map_line_offset == parser->error_line_number)
 		{
 			it.x = 0;
 			while (it.x < (int64_t)parser->column)
@@ -87,5 +100,8 @@ int	map_print_error_layout(t_map_parser *parser)
 		}
 		it.y++;
 	}
+	if (parser->error_layout_global)
+		printf("%s\n", parser->error_message);
+	printf("\n");
 	return (0);
 }

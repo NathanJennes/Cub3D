@@ -24,7 +24,7 @@ t_bool	is_map_legal(t_map_info *infos, t_map_parser *parser)
 	if (!infos->map_raw)
 		return (map_error(NULL, parser, MERR_MAP_EMPTY));
 	if (infos->width <= 2 || infos->height <= 2)
-		return (map_error_layout(NULL, parser, MERR_MAP_SIZE, ivec2(-1, -1)));
+		return (map_error_layout(infos, parser, MERR_MAP_SIZE, ivec2(-1, -1)));
 	if (!check_rows(infos, parser))
 		return (FALSE);
 	if (!check_edges(infos, parser))
