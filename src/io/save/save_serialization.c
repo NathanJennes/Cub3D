@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   serialization.c                                    :+:      :+:    :+:   */
+/*   save_serialization.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 18:22:14 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 14:32:56 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/17 14:59:35 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ inline static void	serialize_map(int fd, t_map_info map)
 	dprintf(fd, "FLOOR %d %d %d\n",
 		(int)map.floor.r, (int)map.floor.g,
 		(int)map.floor.b);
-//	dprintf(fd, "NO_TEX %s\n", map.no_tex);
-//	dprintf(fd, "EA_TEX %s\n", map.ea_tex);
-//	dprintf(fd, "SO_TEX %s\n", map.so_tex);
-//	dprintf(fd, "WE_TEX %s\n", map.we_tex);
+	dprintf(fd, "NO_TEX %s\n", get_texture_from_id(map.tx_list[NORTH])->name);
+	dprintf(fd, "EA_TEX %s\n", get_texture_from_id(map.tx_list[EAST])->name);
+	dprintf(fd, "SO_TEX %s\n", get_texture_from_id(map.tx_list[SOUTH])->name);
+	dprintf(fd, "WE_TEX %s\n", get_texture_from_id(map.tx_list[WEST])->name);
 	serialize_map_walls(fd, map);
 	dprintf(fd, "MAP_END\n");
 }

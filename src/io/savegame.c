@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:44:59 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/20 17:09:42 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/17 14:57:39 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,28 @@ inline static void	create_appdata_directory(void);
 
 int	save_game(char *save_name)
 {
-	int	fd;
+	int		fd;
+	char	*new_name;
+	char	*dot;
+	size_t	new_size;
 
-	fd = open_save_file(save_name, TRUE);
+	dot = ft_strrchr(save_name, '.');
+	if (!dot)
+		return (0);
+	new_size = ft_strlen(save_name) - ft_strlen(dot);
+	new_name = gc_substr(save_name, 0, new_size);
+	new_name = gc_strjoin(new_name, ".save", FREE_FIRST);
+	fd = open_save_file(new_name, TRUE);
+	gc_free(new_name);
 	if (fd == -1)
 		return (0);
 	serialize_game(fd);
 	close(fd);
+	reload_saves();
 	return (1);
 }
 
-int	load_game(t_gamestate *save_out, char *save_name)
+int	load_save(t_gamestate *save_out, char *save_name)
 {
 	t_gamestate	save;
 	int			fd;
@@ -75,7 +86,7 @@ inline static int	open_save_file(char *save_name, int truncate)
 	if (truncate)
 		fd = open(save_file, O_CREAT | O_RDWR | O_TRUNC, 0777);
 	else
-		fd = open(save_file, O_CREAT | O_RDWR, 0777);
+		fd = open(save_file, O_RDWR, 0777);
 	gc_free(save_file);
 	return (fd);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_listeners.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:42:50 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/13 23:16:16 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/17 15:28:24 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ inline static void	handle_escape(void)
 	mlx_mouse_show();
 	if (app->state == IN_GAME)
 	{
+		printf("map name: %s\n", app->gamestate.name);
 		save_game(app->gamestate.name);
+		refresh_main_menu();
 		app->state = IN_MENU;
 		app->ui.state = MAIN_MENU;
 		mlx_mouse_show();

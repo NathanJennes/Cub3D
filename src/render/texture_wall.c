@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/15 18:33:45 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/17 15:18:52 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,22 +129,17 @@ NOPROF
 	if (ray->side == SIDE_X)
 	{
 		if (ray->hit_pos.x < player->world_pos.x)
-		{
-			texture = get_texture_from_id(get_map_infos()->tx_list[3]);
-			*tx_data = texture->vflip;
-			return (texture);
-		}
-		texture = get_texture_from_id(get_map_infos()->tx_list[2]);
-		*tx_data = texture->ao_flat;
-		return (texture);
+			texture = get_texture_from_id(get_map_infos()->tx_list[WEST]);
+		else
+			texture = get_texture_from_id(get_map_infos()->tx_list[EAST]);
 	}
-	if (ray->hit_pos.y < player->world_pos.y)
+	else
 	{
-		texture = get_texture_from_id(get_map_infos()->tx_list[1]);
-		*tx_data = texture->ao_flat;
-		return (texture);
+		if (ray->hit_pos.y < player->world_pos.y)
+			texture = get_texture_from_id(get_map_infos()->tx_list[NORTH]);
+		else
+			texture = get_texture_from_id(get_map_infos()->tx_list[SOUTH]);
 	}
-	texture = get_texture_from_id(get_map_infos()->tx_list[0]);
-	*tx_data = texture->vflip;
+	*tx_data = texture->ao_flat;
 	return (texture);
 }

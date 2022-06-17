@@ -34,6 +34,7 @@ void	init_app(char *path)
 	init_start_time();
 	init_gc();
 	init_mlx(app);
+	init_texture_manager();
 	init_font_manager();
 	if (path && load_map(&app->gamestate, path))
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/15 17:35:51 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/17 15:28:04 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ void			print_ivec2(t_ivec2 v, char *font, int size, t_ivec2 pos);
 void			init_main_menu(void);
 void			render_main_menu(void);
 void			update_main_menu(void);
+void			refresh_main_menu(void);
 
 /* New game menu */
 void			init_new_game_menu(void);

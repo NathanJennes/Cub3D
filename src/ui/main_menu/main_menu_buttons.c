@@ -21,6 +21,16 @@ int	btn_continue(t_button *button)
 	app = get_app();
 	app->gamestate = app->savegames[0];
 	app->state = IN_GAME;
+	printf("selected save:\nF: ");
+	ft_print_vec3(vec3((double)app->gamestate.map.floor.r,
+		(double)app->gamestate.map.floor.g, (double)app->gamestate.map.floor.b));
+	printf("C ");
+	ft_print_vec3(vec3((double)app->gamestate.map.floor.r,
+		(double)app->gamestate.map.floor.g, (double)app->gamestate.map.floor.b));
+	printf("NORTH: %s, EAST: %s, SOUTH: %s, WEST: %s\n", get_texture_from_id(app->gamestate.map.tx_list[NORTH])->name,
+		get_texture_from_id(app->gamestate.map.tx_list[EAST])->name,
+		get_texture_from_id(app->gamestate.map.tx_list[SOUTH])->name,
+		get_texture_from_id(app->gamestate.map.tx_list[WEST])->name);
 	return (0);
 }
 

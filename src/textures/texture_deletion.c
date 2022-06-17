@@ -22,6 +22,7 @@ void	free_texture(t_texture *texture)
 	gc_free(texture->ao_left);
 	gc_free(texture->ao_flat);
 	gc_free(texture->vflip);
+	gc_free(texture->name);
 	if (texture->original_handle)
 		mlx_destroy_image(get_mlx(), texture->original_handle);
 	if (texture->grayscale_handle)

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 14:57:26 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/15 14:35:59 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/17 16:00:40 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	unload_saves(void)
 		i++;
 	}
 	gc_free(app->savegames);
+	app->savegames = NULL;
+	app->savegames_count = 0;
 }
 
 inline static void	add_to_saves(char *save_name)
@@ -63,9 +65,10 @@ inline static void	add_to_saves(char *save_name)
 	t_mlx		*app;
 	t_gamestate	save;
 
-	if (!load_game(&save, save_name))
+	if (!load_save(&save, save_name))
 		return ;
 	grow_saves_array();
+	save.name = gc_strdup(save_name);
 	app = get_app();
 	app->savegames[app->savegames_count] = save;
 	app->savegames_count++;

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:37:39 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/31 15:02:26 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/17 15:27:22 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,25 @@ void	init_main_menu(void)
 	main_menu->btn_exit = create_button("assets/ui/exit.xpm",
 			ivec2(0, 0), btn_exit_app);
 	init_positions(main_menu);
+}
+
+void	refresh_main_menu(void)
+{
+	t_ui_main_menu	*main_menu;
+
+	main_menu = &get_app()->ui.main_menu;
+	if (get_app()->savegames_count == 0)
+		main_menu->btn_load.infos.displayed = FALSE;
+	else
+		main_menu->btn_load.infos.displayed = TRUE;
+	if (get_app()->maps_count == 0)
+		main_menu->btn_new_game.infos.displayed = FALSE;
+	else
+		main_menu->btn_new_game.infos.displayed = TRUE;
+	if (get_app()->savegames_count == 0)
+		main_menu->btn_continue.infos.displayed = FALSE;
+	else
+		main_menu->btn_continue.infos.displayed = TRUE;
 }
 
 inline static void	init_positions(t_ui_main_menu *main_menu)
