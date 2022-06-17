@@ -19,7 +19,6 @@ void		serialize_game(int fd);
 int			deserialize_save(t_gamestate *save_out, int fd, char *filename);
 
 inline static int	open_map_file(char *map_name);
-inline static void	create_maps_directory(void);
 
 int	load_map(t_gamestate *map_out, char *map_name)
 {
@@ -47,20 +46,10 @@ inline static int	open_map_file(char *map_name)
 	int		fd;
 	char	*map_file;
 
-	create_maps_directory();
 	map_file = gc_strdup(MAPS_DIRECTORY);
 	map_file = gc_strappend(map_file, '/', LK_TRUE);
 	map_file = gc_strjoin(map_file, map_name, FREE_FIRST);
-	fd = open(map_file, O_CREAT | O_RDWR, 0777);
+	fd = open(map_file, O_RDWR, 0777);
 	gc_free(map_file);
 	return (fd);
-}
-
-inline static void	create_maps_directory(void)
-{
-	struct stat	dir;
-
-	ft_memset(&dir, 0, sizeof (struct stat));
-	if (stat(MAPS_DIRECTORY, &dir) == -1)
-		mkdir(MAPS_DIRECTORY, 0777);
 }
