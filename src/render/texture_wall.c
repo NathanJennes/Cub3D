@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_wall.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/16 15:49:44 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/19 17:39:31 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 #include "render.h"
 #include "texture.h"
 
-void				render_floor(t_ivec2 pos, t_wall wall, t_ray *ray,
-						t_ivec3 lighting);
-inline static void			render_wall(t_ivec2 pos, t_wall wall, t_ray *ray,
-						t_vec3 lighting);
-
+inline static void		render_wall(t_ivec2 pos, t_wall wall, t_ray *ray,
+							t_vec3 lighting);
 inline static t_texture	*get_face_texture(t_ray *ray, t_rgb ***tx_data);
-inline static double		get_texture_position(t_texture *texture, t_ray *ray);
-inline static t_ivec3		get_lighting_at_col(t_ray *ray);
+inline static double	get_texture_position(t_texture *texture, t_ray *ray);
+inline static t_ivec3	get_lighting_at_col(t_ray *ray);
 
 void	render_column(int64_t xcol, t_wall wall, t_ray *ray)
 {
@@ -33,7 +30,6 @@ void	render_column(int64_t xcol, t_wall wall, t_ray *ray)
 	lighting = get_lighting_at_col(ray);
 	real_light = vec3((double)lighting.x / 255.0, (double)lighting.y / 255.0, (double)lighting.z / 255.0);
 	render_wall(pos, wall, ray, real_light);
-//	render_floor(pos, wall, ray, lighting);
 }
 
 inline static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_vec3 lighting)
@@ -48,7 +44,6 @@ inline static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_vec3 ligh
 	double		ty;
 	int			px_color;
 
-	(void)lighting;
 	set_depth_at(pos.x, ray->distance * CELL_SIZE);
 	texture = get_face_texture(ray, &tx_data);
 	tx = (int64_t)get_texture_position(texture, ray);
@@ -56,6 +51,15 @@ inline static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_vec3 ligh
 	ratio = (double)texture->height / (double)wall.real_size;
 	ty = (double)wall.wall_origin * ratio;
 	wall.size += wall.screen_origin;
+	if (!ray->hit)
+	{
+		while (pos.y < wall.size)
+		{
+			set_screen_pixel_unsafe(pos.x, pos.y, BLACK);
+			pos.y++;
+		}
+		return ;
+	}
 	while (pos.y < wall.size)
 	{
 		color = data[(int64_t)ty];
