@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/20 15:54:37 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/20 19:33:57 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,6 +234,7 @@ void		init_gc(void);
 
 /* main_loop.c */
 int			main_loop(void);
+void		render_main_menu_background(void);
 
 /* hooks.c.c */
 int			mouse_move_hooks(int x, int y, void *unused);
@@ -250,6 +251,7 @@ void		cub_update_mouse_pos(int x, int y) NOPROF;
 t_ivec2		get_mouse_position(void) NOPROF;
 void		reset_mouse_pos(void);
 void		update_player_vectors(t_player *player) NOPROF;
+void		update_player_direction(t_player *player, double delta_time, t_bool handle_input) NOPROF;
 void		update_player(t_player *player) NOPROF;
 
 /* Sprites */

@@ -35,7 +35,10 @@ int	render_ui(void)
 	{
 		mlx_mouse_show();
 		if (app->ui.state == MAIN_MENU)
+		{
+			render_main_menu_background();
 			render_main_menu();
+		}
 		else if (app->ui.state == NEW_GAME_MENU)
 			render_new_game_menu();
 		else if (app->ui.state == OPTION_MENU)
