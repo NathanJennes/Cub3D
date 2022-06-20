@@ -13,12 +13,12 @@
 #include "ui.h"
 #include "core.h"
 
-int			btn_continue(t_button *button);
-int			btn_new_game(t_button *button);
-int			btn_load_game(t_button *button);
-int			btn_editor(t_button *button);
-int			btn_option(t_button *button);
-int			btn_exit_app(t_button *button);
+int					btn_continue(t_button *button);
+int					btn_new_game(t_button *button);
+int					btn_load_game(t_button *button);
+int					btn_editor(t_button *button);
+int					btn_option(t_button *button);
+int					btn_exit_app(t_button *button);
 
 inline static void	init_positions_main_menu(t_ui_main_menu *main_menu);
 

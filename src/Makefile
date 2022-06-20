@@ -75,6 +75,10 @@ UI_SETTINGS_MENU_FILE	:=	settings_menu.c settings_menu_init.c settings_menu_upda
 							settings_menu_buttons.c settings_menu_buttons2.c
 UI_SETTINGS_MENU_SRCS	:= $(addprefix $(UI_SETTINGS_MENU_DIR)/, $(UI_SETTINGS_MENU_FILE))
 
+UI_LOAD_MENU_DIR		:=	$(UI_DIR)/load_menu
+UI_LOAD_MENU_FILE		:=	load_menu.c load_menu_init.c load_menu_buttons.c
+UI_LOAD_MENU_SRCS		:= $(addprefix $(UI_LOAD_MENU_DIR)/, $(UI_LOAD_MENU_FILE))
+
 TEXTURES_DIR	:=	textures
 TEXTURES_FILE	:=	xpm_loader.c texture_generation.c ambiant_occlusion.c	\
 					texture_deletion.c texture_utils.c	\
@@ -118,6 +122,7 @@ SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\
 					$(addprefix $(SRCS_DIR)/, $(SETTINGS_SRCS))					\
 					$(addprefix $(SRCS_DIR)/, $(UI_SETTINGS_MENU_SRCS))			\
 					$(addprefix $(SRCS_DIR)/, $(SPRITE_SRCS))					\
+					$(addprefix $(SRCS_DIR)/, $(UI_LOAD_MENU_SRCS))				\
 
 PROFILE_SRCS	:=	$(SRCS)	\
 					$(addprefix $(SRCS_DIR)/, $(PROFILING_SRCS))				\
@@ -211,6 +216,10 @@ $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(SPRITE_DIR)/%.c | $(RELEASE_OBJS_DIR)
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
+$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(UI_LOAD_MENU_DIR)/%.c | $(RELEASE_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
 $(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
 	@printf "$(_BLUE)\nCompiled source files\n"
 	@$(BIN_CC) $(RELEASE_BIN_LDFLAGS) $(RELEASE_OBJS) $(RELEASE_LIBS) -o ../$@
@@ -277,6 +286,10 @@ $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_SETTINGS_MENU_DIR)/%.c | $(DEBUG_OBJS_D
 	@printf "$(_GREEN)█$(_END)"
 
 $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(SPRITE_DIR)/%.c | $(DEBUG_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_LOAD_MENU_DIR)/%.c | $(DEBUG_OBJS_DIR)
 	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
@@ -350,6 +363,10 @@ $(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(UI_SETTINGS_MENU_DIR)/%.c | $(PROFILE_OB
 	@printf "$(_GREEN)█$(_END)"
 
 $(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(SPRITE_DIR)/%.c | $(PROFILE_OBJS_DIR)
+	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(UI_LOAD_MENU_DIR)/%.c | $(PROFILE_OBJS_DIR)
 	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 

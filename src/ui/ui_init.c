@@ -24,6 +24,7 @@ void	init_ui(void)
 	init_main_menu();
 	init_new_game_menu();
 	init_settings_menu();
+	init_load_menu();
 	init_mmap();
 }
 

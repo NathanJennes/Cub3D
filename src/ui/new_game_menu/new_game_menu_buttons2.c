@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:09:40 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/17 15:45:22 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/20 17:42:04 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,10 @@ int	btn_start_new_game(t_button *button)
 	if (menu->selected_save != -1)
 	{
 		app = get_app();
-		printf("Creating a new game from map: %s\n",
-			app->maps[menu->selected_save
-			+ menu->first_save_offset].name);
 		app->gamestate = app->maps[menu->selected_save
 			+ menu->first_save_offset];
 		update_player_vectors(get_player());
 		init_sprite_manager();
-		printf("selected save:\nF: ");
-		ft_print_vec3(vec3((double)app->gamestate.map.floor.r,
-			(double)app->gamestate.map.floor.g, (double)app->gamestate.map.floor.b));
-		printf("C ");
-		ft_print_vec3(vec3((double)app->gamestate.map.floor.r,
-			(double)app->gamestate.map.floor.g, (double)app->gamestate.map.floor.b));
-		printf("NORTH: %s, EAST: %s, SOUTH: %s, WEST: %s\n", get_texture_from_id(app->gamestate.map.tx_list[NORTH])->name,
-			get_texture_from_id(app->gamestate.map.tx_list[EAST])->name,
-			get_texture_from_id(app->gamestate.map.tx_list[SOUTH])->name,
-			get_texture_from_id(app->gamestate.map.tx_list[WEST])->name);
 		app->state = IN_GAME;
 	}
 	return (0);

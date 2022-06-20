@@ -39,7 +39,6 @@ inline static void	handle_escape(void)
 	mlx_mouse_show();
 	if (app->state == IN_GAME)
 	{
-		printf("map name: %s\n", app->gamestate.name);
 		save_game(app->gamestate.name);
 		refresh_main_menu();
 		app->state = IN_MENU;
