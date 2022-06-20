@@ -20,7 +20,7 @@ int			btn_editor(t_button *button);
 int			btn_option(t_button *button);
 int			btn_exit_app(t_button *button);
 
-inline static void	init_positions(t_ui_main_menu *main_menu);
+inline static void	init_positions_main_menu(t_ui_main_menu *main_menu);
 
 void	init_main_menu(void)
 {
@@ -47,7 +47,7 @@ void	init_main_menu(void)
 			ivec2(0, 0), btn_option);
 	main_menu->btn_exit = create_button("assets/ui/exit.xpm",
 			ivec2(0, 0), btn_exit_app);
-	init_positions(main_menu);
+	init_positions_main_menu(main_menu);
 }
 
 void	refresh_main_menu(void)
@@ -69,7 +69,7 @@ void	refresh_main_menu(void)
 		main_menu->btn_continue.infos.displayed = TRUE;
 }
 
-inline static void	init_positions(t_ui_main_menu *main_menu)
+inline static void	init_positions_main_menu(t_ui_main_menu *main_menu)
 {
 	uic_padding(&main_menu->btn_continue.infos, ivec2(20, 20), ivec2(0, 0));
 	uic_padding(&main_menu->btn_new_game.infos, ivec2(20, 20), ivec2(0, 0));

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 12:51:53 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 15:19:28 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/20 17:02:45 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ inline static void	save_player(t_settings *settings, int fd);
 inline static void	save_win(t_settings *settings, int fd);
 
 inline static int	open_settings_file(char *save_name);
-inline static void	create_appdata_directory(void);
+inline static void	create_directory_appdata(void);
 
 void	save_settings(t_settings *settings)
 {
@@ -56,7 +56,7 @@ inline static int	open_settings_file(char *save_name)
 	int		fd;
 	char	*save_file;
 
-	create_appdata_directory();
+	create_directory_appdata();
 	save_file = gc_strdup(APPDATA_DIRECTORY);
 	save_file = gc_strappend(save_file, '/', LK_TRUE);
 	save_file = gc_strjoin(save_file, save_name, FREE_FIRST);
@@ -65,7 +65,7 @@ inline static int	open_settings_file(char *save_name)
 	return (fd);
 }
 
-inline static void	create_appdata_directory(void)
+inline static void	create_directory_appdata(void)
 {
 	struct stat	dir;
 

@@ -17,7 +17,7 @@ int			parse_fov(char *line, t_settings *settings);
 int			parse_sens(char *line, t_settings *settings);
 
 inline static void	set_settings_out(t_settings *settings_out);
-inline static int	parse_line(char *line, t_settings *settings);
+inline static int	parse_line_settings(char *line, t_settings *settings);
 inline static int	parse_win(char *line, t_settings *settings);
 
 int	deserialize_settings(t_settings *settings_out, int fd)
@@ -30,7 +30,7 @@ int	deserialize_settings(t_settings *settings_out, int fd)
 	while (line)
 	{
 		line = ft_trimr(line);
-		if (!parse_line(line, settings_out))
+		if (!parse_line_settings(line, settings_out))
 		{
 			gc_free(line);
 			printf("Settings file currupted at line: %d\n", line_num);
@@ -57,7 +57,7 @@ inline static void	set_settings_out(t_settings *settings_out)
 	settings_out->halfw_h = settings_out->win_h / 2;
 }
 
-inline static int	parse_line(char *line, t_settings *settings)
+inline static int	parse_line_settings(char *line, t_settings *settings)
 {
 	if (ft_strncmp(line, "FOV", ft_strlen("FOV")) == 0)
 		return (parse_fov(line, settings));

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 11:05:43 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/15 14:35:59 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/20 16:53:11 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			deserialize_map(int fd, char *line, t_gamestate *save);
 void		construct_map(t_map_info *infos);
 int			load_mandatory_map(t_gamestate *save_out, int fd, char *line, char *filename);
 
-inline static int	parse_line(int fd, char *line, t_gamestate *save);
+inline static int	parse_line_save(int fd, char *line, t_gamestate *save);
 inline static int	deserialize_cub_save(t_gamestate *save_out, int fd);
 
 int	deserialize_save(t_gamestate *save_out, int fd, char *filename)
@@ -44,7 +44,7 @@ inline static int	deserialize_cub_save(t_gamestate *save_out, int fd)
 	line = gc_get_next_line(fd);
 	while (line)
 	{
-		if (!parse_line(fd, line, &save))
+		if (!parse_line_save(fd, line, &save))
 			return (0);
 		line = gc_get_next_line(fd);
 	}
@@ -57,7 +57,7 @@ inline static int	deserialize_cub_save(t_gamestate *save_out, int fd)
 	return (1);
 }
 
-inline static int	parse_line(int fd, char *line, t_gamestate *save)
+inline static int	parse_line_save(int fd, char *line, t_gamestate *save)
 {
 	line = ft_trimr(line);
 	if (ft_strncmp(line, "PLAYER_START", ft_strlen("PLAYER_START")) == 0)
