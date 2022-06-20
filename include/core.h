@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/16 21:06:34 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/20 15:54:37 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_debug
 	t_ivec2	dy;
 }	t_debug;
 
-typedef union s_rgb
+typedef union u_rgb
 {
 	struct
 	{
@@ -63,7 +63,7 @@ typedef union s_rgb
 		uint8_t	r;
 		uint8_t	t;
 	};
-	int	color;
+	uint32_t	color;
 }	t_rgb;
 
 typedef struct s_mouse

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:58:17 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/15 13:39:38 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/20 14:16:39 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_texture	create_blank_texture(int width, int height)
 	texture.original_handle = mlx_new_image(get_mlx(), width, height);
 	if (!texture.original_handle)
 		return (texture);
-	texture.original = (uint8_t *)mlx_get_data_addr(
+	texture.original = (t_rgb *)mlx_get_data_addr(
 			texture.original_handle, &texture.bpp,
 			&texture.line_size, &texture.endian);
 	gc_memseti(texture.original, trgb(255, 0, 0, 0),
@@ -62,7 +62,7 @@ void	finish_new_texture(int64_t tex_id)
 inline static void	transfer_texture_data(t_xpm_file *file, t_texture *texture)
 {
 	texture->original_handle = file->handle;
-	texture->original = file->data;
+	texture->original = (t_rgb *)file->data;
 	texture->width = file->width;
 	texture->height = file->height;
 	texture->bpp = file->bpp;

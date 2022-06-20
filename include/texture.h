@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:38:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/17 15:23:29 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/20 14:13:28 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 # define INVALID_TEXTURE -1
 
-typedef union s_rgb	t_rgb;
+typedef union u_rgb	t_rgb;
 
 typedef struct s_xpm_file
 {
@@ -42,12 +42,12 @@ typedef struct s_texture
 	int		width;
 	int		height;
 	void	*original_handle;
-	uint8_t	*original;
-	uint8_t	*grayscale;
+	t_rgb	*original;
+	t_rgb	*grayscale;
 	void	*grayscale_handle;
-	uint8_t	*inversed_grayscale;
+	t_rgb	*inversed_grayscale;
 	void	*inversed_grayscale_handle;
-	uint8_t	*inversed;
+	t_rgb	*inversed;
 	void	*inversed_handle;
 	t_rgb	**vflip;
 	t_rgb	**ao_flat;

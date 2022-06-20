@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 13:38:44 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/15 15:06:44 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/20 14:21:47 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ inline static t_rgb	**allocate_texture(t_texture *tex, int64_t width, int64_t he
 		j = 0;
 		while (j < height)
 		{
-			tab[i][j].color = *(int *)(tex->original + i * 4 + j * tex->line_size);
+			tab[i][j] = tex->original[i + j * tex->width];
 			j++;
 		}
 		i++;
