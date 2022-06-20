@@ -22,7 +22,7 @@ int			parse_texture(t_map_info *info, t_map_parser *parser, char *line, int dire
 int			add_map_row(t_map_info *infos, t_map_parser *parser, char *line) NOPROF;
 t_bool		is_map_legal(t_map_info *infos, t_map_parser *parser) NOPROF;
 
-inline static int	parse_line(t_map_info *infos, t_map_parser *parser, char *line) NOPROF;
+inline static int	parse_line_mand(t_map_info *infos, t_map_parser *parser, char *line) NOPROF;
 inline static void	setup_player(t_gamestate *save) NOPROF;
 
 int	load_mandatory_map(t_gamestate *save_out, int fd, char *line, char *filename)
@@ -39,7 +39,7 @@ int	load_mandatory_map(t_gamestate *save_out, int fd, char *line, char *filename
 	while (line)
 	{
 		parser.line = line;
-		if (!parse_line(infos, &parser, line))
+		if (!parse_line_mand(infos, &parser, line))
 			return (map_print_error(&parser));
 		gc_free(line);
 		line = ft_trimr(gc_get_next_line(fd));
@@ -54,7 +54,7 @@ int	load_mandatory_map(t_gamestate *save_out, int fd, char *line, char *filename
 	return (1);
 }
 
-inline static int	parse_line(t_map_info *infos, t_map_parser *parser, char *line)
+inline static int	parse_line_mand(t_map_info *infos, t_map_parser *parser, char *line)
 {
 	static int	map_status = MEMPTY;
 

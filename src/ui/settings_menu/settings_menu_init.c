@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:36:08 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/07 19:28:50 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/20 16:58:51 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int			chk_unselect_res_high(t_checkbox *checkbox);
 int			chk_select_res_fullscreen(t_checkbox *checkbox);
 int			chk_unselect_res_fullscreen(t_checkbox *checkbox);
 
-inline static void	init_positions(t_ui_settings_menu *menu);
-inline static void	init_textures(t_ui_settings_menu *menu);
+inline static void	init_positions_settings_menu(t_ui_settings_menu *menu);
+inline static void	init_textures_settings(t_ui_settings_menu *menu);
 inline static void	init_current_res_checkbox(t_ui_settings_menu *menu);
 
 void	init_settings_menu(void)
@@ -57,12 +57,12 @@ void	init_settings_menu(void)
 	menu->chk_res_fullscreen.is_clickable = FALSE;
 	menu->btn_back = create_button("assets/placeholder.xpm",
 			ivec2(50, settings->win_h - 50), btn_settings_back);
-	init_textures(menu);
-	init_positions(menu);
+	init_textures_settings(menu);
+	init_positions_settings_menu(menu);
 	init_current_res_checkbox(menu);
 }
 
-inline static void	init_positions(t_ui_settings_menu *menu)
+inline static void	init_positions_settings_menu(t_ui_settings_menu *menu)
 {
 	menu->slid_fov.infos.pos.y = 50;
 	uic_center_win_w(&menu->slid_fov.infos);
@@ -83,7 +83,7 @@ inline static void	init_positions(t_ui_settings_menu *menu)
 	uic_side_right(&menu->lbl_sens.infos, &menu->slid_sens.infos);
 }
 
-inline static void	init_textures(t_ui_settings_menu *menu)
+inline static void	init_textures_settings(t_ui_settings_menu *menu)
 {
 	menu->chk_res_min.tex_id = new_texture(200, 60);
 	clear_texture(RED, menu->chk_res_min.tex_id);

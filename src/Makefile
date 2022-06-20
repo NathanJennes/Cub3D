@@ -1,6 +1,7 @@
 RELEASE_NAME 			:=	cub3d
 DEBUG_NAME				:=	cub3dd
 PROFILE_NAME			:=	cub3dp
+PERF_NAME				:=	cub3dperf
 
 # Source files
 # ****************************************************************************
@@ -79,7 +80,7 @@ TEXTURES_FILE	:=	xpm_loader.c texture_generation.c ambiant_occlusion.c	\
 					texture_deletion.c texture_utils.c	\
 					texture_manager.c texture_manager_helper.c	\
 					texture_grayscale.c texture_inversed.c texture_flip.c	\
-					texture_floor_ceilling.c texture_walls_generation.c
+					texture_walls_generation.c
 TEXTURE_SRCS	:=	$(addprefix $(TEXTURES_DIR)/, $(TEXTURES_FILE))
 
 IO_DIR			:=	io
@@ -108,7 +109,7 @@ SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\
 					$(addprefix $(SRCS_DIR)/, $(TEXTURE_SRCS))					\
 					$(addprefix $(SRCS_DIR)/, $(IO_SRCS))						\
 					$(addprefix $(SRCS_DIR)/, $(SAVE_SRCS))						\
-					$(addprefix $(SRCS_DIR)/, $(INPUT_FILE))					\
+					$(addprefix $(SRCS_DIR)/, $(INPUT_SRCS))					\
 					$(addprefix $(SRCS_DIR)/, $(UI_COMPONENT_SRCS))				\
 					$(addprefix $(SRCS_DIR)/, $(UI_LAYOUT_SRCS))				\
 					$(addprefix $(SRCS_DIR)/, $(UI_MAIN_MENU_SRCS))				\
@@ -133,6 +134,9 @@ DEPENDS			:=	$(RELEASE_OBJS:.o=.d) $(DEBUG_OBJS:.o=.d) $(PROFILE_OBJS:.o=.d)
 
 .PHONY: all
 all: $(RELEASE_NAME)
+
+.PHONY: perf
+perf: $(PERF_NAME)
 
 .PHONY: debug
 debug: $(DEBUG_NAME)
@@ -354,11 +358,17 @@ $(PROFILE_NAME): $(PROFILE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
 	@$(BIN_CC) $(PROFILE_BIN_LDFLAGS) $(PROFILE_OBJS) $(RELEASE_LIBS) -o ../$@
 	@printf "$(_GREEN)Finish compiling $(PROFILE_NAME)!$(_END)\n"
 
+$(PERF_NAME): $(SRCS)
+	@cat $(SRCS) > perf_out.c
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(RELEASE_BIN_LDFLAGS) -ferror-limit=200 perf_out.c $(RELEASE_LIBS) -o ../$(PERF_NAME)
+	@rm -f perf_out.c
+
 clean:
 	@printf "$(_YELLOW)Removing object files ...$(_END)\n"
 	@rm -rf $(RELEASE_OBJS_DIR)
 	@rm -rf $(DEBUG_OBJS_DIR)
 	@rm -rf $(PROFILE_OBJS_DIR)
+	@rm -f perf_out.c
 	@rm -fr *.dSYM
 
 fclean:	clean
@@ -366,6 +376,7 @@ fclean:	clean
 	@rm -rf ../$(RELEASE_NAME)
 	@rm -rf ../$(DEBUG_NAME)
 	@rm -rf ../$(PROFILE_NAME)
+	@rm -f ../$(PERF_NAME)
 
 re:		fclean all
 

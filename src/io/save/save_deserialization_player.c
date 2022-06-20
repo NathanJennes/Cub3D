@@ -14,7 +14,7 @@
 #include "core.h"
 #include "leaky.h"
 
-inline static int	parse_line(char *line, t_gamestate *save);
+inline static int	parse_line_player(char *line, t_gamestate *save);
 inline static int	parse_pos(char *line, t_gamestate *save);
 
 int	deserialize_player(int fd, char *line, t_gamestate *save)
@@ -28,7 +28,7 @@ int	deserialize_player(int fd, char *line, t_gamestate *save)
 			gc_free(line);
 			return (1);
 		}
-		if (!parse_line(line, save))
+		if (!parse_line_player(line, save))
 		{
 			gc_free(line);
 			return (0);
@@ -39,7 +39,7 @@ int	deserialize_player(int fd, char *line, t_gamestate *save)
 	return (0);
 }
 
-inline static int	parse_line(char *line, t_gamestate *save)
+inline static int	parse_line_player(char *line, t_gamestate *save)
 {
 	if (ft_strncmp(line, "POS", ft_strlen("POS")) == 0)
 		return (parse_pos(line, save));

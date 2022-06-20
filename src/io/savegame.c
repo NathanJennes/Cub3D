@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:44:59 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/17 14:57:39 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/20 16:51:27 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "render.h"
 
 void		serialize_game(int fd);
-int			deserialize_save(t_gamestate *save_out, int fd);
+int			deserialize_save(t_gamestate *save_out, int fd, char *filename);
 
 inline static int	open_save_file(char *save_name, int truncate);
 inline static void	create_appdata_directory(void);
@@ -55,7 +55,7 @@ int	load_save(t_gamestate *save_out, char *save_name)
 	fd = open_save_file(save_name, FALSE);
 	if (fd == -1)
 		return (0);
-	if (!deserialize_save(&save, fd))
+	if (!deserialize_save(&save, fd, save_name))
 	{
 		gc_strarray_free(save.map.map_raw);
 		gc_free2d((void **)save.map.map, save.map.height);
