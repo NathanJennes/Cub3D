@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/16 17:15:59 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:22:22 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,45 @@ int	main_loop(void)
 inline static void	render_game(t_mlx *app, const t_settings *settings,
 		struct timeval time[4])
 {
+	t_vec3	result;
+	t_rgb	color;
+	double	step;
+	double	shade;
+	int64_t	i;
+
+	i = 0;
 	gettimeofday(&time[0], NULL);
 	draw_rect_unsafe(ivec2(0, 0),
-		ivec2(settings->win_w, settings->halfw_h),
+		ivec2(settings->win_w, settings->halfw_h - 60),
 		get_map_infos()->ceiling.color);
-	draw_rect_unsafe(ivec2(0, settings->halfw_h),
+	shade = 1.0;
+	step = 1.0 / 40.0;
+	while (i < 40)
+	{
+		result.x = (double)(get_map_infos()->ceiling.r * shade);
+		result.y = (double)(get_map_infos()->ceiling.g * shade);
+		result.z = (double)(get_map_infos()->ceiling.b * shade);
+		color.color = trgb(color.t, (int)result.x, (int)result.y, (int)result.z);
+		draw_line(ivec2(0, settings->halfw_h - 60 + i),
+			ivec2(settings->win_w, settings->halfw_h - 60 + i), color.color);
+		shade -= step;
+		i++;
+	}
+	draw_rect_unsafe(ivec2(0, settings->halfw_h - 20),
+		ivec2(settings->win_w, settings->halfw_h + 20), BLACK);
+	i = 0;
+	while (i < 40)
+	{
+		result.x = (double)(get_map_infos()->floor.r * shade);
+		result.y = (double)(get_map_infos()->floor.g * shade);
+		result.z = (double)(get_map_infos()->floor.b * shade);
+		color.color = trgb(color.t, (int)result.x, (int)result.y, (int)result.z);
+		draw_line(ivec2(0, settings->halfw_h + 20 + i),
+			ivec2(settings->win_w, settings->halfw_h + 20 + i), color.color);
+		shade += step;
+		i++;
+	}
+	draw_rect_unsafe(ivec2(0, settings->halfw_h + 60),
 		ivec2(settings->win_w, settings->halfw_h),
 		get_map_infos()->floor.color);
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);

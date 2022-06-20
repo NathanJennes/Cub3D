@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_wall.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/19 17:39:31 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/20 18:20:19 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "render.h"
 #include "texture.h"
 
+inline static double	calculate_shade(t_ray *ray);
 inline static void		render_wall(t_ivec2 pos, t_wall wall, t_ray *ray,
 							t_vec3 lighting);
 inline static t_texture	*get_face_texture(t_ray *ray, t_rgb ***tx_data);
@@ -28,7 +29,15 @@ void	render_column(int64_t xcol, t_wall wall, t_ray *ray)
 
 	pos = ivec2(xcol, wall.screen_origin);
 	lighting = get_lighting_at_col(ray);
-	real_light = vec3((double)lighting.x / 255.0, (double)lighting.y / 255.0, (double)lighting.z / 255.0);
+	if (!get_app()->mandatory)
+	{
+		real_light = vec3((double) lighting.x / 255.0,
+				(double) lighting.y / 255.0,
+				(double) lighting.z / 255.0);
+	}
+	else
+		real_light = vec3(1.0, 1.0, 1.0);
+	wall.size += wall.screen_origin;
 	render_wall(pos, wall, ray, real_light);
 }
 
@@ -43,6 +52,7 @@ inline static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_vec3 ligh
 	int64_t		tx;
 	double		ty;
 	int			px_color;
+	double		shade;
 
 	set_depth_at(pos.x, ray->distance * CELL_SIZE);
 	texture = get_face_texture(ray, &tx_data);
@@ -50,38 +60,34 @@ inline static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_vec3 ligh
 	data = tx_data[tx];
 	ratio = (double)texture->height / (double)wall.real_size;
 	ty = (double)wall.wall_origin * ratio;
-	wall.size += wall.screen_origin;
-	if (!ray->hit)
-	{
-		while (pos.y < wall.size)
-		{
-			set_screen_pixel_unsafe(pos.x, pos.y, BLACK);
-			pos.y++;
-		}
-		return ;
-	}
+	shade = calculate_shade(ray);
 	while (pos.y < wall.size)
 	{
 		color = data[(int64_t)ty];
-		if (!get_app()->mandatory)
-		{
-			result.x = (double) color.r * lighting.x;
-			result.y = (double) color.g * lighting.y;
-			result.z = (double) color.b * lighting.z;
-			if (result.x > 255.0)
-				result.x = 255.0;
-			if (result.y > 255.0)
-				result.y = 255.0;
-			if (result.z > 255.0)
-				result.z = 255.0;
-			px_color = trgb(color.t, (int) result.x, (int) result.y, (int) result.z);
-			set_screen_pixel_unsafe(pos.x, pos.y, px_color);
-		}
-		else
-			set_screen_pixel_unsafe(pos.x, pos.y, color.color);
+		result.x = (double)((color.r * lighting.x) * shade);
+		result.y = (double)((color.g * lighting.y) * shade);
+		result.z = (double)((color.b * lighting.z) * shade);
+		if (result.x > 255.0)
+			result.x = 255.0;
+		if (result.y > 255.0)
+			result.y = 255.0;
+		if (result.z > 255.0)
+			result.z = 255.0;
+		px_color = trgb(color.t, (int)result.x, (int)result.y, (int)result.z);
+		set_screen_pixel_unsafe(pos.x, pos.y, px_color);
 		pos.y++;
 		ty += ratio;
 	}
+}
+
+// TODO: replace by ft_ilerpf()
+inline static double	calculate_shade(t_ray *ray)
+{
+	if (ray->distance >= 1.0 && ray->distance < 19.0)
+		return ((RAY_LENGTH - ray->distance) / 15);
+	if (ray->distance >= 19.0)
+		return (0);
+	return (1);
 }
 
 inline static t_ivec3	get_lighting_at_col(t_ray *ray)

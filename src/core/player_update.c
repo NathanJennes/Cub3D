@@ -37,26 +37,23 @@ inline static void	update_player_position(t_player *player, t_vec2 future_pos,
 	{
 		future_pos.y += PLAYER_SPEED * player->right.y * delta_time;
 		future_pos.x += PLAYER_SPEED * player->right.x * delta_time;
-		is_colliding(future_pos);
 	}
 	if (is_key_down(KEY_A))
 	{
 		future_pos.y -= PLAYER_SPEED * player->right.y * delta_time;
 		future_pos.x -= PLAYER_SPEED * player->right.x * delta_time;
-		is_colliding(future_pos);
 	}
 	if (is_key_down(KEY_W))
 	{
 		future_pos.y += PLAYER_SPEED * player->forward.y * delta_time;
 		future_pos.x += PLAYER_SPEED * player->forward.x * delta_time;
-		is_colliding(future_pos);
 	}
 	if (is_key_down(KEY_S))
 	{
 		future_pos.y -= PLAYER_SPEED * player->forward.y * delta_time;
 		future_pos.x -= PLAYER_SPEED * player->forward.x * delta_time;
-		is_colliding(future_pos);
 	}
+	is_colliding(future_pos);
 }
 
 inline static void	update_player_direction(t_player *player, double delta_time)

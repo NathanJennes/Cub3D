@@ -14,7 +14,7 @@
 #include "core.h"
 #include "render.h"
 
-inline static void			get_correct_distance(t_ray *ray);
+inline static void		get_correct_distance(t_ray *ray);
 inline static t_wall		get_wall_info(t_ray *ray);
 void				render_column(int64_t xcol, t_wall wall, t_ray *ray);
 

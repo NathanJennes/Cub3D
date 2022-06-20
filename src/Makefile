@@ -107,7 +107,7 @@ SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\
 					$(addprefix $(SRCS_DIR)/, $(TEXTURE_SRCS))					\
 					$(addprefix $(SRCS_DIR)/, $(IO_SRCS))						\
 					$(addprefix $(SRCS_DIR)/, $(SAVE_SRCS))						\
-					$(addprefix $(SRCS_DIR)/, $(INPUT_FILE))					\
+					$(addprefix $(SRCS_DIR)/, $(INPUT_SRCS))					\
 					$(addprefix $(SRCS_DIR)/, $(UI_COMPONENT_SRCS))				\
 					$(addprefix $(SRCS_DIR)/, $(UI_LAYOUT_SRCS))				\
 					$(addprefix $(SRCS_DIR)/, $(UI_MAIN_MENU_SRCS))				\

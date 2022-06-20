@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 15:52:09 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/19 16:31:08 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/20 15:55:45 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_ray	shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos, double max_di
 		return (populate_ray(dists.x - lengths.x, ray, TRUE, side));
 	if (hit)
 		return (populate_ray(dists.y - lengths.y, ray, TRUE, side));
-	return (populate_ray(RAY_LENGTH - 10, ray, FALSE, NOSIDE));
+	return (populate_ray(RAY_LENGTH + 10, ray, FALSE, NOSIDE));
 }
 
 inline static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side)
