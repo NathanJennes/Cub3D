@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/21 15:39:45 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/21 17:30:50 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,10 @@ void	init_math(void)
 	pc->r_half_vfov = pc->r_vfov / 2;
 	pc->plane_len = tan(pc->r_half_fov);
 	pc->plane_dist = settings->halfw_w / (pc->r_vfov / 2);
-	settings->win_slice = settings->win_h / 3;
+	settings->win_slice = (double)settings->win_h / 3;
 	settings->win_two_slice = settings->win_slice * 2;
 	settings->max_dist = settings->win_slice / 5;
+	settings->max_lerp = settings->halfw_h - (settings->max_dist / 2);
+	printf("%lf\n", settings->win_slice);
+	printf("%lf\n", settings->max_lerp);
 }

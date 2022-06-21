@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/21 16:51:16 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/21 16:51:27 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ inline static void	render_background(t_mlx *app, const t_settings *settings)
 	int64_t	i;
 
 	draw_rect(ivec2(0, 0),
-		ivec2(settings->win_w, settings->win_slice),
+		ivec2(settings->win_w, (int64_t)settings->win_slice),
 		get_map_infos()->ceiling.color);
-	i = settings->win_slice;
-	while (i < settings->halfw_h - (settings->max_dist / 2))
+	i = (int64_t)settings->win_slice;
+	while (i < (int64_t)(settings->max_lerp))
 	{
 		shade = ft_ilerpf(settings->halfw_h,
-				(double)settings->win_slice, (double)i);
+				settings->win_slice, (double)i);
 		res.x = (double)(get_map_infos()->ceiling.r * shade);
 		res.y = (double)(get_map_infos()->ceiling.g * shade);
 		res.z = (double)(get_map_infos()->ceiling.b * shade);
@@ -89,8 +89,8 @@ inline static void	render_background(t_mlx *app, const t_settings *settings)
 			ivec2(settings->win_w, settings->win_h - i), color.color);
 		i++;
 	}
-	draw_rect(ivec2(0, settings->win_two_slice),
-		ivec2(settings->win_w, settings->win_slice),
+	draw_rect(ivec2(0, (int64_t)settings->win_two_slice),
+		ivec2(settings->win_w, (int64_t)settings->win_slice),
 		get_map_infos()->floor.color);
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 }
