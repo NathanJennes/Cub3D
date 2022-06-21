@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/20 18:20:19 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/21 14:31:35 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "render.h"
 #include "texture.h"
 
-inline static double	calculate_shade(t_ray *ray);
+inline static double	calculate_shade(t_wall wall);
 inline static void		render_wall(t_ivec2 pos, t_wall wall, t_ray *ray,
 							t_vec3 lighting);
 inline static t_texture	*get_face_texture(t_ray *ray, t_rgb ***tx_data);
@@ -60,7 +60,7 @@ inline static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_vec3 ligh
 	data = tx_data[tx];
 	ratio = (double)texture->height / (double)wall.real_size;
 	ty = (double)wall.wall_origin * ratio;
-	shade = calculate_shade(ray);
+	shade = calculate_shade(wall);
 	while (pos.y < wall.size)
 	{
 		color = data[(int64_t)ty];
@@ -80,14 +80,19 @@ inline static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_vec3 ligh
 	}
 }
 
-// TODO: replace by ft_ilerpf()
-inline static double	calculate_shade(t_ray *ray)
+inline static double	calculate_shade(t_wall wall)
 {
-	if (ray->distance >= 1.0 && ray->distance < 19.0)
-		return ((RAY_LENGTH - ray->distance) / 15);
-	if (ray->distance >= 19.0)
+	double		shade;
+
+	if (wall.real_size < 50 && wall.real_size > 20)
+	{
+		shade = ft_ilerpf(20.0, 50.0, (double)wall.real_size);
+		printf("%lf\n", shade);
+		return (shade);
+	}
+	if (wall.real_size < 20)
 		return (0);
-	return (1);
+	return (1.0);
 }
 
 inline static t_ivec3	get_lighting_at_col(t_ray *ray)

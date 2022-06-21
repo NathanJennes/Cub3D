@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/15 17:01:45 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/21 15:29:07 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,10 @@ typedef struct s_settings
 	int			desired_win_h;
 	int			desired_win_w;
 	double		cam_sensitivity;
+	int64_t		win_slice;
+	int64_t		win_two_slice;
+	int64_t		max_dist;
+	int64_t		max_lerp;
 }	t_settings;
 
 typedef struct s_light	t_light;
