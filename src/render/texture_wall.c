@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/21 17:40:09 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:14:44 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ inline static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_vec3 ligh
 	t_vec3		result;
 	int64_t		tx;
 	double		ty;
-	int			px_color;
 	double		shade;
 
 	shade = calculate_shade(wall);
@@ -63,18 +62,23 @@ inline static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_vec3 ligh
 	ty = (double)wall.wall_origin * ratio;
 	while (pos.y < wall.size)
 	{
-		color = data[(int64_t)ty];
-		result.x = (double)((color.r * lighting.x) * shade);
-		result.y = (double)((color.g * lighting.y) * shade);
-		result.z = (double)((color.b * lighting.z) * shade);
-		if (result.x > 255.0)
-			result.x = 255.0;
-		if (result.y > 255.0)
-			result.y = 255.0;
-		if (result.z > 255.0)
-			result.z = 255.0;
-		px_color = trgb(color.t, (int)result.x, (int)result.y, (int)result.z);
-		set_screen_pixel_unsafe(pos.x, pos.y, px_color);
+		if ((double)wall.screen_origin < get_settings()->max_lerp)
+		{
+			color = data[(int64_t) ty];
+			result.x = (double)((color.r * lighting.x) * shade);
+			result.y = (double)((color.g * lighting.y) * shade);
+			result.z = (double)((color.b * lighting.z) * shade);
+			if (result.x > 255.0)
+				result.x = 255.0;
+			if (result.y > 255.0)
+				result.y = 255.0;
+			if (result.z > 255.0)
+				result.z = 255.0;
+			color.color = trgb(color.t, (int) result.x, (int) result.y, (int) result.z);
+		}
+		else
+			color.color = BLACK;
+		set_screen_pixel_unsafe(pos.x, pos.y, color.color);
 		pos.y++;
 		ty += ratio;
 	}
@@ -86,7 +90,7 @@ inline static double	calculate_shade(t_wall wall)
 	double		shade;
 
 	settings = get_settings();
-	if ((double)wall.screen_origin >= settings->max_lerp)
+	if ((double)wall.screen_origin > settings->max_lerp)
 		return (0);
 	if ((double)wall.screen_origin >= settings->win_slice)
 	{

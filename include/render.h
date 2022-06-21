@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/20 15:54:28 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:26:50 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "core.h"
 # include "font.h"
 
-# define RAY_LENGTH 20
+# define RAY_LENGTH 10
 
 # define NOSIDE 0
 # define SIDE_X 1
