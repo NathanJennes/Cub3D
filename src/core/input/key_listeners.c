@@ -28,7 +28,10 @@ int	key_pressed_listener(int keycode)
 	{
 		app->ui.lock_crosshair = !app->ui.lock_crosshair;
 		if (app->ui.lock_crosshair == TRUE)
+		{
 			mlx_mouse_hide();
+			reset_mouse_pos();
+		}
 		else
 			mlx_mouse_show();
 	}
