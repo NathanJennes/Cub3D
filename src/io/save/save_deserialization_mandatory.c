@@ -3,75 +3,91 @@
 /*                                                        :::      ::::::::   */
 /*   save_deserialization_mandatory.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/19 15:59:07 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/16 20:22:09 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "map_error.h"
 #include "leaky.h"
 #include "render.h"
 #include "core.h"
+#include "io.h"
 
-void		construct_map(t_map_info *infos)NOPROF;
-int			parse_color(t_rgb *color, char *line)NOPROF;
-int			parse_texture(t_map_info *info, char *line)NOPROF;
-int			add_map_row(t_map_info *infos, char *line)NOPROF;
+void		construct_map(t_map_info *infos) NOPROF;
+int			parse_color(t_rgb *color, t_map_parser *parser, char *line) NOPROF;
+int			parse_texture(t_map_info *info, t_map_parser *parser, char *line, int direction) NOPROF;
+int			add_map_row(t_map_info *infos, t_map_parser *parser, char *line) NOPROF;
+t_bool		is_map_legal(t_map_info *infos, t_map_parser *parser) NOPROF;
 
-inline static int	parse_line(t_map_info *infos, char *line)NOPROF;
-inline static void	setup_player(t_gamestate *save)NOPROF;
+inline static int	parse_line_mand(t_map_info *infos, t_map_parser *parser, char *line) NOPROF;
+inline static void	setup_player(t_gamestate *save) NOPROF;
 
-int	load_mandatory_map(t_gamestate *save_out, int fd, char *line)
+int	load_mandatory_map(t_gamestate *save_out, int fd, char *line, char *filename)
 {
-	t_map_info	*infos;
+	t_map_info		*infos;
+	t_map_parser	parser;
 
 	ft_memset(save_out, 0, sizeof (t_gamestate));
+	ft_memset(&parser, 0, sizeof (t_map_parser));
 	infos = &save_out->map;
+	ft_memsetl(&infos->tx_list, INVALID_TEXTURE, 4);
+	parser.filename = filename;
+	parser.map_line_offset = -1;
 	while (line)
 	{
-		if (!parse_line(infos, ft_trimr(line)))
-		{
-			gc_free(line);
-			return (0);
-		}
+		parser.line = line;
+		if (!parse_line_mand(infos, &parser, line))
+			return (map_print_error(&parser));
 		gc_free(line);
-		line = gc_get_next_line(fd);
+		line = ft_trimr(gc_get_next_line(fd));
+		parser.line_number++;
 	}
-	if (!infos->map_raw)
-		return (0);
+	if (!is_map_legal(infos, &parser))
+		return (map_print_error(&parser));
 	construct_map(infos);
-	if (!infos->spawn_dir)
-		return (0);
 	gc_strarray_free(infos->map_raw);
 	setup_player(save_out);
 	save_out->lights = gc_calloc(1, sizeof (t_light));
 	return (1);
 }
 
-inline static int	parse_line(t_map_info *infos, char *line)
+inline static int	parse_line_mand(t_map_info *infos, t_map_parser *parser, char *line)
 {
-	if (line[0] == '\n')
+	static int	map_status = MEMPTY;
+
+	if (parser->line_number == 0)
+		map_status = MEMPTY;
+	if (ft_strlen(ft_strskip_space(line)) == 0)
 		return (1);
-	if (ft_isdigit(line[0]) || line[0] == ' ')
-		return (add_map_row(infos, line));
-	else if (infos->map)
+	if (ft_isdigit(line[0]) || ft_isdigit(*ft_strskip_space(line)))
+	{
+		if (map_status == MFINISHED)
+			return (map_error(line, parser, MERR_MAP_REDEFINITION));
+		map_status = MWIP;
+		return (add_map_row(infos, parser, line));
+	}
+	else if (map_status == MWIP && !is_map_legal(infos, parser))
 		return (0);
+	else if (map_status == MWIP)
+		map_status = MFINISHED;
 	if (line[0] == 'C' && line[1] == ' ')
-		return (parse_color(&infos->ceiling, ft_strskip_space(line + 1)));
+		return (parse_color(&infos->ceiling, parser, ft_strskip_space(line + 1)));
 	else if (line[0] == 'F' && line[1] == ' ')
-		return (parse_color(&infos->floor, ft_strskip_space(line + 1)));
+		return (parse_color(&infos->floor, parser, ft_strskip_space(line + 1)));
 	else if (ft_strncmp(line, "NO", 2) == 0)
-		return (parse_texture(infos, ft_strskip_space(line + 2)));
+		return (parse_texture(infos, parser, ft_strskip_space(line + 2), NORTH));
 	else if (ft_strncmp(line, "SO", 2) == 0)
-		return (parse_texture(infos, ft_strskip_space(line + 2)));
+		return (parse_texture(infos, parser, ft_strskip_space(line + 2), SOUTH));
 	else if (ft_strncmp(line, "EA", 2) == 0)
-		return (parse_texture(infos, ft_strskip_space(line + 2)));
+		return (parse_texture(infos, parser, ft_strskip_space(line + 2), EAST));
 	else if (ft_strncmp(line, "WE", 2) == 0)
-		return (parse_texture(infos, ft_strskip_space(line + 2)));
+		return (parse_texture(infos, parser, ft_strskip_space(line + 2), WEST));
 	else if (ft_strncmp(line, "L", 1) == 0)
 		return (1);
-	return (0);
+	return (map_error(line, parser, MERR_UNRECOGNIZED_LINE));
 }
 
 inline static void	setup_player(t_gamestate *save)

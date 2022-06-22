@@ -1,6 +1,7 @@
 RELEASE_NAME 			:=	cub3d
 DEBUG_NAME				:=	cub3dd
 PROFILE_NAME			:=	cub3dp
+PERF_NAME				:=	cub3dperf
 
 # Source files
 # ****************************************************************************
@@ -28,7 +29,7 @@ RENDER_FILE		:=	render_primitives.c render_primitives_img.c	\
 					render_ui_texture.c render_text.c	\
 					render_walls.c render_debug.c raycasting.c	\
 					lighting.c light_manager.c texture_wall.c	\
-					init_renderer.c renderer_worker.c
+					init_renderer.c renderer_worker.c render_main_menu_background.c
 RENDER_SRCS		:=	$(addprefix $(RENDER_DIR)/, $(RENDER_FILE))
 
 FONT_DIR		:=	$(RENDER_DIR)/font
@@ -74,6 +75,10 @@ UI_SETTINGS_MENU_FILE	:=	settings_menu.c settings_menu_init.c settings_menu_upda
 							settings_menu_buttons.c settings_menu_buttons2.c
 UI_SETTINGS_MENU_SRCS	:= $(addprefix $(UI_SETTINGS_MENU_DIR)/, $(UI_SETTINGS_MENU_FILE))
 
+UI_LOAD_MENU_DIR		:=	$(UI_DIR)/load_menu
+UI_LOAD_MENU_FILE		:=	load_menu.c load_menu_init.c load_menu_buttons.c
+UI_LOAD_MENU_SRCS		:= $(addprefix $(UI_LOAD_MENU_DIR)/, $(UI_LOAD_MENU_FILE))
+
 TEXTURES_DIR	:=	textures
 TEXTURES_FILE	:=	xpm_loader.c texture_generation.c ambiant_occlusion.c	\
 					texture_deletion.c texture_utils.c	\
@@ -83,7 +88,8 @@ TEXTURES_FILE	:=	xpm_loader.c texture_generation.c ambiant_occlusion.c	\
 TEXTURE_SRCS	:=	$(addprefix $(TEXTURES_DIR)/, $(TEXTURES_FILE))
 
 IO_DIR			:=	io
-IO_FILE			:=	savegame.c saves_manager.c loaded_map.c loaded_map_manager.c
+IO_FILE			:=	savegame.c saves_manager.c loaded_map.c loaded_map_manager.c\
+					map_error.c
 IO_SRCS			:=	$(addprefix $(IO_DIR)/, $(IO_FILE))
 
 SAVE_DIR		:=	$(IO_DIR)/save
@@ -93,7 +99,7 @@ SAVE_FILE		:=	save_deserialization.c	\
 					save_deserialization_map_specs.c save_deserialization_map_textures.c	\
 					save_deserialization_player.c	\
 					save_serialization.c	\
-					map_construction.c
+					map_construction.c map_checking.c
 SAVE_SRCS		:=	$(addprefix $(SAVE_DIR)/, $(SAVE_FILE))
 
 SETTINGS_DIR		:=	$(IO_DIR)/settings
@@ -116,6 +122,7 @@ SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\
 					$(addprefix $(SRCS_DIR)/, $(SETTINGS_SRCS))					\
 					$(addprefix $(SRCS_DIR)/, $(UI_SETTINGS_MENU_SRCS))			\
 					$(addprefix $(SRCS_DIR)/, $(SPRITE_SRCS))					\
+					$(addprefix $(SRCS_DIR)/, $(UI_LOAD_MENU_SRCS))				\
 
 PROFILE_SRCS	:=	$(SRCS)	\
 					$(addprefix $(SRCS_DIR)/, $(PROFILING_SRCS))				\
@@ -132,6 +139,9 @@ DEPENDS			:=	$(RELEASE_OBJS:.o=.d) $(DEBUG_OBJS:.o=.d) $(PROFILE_OBJS:.o=.d)
 
 .PHONY: all
 all: $(RELEASE_NAME)
+
+.PHONY: perf
+perf: $(PERF_NAME)
 
 .PHONY: debug
 debug: $(DEBUG_NAME)
@@ -206,6 +216,10 @@ $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(SPRITE_DIR)/%.c | $(RELEASE_OBJS_DIR)
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
+$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(UI_LOAD_MENU_DIR)/%.c | $(RELEASE_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
 $(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
 	@printf "$(_BLUE)\nCompiled source files\n"
 	@$(BIN_CC) $(RELEASE_BIN_LDFLAGS) $(RELEASE_OBJS) $(RELEASE_LIBS) -o ../$@
@@ -272,6 +286,10 @@ $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_SETTINGS_MENU_DIR)/%.c | $(DEBUG_OBJS_D
 	@printf "$(_GREEN)█$(_END)"
 
 $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(SPRITE_DIR)/%.c | $(DEBUG_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
+$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_LOAD_MENU_DIR)/%.c | $(DEBUG_OBJS_DIR)
 	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
@@ -348,16 +366,26 @@ $(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(SPRITE_DIR)/%.c | $(PROFILE_OBJS_DIR)
 	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
+$(PROFILE_OBJS_DIR)/%p.o:	$(SRCS_DIR)/$(UI_LOAD_MENU_DIR)/%.c | $(PROFILE_OBJS_DIR)
+	@$(BIN_CC) $(PROFILE_BIN_CFLAGS) -c $< -o $@
+	@printf "$(_GREEN)█$(_END)"
+
 $(PROFILE_NAME): $(PROFILE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
 	@printf "$(_BLUE)\nCompiled source files\n"
 	@$(BIN_CC) $(PROFILE_BIN_LDFLAGS) $(PROFILE_OBJS) $(RELEASE_LIBS) -o ../$@
 	@printf "$(_GREEN)Finish compiling $(PROFILE_NAME)!$(_END)\n"
+
+$(PERF_NAME): $(SRCS)
+	@cat $(SRCS) > perf_out.c
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(RELEASE_BIN_LDFLAGS) -ferror-limit=200 perf_out.c $(RELEASE_LIBS) -o ../$(PERF_NAME)
+	@rm -f perf_out.c
 
 clean:
 	@printf "$(_YELLOW)Removing object files ...$(_END)\n"
 	@rm -rf $(RELEASE_OBJS_DIR)
 	@rm -rf $(DEBUG_OBJS_DIR)
 	@rm -rf $(PROFILE_OBJS_DIR)
+	@rm -f perf_out.c
 	@rm -fr *.dSYM
 
 fclean:	clean
@@ -365,6 +393,7 @@ fclean:	clean
 	@rm -rf ../$(RELEASE_NAME)
 	@rm -rf ../$(DEBUG_NAME)
 	@rm -rf ../$(PROFILE_NAME)
+	@rm -f ../$(PERF_NAME)
 
 re:		fclean all
 

@@ -32,8 +32,8 @@ BIN_CC				:=		gcc
 
 RELEASE_BIN_CFLAGS		:=
 RELEASE_BIN_CFLAGS		+=		-MD
-RELEASE_BIN_CFLAGS		+=		-Wall -Wextra -O3
-RELEASE_BIN_CFLAGS		+=		-mllvm -inline-threshold=1000000
+RELEASE_BIN_CFLAGS		+=		-Wall -Wextra -Werror -O3
+RELEASE_BIN_CFLAGS		+=		-mllvm -inline-threshold=100000000
 RELEASE_BIN_CFLAGS		+=		$(INC_PATH)
 
 DEBUG_BIN_CFLAGS		:=
@@ -94,6 +94,14 @@ ifeq ($(OS), Darwin)
 	@$(MAKE) -j4 -C $(MLX_DIR)
 endif
 	@$(MAKE) -j4 -C $(SRCS_DIR) -r -R --warn-undefined-variables
+
+.PHONY: perf
+perf: header
+	@$(MAKE) -j4 -C $(LIBFT_DIR)
+ifeq ($(OS), Darwin)
+	@$(MAKE) -j4 -C $(MLX_DIR)
+endif
+	@$(MAKE) -j4 -C $(SRCS_DIR) -r -R --warn-undefined-variables perf
 
 .PHONY: debug
 debug: header

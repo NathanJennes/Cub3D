@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/22 13:37:10 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/22 17:21:11 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 #include "render.h"
 #include <math.h>
 
-int			key_up_callback(int keycode, void *unused);
-int			key_down_callback(int keycode, void *unused);
-int			mouse_down_callback(int button, int x, int y, void *unused);
-int			mouse_up_callback(int button, int x, int y, void *unused);
+int					key_up_callback(int keycode, void *unused);
+int					key_down_callback(int keycode, void *unused);
+int					mouse_down_callback(int button, int x, int y, void *unused);
+int					mouse_up_callback(int button, int x, int y, void *unused);
 
-inline static void	init_hooks(void);
-inline static void	init_start_time(void);
+inline static void		init_hooks(void);
+inline static void		init_start_time(void);
 
 void	init_app(char *path)
 {
@@ -34,6 +34,7 @@ void	init_app(char *path)
 	init_start_time();
 	init_gc();
 	init_window("Cub3d");
+	init_texture_manager();
 	init_font_manager();
 	load_all_saves();
 	load_all_maps();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loaded_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:07:45 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/16 15:34:11 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/16 17:44:52 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@
 #include "leaky.h"
 
 void		serialize_game(int fd);
-int			deserialize_save(t_gamestate *save_out, int fd);
+int			deserialize_save(t_gamestate *save_out, int fd, char *filename);
 
 inline static int	open_map_file(char *map_name);
-inline static void	create_maps_directory(void);
 
 int	load_map(t_gamestate *map_out, char *map_name)
 {
@@ -32,7 +31,7 @@ int	load_map(t_gamestate *map_out, char *map_name)
 	fd = open_map_file(map_name);
 	if (fd == -1)
 		return (0);
-	if (!deserialize_save(&save, fd))
+	if (!deserialize_save(&save, fd, map_name))
 	{
 		gc_strarray_free(save.map.map_raw);
 		gc_free2d((void **)save.map.map, save.map.height);
@@ -49,20 +48,10 @@ inline static int	open_map_file(char *map_name)
 	int		fd;
 	char	*map_file;
 
-	create_maps_directory();
 	map_file = gc_strdup(MAPS_DIRECTORY);
 	map_file = gc_strappend(map_file, '/', LK_TRUE);
 	map_file = gc_strjoin(map_file, map_name, FREE_FIRST);
 	fd = open(map_file, O_RDWR, 0777);
 	gc_free(map_file);
 	return (fd);
-}
-
-inline static void	create_maps_directory(void)
-{
-	struct stat	dir;
-
-	ft_memset(&dir, 0, sizeof (struct stat));
-	if (stat(MAPS_DIRECTORY, &dir) == -1)
-		mkdir(MAPS_DIRECTORY, 0777);
 }

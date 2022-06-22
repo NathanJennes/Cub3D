@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/16 16:08:20 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/20 17:43:26 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,15 @@ typedef struct s_ui_settings_menu
 	t_button	btn_back;
 }	t_ui_settings_menu;
 
+typedef struct s_ui_load_menu
+{
+	t_label		lbl_selected_save;
+	t_button	btn_next_save;
+	t_button	btn_start;
+	t_button	btn_back;
+	size_t		save_selected;
+}	t_ui_load_menu;
+
 typedef struct s_ui
 {
 	t_ui_state			state;
@@ -158,6 +167,7 @@ typedef struct s_ui
 	t_ui_main_menu		main_menu;
 	t_ui_new_game_menu	new_game_menu;
 	t_ui_settings_menu	settings_menu;
+	t_ui_load_menu		load_menu;
 	t_mmap				minimap;
 	t_bool				lock_crosshair;
 	int64_t				tx_crosshair;
@@ -174,7 +184,6 @@ void			print_debug(void);
 void			switch_debug_ui(void);
 
 int64_t			str_px_size(char *str);
-int64_t			str_px_size(char *str);
 void			print_double(double val, char *font, int size, t_ivec2 pos);
 void			print_int(int val, char *font, int size, t_ivec2 pos);
 void			print_vec2(t_vec2 v, char *font, int size, t_ivec2 pos);
@@ -184,6 +193,7 @@ void			print_ivec2(t_ivec2 v, char *font, int size, t_ivec2 pos);
 void			init_main_menu(void);
 void			render_main_menu(void);
 void			update_main_menu(void);
+void			refresh_main_menu(void);
 
 /* New game menu */
 void			init_new_game_menu(void);
@@ -195,6 +205,12 @@ void			refresh_new_game_menu(void);
 void			init_settings_menu(void);
 void			render_settings_menu(void);
 void			update_settings_menu(void);
+
+/* Load menu */
+void			init_load_menu(void);
+void			refresh_load_menu(void);
+void			render_load_menu(void);
+void			update_load_menu(void);
 
 /* Minimap */
 void			render_minimap(double zoom);

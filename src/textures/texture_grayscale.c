@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:52:33 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/10 19:47:52 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/20 15:57:44 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,30 @@
 #include "texture.h"
 #include "mlx.h"
 #include "colors.h"
+#include "core.h"
 
 void	create_texture_grayscale(t_texture *tex)
 {
-	size_t		tex_size;
-	size_t		i;
-	int			*pixel;
-	int			*original_pixel;
-	int			gray;
+	size_t	tex_size;
+	size_t	i;
+	t_rgb	*pixel;
+	t_rgb	original_pixel;
+	int		gray;
 
-	tex->grayscale = (uint8_t *)mlx_get_data_addr(tex->grayscale_handle,
-			&tex->bpp, &tex->line_size, &tex->endian);
+	tex->grayscale = (t_rgb *)mlx_get_data_addr(
+			tex->grayscale_handle, &tex->bpp,
+			&tex->line_size, &tex->endian);
 	i = 0;
 	tex_size = tex->width * tex->height;
 	while (i < tex_size)
 	{
-		original_pixel = (int *)(tex->original + i * sizeof(int));
-		pixel = (int *)(tex->grayscale + i * sizeof(int));
-		gray = (get_r(*original_pixel) + get_g(*original_pixel)
-				+ get_b(*original_pixel)) / 3;
-		*pixel = trgb(get_t(*original_pixel), gray, gray, gray);
+		original_pixel = tex->original[i];
+		pixel = &tex->grayscale[i];
+		gray = (original_pixel.r + original_pixel.g
+				+ original_pixel.b) / 3;
+		pixel->r = gray;
+		pixel->g = gray;
+		pixel->b = gray;
 		i++;
 	}
 }
@@ -42,22 +46,24 @@ void	create_texture_inverse_grayscale(t_texture *tex)
 {
 	size_t	tex_size;
 	size_t	i;
-	int		*pixel;
-	int		*original_pixel;
+	t_rgb	*pixel;
+	t_rgb	original_pixel;
 	int		gray;
 
-	tex->inversed_grayscale = (uint8_t *)mlx_get_data_addr(
+	tex->inversed_grayscale = (t_rgb *)mlx_get_data_addr(
 			tex->inversed_grayscale_handle, &tex->bpp,
 			&tex->line_size, &tex->endian);
 	i = 0;
 	tex_size = tex->width * tex->height;
 	while (i < tex_size)
 	{
-		original_pixel = (int *)(tex->original + i * sizeof(int));
-		pixel = (int *)(tex->inversed_grayscale + i * sizeof(int));
-		gray = (get_r(*original_pixel) + get_g(*original_pixel)
-				+ get_b(*original_pixel)) / 3;
-		*pixel = trgb(get_t(*original_pixel), 255 - gray, 255 - gray, 255 - gray);
+		original_pixel = tex->original[i];
+		pixel = &tex->inversed_grayscale[i];
+		gray = (original_pixel.r + original_pixel.g
+				+ original_pixel.b) / 3;
+		pixel->r = 255 - gray;
+		pixel->g = 255 - gray;
+		pixel->b = 255 - gray;
 		i++;
 	}
 }

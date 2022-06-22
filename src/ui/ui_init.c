@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 18:21:25 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/16 16:37:30 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/22 17:07:05 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	init_ui(void)
 	init_new_game_menu();
 	init_settings_menu();
 	init_hud(ui);
+	init_load_menu();
 }
 
 static void	init_hud(t_ui *ui)

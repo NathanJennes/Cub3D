@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:38:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/15 14:04:33 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/20 14:13:28 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 # define INVALID_TEXTURE -1
 
-typedef union s_rgb	t_rgb;
+typedef union u_rgb	t_rgb;
 
 typedef struct s_xpm_file
 {
@@ -34,6 +34,7 @@ typedef struct s_xpm_file
 
 typedef struct s_texture
 {
+	char	*name;
 	int64_t	id;
 	int		bpp;
 	int		line_size;
@@ -41,12 +42,12 @@ typedef struct s_texture
 	int		width;
 	int		height;
 	void	*original_handle;
-	uint8_t	*original;
-	uint8_t	*grayscale;
+	t_rgb	*original;
+	t_rgb	*grayscale;
 	void	*grayscale_handle;
-	uint8_t	*inversed_grayscale;
+	t_rgb	*inversed_grayscale;
 	void	*inversed_grayscale_handle;
-	uint8_t	*inversed;
+	t_rgb	*inversed;
 	void	*inversed_handle;
 	t_rgb	**vflip;
 	t_rgb	**ao_flat;
@@ -62,6 +63,7 @@ typedef struct s_texture_manager
 }	t_texture_manager;
 
 /* Core */
+void		init_texture_manager(void);
 int			load_xpm(t_xpm_file *xpm_out, char *path);
 t_texture	create_texture_from_xpm_file(t_xpm_file file);
 t_texture	create_blank_texture(int width, int height);

@@ -1,0 +1,13 @@
+111111
+10N001
+111001
+100S01
+111111
+
+NO assets/textures/proto_wall/proto_north.xpm
+SO assets/textures/proto_wall/proto_south.xpm
+EA assets/textures/proto_wall/proto_east.xpm
+WE assets/textures/proto_wall/proto_west.xpm
+
+C 0,164,216
+F 102,102,102

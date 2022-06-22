@@ -18,7 +18,7 @@
 int	close_app(void)
 {
 	shutdown_renderer();
-	if (get_app()->gamestate.name)
+	if (get_app()->state == IN_GAME && get_app()->gamestate.name)
 		save_game(get_app()->gamestate.name);
 	save_settings(get_settings());
 	destroy_window();

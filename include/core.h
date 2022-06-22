@@ -43,13 +43,18 @@
 
 # define RENDER_WORKER_COUNT 4
 
+# define NORTH 0
+# define EAST 1
+# define SOUTH 2
+# define WEST 3
+
 typedef struct s_debug
 {
 	t_ivec2	dx;
 	t_ivec2	dy;
 }	t_debug;
 
-typedef union s_rgb
+typedef union u_rgb
 {
 	struct
 	{
@@ -58,7 +63,7 @@ typedef union s_rgb
 		uint8_t	r;
 		uint8_t	t;
 	};
-	int	color;
+	uint32_t	color;
 }	t_rgb;
 
 typedef struct s_mouse
@@ -90,8 +95,7 @@ typedef struct s_map_info
 	char		spawn_dir;
 	t_rgb		ceiling;
 	t_rgb		floor;
-	int64_t		*tx_list;
-	int64_t		tx_count;
+	int64_t		tx_list[4];
 	int			**map;
 	char		**map_raw;
 }	t_map_info;
@@ -216,7 +220,10 @@ typedef struct s_mlx
 	t_bool				mandatory;
 }	t_mlx;
 
+//TODO: quand on se deplace en diagonale, la minimap shake
+
 /* core.c */
+void 		init_mlx(t_mlx *app);
 void		init_window(char *win_name);
 int			close_app(void);
 void		error_close_app(void);
@@ -232,6 +239,7 @@ void		init_gc(void);
 
 /* main_loop.c */
 int			main_loop(void);
+void		render_main_menu_background(void);
 
 /* hooks.c.c */
 int			mouse_move_hooks(int x, int y, void *unused);
@@ -248,6 +256,7 @@ void		cub_update_mouse_pos(int x, int y) NOPROF;
 t_ivec2		get_mouse_position(void) NOPROF;
 void		reset_mouse_pos(void);
 void		update_player_vectors(t_player *player) NOPROF;
+void		update_player_direction(t_player *player, double delta_time, t_bool handle_input) NOPROF;
 void		update_player(t_player *player) NOPROF;
 
 /* Sprites */

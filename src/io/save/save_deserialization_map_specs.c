@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   deserialization_map_specs.c                        :+:      :+:    :+:   */
+/*   save_deserialization_map_specs.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 12:03:22 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/15 12:43:02 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/17 16:15:56 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	deserialize_map_parse_width(char *line, t_gamestate *save)
 	cursor = ft_strskip_space(cursor);
 	if (!ft_isdigit(*cursor))
 		return (0);
-	save->map.width = (size_t)ft_atoi(cursor);
+	save->map.width = ft_atoi(cursor);
 	return (1);
 }
 
@@ -34,10 +34,11 @@ int	deserialize_map_parse_height(char *line, t_gamestate *save)
 	cursor = ft_strskip_space(cursor);
 	if (!ft_isdigit(*cursor))
 		return (0);
-	save->map.height = (size_t)ft_atoi(cursor);
+	save->map.height = ft_atoi(cursor);
 	return (1);
 }
 
+//TODO: check if spawn is in map
 int	deserialize_map_parse_spawn(char *line, t_gamestate *save)
 {
 	char	*cursor;
@@ -45,14 +46,14 @@ int	deserialize_map_parse_spawn(char *line, t_gamestate *save)
 	cursor = ft_trimr(line);
 	cursor = ft_strskip_alpha(cursor);
 	cursor = ft_strskip_space(cursor);
-	if (!ft_isdigit(*cursor) && *cursor != '-')
+	if (!ft_isdigit(*cursor))
 		return (0);
-	save->map.spawn_pos.x = (float)ft_atoi(cursor);
+	save->map.spawn_pos.x = ft_atoi(cursor);
 	cursor = ft_strskip_digit(cursor);
 	cursor = ft_strskip_space(cursor);
-	if (!ft_isdigit(*cursor) && *cursor != '-')
+	if (!ft_isdigit(*cursor))
 		return (0);
-	save->map.spawn_pos.y = (float)ft_atoi(cursor);
+	save->map.spawn_pos.y = ft_atoi(cursor);
 	cursor = ft_strskip_digit(cursor);
 	cursor = ft_strskip_space(cursor);
 	if (!ft_isalpha(*cursor))
@@ -63,46 +64,60 @@ int	deserialize_map_parse_spawn(char *line, t_gamestate *save)
 
 int	deserialize_map_parse_ceiling(char *line, t_gamestate *save)
 {
+	int		color;
 	char	*cursor;
 
 	cursor = ft_trimr(line);
-	cursor = ft_strskip_alpha(cursor);
-	cursor = ft_strskip_space(cursor);
-	if (!ft_isdigit(*cursor) && *cursor != '-')
+	cursor = ft_strskip_space(ft_strskip_alpha(cursor));
+	if (!ft_isdigit(*cursor))
 		return (0);
-	save->map.ceiling.r = (float)ft_atoi(cursor);
-	cursor = ft_strskip_digit(cursor);
-	cursor = ft_strskip_space(cursor);
-	if (!ft_isdigit(*cursor) && *cursor != '-')
+	color = ft_atoi(cursor);
+	if (color < 0 || color > 255)
 		return (0);
-	save->map.ceiling.g = (float)ft_atoi(cursor);
-	cursor = ft_strskip_digit(cursor);
-	cursor = ft_strskip_space(cursor);
-	if (!ft_isdigit(*cursor) && *cursor != '-')
+	save->map.ceiling.r = color;
+	cursor = ft_strskip_space(ft_strskip_digit(cursor));
+	if (!ft_isdigit(*cursor))
 		return (0);
-	save->map.ceiling.b = (float)ft_atoi(cursor);
+	color = ft_atoi(cursor);
+	if (color < 0 || color > 255)
+		return (0);
+	save->map.ceiling.g = color;
+	cursor = ft_strskip_space(ft_strskip_digit(cursor));
+	if (!ft_isdigit(*cursor))
+		return (0);
+	color = ft_atoi(cursor);
+	if (color < 0 || color > 255)
+		return (0);
+	save->map.ceiling.b = color;
 	return (1);
 }
 
 int	deserialize_map_parse_floor(char *line, t_gamestate *save)
 {
+	int		color;
 	char	*cursor;
 
 	cursor = ft_trimr(line);
-	cursor = ft_strskip_alpha(cursor);
-	cursor = ft_strskip_space(cursor);
-	if (!ft_isdigit(*cursor) && *cursor != '-')
+	cursor = ft_strskip_space(ft_strskip_alpha(cursor));
+	if (!ft_isdigit(*cursor))
 		return (0);
-	save->map.floor.r = (float)ft_atoi(cursor);
-	cursor = ft_strskip_digit(cursor);
-	cursor = ft_strskip_space(cursor);
-	if (!ft_isdigit(*cursor) && *cursor != '-')
+	color = ft_atoi(cursor);
+	if (color < 0 || color > 255)
 		return (0);
-	save->map.floor.b = (float)ft_atoi(cursor);
-	cursor = ft_strskip_digit(cursor);
-	cursor = ft_strskip_space(cursor);
-	if (!ft_isdigit(*cursor) && *cursor != '-')
+	save->map.floor.r = color;
+	cursor = ft_strskip_space(ft_strskip_digit(cursor));
+	if (!ft_isdigit(*cursor))
 		return (0);
-	save->map.floor.b = (float)ft_atoi(cursor);
+	color = ft_atoi(cursor);
+	if (color < 0 || color > 255)
+		return (0);
+	save->map.floor.g = color;
+	cursor = ft_strskip_space(ft_strskip_digit(cursor));
+	if (!ft_isdigit(*cursor))
+		return (0);
+	color = ft_atoi(cursor);
+	if (color < 0 || color > 255)
+		return (0);
+	save->map.floor.b = color;
 	return (1);
 }

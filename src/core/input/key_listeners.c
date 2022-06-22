@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:42:50 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/16 17:15:59 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/17 15:28:24 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ inline static void	handle_escape(void)
 	if (app->state == IN_GAME)
 	{
 		save_game(app->gamestate.name);
+		refresh_main_menu();
 		app->state = IN_MENU;
 		app->ui.state = MAIN_MENU;
 		mlx_mouse_show();

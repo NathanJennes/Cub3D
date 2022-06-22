@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/22 14:49:19 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/22 17:29:55 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ inline static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_vec3 ligh
 	ty = (double)wall.wall_origin * ratio;
 	while (pos.y < wall.size)
 	{
-		color = data[(int64_t) ty];
+		color = data[(int64_t)ty];
 		if (!get_app()->mandatory)
 		{
 			result.x = (double)((color.r * lighting.x) * shade);
@@ -154,21 +154,24 @@ NOPROF
 	{
 		if (ray->hit_pos.x < player->world_pos.x)
 		{
-			texture = get_texture_from_id(get_map_infos()->tx_list[3]);
+			texture = get_texture_from_id(get_map_infos()->tx_list[WEST]);
 			*tx_data = texture->vflip;
 			return (texture);
 		}
-		texture = get_texture_from_id(get_map_infos()->tx_list[2]);
-		*tx_data = texture->ao_flat;
-		return (texture);
+		else
+			texture = get_texture_from_id(get_map_infos()->tx_list[EAST]);
 	}
-	if (ray->hit_pos.y < player->world_pos.y)
+	else
 	{
-		texture = get_texture_from_id(get_map_infos()->tx_list[1]);
-		*tx_data = texture->ao_flat;
-		return (texture);
+		if (ray->hit_pos.y < player->world_pos.y)
+			texture = get_texture_from_id(get_map_infos()->tx_list[NORTH]);
+		else
+		{
+			texture = get_texture_from_id(get_map_infos()->tx_list[SOUTH]);
+			*tx_data = texture->vflip;
+			return (texture);
+		}
 	}
-	texture = get_texture_from_id(get_map_infos()->tx_list[0]);
-	*tx_data = texture->vflip;
+	*tx_data = texture->ao_flat;
 	return (texture);
 }

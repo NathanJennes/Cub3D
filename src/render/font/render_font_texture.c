@@ -14,10 +14,10 @@
 #include "render.h"
 #include "colors.h"
 
-inline static int	render_letter(char c, t_font *font, t_ivec2 pos, t_ivec2 size_tex);
-inline static int	sample_pixel(uint8_t *data, t_vec2 pos, t_vec2 size, int line_size);
-inline static int	get_pixel_color(t_text_render *infos);
-inline static void	render_pixel(t_text_render *infos, int color, int64_t tex_id);
+inline static int	render_letter_tex(char c, t_font *font, t_ivec2 pos, t_ivec2 size_tex);
+inline static int	sample_pixel_tex(uint8_t *data, t_vec2 pos, t_vec2 size, int line_size);
+inline static int	get_pixel_color_tex(t_text_render *infos);
+inline static void	render_pixel_tex(t_text_render *infos, int color, int64_t tex_id);
 
 void	render_text_tex(char *text, char *font_name, t_ivec2 pos,
 			t_ivec2 size_id)
@@ -37,12 +37,12 @@ void	render_text_tex(char *text, char *font_name, t_ivec2 pos,
 	x_pos = pos.x;
 	while (i < len)
 	{
-		x_pos += render_letter(text[i], font, ivec2(x_pos, pos.y), size_id);
+		x_pos += render_letter_tex(text[i], font, ivec2(x_pos, pos.y), size_id);
 		i++;
 	}
 }
 
-inline static int	render_letter(char c, t_font *font, t_ivec2 pos, t_ivec2 size_tex)
+inline static int	render_letter_tex(char c, t_font *font, t_ivec2 pos, t_ivec2 size_tex)
 {
 	t_text_render	infos;
 	int				color;
@@ -62,8 +62,8 @@ inline static int	render_letter(char c, t_font *font, t_ivec2 pos, t_ivec2 size_
 		infos.xy.x = 0;
 		while (infos.xy.x < infos.px_size.x)
 		{
-			color = get_pixel_color(&infos);
-			render_pixel(&infos, color, size_tex.y);
+			color = get_pixel_color_tex(&infos);
+			render_pixel_tex(&infos, color, size_tex.y);
 			infos.xy.x++;
 		}
 		infos.xy.y++;
@@ -71,11 +71,11 @@ inline static int	render_letter(char c, t_font *font, t_ivec2 pos, t_ivec2 size_
 	return ((int)((double)infos.c->x_advance * infos.ratio));
 }
 
-inline static int	get_pixel_color(t_text_render *infos)
+inline static int	get_pixel_color_tex(t_text_render *infos)
 {
 	int	color;
 
-	color = sample_pixel(infos->font->bitmap.data,
+	color = sample_pixel_tex(infos->font->bitmap.data,
 			vec2((double)infos->c->x + (double) infos->xy.x / infos->ratio,
 				(double)infos->c->y + (double) infos->xy.y / infos->ratio),
 			vec2(1.0f / infos->ratio, 1.0f / infos->ratio),
@@ -83,7 +83,7 @@ inline static int	get_pixel_color(t_text_render *infos)
 	return (color);
 }
 
-inline static void	render_pixel(t_text_render *infos, int color, int64_t tex_id)
+inline static void	render_pixel_tex(t_text_render *infos, int color, int64_t tex_id)
 {
 	if (get_t(color) < 255)
 		set_texture_pixel((int)((double)infos->c->x_off * infos->ratio)
@@ -92,7 +92,7 @@ inline static void	render_pixel(t_text_render *infos, int color, int64_t tex_id)
 			+ infos->pos.y + infos->xy.y, color, tex_id);
 }
 
-inline static int	sample_pixel(uint8_t *data, t_vec2 pos, t_vec2 size, int line_size)
+inline static int	sample_pixel_tex(uint8_t *data, t_vec2 pos, t_vec2 size, int line_size)
 {
 	int64_t	t;
 	t_vec2	sample_dists;
