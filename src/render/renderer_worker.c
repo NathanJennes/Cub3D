@@ -14,7 +14,7 @@
 #include "render.h"
 
 inline static t_bool	is_game_running(void);
-inline static void		init_cols(int64_t *col_start, int64_t *col_end, int64_t id);
+inline static void	init_cols(int64_t *col_start, int64_t *col_end, int64_t id);
 
 void	*renderer_worker_loop(void *param_id)
 {
