@@ -53,7 +53,7 @@ inline static t_bool	is_game_running(void)
 	return (running);
 }
 
-inline static void		init_cols(int64_t *col_start, int64_t *col_end, int64_t id)
+inline static void	init_cols(int64_t *col_start, int64_t *col_end, int64_t id)
 {
 	int64_t		section;
 	t_settings	*settings;

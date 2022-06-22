@@ -42,7 +42,8 @@ void	render_walls(int64_t col_start, int64_t col_end)
 		vec2_normalize(&ray.direction);
 		ray = shoot_ray(ray.direction, player->world_pos,
 				player->map_pos, RAY_LENGTH);
-		render_column(i, get_wall_info(&ray), &ray);
+		if (ray.hit)
+			render_column(i, get_wall_info(&ray), &ray);
 		vec2_add(&start, player->plane_inc);
 		i++;
 	}

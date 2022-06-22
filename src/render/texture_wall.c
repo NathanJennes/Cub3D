@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/21 18:14:44 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/22 14:49:19 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	render_column(int64_t xcol, t_wall wall, t_ray *ray)
 	t_vec3		real_light;
 
 	pos = ivec2(xcol, wall.screen_origin);
-	lighting = get_lighting_at_col(ray);
 	if (!get_app()->mandatory)
 	{
-		real_light = vec3((double) lighting.x / 255.0,
-				(double) lighting.y / 255.0,
-				(double) lighting.z / 255.0);
+		lighting = get_lighting_at_col(ray);
+		real_light = vec3((double)lighting.x / 255.0,
+				(double)lighting.y / 255.0,
+				(double)lighting.z / 255.0);
 	}
 	else
 		real_light = vec3(1.0, 1.0, 1.0);
@@ -62,9 +62,9 @@ inline static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_vec3 ligh
 	ty = (double)wall.wall_origin * ratio;
 	while (pos.y < wall.size)
 	{
-		if ((double)wall.screen_origin < get_settings()->max_lerp)
+		color = data[(int64_t) ty];
+		if (!get_app()->mandatory)
 		{
-			color = data[(int64_t) ty];
 			result.x = (double)((color.r * lighting.x) * shade);
 			result.y = (double)((color.g * lighting.y) * shade);
 			result.z = (double)((color.b * lighting.z) * shade);
@@ -76,8 +76,6 @@ inline static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_vec3 ligh
 				result.z = 255.0;
 			color.color = trgb(color.t, (int) result.x, (int) result.y, (int) result.z);
 		}
-		else
-			color.color = BLACK;
 		set_screen_pixel_unsafe(pos.x, pos.y, color.color);
 		pos.y++;
 		ty += ratio;
@@ -90,15 +88,15 @@ inline static double	calculate_shade(t_wall wall)
 	double		shade;
 
 	settings = get_settings();
-	if ((double)wall.screen_origin > settings->max_lerp)
-		return (0);
+	if ((double)wall.screen_origin < settings->max_lerp)
+		return (1.0);
 	if ((double)wall.screen_origin >= settings->win_slice)
 	{
 		shade = ft_ilerpf(settings->max_lerp, settings->win_slice,
 				(double)wall.screen_origin);
 		return (shade);
 	}
-	return (1.0);
+	return (0);
 }
 
 inline static t_ivec3	get_lighting_at_col(t_ray *ray)

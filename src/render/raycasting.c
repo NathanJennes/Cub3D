@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 15:52:09 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/21 17:43:27 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/22 13:18:35 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 inline static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side);
 inline static t_vec2	calculate_lengths(t_vec2 *ray);
-inline static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos,
-		t_ivec2 map_pos);
+inline static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists,
+						t_vec2 pos, t_ivec2 map_pos);
 
 t_ray	shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos, double max_dist)
 {
@@ -28,7 +28,7 @@ t_ray	shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos, double max_di
 	int		side;
 
 	if (get_map_type(map_pos.x, map_pos.y) == WALL)
-		return (populate_ray(-1.0f, ray, TRUE, NOSIDE));
+		return (populate_ray(0, ray, TRUE, NOSIDE));
 	vec2_divf(&ray_world_pos, CELL_SIZE);
 	lengths = calculate_lengths(&ray);
 	step = calculate_step_dists(&ray, &dists, ray_world_pos, map_pos);
@@ -94,8 +94,8 @@ NOPROF
 	return (lengths);
 }
 
-inline static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists, t_vec2 pos,
-		t_ivec2 map_pos)
+inline static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists,
+						t_vec2 pos, t_ivec2 map_pos)
 NOPROF
 {
 	t_ivec2	step;

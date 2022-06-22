@@ -36,6 +36,8 @@ int	key_pressed_listener(int keycode)
 		handle_escape();
 	else if (keycode == KEY_F4)
 		app->renderer.multithreading = !app->renderer.multithreading;
+	else if (keycode == KEY_F10)
+		app->mandatory = !app->mandatory;
 	return (0);
 }
 

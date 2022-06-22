@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/21 18:09:37 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/22 13:35:00 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 #include "ui.h"
 #include "render.h"
 
+void				render_background_gradian(t_mlx *app, const t_settings *settings);
+void				render_background(t_mlx *app, const t_settings *settings);
 inline static void	render_crosshair(void);
-inline static void	render_background(t_mlx *app, const t_settings *settings);
 inline static void	debug_time_frame(const t_mlx *app, struct timeval *time);
 inline static void	render_game(t_mlx *app, const t_settings *settings,
 						struct timeval time[4]);
@@ -54,7 +55,10 @@ inline static void	render_game(t_mlx *app, const t_settings *settings,
 		struct timeval time[4])
 {
 	gettimeofday(&time[0], NULL);
-	render_background(app, settings);
+	if (!get_app()->mandatory)
+		render_background_gradian(app, settings);
+	else
+		render_background(app, settings);
 	gettimeofday(&time[1], NULL);
 	renderer_render();
 	gettimeofday(&time[2], NULL);
@@ -63,36 +67,6 @@ inline static void	render_game(t_mlx *app, const t_settings *settings,
 		render_debug(app);
 	gettimeofday(&time[3], NULL);
 	debug_time_frame(app, time);
-}
-
-inline static void	render_background(t_mlx *app, const t_settings *settings)
-{
-	t_rgb	color;
-	t_vec3	res;
-	double	shade;
-	int64_t	i;
-
-	draw_rect(ivec2(0, 0),
-		ivec2(settings->win_w, (int64_t)settings->win_slice),
-		get_map_infos()->ceiling.color);
-	i = (int64_t)settings->win_slice;
-	while (i < (int64_t)(settings->max_lerp))
-	{
-		shade = ft_ilerpf(settings->halfw_h,
-				settings->win_slice, (double)i);
-		res.x = (double)(get_map_infos()->ceiling.r * shade);
-		res.y = (double)(get_map_infos()->ceiling.g * shade);
-		res.z = (double)(get_map_infos()->ceiling.b * shade);
-		color.color = trgb(0, (int)res.x, (int)res.y, (int)res.z);
-		draw_line(ivec2(0, i), ivec2(settings->win_w, i), color.color);
-		draw_line(ivec2(0, settings->win_h - i),
-			ivec2(settings->win_w, settings->win_h - i), color.color);
-		i++;
-	}
-	draw_rect(ivec2(0, (int64_t)settings->win_two_slice),
-		ivec2(settings->win_w, (int64_t)settings->win_slice),
-		get_map_infos()->floor.color);
-	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 }
 
 inline static void	render_crosshair(void)
