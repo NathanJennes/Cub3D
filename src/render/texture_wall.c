@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_wall.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/22 17:29:55 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/22 22:08:50 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void	render_column(int64_t xcol, t_wall wall, t_ray *ray)
 
 inline static void	render_wall(t_ivec2 pos, t_wall wall, t_ray *ray, t_vec3 lighting)
 {
-	double		ratio;
 	t_texture	*texture;
 	t_rgb		**tx_data;
 	t_rgb		*data;
 	t_rgb		color;
 	t_vec3		result;
+	double		ratio;
 	int64_t		tx;
 	double		ty;
 	double		shade;
@@ -88,7 +88,7 @@ inline static double	calculate_shade(t_wall wall)
 	double		shade;
 
 	settings = get_settings();
-	if ((double)wall.screen_origin < settings->max_lerp)
+	if ((double)wall.screen_origin < settings->win_slice)
 		return (1.0);
 	if ((double)wall.screen_origin >= settings->win_slice)
 	{

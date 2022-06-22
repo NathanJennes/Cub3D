@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/22 16:28:15 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/22 21:50:50 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "render.h"
 
 inline static void	render_background_gradian(t_mlx *app, const t_settings *settings);
-inline static void	render_background(t_mlx *app, const t_settings *settings);
 inline static void	render_crosshair(void);
 inline static void	debug_time_frame(const t_mlx *app, struct timeval *time);
 inline static void	render_game(t_mlx *app, const t_settings *settings,
@@ -39,8 +38,6 @@ int	main_loop(void)
 		if (app->ui.lock_crosshair == TRUE)
 			reset_mouse_pos();
 	}
-	else
-		clear_screen(BKGD_COLOR);
 	if (get_ui()->debug)
 		print_debug();
 	fps_counter();
