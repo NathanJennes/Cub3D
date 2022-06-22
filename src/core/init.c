@@ -98,6 +98,4 @@ void	init_math(void)
 	settings->win_two_slice = settings->win_slice * 2;
 	settings->max_dist = fabs((double)1 / RAY_LENGTH * get_math()->plane_dist);
 	settings->max_lerp = settings->halfw_h - (settings->max_dist / 2);
-	printf("%lf\n", settings->win_slice);
-	printf("%lf\n", settings->max_lerp);
 }
