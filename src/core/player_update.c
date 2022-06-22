@@ -14,8 +14,10 @@
 #include "input_code.h"
 #include "render.h"
 
+static void		input_direction(t_player *player, double delta_time,
+					t_settings *settings);
 inline static void	update_player_position(t_player *player, t_vec2 future_pos,
-						double delta_time);
+					double delta_time);
 
 void	update_player(t_player *player)
 {
@@ -61,18 +63,7 @@ void	update_player_direction(t_player *player, double delta_time, t_bool handle_
 
 	settings = get_settings();
 	if (handle_input)
-	{
-		get_app()->mouse.delta.x = \
-			get_mouse_position().x - get_app()->settings.halfw_w;
-		get_player()->direction -= 0.0005 * (get_settings()->cam_sensitivity
-			* (double)get_app()->mouse.delta.x);
-		if (is_key_down(KEY_RIGHT))
-			player->direction -= PI / 4.0 * settings->cam_sensitivity
-				* delta_time;
-		if (is_key_down(KEY_LEFT))
-			player->direction += PI / 4.0 * settings->cam_sensitivity
-				* delta_time;
-	}
+		input_direction(player, delta_time, settings);
 	if (player->direction < 0.0)
 		player->direction += TWO_PI;
 	else if (player->direction > TWO_PI)
@@ -85,4 +76,19 @@ void	update_player_direction(t_player *player, double delta_time, t_bool handle_
 	player->plane_inc = \
 			vec2((player->right.x * get_math()->plane_len) / settings->halfw_w,
 			(player->right.y * get_math()->plane_len) / settings->halfw_w);
+}
+
+static void	input_direction(t_player *player, double delta_time,
+		t_settings *settings)
+{
+	get_app()->mouse.delta.x = \
+			get_mouse_position().x - get_app()->settings.halfw_w;
+	get_player()->direction -= 0.0005 * (get_settings()->cam_sensitivity
+		* (double)get_app()->mouse.delta.x);
+	if (is_key_down(KEY_RIGHT))
+		player->direction -= PI / 4.0 * settings->cam_sensitivity
+			* delta_time;
+	if (is_key_down(KEY_LEFT))
+		player->direction += PI / 4.0 * settings->cam_sensitivity
+			* delta_time;
 }

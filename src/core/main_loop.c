@@ -21,6 +21,7 @@ inline static void	render_crosshair(void);
 inline static void	debug_time_frame(const t_mlx *app, struct timeval *time);
 inline static void	render_game(t_mlx *app, const t_settings *settings,
 						struct timeval time[4]);
+inline static void	render_gradian(t_mlx *app, const t_settings *settings);
 
 int	main_loop(void)
 {
@@ -56,7 +57,15 @@ inline static void	render_game(t_mlx *app, const t_settings *settings,
 {
 	gettimeofday(&time[0], NULL);
 	if (get_app()->mandatory)
-		render_background(app, settings);
+	{
+		draw_rect_unsafe(ivec2(0, 0),
+			ivec2(settings->win_w, settings->halfw_h),
+			get_map_infos()->ceiling.color);
+		draw_rect_unsafe(ivec2(0, settings->halfw_h),
+			ivec2(settings->win_w, settings->halfw_h),
+			get_map_infos()->floor.color);
+		mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
+	}
 	else
 		render_background_gradian(app, settings);
 	gettimeofday(&time[1], NULL);
@@ -82,8 +91,8 @@ inline static void	render_crosshair(void)
 inline static void	render_background_gradian(t_mlx *app, const t_settings *settings)
 {
 	t_rgb	color;
-	t_vec3	res;
 	double	shade;
+	t_vec3	res;
 	int64_t	i;
 
 	draw_rect_unsafe(ivec2(0, 0),
@@ -103,21 +112,15 @@ inline static void	render_background_gradian(t_mlx *app, const t_settings *setti
 			ivec2(settings->win_w, settings->win_h - i), color.color);
 		i++;
 	}
+	render_gradian(app, settings);
+}
+
+inline static void	render_gradian(t_mlx *app, const t_settings *settings)
+{
 	draw_rect_unsafe(ivec2(0, (int64_t)settings->max_lerp + 1),
 		ivec2(settings->win_w, (int64_t)settings->max_dist + 1), BLACK);
 	draw_rect_unsafe(ivec2(0, (int64_t)settings->win_two_slice),
 		ivec2(settings->win_w, (int64_t)settings->win_slice),
-		get_map_infos()->floor.color);
-	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
-}
-
-inline static void	render_background(t_mlx *app, const t_settings *settings)
-{
-	draw_rect_unsafe(ivec2(0, 0),
-		ivec2(settings->win_w, settings->halfw_h),
-		get_map_infos()->ceiling.color);
-	draw_rect_unsafe(ivec2(0, settings->halfw_h),
-		ivec2(settings->win_w, settings->halfw_h),
 		get_map_infos()->floor.color);
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 }

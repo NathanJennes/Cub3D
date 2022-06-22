@@ -228,7 +228,7 @@ void		init_window(char *win_name);
 int			close_app(void);
 void		error_close_app(void);
 void		check_leaky_errors(void);
-void		init_math(void);
+void		update_precalc(void);
 
 /* window.c */
 void		destroy_window(void);

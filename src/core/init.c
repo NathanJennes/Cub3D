@@ -16,13 +16,14 @@
 #include "render.h"
 #include <math.h>
 
-int					key_up_callback(int keycode, void *unused);
-int					key_down_callback(int keycode, void *unused);
-int					mouse_down_callback(int button, int x, int y, void *unused);
-int					mouse_up_callback(int button, int x, int y, void *unused);
+int				key_up_callback(int keycode, void *unused);
+int				key_down_callback(int keycode, void *unused);
+int				mouse_down_callback(int button, int x, int y, void *unused);
+int				mouse_up_callback(int button, int x, int y, void *unused);
 
-inline static void		init_hooks(void);
-inline static void		init_start_time(void);
+static void		init_hooks(void);
+static void		init_start_time(void);
+static void		init_mandatory(t_mlx *app, char *path);
 
 void	init_app(char *path)
 {
@@ -40,10 +41,15 @@ void	init_app(char *path)
 	load_all_maps();
 	printf("Saves loaded: %d\n", (int) app->savegames_count);
 	printf("Maps loaded: %d\n", (int) app->maps_count);
-	init_math();
+	update_precalc();
 	init_ui();
 	init_hooks();
 	init_renderer();
+	init_mandatory(app, path);
+}
+
+static void	init_mandatory(t_mlx *app, char *path)
+{
 	if (load_map(&app->gamestate, path))
 	{
 		app->state = IN_GAME;
@@ -56,7 +62,7 @@ void	init_app(char *path)
 		printf("Error: couldn't load specified map.\n");
 }
 
-inline static void	init_hooks(void)
+static void	init_hooks(void)
 {
 	t_mlx	*app;
 
@@ -70,7 +76,7 @@ inline static void	init_hooks(void)
 	mlx_loop_hook(app->mlx, main_loop, app);
 }
 
-inline static void	init_start_time(void)
+static void	init_start_time(void)
 {
 	t_mlx			*app;
 	struct timeval	time;
@@ -81,7 +87,7 @@ inline static void	init_start_time(void)
 	app->last_time = app->start_time;
 }
 
-void	init_math(void)
+void	update_precalc(void)
 {
 	t_math		*pc;
 	t_settings	*settings;
