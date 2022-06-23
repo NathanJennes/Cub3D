@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_deserialization_mandatory.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/16 20:22:09 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/23 13:58:50 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@
 #include "core.h"
 #include "io.h"
 
+int			parse_light(t_gamestate *gamestate, t_map_parser *parser, char *line);
 void		construct_map(t_map_info *infos) NOPROF;
 int			parse_color(t_rgb *color, t_map_parser *parser, char *line) NOPROF;
 int			parse_texture(t_map_info *info, t_map_parser *parser, char *line, int direction) NOPROF;
 int			add_map_row(t_map_info *infos, t_map_parser *parser, char *line) NOPROF;
 t_bool		is_map_legal(t_map_info *infos, t_map_parser *parser) NOPROF;
 
-inline static int	parse_line_mand(t_map_info *infos, t_map_parser *parser, char *line) NOPROF;
+inline static int	parse_line_mand(t_gamestate *gamestate, t_map_info *infos, t_map_parser *parser, char *line) NOPROF;
 inline static void	setup_player(t_gamestate *save) NOPROF;
 
 int	load_mandatory_map(t_gamestate *save_out, int fd, char *line, char *filename)
@@ -39,7 +40,7 @@ int	load_mandatory_map(t_gamestate *save_out, int fd, char *line, char *filename
 	while (line)
 	{
 		parser.line = line;
-		if (!parse_line_mand(infos, &parser, line))
+		if (!parse_line_mand(save_out, infos, &parser, line))
 			return (map_print_error(&parser));
 		gc_free(line);
 		line = ft_trimr(gc_get_next_line(fd));
@@ -50,11 +51,10 @@ int	load_mandatory_map(t_gamestate *save_out, int fd, char *line, char *filename
 	construct_map(infos);
 	gc_strarray_free(infos->map_raw);
 	setup_player(save_out);
-	save_out->lights = gc_calloc(1, sizeof (t_light));
 	return (1);
 }
 
-inline static int	parse_line_mand(t_map_info *infos, t_map_parser *parser, char *line)
+inline static int	parse_line_mand(t_gamestate *gamestate, t_map_info *infos, t_map_parser *parser, char *line)
 {
 	static int	map_status = MEMPTY;
 
@@ -86,7 +86,7 @@ inline static int	parse_line_mand(t_map_info *infos, t_map_parser *parser, char 
 	else if (ft_strncmp(line, "WE", 2) == 0)
 		return (parse_texture(infos, parser, ft_strskip_space(line + 2), WEST));
 	else if (ft_strncmp(line, "L", 1) == 0)
-		return (1);
+		return (parse_light(gamestate, parser, ft_strskip_space(line + 2)));
 	return (map_error(line, parser, MERR_UNRECOGNIZED_LINE));
 }
 

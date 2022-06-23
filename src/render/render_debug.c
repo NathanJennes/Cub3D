@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_debug.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/16 15:18:45 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/23 11:32:06 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ void	render_debug(t_mlx *app)
 	while (i < app->gamestate.light_count)
 	{
 		t_light *l = &app->gamestate.lights[i];
-		int col = trgb(0, l->color.x, l->color.y, l->color.z);
-		draw_circle(ivec2(l->pos.x, l->pos.y), 7, col);
+		draw_circle(ivec2(l->pos.x, l->pos.y), 7, l->color.color);
 		i++;
 	}
 	t_ivec3 light = get_lighting_level

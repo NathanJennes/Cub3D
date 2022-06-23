@@ -31,7 +31,7 @@
 typedef struct s_light
 {
 	t_vec3	pos;
-	t_ivec3	color;
+	t_rgb	color;
 	double	intensity;
 }			t_light;
 
@@ -121,7 +121,7 @@ int				get_map_type(int64_t x, int64_t y);
 /* Lights */
 t_ivec3			get_lighting_level(t_vec3 pos, t_vec3 normal);
 int				apply_light_to_color(t_rgb color, t_vec3 light);
-void			add_light(t_vec3 pos, t_ivec3 color, double intensity);
+void			add_light(t_gamestate *gamestate, t_vec3 pos, t_rgb color, double intensity);
 void			free_lights(t_gamestate *gamestate);
 
 /* Sprite */

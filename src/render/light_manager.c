@@ -14,18 +14,18 @@
 #include "core.h"
 #include "leaky.h"
 
-void	add_light(t_vec3 pos, t_ivec3 color, double intensity)
+void	add_light(t_gamestate *gamestate, t_vec3 pos, t_rgb color, double intensity)
 {
 	t_mlx	*app;
 	t_light	*new;
 
 	app = get_app();
-	new = gc_calloc(app->gamestate.light_count + 1, sizeof (t_light));
-	gc_memmove(new, app->gamestate.lights, app->gamestate.light_count * sizeof (t_light));
-	gc_free(app->gamestate.lights);
-	app->gamestate.lights = new;
-	app->gamestate.lights[app->gamestate.light_count] = (t_light){pos, color, intensity};
-	app->gamestate.light_count++;
+	new = gc_calloc(gamestate->light_count + 1, sizeof (t_light));
+	gc_memmove(new, gamestate->lights, gamestate->light_count * sizeof (t_light));
+	gc_free(gamestate->lights);
+	gamestate->lights = new;
+	gamestate->lights[gamestate->light_count] = (t_light){pos, color, intensity};
+	gamestate->light_count++;
 }
 
 void	free_lights(t_gamestate *gamestate)

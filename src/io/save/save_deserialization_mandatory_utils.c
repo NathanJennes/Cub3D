@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_deserialization_mandatory_utils.c             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/16 18:41:40 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/23 14:10:47 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "leaky.h"
 #include "map_error.h"
 
-inline static t_bool	is_color_value_legal(char *line);
+t_bool	is_color_value_legal(char *line);
 
 int	parse_color(t_rgb *color, t_map_parser *parser, char *line)
 {
@@ -68,7 +68,7 @@ int	add_map_row(t_map_info *infos, t_map_parser *parser, char *line)
 	return (1);
 }
 
-inline static t_bool	is_color_value_legal(char *line)
+t_bool	is_color_value_legal(char *line)
 {
 	size_t	i;
 

@@ -18,11 +18,15 @@ void	update_ui_click_end(int button);
 
 void	mouse_click_begin(int button)
 {
+	t_rgb	color;
+
+	color.r = rand() % (255 - 1) + 1;
+	color.g = rand() % (255 - 1) + 1;
+	color.b = rand() % (255 - 1) + 1;
 	update_ui_click_begin(button);
-	add_light(
+	add_light(&get_app()->gamestate,
 		vec3(get_mouse_position().x, get_mouse_position().y, CELL_SIZE / 2),
-		ivec3(rand() % (255 - 1) + 1, rand() % (255 - 1) + 1,
-			rand() % (255 - 1) + 1),
+		color,
 		1000.0);
 }
 

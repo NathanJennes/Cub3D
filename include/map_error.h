@@ -21,6 +21,9 @@ typedef struct s_map_info	t_map_info;
 
 # define MERR_UNRECOGNIZED_LINE "Unrecognized line"
 
+# define MERR_POS_EXPECTED "Expected a positive position value. Syntax: X,Y,Z (> 0)"
+# define MERR_POS_OUTBOUND "Invalid position given. Outside of map bound"
+
 # define MERR_COLOR_EXPECTED_R "Expected a positive red color value. Syntax: R,G,B (0-255)"
 # define MERR_COLOR_EXPECTED_B "Expected a positive blue color value. Syntax: R,G,B (0-255)"
 # define MERR_COLOR_EXPECTED_G "Expected a positive green color value. Syntax: R,G,B (0-255)"

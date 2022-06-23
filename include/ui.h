@@ -25,7 +25,7 @@
 
 /* Minimap */
 # define MMAP_PAD			20
-# define MMAP_ZOOM_FACTOR	30
+# define MMAP_ZOOM_FACTOR	20
 # define MMAP_PLAYER_DIAM	6
 
 typedef struct s_mlx	t_mlx;
