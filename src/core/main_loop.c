@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/22 21:50:50 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/23 13:27:45 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,8 @@ inline static void	render_background_gradian(t_mlx *app, const t_settings *setti
 		res.y = (double)(get_map_infos()->ceiling.g * shade);
 		res.z = (double)(get_map_infos()->ceiling.b * shade);
 		color.color = trgb(0, (int)res.x, (int)res.y, (int)res.z);
-		draw_line_unsafe(ivec2(0, i), ivec2(settings->win_w, i), color.color);
-		draw_line_unsafe(ivec2(0, settings->win_h - i),
-			ivec2(settings->win_w, settings->win_h - i), color.color);
+		ft_memseti((int *)app->frame.addr + i * settings->win_w, color.color, settings->win_w);
+		ft_memseti((int *)app->frame.addr + (settings->win_h - i) * settings->win_w, color.color, settings->win_w);
 		i++;
 	}
 	render_gradian(app, settings);

@@ -41,7 +41,7 @@ void	reload_maps(void)
 {
 	unload_maps();
 	load_all_maps();
-	refresh_new_game_menu();
+	new_game_menu_refresh();
 }
 
 void	unload_maps(void)

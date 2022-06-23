@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/20 17:43:26 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/23 13:48:31 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ void			refresh_main_menu(void);
 void			init_new_game_menu(void);
 void			render_new_game_menu(void);
 void			update_new_game_menu(void);
-void			refresh_new_game_menu(void);
+void			new_game_menu_refresh(void);
 
 /* Settings menu */
 void			init_settings_menu(void);

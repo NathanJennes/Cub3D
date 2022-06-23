@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:38:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/20 14:13:28 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/23 13:56:11 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void		free_texture(t_texture *texture);
 int64_t		load_texture(char *path);
 int64_t		new_texture(int width, int height);
 void		finish_new_texture(int64_t tex_id);
+void		update_texture_variations(int64_t tex_id);
 void		unload_texture_manager(void);
 t_texture	*get_texture_from_id(int64_t tex_id);
 
