@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   save_serialization.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 18:22:14 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/17 15:03:13 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/23 19:39:07 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
+#include "render.h"
 
+inline static void	serialize_light(int fd, t_gamestate *gamestate);
 inline static void	serialize_player(int fd, t_player player);
-inline static void	serialize_map(int fd, t_map_info map);
+inline static void serialize_map(int fd, t_map_info map);
 inline static void	serialize_map_walls(int fd, t_map_info map);
 
 void	serialize_game(int fd)
@@ -38,7 +40,7 @@ inline static void	serialize_player(int fd, t_player player)
 	dprintf(fd, "PLAYER_END\n");
 }
 
-inline static void	serialize_map(int fd, t_map_info map)
+inline static void serialize_map(int fd, t_map_info map)
 {
 	dprintf(fd, "MAP_START\n");
 	dprintf(fd, "W %d\n", (int)map.width);
@@ -56,7 +58,27 @@ inline static void	serialize_map(int fd, t_map_info map)
 	dprintf(fd, "SO_TEX %s\n", get_texture_from_id(map.tx_list[SOUTH])->name);
 	dprintf(fd, "WE_TEX %s\n", get_texture_from_id(map.tx_list[WEST])->name);
 	serialize_map_walls(fd, map);
+	serialize_light(fd, &get_app()->gamestate);
 	dprintf(fd, "MAP_END\n");
+}
+
+inline static void	serialize_light(int fd, t_gamestate *gamestate)
+{
+	int64_t	i;
+
+	i = 0;
+	while (i < gamestate->light_count)
+	{
+		dprintf(fd, "L %d,%d,%d ",
+			gamestate->lights[i].color.r,
+			gamestate->lights[i].color.g,
+			gamestate->lights[i].color.b);
+		dprintf(fd, "%d,%d,%d\n",
+			(int)gamestate->lights[i].pos.x,
+			(int)gamestate->lights[i].pos.y,
+			(int)gamestate->lights[i].pos.z);
+		i++;
+	}
 }
 
 inline static void	serialize_map_walls(int fd, t_map_info map)

@@ -28,6 +28,8 @@
 
 # define DEFAULT_FONT "HelveticaNeue"
 
+# define DEFAULT_INTENSITY 250.0
+
 typedef struct s_light
 {
 	t_vec3	pos;

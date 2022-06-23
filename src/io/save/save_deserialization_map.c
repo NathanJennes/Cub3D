@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   save_deserialization_map.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 11:45:36 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/17 16:22:07 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/23 20:11:31 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "leaky.h"
+#include "render.h"
 
 int			deserialize_map_parse_width(char *line, t_gamestate *save);
 int			deserialize_map_parse_height(char *line, t_gamestate *save);
@@ -52,6 +53,41 @@ int	deserialize_map(int fd, char *line, t_gamestate *save)
 	return (0);
 }
 
+int	deserialize_light(char *line, t_gamestate *save)
+{
+	t_vec3	pos;
+	t_rgb	color;
+
+	line = ft_strskip_alpha(line);
+	line = ft_strskip_space(line);
+	color.r = ft_atoi(line);
+	line = ft_strskip_digit(line);
+	if (*line != ',')
+		return (0);
+	line++;
+	color.g = ft_atoi(line);
+	line = ft_strskip_digit(line);
+	if (*line != ',')
+		return (0);
+	line++;
+	color.b = ft_atoi(line);
+	line = ft_strskip_digit(line);
+	line = ft_strskip_space(line);
+	pos.x = ft_atoi(line);
+	line = ft_strskip_digit(line);
+	if (*line != ',')
+		return (0);
+	line++;
+	pos.y = ft_atoi(line);
+	line = ft_strskip_digit(line);
+	if (*line != ',')
+		return (0);
+	line++;
+	pos.z = ft_atoi(line);
+	add_light(save, pos, color, DEFAULT_INTENSITY);
+	return (1);
+}
+
 inline static int	parse_line(char *line, t_gamestate *save, int64_t line_number)
 {
 	if (line_number == 0)
@@ -72,7 +108,10 @@ inline static int	parse_line(char *line, t_gamestate *save, int64_t line_number)
 		return (deserialize_map_parse_so_tex(line, save));
 	if (line_number == 8)
 		return (deserialize_map_parse_we_tex(line, save));
-	if (ft_isdigit(*line) && line_number > 8)
+	if (ft_isdigit(*line) && line_number > 8
+		&& line_number <= 8 + save->map.height)
 		return (deserialize_map_parse_map_content(line, save));
+	if (ft_strncmp(line, "L", 1) == 0 && line_number > 8 + save->map.height)
+		return (deserialize_light(line, save));
 	return (0);
 }

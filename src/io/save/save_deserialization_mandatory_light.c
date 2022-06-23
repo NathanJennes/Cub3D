@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 19:12:31 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/23 19:39:07 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	parse_light(t_gamestate *gamestate, t_map_parser *parser, char *line)
 		return (0);
 	if (!parse_light_pos(&pos, parser, ft_strskip_space(line + 1)))
 		return (0);
-	add_light(gamestate, pos, color, 250.0);
+	add_light(gamestate, pos, color, DEFAULT_INTENSITY);
 	return (1);
 }
 
@@ -86,6 +86,7 @@ static int	parse_light_pos(t_vec3 *pos, t_map_parser *parser, char *line)
 	return (1);
 }
 
+// TODO: do good below
 static t_bool	is_pos_value_legal(char *line)
 {
 	size_t	i;
