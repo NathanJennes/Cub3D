@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 14:38:07 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/23 19:12:31 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	parse_light(t_gamestate *gamestate, t_map_parser *parser, char *line)
 		return (0);
 	if (!parse_light_pos(&pos, parser, ft_strskip_space(line + 1)))
 		return (0);
-	add_light(gamestate, pos, color, 1000.0);
+	add_light(gamestate, pos, color, 250.0);
 	return (1);
 }
 
@@ -64,24 +64,24 @@ static int	parse_light_pos(t_vec3 *pos, t_map_parser *parser, char *line)
 {
 	if (!ft_isdigit(*line))
 		return (map_error(line, parser, MERR_POS_EXPECTED));
-//	if (!is_pos_value_legal(line))
-//		return (map_error(line, parser, MERR_POS_OUTBOUND));
+	if (!is_pos_value_legal(line))
+		return (map_error(line, parser, MERR_POS_OUTBOUND));
 	pos->x = ft_atoi(line);
 	line = ft_strskip_digit(line);
 	if (*line != ',')
 		return (map_error(line, parser, MERR_COLOR_EXPECTED_COMMA));
 	if (!ft_isdigit(*(++line)))
 		return (map_error(line, parser, MERR_POS_EXPECTED));
-//	if (!is_pos_value_legal(line))
-//		return (map_error(line, parser, MERR_POS_OUTBOUND));
+	if (!is_pos_value_legal(line))
+		return (map_error(line, parser, MERR_POS_OUTBOUND));
 	pos->y = ft_atoi(line);
 	line = ft_strskip_digit(line);
 	if (*line != ',')
 		return (map_error(line, parser, MERR_COLOR_EXPECTED_COMMA));
 	if (!ft_isdigit(*(++line)))
 		return (map_error(line, parser, MERR_POS_EXPECTED));
-//	if (!is_pos_value_legal(line))
-//		return (map_error(line, parser, MERR_POS_OUTBOUND));
+	if (!is_pos_value_legal(line))
+		return (map_error(line, parser, MERR_POS_OUTBOUND));
 	pos->z = ft_atoi(line);
 	return (1);
 }
