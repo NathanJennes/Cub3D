@@ -60,6 +60,7 @@ int	btn_start_new_game(t_button *button)
 	{
 		app = get_app();
 		app->gamestate = app->maps[menu->selected_save];
+		update_player_direction(get_player(), app->delta_time, FALSE);
 		update_player_vectors(get_player());
 		init_sprite_manager();
 		app->state = IN_GAME;

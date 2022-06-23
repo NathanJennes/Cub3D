@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 19:04:40 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/20 17:16:40 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/23 18:22:49 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,13 @@ int	btn_continue(t_button *button)
 	(void)button;
 	app = get_app();
 	app->gamestate = app->savegames[0];
+	update_player_direction(get_player(), app->delta_time, FALSE);
+	update_player_vectors(get_player());
+	init_sprite_manager();
 	app->state = IN_GAME;
+	mlx_mouse_hide();
+	app->ui.lock_crosshair = TRUE;
+	reset_mouse_pos();
 	return (0);
 }
 
