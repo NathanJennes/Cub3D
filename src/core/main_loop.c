@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/22 21:50:50 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/23 18:21:30 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,20 @@ int	main_loop(void)
 
 	app = get_app();
 	settings = get_settings();
-	if (app->state & IN_GAME)
+	if (app->state == IN_GAME)
 	{
 		if (app->ui.lock_crosshair == TRUE)
+		{
 			update_player(&app->gamestate.player);
-		render_game(app, settings, time);
-		if (app->ui.lock_crosshair == TRUE)
 			reset_mouse_pos();
+		}
+		render_game(app, settings, time);
 	}
 	if (get_ui()->debug)
 		print_debug();
 	fps_counter();
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
-	if (app->state & IN_GAME)
+	if (app->state == IN_GAME)
 		render_crosshair();
 	update_ui();
 	render_ui();
@@ -87,7 +88,8 @@ inline static void	render_crosshair(void)
 
 inline static void	render_background_gradian(t_mlx *app, const t_settings *settings)
 {
-	t_rgb	color;
+	t_rgb	color_c;
+	t_rgb	color_f;
 	double	shade;
 	t_vec3	res;
 	int64_t	i;
@@ -103,10 +105,13 @@ inline static void	render_background_gradian(t_mlx *app, const t_settings *setti
 		res.x = (double)(get_map_infos()->ceiling.r * shade);
 		res.y = (double)(get_map_infos()->ceiling.g * shade);
 		res.z = (double)(get_map_infos()->ceiling.b * shade);
-		color.color = trgb(0, (int)res.x, (int)res.y, (int)res.z);
-		draw_line_unsafe(ivec2(0, i), ivec2(settings->win_w, i), color.color);
-		draw_line_unsafe(ivec2(0, settings->win_h - i),
-			ivec2(settings->win_w, settings->win_h - i), color.color);
+		color_c.color = trgb(0, (int)res.x, (int)res.y, (int)res.z);
+		res.x = (double)(get_map_infos()->floor.r * shade);
+		res.y = (double)(get_map_infos()->floor.g * shade);
+		res.z = (double)(get_map_infos()->floor.b * shade);
+		color_f.color = trgb(0, (int)res.x, (int)res.y, (int)res.z);
+		ft_memseti((int *)app->frame.addr + i * settings->win_w, color_c.color, settings->win_w);
+		ft_memseti((int *)app->frame.addr + (settings->win_h - i) * settings->win_w, color_f.color, settings->win_w);
 		i++;
 	}
 	render_gradian(app, settings);

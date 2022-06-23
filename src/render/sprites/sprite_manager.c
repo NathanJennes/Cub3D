@@ -21,6 +21,8 @@ void	init_sprite_manager(void)
 	t_sprite_manager	*manager;
 
 	manager = &get_app()->sprite_manager;
+	gc_free(manager->sprites);
+	gc_free(manager->angle_lookup);
 	manager->sprite_count = 1;
 	manager->sprites = gc_calloc(1, sizeof (t_sprite));
 	manager->sprites[0] = (t_sprite){{120, 75}, {10, 10}, 0};

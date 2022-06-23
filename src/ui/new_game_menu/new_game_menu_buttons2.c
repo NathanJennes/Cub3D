@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:09:40 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/20 17:42:04 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/23 13:49:15 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	btn_new_game_down(t_button *button)
 	app = get_app();
 	if (menu->first_save_offset + 5 < app->maps_count)
 		menu->first_save_offset++;
-	printf("btn_new_game_down not implemented\n");
+	new_game_menu_refresh();
 	return (0);
 }
 
@@ -45,7 +45,7 @@ int	btn_new_game_up(t_button *button)
 	menu = &get_ui()->new_game_menu;
 	if (menu->first_save_offset > 0)
 		menu->first_save_offset--;
-	printf("btn_new_game_up not implemented\n");
+	new_game_menu_refresh();
 	return (0);
 }
 
@@ -59,8 +59,8 @@ int	btn_start_new_game(t_button *button)
 	if (menu->selected_save != -1)
 	{
 		app = get_app();
-		app->gamestate = app->maps[menu->selected_save
-			+ menu->first_save_offset];
+		app->gamestate = app->maps[menu->selected_save];
+		update_player_direction(get_player(), app->delta_time, FALSE);
 		update_player_vectors(get_player());
 		init_sprite_manager();
 		app->state = IN_GAME;

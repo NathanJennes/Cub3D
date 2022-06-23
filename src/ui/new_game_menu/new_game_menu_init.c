@@ -114,27 +114,3 @@ void	init_textures(void)
 		i++;
 	}
 }
-
-void	update_display_status(void)
-{
-	t_ui_new_game_menu	*menu;
-	t_mlx				*app;
-	int64_t				i;
-
-	menu = &get_ui()->new_game_menu;
-	app = get_app();
-	i = 0;
-	while (i < 5)
-	{
-		if (i < app->maps_count)
-			menu->btn_save[i].infos.displayed = TRUE;
-		else
-			menu->btn_save[i].infos.displayed = FALSE;
-		i++;
-	}
-	if (app->maps_count <= 5)
-	{
-		menu->btn_up.is_clickable = FALSE;
-		menu->btn_down.is_clickable = FALSE;
-	}
-}

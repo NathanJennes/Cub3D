@@ -13,7 +13,7 @@
 #include "render.h"
 #include "core.h"
 
-inline static void	change_background(t_mlx *app);
+void				change_background(t_mlx *app);
 inline static void	setup_camera(t_mlx *app);
 
 void	render_main_menu_background(void)
@@ -45,7 +45,7 @@ void	render_main_menu_background(void)
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 }
 
-inline static void	change_background(t_mlx *app)
+void	change_background(t_mlx *app)
 {
 	int	new_map;
 

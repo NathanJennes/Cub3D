@@ -18,8 +18,6 @@ inline static void		get_correct_distance(t_ray *ray);
 inline static t_wall		get_wall_info(t_ray *ray);
 void				render_column(int64_t xcol, t_wall wall, t_ray *ray);
 
-//TODO: inline functions that are in the loop with the inline keyword
-//TODO: (Group them in the same .c file)
 void	render_walls(int64_t col_start, int64_t col_end)
 {
 	int64_t		i;
