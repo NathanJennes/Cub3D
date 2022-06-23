@@ -33,10 +33,11 @@ int	main_loop(void)
 	if (app->state & IN_GAME)
 	{
 		if (app->ui.lock_crosshair == TRUE)
+		{
 			update_player(&app->gamestate.player);
-		render_game(app, settings, time);
-		if (app->ui.lock_crosshair == TRUE)
 			reset_mouse_pos();
+		}
+		render_game(app, settings, time);
 	}
 	if (get_ui()->debug)
 		print_debug();
