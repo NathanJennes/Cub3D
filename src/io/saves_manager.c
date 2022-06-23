@@ -6,13 +6,15 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 14:57:26 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/17 16:00:40 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/23 15:38:42 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <dirent.h>
 #include "core.h"
 #include "leaky.h"
+
+void				change_background(t_mlx *app);
 
 inline static void	add_to_saves(char *save_name);
 inline static void	grow_saves_array(void);
@@ -41,6 +43,7 @@ void	reload_saves(void)
 {
 	unload_saves();
 	load_all_saves();
+	change_background(get_app());
 }
 
 void	unload_saves(void)

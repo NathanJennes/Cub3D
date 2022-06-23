@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 13:27:45 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/23 15:33:50 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main_loop(void)
 
 	app = get_app();
 	settings = get_settings();
-	if (app->state & IN_GAME)
+	if (app->state == IN_GAME)
 	{
 		if (app->ui.lock_crosshair == TRUE)
 		{
@@ -43,7 +43,7 @@ int	main_loop(void)
 		print_debug();
 	fps_counter();
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
-	if (app->state & IN_GAME)
+	if (app->state == IN_GAME)
 		render_crosshair();
 	update_ui();
 	render_ui();
