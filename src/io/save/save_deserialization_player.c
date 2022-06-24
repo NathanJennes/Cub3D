@@ -46,7 +46,6 @@ inline static int	parse_line_player(char *line, t_gamestate *save)
 	return (0);
 }
 
-//TODO: check if the player is in the map
 inline static int	parse_pos(char *line, t_gamestate *save)
 {
 	int		number;
