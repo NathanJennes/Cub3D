@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 18:00:21 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 14:29:35 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/24 14:49:41 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	update_player_direction(t_player *player, double delta_time, t_bool handle_
 	if (handle_input)
 	{
 		get_app()->mouse.delta.x = \
-		get_mouse_position().x - get_app()->settings.halfw_w;
-		get_player()->direction -= 0.0005 * (get_settings()->cam_sensitivity
-											* (double)get_app()->mouse.delta.x);
+			get_mouse_position().x - get_app()->settings.halfw_w;
+		get_player()->direction -= 0.01 * (get_settings()->cam_sensitivity
+											* (double)get_app()->mouse.delta.x) * delta_time;
 		if (is_key_down(KEY_RIGHT))
 			player->direction -= PI / 4.0 * settings->cam_sensitivity * delta_time;
 		if (is_key_down(KEY_LEFT))

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 13:38:18 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 13:51:34 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/24 15:00:58 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	update_display_status(void)
 	{
 		menu->btn_up.is_clickable = FALSE;
 		menu->btn_down.is_clickable = FALSE;
+		menu->btn_up.infos.displayed = FALSE;
+		menu->btn_down.infos.displayed = FALSE;
 	}
 }
 

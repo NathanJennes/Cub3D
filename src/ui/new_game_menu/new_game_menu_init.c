@@ -51,7 +51,7 @@ void	init_new_game_menu(void)
 			ivec2(0, 0), btn_new_game_up);
 	menu->btn_start = create_button("assets/ui/start_button.xpm",
 			ivec2(0, 0), btn_start_new_game);
-	menu->btn_start.is_clickable = FALSE;
+	menu->btn_start.infos.displayed = FALSE;
 	init_save_button(menu);
 	update_display_status();
 	init_textures();

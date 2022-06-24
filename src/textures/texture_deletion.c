@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_deletion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 22:57:27 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/06 13:04:54 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/24 15:04:25 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,8 @@
 
 void	free_texture(t_texture *texture)
 {
-	gc_free(texture->ao_all);
-	gc_free(texture->ao_right);
-	gc_free(texture->ao_left);
-	gc_free(texture->ao_flat);
-	gc_free(texture->vflip);
+	gc_free2d((void **)texture->wall, texture->width);
+	gc_free2d((void **)texture->wall_flip, texture->width);
 	gc_free(texture->name);
 	if (texture->original_handle)
 		mlx_destroy_image(get_mlx(), texture->original_handle);

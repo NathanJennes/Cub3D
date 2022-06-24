@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 13:38:44 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 13:54:51 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/24 15:08:03 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,8 @@
 #include "mlx.h"
 #include "core.h"
 
-void			shade_ao_texture_flat(
-					t_rgb **data, int width, int height);
-void			shade_ao_texture_right(
-					t_rgb **data, int width, int height);
-void			shade_ao_texture_left(
-					t_rgb **data, int width, int height);
-void			shade_ao_texture_all(
-					t_rgb **data, int width, int height);
-void			create_texture_vflip(t_rgb **original, t_rgb **vflip, int width, int height);
+void			create_texture_wall(t_texture *tex);
+void			create_texture_vflip(t_texture *tex);
 void			create_texture_grayscale(t_texture *tex);
 void			create_texture_inversed(t_texture *tex);
 void			create_texture_inverse_grayscale(t_texture *tex);
@@ -32,11 +25,8 @@ inline static t_rgb	**allocate_texture(t_texture *tex, int64_t width, int64_t he
 
 void	create_texture_variations(t_texture *tex)
 {
-	tex->ao_flat = allocate_texture(tex, tex->width, tex->height);
-	tex->ao_right = allocate_texture(tex, tex->width, tex->height);
-	tex->ao_left = allocate_texture(tex, tex->width, tex->height);
-	tex->ao_all = allocate_texture(tex, tex->width, tex->height);
-	tex->vflip = allocate_texture(tex, tex->width, tex->height);
+	tex->wall = allocate_texture(tex, tex->width, tex->height);
+	tex->wall_flip = allocate_texture(tex, tex->width, tex->height);
 	tex->grayscale_handle = mlx_new_image(get_mlx(), tex->width, tex->height);
 	tex->inversed_handle = mlx_new_image(get_mlx(), tex->width, tex->height);
 	tex->inversed_grayscale_handle = mlx_new_image(get_mlx(),
@@ -45,11 +35,8 @@ void	create_texture_variations(t_texture *tex)
 
 void	shade_texture_variations(t_texture *tex)
 {
-	shade_ao_texture_flat(tex->ao_flat, tex->width, tex->height);
-	shade_ao_texture_right(tex->ao_right, tex->width, tex->height);
-	shade_ao_texture_left(tex->ao_left, tex->width, tex->height);
-	shade_ao_texture_all(tex->ao_all, tex->width, tex->height);
-	create_texture_vflip(tex->ao_flat, tex->vflip, tex->width, tex->height);
+	create_texture_wall(tex);
+	create_texture_vflip(tex);
 	create_texture_grayscale(tex);
 	create_texture_inversed(tex);
 	create_texture_inverse_grayscale(tex);

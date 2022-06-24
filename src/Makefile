@@ -80,7 +80,7 @@ UI_LOAD_MENU_FILE		:=	load_menu.c load_menu_init.c load_menu_buttons.c
 UI_LOAD_MENU_SRCS		:= $(addprefix $(UI_LOAD_MENU_DIR)/, $(UI_LOAD_MENU_FILE))
 
 TEXTURES_DIR	:=	textures
-TEXTURES_FILE	:=	xpm_loader.c texture_generation.c ambiant_occlusion.c	\
+TEXTURES_FILE	:=	xpm_loader.c texture_generation.c	\
 					texture_deletion.c texture_utils.c	\
 					texture_manager.c texture_manager_helper.c	\
 					texture_grayscale.c texture_inversed.c texture_flip.c	\

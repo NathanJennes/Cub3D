@@ -32,6 +32,7 @@ void	create_texture_inversed(t_texture *tex)
 		pixel->r = 255 - original_pixel.r;
 		pixel->g = 255 - original_pixel.g;
 		pixel->b = 255 - original_pixel.b;
+		pixel->t = original_pixel.t;
 		i++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_wall.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 13:48:29 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/22 22:08:50 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/24 15:04:25 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ NOPROF
 		if (ray->hit_pos.x < player->world_pos.x)
 		{
 			texture = get_texture_from_id(get_map_infos()->tx_list[WEST]);
-			*tx_data = texture->vflip;
+			*tx_data = texture->wall_flip;
 			return (texture);
 		}
 		else
@@ -168,10 +168,10 @@ NOPROF
 		else
 		{
 			texture = get_texture_from_id(get_map_infos()->tx_list[SOUTH]);
-			*tx_data = texture->vflip;
+			*tx_data = texture->wall_flip;
 			return (texture);
 		}
 	}
-	*tx_data = texture->ao_flat;
+	*tx_data = texture->wall;
 	return (texture);
 }

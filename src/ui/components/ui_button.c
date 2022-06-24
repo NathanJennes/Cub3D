@@ -41,10 +41,10 @@ void	render_ui_button(t_button *button)
 		return ;
 	infos = &button->infos;
 	if (button->clicked || !button->is_clickable)
-		render_ui_texture_inverse_grayscale(button->tex_id,
+		render_ui_texture_grayscale(button->tex_id,
 			infos->pos.x, infos->pos.y);
 	else if (button->hovered)
-		render_ui_texture_grayscale(button->tex_id, infos->pos.x, infos->pos.y);
+		render_ui_texture_inverse_grayscale(button->tex_id, infos->pos.x, infos->pos.y);
 	else
 		render_ui_texture(button->tex_id, infos->pos.x, infos->pos.y);
 }

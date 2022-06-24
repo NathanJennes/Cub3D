@@ -24,7 +24,7 @@ int	btn_select_save1(t_checkbox *checkbox)
 	if (menu->first_save_offset > app->maps_count)
 		return (0);
 	menu->selected_save = menu->first_save_offset;
-	menu->btn_start.is_clickable = TRUE;
+	menu->btn_start.infos.displayed = TRUE;
 	menu->btn_save[1].checked = FALSE;
 	menu->btn_save[2].checked = FALSE;
 	menu->btn_save[3].checked = FALSE;
@@ -43,7 +43,7 @@ int	btn_select_save2(t_checkbox *checkbox)
 	if (menu->first_save_offset + 1 > app->maps_count)
 		return (0);
 	menu->selected_save = menu->first_save_offset + 1;
-	menu->btn_start.is_clickable = TRUE;
+	menu->btn_start.infos.displayed = TRUE;
 	menu->btn_save[0].checked = FALSE;
 	menu->btn_save[2].checked = FALSE;
 	menu->btn_save[3].checked = FALSE;
@@ -62,7 +62,7 @@ int	btn_select_save3(t_checkbox *checkbox)
 	if (menu->first_save_offset + 2 > app->maps_count)
 		return (0);
 	menu->selected_save = menu->first_save_offset + 2;
-	menu->btn_start.is_clickable = TRUE;
+	menu->btn_start.infos.displayed = TRUE;
 	menu->btn_save[0].checked = FALSE;
 	menu->btn_save[1].checked = FALSE;
 	menu->btn_save[3].checked = FALSE;
@@ -81,7 +81,7 @@ int	btn_select_save4(t_checkbox *checkbox)
 	if (menu->first_save_offset + 3 > app->maps_count)
 		return (0);
 	menu->selected_save = menu->first_save_offset + 3;
-	menu->btn_start.is_clickable = TRUE;
+	menu->btn_start.infos.displayed = TRUE;
 	menu->btn_save[0].checked = FALSE;
 	menu->btn_save[1].checked = FALSE;
 	menu->btn_save[2].checked = FALSE;
@@ -100,7 +100,7 @@ int	btn_select_save5(t_checkbox *checkbox)
 	if (menu->first_save_offset + 4 > app->maps_count)
 		return (0);
 	menu->selected_save = menu->first_save_offset + 4;
-	menu->btn_start.is_clickable = TRUE;
+	menu->btn_start.infos.displayed = TRUE;
 	menu->btn_save[0].checked = FALSE;
 	menu->btn_save[1].checked = FALSE;
 	menu->btn_save[2].checked = FALSE;

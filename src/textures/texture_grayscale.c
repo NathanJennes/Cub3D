@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 22:52:33 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/20 15:57:44 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/24 14:55:05 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	create_texture_grayscale(t_texture *tex)
 		pixel->r = gray;
 		pixel->g = gray;
 		pixel->b = gray;
+		pixel->t = original_pixel.t;
 		i++;
 	}
 }
@@ -64,6 +65,7 @@ void	create_texture_inverse_grayscale(t_texture *tex)
 		pixel->r = 255 - gray;
 		pixel->g = 255 - gray;
 		pixel->b = 255 - gray;
+		pixel->t = original_pixel.t;
 		i++;
 	}
 }

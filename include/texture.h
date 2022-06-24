@@ -49,11 +49,8 @@ typedef struct s_texture
 	void	*inversed_grayscale_handle;
 	t_rgb	*inversed;
 	void	*inversed_handle;
-	t_rgb	**vflip;
-	t_rgb	**ao_flat;
-	t_rgb	**ao_right;
-	t_rgb	**ao_left;
-	t_rgb	**ao_all;
+	t_rgb	**wall_flip;
+	t_rgb	**wall;
 }	t_texture;
 
 typedef struct s_texture_manager
