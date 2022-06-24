@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:31:13 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/24 17:10:22 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/24 17:21:15 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	mouse_click_begin(int button)
 	color.b = rand() % (255 - 1) + 1;
 	update_ui_click_begin(button);
 	add_light(&get_app()->gamestate,
-		vec3(get_mouse_position().x, get_mouse_position().y, CELL_SIZE / 2),
+		vec3(get_mouse_position().x, get_mouse_position().y, 18),
 		color,
 		100.0);
 	new_sprite.tex_id = get_app()->lamp_tex_id;

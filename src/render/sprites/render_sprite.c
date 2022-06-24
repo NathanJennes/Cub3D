@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 16:25:27 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/24 17:06:46 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/24 17:09:24 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ inline static void		draw_col_sprite(t_sprite *sprite, int64_t x_pos, int64_t tex
 	tex_y = 0;
 	while (i < size_h)
 	{
-		set_screen_pixel(x_pos, y_base + i, texture->wall[tex_x][(int64_t)tex_y].color);
+		if (texture->wall[tex_x][(int64_t)tex_y].t < 255)
+			set_screen_pixel(x_pos, y_base + i, texture->wall[tex_x][(int64_t)tex_y].color);
 		i++;
 		tex_y += ratio;
 	}
