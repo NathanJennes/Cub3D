@@ -25,6 +25,7 @@ int			deserialize_map_parse_so_tex(char *line, t_gamestate *save);
 int			deserialize_map_parse_we_tex(char *line, t_gamestate *save);
 int			deserialize_map_parse_map_content(char *line, t_gamestate *save);
 
+//inline static int	deserialize_light_pos(char *line, t_gamestate *save);
 inline static int	parse_line(char *line, t_gamestate *save, int64_t line_number);
 
 int	deserialize_map(int fd, char *line, t_gamestate *save)
@@ -87,6 +88,41 @@ int	deserialize_light(char *line, t_gamestate *save)
 	add_light(save, pos, color, DEFAULT_INTENSITY);
 	return (1);
 }
+
+//inline static int	deserialize_light_pos(char *line, t_gamestate *save)
+//{
+//	t_vec3	pos;
+//	t_rgb	color;
+//
+//	line = ft_strskip_alpha(line);
+//	line = ft_strskip_space(line);
+//	color.r = ft_atoi(line);
+//	line = ft_strskip_digit(line);
+//	if (*line != ',')
+//		return (0);
+//	line++;
+//	color.g = ft_atoi(line);
+//	line = ft_strskip_digit(line);
+//	if (*line != ',')
+//		return (0);
+//	line++;
+//	color.b = ft_atoi(line);
+//	line = ft_strskip_digit(line);
+//	line = ft_strskip_space(line);
+//	pos.x = ft_atoi(line);
+//	line = ft_strskip_digit(line);
+//	if (*line != ',')
+//		return (0);
+//	line++;
+//	pos.y = ft_atoi(line);
+//	line = ft_strskip_digit(line);
+//	if (*line != ',')
+//		return (0);
+//	line++;
+//	pos.z = ft_atoi(line);
+//	add_light(save, pos, color, DEFAULT_INTENSITY);
+//	return (1);
+//}
 
 inline static int	parse_line(char *line, t_gamestate *save, int64_t line_number)
 {

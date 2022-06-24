@@ -67,8 +67,8 @@ void	render_debug(t_mlx *app)
 		vec3(player->forward.x, player->forward.y, 0.0));
 	draw_circle(get_mouse_position(), 10, trgb(0, light.x, light.y, light.z));
 
-//	if (app->ui.debug == TRUE)
-//		debug_rays();
+	if (app->ui.debug == TRUE)
+		debug_rays();
 
 	draw_circle(app->debug.dx, 5, BLUE);
 	draw_circle(app->debug.dy, 5, BLUE);

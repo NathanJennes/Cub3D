@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:48:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/24 11:32:56 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/24 13:37:35 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,26 @@
 #include "core.h"
 #include "render.h"
 
-int			btn_new_game_back(t_button *button);
-int			btn_new_game_down(t_button *button);
-int			btn_new_game_up(t_button *button);
-int			btn_start_new_game(t_button *button);
-int			btn_select_save1(t_checkbox *checkbox);
-int			btn_select_save2(t_checkbox *checkbox);
-int			btn_select_save3(t_checkbox *checkbox);
-int			btn_select_save4(t_checkbox *checkbox);
-int			btn_select_save5(t_checkbox *checkbox);
-int			btn_unselect_save1(t_checkbox *checkbox);
-int			btn_unselect_save2(t_checkbox *checkbox);
-int			btn_unselect_save3(t_checkbox *checkbox);
-int			btn_unselect_save4(t_checkbox *checkbox);
-int			btn_unselect_save5(t_checkbox *checkbox);
+int					btn_new_game_back(t_button *button);
+int					btn_new_game_down(t_button *button);
+int					btn_new_game_up(t_button *button);
+int					btn_start_new_game(t_button *button);
+int					btn_select_save1(t_checkbox *checkbox);
+int					btn_select_save2(t_checkbox *checkbox);
+int					btn_select_save3(t_checkbox *checkbox);
+int					btn_select_save4(t_checkbox *checkbox);
+int					btn_select_save5(t_checkbox *checkbox);
+int					btn_unselect_save1(t_checkbox *checkbox);
+int					btn_unselect_save2(t_checkbox *checkbox);
+int					btn_unselect_save3(t_checkbox *checkbox);
+int					btn_unselect_save4(t_checkbox *checkbox);
+int					btn_unselect_save5(t_checkbox *checkbox);
 
-inline static void	init_positions_new_game_menu(void);
-void		init_textures(void);
-void		update_display_status(void);
+void				init_textures(void);
+void				init_save_button(t_ui_new_game_menu *menu);
+void				update_display_status(void);
+inline static void		init_positions_new_game_menu(void);
+
 
 void	init_new_game_menu(void)
 {
@@ -41,7 +43,7 @@ void	init_new_game_menu(void)
 	settings = get_settings();
 	menu = &get_ui()->new_game_menu;
 	menu->selected_save = -1;
-	menu->btn_back = create_button("assets/placeholder.xpm",
+	menu->btn_back = create_button("assets/ui/left_arrow.xpm",
 			ivec2(50, settings->win_h - 50), btn_new_game_back);
 	menu->btn_down = create_button("assets/ui/down_arrow.xpm",
 			ivec2(0, 0), btn_new_game_down);
@@ -50,6 +52,14 @@ void	init_new_game_menu(void)
 	menu->btn_start = create_button("assets/ui/start_button.xpm",
 			ivec2(0, 0), btn_start_new_game);
 	menu->btn_start.is_clickable = FALSE;
+	init_save_button(menu);
+	update_display_status();
+	init_textures();
+	init_positions_new_game_menu();
+}
+
+void	init_save_button(t_ui_new_game_menu *menu)
+{
 	menu->btn_save[0] = create_checkbox(NULL, ivec2(0, 100),
 			btn_select_save1, btn_unselect_save1);
 	menu->btn_save[1] = create_checkbox(NULL, ivec2(0, 0),
@@ -60,9 +70,6 @@ void	init_new_game_menu(void)
 			btn_select_save4, btn_unselect_save4);
 	menu->btn_save[4] = create_checkbox(NULL, ivec2(0, 0),
 			btn_select_save5, btn_unselect_save5);
-	update_display_status();
-	init_textures();
-	init_positions_new_game_menu();
 }
 
 inline static void	init_positions_new_game_menu(void)
@@ -104,8 +111,8 @@ void	init_textures(void)
 		{
 			checkbox->tex_id = new_texture(250, 50);
 			clear_texture(trgb(0, 255, 51, 51), checkbox->tex_id);
-			render_text_tex(app->maps[i].name, "HelveticaNeue",
-				text_center(app->maps[i].name, "HelveticaNeue", 30,
+			render_text_tex(app->maps[i].name, DEFAULT_FONT,
+				text_center(app->maps[i].name, DEFAULT_FONT, 30,
 					ivec2(125, 25)),
 				ivec2(30, checkbox->tex_id));
 			finish_new_texture(checkbox->tex_id);
