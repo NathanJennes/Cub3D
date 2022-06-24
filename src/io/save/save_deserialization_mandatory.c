@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_deserialization_mandatory.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 13:58:50 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/24 13:52:10 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	load_mandatory_map(t_gamestate *save_out, int fd, char *line, char *filename
 	if (!is_map_legal(infos, &parser))
 		return (map_print_error(&parser));
 	construct_map(infos);
-	gc_strarray_free(infos->map_raw);
 	setup_player(save_out);
 	if (!is_player_position_legal(save_out))
 		return (0);

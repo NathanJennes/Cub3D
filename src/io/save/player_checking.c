@@ -20,8 +20,8 @@ t_bool	is_player_position_legal(t_gamestate *gamestate)
 	player = &gamestate->player;
 	if (player->world_pos.x < 0 || player->world_pos.y < 0)
 		return (FALSE);
-	if (player->world_pos.x > (double)gamestate->map.width
-		|| player->world_pos.y > (double)gamestate->map.height)
+	if (player->world_pos.x > (double)gamestate->map.width * CELL_SIZE
+		|| player->world_pos.y > (double)gamestate->map.height * CELL_SIZE)
 		return (FALSE);
 	if (gamestate->map.map[player->map_pos.y][player->map_pos.x] != EMPTY)
 		return (FALSE);

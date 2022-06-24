@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 18:08:31 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/15 13:58:16 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/24 14:30:42 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	shade_ao_texture_flat(t_rgb **data, int width, int height)
 		row = 0;
 		while (row < height)
 		{
-			if (row <= height / 10)
-				shade_pixel(&data[column][row], row, height / 10);
-			else if (row >= height - height / 10)
-				shade_pixel(&data[column][row], height - row, height / 10);
+			if (row <= height / 20)
+				shade_pixel(&data[column][row], row, height / 20);
+			else if (row >= height - height / 20)
+				shade_pixel(&data[column][row], height - row, height / 20);
 			row++;
 		}
 		column++;
@@ -47,8 +47,8 @@ void	shade_ao_texture_right(t_rgb **data, int width, int height)
 		row = 0;
 		while (row < height)
 		{
-			if (column >= width - width / 10)
-				shade_pixel(&data[column][row], width - column, width / 10);
+			if (column >= width - width / 20)
+				shade_pixel(&data[column][row], width - column, width / 20);
 			row++;
 		}
 		column++;
@@ -66,8 +66,8 @@ void	shade_ao_texture_left(t_rgb **data, int width, int height)
 		row = 0;
 		while (row < height)
 		{
-			if (column <= width / 10)
-				shade_pixel(&data[column][row], column, width / 10);
+			if (column <= width / 20)
+				shade_pixel(&data[column][row], column, width / 20);
 			row++;
 		}
 		column++;
@@ -85,7 +85,7 @@ inline static void	shade_pixel(t_rgb *data, int64_t row, int64_t total_row)
 {
 	double	shade_factor;
 
-	shade_factor = (double)row / (double)total_row;
+	shade_factor = ft_lerpf(0.2, 1.0, (double)row / (double)total_row);
 	data->r *= shade_factor;
 	data->g *= shade_factor;
 	data->b *= shade_factor;

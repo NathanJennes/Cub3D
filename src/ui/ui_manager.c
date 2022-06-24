@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_manager.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:00:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/20 17:47:03 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/24 13:57:17 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ int	render_ui(void)
 		mlx_mouse_show();
 		if (app->ui.state == MAIN_MENU)
 		{
-			render_main_menu_background();
+			if (app->maps_count > 0)
+				render_main_menu_background();
+			else
+				clear_screen(BKGD_COLOR);
 			render_main_menu();
 		}
 		else if (app->ui.state == NEW_GAME_MENU)

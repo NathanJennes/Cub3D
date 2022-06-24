@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 11:05:43 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 18:53:01 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/24 14:04:17 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ inline static int	deserialize_cub_save(t_gamestate *save_out, int fd)
 	gc_strarray_free(save.map.map_raw);
 	if (!save.map.spawn_dir)
 		return (0);
-	if (!is_player_position_legal(save_out))
+	if (!is_player_position_legal(&save))
 		return (0);
 	*save_out = save;
 	return (1);
