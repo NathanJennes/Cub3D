@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:31:13 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/24 15:17:51 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/24 17:10:22 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	update_ui_click_end(int button);
 
 void	mouse_click_begin(int button)
 {
-	t_rgb	color;
+	t_rgb		color;
+	t_sprite	new_sprite;
 
 	color.r = rand() % (255 - 1) + 1;
 	color.g = rand() % (255 - 1) + 1;
@@ -28,6 +29,10 @@ void	mouse_click_begin(int button)
 		vec3(get_mouse_position().x, get_mouse_position().y, CELL_SIZE / 2),
 		color,
 		100.0);
+	new_sprite.tex_id = get_app()->lamp_tex_id;
+	new_sprite.size = ivec2(3, 4);
+	new_sprite.pos = vec3(get_mouse_position().x, get_mouse_position().y, 8);
+	add_sprite_to_current_game(new_sprite);
 }
 
 void	mouse_click_end(int button)

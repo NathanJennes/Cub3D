@@ -89,7 +89,7 @@ TEXTURE_SRCS	:=	$(addprefix $(TEXTURES_DIR)/, $(TEXTURES_FILE))
 
 IO_DIR			:=	io
 IO_FILE			:=	savegame.c saves_manager.c loaded_map.c loaded_map_manager.c\
-					map_error.c
+					map_error.c sprite_generator.c
 IO_SRCS			:=	$(addprefix $(IO_DIR)/, $(IO_FILE))
 
 SAVE_DIR		:=	$(IO_DIR)/save

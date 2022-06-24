@@ -68,6 +68,7 @@ inline static void	render_game(t_mlx *app, const t_settings *settings,
 		render_background_gradian(app, settings);
 	gettimeofday(&time[1], NULL);
 	renderer_render();
+	render_sprites();
 	gettimeofday(&time[2], NULL);
 	render_minimap(1);
 	if (get_ui()->debug)

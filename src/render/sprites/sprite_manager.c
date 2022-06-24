@@ -6,13 +6,14 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 13:37:13 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/15 14:35:59 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/24 16:53:22 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "core.h"
 #include "leaky.h"
+#include "render.h"
 
 inline static void	generate_lookup_table(double *table);
 
@@ -23,11 +24,24 @@ void	init_sprite_manager(void)
 	manager = &get_app()->sprite_manager;
 	gc_free(manager->sprites);
 	gc_free(manager->angle_lookup);
-	manager->sprite_count = 1;
-	manager->sprites = gc_calloc(1, sizeof (t_sprite));
-	manager->sprites[0] = (t_sprite){{120, 75}, {10, 10}, 0};
+	manager->sprite_count = 0;
+	manager->sprites = gc_calloc(0, sizeof (t_sprite));
 	manager->angle_lookup = gc_calloc(get_settings()->win_w, sizeof (double));
 	generate_lookup_table(manager->angle_lookup);
+}
+
+void	add_sprite_to_current_game(t_sprite sprite)
+{
+	t_sprite			*new_array;
+	t_sprite_manager	*manager;
+
+	manager = &get_app()->sprite_manager;
+	new_array = gc_calloc(manager->sprite_count + 1, sizeof (t_sprite));
+	ft_memmove(new_array, manager->sprites, manager->sprite_count * sizeof (t_sprite));
+	gc_free(manager->sprites);
+	manager->sprites = new_array;
+	manager->sprites[manager->sprite_count] = sprite;
+	manager->sprite_count++;
 }
 
 void	clear_sprite_manager(void)
@@ -35,8 +49,23 @@ void	clear_sprite_manager(void)
 	t_sprite_manager	*manager;
 
 	manager = &get_app()->sprite_manager;
+	manager->sprite_count = 0;
 	gc_free(manager->sprites);
 	gc_free(manager->angle_lookup);
+}
+
+void	render_sprites(void)
+{
+	t_sprite_manager	*manager;
+	int64_t				i;
+
+	manager = &get_app()->sprite_manager;
+	i = 0;
+	while (i < manager->sprite_count)
+	{
+		render_sprite(&manager->sprites[i]);
+		i++;
+	}
 }
 
 inline static void	generate_lookup_table(double *table)

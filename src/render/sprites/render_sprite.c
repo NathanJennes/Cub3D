@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_sprite.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 16:25:27 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/14 10:58:28 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/24 17:06:46 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,9 @@ void	render_sprite(t_sprite *sprite)
 	double	distance;
 	int64_t x_pos;
 
-	if (sprite->tex_id == INVALID_TEXTURE)
-		return ;
 	x_pos = get_x_position(sprite, &distance);
 	if (x_pos == -1)
 		return ;
-	draw_circle(ivec2((int)x_pos, get_settings()->halfw_h), 10, trgb(0, 200, 100, 200));
 	draw_sprite(sprite, x_pos, distance);
 }
 
@@ -70,14 +67,15 @@ inline static void		draw_col_sprite(t_sprite *sprite, int64_t x_pos, int64_t tex
 
 	set_depth_at(x_pos, distance);
 	texture = get_texture_from_id(sprite->tex_id);
-	size_h = (int64_t)fabs((double)sprite->size.y / (distance * 1) * get_math()->plane_dist);
+	size_h = (int64_t)fabs((double)sprite->size.y / distance * get_math()->plane_dist);
 	ratio = (double)texture->height / (double)size_h;
 	y_base = get_settings()->halfw_h - size_h / 2;
+	y_base -= (int64_t)fabs((double)sprite->pos.z / distance * get_math()->plane_dist);
 	i = 0;
 	tex_y = 0;
 	while (i < size_h)
 	{
-		set_screen_pixel(x_pos, y_base + i, *((int *)texture->original + tex_x + (int64_t)tex_y * texture->line_size / 4));
+		set_screen_pixel(x_pos, y_base + i, texture->wall[tex_x][(int64_t)tex_y].color);
 		i++;
 		tex_y += ratio;
 	}
