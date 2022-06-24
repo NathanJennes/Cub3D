@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/24 16:52:38 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/24 17:52:13 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_sprite
 	t_vec3	pos;
 	t_ivec2	size;
 	int64_t	tex_id;
+	t_vec3	color;
 }	t_sprite;
 
 typedef struct s_sprite_manager

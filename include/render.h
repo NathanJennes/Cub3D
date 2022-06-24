@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/22 13:30:59 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:42:56 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,18 @@ typedef struct s_light
 	t_rgb	color;
 	double	intensity;
 }			t_light;
+
+typedef struct s_rsprite
+{
+	int64_t		x_base;
+	int64_t		size_x;
+	int64_t		size_h;
+	int64_t		y_base;
+	t_vec3		color;
+	t_texture	*texture;
+	double		ratio_y;
+	double		ratio_x;
+}	t_rsprite;
 
 /* Renderer */
 void			init_renderer(void);

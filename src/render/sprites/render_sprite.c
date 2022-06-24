@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 16:25:27 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/24 17:09:24 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/24 17:54:30 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,69 +16,74 @@
 
 inline static int64_t	get_x_position(t_sprite *sprite, double *distance);
 inline static int64_t	get_x_from_angle(double angle);
-inline static void		draw_sprite(t_sprite *sprite, int64_t x_pos, double distance);
-inline static void		draw_col_sprite(t_sprite *sprite, int64_t x_pos, int64_t tex_x, double distance);
+inline static void		draw_sprite(t_rsprite *rsprite, double distance);
+inline static void		draw_col_sprite(t_rsprite *rsprite, int64_t x_pos, int64_t tex_x, double distance);
 
 void	render_sprite(t_sprite *sprite)
 {
-	double	distance;
-	int64_t x_pos;
+	double		distance;
+	int64_t		x_pos;
+	t_rsprite	rsprite;
 
 	x_pos = get_x_position(sprite, &distance);
 	if (x_pos == -1)
 		return ;
-	draw_sprite(sprite, x_pos, distance);
+	rsprite.size_x = (int64_t)fabs((double)sprite->size.x / (distance * 1) * get_math()->plane_dist);
+	if (rsprite.size_x < 2)
+		return ;
+	rsprite.texture = get_texture_from_id(sprite->tex_id);
+	rsprite.color = sprite->color;
+	rsprite.size_h = (int64_t)fabs((double)sprite->size.y / distance * get_math()->plane_dist);
+	rsprite.ratio_y = (double)rsprite.texture->height / (double)rsprite.size_h;
+	rsprite.ratio_x = (double)rsprite.texture->width / (double)rsprite.size_x;
+	rsprite.y_base = get_settings()->halfw_h - rsprite.size_h / 2;
+	rsprite.y_base -= (int64_t)fabs((double)sprite->pos.z / distance * get_math()->plane_dist);
+	rsprite.x_base = x_pos - rsprite.size_x / 2;
+	draw_sprite(&rsprite, distance);
 }
 
-inline static void		draw_sprite(t_sprite *sprite, int64_t x_pos, double distance)
+inline static void		draw_sprite(t_rsprite *rsprite, double distance)
 {
 	int64_t		i;
-	int64_t		size_x;
-	int64_t		x_base;
-	double		ratio;
 	double		tex_x;
-	t_texture	*texture;
 
-	texture = get_texture_from_id(sprite->tex_id);
-	size_x = (int64_t)fabs((double)sprite->size.x / (distance * 1) * get_math()->plane_dist);
-	if (size_x < 2)
-		return ;
-	ratio = (double)texture->width / (double)size_x;
-	x_base = x_pos - size_x / 2;
 	i = 0;
 	tex_x = 0;
-	while (i < size_x)
+	while (i < rsprite->size_x)
 	{
-		if (get_depth_at(x_base + i) >= distance)
-			draw_col_sprite(sprite, x_base + i, (int64_t)tex_x, distance);
+		if (get_depth_at(rsprite->x_base + i) >= distance)
+			draw_col_sprite(rsprite, rsprite->x_base + i, (int64_t)tex_x, distance);
 		i++;
-		tex_x += ratio;
+		tex_x += rsprite->ratio_x;
 	}
 }
 
-inline static void		draw_col_sprite(t_sprite *sprite, int64_t x_pos, int64_t tex_x, double distance)
+inline static void		draw_col_sprite(t_rsprite *rsprite, int64_t x_pos, int64_t tex_x, double distance)
 {
-	int64_t		i;
-	int64_t		size_h;
-	int64_t		y_base;
-	double		ratio;
-	double		tex_y;
-	t_texture	*texture;
+	int64_t	i;
+	double	tex_y;
+	t_rgb	color;
+	t_vec3	result;
 
 	set_depth_at(x_pos, distance);
-	texture = get_texture_from_id(sprite->tex_id);
-	size_h = (int64_t)fabs((double)sprite->size.y / distance * get_math()->plane_dist);
-	ratio = (double)texture->height / (double)size_h;
-	y_base = get_settings()->halfw_h - size_h / 2;
-	y_base -= (int64_t)fabs((double)sprite->pos.z / distance * get_math()->plane_dist);
 	i = 0;
 	tex_y = 0;
-	while (i < size_h)
+	while (i < rsprite->size_h)
 	{
-		if (texture->wall[tex_x][(int64_t)tex_y].t < 255)
-			set_screen_pixel(x_pos, y_base + i, texture->wall[tex_x][(int64_t)tex_y].color);
+		if (rsprite->texture->wall[tex_x][(int64_t)tex_y].t < 255)
+		{
+			color = rsprite->texture->wall[tex_x][(int64_t)tex_y];
+			if (!get_app()->mandatory)
+			{
+				result.x = ((double)color.r * rsprite->color.x);
+				result.y = ((double)color.g * rsprite->color.y);
+				result.z = ((double)color.b * rsprite->color.z);
+				color.color = trgb(color.t, (int) result.x, (int) result.y, (int) result.z);
+			}
+			set_screen_pixel(x_pos, rsprite->y_base + i, color.color);
+		}
 		i++;
-		tex_y += ratio;
+		tex_y += rsprite->ratio_y;
 	}
 }
 
