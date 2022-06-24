@@ -28,7 +28,7 @@
 
 # define DEFAULT_FONT "HelveticaNeue"
 
-# define DEFAULT_INTENSITY 250.0
+# define DEFAULT_INTENSITY 100.0
 
 typedef struct s_light
 {

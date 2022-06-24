@@ -32,7 +32,7 @@ BIN_CC				:=		gcc
 
 RELEASE_BIN_CFLAGS		:=
 RELEASE_BIN_CFLAGS		+=		-MD
-RELEASE_BIN_CFLAGS		+=		-Wall -Wextra -O3
+RELEASE_BIN_CFLAGS		+=		-Wall -Wextra -Werror -O3
 RELEASE_BIN_CFLAGS		+=		-mllvm -inline-threshold=100000000
 RELEASE_BIN_CFLAGS		+=		$(INC_PATH)
 

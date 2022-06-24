@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_deserialization_map.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 11:45:36 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 20:11:31 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/24 16:10:44 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ inline static int	parse_line(char *line, t_gamestate *save, int64_t line_number)
 		return (deserialize_map_parse_so_tex(line, save));
 	if (line_number == 8)
 		return (deserialize_map_parse_we_tex(line, save));
-	if (ft_isdigit(*line) && line_number > 8
+	if ((ft_isdigit(*line) || *line == ' ') && line_number > 8
 		&& line_number <= 8 + save->map.height)
 		return (deserialize_map_parse_map_content(line, save));
 	if (ft_strncmp(line, "L", 1) == 0 && line_number > 8 + save->map.height)

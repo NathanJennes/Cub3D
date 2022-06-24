@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:04:44 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 11:31:35 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/24 15:15:58 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "libft.h"
 #include "render.h"
 
@@ -72,7 +73,7 @@ inline static void	process_light(t_light *light, t_ivec3 *lighting,
 	if (dot_product <= 0.0)
 		return ;
 	distance = ft_pow2(light_dir.x) + ft_pow2(light_dir.y) + ft_pow2(light_dir.z);
-	create_vector_light(light, distance, dot_product, lighting);
+	create_vector_light(light, sqrt(distance), dot_product, lighting);
 }
 
 inline static void	create_vector_light(t_light *light, double distance,

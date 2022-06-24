@@ -6,10 +6,11 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:49:16 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/27 16:22:37 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/24 15:26:38 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "core.h"
 #include "render.h"
 
@@ -61,7 +62,7 @@ void	draw_line(t_ivec2 start, t_ivec2 end, int col)
 	t_vec2	ppos;
 	t_vec2	delta;
 
-	pixels_to_draw = ft_sqrt((ft_pow2(end.x - start.x)) + \
+	pixels_to_draw = sqrt((ft_pow2(end.x - start.x)) + \
 			ft_pow2(end.y - start.y));
 	delta.x = ((double)end.x - (double)start.x) / (double)pixels_to_draw;
 	delta.y = ((double)end.y - (double)start.y) / (float)pixels_to_draw;
@@ -82,7 +83,7 @@ void	draw_line_lerp(t_ivec2 start, t_ivec2 end, int col1, int col2)
 	t_vec2	ppos;
 	t_vec2	delta;
 
-	pixels_to_draw = ft_sqrt((ft_pow2(end.x - start.x)) + \
+	pixels_to_draw = sqrt((ft_pow2(end.x - start.x)) + \
 			ft_pow2(end.y - start.y));
 	delta.x = ((float)end.x - (float)start.x) / (float)pixels_to_draw;
 	delta.y = ((float)end.y - (float)start.y) / (float)pixels_to_draw;

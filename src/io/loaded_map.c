@@ -35,7 +35,6 @@ int	load_map(t_gamestate *map_out, char *map_name)
 	{
 		gc_strarray_free(save.map.map_raw);
 		gc_free2d((void **)save.map.map, save.map.height);
-		printf("%s was not loaded\n", map_name);
 		return (0);
 	}
 	save.name = gc_strdup(map_name);

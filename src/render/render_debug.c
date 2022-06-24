@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_debug.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/24 10:31:23 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/24 15:16:50 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 #include "ui.h"
 #include "render.h"
 
-inline static void		print_ray(t_vec2 hit_pos) NOPROF;
-inline static void		debug_rays(void) NOPROF;
+//inline static void		print_ray(t_vec2 hit_pos) NOPROF;
+//inline static void		debug_rays(void) NOPROF;
 inline static t_vec2	rotate_vector(t_vec2 v, double angle) NOPROF;
 inline static void		print_player_vector(void) NOPROF;
 
@@ -67,8 +67,8 @@ void	render_debug(t_mlx *app)
 		vec3(player->forward.x, player->forward.y, 0.0));
 	draw_circle(get_mouse_position(), 10, trgb(0, light.x, light.y, light.z));
 
-	if (app->ui.debug == TRUE)
-		debug_rays();
+	//if (app->ui.debug == TRUE)
+	//	debug_rays();
 
 	draw_circle(app->debug.dx, 5, BLUE);
 	draw_circle(app->debug.dy, 5, BLUE);
@@ -84,38 +84,38 @@ void	render_debug(t_mlx *app)
 	}
 }
 
-static void	debug_rays(void)
-NOPROF
-{
-	int64_t		i;
-	t_vec2		ray_direction;
-	t_player	*player;
-	t_vec2		start;
-	t_settings	*settings;
-	t_ray		ray;
-
-	settings = get_settings();
-	i = 0;
-	player = get_player();
-	start = vec2(player->world_pos.x + player->forward.x - player->right.x * get_math()->plane_len,
-		player->world_pos.y + player->forward.y - player->right.y * get_math()->plane_len);
-	while (i < settings->win_w)
-	{
-		ray_direction = vec2(start.x - player->world_pos.x, start.y - player->world_pos.y);
-		vec2_normalize(&ray_direction);
-		ray = shoot_ray(ray_direction, player->world_pos, player->map_pos, RAY_LENGTH);
-		print_ray(ray.hit_pos);
-		vec2_add(&start, player->plane_inc);
-		i++;
-	}
-}
-
-void	print_ray(t_vec2 hit_pos)
-NOPROF
-{
-	draw_line(v2_to_iv2(get_player()->world_pos), v2_to_iv2(hit_pos), RED);
-	draw_circle(v2_to_iv2(hit_pos), 10, YELLOW);
-}
+//static void	debug_rays(void)
+//NOPROF
+//{
+//	int64_t		i;
+//	t_vec2		ray_direction;
+//	t_player	*player;
+//	t_vec2		start;
+//	t_settings	*settings;
+//	t_ray		ray;
+//
+//	settings = get_settings();
+//	i = 0;
+//	player = get_player();
+//	start = vec2(player->world_pos.x + player->forward.x - player->right.x * get_math()->plane_len,
+//		player->world_pos.y + player->forward.y - player->right.y * get_math()->plane_len);
+//	while (i < settings->win_w)
+//	{
+//		ray_direction = vec2(start.x - player->world_pos.x, start.y - player->world_pos.y);
+//		vec2_normalize(&ray_direction);
+//		ray = shoot_ray(ray_direction, player->world_pos, player->map_pos, RAY_LENGTH);
+//		print_ray(ray.hit_pos);
+//		vec2_add(&start, player->plane_inc);
+//		i++;
+//	}
+//}
+//
+//void	print_ray(t_vec2 hit_pos)
+//NOPROF
+//{
+//	draw_line(v2_to_iv2(get_player()->world_pos), v2_to_iv2(hit_pos), RED);
+//	draw_circle(v2_to_iv2(hit_pos), 10, YELLOW);
+//}
 
 void	print_player_vector(void)
 NOPROF

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:31:13 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/28 16:27:57 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/24 15:17:51 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	mouse_click_begin(int button)
 	add_light(&get_app()->gamestate,
 		vec3(get_mouse_position().x, get_mouse_position().y, CELL_SIZE / 2),
 		color,
-		1000.0);
+		100.0);
 }
 
 void	mouse_click_end(int button)
