@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/21 17:23:09 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/23 18:35:47 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,7 +257,8 @@ t_ivec2		get_mouse_position(void) NOPROF;
 void		reset_mouse_pos(void);
 void		update_player_vectors(t_player *player) NOPROF;
 void		update_player_direction(t_player *player, double delta_time, t_bool handle_input) NOPROF;
-void		update_player(t_player *player) NOPROF;
+void		update_player(t_player *player, t_bool handle_input) NOPROF;
+t_bool		is_player_position_legal(t_gamestate *gamestate) NOPROF;
 
 /* Sprites */
 void		init_sprite_manager(void) NOPROF;

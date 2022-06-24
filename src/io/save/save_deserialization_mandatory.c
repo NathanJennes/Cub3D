@@ -51,6 +51,8 @@ int	load_mandatory_map(t_gamestate *save_out, int fd, char *line, char *filename
 	construct_map(infos);
 	gc_strarray_free(infos->map_raw);
 	setup_player(save_out);
+	if (!is_player_position_legal(save_out))
+		return (0);
 	return (1);
 }
 
@@ -101,5 +103,5 @@ inline static void	setup_player(t_gamestate *save)
 	else if (save->map.spawn_dir == 'W')
 		save->player.direction = PI * 3.0 / 2.0;
 	save->player.world_pos = save->map.spawn_pos;
-	update_player(&save->player);
+	update_player(&save->player, FALSE);
 }

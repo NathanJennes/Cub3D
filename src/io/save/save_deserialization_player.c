@@ -73,6 +73,6 @@ inline static int	parse_pos(char *line, t_gamestate *save)
 		number = ft_atoi(++line_cursor);
 		save->player.direction += (float)number / pow(10.0, ft_nbrlen(number));
 	}
-	update_player(&save->player);
+	update_player(&save->player, FALSE);
 	return (1);
 }

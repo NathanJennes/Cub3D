@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 18:00:21 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 14:29:28 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/23 14:29:35 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 inline static void	update_player_position(t_player *player, t_vec2 future_pos,
 					double delta_time);
 
-void	update_player(t_player *player)
+void	update_player(t_player *player, t_bool handle_input)
 {
 	t_vec2		future_pos;
 	double		delta_time;
@@ -25,7 +25,7 @@ void	update_player(t_player *player)
 	delta_time = get_app()->delta_time;
 	future_pos = get_player()->world_pos;
 	update_player_position(player, future_pos, delta_time);
-	update_player_direction(player, delta_time, TRUE);
+	update_player_direction(player, delta_time, handle_input);
 	update_player_vectors(player);
 }
 

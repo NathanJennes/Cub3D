@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 18:21:30 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/23 18:21:40 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main_loop(void)
 	{
 		if (app->ui.lock_crosshair == TRUE)
 		{
-			update_player(&app->gamestate.player);
+			update_player(&app->gamestate.player, TRUE);
 			reset_mouse_pos();
 		}
 		render_game(app, settings, time);
