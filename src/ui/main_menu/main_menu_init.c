@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_menu_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:37:39 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/17 15:27:22 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/24 11:02:07 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	init_main_menu(void)
 		main_menu->btn_load.infos.displayed = FALSE;
 	main_menu->btn_editor = create_button("assets/ui/editor.xpm",
 			ivec2(0, 0), btn_editor);
-	main_menu->btn_option = create_button("assets/placeholder.xpm",
+	main_menu->btn_option = create_button("assets/ui/option.xpm",
 			ivec2(0, 0), btn_option);
 	main_menu->btn_exit = create_button("assets/ui/exit.xpm",
 			ivec2(0, 0), btn_exit_app);

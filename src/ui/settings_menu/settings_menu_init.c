@@ -55,7 +55,7 @@ void	init_settings_menu(void)
 	menu->chk_res_fullscreen = create_checkbox(NULL, ivec2_zero(),
 			chk_select_res_fullscreen, chk_unselect_res_fullscreen);
 	menu->chk_res_fullscreen.is_clickable = FALSE;
-	menu->btn_back = create_button("assets/placeholder.xpm",
+	menu->btn_back = create_button("assets/ui/left_arrow.xpm",
 			ivec2(50, settings->win_h - 50), btn_settings_back);
 	init_textures_settings(menu);
 	init_positions_settings_menu(menu);

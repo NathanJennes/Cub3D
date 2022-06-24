@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_menu_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:17:29 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/20 18:13:24 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/24 13:24:18 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	init_load_menu(void)
 	menu->lbl_selected_save = create_label(
 		ivec2(get_settings()->halfw_w, 50),
 		"", ivec2(get_settings()->win_w, 100));
-	menu->btn_start = create_button("assets/placeholder.xpm",
+	menu->btn_start = create_button("assets/ui/start_button.xpm",
 		ivec2(0, 0), btn_load_save);
-	menu->btn_next_save = create_button("assets/placeholder.xpm",
+	menu->btn_next_save = create_button("assets/ui/right_arrow.xpm",
 		ivec2(0, 0), btn_next_save);
-	menu->btn_back = create_button("assets/placeholder.xpm",
+	menu->btn_back = create_button("assets/ui/left_arrow.xpm",
 		ivec2(50, get_settings()->win_h - 50), btn_back);
 	init_positions_load_menu(menu);
 }

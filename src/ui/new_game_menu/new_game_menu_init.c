@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_game_menu_init.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:48:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/14 10:43:12 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/24 11:32:56 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ void	init_new_game_menu(void)
 	menu->selected_save = -1;
 	menu->btn_back = create_button("assets/placeholder.xpm",
 			ivec2(50, settings->win_h - 50), btn_new_game_back);
-	menu->btn_down = create_button("assets/placeholder.xpm",
+	menu->btn_down = create_button("assets/ui/down_arrow.xpm",
 			ivec2(0, 0), btn_new_game_down);
-	menu->btn_up = create_button("assets/placeholder.xpm",
+	menu->btn_up = create_button("assets/ui/up_arrow.xpm",
 			ivec2(0, 0), btn_new_game_up);
-	menu->btn_start = create_button("assets/placeholder.xpm",
+	menu->btn_start = create_button("assets/ui/start_button.xpm",
 			ivec2(0, 0), btn_start_new_game);
 	menu->btn_start.is_clickable = FALSE;
 	menu->btn_save[0] = create_checkbox(NULL, ivec2(0, 100),
