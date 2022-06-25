@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/23 13:48:31 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/25 21:47:38 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,29 @@
 /* Minimap */
 # define MMAP_PAD			20
 # define MMAP_ZOOM_FACTOR	20
-# define MMAP_PLAYER_DIAM	6
+# define MMAP_PLAYER_DIAM	8
 
 typedef struct s_mlx	t_mlx;
 
 typedef enum e_ui_state
 {
-	MAIN_MENU = 1,
-	NEW_GAME_MENU = 2,
-	PAUSE_MENU = 4,
-	LOAD_MENU = 8,
-	OPTION_MENU = 16,
-	EDITOR_MENU = 32,
+	NONE,
+	MAIN_MENU,
+	NEW_GAME_MENU,
+	LOAD_MENU,
+	OPTION_MENU,
+	EDITOR_MENU,
+	MAP_MENU,
+	KEYBINDS_MENU,
 }	t_ui_state;
+
+typedef enum e_ui_debug_state
+{
+	NO_DEBUG,
+	LVL1,
+	LVL2,
+	LVL3
+}	t_ui_debug_state;
 
 typedef struct s_mmap
 {
@@ -151,6 +161,19 @@ typedef struct s_ui_settings_menu
 	t_button	btn_back;
 }	t_ui_settings_menu;
 
+typedef struct s_ui_map_menu
+{
+	t_slider	red_color;
+	t_label		red_label;
+	t_slider	blue_color;
+	t_label		blue_label;
+	t_slider	green_color;
+	t_label		green_label;
+	t_slider	intensity;
+	t_label		intensity_label;
+	t_checkbox	editor_mode;
+}	t_ui_map_menu;
+
 typedef struct s_ui_load_menu
 {
 	t_label		lbl_selected_save;
@@ -162,14 +185,15 @@ typedef struct s_ui_load_menu
 
 typedef struct s_ui
 {
+	t_ui_state			prev_state;
 	t_ui_state			state;
 	t_bool				debug;
 	t_ui_main_menu		main_menu;
 	t_ui_new_game_menu	new_game_menu;
 	t_ui_settings_menu	settings_menu;
 	t_ui_load_menu		load_menu;
+	t_ui_map_menu		map_menu;
 	t_mmap				minimap;
-	t_bool				lock_crosshair;
 	int64_t				tx_crosshair;
 }	t_ui;
 
@@ -212,6 +236,15 @@ void			refresh_load_menu(void);
 void			render_load_menu(void);
 void			update_load_menu(void);
 
+/* Map menu */
+void			init_map_menu(void);
+void			render_map_menu(void);
+void			update_map_menu(void);
+
+/* Keybindings */
+void			init_print_keybindings(void);
+void			print_keybindings(void);
+
 /* Minimap */
 void			render_minimap(double zoom);
 
@@ -228,8 +261,10 @@ t_checkbox		create_checkbox(char *texture_path, t_ivec2 pos,
 					int (*event_unchecked)(struct s_checkbox *checkbox));
 void			update_ui_checkbox(t_checkbox *checkbox);
 void			render_ui_checkbox(t_checkbox *checkbox);
-void			update_ui_checkbox_click_begin(t_checkbox *checkbox, int mouse_btn);
-void			update_ui_checkbox_click_end(t_checkbox *checkbox, int mouse_btn);
+void			update_ui_checkbox_click_begin(t_checkbox *checkbox,
+					int mouse_btn);
+void			update_ui_checkbox_click_end(t_checkbox *checkbox,
+					int mouse_btn);
 
 t_img_box		create_img_box(char *texture_path, t_ivec2 pos);
 void			render_ui_img_box(t_img_box *box);

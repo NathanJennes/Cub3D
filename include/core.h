@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/23 18:35:47 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/25 16:14:18 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@
 
 typedef struct s_debug
 {
-	t_ivec2	dx;
-	t_ivec2	dy;
 }	t_debug;
 
 typedef union u_rgb
@@ -128,6 +126,7 @@ typedef struct s_player
 	t_vec2		forward;
 	t_vec2		right;
 	t_vec2		plane_inc;
+	t_bool		lock;
 }	t_player;
 
 typedef struct s_settings
@@ -223,7 +222,6 @@ typedef struct s_mlx
 //TODO: quand on se deplace en diagonale, la minimap shake
 
 /* core.c */
-void 		init_mlx(t_mlx *app);
 void		init_window(char *win_name);
 int			close_app(void);
 void		error_close_app(void);

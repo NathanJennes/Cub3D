@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_manager.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:00:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/24 14:44:03 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/25 18:16:10 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,13 @@ int	render_ui(void)
 
 	app = get_app();
 	if (app->state != IN_MENU)
+	{
+		if (app->ui.state == KEYBINDS_MENU)
+			print_keybindings();
+		else if (app->ui.state == MAP_MENU)
+			render_map_menu();
 		return (0);
+	}
 	mlx_mouse_show();
 	if (app->ui.state == MAIN_MENU)
 	{
@@ -57,7 +63,11 @@ void	update_ui(void)
 
 	app = get_app();
 	if (app->state != IN_MENU)
+	{
+		if (app->ui.state == MAP_MENU)
+			update_map_menu();
 		return ;
+	}
 	if (app->ui.state == MAIN_MENU)
 		update_main_menu();
 	else if (app->ui.state == NEW_GAME_MENU)

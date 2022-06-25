@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 18:21:40 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/25 21:22:42 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main_loop(void)
 	settings = get_settings();
 	if (app->state == IN_GAME)
 	{
-		if (app->ui.lock_crosshair == TRUE)
+		if (app->gamestate.player.lock == FALSE)
 		{
 			update_player(&app->gamestate.player, TRUE);
 			reset_mouse_pos();

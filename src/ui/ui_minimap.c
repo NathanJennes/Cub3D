@@ -26,6 +26,8 @@ void	render_minimap(double zoom)
 	t_ivec2		player_pos;
 	t_vec2		offset;
 
+	if (get_ui()->state == MAP_MENU)
+		return ;
 	player = get_player();
 	minimap = &get_ui()->minimap;
 	cell_size = MMAP_ZOOM_FACTOR * zoom;

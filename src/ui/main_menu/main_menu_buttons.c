@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_menu_buttons.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 19:04:40 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 18:22:49 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/25 18:37:07 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	btn_continue(t_button *button)
 	init_sprite_manager();
 	app->state = IN_GAME;
 	mlx_mouse_hide();
-	app->ui.lock_crosshair = TRUE;
 	reset_mouse_pos();
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/22 17:21:11 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/25 18:37:07 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,10 @@ static void	init_mandatory(t_mlx *app, char *path)
 		app->state = IN_GAME;
 		app->renderer.multithreading = FALSE;
 		app->mandatory = TRUE;
-		app->ui.lock_crosshair = TRUE;
 		mlx_mouse_hide();
 	}
 	else if (path)
-		printf("Error: couldn't load specified map.\n");
+		printf("Error: couldn't load specified map_menu.\n");
 }
 
 static void	init_hooks(void)
