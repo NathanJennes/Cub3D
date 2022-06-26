@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:44:59 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/20 16:51:27 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/26 17:42:30 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@
 #include "core.h"
 #include "render.h"
 
-void		serialize_game(int fd);
-int			deserialize_save(t_gamestate *save_out, int fd, char *filename);
+void				serialize_game(int fd);
+int					deserialize_save(t_gamestate *save_out, int fd, char *filename);
 
 inline static int	open_save_file(char *save_name, int truncate);
 inline static void	create_appdata_directory(void);
+inline static char	*return_save_name(char *new_name);
 
-int	save_game(char *save_name)
+char	*save_game(char *save_name)
 {
 	int		fd;
 	char	*new_name;
@@ -32,18 +33,37 @@ int	save_game(char *save_name)
 
 	dot = ft_strrchr(save_name, '.');
 	if (!dot)
-		return (0);
+		return (NULL);
 	new_size = ft_strlen(save_name) - ft_strlen(dot);
 	new_name = gc_substr(save_name, 0, new_size);
 	new_name = gc_strjoin(new_name, ".save", FREE_FIRST);
 	fd = open_save_file(new_name, TRUE);
-	gc_free(new_name);
 	if (fd == -1)
-		return (0);
+		return (NULL);
 	serialize_game(fd);
 	close(fd);
 	reload_saves();
-	return (1);
+	return (return_save_name(new_name));
+}
+
+inline static char	*return_save_name(char *new_name)
+{
+	size_t	i;
+	t_mlx	*app;
+
+	app = get_app();
+	i = 0;
+	while (i < get_app()->savegames_count)
+	{
+		if (ft_strcmp(app->savegames[i].name, new_name) == 0)
+		{
+			gc_free(new_name);
+			return (app->savegames[i].name);
+		}
+		i++;
+	}
+	gc_free(new_name);
+	return (NULL);
 }
 
 int	load_save(t_gamestate *save_out, char *save_name)

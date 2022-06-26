@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/26 16:46:07 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/26 17:22:49 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ typedef struct s_settings
 	double		win_two_slice;
 	double		max_dist;
 	double		max_lerp;
+	char		*last_save;
 }	t_settings;
 
 

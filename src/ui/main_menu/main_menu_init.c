@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_menu_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:37:39 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/24 11:02:07 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/26 17:33:40 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,10 @@ void	init_main_menu(void)
 			ivec2(0, 50));
 	main_menu->btn_continue = create_button("assets/ui/continue.xpm",
 			ivec2(0, 0), btn_continue);
-	if (get_app()->savegames_count == 0)
-		main_menu->btn_continue.infos.displayed = FALSE;
 	main_menu->btn_new_game = create_button("assets/ui/new_game.xpm",
 			ivec2(0, 0), btn_new_game);
-	if (get_app()->maps_count == 0)
-		main_menu->btn_new_game.infos.displayed = FALSE;
 	main_menu->btn_load = create_button("assets/ui/load.xpm",
 			ivec2(0, 0), btn_load_game);
-	if (get_app()->savegames_count == 0)
-		main_menu->btn_load.infos.displayed = FALSE;
 	main_menu->btn_editor = create_button("assets/ui/editor.xpm",
 			ivec2(0, 0), btn_editor);
 	main_menu->btn_option = create_button("assets/ui/option.xpm",
@@ -48,12 +42,16 @@ void	init_main_menu(void)
 	main_menu->btn_exit = create_button("assets/ui/exit.xpm",
 			ivec2(0, 0), btn_exit_app);
 	init_positions_main_menu(main_menu);
+	refresh_main_menu();
 }
 
 void	refresh_main_menu(void)
 {
 	t_ui_main_menu	*main_menu;
+	size_t			i;
+	t_mlx			*app;
 
+	app = get_app();
 	main_menu = &get_app()->ui.main_menu;
 	if (get_app()->savegames_count == 0)
 		main_menu->btn_load.infos.displayed = FALSE;
@@ -63,10 +61,17 @@ void	refresh_main_menu(void)
 		main_menu->btn_new_game.infos.displayed = FALSE;
 	else
 		main_menu->btn_new_game.infos.displayed = TRUE;
-	if (get_app()->savegames_count == 0)
-		main_menu->btn_continue.infos.displayed = FALSE;
-	else
-		main_menu->btn_continue.infos.displayed = TRUE;
+	main_menu->btn_continue.infos.displayed = FALSE;
+	i = 0;
+	while (i < app->savegames_count)
+	{
+		printf("save name: [%s], settings lastsave: [%s]\n", app->savegames[i].name, app->settings.last_save);
+		if (ft_strcmp(app->savegames[i].name, app->settings.last_save) == 0)
+		{
+			main_menu->btn_continue.infos.displayed = TRUE;
+		}
+		i++;
+	}
 }
 
 inline static void	init_positions_main_menu(t_ui_main_menu *main_menu)

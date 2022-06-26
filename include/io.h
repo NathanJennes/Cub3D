@@ -42,7 +42,7 @@ typedef struct s_map_parser
 	t_map_info	*infos;
 }			t_map_parser;
 
-int			save_game(char *save_name);
+char		*save_game(char *save_name);
 int			load_save(t_gamestate *save_out, char *save_name);
 int			load_map(t_gamestate *map_out, char *map_name);
 void		free_save(t_gamestate *save);

@@ -6,13 +6,14 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:42:50 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/26 16:17:04 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/26 17:37:20 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "render.h"
 #include "input_code.h"
+#include "leaky.h"
 
 inline static void	handle_escape(void);
 inline static void	turn_off_lights(void);
@@ -54,12 +55,20 @@ int	key_pressed_listener(int keycode)
 inline static void	handle_escape(void)
 {
 	t_mlx	*app;
+	char	*save_name;
 
 	app = get_app();
 	mlx_mouse_show();
 	if (app->state == IN_GAME)
 	{
-		save_game(app->gamestate.name);
+		save_name = save_game(app->gamestate.name);
+		if (save_name)
+		{
+			gc_free(app->settings.last_save);
+			app->settings.last_save = gc_strdup(save_name);
+		}
+		else
+			printf("Can't save save\n");
 		refresh_main_menu();
 		app->state = IN_MENU;
 		app->ui.state = MAIN_MENU;

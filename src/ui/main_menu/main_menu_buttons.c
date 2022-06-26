@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 19:04:40 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 18:22:49 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/26 17:21:49 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,17 @@
 int	btn_continue(t_button *button)
 {
 	t_mlx	*app;
+	size_t	i;
 
 	(void)button;
 	app = get_app();
-	app->gamestate = app->savegames[0];
+	i = 0;
+	while (i < app->savegames_count)
+	{
+		if (ft_strcmp(app->savegames[i].name, app->settings.last_save) == 0)
+			app->gamestate = app->savegames[i];
+		i++;
+	}
 	update_player_direction(get_player(), app->delta_time, FALSE);
 	update_player_vectors(get_player());
 	generate_sprites_for_new_map();

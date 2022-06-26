@@ -33,6 +33,7 @@ void	save_settings(t_settings *settings)
 	}
 	save_player(settings, fd);
 	save_win(settings, fd);
+	dprintf(fd, "LAST_SAVE %s\n", settings->last_save);
 }
 
 inline static void	save_player(t_settings *settings, int fd)
