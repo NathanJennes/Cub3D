@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 14:24:49 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/15 14:35:59 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/26 19:15:46 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ inline static void	read_map_content(t_map_info *infos, size_t i, size_t j, int *
 	if (ft_isalpha(infos->map_raw[i][j]))
 	{
 		infos->spawn_dir = infos->map_raw[i][j];
-		infos->spawn_pos = vec2(j * CELL_SIZE, i * CELL_SIZE);
+		infos->spawn_pos = vec2(j * CELL_SIZE + CELL_SIZE / 2.0,
+			i * CELL_SIZE + CELL_SIZE / 2.0);
 	}
 }
