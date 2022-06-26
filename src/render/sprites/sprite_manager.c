@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 13:37:13 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/24 16:53:22 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/26 16:20:08 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	add_sprite_to_current_game(t_sprite sprite)
 	ft_memmove(new_array, manager->sprites, manager->sprite_count * sizeof (t_sprite));
 	gc_free(manager->sprites);
 	manager->sprites = new_array;
+	sprite.id = manager->sprite_count;
 	manager->sprites[manager->sprite_count] = sprite;
 	manager->sprite_count++;
 }

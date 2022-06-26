@@ -32,7 +32,8 @@ t_ivec3	get_lighting_level(t_vec3 pos, t_vec3 normal)
 	i = 0;
 	while (i < app->gamestate.light_count)
 	{
-		process_light(&lights[i], &lighting, &pos, &normal);
+		if (lights[i].enabled)
+			process_light(&lights[i], &lighting, &pos, &normal);
 		i++;
 	}
 	return (lighting);

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 16:25:27 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/24 17:54:30 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/26 16:47:44 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ void	render_sprite(t_sprite *sprite)
 	if (rsprite.size_x < 2)
 		return ;
 	rsprite.texture = get_texture_from_id(sprite->tex_id);
-	rsprite.color = sprite->color;
+	if (get_lights()[sprite->id].enabled)
+		rsprite.color = sprite->color;
+	else
+		rsprite.color = vec3(51.0 / 255.0, 51.0 / 255.0, 51.0 / 255.0);
 	rsprite.size_h = (int64_t)fabs((double)sprite->size.y / distance * get_math()->plane_dist);
 	rsprite.ratio_y = (double)rsprite.texture->height / (double)rsprite.size_h;
 	rsprite.ratio_x = (double)rsprite.texture->width / (double)rsprite.size_x;

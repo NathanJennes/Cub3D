@@ -73,15 +73,6 @@ void	render_debug(t_mlx *app)
 	draw_circle(app->debug.dx, 5, BLUE);
 	draw_circle(app->debug.dy, 5, BLUE);
 	print_player_vector();
-
-	t_sprite	*sprite = &app->sprite_manager.sprites[0];
-	if (sprite)
-	{
-		render_sprite(sprite);
-		draw_rect(ivec2(sprite->pos.x - sprite->size.x / 2,
-				sprite->pos.y - sprite->size.y / 2), ivec2(10, 10),
-			trgb(0, 100, 255, 100));
-	}
 }
 
 //static void	debug_rays(void)

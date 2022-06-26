@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   key_listeners.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:42:50 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/17 15:28:24 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/26 16:17:04 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
+#include "render.h"
 #include "input_code.h"
 
 inline static void	handle_escape(void);
+inline static void	turn_off_lights(void);
+inline static void	turn_on_lights(void);
 
 int	key_pressed_listener(int keycode)
 {
@@ -41,6 +44,10 @@ int	key_pressed_listener(int keycode)
 		app->renderer.multithreading = !app->renderer.multithreading;
 	else if (keycode == KEY_F10)
 		app->mandatory = !app->mandatory;
+	else if (keycode == KEY_E && app->state == IN_GAME)
+		turn_off_lights();
+	else if (keycode == KEY_Q && app->state == IN_GAME)
+		turn_on_lights();
 	return (0);
 }
 
@@ -70,3 +77,37 @@ inline static void	handle_escape(void)
 			close_app();
 	}
 }
+
+inline static void	turn_off_lights(void)
+{
+	int64_t		i;
+	t_gamestate	*game;
+
+	game = &get_app()->gamestate;
+	i = 0;
+	while (i < game->light_count)
+	{
+		if (ft_pow2(game->lights[i].pos.x - game->player.world_pos.x) +
+			ft_pow2(game->lights[i].pos.y - game->player.world_pos.y) < CELL_SIZE * CELL_SIZE)
+			game->lights[i].enabled = FALSE;
+		i++;
+	}
+}
+
+inline static void	turn_on_lights(void)
+{
+	int64_t		i;
+	t_gamestate	*game;
+
+	game = &get_app()->gamestate;
+	i = 0;
+	while (i < game->light_count)
+	{
+		if (ft_pow2(game->lights[i].pos.x - game->player.world_pos.x) +
+			ft_pow2(game->lights[i].pos.y - game->player.world_pos.y) <
+			CELL_SIZE * CELL_SIZE)
+			game->lights[i].enabled = TRUE;
+		i++;
+	}
+}
+

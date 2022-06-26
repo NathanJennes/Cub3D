@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/24 17:42:56 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/26 16:20:08 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_light
 	t_vec3	pos;
 	t_rgb	color;
 	double	intensity;
+	t_bool	enabled;
 }			t_light;
 
 typedef struct s_rsprite
