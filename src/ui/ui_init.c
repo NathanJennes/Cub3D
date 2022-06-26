@@ -26,6 +26,7 @@ void	init_ui(void)
 	init_settings_menu();
 	init_hud(ui);
 	init_load_menu();
+	init_map_menu();
 }
 
 static void	init_hud(t_ui *ui)

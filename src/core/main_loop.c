@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/26 12:37:58 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/26 17:01:23 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main_loop(void)
 
 	app = get_app();
 	settings = get_settings();
+	printf("%d\n", app->editor_mode);
 	if (app->state == IN_GAME)
 	{
 		if (app->gamestate.player.lock == FALSE)
@@ -68,8 +69,8 @@ inline static void	render_game(t_mlx *app, const t_settings *settings,
 	renderer_render();
 	gettimeofday(&time[2], NULL);
 	render_minimap(1);
-	render_debug(app);
 	gettimeofday(&time[3], NULL);
+	render_debug(app);
 	debug_time_frame(app, time);
 }
 

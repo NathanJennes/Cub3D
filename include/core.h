@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/25 16:14:18 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/26 14:52:50 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ typedef struct s_map_info
 {
 	int64_t		width;
 	int64_t		height;
+	int64_t		screen_width;
+	int64_t		screen_height;
 	t_vec2		spawn_pos;
 	char		spawn_dir;
 	t_rgb		ceiling;
@@ -217,6 +219,7 @@ typedef struct s_mlx
 	t_renderer			renderer;
 	t_debug				debug;
 	t_bool				mandatory;
+	t_bool				editor_mode;
 }	t_mlx;
 
 //TODO: quand on se deplace en diagonale, la minimap shake

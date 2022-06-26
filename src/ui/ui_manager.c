@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_manager.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:00:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/25 18:16:10 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/26 18:05:05 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void	update_settings_menu_click_end(int button);
 
 void	update_load_menu_click_begin(int mouse_btn);
 void	update_load_menu_click_end(int mouse_btn);
+
+void	update_map_menu_click_begin(int mouse_btn);
+void	update_map_menu_click_end(int mouse_btn);
 
 int	render_ui(void)
 {
@@ -84,7 +87,11 @@ void	update_ui_click_begin(int button)
 
 	app = get_app();
 	if (app->state != IN_MENU)
+	{
+		if (app->ui.state == MAP_MENU)
+			update_map_menu_click_begin(button);
 		return ;
+	}
 	if (app->ui.state == MAIN_MENU)
 		update_main_menu_click_begin(button);
 	else if (app->ui.state == NEW_GAME_MENU)
@@ -101,7 +108,11 @@ void	update_ui_click_end(int button)
 
 	app = get_app();
 	if (app->state != IN_MENU)
-		return ;
+	{
+		if (app->ui.state == MAP_MENU)
+			update_map_menu_click_end(button);
+		return;
+	}
 	if (app->ui.state == MAIN_MENU)
 		update_main_menu_click_end(button);
 	else if (app->ui.state == NEW_GAME_MENU)

@@ -25,9 +25,7 @@ void	init_load_menu(void)
 	t_ui_load_menu	*menu;
 
 	menu = &get_ui()->load_menu;
-	menu->lbl_selected_save = create_label(
-		ivec2(get_settings()->halfw_w, 50),
-		"", ivec2(get_settings()->win_w, 100));
+	menu->lbl_selected_save = create_label(ivec2(get_settings()->halfw_w, 50), "", ivec2(get_settings()->win_w, 100), 0);
 	menu->btn_start = create_button("assets/ui/start_button.xpm",
 		ivec2(0, 0), btn_load_save);
 	menu->btn_next_save = create_button("assets/ui/right_arrow.xpm",

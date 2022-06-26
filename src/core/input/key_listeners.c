@@ -61,7 +61,7 @@ inline static void	handle_f1(t_mlx *app)
 	if (app->ui.state != KEYBINDS_MENU)
 	{
 		app->ui.prev_state = app->ui.state;
-		app->ui.state = MAP_MENU;
+		app->ui.state = KEYBINDS_MENU;
 		return ;
 	}
 	app->ui.state = app->ui.prev_state;

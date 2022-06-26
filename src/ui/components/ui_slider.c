@@ -37,7 +37,6 @@ t_slider	create_slider(t_ivec2 pos, t_ivec2 size, t_vec3 min_max_val)
 	return (slider);
 }
 
-//TODO: try this style: https://lh3.googleusercontent.com/RYCWIG5RchIPW4uv1OoOp6XshQ7TbRmj1vlf46rbV1uXlFj9k8M3eAQpN-Qg8ePE7CqG6OSXUJhED1tfbF8yiv_su1Mvbz2LEl70Tw=w1064-v0
 inline static void	generate_cursor_texture(t_ivec2 size, t_slider *slider)
 {
 	draw_circle_tex(ivec2(size.y, size.y),

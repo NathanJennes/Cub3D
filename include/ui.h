@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/26 12:33:34 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/26 17:05:46 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct s_label
 	t_ui_component	infos;
 	char			*text;
 	int64_t			tex_id;
+	int 			font_size;
 }	t_label;
 
 typedef struct s_img_box
@@ -163,15 +164,15 @@ typedef struct s_ui_settings_menu
 
 typedef struct s_ui_map_menu
 {
-	t_slider	red_color;
+	t_slider	slid_red_color;
 	t_label		red_label;
-	t_slider	blue_color;
+	t_slider	slid_blue_color;
 	t_label		blue_label;
-	t_slider	green_color;
+	t_slider	slid_green_color;
 	t_label		green_label;
 	t_slider	intensity;
 	t_label		intensity_label;
-	t_checkbox	editor_mode;
+	t_checkbox	chk_editor_mode;
 }	t_ui_map_menu;
 
 typedef struct s_ui_load_menu
@@ -269,7 +270,7 @@ void			update_ui_checkbox_click_end(t_checkbox *checkbox,
 t_img_box		create_img_box(char *texture_path, t_ivec2 pos);
 void			render_ui_img_box(t_img_box *box);
 
-t_label			create_label(t_ivec2 pos, char *text, t_ivec2 size);
+t_label create_label(t_ivec2 pos, char *text, t_ivec2 size, int font_size);
 void			render_ui_label(t_label *label);
 void			update_ui_label_text(t_label *label, char *text);
 
