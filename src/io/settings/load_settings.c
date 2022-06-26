@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 12:42:37 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/01 14:21:10 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/26 17:22:59 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ inline static t_settings	load_default_settings(void)
 	settings.halfw_w = 960 / 2;
 	settings.halfw_h = 540 / 2;
 	settings.cam_sensitivity = 2.0;
+	settings.last_save = "";
 	return (settings);
 }

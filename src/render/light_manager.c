@@ -25,7 +25,7 @@ void	add_light(t_gamestate *gamestate, t_vec3 pos, t_rgb color,
 	gc_free(gamestate->lights);
 	gamestate->lights = new;
 	gamestate->lights[gamestate->light_count] = \
-		(t_light){pos, color, intensity};
+		(t_light){pos, color, intensity, TRUE};
 	gamestate->light_count++;
 }
 

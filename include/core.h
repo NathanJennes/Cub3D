@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/26 14:52:50 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/26 17:22:49 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,15 @@ typedef struct s_mouse
 	t_ivec2	delta;
 }	t_mouse;
 
+typedef struct s_light	t_light;
+
 typedef struct s_sprite
 {
-	t_vec2	pos;
+	t_vec3	pos;
 	t_ivec2	size;
 	int64_t	tex_id;
+	t_vec3	color;
+	int64_t	id;
 }	t_sprite;
 
 typedef struct s_sprite_manager
@@ -145,9 +149,9 @@ typedef struct s_settings
 	double		win_two_slice;
 	double		max_dist;
 	double		max_lerp;
+	char		*last_save;
 }	t_settings;
 
-typedef struct s_light	t_light;
 
 typedef struct s_gamestate
 {
@@ -219,6 +223,7 @@ typedef struct s_mlx
 	t_renderer			renderer;
 	t_debug				debug;
 	t_bool				mandatory;
+	int64_t				lamp_tex_id;
 	t_bool				editor_mode;
 }	t_mlx;
 
@@ -263,7 +268,10 @@ t_bool		is_player_position_legal(t_gamestate *gamestate) NOPROF;
 
 /* Sprites */
 void		init_sprite_manager(void) NOPROF;
+void		add_sprite_to_current_game(t_sprite sprite) NOPROF;
 void		clear_sprite_manager(void) NOPROF;
+void		generate_sprites_for_new_map(void);
+void		render_sprites(void);
 
 double		get_depth_at(int64_t i) NOPROF;
 void		set_depth_at(int64_t i, double distance) NOPROF;

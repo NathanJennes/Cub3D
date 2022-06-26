@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deserialization_settings.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 14:30:37 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/14 10:27:39 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/26 17:25:57 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int			parse_fov(char *line, t_settings *settings);
 int			parse_sens(char *line, t_settings *settings);
+int			parse_last_save(char *line, t_settings *settings);
 
 inline static void	set_settings_out(t_settings *settings_out);
 inline static int	parse_line_settings(char *line, t_settings *settings);
@@ -40,7 +41,7 @@ int	deserialize_settings(t_settings *settings_out, int fd)
 		line = gc_get_next_line(fd);
 		line_num++;
 	}
-	if (line_num != 3)
+	if (line_num != 4)
 	{
 		printf("Settings file currupted at line: %d\n", line_num);
 		return (0);
@@ -65,6 +66,8 @@ inline static int	parse_line_settings(char *line, t_settings *settings)
 		return (parse_win(line, settings));
 	else if (ft_strncmp(line, "SENS", ft_strlen("SENS")) == 0)
 		return (parse_sens(line, settings));
+	else if (ft_strncmp(line, "LAST_SAVE", ft_strlen("LAST_SAVE")) == 0)
+		return (parse_last_save(line, settings));
 	return (0);
 }
 

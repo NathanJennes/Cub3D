@@ -54,7 +54,7 @@ int	btn_load_save(t_button *button)
 	app->gamestate = app->savegames[menu->save_selected];
 	update_player_direction(get_player(), app->delta_time, FALSE);
 	update_player_vectors(get_player());
-	init_sprite_manager();
+	generate_sprites_for_new_map();
 	app->state = IN_GAME;
 	mlx_mouse_hide();
 	reset_mouse_pos();

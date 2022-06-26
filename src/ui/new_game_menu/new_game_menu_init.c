@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_game_menu_init.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:48:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/24 13:37:35 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/26 17:46:06 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ inline static void	init_positions_new_game_menu(void)
 	t_ui_new_game_menu	*menu;
 
 	menu = &get_ui()->new_game_menu;
-	uic_padding(&menu->btn_save[0].infos, ivec2(25, 50), ivec2(50, 50));
-	uic_padding(&menu->btn_save[1].infos, ivec2(50, 50), ivec2(50, 50));
-	uic_padding(&menu->btn_save[2].infos, ivec2(50, 50), ivec2(50, 50));
-	uic_padding(&menu->btn_save[3].infos, ivec2(50, 50), ivec2(50, 50));
-	uic_padding(&menu->btn_save[4].infos, ivec2(50, 50), ivec2(50, 50));
+	uic_padding(&menu->btn_save[0].infos, ivec2(25, 40), ivec2(50, 50));
+	uic_padding(&menu->btn_save[1].infos, ivec2(40, 40), ivec2(50, 50));
+	uic_padding(&menu->btn_save[2].infos, ivec2(40, 40), ivec2(50, 50));
+	uic_padding(&menu->btn_save[3].infos, ivec2(40, 40), ivec2(50, 50));
+	uic_padding(&menu->btn_save[4].infos, ivec2(40, 40), ivec2(50, 50));
 	uic_padding(&menu->btn_down.infos, ivec2(50, 50), ivec2(50, 50));
 	uic_center_win_w(&menu->btn_save[0].infos);
 	uic_above(&menu->btn_start.infos, &menu->btn_save[0].infos);
