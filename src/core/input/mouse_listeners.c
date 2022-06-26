@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:31:13 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/26 16:40:34 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/26 17:54:29 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,48 @@ void	mouse_click_end(int button)
 
 void	mouse_wheel_up(void)
 {
-	return ;
+	t_mlx	*app;
+	t_ui	*ui;
+
+	app = get_app();
+	if (app->state == IN_GAME)
+		return ;
+	ui = get_ui();
+	if (ui->state == NEW_GAME_MENU && ui->new_game_menu.first_save_offset > 0)
+	{
+		ui->new_game_menu.first_save_offset--;
+		new_game_menu_refresh();
+	}
+	if (ui->state == LOAD_MENU && ui->load_menu.save_selected >= 0)
+	{
+		if (ui->load_menu.save_selected == 0)
+			ui->load_menu.save_selected = app->savegames_count - 1;
+		else
+			ui->load_menu.save_selected--;
+		refresh_load_menu();
+	}
 }
 
 void	mouse_wheel_down(void)
 {
-	return ;
+	t_mlx	*app;
+	t_ui	*ui;
+
+	app = get_app();
+	if (app->state == IN_GAME)
+		return ;
+	ui = get_ui();
+	if (ui->state == NEW_GAME_MENU && ui->new_game_menu.first_save_offset < app->maps_count - 5)
+	{
+		ui->new_game_menu.first_save_offset++;
+		new_game_menu_refresh();
+	}
+	if (ui->state == LOAD_MENU && ui->load_menu.save_selected < app->savegames_count)
+	{
+		if (ui->load_menu.save_selected == app->savegames_count - 1)
+			ui->load_menu.save_selected = 0;
+		else
+			ui->load_menu.save_selected++;
+		refresh_load_menu();
+	}
 }

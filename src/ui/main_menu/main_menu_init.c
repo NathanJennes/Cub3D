@@ -65,11 +65,8 @@ void	refresh_main_menu(void)
 	i = 0;
 	while (i < app->savegames_count)
 	{
-		printf("save name: [%s], settings lastsave: [%s]\n", app->savegames[i].name, app->settings.last_save);
 		if (ft_strcmp(app->savegames[i].name, app->settings.last_save) == 0)
-		{
 			main_menu->btn_continue.infos.displayed = TRUE;
-		}
 		i++;
 	}
 }
