@@ -32,7 +32,6 @@ int	btn_continue(t_button *button)
 	generate_sprites_for_new_map();
 	app->state = IN_GAME;
 	mlx_mouse_hide();
-	app->ui.lock_crosshair = TRUE;
 	reset_mouse_pos();
 	return (0);
 }

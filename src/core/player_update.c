@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 18:00:21 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/24 16:21:44 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/25 18:52:39 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 #include "render.h"
 
 inline static void	update_player_position(t_player *player, t_vec2 future_pos,
-					double delta_time, double shift);
+						double delta_time, double shift);
+inline static void	clamp_player_direction(t_player *player,
+						const t_settings *settings);
 
 void	update_player(t_player *player, t_bool handle_input)
 {
@@ -69,12 +71,19 @@ void	update_player_direction(t_player *player, double delta_time, t_bool handle_
 		get_app()->mouse.delta.x = \
 			get_mouse_position().x - get_app()->settings.halfw_w;
 		get_player()->direction -= 0.01 * (get_settings()->cam_sensitivity
-											* (double)get_app()->mouse.delta.x) * delta_time;
+			* (double)get_app()->mouse.delta.x) * delta_time;
 		if (is_key_down(KEY_RIGHT))
-			player->direction -= PI / 4.0 * settings->cam_sensitivity * delta_time;
+			player->direction -= \
+				PI / 4.0 * settings->cam_sensitivity * delta_time;
 		if (is_key_down(KEY_LEFT))
-			player->direction += PI / 4.0 * settings->cam_sensitivity * delta_time;
+			player->direction += \
+				PI / 4.0 * settings->cam_sensitivity * delta_time;
 	}
+	clamp_player_direction(player, settings);
+}
+
+inline static void	clamp_player_direction(t_player *player, const t_settings *settings)
+{
 	if (player->direction < 0.0)
 		player->direction += TWO_PI;
 	else if (player->direction > TWO_PI)
@@ -86,5 +95,5 @@ void	update_player_direction(t_player *player, double delta_time, t_bool handle_
 		get_math()->base_angle -= TWO_PI;
 	player->plane_inc = \
 			vec2((player->right.x * get_math()->plane_len) / settings->halfw_w,
-		(player->right.y * get_math()->plane_len) / settings->halfw_w);
+			(player->right.y * get_math()->plane_len) / settings->halfw_w);
 }

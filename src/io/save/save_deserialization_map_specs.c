@@ -38,7 +38,7 @@ int	deserialize_map_parse_height(char *line, t_gamestate *save)
 	return (1);
 }
 
-//TODO: check if spawn is in map
+//TODO: check if spawn is in map_menu
 int	deserialize_map_parse_spawn(char *line, t_gamestate *save)
 {
 	char	*cursor;

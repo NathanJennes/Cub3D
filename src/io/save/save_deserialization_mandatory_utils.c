@@ -65,6 +65,8 @@ int	add_map_row(t_map_info *infos, t_map_parser *parser, char *line)
 	infos->map_raw = gc_strarray_append(infos->map_raw, line);
 	if ((int64_t)ft_strlen(line) > infos->width)
 		infos->width = (int64_t)ft_strlen(line);
+	infos->screen_height = infos->height * CELL_SIZE;
+	infos->screen_width = infos->width * CELL_SIZE;
 	return (1);
 }
 

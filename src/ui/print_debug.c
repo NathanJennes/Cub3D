@@ -23,7 +23,9 @@ NOPROF
 {
 	t_ivec2	debug_pos;
 
-	debug_pos = ivec2(20, get_settings()->win_h / 2 - 100);
+	if (get_ui()->debug_state == NO_DEBUG)
+		return ;
+	debug_pos = ivec2(20, get_settings()->win_h / 2);
 	debug_rays(&debug_pos);
 	debug_pos.y += 20;
 	debug_player(&debug_pos);

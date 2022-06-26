@@ -22,7 +22,7 @@ typedef struct s_map_info	t_map_info;
 # define MERR_UNRECOGNIZED_LINE "Unrecognized line"
 
 # define MERR_POS_EXPECTED "Expected a positive position value. Syntax: X,Y,Z (> 0)"
-# define MERR_POS_OUTBOUND "Invalid position given. Outside of map bound"
+# define MERR_POS_OUTBOUND "Invalid position given. Outside of map_menu bound"
 
 # define MERR_COLOR_EXPECTED_R "Expected a positive red color value. Syntax: R,G,B (0-255)"
 # define MERR_COLOR_EXPECTED_B "Expected a positive blue color value. Syntax: R,G,B (0-255)"
@@ -34,16 +34,16 @@ typedef struct s_map_info	t_map_info;
 # define MERR_TEXTURE_WRONG_FILE "Couldn't load the texture"
 # define MERR_TEXTURE_REDEFINITION "A texture for this side was already defined"
 
-# define MERR_MAP_EMPTY "No map layout was given in the file"
-# define MERR_MAP_SIZE "Invalid map size: this map doesn't allow any valid spawn position"
-# define MERR_MAP_REDEFINITION "The map layout cannot be split into multiple part in the map file"
-# define MERR_MAP_WRONG_CHAR "Invalid character in the map layout definition"
-# define MERR_MAP_INVALID_LINE_SIDES "Invalid line: the map layout contains tiles that are not closed by walls"
+# define MERR_MAP_EMPTY "No map_menu layout was given in the file"
+# define MERR_MAP_SIZE "Invalid map_menu size: this map_menu doesn't allow any valid spawn position"
+# define MERR_MAP_REDEFINITION "The map_menu layout cannot be split into multiple part in the map_menu file"
+# define MERR_MAP_WRONG_CHAR "Invalid character in the map_menu layout definition"
+# define MERR_MAP_INVALID_LINE_SIDES "Invalid line: the map_menu layout contains tiles that are not closed by walls"
 # define MERR_MAP_HOLE_NORTH "This tile should have a wall above it"
 # define MERR_MAP_HOLE_SOUTH "This tile should have a wall below it"
-# define MERR_MAP_EDGE_NOT_WALL "Invalid tile: there may only be walls surrounding the map"
-# define MERR_MAP_SPAWN_REDEFINITION "A map cannot contain more than one spawn"
-# define MERR_MAP_NO_SPAWN "A map needs to contain a spawn point"
+# define MERR_MAP_EDGE_NOT_WALL "Invalid tile: there may only be walls surrounding the map_menu"
+# define MERR_MAP_SPAWN_REDEFINITION "A map_menu cannot contain more than one spawn"
+# define MERR_MAP_NO_SPAWN "A map_menu needs to contain a spawn point"
 
 int	map_error(char *line, t_map_parser *parser, const char *error);
 int	map_error_layout(t_map_info *infos, t_map_parser *parser, const char *error, t_ivec2 pos);

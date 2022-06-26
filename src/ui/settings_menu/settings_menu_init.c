@@ -39,13 +39,13 @@ void	init_settings_menu(void)
 	menu->slid_fov = create_slider(ivec2_zero(),
 			ivec2(350, 20), vec3(10.0, 170.0,
 				(float)get_settings()->fov));
-	menu->lbl_fov = create_label(ivec2_zero(),
-			gc_itoa(get_settings()->fov), ivec2(200, 100));
+	menu->lbl_fov = create_label(ivec2_zero(), gc_itoa(get_settings()->fov),
+			ivec2(200, 100), 0);
 	menu->slid_sens = create_slider(ivec2_zero(),
 			ivec2(350, 20), vec3(0.1, 10.0,
 				(float)get_settings()->cam_sensitivity));
 	menu->lbl_sens = create_label(ivec2_zero(),
-			gc_itoa(get_settings()->cam_sensitivity), ivec2(200, 100));
+			gc_itoa(get_settings()->cam_sensitivity), ivec2(200, 100), 0);
 	menu->chk_res_min = create_checkbox(NULL, ivec2_zero(),
 			chk_select_res_min, chk_unselect_res_min);
 	menu->chk_res_med = create_checkbox(NULL, ivec2_zero(),

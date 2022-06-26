@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_game_menu_buttons2.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 18:09:40 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 13:49:15 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/25 18:37:07 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	btn_start_new_game(t_button *button)
 		generate_sprites_for_new_map();
 		app->state = IN_GAME;
 		mlx_mouse_hide();
-		app->ui.lock_crosshair = TRUE;
 		reset_mouse_pos();
 	}
 	return (0);

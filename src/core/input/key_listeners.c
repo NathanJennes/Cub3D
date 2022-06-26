@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_listeners.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:42:50 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/26 17:37:20 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/25 18:57:23 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 #include "input_code.h"
 #include "leaky.h"
 
+inline static void	handle_f1(t_mlx *app);
 inline static void	handle_escape(void);
+inline static void	handle_tab(t_mlx *app);
 inline static void	turn_off_lights(void);
 inline static void	turn_on_lights(void);
 
@@ -26,30 +28,51 @@ int	key_pressed_listener(int keycode)
 	app = get_app();
 	if (keycode == KEY_BACKSPACE)
 		close_app();
-	else if (keycode == KEY_F3)
-		switch_debug_ui();
 	else if (keycode == KEY_TAB)
-	{
-		app->ui.lock_crosshair = !app->ui.lock_crosshair;
-		if (app->ui.lock_crosshair == TRUE)
-		{
-			mlx_mouse_hide();
-			reset_mouse_pos();
-		}
-		else
-			mlx_mouse_show();
-	}
+		handle_tab(app);
 	else if (keycode == KEY_ESC)
 		handle_escape();
+	else if (keycode == KEY_F1)
+		handle_f1(app);
+	else if (keycode == KEY_F2)
+		app->mandatory = !app->mandatory;
+	else if (keycode == KEY_F3)
+		handle_debug_ui();
 	else if (keycode == KEY_F4)
 		app->renderer.multithreading = !app->renderer.multithreading;
-	else if (keycode == KEY_F10)
-		app->mandatory = !app->mandatory;
 	else if (keycode == KEY_E && app->state == IN_GAME)
 		turn_off_lights();
 	else if (keycode == KEY_Q && app->state == IN_GAME)
 		turn_on_lights();
 	return (0);
+}
+
+inline static void	handle_tab(t_mlx *app)
+{
+	if (app->state != IN_GAME)
+		return ;
+	if (app->ui.state == MAP_MENU)
+	{
+		app->gamestate.player.lock = FALSE;
+		app->ui.state = NONE;
+		mlx_mouse_hide();
+		reset_mouse_pos();
+		return ;
+	}
+	app->gamestate.player.lock = TRUE;
+	app->ui.state = MAP_MENU;
+	mlx_mouse_show();
+}
+
+inline static void	handle_f1(t_mlx *app)
+{
+	if (app->ui.state != KEYBINDS_MENU)
+	{
+		app->ui.prev_state = app->ui.state;
+		app->ui.state = KEYBINDS_MENU;
+		return ;
+	}
+	app->ui.state = app->ui.prev_state;
 }
 
 inline static void	handle_escape(void)
@@ -119,4 +142,3 @@ inline static void	turn_on_lights(void)
 		i++;
 	}
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_helper.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:36:50 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/15 15:46:43 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/26 12:57:10 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,17 @@ int64_t	str_px_size(char *str)
 	return ((int)ft_strlen(str) * 7);
 }
 
-void	switch_debug_ui(void)
+void	handle_debug_ui(void)
 {
 	t_mlx	*app;
 
 	app = get_app();
-	if (app->ui.debug == TRUE)
-		app->ui.debug = FALSE;
-	else
-		app->ui.debug = TRUE;
+	if (app->ui.debug_state == LVL3)
+	{
+		app->ui.debug_state = NO_DEBUG;
+		return ;
+	}
+	app->ui.debug_state++;
 }
 
 void	print_double(double val, char *font, int size, t_ivec2 pos)

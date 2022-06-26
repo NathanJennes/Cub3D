@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
 /*   Updated: 2022/06/26 17:22:49 by njennes          ###   ########.fr       */
@@ -50,8 +50,6 @@
 
 typedef struct s_debug
 {
-	t_ivec2	dx;
-	t_ivec2	dy;
 }	t_debug;
 
 typedef union u_rgb
@@ -95,6 +93,8 @@ typedef struct s_map_info
 {
 	int64_t		width;
 	int64_t		height;
+	int64_t		screen_width;
+	int64_t		screen_height;
 	t_vec2		spawn_pos;
 	char		spawn_dir;
 	t_rgb		ceiling;
@@ -132,6 +132,7 @@ typedef struct s_player
 	t_vec2		forward;
 	t_vec2		right;
 	t_vec2		plane_inc;
+	t_bool		lock;
 }	t_player;
 
 typedef struct s_settings
@@ -223,12 +224,12 @@ typedef struct s_mlx
 	t_debug				debug;
 	t_bool				mandatory;
 	int64_t				lamp_tex_id;
+	t_bool				editor_mode;
 }	t_mlx;
 
 //TODO: quand on se deplace en diagonale, la minimap shake
 
 /* core.c */
-void 		init_mlx(t_mlx *app);
 void		init_window(char *win_name);
 int			close_app(void);
 void		error_close_app(void);

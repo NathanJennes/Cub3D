@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_menu_buttons.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:17:28 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 15:51:08 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/25 18:37:07 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ int	btn_load_save(t_button *button)
 	generate_sprites_for_new_map();
 	app->state = IN_GAME;
 	mlx_mouse_hide();
-	app->ui.lock_crosshair = TRUE;
 	reset_mouse_pos();
 	return (0);
 }
-

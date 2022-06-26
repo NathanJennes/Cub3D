@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 18:21:40 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/26 17:01:23 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,20 @@ int	main_loop(void)
 
 	app = get_app();
 	settings = get_settings();
+	printf("%d\n", app->editor_mode);
 	if (app->state == IN_GAME)
 	{
-		if (app->ui.lock_crosshair == TRUE)
+		if (app->gamestate.player.lock == FALSE)
 		{
 			update_player(&app->gamestate.player, TRUE);
 			reset_mouse_pos();
 		}
 		render_game(app, settings, time);
 	}
-	if (get_ui()->debug)
-		print_debug();
+	print_debug();
 	fps_counter();
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
-	if (app->state == IN_GAME)
-		render_crosshair();
+	render_crosshair();
 	update_ui();
 	render_ui();
 	return (0);
@@ -71,9 +70,8 @@ inline static void	render_game(t_mlx *app, const t_settings *settings,
 	render_sprites();
 	gettimeofday(&time[2], NULL);
 	render_minimap(1);
-	if (get_ui()->debug)
-		render_debug(app);
 	gettimeofday(&time[3], NULL);
+	render_debug(app);
 	debug_time_frame(app, time);
 }
 
@@ -81,6 +79,8 @@ inline static void	render_crosshair(void)
 {
 	t_texture	*crosshair;
 
+	if (get_app()->state != IN_GAME)
+		return ;
 	crosshair = get_texture_from_id(get_ui()->tx_crosshair);
 	render_ui_texture(get_ui()->tx_crosshair,
 		get_settings()->halfw_w - crosshair->width / 2,
@@ -128,9 +128,9 @@ inline static void	render_gradian(t_mlx *app, const t_settings *settings)
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 }
 
-inline static void	debug_time_frame(const t_mlx *app, struct timeval *time)
+void	debug_time_frame(const t_mlx *app, struct timeval *time)
 {
-	if (app->ui.debug == TRUE)
+	if (app->ui.debug_state == LVL2)
 		printf("[FRAME - RENDER]: background: %lldms, walls: "
 			"%lldms, test_scene: %lldms, total %lldms\n",
 			(int64_t)((time[1].tv_sec * 1000 + time[1].tv_usec / 1000)
