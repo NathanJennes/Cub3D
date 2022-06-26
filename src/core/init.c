@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/25 18:37:07 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/26 19:22:40 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,14 @@ static void	init_mandatory(t_mlx *app, char *path)
 {
 	if (load_map(&app->gamestate, path))
 	{
-		app->state = IN_GAME;
+		update_player_direction(get_player(), app->delta_time, FALSE);
+		update_player_vectors(get_player());
+		generate_sprites_for_new_map();
 		app->renderer.multithreading = FALSE;
 		app->mandatory = TRUE;
+		app->state = IN_GAME;
 		mlx_mouse_hide();
+		reset_mouse_pos();
 	}
 	else if (path)
 		printf("Error: couldn't load specified map_menu.\n");
