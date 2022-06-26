@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_debug.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 11:21:01 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/24 17:38:05 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/26 12:57:24 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,15 @@ void	render_debug(t_mlx *app)
 {
 	t_player			*player;
 
+	if (app->ui.debug_state == NO_DEBUG)
+		return ;
 	player = get_player();
-	debug_minimap(&app->gamestate.map);
-	debug_light(app, player);
-	if (app->ui.debug == TRUE)
+	if (app->ui.debug_state >= LVL1)
+		debug_minimap(&app->gamestate.map);
+	if (app->ui.debug_state == LVL2)
 		debug_rays(player);
+	if (app->ui.debug_state == LVL3)
+		debug_light(app, player);
 	print_player_vector(player->world_pos);
 	debug_sprite(app);
 }
@@ -133,8 +137,11 @@ inline static void	debug_rays(t_player *player)
 
 inline static void	print_ray(t_vec2 hit_pos)
 {
-	draw_line(v2_to_iv2(get_player()->world_pos), v2_to_iv2(hit_pos), RED);
-	draw_circle(v2_to_iv2(hit_pos), 10, YELLOW);
+	if (get_ui()->debug_state == LVL2)
+	{
+		draw_line(v2_to_iv2(get_player()->world_pos), v2_to_iv2(hit_pos), RED);
+		draw_circle(v2_to_iv2(hit_pos), 10, YELLOW);
+	}
 }
 
 inline static void	print_player_vector(t_vec2 player_pos)

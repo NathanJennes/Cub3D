@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/25 21:47:38 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/26 12:33:34 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ typedef struct s_ui
 {
 	t_ui_state			prev_state;
 	t_ui_state			state;
-	t_bool				debug;
+	t_ui_debug_state	debug_state;
 	t_ui_main_menu		main_menu;
 	t_ui_new_game_menu	new_game_menu;
 	t_ui_settings_menu	settings_menu;
@@ -205,7 +205,7 @@ void			update_ui(void);
 void			fps_counter(void);
 void			print_debug(void);
 
-void			switch_debug_ui(void);
+void			handle_debug_ui(void);
 
 int64_t			str_px_size(char *str);
 void			print_double(double val, char *font, int size, t_ivec2 pos);

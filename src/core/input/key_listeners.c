@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:42:50 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/25 18:56:20 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/25 18:57:23 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	key_pressed_listener(int keycode)
 	else if (keycode == KEY_F2)
 		app->mandatory = !app->mandatory;
 	else if (keycode == KEY_F3)
-		switch_debug_ui();
+		handle_debug_ui();
 	else if (keycode == KEY_F4)
 		app->renderer.multithreading = !app->renderer.multithreading;
 	return (0);

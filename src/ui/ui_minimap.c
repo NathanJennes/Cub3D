@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui_minimap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 13:11:29 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/15 17:48:58 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/26 13:03:40 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	render_minimap(double zoom)
 	t_ivec2		player_pos;
 	t_vec2		offset;
 
-	if (get_ui()->state == MAP_MENU)
+	if (get_ui()->state == MAP_MENU || get_ui()->debug_state != NO_DEBUG)
 		return ;
 	player = get_player();
 	minimap = &get_ui()->minimap;
