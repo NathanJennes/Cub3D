@@ -45,7 +45,7 @@ SPRITE_SRCS		:=	$(addprefix $(SPRITE_DIR)/, $(SPRITE_FILE))
 UI_DIR			:=	ui
 UI_FILE			:=	fps_counter.c ui_helper.c ui_manager.c ui_manager_render.c	\
 					ui_minimap.c ui_init.c print_debug.c	\
-					crosshair.c ui_helper_2.c
+					crosshair.c ui_helper_2.c key_bindings_menu.c
 UI_SRCS			:=	$(addprefix $(UI_DIR)/, $(UI_FILE))
 
 UI_COMPONENT_DIR	:=	$(UI_DIR)/components

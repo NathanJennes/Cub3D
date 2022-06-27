@@ -27,6 +27,7 @@ void	init_ui(void)
 	init_hud(ui);
 	init_load_menu();
 	init_map_menu();
+	init_keybings_menu();
 }
 
 static void	init_hud(t_ui *ui)

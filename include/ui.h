@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/27 18:02:19 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/27 18:33:55 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,12 @@ typedef struct s_ui_load_menu
 	size_t		save_selected;
 }	t_ui_load_menu;
 
+typedef struct s_ui_keybind_menu
+{
+	t_label		title;
+	t_img_box	img;
+}	t_ui_keybind_menu;
+
 typedef struct s_ui
 {
 	t_ui_state			prev_state;
@@ -195,6 +201,7 @@ typedef struct s_ui
 	t_ui_settings_menu	settings_menu;
 	t_ui_load_menu		load_menu;
 	t_ui_map_menu		map_menu;
+	t_ui_keybind_menu	key_menu;
 	t_mmap				minimap;
 	int64_t				tx_crosshair;
 }	t_ui;
@@ -244,7 +251,8 @@ void			render_map_menu(void);
 void			update_map_menu(void);
 
 /* Keybindings */
-void			print_keybindings(void);
+void			init_keybings_menu(void);
+void			render_keybindings_menu(void);
 
 /* Minimap */
 void			render_minimap(double zoom);
