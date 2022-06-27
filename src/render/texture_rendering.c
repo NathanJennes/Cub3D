@@ -14,7 +14,8 @@
 #include "bool.h"
 #include "core.h"
 
-inline static int	pixel_in_texture(int64_t x, int64_t y, int width, int height);
+inline static int	pixel_in_texture(int64_t x, int64_t y, int width,
+						int height);
 
 void	clear_texture(int color, int64_t tex_id)
 {
@@ -61,7 +62,8 @@ void	set_texture_pixel_unsafe(int64_t x, int64_t y,
 	dst->color = color;
 }
 
-inline static t_bool	pixel_in_texture(int64_t x, int64_t y, int width, int height)
+inline static t_bool	pixel_in_texture(int64_t x, int64_t y, int width,
+			int height)
 {
 	if (x < 0 || x >= width || y < 0 || y >= height)
 		return (FALSE);

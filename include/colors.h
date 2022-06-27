@@ -29,16 +29,11 @@
 # define BKGD_COLOR		0x0037464B
 
 /* colors */
-int			trgb(int t, int r, int g, int b)
-NOPROF;
-int			get_t(int trgb)
-NOPROF;
-int			get_r(int trgb)
-NOPROF;
-int			get_g(int trgb)
-NOPROF;
-int			get_b(int trgb)
-NOPROF;
+int			trgb(int t, int r, int g, int b);
+int			get_t(int trgb);
+int			get_r(int trgb);
+int			get_g(int trgb);
+int			get_b(int trgb);
 
 /* colors utils */
 int			color_lerp(int col1, int col2, double value);

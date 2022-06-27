@@ -13,13 +13,13 @@
 #include "core.h"
 #include "leaky.h"
 
-int			parse_fov(char *line, t_settings *settings);
-int			parse_sens(char *line, t_settings *settings);
-int			parse_last_save(char *line, t_settings *settings);
+int				parse_fov(char *line, t_settings *settings);
+int				parse_sens(char *line, t_settings *settings);
+int				parse_last_save(char *line, t_settings *settings);
 
 inline static void	set_settings_out(t_settings *settings_out);
-inline static int	parse_line_settings(char *line, t_settings *settings);
-inline static int	parse_win(char *line, t_settings *settings);
+inline static int		parse_line_settings(char *line, t_settings *settings);
+inline static int		parse_win(char *line, t_settings *settings);
 
 int	deserialize_settings(t_settings *settings_out, int fd)
 {

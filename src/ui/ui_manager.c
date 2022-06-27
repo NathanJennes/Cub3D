@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:00:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/26 18:05:05 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/27 17:35:53 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,37 +29,6 @@ void	update_load_menu_click_end(int mouse_btn);
 void	update_map_menu_click_begin(int mouse_btn);
 void	update_map_menu_click_end(int mouse_btn);
 
-int	render_ui(void)
-{
-	t_mlx			*app;
-
-	app = get_app();
-	if (app->state != IN_MENU)
-	{
-		if (app->ui.state == KEYBINDS_MENU)
-			print_keybindings();
-		else if (app->ui.state == MAP_MENU)
-			render_map_menu();
-		return (0);
-	}
-	mlx_mouse_show();
-	if (app->ui.state == MAIN_MENU)
-	{
-		if (app->maps_count > 0)
-			render_main_menu_background();
-		else
-			clear_screen(BKGD_COLOR);
-		render_main_menu();
-	}
-	else if (app->ui.state == NEW_GAME_MENU)
-		render_new_game_menu();
-	else if (app->ui.state == OPTION_MENU)
-		render_settings_menu();
-	else if (app->ui.state == LOAD_MENU)
-		render_load_menu();
-	return (0);
-}
-
 void	update_ui(void)
 {
 	t_mlx	*app;
@@ -67,8 +36,7 @@ void	update_ui(void)
 	app = get_app();
 	if (app->state != IN_MENU)
 	{
-		if (app->ui.state == MAP_MENU)
-			update_map_menu();
+		update_map_menu();
 		return ;
 	}
 	if (app->ui.state == MAIN_MENU)
@@ -111,7 +79,7 @@ void	update_ui_click_end(int button)
 	{
 		if (app->ui.state == MAP_MENU)
 			update_map_menu_click_end(button);
-		return;
+		return ;
 	}
 	if (app->ui.state == MAIN_MENU)
 		update_main_menu_click_end(button);

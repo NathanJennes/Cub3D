@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:50:34 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/16 17:07:54 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/27 17:44:44 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ void	update_new_game_menu_click_end(int button)
 	update_ui_button_click_end(&menu->btn_down, button);
 	update_ui_button_click_end(&menu->btn_up, button);
 	update_ui_button_click_end(&menu->btn_start, button);
-	update_ui_checkbox_click_end(&menu->btn_save[0], button);
-	update_ui_checkbox_click_end(&menu->btn_save[1], button);
-	update_ui_checkbox_click_end(&menu->btn_save[2], button);
-	update_ui_checkbox_click_end(&menu->btn_save[3], button);
-	update_ui_checkbox_click_end(&menu->btn_save[4], button);
+	update_ui_checkbox_click_end(&menu->btn_save[0], button, get_mouse_pos());
+	update_ui_checkbox_click_end(&menu->btn_save[1], button, get_mouse_pos());
+	update_ui_checkbox_click_end(&menu->btn_save[2], button, get_mouse_pos());
+	update_ui_checkbox_click_end(&menu->btn_save[3], button, get_mouse_pos());
+	update_ui_checkbox_click_end(&menu->btn_save[4], button, get_mouse_pos());
 }
 
 void	refresh_new_game_menu(void)

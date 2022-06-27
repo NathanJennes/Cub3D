@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_utils.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:53:13 by cybattis          #+#    #+#             */
-/*   Updated: 2022/05/26 12:49:15 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/27 18:02:19 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,12 @@
 # define ERR_FONT_META_NO_EQUAL_AFTER_FIELD -8
 # define ERR_FONT_META_REACHED_EOF -9
 
-
 /* error_utils.c */
 void		ft_ferror(int fd);
 void		ft_error_msg(char *msg);
 void		ft_free_2d(void **ptr, int i);
 int			error_code_msg(int code, char *msg);
 
-int			print_cub_err(int err) NOPROF;
+int			print_cub_err(int err);
 
 #endif

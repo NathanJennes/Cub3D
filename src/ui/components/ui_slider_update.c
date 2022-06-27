@@ -15,8 +15,8 @@
 #include "libft.h"
 #include "input_code.h"
 
-inline static int64_t	simple_dist(int64_t x1, int64_t y1, int64_t x2, int64_t y2);
-
+inline static int64_t	simple_dist(int64_t x1, int64_t y1, int64_t x2,
+							int64_t y2);
 
 void	update_ui_slider(t_slider *slider)
 {
@@ -27,7 +27,7 @@ void	update_ui_slider(t_slider *slider)
 	if (!slider->infos.displayed)
 		return ;
 	infos = &slider->infos;
-	mouse = get_mouse_position();
+	mouse = get_mouse_pos();
 	if (simple_dist(mouse.x, mouse.y, infos->pos.x + slider->cursor_pos_x
 			+ infos->size.y / 2, infos->pos.y + infos->size.y / 2)
 		<= infos->size.y * infos->size.y || slider->selected)
@@ -54,7 +54,7 @@ void	update_ui_slider_click_begin(t_slider *slider, int mouse_btn)
 	if (!slider->infos.displayed || mouse_btn != MOUSE_LEFT)
 		return ;
 	infos = &slider->infos;
-	mouse_pos = get_mouse_position();
+	mouse_pos = get_mouse_pos();
 	if (mouse_pos.x >= infos->pos.x
 		&& mouse_pos.x <= infos->pos.x + infos->size.x
 		&& mouse_pos.y >= infos->pos.y
@@ -73,7 +73,8 @@ void	update_ui_slider_click_end(t_slider *slider, int mouse_btn)
 	slider->selected = FALSE;
 }
 
-inline static int64_t	simple_dist(int64_t x1, int64_t y1, int64_t x2, int64_t y2)
+inline static int64_t	simple_dist(int64_t x1, int64_t y1, int64_t x2,
+			int64_t y2)
 {
 	int64_t	dist;
 	int64_t	x;

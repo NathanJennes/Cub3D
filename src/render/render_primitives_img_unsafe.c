@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_primitives_img_unsafe.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:17:28 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/24 15:26:38 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/27 17:08:02 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 #include "core.h"
 #include "render.h"
 
-void	draw_rect_tex_unsafe(t_ivec2 pos, t_ivec2 size,
-	int color, int64_t tex_id)
+static void	divide_by_two(t_ivec2 *pos, t_ivec2 *size);
+
+void	draw_rect_tex_unsafe(t_ivec2 pos, t_ivec2 size, int color,
+			int64_t tex_id)
 {
 	t_ivec2		iter;
 	int64_t		*pixels;
@@ -27,8 +29,7 @@ void	draw_rect_tex_unsafe(t_ivec2 pos, t_ivec2 size,
 	if (!tex)
 		return ;
 	pixels = (int64_t *)tex->original;
-	size.x /= 2;
-	pos.x /= 2;
+	divide_by_two(&pos, &size);
 	((int *)&col)[0] = color;
 	((int *)&col)[1] = color;
 	width2 = tex->width / 2;
@@ -43,6 +44,12 @@ void	draw_rect_tex_unsafe(t_ivec2 pos, t_ivec2 size,
 		}
 		iter.y++;
 	}
+}
+
+static void	divide_by_two(t_ivec2 *pos, t_ivec2 *size)
+{
+	(*size).x /= 2;
+	(*pos).x /= 2;
 }
 
 void	draw_circle_tex_unsafe(t_ivec2 pos, int64_t diameter,

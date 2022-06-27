@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/26 17:05:46 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/27 18:02:19 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 # define MMAP_ZOOM_FACTOR	20
 # define MMAP_PLAYER_DIAM	8
 
-typedef struct s_mlx	t_mlx;
+typedef struct s_mlx		t_mlx;
+typedef struct s_settings	t_settings;
 
 typedef enum e_ui_state
 {
@@ -96,7 +97,7 @@ typedef struct s_label
 	t_ui_component	infos;
 	char			*text;
 	int64_t			tex_id;
-	int 			font_size;
+	int				font_size;
 }	t_label;
 
 typedef struct s_img_box
@@ -227,7 +228,7 @@ void			update_new_game_menu(void);
 void			new_game_menu_refresh(void);
 
 /* Settings menu */
-void			init_settings_menu(void);
+void			init_settings_menu(t_settings *settings);
 void			render_settings_menu(void);
 void			update_settings_menu(void);
 
@@ -243,7 +244,6 @@ void			render_map_menu(void);
 void			update_map_menu(void);
 
 /* Keybindings */
-void			init_print_keybindings(void);
 void			print_keybindings(void);
 
 /* Minimap */
@@ -264,13 +264,14 @@ void			update_ui_checkbox(t_checkbox *checkbox);
 void			render_ui_checkbox(t_checkbox *checkbox);
 void			update_ui_checkbox_click_begin(t_checkbox *checkbox,
 					int mouse_btn);
-void			update_ui_checkbox_click_end(t_checkbox *checkbox,
-					int mouse_btn);
+void			update_ui_checkbox_click_end(t_checkbox *ckx, int mouse_btn,
+					t_ivec2 mouse_pos);
 
 t_img_box		create_img_box(char *texture_path, t_ivec2 pos);
 void			render_ui_img_box(t_img_box *box);
 
-t_label create_label(t_ivec2 pos, char *text, t_ivec2 size, int font_size);
+t_label			create_label(t_ivec2 pos, char *text, t_ivec2 size,
+					int font_size);
 void			render_ui_label(t_label *label);
 void			update_ui_label_text(t_label *label, char *text);
 
@@ -281,19 +282,19 @@ void			update_ui_slider_click_begin(t_slider *slider, int mouse_btn);
 void			update_ui_slider_click_end(t_slider *slider, int mouse_btn);
 
 /* Ui positionning */
-t_ui_component	*uic_center_win_w(t_ui_component *comp) NOPROF;
-t_ui_component	*uic_center_win_h(t_ui_component *comp) NOPROF;
-t_ui_component	*uic_center_win(t_ui_component *comp) NOPROF;
+t_ui_component	*uic_center_win_w(t_ui_component *comp);
+t_ui_component	*uic_center_win_h(t_ui_component *comp);
+t_ui_component	*uic_center_win(t_ui_component *comp);
 
-t_ui_component	*uic_padding_up(t_ui_component *comp, int64_t pad) NOPROF;
-t_ui_component	*uic_padding_right(t_ui_component *comp, int64_t pad) NOPROF;
-t_ui_component	*uic_padding_down(t_ui_component *comp, int64_t pad) NOPROF;
-t_ui_component	*uic_padding_left(t_ui_component *comp, int64_t pad) NOPROF;
-t_ui_component	*uic_padding(t_ui_component *comp, t_ivec2 td, t_ivec2 lr) NOPROF;
+t_ui_component	*uic_padding_up(t_ui_component *comp, int64_t pad);
+t_ui_component	*uic_padding_right(t_ui_component *comp, int64_t pad);
+t_ui_component	*uic_padding_down(t_ui_component *comp, int64_t pad);
+t_ui_component	*uic_padding_left(t_ui_component *comp, int64_t pad);
+t_ui_component	*uic_padding(t_ui_component *comp, t_ivec2 td, t_ivec2 lr);
 
-t_ui_component	*uic_below(t_ui_component *comp, t_ui_component *other) NOPROF;
-t_ui_component	*uic_above(t_ui_component *comp, t_ui_component *other) NOPROF;
-t_ui_component	*uic_side_left(t_ui_component *comp, t_ui_component *other) NOPROF;
-t_ui_component	*uic_side_right(t_ui_component *comp, t_ui_component *other) NOPROF;
+t_ui_component	*uic_below(t_ui_component *comp, t_ui_component *other);
+t_ui_component	*uic_above(t_ui_component *comp, t_ui_component *other);
+t_ui_component	*uic_side_left(t_ui_component *comp, t_ui_component *other);
+t_ui_component	*uic_side_right(t_ui_component *comp, t_ui_component *other);
 
 #endif

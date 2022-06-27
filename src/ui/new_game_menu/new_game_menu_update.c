@@ -14,7 +14,8 @@
 #include "core.h"
 #include "render.h"
 
-inline static void	update_checkbox_text(t_ui_new_game_menu *menu, t_checkbox *checkbox, int64_t i);
+inline static void	update_checkbox_text(t_ui_new_game_menu *menu,
+						t_checkbox *checkbox, int64_t i);
 
 void	update_display_status(void)
 {
@@ -60,7 +61,8 @@ void	new_game_menu_refresh(void)
 	}
 }
 
-inline static void	update_checkbox_text(t_ui_new_game_menu *menu, t_checkbox *checkbox, int64_t i)
+inline static void	update_checkbox_text(t_ui_new_game_menu *menu,
+			t_checkbox *checkbox, int64_t i)
 {
 	t_mlx	*app;
 
@@ -68,8 +70,10 @@ inline static void	update_checkbox_text(t_ui_new_game_menu *menu, t_checkbox *ch
 	if (checkbox->tex_id == INVALID_TEXTURE)
 		checkbox->tex_id = new_texture(250, 50);
 	clear_texture(trgb(0, 255, 51, 51), checkbox->tex_id);
-	render_text_tex(app->maps[i + menu->first_save_offset].name, "HelveticaNeue",
-		text_center(app->maps[i + menu->first_save_offset].name, "HelveticaNeue", 30,
+	render_text_tex(app->maps[i + menu->first_save_offset].name,
+		"HelveticaNeue",
+		text_center(app->maps[i + menu->first_save_offset].name,
+			"HelveticaNeue", 30,
 			ivec2(125, 25)),
 		ivec2(30, checkbox->tex_id));
 	update_texture_variations(checkbox->tex_id);

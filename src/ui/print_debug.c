@@ -19,7 +19,6 @@ inline static void	debug_rays(t_ivec2 *pos);
 inline static void	debug_settings(t_ivec2 *pos);
 
 void	print_debug(void)
-NOPROF
 {
 	t_ivec2	debug_pos;
 
@@ -35,14 +34,14 @@ NOPROF
 	if (get_app()->renderer.multithreading)
 	{
 		render_text("multithreaded", DEFAULT_FONT, 20,
-		text_center_height("singlethreaded", DEFAULT_FONT, 20,
-			ivec2(debug_pos.x, debug_pos.y)));
+			text_center_height("singlethreaded", DEFAULT_FONT, 20,
+				ivec2(debug_pos.x, debug_pos.y)));
 	}
 	else
 	{
 		render_text("singlethreaded", DEFAULT_FONT, 20,
-		text_center_height("singlethreaded", DEFAULT_FONT, 20,
-			ivec2(debug_pos.x, debug_pos.y)));
+			text_center_height("singlethreaded", DEFAULT_FONT, 20,
+				ivec2(debug_pos.x, debug_pos.y)));
 	}
 }
 
@@ -62,7 +61,6 @@ inline static void	debug_rays(t_ivec2 *pos)
 }
 
 inline static void	debug_player(t_ivec2 *pos)
-NOPROF
 {
 	t_player	*player;
 
@@ -84,17 +82,31 @@ NOPROF
 		ivec2(pos->x + str_px_size("Map pos ") + 25, pos->y));
 	pos->y += 40;
 	render_text("Mouse pos ", DEFAULT_FONT, 15, ivec2(pos->x, pos->y));
-	print_ivec2(get_mouse_position(), DEFAULT_FONT, 15,
-			ivec2(pos->x + str_px_size("Mouse pos ") + 25, pos->y));
+	print_ivec2(get_mouse_pos(), DEFAULT_FONT, 15,
+		ivec2(pos->x + str_px_size("Mouse pos ") + 25, pos->y));
 	pos->y += 10;
 }
 
 inline static void	debug_settings(t_ivec2 *pos)
-NOPROF
 {
 	render_text("Settings", DEFAULT_FONT, 15, ivec2(pos->x, pos->y));
 	pos->y += 20;
 	render_text("FOV ", DEFAULT_FONT, 15, ivec2(pos->x, pos->y));
 	print_int(get_settings()->fov, DEFAULT_FONT, 15,
 		ivec2(pos->x + str_px_size("FOV ") + 25, pos->y));
+}
+
+void	debug_time_frame(const t_mlx *app, struct timeval *time)
+{
+	if (app->ui.debug_state == LVL2)
+		printf("[FRAME - RENDER]: background: %lldms, walls: "
+			"%lldms, test_scene: %lldms, total %lldms\n",
+			(int64_t)((time[1].tv_sec * 1000 + time[1].tv_usec / 1000)
+				- (time[0].tv_sec * 1000 + time[0].tv_usec / 1000)),
+			(int64_t)((time[2].tv_sec * 1000 + time[2].tv_usec / 1000)
+				- (time[1].tv_sec * 1000 + time[1].tv_usec / 1000)),
+			(int64_t)((time[3].tv_sec * 1000 + time[3].tv_usec / 1000)
+				- (time[2].tv_sec * 1000 + time[2].tv_usec / 1000)),
+			(int64_t)((time[3].tv_sec * 1000 + time[3].tv_usec / 1000)
+				- (time[0].tv_sec * 1000 + time[0].tv_usec / 1000)));
 }

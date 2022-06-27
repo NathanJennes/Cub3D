@@ -23,7 +23,7 @@ void	init_ui(void)
 	ui->state = MAIN_MENU;
 	init_main_menu();
 	init_new_game_menu();
-	init_settings_menu();
+	init_settings_menu(get_settings());
 	init_hud(ui);
 	init_load_menu();
 	init_map_menu();

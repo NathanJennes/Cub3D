@@ -9,7 +9,7 @@ PERF_NAME				:=	cub3dperf
 CORE_DIR		:=	core
 CORE_FILE		:=	main.c exit.c main_loop.c init.c gc.c collision.c			\
 					getters.c getters_2.c window.c cub_error.c player.c			\
-					player_update.c
+					player_update.c getters_3.c
 CORE_SRCS		:=	$(addprefix $(CORE_DIR)/, $(CORE_FILE))
 
 PROFILING_DIR	:=	profiling
@@ -18,16 +18,16 @@ PROFILING_SRCS	:=	$(addprefix $(PROFILING_DIR)/, $(PROFILING_FILE))
 
 INPUT_DIR		:=	$(CORE_DIR)/input
 INPUT_FILE		:=	input_device.c key_listeners.c key_manager.c	\
-					mouse_listeners.c mouse_manager.c
+					mouse_listeners.c mouse_manager.c key_listeners_handlers.c
 INPUT_SRCS		:=	$(addprefix $(INPUT_DIR)/, $(INPUT_FILE))
 
 RENDER_DIR		:=	render
 RENDER_FILE		:=	render_primitives.c render_primitives_img.c	\
 					render_primitives_unsafe.c render_primitives_img_unsafe.c	\
-					colors.c colors_utils.c	\
+					colors.c colors_utils.c	utils.c texture_wall_utils.c	\
 					screen_rendering.c texture_rendering.c	\
 					render_ui_texture.c render_text.c	\
-					render_walls.c render_debug.c raycasting.c	\
+					render_walls.c render_debug.c render_debug_2.c raycasting.c	\
 					lighting.c light_manager.c texture_wall.c	\
 					init_renderer.c renderer_worker.c render_main_menu_background.c
 RENDER_SRCS		:=	$(addprefix $(RENDER_DIR)/, $(RENDER_FILE))
@@ -43,8 +43,9 @@ SPRITE_FILE		:=	render_sprite.c sprite_manager.c depth_control.c
 SPRITE_SRCS		:=	$(addprefix $(SPRITE_DIR)/, $(SPRITE_FILE))
 
 UI_DIR			:=	ui
-UI_FILE			:=	fps_counter.c ui_helper.c ui_manager.c						\
-					ui_minimap.c ui_init.c print_debug.c print_keybindings.c
+UI_FILE			:=	fps_counter.c ui_helper.c ui_manager.c ui_manager_render.c	\
+					ui_minimap.c ui_init.c print_debug.c	\
+					crosshair.c ui_helper_2.c
 UI_SRCS			:=	$(addprefix $(UI_DIR)/, $(UI_FILE))
 
 UI_COMPONENT_DIR	:=	$(UI_DIR)/components
@@ -72,7 +73,8 @@ UI_NEW_GAME_MENU_SRCS	:= $(addprefix $(UI_NEW_GAME_MENU_DIR)/, $(UI_NEW_GAME_MEN
 
 UI_SETTINGS_MENU_DIR	:=	$(UI_DIR)/settings_menu
 UI_SETTINGS_MENU_FILE	:=	settings_menu.c settings_menu_init.c settings_menu_update.c	\
-							settings_menu_buttons.c settings_menu_buttons2.c
+							settings_menu_buttons.c settings_menu_buttons2.c			\
+							settings_menu_init_2.c
 UI_SETTINGS_MENU_SRCS	:= $(addprefix $(UI_SETTINGS_MENU_DIR)/, $(UI_SETTINGS_MENU_FILE))
 
 UI_LOAD_MENU_DIR		:=	$(UI_DIR)/load_menu
@@ -97,13 +99,13 @@ IO_FILE			:=	savegame.c saves_manager.c loaded_map.c loaded_map_manager.c\
 IO_SRCS			:=	$(addprefix $(IO_DIR)/, $(IO_FILE))
 
 SAVE_DIR		:=	$(IO_DIR)/save
-SAVE_FILE		:=	save_deserialization.c	\
+SAVE_FILE		:=	save_deserialization.c free_save.c	\
 					save_deserialization_mandatory.c save_deserialization_mandatory_utils.c	\
 					save_deserialization_map.c save_deserialization_map_content.c	\
 					save_deserialization_map_specs.c save_deserialization_map_textures.c	\
 					save_deserialization_player.c save_deserialization_mandatory_light.c	\
 					save_serialization.c	\
-					map_construction.c map_checking.c player_checking.c
+					map_construction.c map_checking.c player_checking.c map_checking_utils.c
 SAVE_SRCS		:=	$(addprefix $(SAVE_DIR)/, $(SAVE_FILE))
 
 SETTINGS_DIR		:=	$(IO_DIR)/settings

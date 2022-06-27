@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings_menu_init.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:36:08 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/20 16:58:51 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/27 17:51:52 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,35 @@
 #include "leaky.h"
 #include "render.h"
 
-int			btn_settings_back(t_button *button);
-int			chk_select_res_min(t_checkbox *checkbox);
-int			chk_unselect_res_min(t_checkbox *checkbox);
-int			chk_select_res_med(t_checkbox *checkbox);
-int			chk_unselect_res_med(t_checkbox *checkbox);
-int			chk_select_res_high(t_checkbox *checkbox);
-int			chk_unselect_res_high(t_checkbox *checkbox);
-int			chk_select_res_fullscreen(t_checkbox *checkbox);
-int			chk_unselect_res_fullscreen(t_checkbox *checkbox);
+int					btn_settings_back(t_button *button);
+int					chk_select_res_min(t_checkbox *checkbox);
+int					chk_unselect_res_min(t_checkbox *checkbox);
+int					chk_select_res_med(t_checkbox *checkbox);
+int					chk_unselect_res_med(t_checkbox *checkbox);
+int					chk_select_res_high(t_checkbox *checkbox);
+int					chk_unselect_res_high(t_checkbox *checkbox);
+int					chk_select_res_fullscreen(t_checkbox *checkbox);
+int					chk_unselect_res_fullscreen(t_checkbox *checkbox);
+void				init_current_res_checkbox(t_ui_settings_menu *menu);
 
-inline static void	init_positions_settings_menu(t_ui_settings_menu *menu);
-inline static void	init_textures_settings(t_ui_settings_menu *menu);
-inline static void	init_current_res_checkbox(t_ui_settings_menu *menu);
+inline static void		init_positions_settings_menu(t_ui_settings_menu *menu);
+inline static void		init_textures_settings(t_ui_settings_menu *menu);
+inline static void		init_texture_settings_2(t_ui_settings_menu *menu);
 
-void	init_settings_menu(void)
+void	init_settings_menu(t_settings *settings)
 {
 	t_ui_settings_menu	*menu;
-	t_settings			*settings;
 
-	settings = get_settings();
 	menu = &get_app()->ui.settings_menu;
 	menu->slid_fov = create_slider(ivec2_zero(),
-			ivec2(350, 20), vec3(10.0, 170.0,
-				(float)get_settings()->fov));
+			ivec2(350, 20), vec3(10.0, 170.0, (float)get_settings()->fov));
 	menu->lbl_fov = create_label(ivec2_zero(), gc_itoa(get_settings()->fov),
 			ivec2(200, 100), 0);
 	menu->slid_sens = create_slider(ivec2_zero(),
 			ivec2(350, 20), vec3(0.1, 10.0,
 				(float)get_settings()->cam_sensitivity));
 	menu->lbl_sens = create_label(ivec2_zero(),
-			gc_itoa(get_settings()->cam_sensitivity), ivec2(200, 100), 0);
+			gc_itoa(settings->cam_sensitivity), ivec2(200, 100), 0);
 	menu->chk_res_min = create_checkbox(NULL, ivec2_zero(),
 			chk_select_res_min, chk_unselect_res_min);
 	menu->chk_res_med = create_checkbox(NULL, ivec2_zero(),
@@ -58,8 +56,6 @@ void	init_settings_menu(void)
 	menu->btn_back = create_button("assets/ui/left_arrow.xpm",
 			ivec2(50, settings->win_h - 50), btn_settings_back);
 	init_textures_settings(menu);
-	init_positions_settings_menu(menu);
-	init_current_res_checkbox(menu);
 }
 
 inline static void	init_positions_settings_menu(t_ui_settings_menu *menu)
@@ -99,6 +95,13 @@ inline static void	init_textures_settings(t_ui_settings_menu *menu)
 		ivec2(22, menu->chk_res_med.tex_id));
 	finish_new_texture(menu->chk_res_med.tex_id);
 	menu->chk_res_med.infos.size = get_texture_size(menu->chk_res_med.tex_id);
+	init_texture_settings_2(menu);
+	init_positions_settings_menu(menu);
+	init_current_res_checkbox(menu);
+}
+
+inline static void	init_texture_settings_2(t_ui_settings_menu *menu)
+{
 	menu->chk_res_high.tex_id = new_texture(200, 60);
 	clear_texture(RED, menu->chk_res_high.tex_id);
 	render_text_tex("1920x1080", DEFAULT_FONT,
@@ -115,17 +118,4 @@ inline static void	init_textures_settings(t_ui_settings_menu *menu)
 	finish_new_texture(menu->chk_res_fullscreen.tex_id);
 	menu->chk_res_fullscreen.infos.size = \
 		get_texture_size(menu->chk_res_fullscreen.tex_id);
-}
-
-inline static void	init_current_res_checkbox(t_ui_settings_menu *menu)
-{
-	t_settings	*settings;
-
-	settings = get_settings();
-	if (settings->win_w == 960)
-		menu->chk_res_min.checked = TRUE;
-	else if (settings->win_w == 1280)
-		menu->chk_res_med.checked = TRUE;
-	else
-		menu->chk_res_high.checked = TRUE;
 }

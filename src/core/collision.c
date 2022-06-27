@@ -37,13 +37,15 @@ static void	check_xpos(t_vec2 direction, t_vec2 future_pos)
 	player = get_player();
 	if (direction.x > 0)
 	{
-		dx = ivec2((int64_t)(future_pos.x + COLLISION_PAD), (int64_t)player->world_pos.y);
+		dx = ivec2((int64_t)(future_pos.x + COLLISION_PAD),
+				(int64_t)player->world_pos.y);
 		if (get_map_type(dx.x / CELL_SIZE, dx.y / CELL_SIZE) == EMPTY)
 			player->world_pos.x = future_pos.x;
 	}
 	else if (direction.x < 0)
 	{
-		dx = ivec2((int64_t)(future_pos.x - COLLISION_PAD), (int64_t)player->world_pos.y);
+		dx = ivec2((int64_t)(future_pos.x - COLLISION_PAD),
+				(int64_t)player->world_pos.y);
 		if (get_map_type(dx.x / CELL_SIZE, dx.y / CELL_SIZE) == EMPTY)
 			player->world_pos.x = future_pos.x;
 	}
@@ -57,13 +59,15 @@ static void	check_ypos(t_vec2 direction, t_vec2 future_pos)
 	player = get_player();
 	if (direction.y > 0)
 	{
-		dy = ivec2((int64_t)player->world_pos.x, (int64_t)(future_pos.y + COLLISION_PAD));
+		dy = ivec2((int64_t)player->world_pos.x,
+				(int64_t)(future_pos.y + COLLISION_PAD));
 		if (get_map_type(dy.x / CELL_SIZE, dy.y / CELL_SIZE) == EMPTY)
 			player->world_pos.y = future_pos.y;
 	}
 	else if (direction.y < 0)
 	{
-		dy = ivec2((int64_t)player->world_pos.x, (int64_t)(future_pos.y - COLLISION_PAD));
+		dy = ivec2((int64_t)player->world_pos.x,
+				(int64_t)(future_pos.y - COLLISION_PAD));
 		if (get_map_type(dy.x / CELL_SIZE, dy.y / CELL_SIZE) == EMPTY)
 			player->world_pos.y = future_pos.y;
 	}

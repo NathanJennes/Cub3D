@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_listeners.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:31:13 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/26 17:54:29 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/27 13:57:43 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ void	mouse_click_begin(int button)
 		color.g = (uint8_t)map_menu->slid_green_color.value;
 		color.b = (uint8_t)map_menu->slid_blue_color.value;
 		add_light(&get_app()->gamestate,
-			vec3(get_mouse_position().x, get_mouse_position().y, 18),
+			vec3(get_mouse_pos().x, get_mouse_pos().y, 18),
 			color,
 			100.0);
-		new_light = &get_app()->gamestate.lights[get_app()->gamestate.light_count - 1];
+		new_light = &get_gamestate()->lights[get_gamestate()->light_count - 1];
 		new_sprite.tex_id = get_app()->lamp_tex_id;
 		new_sprite.size = ivec2(3, 4);
-		new_sprite.pos = vec3(get_mouse_position().x, get_mouse_position().y, 8);
+		new_sprite.pos = vec3(get_mouse_pos().x, get_mouse_pos().y, 8);
 		new_sprite.color = vec3((double)new_light->color.r / 255.0,
-			(double)new_light->color.g / 255.0,
-			(double)new_light->color.b / 255.0);
+				(double)new_light->color.g / 255.0,
+				(double)new_light->color.b / 255.0);
 		add_sprite_to_current_game(new_sprite);
 	}
 }
@@ -83,12 +83,14 @@ void	mouse_wheel_down(void)
 	if (app->state == IN_GAME)
 		return ;
 	ui = get_ui();
-	if (ui->state == NEW_GAME_MENU && ui->new_game_menu.first_save_offset < app->maps_count - 5)
+	if (ui->state == NEW_GAME_MENU
+		&& ui->new_game_menu.first_save_offset < app->maps_count - 5)
 	{
 		ui->new_game_menu.first_save_offset++;
 		new_game_menu_refresh();
 	}
-	if (ui->state == LOAD_MENU && ui->load_menu.save_selected < app->savegames_count)
+	if (ui->state == LOAD_MENU
+		&& ui->load_menu.save_selected < app->savegames_count)
 	{
 		if (ui->load_menu.save_selected == app->savegames_count - 1)
 			ui->load_menu.save_selected = 0;

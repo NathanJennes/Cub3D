@@ -111,7 +111,8 @@ inline static void	render_mmap_empty(int x, int y, int cell_size)
 
 int	outside_mmap_bounds(int x, int y)
 {
-	if (x < MMAP_PAD || x > MMAP_PAD + get_ui()->minimap.mmap_w || y < MMAP_PAD || y > MMAP_PAD
+	if (x < MMAP_PAD || x > MMAP_PAD + get_ui()->minimap.mmap_w
+		|| y < MMAP_PAD || y > MMAP_PAD
 		+ get_ui()->minimap.mmap_h)
 		return (1);
 	return (0);

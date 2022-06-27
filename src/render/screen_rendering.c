@@ -12,14 +12,14 @@
 
 #include "core.h"
 
-inline static int	pixel_in_screen(int64_t x, int64_t y) NOPROF;
+inline static int	pixel_in_screen(int64_t x, int64_t y);
 
 void	clear_screen(int color)
 {
-	int64_t	i;
-	int64_t	total;
-	int64_t	*pixels;
-	int64_t	col;
+	int64_t		i;
+	int64_t		total;
+	int64_t		*pixels;
+	int64_t		col;
 	t_settings	*settings;
 
 	settings = get_settings();
@@ -36,7 +36,6 @@ void	clear_screen(int color)
 }
 
 void	set_screen_pixel(int64_t x, int64_t y, int color)
-NOPROF
 {
 	char	*dst;
 	t_frame	*frame;
@@ -50,7 +49,6 @@ NOPROF
 }
 
 void	set_screen_pixel_unsafe(int64_t x, int64_t y, int color)
-NOPROF
 {
 	char	*dst;
 	t_frame	*frame;
@@ -62,7 +60,6 @@ NOPROF
 }
 
 inline static int	pixel_in_screen(int64_t x, int64_t y)
-NOPROF
 {
 	t_settings	*settings;
 

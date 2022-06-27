@@ -20,8 +20,8 @@ void			create_texture_vflip(t_texture *tex);
 void			create_texture_grayscale(t_texture *tex);
 void			create_texture_inversed(t_texture *tex);
 void			create_texture_inverse_grayscale(t_texture *tex);
-
-inline static t_rgb	**allocate_texture(t_texture *tex, int64_t width, int64_t height);
+inline static t_rgb	**allocate_texture(t_texture *tex, int64_t width,
+					int64_t height);
 
 void	create_texture_variations(t_texture *tex)
 {
@@ -30,7 +30,7 @@ void	create_texture_variations(t_texture *tex)
 	tex->grayscale_handle = mlx_new_image(get_mlx(), tex->width, tex->height);
 	tex->inversed_handle = mlx_new_image(get_mlx(), tex->width, tex->height);
 	tex->inversed_grayscale_handle = mlx_new_image(get_mlx(),
-		tex->width, tex->height);
+			tex->width, tex->height);
 }
 
 void	shade_texture_variations(t_texture *tex)
@@ -42,7 +42,8 @@ void	shade_texture_variations(t_texture *tex)
 	create_texture_inverse_grayscale(tex);
 }
 
-inline static t_rgb	**allocate_texture(t_texture *tex, int64_t width, int64_t height)
+inline static t_rgb	**allocate_texture(t_texture *tex, int64_t width,
+			int64_t height)
 {
 	int64_t	i;
 	int64_t	j;

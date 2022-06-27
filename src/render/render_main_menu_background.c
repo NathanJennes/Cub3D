@@ -14,7 +14,7 @@
 #include "core.h"
 
 void				change_background(t_mlx *app);
-inline static void	setup_camera(t_mlx *app);
+inline static void		setup_camera(t_mlx *app);
 
 void	render_main_menu_background(void)
 {
@@ -63,7 +63,9 @@ inline static void	setup_camera(t_mlx *app)
 	cam_pos = ivec2(rand() % infos->width, rand() % infos->height);
 	while (infos->map[cam_pos.y][cam_pos.x] == WALL)
 		cam_pos = ivec2(rand() % infos->width, rand() % infos->height);
-	app->gamestate.player.world_pos = vec2(cam_pos.x * CELL_SIZE + CELL_SIZE / 2,
-		cam_pos.y * CELL_SIZE + CELL_SIZE / 2);
-	app->gamestate.player.direction = (double)(rand() % 4) + (double)(rand() % 10) / 10.0;
+	app->gamestate.player.world_pos = \
+		vec2(cam_pos.x * CELL_SIZE + CELL_SIZE / 2,
+			cam_pos.y * CELL_SIZE + CELL_SIZE / 2);
+	app->gamestate.player.direction = \
+		(double)(rand() % 4) + (double)(rand() % 10) / 10.0;
 }

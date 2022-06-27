@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_keybindings.c                                :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/25 17:52:33 by Cyril             #+#    #+#             */
-/*   Updated: 2022/06/25 17:54:49 by Cyril            ###   ########.fr       */
+/*   Created: 2022/06/27 16:59:20 by cybattis          #+#    #+#             */
+/*   Updated: 2022/06/27 16:59:20 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ui.h"
 #include "core.h"
 
-void	init_print_keybindings(void)
+int	get_map_type(int64_t x, int64_t y)
 {
+	t_map_info	*map;
 
-}
-
-void	print_keybindings(void)
-{
-
+	map = get_map_infos();
+	if (x < 0 || x >= map->width || y < 0 || y >= map->height)
+		return (VOID);
+	return (map->map[y][x]);
 }

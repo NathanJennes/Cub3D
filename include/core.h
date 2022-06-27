@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/26 17:22:49 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/27 18:02:19 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,15 @@ typedef struct s_ray
 	t_vec2		ray;
 }	t_ray;
 
+typedef struct s_raycasting
+{
+	t_ivec2	step;
+	t_vec2	lengths;
+	t_vec2	dists;
+	t_bool	hit;
+	int		side;
+}	t_raycasting;
+
 typedef struct s_player
 {
 	t_vec2		world_pos;
@@ -151,7 +160,6 @@ typedef struct s_settings
 	double		max_lerp;
 	char		*last_save;
 }	t_settings;
-
 
 typedef struct s_gamestate
 {
@@ -230,62 +238,64 @@ typedef struct s_mlx
 //TODO: quand on se deplace en diagonale, la minimap shake
 
 /* core.c */
-void		init_window(char *win_name);
-int			close_app(void);
-void		error_close_app(void);
-void		check_leaky_errors(void);
-void		update_precalc(void);
+void				init_window(char *win_name);
+int					close_app(void);
+void				error_close_app(void);
+void				check_leaky_errors(void);
+void				update_precalc(void);
 
 /* window.c */
-void		destroy_window(void);
+void				destroy_window(void);
 
 /* initialization */
-void		init_app(char *path);
-void		init_gc(void);
+void				init_app(char *path);
+void				init_gc(void);
 
 /* main_loop.c */
-int			main_loop(void);
-void		render_main_menu_background(void);
+int					main_loop(void);
+void				render_main_menu_background(void);
 
 /* hooks.c.c */
-int			mouse_move_hooks(int x, int y, void *unused);
+int					mouse_move_hooks(int x, int y, void *unused);
 
 /* Keys */
-t_bool		is_key_down(int keycode) NOPROF;
+t_bool				is_key_down(int keycode);
 
-void		is_colliding(t_vec2 future_pos);
+void				is_colliding(t_vec2 future_pos);
 
 /* Mouse */
-t_bool		is_mouse_down(int button) NOPROF;
+t_bool				is_mouse_down(int button);
 
-void		cub_update_mouse_pos(int x, int y) NOPROF;
-t_ivec2		get_mouse_position(void) NOPROF;
-void		reset_mouse_pos(void);
-void		update_player_vectors(t_player *player) NOPROF;
-void		update_player_direction(t_player *player, double delta_time, t_bool handle_input) NOPROF;
-void		update_player(t_player *player, t_bool handle_input) NOPROF;
-t_bool		is_player_position_legal(t_gamestate *gamestate) NOPROF;
+void				cub_update_mouse_pos(int x, int y);
+t_ivec2				get_mouse_pos(void);
+void				reset_mouse_pos(void);
+void				update_player_vectors(t_player *player);
+void				update_player_direction(t_player *player, double delta_time,
+						t_bool handle_input);
+void				update_player(t_player *player, t_bool handle_input);
+t_bool				is_player_position_legal(t_gamestate *gamestate);
 
 /* Sprites */
-void		init_sprite_manager(void) NOPROF;
-void		add_sprite_to_current_game(t_sprite sprite) NOPROF;
-void		clear_sprite_manager(void) NOPROF;
-void		generate_sprites_for_new_map(void);
-void		render_sprites(void);
+void				init_sprite_manager(void);
+void				add_sprite_to_current_game(t_sprite sprite);
+void				clear_sprite_manager(void);
+void				generate_sprites_for_new_map(void);
+void				render_sprites(void);
 
-double		get_depth_at(int64_t i) NOPROF;
-void		set_depth_at(int64_t i, double distance) NOPROF;
+double				get_depth_at(int64_t i);
+void				set_depth_at(int64_t i, double distance);
 
 /* getters */
-t_mlx				*get_app(void) NOPROF;
-t_frame				*get_frame(void) NOPROF;
-t_map_info			*get_map_infos(void) NOPROF;
-t_player			*get_player(void) NOPROF;
-void				*get_mlx(void) NOPROF;
-t_ui				*get_ui(void) NOPROF;
-t_settings			*get_settings(void) NOPROF;
-t_math				*get_math(void) NOPROF;
-t_texture_manager	*get_texture_manager(void) NOPROF;
-t_light				*get_lights(void) NOPROF;
+t_mlx				*get_app(void);
+t_frame				*get_frame(void);
+t_map_info			*get_map_infos(void);
+t_player			*get_player(void);
+void				*get_mlx(void);
+t_ui				*get_ui(void);
+t_settings			*get_settings(void);
+t_math				*get_math(void);
+t_texture_manager	*get_texture_manager(void);
+t_light				*get_lights(void);
+t_gamestate			*get_gamestate(void);
 
 #endif

@@ -15,8 +15,8 @@
 #include "mlx.h"
 #include "core.h"
 
-void	create_texture_variations(t_texture *tex);
-void	shade_texture_variations(t_texture *tex);
+void			create_texture_variations(t_texture *tex);
+void			shade_texture_variations(t_texture *tex);
 
 inline static void	transfer_texture_data(t_xpm_file *file, t_texture *texture);
 

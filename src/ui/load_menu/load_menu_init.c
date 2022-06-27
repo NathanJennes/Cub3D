@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:17:29 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/24 13:24:18 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/27 17:38:54 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,21 @@ int					btn_back(t_button *button);
 int					btn_next_save(t_button *button);
 int					btn_load_save(t_button *button);
 
-inline static void	init_positions_load_menu(t_ui_load_menu *menu);
+inline static void		init_positions_load_menu(t_ui_load_menu *menu);
 
 void	init_load_menu(void)
 {
 	t_ui_load_menu	*menu;
 
 	menu = &get_ui()->load_menu;
-	menu->lbl_selected_save = create_label(ivec2(get_settings()->halfw_w, 50), "", ivec2(get_settings()->win_w, 100), 0);
+	menu->lbl_selected_save = create_label(ivec2(get_settings()->halfw_w, 50),
+			"", ivec2(get_settings()->win_w, 100), 0);
 	menu->btn_start = create_button("assets/ui/start_button.xpm",
-		ivec2(0, 0), btn_load_save);
+			ivec2(0, 0), btn_load_save);
 	menu->btn_next_save = create_button("assets/ui/right_arrow.xpm",
-		ivec2(0, 0), btn_next_save);
+			ivec2(0, 0), btn_next_save);
 	menu->btn_back = create_button("assets/ui/left_arrow.xpm",
-		ivec2(50, get_settings()->win_h - 50), btn_back);
+			ivec2(50, get_settings()->win_h - 50), btn_back);
 	init_positions_load_menu(menu);
 }
 
@@ -42,7 +43,6 @@ void	refresh_load_menu(void)
 	menu = &get_ui()->load_menu;
 	update_ui_label_text(&menu->lbl_selected_save,
 		get_app()->savegames[menu->save_selected].name);
-
 }
 
 inline static void	init_positions_load_menu(t_ui_load_menu *menu)

@@ -18,11 +18,11 @@
 #include "render.h"
 
 void				serialize_game(int fd);
-int					deserialize_save(t_gamestate *save_out, int fd, char *filename);
-
-inline static int	open_save_file(char *save_name, int truncate);
-inline static void	create_appdata_directory(void);
-inline static char	*return_save_name(char *new_name);
+int					deserialize_save(t_gamestate *save_out, int fd,
+						char *filename);
+inline static int			open_save_file(char *save_name, int truncate);
+inline static void		create_appdata_directory(void);
+inline static char		*return_save_name(char *new_name);
 
 char	*save_game(char *save_name)
 {
@@ -85,13 +85,6 @@ int	load_save(t_gamestate *save_out, char *save_name)
 	close(fd);
 	*save_out = save;
 	return (1);
-}
-
-void	free_save(t_gamestate *save)
-{
-	gc_free2d((void **) save->map.map, save->map.height);
-	gc_free(save->name);
-	free_lights(save);
 }
 
 inline static int	open_save_file(char *save_name, int truncate)

@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:42:50 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/25 18:57:23 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/27 14:52:14 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "input_code.h"
 #include "leaky.h"
 
-inline static void	handle_f1(t_mlx *app);
+void			handle_f1(t_mlx *app);
 inline static void	handle_escape(void);
 inline static void	handle_tab(t_mlx *app);
 inline static void	turn_off_lights(void);
@@ -55,6 +55,8 @@ inline static void	handle_tab(t_mlx *app)
 	{
 		app->gamestate.player.lock = FALSE;
 		app->ui.state = NONE;
+		app->editor_mode = FALSE;
+		app->ui.map_menu.chk_editor_mode.checked = FALSE;
 		mlx_mouse_hide();
 		reset_mouse_pos();
 		return ;
@@ -62,17 +64,6 @@ inline static void	handle_tab(t_mlx *app)
 	app->gamestate.player.lock = TRUE;
 	app->ui.state = MAP_MENU;
 	mlx_mouse_show();
-}
-
-inline static void	handle_f1(t_mlx *app)
-{
-	if (app->ui.state != KEYBINDS_MENU)
-	{
-		app->ui.prev_state = app->ui.state;
-		app->ui.state = KEYBINDS_MENU;
-		return ;
-	}
-	app->ui.state = app->ui.prev_state;
 }
 
 inline static void	handle_escape(void)
@@ -95,19 +86,12 @@ inline static void	handle_escape(void)
 		refresh_main_menu();
 		app->state = IN_MENU;
 		app->ui.state = MAIN_MENU;
-		mlx_mouse_show();
+		return ;
 	}
-	else if (app->state == IN_MENU)
-	{
-		if (app->ui.state == NEW_GAME_MENU)
-			app->ui.state = MAIN_MENU;
-		else if (app->ui.state == LOAD_MENU)
-			app->ui.state = MAIN_MENU;
-		else if (app->ui.state == OPTION_MENU)
-			app->ui.state = MAIN_MENU;
-		else if (app->ui.state == MAIN_MENU)
-			close_app();
-	}
+	if (app->ui.state != MAIN_MENU)
+		app->ui.state = MAIN_MENU;
+	else if (app->ui.state == MAIN_MENU)
+		close_app();
 }
 
 inline static void	turn_off_lights(void)
@@ -119,8 +103,9 @@ inline static void	turn_off_lights(void)
 	i = 0;
 	while (i < game->light_count)
 	{
-		if (ft_pow2(game->lights[i].pos.x - game->player.world_pos.x) +
-			ft_pow2(game->lights[i].pos.y - game->player.world_pos.y) < CELL_SIZE * CELL_SIZE)
+		if (ft_pow2(game->lights[i].pos.x - game->player.world_pos.x) + \
+			ft_pow2(game->lights[i].pos.y - game->player.world_pos.y) < \
+			CELL_SIZE * CELL_SIZE)
 			game->lights[i].enabled = FALSE;
 		i++;
 	}
@@ -135,8 +120,8 @@ inline static void	turn_on_lights(void)
 	i = 0;
 	while (i < game->light_count)
 	{
-		if (ft_pow2(game->lights[i].pos.x - game->player.world_pos.x) +
-			ft_pow2(game->lights[i].pos.y - game->player.world_pos.y) <
+		if (ft_pow2(game->lights[i].pos.x - game->player.world_pos.x) + \
+			ft_pow2(game->lights[i].pos.y - game->player.world_pos.y) < \
 			CELL_SIZE * CELL_SIZE)
 			game->lights[i].enabled = TRUE;
 		i++;

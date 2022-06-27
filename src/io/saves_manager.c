@@ -16,8 +16,8 @@
 
 void				change_background(t_mlx *app);
 
-inline static void	add_to_saves(char *save_name);
-inline static void	grow_saves_array(void);
+inline static void		add_to_saves(char *save_name);
+inline static void		grow_saves_array(void);
 
 void	load_all_saves(void)
 {

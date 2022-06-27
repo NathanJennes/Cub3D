@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 15:52:09 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/22 13:18:35 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/27 16:59:50 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,49 +18,49 @@ inline static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side);
 inline static t_vec2	calculate_lengths(t_vec2 *ray);
 inline static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists,
 						t_vec2 pos, t_ivec2 map_pos);
+static void		update_distance(t_ivec2 *map_pos, t_raycasting *r);
 
-t_ray	shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos, double max_dist)
+t_ray	shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos,
+		double max_dist)
 {
-	t_ivec2	step;
-	t_vec2	lengths;
-	t_vec2	dists;
-	t_bool	hit;
-	int		side;
+	t_raycasting	r;
 
 	if (get_map_type(map_pos.x, map_pos.y) == WALL)
 		return (populate_ray(0, ray, TRUE, NOSIDE));
 	vec2_divf(&ray_world_pos, CELL_SIZE);
-	lengths = calculate_lengths(&ray);
-	step = calculate_step_dists(&ray, &dists, ray_world_pos, map_pos);
-	vec2_multv2(&dists, lengths);
-	hit = FALSE;
-	side = NOSIDE;
-	while (!hit && (dists.x < max_dist || dists.y < max_dist))
-	{
-		if (dists.x < dists.y)
-		{
-			dists.x += lengths.x;
-			map_pos.x += step.x;
-			side = SIDE_X;
-		}
-		else
-		{
-			dists.y += lengths.y;
-			map_pos.y += step.y;
-			side = SIDE_Y;
-		}
-		if (get_map_type(map_pos.x, map_pos.y) == WALL)
-			hit = TRUE;
-	}
-	if (hit && side == SIDE_X)
-		return (populate_ray(dists.x - lengths.x, ray, TRUE, side));
-	if (hit)
-		return (populate_ray(dists.y - lengths.y, ray, TRUE, side));
+	r.lengths = calculate_lengths(&ray);
+	r.step = calculate_step_dists(&ray, &r.dists, ray_world_pos, map_pos);
+	vec2_multv2(&r.dists, r.lengths);
+	r.hit = FALSE;
+	r.side = NOSIDE;
+	while (!r.hit && (r.dists.x < max_dist || r.dists.y < max_dist))
+		update_distance(&map_pos, &r);
+	if (r.hit && r.side == SIDE_X)
+		return (populate_ray(r.dists.x - r.lengths.x, ray, TRUE, r.side));
+	if (r.hit)
+		return (populate_ray(r.dists.y - r.lengths.y, ray, TRUE, r.side));
 	return (populate_ray(RAY_LENGTH, ray, FALSE, NOSIDE));
 }
 
+static void	update_distance(t_ivec2 *map_pos, t_raycasting *r)
+{
+	if ((*r).dists.x < (*r).dists.y)
+	{
+		(*r).dists.x += (*r).lengths.x;
+		(*map_pos).x += (*r).step.x;
+		(*r).side = SIDE_X;
+	}
+	else
+	{
+		(*r).dists.y += (*r).lengths.y;
+		(*map_pos).y += (*r).step.y;
+		(*r).side = SIDE_Y;
+	}
+	if (get_map_type((*map_pos).x, (*map_pos).y) == WALL)
+		(*r).hit = TRUE;
+}
+
 inline static t_ray	populate_ray(double dist, t_vec2 ray, t_bool hit, int side)
-NOPROF
 {
 	t_ray		result;
 	t_player	*player;
@@ -69,7 +69,7 @@ NOPROF
 	result.distance = dist;
 	if (hit)
 		result.hit_pos = vec2(player->world_pos.x + ray.x * dist * CELL_SIZE,
-			player->world_pos.y + ray.y * dist * CELL_SIZE);
+				player->world_pos.y + ray.y * dist * CELL_SIZE);
 	else
 		result.hit_pos = vec2_zero();
 	result.hit = hit;
@@ -79,7 +79,6 @@ NOPROF
 }
 
 inline static t_vec2	calculate_lengths(t_vec2 *ray)
-NOPROF
 {
 	t_vec2	lengths;
 
@@ -96,7 +95,6 @@ NOPROF
 
 inline static t_ivec2	calculate_step_dists(t_vec2 *ray, t_vec2 *dists,
 						t_vec2 pos, t_ivec2 map_pos)
-NOPROF
 {
 	t_ivec2	step;
 
@@ -121,15 +119,4 @@ NOPROF
 		dists->y = pos.y - (double)map_pos.y;
 	}
 	return (step);
-}
-
-int	get_map_type(int64_t x, int64_t y)
-NOPROF
-{
-	t_map_info	*map;
-
-	map = get_map_infos();
-	if (x < 0 || x >= map->width || y < 0 || y >= map->height)
-		return (VOID);
-	return (map->map[y][x]);
 }

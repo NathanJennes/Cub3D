@@ -21,7 +21,7 @@ inline static int	load_font_infos(t_font *font, int fd);
 inline static int	load_font_chars(t_font *font, int fd);
 inline static int	parse_char_infos(t_char_meta *chars, char *line);
 inline static int	populate_char_info(t_char_meta *c, char *line,
-				char *field_name, int *field);
+						char *field_name, int *field);
 
 int	load_font_meta(t_font *font, char *path)
 {

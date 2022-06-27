@@ -59,7 +59,8 @@ inline static void	process_light(t_light *light, t_ivec3 *lighting,
 	double	dot_product;
 	double	distance;
 
-	light_dir = vec3(light->pos.x - pos->x, light->pos.y - pos->y, light->pos.z - pos->z);
+	light_dir = vec3(light->pos.x - pos->x, light->pos.y - pos->y,
+			light->pos.z - pos->z);
 	dir_normalized = vec3_normalized(light_dir);
 	ray = shoot_ray(vec2(dir_normalized.x, dir_normalized.y),
 			vec2(pos->x, pos->y),
@@ -73,7 +74,8 @@ inline static void	process_light(t_light *light, t_ivec3 *lighting,
 		* normal->y + dir_normalized.z * normal->z;
 	if (dot_product <= 0.0)
 		return ;
-	distance = ft_pow2(light_dir.x) + ft_pow2(light_dir.y) + ft_pow2(light_dir.z);
+	distance = \
+		ft_pow2(light_dir.x) + ft_pow2(light_dir.y) + ft_pow2(light_dir.z);
 	create_vector_light(light, sqrt(distance), dot_product, lighting);
 }
 

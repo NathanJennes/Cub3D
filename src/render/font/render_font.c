@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_font.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 14:33:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/23 15:05:14 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/27 15:49:08 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 #include "render.h"
 #include "colors.h"
 
-inline static int	render_letter(char c, t_font *font, int size, t_ivec2 pos);
-inline static int	sample_pixel(uint8_t *data, t_vec2 pos, t_vec2 size, int line_size);
-inline static int	get_pixel_color(t_text_render *infos);
+inline static int		render_letter(char c, t_font *font, int size,
+							t_ivec2 pos);
+inline static int		sample_pixel(uint8_t *data, t_vec2 pos, t_vec2 size,
+							int line_size);
+inline static int		get_pixel_color(t_text_render *infos);
 inline static void	render_pixel(t_text_render *infos, int color);
 
 void	render_text(char *text, char *font_name, int size, t_ivec2 pos)
@@ -91,7 +93,8 @@ inline static void	render_pixel(t_text_render *infos, int color)
 			+ infos->pos.y + infos->xy.y, color);
 }
 
-inline static int	sample_pixel(uint8_t *data, t_vec2 pos, t_vec2 size, int line_size)
+inline static int	sample_pixel(uint8_t *data, t_vec2 pos, t_vec2 size,
+			int line_size)
 {
 	int64_t	t;
 	t_vec2	sample_dists;

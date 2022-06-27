@@ -20,7 +20,7 @@ void	cub_update_mouse_pos(int x, int y)
 	app->mouse.position = ivec2(x, y);
 }
 
-t_ivec2	get_mouse_position(void)
+t_ivec2	get_mouse_pos(void)
 {
 	return (get_app()->mouse.position);
 }

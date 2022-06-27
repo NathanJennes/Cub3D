@@ -18,7 +18,7 @@
 inline static void	save_player(t_settings *settings, int fd);
 inline static void	save_win(t_settings *settings, int fd);
 
-inline static int	open_settings_file(char *save_name);
+inline static int		open_settings_file(char *save_name);
 inline static void	create_directory_appdata(void);
 
 void	save_settings(t_settings *settings)

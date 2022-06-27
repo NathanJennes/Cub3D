@@ -70,3 +70,12 @@ inline static int	is_illegal_char(char c, t_map_info *infos, int *saw_wall,
 		*last_is_wall = 0;
 	return (0);
 }
+
+char	*start_trim(char *line)
+{
+	char	*cursor;
+
+	cursor = ft_trimr(line);
+	cursor = ft_strskip_space(ft_strskip_alpha(cursor));
+	return (cursor);
+}

@@ -12,6 +12,8 @@
 
 #include "core.h"
 
+char	*start_trim(char *line);
+
 int	deserialize_map_parse_width(char *line, t_gamestate *save)
 {
 	char	*cursor;
@@ -67,8 +69,7 @@ int	deserialize_map_parse_ceiling(char *line, t_gamestate *save)
 	int		color;
 	char	*cursor;
 
-	cursor = ft_trimr(line);
-	cursor = ft_strskip_space(ft_strskip_alpha(cursor));
+	cursor = start_trim(line);
 	if (!ft_isdigit(*cursor))
 		return (0);
 	color = ft_atoi(cursor);
@@ -97,8 +98,7 @@ int	deserialize_map_parse_floor(char *line, t_gamestate *save)
 	int		color;
 	char	*cursor;
 
-	cursor = ft_trimr(line);
-	cursor = ft_strskip_space(ft_strskip_alpha(cursor));
+	cursor = start_trim(line);
 	if (!ft_isdigit(*cursor))
 		return (0);
 	color = ft_atoi(cursor);

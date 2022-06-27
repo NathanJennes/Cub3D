@@ -42,7 +42,8 @@ int	parse_color(t_rgb *color, t_map_parser *parser, char *line)
 	return (1);
 }
 
-int	parse_texture(t_map_info *info, t_map_parser *parser, char *line, int direction)
+int	parse_texture(t_map_info *info, t_map_parser *parser, char *line,
+			int direction)
 {
 	if (info->tx_list[direction] != INVALID_TEXTURE)
 		return (map_error(line, parser, MERR_TEXTURE_REDEFINITION));

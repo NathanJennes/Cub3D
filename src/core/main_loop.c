@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:44:35 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/26 17:01:23 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/27 14:50:50 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 #include "ui.h"
 #include "render.h"
 
-inline static void	render_background_gradian(t_mlx *app, const t_settings *settings);
-inline static void	render_crosshair(void);
-inline static void	debug_time_frame(const t_mlx *app, struct timeval *time);
-inline static void	render_game(t_mlx *app, const t_settings *settings,
+void				render_crosshair(void);
+void				debug_time_frame(const t_mlx *app, struct timeval *time);
+inline static void		render_background_gradian(t_mlx *app,
+						const t_settings *settings);
+inline static void		render_game(t_mlx *app, const t_settings *settings,
 						struct timeval time[4]);
-inline static void	render_gradian(t_mlx *app, const t_settings *settings);
+inline static void		render_gradian(t_mlx *app, const t_settings *settings);
+inline static t_vec3		get_res_color(t_rgb base_color, double shade);
 
 int	main_loop(void)
 {
@@ -30,7 +32,6 @@ int	main_loop(void)
 
 	app = get_app();
 	settings = get_settings();
-	printf("%d\n", app->editor_mode);
 	if (app->state == IN_GAME)
 	{
 		if (app->gamestate.player.lock == FALSE)
@@ -64,7 +65,10 @@ inline static void	render_game(t_mlx *app, const t_settings *settings,
 		mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
 	}
 	else
+	{
 		render_background_gradian(app, settings);
+		render_gradian(app, settings);
+	}
 	gettimeofday(&time[1], NULL);
 	renderer_render();
 	render_sprites();
@@ -75,19 +79,8 @@ inline static void	render_game(t_mlx *app, const t_settings *settings,
 	debug_time_frame(app, time);
 }
 
-inline static void	render_crosshair(void)
-{
-	t_texture	*crosshair;
-
-	if (get_app()->state != IN_GAME)
-		return ;
-	crosshair = get_texture_from_id(get_ui()->tx_crosshair);
-	render_ui_texture(get_ui()->tx_crosshair,
-		get_settings()->halfw_w - crosshair->width / 2,
-		get_settings()->halfw_h - crosshair->height / 2);
-}
-
-inline static void	render_background_gradian(t_mlx *app, const t_settings *settings)
+inline static void	render_background_gradian(t_mlx *app,
+					const t_settings *settings)
 {
 	t_rgb	color_c;
 	t_rgb	color_f;
@@ -98,24 +91,31 @@ inline static void	render_background_gradian(t_mlx *app, const t_settings *setti
 	draw_rect_unsafe(ivec2(0, 0),
 		ivec2(settings->win_w, (int64_t)settings->win_slice),
 		get_map_infos()->ceiling.color);
-	i = (int64_t)settings->win_slice;
-	while (i <= (int64_t)(settings->max_lerp))
+	i = (int64_t)settings->win_slice - 1;
+	while (++i <= (int64_t)(settings->max_lerp))
 	{
 		shade = ft_ilerpf(settings->halfw_h,
 				settings->win_slice, (double)i);
-		res.x = (double)(get_map_infos()->ceiling.r * shade);
-		res.y = (double)(get_map_infos()->ceiling.g * shade);
-		res.z = (double)(get_map_infos()->ceiling.b * shade);
+		res = get_res_color(get_map_infos()->ceiling, shade);
 		color_c.color = trgb(0, (int)res.x, (int)res.y, (int)res.z);
-		res.x = (double)(get_map_infos()->floor.r * shade);
-		res.y = (double)(get_map_infos()->floor.g * shade);
-		res.z = (double)(get_map_infos()->floor.b * shade);
+		res = get_res_color(get_map_infos()->floor, shade);
 		color_f.color = trgb(0, (int)res.x, (int)res.y, (int)res.z);
-		ft_memseti((int *)app->frame.addr + i * settings->win_w, color_c.color, settings->win_w);
-		ft_memseti((int *)app->frame.addr + (settings->win_h - i) * settings->win_w, color_f.color, settings->win_w);
-		i++;
+		ft_memseti((int *)app->frame.addr + i * settings->win_w,
+			color_c.color, settings->win_w);
+		ft_memseti(
+			(int *)app->frame.addr + (settings->win_h - i) * settings->win_w,
+			color_f.color, settings->win_w);
 	}
-	render_gradian(app, settings);
+}
+
+inline static t_vec3	get_res_color(t_rgb base_color, double shade)
+{
+	t_vec3	res;
+
+	res.x = (double)(base_color.r * shade);
+	res.y = (double)(base_color.g * shade);
+	res.z = (double)(base_color.b * shade);
+	return (res);
 }
 
 inline static void	render_gradian(t_mlx *app, const t_settings *settings)
@@ -126,19 +126,4 @@ inline static void	render_gradian(t_mlx *app, const t_settings *settings)
 		ivec2(settings->win_w, (int64_t)settings->win_slice),
 		get_map_infos()->floor.color);
 	mlx_put_image_to_window(app->mlx, app->win, app->frame.img, 0, 0);
-}
-
-void	debug_time_frame(const t_mlx *app, struct timeval *time)
-{
-	if (app->ui.debug_state == LVL2)
-		printf("[FRAME - RENDER]: background: %lldms, walls: "
-			"%lldms, test_scene: %lldms, total %lldms\n",
-			(int64_t)((time[1].tv_sec * 1000 + time[1].tv_usec / 1000)
-				- (time[0].tv_sec * 1000 + time[0].tv_usec / 1000)),
-			(int64_t)((time[2].tv_sec * 1000 + time[2].tv_usec / 1000)
-				- (time[1].tv_sec * 1000 + time[1].tv_usec / 1000)),
-			(int64_t)((time[3].tv_sec * 1000 + time[3].tv_usec / 1000)
-				- (time[2].tv_sec * 1000 + time[2].tv_usec / 1000)),
-			(int64_t)((time[3].tv_sec * 1000 + time[3].tv_usec / 1000)
-				- (time[0].tv_sec * 1000 + time[0].tv_usec / 1000)));
 }

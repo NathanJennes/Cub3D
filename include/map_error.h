@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   map_error.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:17:43 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/16 19:33:58 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/27 18:03:58 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_ERROR_H
 # define MAP_ERROR_H
 
-#include <stdint.h>
-#include "libft.h"
+# include <stdint.h>
+# include "libft.h"
 
 typedef struct s_map_parser	t_map_parser;
 typedef struct s_map_info	t_map_info;
@@ -46,7 +46,8 @@ typedef struct s_map_info	t_map_info;
 # define MERR_MAP_NO_SPAWN "A map_menu needs to contain a spawn point"
 
 int	map_error(char *line, t_map_parser *parser, const char *error);
-int	map_error_layout(t_map_info *infos, t_map_parser *parser, const char *error, t_ivec2 pos);
+int	map_error_layout(t_map_info *infos, t_map_parser *parser, const char *error,
+		t_ivec2 pos);
 int	map_print_error(t_map_parser *parser);
 int	map_print_error_layout(t_map_parser *parser);
 

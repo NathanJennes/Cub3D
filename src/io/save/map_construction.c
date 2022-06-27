@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   map_construction.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 14:24:49 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/26 19:15:46 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/27 15:17:25 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "leaky.h"
 
-inline static void	read_map_content(t_map_info *infos, size_t i, size_t j, int *row);
+inline static void	read_map_content(t_map_info *infos, size_t i, size_t j,
+						int *row);
 
 void	construct_map(t_map_info *infos)
 {
@@ -37,7 +38,8 @@ void	construct_map(t_map_info *infos)
 	}
 }
 
-inline static void	read_map_content(t_map_info *infos, size_t i, size_t j, int *row)
+inline static void	read_map_content(t_map_info *infos, size_t i, size_t j,
+			int *row)
 {
 	if (infos->map_raw[i][j] == '1')
 		row[j] = WALL;
@@ -48,7 +50,7 @@ inline static void	read_map_content(t_map_info *infos, size_t i, size_t j, int *
 	if (ft_isalpha(infos->map_raw[i][j]))
 	{
 		infos->spawn_dir = infos->map_raw[i][j];
-		infos->spawn_pos = vec2(j * CELL_SIZE + CELL_SIZE / 2.0,
-			i * CELL_SIZE + CELL_SIZE / 2.0);
+		infos->spawn_pos = vec2((double)j * CELL_SIZE + CELL_SIZE / 2.0,
+				(double)i * CELL_SIZE + CELL_SIZE / 2.0);
 	}
 }

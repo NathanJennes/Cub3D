@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 18:22:14 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 19:39:07 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:19:24 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 inline static void	serialize_light(int fd, t_gamestate *gamestate);
 inline static void	serialize_player(int fd, t_player player);
-inline static void serialize_map(int fd, t_map_info map);
+inline static void	serialize_map(int fd, t_map_info map);
 inline static void	serialize_map_walls(int fd, t_map_info map);
 
 void	serialize_game(int fd)
@@ -40,7 +40,7 @@ inline static void	serialize_player(int fd, t_player player)
 	dprintf(fd, "PLAYER_END\n");
 }
 
-inline static void serialize_map(int fd, t_map_info map)
+inline static void	serialize_map(int fd, t_map_info map)
 {
 	dprintf(fd, "MAP_START\n");
 	dprintf(fd, "W %d\n", (int)map.width);

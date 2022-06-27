@@ -17,7 +17,8 @@
 
 t_bool			is_color_value_legal(char *line);
 static t_bool	is_pos_value_legal(char *line);
-static int		parse_light_color(t_rgb *color, t_map_parser *parser, char **line);
+static int		parse_light_color(t_rgb *color, t_map_parser *parser,
+					char **line);
 static int		parse_light_pos(t_vec3 *pos, t_map_parser *parser, char *line);
 
 int	parse_light(t_gamestate *gamestate, t_map_parser *parser, char *line)

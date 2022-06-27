@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:19:19 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/26 16:20:08 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/27 17:27:40 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ typedef struct s_rsprite
 	double		ratio_x;
 }	t_rsprite;
 
+typedef struct s_render_wall
+{
+	double		ratio;
+	double		ty;
+	double		shade;
+}	t_render_wall;
+
 /* Renderer */
 void			init_renderer(void);
 void			shutdown_renderer(void);
@@ -59,9 +66,9 @@ void			render_debug(t_mlx *app);
 
 /* Screen drawing */
 void			clear_screen(int color);
-void			set_screen_pixel(int64_t x, int64_t y, int color) NOPROF;
+void			set_screen_pixel(int64_t x, int64_t y, int color);
 void			set_screen_pixel_unsafe(int64_t x, int64_t y,
-					int color) NOPROF;
+					int color);
 
 void			draw_circle(t_ivec2 pos, int64_t diameter, int color);
 void			draw_circle_unsafe(t_ivec2 pos, int64_t diameter, int color);
@@ -93,13 +100,17 @@ void			draw_line_lerp_tex_unsafe(t_ivec2 start, t_ivec2 end,
 					t_ivec2 col, int64_t tex_id);
 
 void			clear_texture(int color, int64_t tex_id);
-void			set_texture_pixel(int64_t x, int64_t y, int color, int64_t tex_id) NOPROF;
-void			set_texture_pixel_unsafe(int64_t x, int64_t y, int color, int64_t tex_id) NOPROF;
+void			set_texture_pixel(int64_t x, int64_t y, int color,
+					int64_t tex_id);
+void			set_texture_pixel_unsafe(int64_t x, int64_t y, int color,
+					int64_t tex_id);
 
 /* Texture rendering */
 void			render_ui_texture(int64_t tex_id, int64_t x, int64_t y);
-void			render_ui_texture_grayscale(int64_t tex_id, int64_t x, int64_t y);
-void			render_ui_texture_inversed(int64_t tex_id, int64_t x, int64_t y);
+void			render_ui_texture_grayscale(int64_t tex_id, int64_t x,
+					int64_t y);
+void			render_ui_texture_inversed(int64_t tex_id, int64_t x,
+					int64_t y);
 void			render_ui_texture_inverse_grayscale(int64_t tex_id,
 					int64_t x, int64_t y);
 
@@ -113,36 +124,38 @@ void			render_text_tex(char *text, char *font_name, t_ivec2 pos,
 
 void			init_font_manager(void);
 void			unload_font_manager(void);
-t_font			*get_font(char *name) NOPROF;
+t_font			*get_font(char *name);
 
-int64_t			get_text_width(char *text, char *font_name, int size) NOPROF;
-int64_t			get_text_height(char *text, char *font_name, int size) NOPROF;
-int64_t			get_text_box_height(char *text, char *font_name, int size) NOPROF;
-t_ivec2			get_text_size(char *text, char *font_name, int size) NOPROF;
-t_ivec2			get_text_box_size(char *text, char *font_name, int size) NOPROF;
+int64_t			get_text_width(char *text, char *font_name, int size);
+int64_t			get_text_height(char *text, char *font_name, int size);
+int64_t			get_text_box_height(char *text, char *font_name, int size);
+t_ivec2			get_text_size(char *text, char *font_name, int size);
+t_ivec2			get_text_box_size(char *text, char *font_name, int size);
 
 t_ivec2			text_center_height(char *text, char *font_name,
-					int size, t_ivec2 pos) NOPROF;
+					int size, t_ivec2 pos);
 t_ivec2			text_center_width(char *text, char *font_name,
-					int size, t_ivec2 pos) NOPROF;
+					int size, t_ivec2 pos);
 t_ivec2			text_center(char *text, char *font_name,
-					int size, t_ivec2 pos) NOPROF;
+					int size, t_ivec2 pos);
 
 /* Walls rendering */
 void			render_walls(int64_t col_start, int64_t col_end);
-t_ray			shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos, double max_dist);
+t_ray			shoot_ray(t_vec2 ray, t_vec2 ray_world_pos, t_ivec2 map_pos,
+					double max_dist);
 int				get_map_type(int64_t x, int64_t y);
 
 /* Lights */
 t_ivec3			get_lighting_level(t_vec3 pos, t_vec3 normal);
 int				apply_light_to_color(t_rgb color, t_vec3 light);
-void			add_light(t_gamestate *gamestate, t_vec3 pos, t_rgb color, double intensity);
+void			add_light(t_gamestate *gamestate, t_vec3 pos, t_rgb color,
+					double intensity);
 void			free_lights(t_gamestate *gamestate);
 
 /* Sprite */
 void			render_sprite(t_sprite *sprite);
 
 /* Utils */
-int				outside_mmap_bounds(int x, int y) NOPROF;
+int				outside_mmap_bounds(int x, int y);
 
 #endif

@@ -15,8 +15,7 @@
 #include "leaky.h"
 #include "render.h"
 
-int64_t	add_texture_to_array(t_texture texture);
-
+int64_t			add_texture_to_array(t_texture texture);
 inline static int64_t	get_texture_id_from_name(char *name);
 
 void	init_texture_manager(void)
@@ -70,21 +69,6 @@ t_texture	*get_texture_from_id(int64_t tex_id)
 	if (tex_id >= tex_manager->tex_array_size || tex_id < 0)
 		return (&tex_manager->tex_array[0]);
 	return (&tex_manager->tex_array[tex_id]);
-}
-
-void	unload_texture_manager(void)
-{
-	int64_t				i;
-	t_texture_manager	*tex_manager;
-
-	i = 0;
-	tex_manager = &get_app()->texture_manager;
-	while (i < tex_manager->tex_array_size)
-	{
-		free_texture(&tex_manager->tex_array[i]);
-		i++;
-	}
-	gc_free(tex_manager->tex_array);
 }
 
 inline static int64_t	get_texture_id_from_name(char *name)

@@ -42,7 +42,13 @@ int	deserialize_player(int fd, char *line, t_gamestate *save)
 inline static int	parse_line_player(char *line, t_gamestate *save)
 {
 	if (ft_strncmp(line, "POS", ft_strlen("POS")) == 0)
-		return (parse_pos(line, save));
+	{
+		if (parse_pos(line, save))
+		{
+			update_player(&save->player, FALSE);
+			return (1);
+		}
+	}
 	return (0);
 }
 
@@ -72,6 +78,5 @@ inline static int	parse_pos(char *line, t_gamestate *save)
 		number = ft_atoi(++line_cursor);
 		save->player.direction += (float)number / pow(10.0, ft_nbrlen(number));
 	}
-	update_player(&save->player, FALSE);
 	return (1);
 }

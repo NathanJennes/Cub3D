@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 18:00:21 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/25 18:52:39 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/27 14:51:22 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ inline static void	update_player_position(t_player *player, t_vec2 future_pos,
 	is_colliding(future_pos);
 }
 
-void	update_player_direction(t_player *player, double delta_time, t_bool handle_input)
+void	update_player_direction(t_player *player, double delta_time,
+			t_bool handle_input)
 {
 	t_settings	*settings;
 
@@ -69,7 +70,7 @@ void	update_player_direction(t_player *player, double delta_time, t_bool handle_
 	if (handle_input)
 	{
 		get_app()->mouse.delta.x = \
-			get_mouse_position().x - get_app()->settings.halfw_w;
+			get_mouse_pos().x - get_app()->settings.halfw_w;
 		get_player()->direction -= 0.01 * (get_settings()->cam_sensitivity
 			* (double)get_app()->mouse.delta.x) * delta_time;
 		if (is_key_down(KEY_RIGHT))
@@ -82,7 +83,8 @@ void	update_player_direction(t_player *player, double delta_time, t_bool handle_
 	clamp_player_direction(player, settings);
 }
 
-inline static void	clamp_player_direction(t_player *player, const t_settings *settings)
+inline static void	clamp_player_direction(t_player *player,
+			const t_settings *settings)
 {
 	if (player->direction < 0.0)
 		player->direction += TWO_PI;

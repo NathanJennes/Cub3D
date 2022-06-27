@@ -34,7 +34,6 @@ void				init_save_button(t_ui_new_game_menu *menu);
 void				update_display_status(void);
 inline static void		init_positions_new_game_menu(void);
 
-
 void	init_new_game_menu(void)
 {
 	t_ui_new_game_menu	*menu;

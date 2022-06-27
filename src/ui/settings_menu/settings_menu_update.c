@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings_menu_update.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:36:24 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/15 18:36:55 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/27 17:44:44 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,10 @@ void	update_settings_menu_click_end(int button)
 	menu = &get_app()->ui.settings_menu;
 	update_ui_slider_click_end(&menu->slid_fov, button);
 	update_ui_slider_click_end(&menu->slid_sens, button);
-	update_ui_checkbox_click_end(&menu->chk_res_min, button);
-	update_ui_checkbox_click_end(&menu->chk_res_med, button);
-	update_ui_checkbox_click_end(&menu->chk_res_high, button);
-	update_ui_checkbox_click_end(&menu->chk_res_fullscreen, button);
+	update_ui_checkbox_click_end(&menu->chk_res_min, button, get_mouse_pos());
+	update_ui_checkbox_click_end(&menu->chk_res_med, button, get_mouse_pos());
+	update_ui_checkbox_click_end(&menu->chk_res_high, button, get_mouse_pos());
+	update_ui_checkbox_click_end(&menu->chk_res_fullscreen, button,
+		get_mouse_pos());
 	update_ui_button_click_end(&menu->btn_back, button);
 }

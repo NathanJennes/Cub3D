@@ -14,28 +14,27 @@
 #include "render.h"
 
 inline static t_bool	is_game_running(void);
-inline static void	init_cols(int64_t *col_start, int64_t *col_end, int64_t id);
+inline static void	init_cols(t_ivec2 *col, int64_t id);
 
 void	*renderer_worker_loop(void *param_id)
 {
 	int64_t			id;
 	pthread_mutex_t	*lock;
 	pthread_mutex_t	*working_lock;
-	int64_t			col_start;
-	int64_t			col_end;
+	t_ivec2			col;
 	t_renderer		*renderer;
 
 	id = (int64_t)param_id;
 	renderer = &get_app()->renderer;
 	lock = &renderer->locks[id];
 	working_lock = &renderer->working_lock[id];
-	init_cols(&col_start, &col_end, id);
+	init_cols(&col, id);
 	while (is_game_running())
 	{
 		pthread_mutex_lock(working_lock);
 		pthread_mutex_lock(lock);
 		pthread_mutex_unlock(working_lock);
-		render_walls(col_start, col_end);
+		render_walls(col.x, col.y);
 		pthread_mutex_unlock(lock);
 	}
 	return (EXIT_SUCCESS);
@@ -53,16 +52,16 @@ inline static t_bool	is_game_running(void)
 	return (running);
 }
 
-inline static void	init_cols(int64_t *col_start, int64_t *col_end, int64_t id)
+inline static void	init_cols(t_ivec2 *col, int64_t id)
 {
 	int64_t		section;
 	t_settings	*settings;
 
 	settings = get_settings();
 	section = settings->win_w / RENDER_WORKER_COUNT;
-	*col_start = section * id;
+	col->x = section * id;
 	if (id == RENDER_WORKER_COUNT - 1)
-		*col_end = settings->win_w - 1;
+		col->y = settings->win_w - 1;
 	else
-		*col_end = section * (id + 1) - 1;
+		col->y = section * (id + 1) - 1;
 }

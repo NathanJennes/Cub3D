@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:30:18 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/17 13:56:02 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/27 14:54:07 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include "libft.h"
 #include "core.h"
 #include "leaky.h"
+
+static void	print_error_message(const t_map_parser *parser);
 
 int	map_error(char *line, t_map_parser *parser, const char *error)
 {
@@ -29,7 +31,8 @@ int	map_error(char *line, t_map_parser *parser, const char *error)
 	return (0);
 }
 
-int	map_error_layout(t_map_info *infos, t_map_parser *parser, const char *error, t_ivec2 pos)
+int	map_error_layout(t_map_info *infos, t_map_parser *parser, const char *error,
+			t_ivec2 pos)
 {
 	parser->error_message = error;
 	parser->infos = infos;
@@ -43,7 +46,8 @@ int	map_error_layout(t_map_info *infos, t_map_parser *parser, const char *error,
 	}
 	else
 	{
-		parser->column = ft_strlen(infos->map_raw[pos.y]) - ft_strlen(infos->map_raw[pos.y] + pos.x);
+		parser->column = ft_strlen(infos->map_raw[pos.y])
+			- ft_strlen(infos->map_raw[pos.y] + pos.x);
 		parser->line = infos->map_raw[pos.y];
 		parser->error_line_number = parser->map_line_offset + pos.y;
 		parser->error_layout_global = FALSE;
@@ -85,7 +89,8 @@ int	map_print_error_layout(t_map_parser *parser)
 	while (it.y < parser->infos->height)
 	{
 		printf("  %s\n", parser->infos->map_raw[it.y]);
-		if (!parser->error_layout_global && it.y + parser->map_line_offset == parser->error_line_number)
+		if (!parser->error_layout_global
+			&& it.y + parser->map_line_offset == parser->error_line_number)
 		{
 			it.x = 0;
 			while (it.x < (int64_t)parser->column)
@@ -93,13 +98,17 @@ int	map_print_error_layout(t_map_parser *parser)
 				printf(" ");
 				it.x++;
 			}
-			printf("~~^~~\n");
-			printf("%s\n", parser->error_message);
+			printf("~~^~~\n""%s\n", parser->error_message);
 		}
 		it.y++;
 	}
-	if (parser->error_layout_global)
-		printf("%s\n", parser->error_message);
+	print_error_message(parser);
 	printf("\n");
 	return (0);
+}
+
+static void	print_error_message(const t_map_parser *parser)
+{
+	if (parser->error_layout_global)
+		printf("%s\n", parser->error_message);
 }

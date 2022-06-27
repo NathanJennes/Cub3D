@@ -17,7 +17,8 @@
 int			deserialize_player(int fd, char *line, t_gamestate *save);
 int			deserialize_map(int fd, char *line, t_gamestate *save);
 void		construct_map(t_map_info *infos);
-int			load_mandatory_map(t_gamestate *save_out, int fd, char *line, char *filename);
+int			load_mandatory_map(t_gamestate *save_out, int fd, char *line,
+				char *filename);
 
 inline static int	parse_line_save(int fd, char *line, t_gamestate *save);
 inline static int	deserialize_cub_save(t_gamestate *save_out, int fd);

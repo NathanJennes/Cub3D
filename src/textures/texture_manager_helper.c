@@ -46,3 +46,18 @@ inline static void	grow_texture_array(void)
 	gc_free(tex_manager->tex_array);
 	tex_manager->tex_array = new_array;
 }
+
+void	unload_texture_manager(void)
+{
+	int64_t				i;
+	t_texture_manager	*tex_manager;
+
+	i = 0;
+	tex_manager = &get_app()->texture_manager;
+	while (i < tex_manager->tex_array_size)
+	{
+		free_texture(&tex_manager->tex_array[i]);
+		i++;
+	}
+	gc_free(tex_manager->tex_array);
+}
