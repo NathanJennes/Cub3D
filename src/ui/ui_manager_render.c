@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:35:02 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/27 17:58:39 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/27 19:29:46 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,7 @@ static int	other_ui_render(const t_mlx *app)
 		render_map_menu();
 		return (1);
 	}
+	if (app->state == IN_GAME)
+		return (1);
 	return (0);
 }

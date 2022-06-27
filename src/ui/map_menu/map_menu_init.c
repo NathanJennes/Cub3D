@@ -41,7 +41,7 @@ void	init_map_menu(void)
 	menu->green_label = create_label(
 			ivec2_zero(), "Green", ivec2(250, 25), 20);
 	menu->slid_red_color = create_slider(
-			ivec2_zero(), ivec2(250, 15), vec3(0, 255, 0));
+			ivec2_zero(), ivec2(250, 15), vec3(0, 255, 255));
 	menu->red_label = create_label(
 			ivec2_zero(), "Red", ivec2(250, 25), 20);
 	menu->chk_editor_mode = create_checkbox(NULL,
