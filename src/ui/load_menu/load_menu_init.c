@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_menu_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:17:29 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/27 17:38:54 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/28 23:53:01 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init_load_menu(void)
 
 	menu = &get_ui()->load_menu;
 	menu->lbl_selected_save = create_label(ivec2(get_settings()->halfw_w, 50),
-			"", ivec2(get_settings()->win_w, 100), 0);
+			"", ivec2(get_settings()->win_w, 100), 25);
 	menu->btn_start = create_button("assets/ui/start_button.xpm",
 			ivec2(0, 0), btn_load_save);
 	menu->btn_next_save = create_button("assets/ui/right_arrow.xpm",
