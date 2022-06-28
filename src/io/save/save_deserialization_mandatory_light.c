@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/29 00:36:10 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/29 00:42:48 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,14 @@ static int	parse_light_pos(t_vec3 *pos, t_map_parser *parser, char *line)
 	return (1);
 }
 
+// TODO: segfault
 static t_bool	is_pos_value_legal(char *line, int type)
 {
 	double		val;
 	t_map_info	*map;
 
-	map = &get_app()->savegames->map;
+	// TODO Need to get the right height and width
+	map = get_map_infos();
 	val = ft_atoi(line);
 	if (type == X_POS && (val < 0 || val >= map->width * CELL_SIZE))
 		return (FALSE);
