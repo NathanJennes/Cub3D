@@ -45,6 +45,7 @@ int	deserialize_map(int fd, char *line, t_gamestate *save)
 		}
 		if (!parse_line(line, save, line_number))
 		{
+			printf("Error line: %s\n", line);
 			gc_free(line);
 			return (0);
 		}
@@ -73,7 +74,7 @@ int	deserialize_light(char *line, t_gamestate *save)
 		return (0);
 	line++;
 	color.b = ft_atoi(line);
-	if (deserialize_light_pos(line, &pos))
+	if (!deserialize_light_pos(line, &pos))
 		return (0);
 	add_light(save, pos, color, DEFAULT_INTENSITY);
 	return (1);
