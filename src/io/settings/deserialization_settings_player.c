@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deserialization_settings_player.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 15:12:28 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/26 17:27:35 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/28 23:34:12 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,13 @@ int	parse_last_save(char *line, t_settings *settings)
 	line_cursor = ft_trimr(line);
 	line_cursor = ft_strchr(line_cursor, ' ');
 	if (!line_cursor)
-		return (1);
+		return (0);
 	line_cursor = ft_strskip_space(line_cursor);
 	if (!*line_cursor)
-		return (0);
+	{
+		settings->last_save = "";
+		return (1);
+	}
 	settings->last_save = gc_strdup(line_cursor);
 	return (1);
 }
