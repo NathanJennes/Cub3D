@@ -49,7 +49,11 @@
 # define WEST 3
 
 # define ADD 0
-#define DELETE 1
+# define DELETE 1
+
+# define X_POS 0
+# define Y_POS 1
+# define Z_POS 2
 
 typedef union u_rgb
 {

@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 15:12:28 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/28 23:34:12 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/28 23:37:02 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ int	parse_last_save(char *line, t_settings *settings)
 	line_cursor = ft_trimr(line);
 	line_cursor = ft_strchr(line_cursor, ' ');
 	if (!line_cursor)
-		return (0);
+	{
+		settings->last_save = "";
+		return (1);
+	}
 	line_cursor = ft_strskip_space(line_cursor);
 	if (!*line_cursor)
 	{

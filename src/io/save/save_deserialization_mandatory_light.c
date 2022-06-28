@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_deserialization_mandatory_light.c             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 19:39:07 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/29 00:36:10 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "map_error.h"
 
 t_bool			is_color_value_legal(char *line);
-static t_bool	is_pos_value_legal(char *line);
+static t_bool	is_pos_value_legal(char *line, int type);
 static int		parse_light_color(t_rgb *color, t_map_parser *parser,
 					char **line);
 static int		parse_light_pos(t_vec3 *pos, t_map_parser *parser, char *line);
@@ -65,7 +65,7 @@ static int	parse_light_pos(t_vec3 *pos, t_map_parser *parser, char *line)
 {
 	if (!ft_isdigit(*line))
 		return (map_error(line, parser, MERR_POS_EXPECTED));
-	if (!is_pos_value_legal(line))
+	if (!is_pos_value_legal(line, X_POS))
 		return (map_error(line, parser, MERR_POS_OUTBOUND));
 	pos->x = ft_atoi(line);
 	line = ft_strskip_digit(line);
@@ -73,7 +73,7 @@ static int	parse_light_pos(t_vec3 *pos, t_map_parser *parser, char *line)
 		return (map_error(line, parser, MERR_COLOR_EXPECTED_COMMA));
 	if (!ft_isdigit(*(++line)))
 		return (map_error(line, parser, MERR_POS_EXPECTED));
-	if (!is_pos_value_legal(line))
+	if (!is_pos_value_legal(line, Y_POS))
 		return (map_error(line, parser, MERR_POS_OUTBOUND));
 	pos->y = ft_atoi(line);
 	line = ft_strskip_digit(line);
@@ -81,21 +81,24 @@ static int	parse_light_pos(t_vec3 *pos, t_map_parser *parser, char *line)
 		return (map_error(line, parser, MERR_COLOR_EXPECTED_COMMA));
 	if (!ft_isdigit(*(++line)))
 		return (map_error(line, parser, MERR_POS_EXPECTED));
-	if (!is_pos_value_legal(line))
+	if (!is_pos_value_legal(line, Z_POS))
 		return (map_error(line, parser, MERR_POS_OUTBOUND));
 	pos->z = ft_atoi(line);
 	return (1);
 }
 
-// TODO: do good below
-static t_bool	is_pos_value_legal(char *line)
+static t_bool	is_pos_value_legal(char *line, int type)
 {
-	size_t	i;
+	double		val;
+	t_map_info	*map;
 
-	i = 0;
-	while (ft_isdigit(line[i]))
-		i++;
-	if (i == 0 || i > 4)
+	map = &get_app()->savegames->map;
+	val = ft_atoi(line);
+	if (type == X_POS && (val < 0 || val >= map->width * CELL_SIZE))
+		return (FALSE);
+	else if (type == Y_POS && (val < 0 || val >= map->height * CELL_SIZE))
+		return (FALSE);
+	else if (type == Z_POS && (val < 0 || val >= CELL_SIZE))
 		return (FALSE);
 	return (TRUE);
 }
