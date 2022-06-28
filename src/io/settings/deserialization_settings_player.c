@@ -69,7 +69,7 @@ int	parse_last_save(char *line, t_settings *settings)
 	line_cursor = ft_trimr(line);
 	line_cursor = ft_strchr(line_cursor, ' ');
 	if (!line_cursor)
-		return (0);
+		return (1);
 	line_cursor = ft_strskip_space(line_cursor);
 	if (!*line_cursor)
 		return (0);
