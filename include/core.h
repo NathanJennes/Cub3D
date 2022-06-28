@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/27 18:02:19 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/28 20:48:45 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,8 @@
 # define SOUTH 2
 # define WEST 3
 
-typedef struct s_debug
-{
-}	t_debug;
+# define ADD 0
+#define DELETE 1
 
 typedef union u_rgb
 {
@@ -229,10 +228,10 @@ typedef struct s_mlx
 	t_bool				keys[MAX_KEYCODE];
 	t_math				pc;
 	t_renderer			renderer;
-	t_debug				debug;
 	t_bool				mandatory;
 	int64_t				lamp_tex_id;
 	t_bool				editor_mode;
+	t_bool				light_mode;
 }	t_mlx;
 
 //TODO: quand on se deplace en diagonale, la minimap shake

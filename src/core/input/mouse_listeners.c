@@ -3,33 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_listeners.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:31:13 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/27 13:57:43 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/28 20:33:44 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 #include <stdlib.h>
 
-void	update_ui_click_begin(int button);
-void	update_ui_click_end(int button);
+int					is_light_inside_map(t_ivec2 mouse_pos);
+void				update_ui_click_begin(int button);
+void				update_ui_click_end(int button);
+inline static void		mouse_click_editor_mode(t_ui_map_menu *map_menu);
 
 void	mouse_click_begin(int button)
 {
-	t_ui_map_menu	*map_menu;
-	t_rgb			color;
-	t_sprite		new_sprite;
-	t_light			*new_light;
-
 	update_ui_click_begin(button);
-	if (get_app()->editor_mode == TRUE)
+	mouse_click_editor_mode(&get_ui()->map_menu);
+}
+
+inline static void	mouse_click_editor_mode(t_ui_map_menu *map_menu)
+{
+	t_light		*new_light;
+	t_rgb		color;
+	t_sprite	new_sprite;
+
+	if (get_app()->editor_mode == TRUE && is_light_inside_map(get_mouse_pos()))
 	{
-		map_menu = &get_ui()->map_menu;
 		color.r = (uint8_t)map_menu->slid_red_color.value;
 		color.g = (uint8_t)map_menu->slid_green_color.value;
 		color.b = (uint8_t)map_menu->slid_blue_color.value;
+		printf("%d,%d,%d\n", color.r, color.g, color.b);
 		add_light(&get_app()->gamestate,
 			vec3(get_mouse_pos().x, get_mouse_pos().y, 18),
 			color,

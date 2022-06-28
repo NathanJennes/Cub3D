@@ -34,6 +34,8 @@ void	render_map_menu(void)
 	render_ui_label(&menu->blue_label);
 	render_ui_label(&menu->green_label);
 	render_ui_label(&menu->red_label);
+	render_ui_button(&menu->add_light);
+	render_ui_button(&menu->delete_light);
 }
 
 inline static void	render_map(const t_map_info *map, t_mlx *app)

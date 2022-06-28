@@ -16,7 +16,7 @@
 #include "leaky.h"
 
 void			handle_f1(t_mlx *app);
-inline static void	handle_escape(void);
+inline static void	handle_escape(t_mlx *app);
 inline static void	handle_tab(t_mlx *app);
 inline static void	turn_off_lights(void);
 inline static void	turn_on_lights(void);
@@ -31,7 +31,7 @@ int	key_pressed_listener(int keycode)
 	else if (keycode == KEY_TAB)
 		handle_tab(app);
 	else if (keycode == KEY_ESC)
-		handle_escape();
+		handle_escape(app);
 	else if (keycode == KEY_F1)
 		handle_f1(app);
 	else if (keycode == KEY_F2)
@@ -66,12 +66,10 @@ inline static void	handle_tab(t_mlx *app)
 	mlx_mouse_show();
 }
 
-inline static void	handle_escape(void)
+inline static void	handle_escape(t_mlx *app)
 {
-	t_mlx	*app;
 	char	*save_name;
 
-	app = get_app();
 	mlx_mouse_show();
 	if (app->state == IN_GAME)
 	{
@@ -89,7 +87,10 @@ inline static void	handle_escape(void)
 		return ;
 	}
 	if (app->ui.state != MAIN_MENU)
+	{
 		app->ui.state = MAIN_MENU;
+		app->light_mode = ADD;
+	}
 	else if (app->ui.state == MAIN_MENU)
 		close_app();
 }

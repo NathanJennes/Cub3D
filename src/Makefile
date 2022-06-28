@@ -18,7 +18,8 @@ PROFILING_SRCS	:=	$(addprefix $(PROFILING_DIR)/, $(PROFILING_FILE))
 
 INPUT_DIR		:=	$(CORE_DIR)/input
 INPUT_FILE		:=	input_device.c key_listeners.c key_manager.c	\
-					mouse_listeners.c mouse_manager.c key_listeners_handlers.c
+					mouse_listeners.c mouse_manager.c key_listeners_handlers.c	\
+					mouse_check.c
 INPUT_SRCS		:=	$(addprefix $(INPUT_DIR)/, $(INPUT_FILE))
 
 RENDER_DIR		:=	render

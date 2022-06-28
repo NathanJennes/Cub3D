@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:37:04 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/27 18:33:55 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/28 20:48:45 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ typedef struct s_ui_main_menu
 	t_button	btn_editor;
 	t_button	btn_option;
 	t_button	btn_exit;
+	t_label		lbl_help;
 }	t_ui_main_menu;
 
 typedef struct s_ui_new_game_menu
@@ -174,6 +175,8 @@ typedef struct s_ui_map_menu
 	t_slider	intensity;
 	t_label		intensity_label;
 	t_checkbox	chk_editor_mode;
+	t_button	add_light;
+	t_button	delete_light;
 }	t_ui_map_menu;
 
 typedef struct s_ui_load_menu
@@ -246,7 +249,7 @@ void			render_load_menu(void);
 void			update_load_menu(void);
 
 /* Map menu */
-void			init_map_menu(void);
+void			init_map_menu(t_settings *settings);
 void			render_map_menu(void);
 void			update_map_menu(void);
 

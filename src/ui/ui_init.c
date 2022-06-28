@@ -26,7 +26,7 @@ void	init_ui(void)
 	init_settings_menu(get_settings());
 	init_hud(ui);
 	init_load_menu();
-	init_map_menu();
+	init_map_menu(get_settings());
 	init_keybings_menu();
 }
 

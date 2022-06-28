@@ -29,6 +29,29 @@ void	add_light(t_gamestate *gamestate, t_vec3 pos, t_rgb color,
 	gamestate->light_count++;
 }
 
+void	delete_light(t_gamestate *gamestate, int64_t id)
+{
+	t_light	*new;
+
+	new = gc_calloc(gamestate->light_count - 1, sizeof (t_light));
+	if (id == 0)
+		gc_memmove(new, (gamestate->lights + sizeof(t_light)),
+			(gamestate->light_count - 1) * sizeof(t_light));
+	else if (id == gamestate->light_count)
+		gc_memmove(new, gamestate->lights,
+			(gamestate->light_count - 1) * sizeof(t_light));
+	else
+	{
+		gc_memmove(new, gamestate->lights, (id - 1) * sizeof(t_light));
+		gc_memmove(&new + ((id - 1) * sizeof(t_light)),
+			gamestate->lights + (id * sizeof(t_light)),
+			(gamestate->light_count - id) * sizeof(t_light));
+	}
+	gc_free(gamestate->lights);
+	gamestate->lights = new;
+	gamestate->light_count--;
+}
+
 void	free_lights(t_gamestate *gamestate)
 {
 	gc_free(gamestate->lights);

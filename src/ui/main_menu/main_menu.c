@@ -25,6 +25,7 @@ void	render_main_menu(void)
 	render_ui_button(&main_menu->btn_editor);
 	render_ui_button(&main_menu->btn_option);
 	render_ui_button(&main_menu->btn_exit);
+	render_ui_label(&main_menu->lbl_help);
 }
 
 void	update_main_menu(void)

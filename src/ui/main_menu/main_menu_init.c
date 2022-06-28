@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_menu_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:37:39 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/26 17:33:40 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/28 19:38:44 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ void	init_main_menu(void)
 			ivec2(0, 0), btn_option);
 	main_menu->btn_exit = create_button("assets/ui/exit.xpm",
 			ivec2(0, 0), btn_exit_app);
+	main_menu->lbl_help = create_label(
+			ivec2(0, get_settings()->win_h - 50),
+			"Press F1 for help", ivec2(200, 20), 15);
 	init_positions_main_menu(main_menu);
 	refresh_main_menu();
 }
@@ -80,6 +83,7 @@ inline static void	init_positions_main_menu(t_ui_main_menu *main_menu)
 	uic_padding(&main_menu->btn_option.infos, ivec2(20, 20), ivec2(0, 0));
 	uic_padding(&main_menu->btn_exit.infos, ivec2(20, 20), ivec2(0, 0));
 	uic_center_win_w(&main_menu->title.infos);
+	uic_center_win_w(&main_menu->lbl_help.infos);
 	uic_below(&main_menu->btn_continue.infos, &main_menu->title.infos);
 	uic_below(&main_menu->btn_new_game.infos, &main_menu->btn_continue.infos);
 	uic_below(&main_menu->btn_load.infos, &main_menu->btn_new_game.infos);
