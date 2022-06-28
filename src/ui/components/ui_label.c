@@ -23,6 +23,7 @@ t_label	create_label(t_ivec2 pos, char *text, t_ivec2 size, int font_size)
 	label.infos.displayed = TRUE;
 	label.text = text;
 	label.tex_id = new_texture(size.x, size.y);
+	label.font_size = font_size;
 	render_text_tex(label.text, DEFAULT_FONT,
 		text_center(label.text, DEFAULT_FONT, font_size,
 			ivec2(size.x / 2, size.y / 2)),

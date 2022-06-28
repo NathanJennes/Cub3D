@@ -107,7 +107,7 @@ inline static void	turn_off_lights(void)
 		if (ft_pow2(game->lights[i].pos.x - game->player.world_pos.x) + \
 			ft_pow2(game->lights[i].pos.y - game->player.world_pos.y) < \
 			CELL_SIZE * CELL_SIZE)
-			game->lights[i].enabled = !game->lights[i].enabled;
+			game->lights[i].enabled = FALSE;
 		i++;
 	}
 }

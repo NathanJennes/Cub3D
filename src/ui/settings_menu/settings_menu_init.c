@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings_menu_init.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:36:08 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/27 19:18:24 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/28 22:16:08 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void	init_settings_menu(t_settings *settings)
 	menu->slid_fov = create_slider(ivec2_zero(),
 			ivec2(350, 20), vec3(10.0, 170.0, (float)get_settings()->fov));
 	menu->lbl_fov = create_label(ivec2_zero(), gc_itoa(get_settings()->fov),
-			ivec2(200, 100), 10);
+			ivec2(200, 100), 20);
 	menu->slid_sens = create_slider(ivec2_zero(),
 			ivec2(350, 20), vec3(0.1, 10.0,
 				(float)get_settings()->cam_sensitivity));
 	menu->lbl_sens = create_label(ivec2_zero(),
-			gc_itoa(settings->cam_sensitivity), ivec2(200, 100), 10);
+			gc_itoa(settings->cam_sensitivity), ivec2(200, 100), 20);
 	menu->chk_res_min = create_checkbox(NULL, ivec2_zero(),
 			chk_select_res_min, chk_unselect_res_min);
 	menu->chk_res_med = create_checkbox(NULL, ivec2_zero(),
