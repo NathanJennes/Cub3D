@@ -34,6 +34,8 @@ void	update_ui(void)
 	t_mlx	*app;
 
 	app = get_app();
+	if (app->mandatory_lock)
+		return ;
 	if (app->state != IN_MENU)
 	{
 		update_map_menu();

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/29 14:57:40 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/29 17:21:42 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int					add_map_row(t_map_info *infos, t_map_parser *parser,
 						char *line);
 t_bool				is_map_legal(t_map_info *infos, t_map_parser *parser);
 
-inline static int			parse_line_mand(t_gamestate *gamestate,
-						t_map_info *infos, t_map_parser *parser, char *line);
+inline static int			parse_line_mand(t_map_info *infos,
+								t_map_parser *parser, char *line);
 inline static void		setup_player(t_gamestate *save);
 inline static int			map_check_status(int *map_status, t_map_info *infos,
 						t_map_parser *parser, char *line);
@@ -49,7 +49,7 @@ int	load_mandatory_map(t_gamestate *save_out, int fd, char *line,
 	while (line)
 	{
 		parser.line = line;
-		if (!parse_line_mand(save_out, infos, &parser, line))
+		if (!parse_line_mand(infos, &parser, line))
 			return (map_print_error(&parser));
 		gc_free(line);
 		line = ft_trimr(gc_get_next_line(fd));
@@ -58,8 +58,7 @@ int	load_mandatory_map(t_gamestate *save_out, int fd, char *line,
 	if (!is_map_legal(infos, &parser))
 		return (map_print_error(&parser));
 	construct_mand_map(save_out, infos);
-	if (!is_light_pos_legal(save_out, save_out->map.width, save_out->map.height)
-		|| !is_player_position_legal(save_out))
+	if (!is_player_position_legal(save_out))
 		return (0);
 	return (1);
 }
@@ -70,8 +69,8 @@ inline static void	construct_mand_map(t_gamestate *save_out, t_map_info *infos)
 	setup_player(save_out);
 }
 
-inline static int	parse_line_mand(t_gamestate *gamestate, t_map_info *infos,
-			t_map_parser *parser, char *line)
+inline static int	parse_line_mand(t_map_info *infos, t_map_parser *parser,
+						char *line)
 {
 	static int	map_status = MEMPTY;
 
@@ -92,8 +91,6 @@ inline static int	parse_line_mand(t_gamestate *gamestate, t_map_info *infos,
 		return (parse_texture(infos, parser, ft_strskip_space(line + 2), EAST));
 	else if (ft_strncmp(line, "WE", 2) == 0)
 		return (parse_texture(infos, parser, ft_strskip_space(line + 2), WEST));
-	else if (ft_strncmp(line, "L", 1) == 0)
-		return (parse_light(gamestate, parser, ft_strskip_space(line + 2)));
 	return (map_error(line, parser, MERR_UNRECOGNIZED_LINE));
 }
 

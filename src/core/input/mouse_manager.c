@@ -60,7 +60,6 @@ int	mouse_move_hooks(int x, int y, void *unused)
 {
 	(void)unused;
 	cub_update_mouse_pos(x, y);
-	update_ui();
 	return (0);
 }
 

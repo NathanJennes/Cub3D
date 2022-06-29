@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loaded_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:07:45 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/29 11:19:38 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:05:12 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 #include "core.h"
 #include "leaky.h"
 
-void		serialize_game(int fd);
 int			deserialize_save(t_gamestate *save_out, int fd, char *filename);
-
-inline static int	open_map_file(char *map_name);
 
 int	load_map(t_gamestate *map_out, char *map_name)
 {
@@ -28,7 +25,7 @@ int	load_map(t_gamestate *map_out, char *map_name)
 	if (!map_name)
 		return (0);
 	ft_memset(&save, 0, sizeof (t_gamestate));
-	fd = open_map_file(map_name);
+	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
 		return (0);
 	if (!deserialize_save(&save, fd, map_name))
@@ -42,17 +39,4 @@ int	load_map(t_gamestate *map_out, char *map_name)
 	close(fd);
 	*map_out = save;
 	return (1);
-}
-
-inline static int	open_map_file(char *map_name)
-{
-	int		fd;
-	char	*map_file;
-
-	map_file = gc_strdup(MAPS_DIRECTORY);
-	map_file = gc_strappend(map_file, '/', LK_TRUE);
-	map_file = gc_strjoin(map_file, map_name, FREE_FIRST);
-	fd = open(map_file, O_RDWR, 0777);
-	gc_free(map_file);
-	return (fd);
 }

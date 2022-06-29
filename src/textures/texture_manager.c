@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 11:36:36 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/24 16:47:06 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/29 17:15:32 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,12 @@ inline static int64_t	get_texture_id_from_name(char *name);
 
 void	init_texture_manager(void)
 {
-	t_mlx	*app;
 	int64_t	base_tex;
 
 	base_tex = new_texture(128, 128);
 	draw_rect_tex(ivec2(0, 0), ivec2(128, 128),
 		trgb(0, 170, 155, 125), base_tex);
 	finish_new_texture(base_tex);
-	app = get_app();
-	app->lamp_tex_id = load_texture("assets/lamp.xpm");
 }
 
 int64_t	load_texture(char *path)

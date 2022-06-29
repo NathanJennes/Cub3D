@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/26 19:22:40 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:11:36 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,49 +20,34 @@ int				key_up_callback(int keycode, void *unused);
 int				key_down_callback(int keycode, void *unused);
 int				mouse_down_callback(int button, int x, int y, void *unused);
 int				mouse_up_callback(int button, int x, int y, void *unused);
+void 			start_game(void);
 
 static void		init_hooks(void);
-static void		init_start_time(void);
-static void		init_mandatory(t_mlx *app, char *path);
+
 
 void	init_app(char *path)
 {
 	t_mlx	*app;
 
-	srand(time(0));
 	app = get_app();
-	app->settings = load_settings();
-	init_start_time();
 	init_gc();
+	app->settings = load_settings();
 	init_window("Cub3d");
 	init_texture_manager();
-	init_font_manager();
-	load_all_saves();
-	load_all_maps();
-	printf("Saves loaded: %d\n", (int) app->savegames_count);
-	printf("Maps loaded: %d\n", (int) app->maps_count);
 	update_precalc();
-	init_ui();
 	init_hooks();
-	init_renderer();
-	init_mandatory(app, path);
+	if (load_map(&app->gamestate, path))
+		start_game();
+	else
+		ft_error_exit("Error: couldn't load specified map\n");
 }
 
-static void	init_mandatory(t_mlx *app, char *path)
+void start_game(void)
 {
-	if (load_map(&app->gamestate, path))
-	{
-		update_player_direction(get_player(), app->delta_time, FALSE);
-		update_player_vectors(get_player());
-		generate_sprites_for_new_map();
-		app->renderer.multithreading = FALSE;
-		app->mandatory = TRUE;
-		app->state = IN_GAME;
-		mlx_mouse_hide();
-		reset_mouse_pos();
-	}
-	else if (path)
-		printf("Error: couldn't load specified map_menu.\n");
+	update_player_direction(get_player(), FALSE);
+	update_player_vectors(get_player());
+	mlx_mouse_hide();
+	reset_mouse_pos();
 }
 
 static void	init_hooks(void)
@@ -77,17 +62,6 @@ static void	init_hooks(void)
 	mlx_hook(app->win, 5, 0, mouse_up_callback, NULL);
 	mlx_hook(app->win, 6, 0, mouse_move_hooks, app);
 	mlx_loop_hook(app->mlx, main_loop, app);
-}
-
-static void	init_start_time(void)
-{
-	t_mlx			*app;
-	struct timeval	time;
-
-	app = get_app();
-	gettimeofday(&time, NULL);
-	app->start_time = time.tv_sec * 1000 + time.tv_usec / 1000;
-	app->last_time = app->start_time;
 }
 
 void	update_precalc(void)

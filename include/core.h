@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:33:14 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/28 20:48:45 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/29 17:18:23 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,17 +198,6 @@ typedef enum e_app_state
 	IN_GAME
 }	t_app_state;
 
-typedef struct s_renderer
-{
-	t_bool			multithreading;
-	t_bool			running;
-	pthread_mutex_t	running_lock;
-	pthread_mutex_t	locks[RENDER_WORKER_COUNT];
-	pthread_mutex_t	working_lock[RENDER_WORKER_COUNT];
-	pthread_t		workers[RENDER_WORKER_COUNT];
-	double			*depth_buffer;
-}	t_renderer;
-
 typedef struct s_mlx
 {
 	void				*mlx;
@@ -217,25 +206,9 @@ typedef struct s_mlx
 	t_gamestate			gamestate;
 	t_settings			settings;
 	t_mouse				mouse;
-	t_gamestate			*savegames;
-	size_t				savegames_count;
-	t_gamestate			*maps;
-	int64_t				maps_count;
-	int64_t				last_time;
-	int64_t				start_time;
-	double				delta_time;
-	t_app_state			state;
-	t_ui				ui;
 	t_texture_manager	texture_manager;
-	t_font_manager		font_manager;
-	t_sprite_manager	sprite_manager;
 	t_bool				keys[MAX_KEYCODE];
 	t_math				pc;
-	t_renderer			renderer;
-	t_bool				mandatory;
-	int64_t				lamp_tex_id;
-	t_bool				editor_mode;
-	t_bool				light_mode;
 }	t_mlx;
 
 //TODO: quand on se deplace en diagonale, la minimap shake
@@ -244,7 +217,6 @@ typedef struct s_mlx
 void				init_window(char *win_name);
 int					close_app(void);
 void				error_close_app(void);
-void				check_leaky_errors(void);
 void				update_precalc(void);
 
 /* window.c */
@@ -256,7 +228,6 @@ void				init_gc(void);
 
 /* main_loop.c */
 int					main_loop(void);
-void				render_main_menu_background(void);
 
 /* hooks.c.c */
 int					mouse_move_hooks(int x, int y, void *unused);
@@ -273,20 +244,10 @@ void				cub_update_mouse_pos(int x, int y);
 t_ivec2				get_mouse_pos(void);
 void				reset_mouse_pos(void);
 void				update_player_vectors(t_player *player);
-void				update_player_direction(t_player *player, double delta_time,
+void				update_player_direction(t_player *player,
 						t_bool handle_input);
 void				update_player(t_player *player, t_bool handle_input);
 t_bool				is_player_position_legal(t_gamestate *gamestate);
-
-/* Sprites */
-void				init_sprite_manager(void);
-void				add_sprite_to_current_game(t_sprite sprite);
-void				clear_sprite_manager(void);
-void				generate_sprites_for_new_map(void);
-void				render_sprites(void);
-
-double				get_depth_at(int64_t i);
-void				set_depth_at(int64_t i, double distance);
 
 /* getters */
 t_mlx				*get_app(void);
@@ -294,11 +255,8 @@ t_frame				*get_frame(void);
 t_map_info			*get_map_infos(void);
 t_player			*get_player(void);
 void				*get_mlx(void);
-t_ui				*get_ui(void);
 t_settings			*get_settings(void);
 t_math				*get_math(void);
-t_texture_manager	*get_texture_manager(void);
-t_light				*get_lights(void);
 t_gamestate			*get_gamestate(void);
 
 #endif

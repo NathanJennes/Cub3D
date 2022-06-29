@@ -22,7 +22,7 @@ void	print_debug(void)
 {
 	t_ivec2	debug_pos;
 
-	if (get_ui()->debug_state == NO_DEBUG)
+	if (get_ui()->debug_state == NO_DEBUG || get_app()->mandatory_lock)
 		return ;
 	debug_pos = ivec2(20, get_settings()->win_h / 2);
 	debug_rays(&debug_pos);
