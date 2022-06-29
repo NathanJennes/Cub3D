@@ -47,6 +47,7 @@ void	init_map_menu(t_settings *settings)
 			add_light_mode_button);
 	menu->delete_light = create_button("assets/placeholder.xpm", ivec2_zero(),
 			delete_light_mode_button);
+	menu->delete_light.infos.displayed = FALSE;
 	init_positions_map_menu(menu);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_listeners.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:31:13 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/28 20:33:44 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/29 14:51:40 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 int					is_light_inside_map(t_ivec2 mouse_pos);
 void				update_ui_click_begin(int button);
 void				update_ui_click_end(int button);
+void				delete_lights_in_minimap(void);
 inline static void		mouse_click_editor_mode(t_ui_map_menu *map_menu);
 
 void	mouse_click_begin(int button)
@@ -30,12 +31,15 @@ inline static void	mouse_click_editor_mode(t_ui_map_menu *map_menu)
 	t_rgb		color;
 	t_sprite	new_sprite;
 
-	if (get_app()->editor_mode == TRUE && is_light_inside_map(get_mouse_pos()))
+	if (get_app()->state == IN_GAME
+		&& get_app()->editor_mode == TRUE
+		&& is_light_inside_map(get_mouse_pos())
+		&& get_app()->light_mode == ADD)
 	{
+		printf("adding light by click\n");
 		color.r = (uint8_t)map_menu->slid_red_color.value;
 		color.g = (uint8_t)map_menu->slid_green_color.value;
 		color.b = (uint8_t)map_menu->slid_blue_color.value;
-		printf("%d,%d,%d\n", color.r, color.g, color.b);
 		add_light(&get_app()->gamestate,
 			vec3(get_mouse_pos().x, get_mouse_pos().y, 18),
 			color,
@@ -49,6 +53,10 @@ inline static void	mouse_click_editor_mode(t_ui_map_menu *map_menu)
 				(double)new_light->color.b / 255.0);
 		add_sprite_to_current_game(new_sprite);
 	}
+	else if (get_app()->state == IN_GAME
+			&& get_app()->editor_mode == TRUE
+			&& get_app()->light_mode == DELETE)
+		delete_lights_in_minimap();
 }
 
 void	mouse_click_end(int button)

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:43:56 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/15 14:35:59 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/29 14:59:06 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,19 @@ void	add_light(t_gamestate *gamestate, t_vec3 pos, t_rgb color,
 
 void	delete_light(t_gamestate *gamestate, int64_t id)
 {
-	t_light	*new;
+	void	*light_to_delete;
+	void	*sprite_to_delete;
+	t_mlx	*app;
 
-	new = gc_calloc(gamestate->light_count - 1, sizeof (t_light));
-	if (id == 0)
-		gc_memmove(new, (gamestate->lights + sizeof(t_light)),
-			(gamestate->light_count - 1) * sizeof(t_light));
-	else if (id == gamestate->light_count)
-		gc_memmove(new, gamestate->lights,
-			(gamestate->light_count - 1) * sizeof(t_light));
-	else
-	{
-		gc_memmove(new, gamestate->lights, (id - 1) * sizeof(t_light));
-		gc_memmove(&new + ((id - 1) * sizeof(t_light)),
-			gamestate->lights + (id * sizeof(t_light)),
-			(gamestate->light_count - id) * sizeof(t_light));
-	}
-	gc_free(gamestate->lights);
-	gamestate->lights = new;
+	app = get_app();
+	light_to_delete = &gamestate->lights[id];
+	ft_memmove(light_to_delete, light_to_delete + sizeof (t_light),
+		(gamestate->light_count - id - 1) * sizeof (t_light));
 	gamestate->light_count--;
+	sprite_to_delete = &app->sprite_manager.sprites[id];
+	ft_memmove(sprite_to_delete, sprite_to_delete + sizeof (t_sprite),
+		(app->sprite_manager.sprite_count - id - 1) * sizeof (t_sprite));
+	app->sprite_manager.sprite_count--;
 }
 
 void	free_lights(t_gamestate *gamestate)
