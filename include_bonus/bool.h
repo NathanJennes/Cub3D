@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_mand.c                                        :+:      :+:    :+:   */
+/*   bool.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/29 16:32:43 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/29 16:33:25 by njennes          ###   ########.fr       */
+/*   Created: 2022/05/15 11:08:26 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/16 17:44:56 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core.h"
-#include "leaky.h"
+#ifndef BOOL_H
+# define BOOL_H
 
-int	main(int argc, char *argv[])
-{
-	if (argc == 2)
-		init_app(argv[1]);
-	else
-	{
-		printf("Wrong arg count\n");
-		return (0);
-	}
-	mlx_loop(get_mlx());
-	gc_clean();
-	return (0);
-}
+# define TRUE 1
+# define FALSE 0
+
+typedef int	t_bool;
+
+#endif

@@ -21,7 +21,7 @@ int	render_ui(void)
 	t_mlx			*app;
 
 	app = get_app();
-	if (app->mandatory_lock || other_ui_render(app))
+	if (other_ui_render(app))
 		return (0);
 	if (app->ui.state == MAIN_MENU)
 	{

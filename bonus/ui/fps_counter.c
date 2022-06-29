@@ -30,7 +30,7 @@ void	fps_counter(void)
 	time_diff = current_time - app->last_time;
 	app->last_time = current_time;
 	app->delta_time = (double)time_diff / 1000.0;
-	if (app->ui.debug_state != NO_DEBUG && !get_app()->mandatory_lock)
+	if (app->ui.debug_state != NO_DEBUG)
 		display_fps(time_diff);
 }
 

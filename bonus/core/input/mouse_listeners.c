@@ -22,8 +22,6 @@ inline static void		mouse_click_editor_mode(t_ui_map_menu *map_menu,
 
 void	mouse_click_begin(int button)
 {
-	if (get_app()->mandatory_lock)
-		return ;
 	update_ui_click_begin(button);
 	mouse_click_editor_mode(&get_ui()->map_menu, get_mouse_pos());
 }
@@ -59,8 +57,6 @@ inline static void	mouse_click_editor_mode(t_ui_map_menu *map_menu,
 
 void	mouse_click_end(int button)
 {
-	if (get_app()->mandatory_lock)
-		return ;
 	update_ui_click_end(button);
 }
 
@@ -69,8 +65,6 @@ void	mouse_wheel_up(void)
 	t_mlx	*app;
 	t_ui	*ui;
 
-	if (get_app()->mandatory_lock)
-		return ;
 	app = get_app();
 	if (app->state == IN_GAME)
 		return ;
@@ -95,8 +89,6 @@ void	mouse_wheel_down(void)
 	t_mlx	*app;
 	t_ui	*ui;
 
-	if (get_app()->mandatory_lock)
-		return ;
 	app = get_app();
 	if (app->state == IN_GAME)
 		return ;

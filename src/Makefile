@@ -77,31 +77,31 @@ bonus: all
 # --------------------------- #
 
 $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(CORE_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
 $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(RENDER_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
 $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(TEXTURES_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
 $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(IO_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
 $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(SAVE_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
 $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(INPUT_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
 $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(SETTINGS_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
 $(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
@@ -114,31 +114,31 @@ $(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
 # --------------------------- #
 
 $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(CORE_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
 $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(RENDER_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
 $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(TEXTURES_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
 $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(IO_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
 $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(SAVE_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
 $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(INPUT_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
 $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(SETTINGS_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
 $(DEBUG_NAME): $(DEBUG_OBJS) $(DEBUG_LIBFT_LIB) $(DEBUG_LEAKY_LIB)

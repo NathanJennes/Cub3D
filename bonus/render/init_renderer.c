@@ -18,7 +18,7 @@
 inline static void		render_multithreaded(t_renderer *renderer);
 inline static void		render_singlethreaded(void);
 
-void	init_renderer(t_bool init_threads)
+void	init_renderer()
 {
 	int64_t		i;
 	t_renderer	*renderer;
@@ -28,20 +28,17 @@ void	init_renderer(t_bool init_threads)
 	ft_memsetd(renderer->depth_buffer, DBL_MAX, get_settings()->win_w);
 	renderer->running = TRUE;
 	renderer->multithreading = FALSE;
-	if (init_threads)
+	pthread_mutex_init(&renderer->running_lock, NULL);
+	i = 0;
+	while (i < RENDER_WORKER_COUNT)
 	{
-		pthread_mutex_init(&renderer->running_lock, NULL);
-		i = 0;
-		while (i < RENDER_WORKER_COUNT)
-		{
-			pthread_mutex_init(&renderer->locks[i], NULL);
-			pthread_mutex_init(&renderer->working_lock[i], NULL);
-			pthread_mutex_lock(&renderer->locks[i]);
-			pthread_create(&renderer->workers[i], NULL,
-				renderer_worker_loop, (void *)i);
-			pthread_detach(renderer->workers[i]);
-			i++;
-		}
+		pthread_mutex_init(&renderer->locks[i], NULL);
+		pthread_mutex_init(&renderer->working_lock[i], NULL);
+		pthread_mutex_lock(&renderer->locks[i]);
+		pthread_create(&renderer->workers[i], NULL,
+			renderer_worker_loop, (void *)i);
+		pthread_detach(renderer->workers[i]);
+		i++;
 	}
 }
 

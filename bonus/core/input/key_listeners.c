@@ -28,21 +28,21 @@ int	key_pressed_listener(int keycode)
 	app = get_app();
 	if (keycode == KEY_BACKSPACE)
 		close_app();
-	else if (!app->mandatory_lock && keycode == KEY_TAB)
+	else if (keycode == KEY_TAB)
 		handle_tab(app);
-	else if (!app->mandatory_lock && keycode == KEY_ESC)
+	else if (keycode == KEY_ESC)
 		handle_escape(app);
-	else if (!app->mandatory_lock && keycode == KEY_F1)
+	else if (keycode == KEY_F1)
 		handle_f1(app);
-	else if (!app->mandatory_lock && keycode == KEY_F2)
+	else if (keycode == KEY_F2)
 		app->mandatory = !app->mandatory;
-	else if (!app->mandatory_lock && keycode == KEY_F3)
+	else if (keycode == KEY_F3)
 		handle_debug_ui();
-	else if (!app->mandatory_lock && keycode == KEY_F4)
+	else if (keycode == KEY_F4)
 		app->renderer.multithreading = !app->renderer.multithreading;
-	else if (!app->mandatory_lock && keycode == KEY_E && app->state == IN_GAME)
+	else if (keycode == KEY_E && app->state == IN_GAME)
 		turn_off_lights();
-	else if (!app->mandatory_lock && keycode == KEY_Q && app->state == IN_GAME)
+	else if (keycode == KEY_Q && app->state == IN_GAME)
 		turn_on_lights();
 	return (0);
 }

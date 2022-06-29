@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/29 15:47:08 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/29 17:54:49 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	init_app(char *path)
 	update_precalc();
 	init_ui();
 	init_hooks();
-	init_renderer(TRUE);
+	init_renderer();
 }
 
 static void	init_mandatory(t_mlx *app, char *path)
@@ -55,7 +55,7 @@ static void	init_mandatory(t_mlx *app, char *path)
 	init_texture_manager();
 	update_precalc();
 	init_hooks();
-	init_renderer(FALSE);
+	init_renderer();
 	if (load_map(&app->gamestate, path))
 	{
 		update_player_direction(get_player(), app->delta_time, FALSE);
@@ -63,7 +63,6 @@ static void	init_mandatory(t_mlx *app, char *path)
 		generate_sprites_for_new_map();
 		app->renderer.multithreading = FALSE;
 		app->mandatory = TRUE;
-		app->mandatory_lock = TRUE;
 		app->state = IN_GAME;
 		mlx_mouse_hide();
 		reset_mouse_pos();

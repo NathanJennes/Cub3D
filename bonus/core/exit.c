@@ -15,12 +15,8 @@
 #include "leaky.h"
 #include "render.h"
 
-void	close_mandatory(void);
-
 int	close_app()
 {
-	if (get_app()->mandatory_lock)
-		close_mandatory();
 	shutdown_renderer();
 	if (get_app()->state == IN_GAME && get_app()->gamestate.name)
 		save_game(get_app()->gamestate.name);
@@ -43,11 +39,4 @@ void	error_close_app(void)
 	gc_clean();
 	printf("Error\n");
 	exit(EXIT_FAILURE);
-}
-
-void	close_mandatory(void)
-{
-	destroy_window();
-	gc_clean();
-	exit(EXIT_SUCCESS);
 }

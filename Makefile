@@ -8,12 +8,16 @@ BONUS_DIR		:=		$(MAKE_DIR)/bonus
 RELEASE_OBJS_DIR		:=		$(MAKE_DIR)/obj
 RELEASE_BONUS_OBJS_DIR	:=		$(MAKE_DIR)/bonus_obj
 DEBUG_OBJS_DIR			:=		$(MAKE_DIR)/objd
+DEBUG_BONUS_OBJS_DIR	:=		$(MAKE_DIR)/bonus_objd
 
 LIBFT_DIR		:=		$(MAKE_DIR)/Libft
 LEAKY_DIR		:=		$(LIBFT_DIR)/Leaky
 MLX_DIR			:=		$(MAKE_DIR)/minilibx
 
-INC_PATH		:=		-I$(LIBFT_DIR) -I$(LEAKY_DIR) -I$(MAKE_DIR)/include
+INCLUDE_DIR			:=	-I$(MAKE_DIR)/include
+INCLUDE_BONUS_DIR	:=	-I$(MAKE_DIR)/include_bonus
+
+INC_PATH		:=		-I$(LIBFT_DIR) -I$(LEAKY_DIR)
 
 LIB_PATH		:=		-L$(LIBFT_DIR) -L$(LEAKY_DIR)
 
@@ -58,6 +62,7 @@ export MAKE_DIR
 export RELEASE_BONUS_OBJS_DIR
 export RELEASE_OBJS_DIR
 export DEBUG_OBJS_DIR
+export DEBUG_BONUS_OBJS_DIR
 export MASTER_MAKE
 export SRCS_DIR
 export BONUS_DIR
@@ -78,6 +83,8 @@ export RELEASE_LEAKY_LIB
 export LIB_PATH
 export LIBFT_DIR
 export LEAKY_DIR
+export INCLUDE_DIR
+export INCLUDE_BONUS_DIR
 
 .PHONY: all
 all: header
@@ -110,11 +117,13 @@ ifeq ($(OS), Darwin)
 	@$(MAKE) -C $(MLX_DIR) clean
 endif
 	@$(MAKE) -C $(SRCS_DIR) clean
+	@$(MAKE) -C $(BONUS_DIR) clean
 
 .PHONY: fclean
 fclean: clean
 	@$(MAKE) -C $(LIBFT_DIR) fclean
 	@$(MAKE) -C $(SRCS_DIR) fclean
+	@$(MAKE) -C $(BONUS_DIR) fclean
 
 .PHONY: re
 re: fclean all

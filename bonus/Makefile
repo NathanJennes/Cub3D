@@ -108,26 +108,26 @@ SETTINGS_FILE		:=	deserialization_settings.c load_settings.c	\
 						save_settings.c deserialization_settings_player.c
 SETTINGS_SRCS		:=	$(addprefix $(SETTINGS_DIR)/, $(SETTINGS_FILE))
 
-SRCS			:=	$(addprefix $(SRCS_DIR)/, $(CORE_SRCS))						\
-					$(addprefix $(SRCS_DIR)/, $(UI_SRCS))						\
-					$(addprefix $(SRCS_DIR)/, $(RENDER_SRCS))					\
-					$(addprefix $(SRCS_DIR)/, $(TEXTURE_SRCS))					\
-					$(addprefix $(SRCS_DIR)/, $(IO_SRCS))						\
-					$(addprefix $(SRCS_DIR)/, $(SAVE_SRCS))						\
-					$(addprefix $(SRCS_DIR)/, $(INPUT_SRCS))					\
-					$(addprefix $(SRCS_DIR)/, $(UI_COMPONENT_SRCS))				\
-					$(addprefix $(SRCS_DIR)/, $(UI_LAYOUT_SRCS))				\
-					$(addprefix $(SRCS_DIR)/, $(UI_MAIN_MENU_SRCS))				\
-					$(addprefix $(SRCS_DIR)/, $(UI_NEW_GAME_MENU_SRCS))			\
-					$(addprefix $(SRCS_DIR)/, $(FONT_SRCS))						\
-					$(addprefix $(SRCS_DIR)/, $(SETTINGS_SRCS))					\
-					$(addprefix $(SRCS_DIR)/, $(UI_SETTINGS_MENU_SRCS))			\
-					$(addprefix $(SRCS_DIR)/, $(SPRITE_SRCS))					\
-					$(addprefix $(SRCS_DIR)/, $(UI_LOAD_MENU_SRCS))				\
-					$(addprefix $(SRCS_DIR)/, $(UI_MAP_MENU_SRCS))
+SRCS			:=	$(addprefix $(BONUS_DIR)/, $(CORE_SRCS))						\
+					$(addprefix $(BONUS_DIR)/, $(UI_SRCS))						\
+					$(addprefix $(BONUS_DIR)/, $(RENDER_SRCS))					\
+					$(addprefix $(BONUS_DIR)/, $(TEXTURE_SRCS))					\
+					$(addprefix $(BONUS_DIR)/, $(IO_SRCS))						\
+					$(addprefix $(BONUS_DIR)/, $(SAVE_SRCS))						\
+					$(addprefix $(BONUS_DIR)/, $(INPUT_SRCS))					\
+					$(addprefix $(BONUS_DIR)/, $(UI_COMPONENT_SRCS))				\
+					$(addprefix $(BONUS_DIR)/, $(UI_LAYOUT_SRCS))				\
+					$(addprefix $(BONUS_DIR)/, $(UI_MAIN_MENU_SRCS))				\
+					$(addprefix $(BONUS_DIR)/, $(UI_NEW_GAME_MENU_SRCS))			\
+					$(addprefix $(BONUS_DIR)/, $(FONT_SRCS))						\
+					$(addprefix $(BONUS_DIR)/, $(SETTINGS_SRCS))					\
+					$(addprefix $(BONUS_DIR)/, $(UI_SETTINGS_MENU_SRCS))			\
+					$(addprefix $(BONUS_DIR)/, $(SPRITE_SRCS))					\
+					$(addprefix $(BONUS_DIR)/, $(UI_LOAD_MENU_SRCS))				\
+					$(addprefix $(BONUS_DIR)/, $(UI_MAP_MENU_SRCS))
 
-RELEASE_OBJS	:=	$(addprefix $(RELEASE_OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
-DEBUG_OBJS		:=	$(addprefix $(DEBUG_OBJS_DIR)/, $(notdir $(SRCS:.c=d.o)))
+RELEASE_OBJS	:=	$(addprefix $(RELEASE_BONUS_OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
+DEBUG_OBJS		:=	$(addprefix $(DEBUG_BONUS_OBJS_DIR)/, $(notdir $(SRCS:.c=d.o)))
 
 DEPENDS			:=	$(RELEASE_OBJS:.o=.d) $(DEBUG_OBJS:.o=.d)
 
@@ -147,72 +147,72 @@ bonus: all
 #           Release           #
 # --------------------------- #
 
-$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(CORE_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+$(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(CORE_DIR)/%.c | $(RELEASE_BONUS_OBJS_DIR)
+	$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(RENDER_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+$(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(RENDER_DIR)/%.c | $(RELEASE_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(UI_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+$(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(UI_DIR)/%.c | $(RELEASE_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(TEXTURES_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+$(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(TEXTURES_DIR)/%.c | $(RELEASE_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(IO_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+$(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(IO_DIR)/%.c | $(RELEASE_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(SAVE_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+$(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(SAVE_DIR)/%.c | $(RELEASE_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(INPUT_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+$(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(INPUT_DIR)/%.c | $(RELEASE_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(UI_COMPONENT_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+$(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(UI_COMPONENT_DIR)/%.c | $(RELEASE_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(UI_LAYOUT_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+$(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(UI_LAYOUT_DIR)/%.c | $(RELEASE_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(UI_MAIN_MENU_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+$(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(UI_MAIN_MENU_DIR)/%.c | $(RELEASE_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(UI_NEW_GAME_MENU_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+$(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(UI_NEW_GAME_MENU_DIR)/%.c | $(RELEASE_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(FONT_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+$(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(FONT_DIR)/%.c | $(RELEASE_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(SETTINGS_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+$(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(SETTINGS_DIR)/%.c | $(RELEASE_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(UI_SETTINGS_MENU_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+$(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(UI_SETTINGS_MENU_DIR)/%.c | $(RELEASE_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(SPRITE_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+$(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(SPRITE_DIR)/%.c | $(RELEASE_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(UI_LOAD_MENU_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+$(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(UI_LOAD_MENU_DIR)/%.c | $(RELEASE_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(UI_MAP_MENU_DIR)/%.c | $(RELEASE_OBJS_DIR)
-	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) -c $< -o $@
+$(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(UI_MAP_MENU_DIR)/%.c | $(RELEASE_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
 $(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
@@ -224,72 +224,72 @@ $(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
 #           Debug             #
 # --------------------------- #
 
-$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(CORE_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+$(DEBUG_BONUS_OBJS_DIR)/%d.o:	$(BONUS_DIR)/$(CORE_DIR)/%.c | $(DEBUG_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(RENDER_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+$(DEBUG_BONUS_OBJS_DIR)/%d.o:	$(BONUS_DIR)/$(RENDER_DIR)/%.c | $(DEBUG_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+$(DEBUG_BONUS_OBJS_DIR)/%d.o:	$(BONUS_DIR)/$(UI_DIR)/%.c | $(DEBUG_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(TEXTURES_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+$(DEBUG_BONUS_OBJS_DIR)/%d.o:	$(BONUS_DIR)/$(TEXTURES_DIR)/%.c | $(DEBUG_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(IO_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+$(DEBUG_BONUS_OBJS_DIR)/%d.o:	$(BONUS_DIR)/$(IO_DIR)/%.c | $(DEBUG_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(SAVE_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+$(DEBUG_BONUS_OBJS_DIR)/%d.o:	$(BONUS_DIR)/$(SAVE_DIR)/%.c | $(DEBUG_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(INPUT_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+$(DEBUG_BONUS_OBJS_DIR)/%d.o:	$(BONUS_DIR)/$(INPUT_DIR)/%.c | $(DEBUG_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_COMPONENT_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+$(DEBUG_BONUS_OBJS_DIR)/%d.o:	$(BONUS_DIR)/$(UI_COMPONENT_DIR)/%.c | $(DEBUG_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_LAYOUT_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+$(DEBUG_BONUS_OBJS_DIR)/%d.o:	$(BONUS_DIR)/$(UI_LAYOUT_DIR)/%.c | $(DEBUG_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_MAIN_MENU_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+$(DEBUG_BONUS_OBJS_DIR)/%d.o:	$(BONUS_DIR)/$(UI_MAIN_MENU_DIR)/%.c | $(DEBUG_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_NEW_GAME_MENU_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+$(DEBUG_BONUS_OBJS_DIR)/%d.o:	$(BONUS_DIR)/$(UI_NEW_GAME_MENU_DIR)/%.c | $(DEBUG_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(FONT_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+$(DEBUG_BONUS_OBJS_DIR)/%d.o:	$(BONUS_DIR)/$(FONT_DIR)/%.c | $(DEBUG_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(SETTINGS_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+$(DEBUG_BONUS_OBJS_DIR)/%d.o:	$(BONUS_DIR)/$(SETTINGS_DIR)/%.c | $(DEBUG_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_SETTINGS_MENU_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+$(DEBUG_BONUS_OBJS_DIR)/%d.o:	$(BONUS_DIR)/$(UI_SETTINGS_MENU_DIR)/%.c | $(DEBUG_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(SPRITE_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+$(DEBUG_BONUS_OBJS_DIR)/%d.o:	$(BONUS_DIR)/$(SPRITE_DIR)/%.c | $(DEBUG_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_LOAD_MENU_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+$(DEBUG_BONUS_OBJS_DIR)/%d.o:	$(BONUS_DIR)/$(UI_LOAD_MENU_DIR)/%.c | $(DEBUG_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(UI_MAP_MENU_DIR)/%.c | $(DEBUG_OBJS_DIR)
-	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) -c $< -o $@
+$(DEBUG_BONUS_OBJS_DIR)/%d.o:	$(BONUS_DIR)/$(UI_MAP_MENU_DIR)/%.c | $(DEBUG_BONUS_OBJS_DIR)
+	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
 $(DEBUG_NAME): $(DEBUG_OBJS) $(DEBUG_LIBFT_LIB) $(DEBUG_LEAKY_LIB)
@@ -299,8 +299,8 @@ $(DEBUG_NAME): $(DEBUG_OBJS) $(DEBUG_LIBFT_LIB) $(DEBUG_LEAKY_LIB)
 
 clean:
 	@printf "$(_YELLOW)Removing object files ...$(_END)\n"
-	@rm -rf $(RELEASE_OBJS_DIR)
-	@rm -rf $(DEBUG_OBJS_DIR)
+	@rm -rf $(RELEASE_BONUS_OBJS_DIR)
+	@rm -rf $(DEBUG_BONUS_OBJS_DIR)
 	@rm -fr *.dSYM
 
 fclean:	clean
@@ -310,11 +310,11 @@ fclean:	clean
 
 re:		fclean all
 
-$(RELEASE_OBJS_DIR):
-	@mkdir -p $(RELEASE_OBJS_DIR)
+$(RELEASE_BONUS_OBJS_DIR):
+	@mkdir -p $(RELEASE_BONUS_OBJS_DIR)
 
-$(DEBUG_OBJS_DIR):
-	@mkdir -p $(DEBUG_OBJS_DIR)
+$(DEBUG_BONUS_OBJS_DIR):
+	@mkdir -p $(DEBUG_BONUS_OBJS_DIR)
 
 $(RELEASE_LEAKY_LIB):
 	@$(MAKE) -j4 -C $(LEAKY_DIR) -r -R
