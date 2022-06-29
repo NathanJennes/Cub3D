@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/29 11:56:49 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/29 13:55:55 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 t_bool			is_color_value_legal(char *line);
 static int		parse_light_color(t_rgb *color, t_map_parser *parser,
 					char **line);
-static int		parse_light_pos(t_vec3 *pos, t_map_parser *parser, char *line,
-					t_gamestate *gamestate);
+static int		parse_light_pos(t_vec3 *pos, t_map_parser *parser, char *line);
 
 int	parse_light(t_gamestate *gamestate, t_map_parser *parser, char *line)
 {
@@ -28,7 +27,7 @@ int	parse_light(t_gamestate *gamestate, t_map_parser *parser, char *line)
 
 	if (!parse_light_color(&color, parser, &line))
 		return (0);
-	if (!parse_light_pos(&pos, parser, ft_strskip_space(line + 1), gamestate))
+	if (!parse_light_pos(&pos, parser, ft_strskip_space(line + 1)))
 		return (0);
 	add_light(gamestate, pos, color, DEFAULT_INTENSITY);
 	return (1);
@@ -61,8 +60,7 @@ static int	parse_light_color(t_rgb *color, t_map_parser *parser, char **line)
 	return (1);
 }
 
-static int	parse_light_pos(t_vec3 *pos, t_map_parser *parser, char *line,
-			t_gamestate *gamestate)
+static int	parse_light_pos(t_vec3 *pos, t_map_parser *parser, char *line)
 {
 	if (!ft_isdigit(*line))
 		return (map_error(line, parser, MERR_POS_EXPECTED));
@@ -82,19 +80,32 @@ static int	parse_light_pos(t_vec3 *pos, t_map_parser *parser, char *line,
 	return (1);
 }
 
-t_bool	is_light_pos_legal(t_gamestate *gamestate)
+t_bool	is_light_pos_legal(t_gamestate *gamestate,
+			int64_t width, int64_t height)
 {
 	int64_t	i;
 
-	i = 0;
-	while (i < gamestate->light_count)
+	i = -1;
+	while (++i < gamestate->light_count)
 	{
-		if ((gamestate->lights->pos.x < 0 || gamestate->lights->pos.x >= map->width * CELL_SIZE))
+		if (gamestate->lights->pos.x < 0 || \
+			(int64_t)gamestate->lights->pos.x >= width * CELL_SIZE)
+		{
+			printf("%s\n", MERR_POS_OUTBOUND);
 			return (FALSE);
-		else if ((gamestate->lights->pos.y < 0 || gamestate->lights->pos.y >= map->height * CELL_SIZE))
+		}
+		else if (gamestate->lights->pos.y < 0 || \
+			(int64_t)gamestate->lights->pos.y >= height * CELL_SIZE)
+		{
+			printf("%s\n", MERR_POS_OUTBOUND);
 			return (FALSE);
-		else if ((gamestate->lights->pos.z < 0 || gamestate->lights->pos.z >= CELL_SIZE))
+		}
+		else if (gamestate->lights->pos.z < 0 || \
+			gamestate->lights->pos.z >= CELL_SIZE)
+		{
+			printf("%s\n", MERR_POS_OUTBOUND);
 			return (FALSE);
+		}
 	}
 	return (TRUE);
 }

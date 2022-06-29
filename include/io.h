@@ -58,6 +58,7 @@ void		reload_maps(void);
 t_settings	load_settings(void);
 void		save_settings(t_settings *settings);
 
-t_bool		is_light_pos_legal(t_gamestate *gamestate);
+t_bool		is_light_pos_legal(t_gamestate *gamestate,
+				int64_t width, int64_t height);
 
 #endif

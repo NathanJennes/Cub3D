@@ -6,7 +6,7 @@
 /*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/27 15:34:04 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/29 13:57:15 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ inline static int			parse_line_mand(t_gamestate *gamestate,
 inline static void		setup_player(t_gamestate *save);
 inline static int			map_check_status(int *map_status, t_map_info *infos,
 						t_map_parser *parser, char *line);
+inline static void		construct_mand_map(t_gamestate *save_out,
+						t_map_info *infos);
 
 int	load_mandatory_map(t_gamestate *save_out, int fd, char *line,
 			char *filename)
@@ -55,11 +57,17 @@ int	load_mandatory_map(t_gamestate *save_out, int fd, char *line,
 	}
 	if (!is_map_legal(infos, &parser))
 		return (map_print_error(&parser));
-	construct_map(infos);
-	setup_player(save_out);
-	if (!is_player_position_legal(save_out) || !is_light_pos_legal(save_out))
+	construct_mand_map(save_out, infos);
+	if (!is_light_pos_legal(save_out, save_out->map.width, save_out->map.height)
+		&& !is_player_position_legal(save_out))
 		return (0);
 	return (1);
+}
+
+inline static void	construct_mand_map(t_gamestate *save_out, t_map_info *infos)
+{
+	construct_map(infos);
+	setup_player(save_out);
 }
 
 inline static int	parse_line_mand(t_gamestate *gamestate, t_map_info *infos,
