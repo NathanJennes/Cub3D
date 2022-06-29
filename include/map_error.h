@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_error.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 16:17:43 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/27 18:03:58 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/29 14:11:41 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_map_info	t_map_info;
 # define MERR_UNRECOGNIZED_LINE "Unrecognized line"
 
 # define MERR_POS_EXPECTED "Expected a positive position value. Syntax: X,Y,Z (> 0)"
-# define MERR_POS_OUTBOUND "Invalid position given. Outside of map_menu bound"
+# define MERR_LIGHT_POS_OUTBOUND "Invalid light position given. Outside of map bound"
 
 # define MERR_COLOR_EXPECTED_R "Expected a positive red color value. Syntax: R,G,B (0-255)"
 # define MERR_COLOR_EXPECTED_B "Expected a positive blue color value. Syntax: R,G,B (0-255)"

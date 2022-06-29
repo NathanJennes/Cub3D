@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_deserialization_mandatory.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:26:19 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/29 13:57:15 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/29 14:14:01 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	load_mandatory_map(t_gamestate *save_out, int fd, char *line,
 		return (map_print_error(&parser));
 	construct_mand_map(save_out, infos);
 	if (!is_light_pos_legal(save_out, save_out->map.width, save_out->map.height)
-		&& !is_player_position_legal(save_out))
+		|| !is_player_position_legal(save_out))
 		return (0);
 	return (1);
 }

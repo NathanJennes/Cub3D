@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_deserialization_mandatory_light.c             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/29 13:55:55 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/29 14:11:17 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,21 +89,21 @@ t_bool	is_light_pos_legal(t_gamestate *gamestate,
 	while (++i < gamestate->light_count)
 	{
 		if (gamestate->lights->pos.x < 0 || \
-			(int64_t)gamestate->lights->pos.x >= width * CELL_SIZE)
+			(int64_t)gamestate->lights[i].pos.x > width * CELL_SIZE)
 		{
-			printf("%s\n", MERR_POS_OUTBOUND);
+			printf("%s\n", MERR_LIGHT_POS_OUTBOUND);
 			return (FALSE);
 		}
-		else if (gamestate->lights->pos.y < 0 || \
-			(int64_t)gamestate->lights->pos.y >= height * CELL_SIZE)
+		else if (gamestate->lights[i].pos.y < 0 || \
+			(int64_t)gamestate->lights[i].pos.y > height * CELL_SIZE)
 		{
-			printf("%s\n", MERR_POS_OUTBOUND);
+			printf("%s\n", MERR_LIGHT_POS_OUTBOUND);
 			return (FALSE);
 		}
-		else if (gamestate->lights->pos.z < 0 || \
-			gamestate->lights->pos.z >= CELL_SIZE)
+		else if (gamestate->lights[i].pos.z < 0 || \
+			gamestate->lights[i].pos.z > CELL_SIZE)
 		{
-			printf("%s\n", MERR_POS_OUTBOUND);
+			printf("%s\n", MERR_LIGHT_POS_OUTBOUND);
 			return (FALSE);
 		}
 	}
