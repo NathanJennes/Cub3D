@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 19:42:37 by Cyril             #+#    #+#             */
-/*   Updated: 2022/06/29 15:02:23 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/29 15:05:31 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	delete_lights_in_minimap(void)
 	{
 		light = &gamestate->lights[i];
 		if (simple_dist(light->pos,
-			vec3(mouse_pos.x, mouse_pos.y, light->pos.z))
+				vec3(mouse_pos.x, mouse_pos.y, light->pos.z))
 			<= (CELL_SIZE / 2) * (CELL_SIZE / 2))
 		{
 			delete_light(gamestate, i);

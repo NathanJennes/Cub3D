@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:31:13 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/29 15:08:53 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/29 15:20:43 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,44 +17,41 @@ int					is_light_inside_map(t_ivec2 mouse_pos);
 void				update_ui_click_begin(int button);
 void				update_ui_click_end(int button);
 void				delete_lights_in_minimap(void);
-inline static void		mouse_click_editor_mode(t_ui_map_menu *map_menu);
+inline static void		mouse_click_editor_mode(t_ui_map_menu *map_menu,
+						t_ivec2 mouse_pos);
 
 void	mouse_click_begin(int button)
 {
 	update_ui_click_begin(button);
-	mouse_click_editor_mode(&get_ui()->map_menu);
+	mouse_click_editor_mode(&get_ui()->map_menu, get_mouse_pos());
 }
 
-inline static void	mouse_click_editor_mode(t_ui_map_menu *map_menu)
+inline static void	mouse_click_editor_mode(t_ui_map_menu *map_menu,
+		t_ivec2 mouse_pos)
 {
 	t_light		*new_light;
 	t_rgb		color;
 	t_sprite	new_sprite;
 
-	if (get_app()->state == IN_GAME
-		&& get_app()->editor_mode == TRUE
-		&& is_light_inside_map(get_mouse_pos())
-		&& get_app()->light_mode == ADD)
+	if (get_app()->state == IN_GAME && get_app()->editor_mode == TRUE
+		&& is_light_inside_map(mouse_pos) && get_app()->light_mode == ADD)
 	{
 		color.r = (uint8_t)map_menu->slid_red_color.value;
 		color.g = (uint8_t)map_menu->slid_green_color.value;
 		color.b = (uint8_t)map_menu->slid_blue_color.value;
-		add_light(&get_app()->gamestate,
-			vec3(get_mouse_pos().x, get_mouse_pos().y, 18),
-			color,
-			map_menu->intensity.value);
+		add_light(&get_app()->gamestate, vec3(mouse_pos.x, mouse_pos.y, 18),
+			color, map_menu->intensity.value);
 		new_light = &get_gamestate()->lights[get_gamestate()->light_count - 1];
 		new_sprite.tex_id = get_app()->lamp_tex_id;
 		new_sprite.size = ivec2(3, 4);
-		new_sprite.pos = vec3(get_mouse_pos().x, get_mouse_pos().y, 8);
+		new_sprite.pos = vec3(mouse_pos.x, mouse_pos.y, 8);
 		new_sprite.color = vec3((double)new_light->color.r / 255.0,
 				(double)new_light->color.g / 255.0,
 				(double)new_light->color.b / 255.0);
 		add_sprite_to_current_game(new_sprite);
 	}
-	else if (get_app()->state == IN_GAME
-			&& get_app()->editor_mode == TRUE
-			&& get_app()->light_mode == DELETE)
+	else if (get_app()->state == IN_GAME && get_app()->editor_mode == TRUE
+		&& get_app()->light_mode == DELETE)
 		delete_lights_in_minimap();
 }
 
