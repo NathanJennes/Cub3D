@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loaded_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:07:45 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/16 17:44:52 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/29 11:19:38 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	load_map(t_gamestate *map_out, char *map_name)
 	if (!deserialize_save(&save, fd, map_name))
 	{
 		gc_strarray_free(save.map.map_raw);
-		gc_free2d((void **)save.map.map, save.map.height);
+		if (save.map.map)
+			gc_free2d((void **)save.map.map, save.map.height);
 		return (0);
 	}
 	save.name = gc_strdup(map_name);

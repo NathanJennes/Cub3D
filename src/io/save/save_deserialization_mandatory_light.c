@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_deserialization_mandatory_light.c             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/29 00:42:48 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/29 11:56:49 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 #include "map_error.h"
 
 t_bool			is_color_value_legal(char *line);
-static t_bool	is_pos_value_legal(char *line, int type);
 static int		parse_light_color(t_rgb *color, t_map_parser *parser,
 					char **line);
-static int		parse_light_pos(t_vec3 *pos, t_map_parser *parser, char *line);
+static int		parse_light_pos(t_vec3 *pos, t_map_parser *parser, char *line,
+					t_gamestate *gamestate);
 
 int	parse_light(t_gamestate *gamestate, t_map_parser *parser, char *line)
 {
@@ -28,7 +28,7 @@ int	parse_light(t_gamestate *gamestate, t_map_parser *parser, char *line)
 
 	if (!parse_light_color(&color, parser, &line))
 		return (0);
-	if (!parse_light_pos(&pos, parser, ft_strskip_space(line + 1)))
+	if (!parse_light_pos(&pos, parser, ft_strskip_space(line + 1), gamestate))
 		return (0);
 	add_light(gamestate, pos, color, DEFAULT_INTENSITY);
 	return (1);
@@ -61,46 +61,40 @@ static int	parse_light_color(t_rgb *color, t_map_parser *parser, char **line)
 	return (1);
 }
 
-static int	parse_light_pos(t_vec3 *pos, t_map_parser *parser, char *line)
+static int	parse_light_pos(t_vec3 *pos, t_map_parser *parser, char *line,
+			t_gamestate *gamestate)
 {
 	if (!ft_isdigit(*line))
 		return (map_error(line, parser, MERR_POS_EXPECTED));
-	if (!is_pos_value_legal(line, X_POS))
-		return (map_error(line, parser, MERR_POS_OUTBOUND));
 	pos->x = ft_atoi(line);
 	line = ft_strskip_digit(line);
 	if (*line != ',')
 		return (map_error(line, parser, MERR_COLOR_EXPECTED_COMMA));
 	if (!ft_isdigit(*(++line)))
 		return (map_error(line, parser, MERR_POS_EXPECTED));
-	if (!is_pos_value_legal(line, Y_POS))
-		return (map_error(line, parser, MERR_POS_OUTBOUND));
 	pos->y = ft_atoi(line);
 	line = ft_strskip_digit(line);
 	if (*line != ',')
 		return (map_error(line, parser, MERR_COLOR_EXPECTED_COMMA));
 	if (!ft_isdigit(*(++line)))
 		return (map_error(line, parser, MERR_POS_EXPECTED));
-	if (!is_pos_value_legal(line, Z_POS))
-		return (map_error(line, parser, MERR_POS_OUTBOUND));
 	pos->z = ft_atoi(line);
 	return (1);
 }
 
-// TODO: segfault
-static t_bool	is_pos_value_legal(char *line, int type)
+t_bool	is_light_pos_legal(t_gamestate *gamestate)
 {
-	double		val;
-	t_map_info	*map;
+	int64_t	i;
 
-	// TODO Need to get the right height and width
-	map = get_map_infos();
-	val = ft_atoi(line);
-	if (type == X_POS && (val < 0 || val >= map->width * CELL_SIZE))
-		return (FALSE);
-	else if (type == Y_POS && (val < 0 || val >= map->height * CELL_SIZE))
-		return (FALSE);
-	else if (type == Z_POS && (val < 0 || val >= CELL_SIZE))
-		return (FALSE);
+	i = 0;
+	while (i < gamestate->light_count)
+	{
+		if ((gamestate->lights->pos.x < 0 || gamestate->lights->pos.x >= map->width * CELL_SIZE))
+			return (FALSE);
+		else if ((gamestate->lights->pos.y < 0 || gamestate->lights->pos.y >= map->height * CELL_SIZE))
+			return (FALSE);
+		else if ((gamestate->lights->pos.z < 0 || gamestate->lights->pos.z >= CELL_SIZE))
+			return (FALSE);
+	}
 	return (TRUE);
 }

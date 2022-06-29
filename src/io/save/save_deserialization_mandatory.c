@@ -57,7 +57,7 @@ int	load_mandatory_map(t_gamestate *save_out, int fd, char *line,
 		return (map_print_error(&parser));
 	construct_map(infos);
 	setup_player(save_out);
-	if (!is_player_position_legal(save_out))
+	if (!is_player_position_legal(save_out) || !is_light_pos_legal(save_out))
 		return (0);
 	return (1);
 }

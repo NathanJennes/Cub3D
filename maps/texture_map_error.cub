@@ -4,8 +4,8 @@ NO assets/textures/proto_wall/proto_north.xpm
 SO assets/textures/proto_wall/proto_south.xpm
 EA assets/textures/proto_wall/proto_east.xpm
 WE assets/textures/proto_wall/proto_west.xpm
-L 152,122,37 30,30,10
-L 152,122,37 70,30,10
+L 11562,122,37 60,30,10
+L 152,122,37 60,30,10
 11111111111111
 10000000000001
 101100S0011001

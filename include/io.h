@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:45:17 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/16 19:37:41 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/29 11:56:49 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ void		reload_maps(void);
 
 t_settings	load_settings(void);
 void		save_settings(t_settings *settings);
+
+t_bool		is_light_pos_legal(t_gamestate *gamestate);
 
 #endif
