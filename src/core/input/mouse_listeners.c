@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 16:31:13 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/29 14:51:40 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/29 15:08:53 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,13 @@ inline static void	mouse_click_editor_mode(t_ui_map_menu *map_menu)
 		&& is_light_inside_map(get_mouse_pos())
 		&& get_app()->light_mode == ADD)
 	{
-		printf("adding light by click\n");
 		color.r = (uint8_t)map_menu->slid_red_color.value;
 		color.g = (uint8_t)map_menu->slid_green_color.value;
 		color.b = (uint8_t)map_menu->slid_blue_color.value;
 		add_light(&get_app()->gamestate,
 			vec3(get_mouse_pos().x, get_mouse_pos().y, 18),
 			color,
-			100.0);
+			map_menu->intensity.value);
 		new_light = &get_gamestate()->lights[get_gamestate()->light_count - 1];
 		new_sprite.tex_id = get_app()->lamp_tex_id;
 		new_sprite.size = ivec2(3, 4);

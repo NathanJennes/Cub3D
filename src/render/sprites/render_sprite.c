@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_sprite.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 16:25:27 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/27 15:47:02 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/06/29 15:14:25 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ inline static int64_t		get_x_position(t_sprite *sprite, double *distance);
 inline static int64_t		get_x_from_angle(double angle);
 inline static void		draw_sprite(t_rsprite *rsprite, double distance);
 inline static void		draw_col_sprite(t_rsprite *rsprite, int64_t x_pos,
-								int64_t tex_x, double distance);
+								int64_t tex_x);
 
 void	render_sprite(t_sprite *sprite)
 {
@@ -60,21 +60,20 @@ inline static void	draw_sprite(t_rsprite *rsprite, double distance)
 	{
 		if (get_depth_at(rsprite->x_base + i) >= distance)
 			draw_col_sprite(rsprite, rsprite->x_base + i,
-				(int64_t)tex_x, distance);
+				(int64_t)tex_x);
 		i++;
 		tex_x += rsprite->ratio_x;
 	}
 }
 
 inline static void	draw_col_sprite(t_rsprite *rsprite, int64_t x_pos,
-			int64_t tex_x, double distance)
+			int64_t tex_x)
 {
 	int64_t	i;
 	double	tex_y;
 	t_rgb	color;
 	t_vec3	result;
 
-	set_depth_at(x_pos, distance);
 	i = -1;
 	tex_y = 0;
 	while (++i < rsprite->size_h)
