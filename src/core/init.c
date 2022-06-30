@@ -6,7 +6,7 @@
 /*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/30 15:00:19 by Cyril            ###   ########.fr       */
+/*   Updated: 2022/06/30 15:04:38 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	init_app(char *path)
 {
 	t_mlx	*app;
 
-	app = get_app();
 	init_gc();
+	app = get_app();
 	app->settings = load_settings();
 	init_window("Cub3d");
 	init_texture_manager();

@@ -15,7 +15,7 @@
 #include "leaky.h"
 #include "render.h"
 
-int	close_app()
+int	close_app(void)
 {
 	shutdown_renderer();
 	if (get_app()->state == IN_GAME && get_app()->gamestate.name)

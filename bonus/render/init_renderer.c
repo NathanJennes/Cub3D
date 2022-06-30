@@ -18,7 +18,7 @@
 inline static void		render_multithreaded(t_renderer *renderer);
 inline static void		render_singlethreaded(void);
 
-void	init_renderer()
+void	init_renderer(void)
 {
 	int64_t		i;
 	t_renderer	*renderer;

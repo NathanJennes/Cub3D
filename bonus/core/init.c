@@ -28,6 +28,7 @@ static void		init_mandatory(t_mlx *app, char *path);
 void	init_app(char *path)
 {
 	t_mlx	*app;
+
 	app = get_app();
 	if (path)
 		init_mandatory(app, path);
