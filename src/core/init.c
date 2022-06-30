@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: Cyril <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:43:54 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/29 17:11:36 by njennes          ###   ########.fr       */
+/*   Updated: 2022/06/30 15:00:19 by Cyril            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/time.h>
 #include "core.h"
 #include "ui.h"
 #include "render.h"
@@ -20,10 +19,9 @@ int				key_up_callback(int keycode, void *unused);
 int				key_down_callback(int keycode, void *unused);
 int				mouse_down_callback(int button, int x, int y, void *unused);
 int				mouse_up_callback(int button, int x, int y, void *unused);
-void 			start_game(void);
+void			start_game(void);
 
 static void		init_hooks(void);
-
 
 void	init_app(char *path)
 {
@@ -42,7 +40,7 @@ void	init_app(char *path)
 		ft_error_exit("Error: couldn't load specified map\n");
 }
 
-void start_game(void)
+void	start_game(void)
 {
 	update_player_direction(get_player(), FALSE);
 	update_player_vectors(get_player());

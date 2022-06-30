@@ -13,7 +13,6 @@
 #include "core.h"
 #include "input_code.h"
 
-
 int	key_pressed_listener(int keycode)
 {
 	if (keycode == KEY_BACKSPACE)

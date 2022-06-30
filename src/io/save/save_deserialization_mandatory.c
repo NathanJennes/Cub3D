@@ -27,7 +27,7 @@ int					add_map_row(t_map_info *infos, t_map_parser *parser,
 t_bool				is_map_legal(t_map_info *infos, t_map_parser *parser);
 
 inline static int			parse_line_mand(t_map_info *infos,
-								t_map_parser *parser, char *line);
+						t_map_parser *parser, char *line);
 inline static void		setup_player(t_gamestate *save);
 inline static int			map_check_status(int *map_status, t_map_info *infos,
 						t_map_parser *parser, char *line);
