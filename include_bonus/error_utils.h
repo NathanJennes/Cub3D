@@ -13,8 +13,6 @@
 #ifndef ERROR_UTILS_H
 # define ERROR_UTILS_H
 
-# include "profiling.h"
-
 # define RETURN_SUCCESS 1
 # define ERR_EMPTY_FILE -1
 # define ERR_FONT_META_INFO_NOT_FOUND -2

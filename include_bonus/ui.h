@@ -17,7 +17,6 @@
 # include "texture.h"
 # include "colors.h"
 # include "bool.h"
-# include "profiling.h"
 
 # ifdef __linux__
 #  include <stdint.h>

@@ -13,8 +13,6 @@
 #ifndef COLORS_H
 # define COLORS_H
 
-# include "profiling.h"
-
 # define BLACK			0x00000000
 # define RED			0x00FF0000
 # define GREEN			0x0000FF00
