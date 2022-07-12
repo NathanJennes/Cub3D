@@ -63,7 +63,7 @@ inline static void	add_to_maps(char *save_name)
 	t_mlx		*app;
 	t_gamestate	save;
 
-	if (!load_map(&save, save_name))
+	if (!load_map(&save, save_name, FALSE))
 		return ;
 	grow_maps_array();
 	app = get_app();

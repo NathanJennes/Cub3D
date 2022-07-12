@@ -61,7 +61,8 @@ inline static void	setup_camera(t_mlx *app)
 
 	infos = &app->gamestate.map;
 	cam_pos = ivec2(rand() % infos->width, rand() % infos->height);
-	while (infos->map[cam_pos.y][cam_pos.x] == WALL)
+	while (infos->map[cam_pos.y][cam_pos.x] == WALL ||
+		infos->map[cam_pos.y][cam_pos.x] == VOID)
 		cam_pos = ivec2(rand() % infos->width, rand() % infos->height);
 	app->gamestate.player.world_pos = \
 		vec2(cam_pos.x * CELL_SIZE + CELL_SIZE / 2,

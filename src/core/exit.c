@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include "core.h"
 
-int	close_app()
+int	close_app(void)
 {
 	destroy_window();
 	gc_clean();

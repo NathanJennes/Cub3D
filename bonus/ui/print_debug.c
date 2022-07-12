@@ -30,18 +30,17 @@ void	print_debug(void)
 	debug_player(&debug_pos);
 	debug_pos.y += 40;
 	debug_settings(&debug_pos);
-	debug_pos.y += 40;
 	if (get_app()->renderer.multithreading)
 	{
 		render_text("multithreaded", DEFAULT_FONT, 20,
 			text_center_height("singlethreaded", DEFAULT_FONT, 20,
-				ivec2(debug_pos.x, debug_pos.y)));
+				ivec2(get_settings()->win_w - 200, debug_pos.y)));
 	}
 	else
 	{
 		render_text("singlethreaded", DEFAULT_FONT, 20,
 			text_center_height("singlethreaded", DEFAULT_FONT, 20,
-				ivec2(debug_pos.x, debug_pos.y)));
+				ivec2(get_settings()->win_w - 200, debug_pos.y)));
 	}
 }
 

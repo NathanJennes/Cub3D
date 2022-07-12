@@ -4,6 +4,9 @@ NO assets/textures/lab/tile065.xpm
 SO assets/textures/lab/tile067.xpm
 EA assets/textures/lab/tile068.xpm
 WE assets/textures/lab/tile069.xpm
+L 94,127,158 66,183,18
+L 211,154,0 67,274,18
+L 211,0,0 57,82,18
                11111111111111111111
 111111         10000000000000000001
 100001   11111110111111111111111101

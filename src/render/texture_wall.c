@@ -22,10 +22,8 @@ inline static void		render_wall(t_ivec2 pos, t_wall wall, t_ray *ray);
 void	render_column(int64_t xcol, t_wall wall, t_ray *ray)
 {
 	t_ivec2		pos;
-	t_vec3		real_light;
 
 	pos = ivec2(xcol, wall.screen_origin);
-	real_light = vec3(1.0, 1.0, 1.0);
 	wall.size += wall.screen_origin;
 	render_wall(pos, wall, ray);
 }

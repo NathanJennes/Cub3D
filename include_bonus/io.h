@@ -44,7 +44,7 @@ typedef struct s_map_parser
 
 char		*save_game(char *save_name);
 int			load_save(t_gamestate *save_out, char *save_name);
-int			load_map(t_gamestate *map_out, char *map_name);
+int			load_map(t_gamestate *map_out, char *map_name, t_bool absolute);
 void		free_save(t_gamestate *save);
 
 void		load_all_saves(void);

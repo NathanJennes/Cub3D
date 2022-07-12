@@ -21,7 +21,6 @@
 # include "ui.h"
 # include "io.h"
 # include "font.h"
-# include "profiling.h"
 
 # ifdef __linux__
 #  include <inttypes.h>

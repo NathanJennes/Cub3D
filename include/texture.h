@@ -15,7 +15,6 @@
 
 # include <stdint.h>
 # include "libft.h"
-# include "profiling.h"
 
 # define INVALID_TEXTURE -1
 

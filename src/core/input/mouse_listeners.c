@@ -22,10 +22,8 @@ void	mouse_click_end(int button)
 
 void	mouse_wheel_up(void)
 {
-
 }
 
 void	mouse_wheel_down(void)
 {
-
 }
