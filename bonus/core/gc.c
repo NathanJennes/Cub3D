@@ -25,6 +25,6 @@ void	init_gc(void)
 inline static int	gc_callback(void *ptr)
 {
 	(void)ptr;
-	error_close_app();
+	error_close_app("Error: allocation error");
 	return (1);
 }

@@ -57,7 +57,7 @@ static void	init_mandatory(t_mlx *app, char *path)
 	update_precalc();
 	init_hooks();
 	init_renderer();
-	if (load_map(&app->gamestate, path))
+	if (load_map(&app->gamestate, path, TRUE))
 	{
 		update_player_direction(get_player(), app->delta_time, FALSE);
 		update_player_vectors(get_player());
@@ -69,10 +69,7 @@ static void	init_mandatory(t_mlx *app, char *path)
 		reset_mouse_pos();
 	}
 	else
-	{
-		printf("Error: couldn't load specified map_menu.\n");
-		exit(1);
-	}
+		error_close_app("Error: couldn't load specified map");
 }
 
 static void	init_hooks(void)

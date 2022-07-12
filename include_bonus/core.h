@@ -242,7 +242,7 @@ typedef struct s_mlx
 /* core.c */
 void				init_window(char *win_name);
 int					close_app(void);
-void				error_close_app(void);
+void				error_close_app(const char *message);
 void				check_leaky_errors(void);
 void				update_precalc(void);
 

@@ -29,7 +29,7 @@ int	close_app(void)
 	exit(EXIT_SUCCESS);
 }
 
-void	error_close_app(void)
+void	error_close_app(const char *message)
 {
 	shutdown_renderer();
 	destroy_window();
@@ -37,6 +37,6 @@ void	error_close_app(void)
 	unload_saves();
 	clear_sprite_manager();
 	gc_clean();
-	printf("Error\n");
+	printf("%s\n", message);
 	exit(EXIT_FAILURE);
 }
