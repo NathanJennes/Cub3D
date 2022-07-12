@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:07:45 by njennes           #+#    #+#             */
-/*   Updated: 2022/07/12 17:18:37 by njennes          ###   ########.fr       */
+/*   Updated: 2022/07/12 17:33:03 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ inline static int	open_map_file(char *map_name, t_bool absolute)
 	if (!absolute)
 	{
 		map_file = gc_strdup(MAPS_DIRECTORY);
-		map_file = gc_strappend(map_file, '/', LK_TRUE);
+		map_file = gc_strappend(map_file, '/');
 		map_file = gc_strjoin(map_file, map_name, FREE_FIRST);
 	}
 	else
