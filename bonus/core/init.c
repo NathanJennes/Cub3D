@@ -23,15 +23,13 @@ int				mouse_up_callback(int button, int x, int y, void *unused);
 
 static void		init_hooks(void);
 static void		init_start_time(void);
-static void		init_mandatory(t_mlx *app, char *path);
+static void		init_with_arg(t_mlx *app, char *path);
 
 void	init_app(char *path)
 {
 	t_mlx	*app;
 
 	app = get_app();
-	if (path)
-		init_mandatory(app, path);
 	srand(time(0));
 	app->settings = load_settings();
 	init_start_time();
@@ -47,29 +45,24 @@ void	init_app(char *path)
 	init_ui();
 	init_hooks();
 	init_renderer();
+	if (path)
+		init_with_arg(app, path);
 }
 
-static void	init_mandatory(t_mlx *app, char *path)
+static void	init_with_arg(t_mlx *app, char *path)
 {
-	init_gc();
-	init_window("Cub3d");
-	init_texture_manager();
-	update_precalc();
-	init_hooks();
-	init_renderer();
 	if (load_map(&app->gamestate, path, TRUE))
 	{
 		update_player_direction(get_player(), app->delta_time, FALSE);
 		update_player_vectors(get_player());
 		generate_sprites_for_new_map();
 		app->renderer.multithreading = FALSE;
-		app->mandatory = TRUE;
 		app->state = IN_GAME;
 		mlx_mouse_hide();
 		reset_mouse_pos();
 	}
 	else
-		error_close_app("Error: couldn't load specified map");
+		printf("Error: couldn't load the given map\n");
 }
 
 static void	init_hooks(void)
