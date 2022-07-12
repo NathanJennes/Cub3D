@@ -13,13 +13,12 @@
 #include "mlx.h"
 #include "core.h"
 #include "texture.h"
-#include "leaky.h"
 
 int	load_xpm(t_xpm_file *xpm_out, char *path)
 {
 	t_xpm_file	file;
 
-	gc_memset(&file, 0, sizeof(t_xpm_file));
+	ft_memset(&file, 0, sizeof(t_xpm_file));
 	file.handle = mlx_xpm_file_to_image(get_mlx(), path,
 			&file.width, &file.height);
 	if (!file.handle)

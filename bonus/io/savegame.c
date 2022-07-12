@@ -6,16 +6,16 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 17:44:59 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/26 17:42:30 by njennes          ###   ########.fr       */
+/*   Updated: 2022/07/12 17:18:14 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <sys/stat.h>
 #include "bool.h"
-#include "leaky.h"
 #include "core.h"
 #include "render.h"
+#include "libft.h"
 
 void				serialize_game(int fd);
 int					deserialize_save(t_gamestate *save_out, int fd,
@@ -94,7 +94,7 @@ inline static int	open_save_file(char *save_name, int truncate)
 
 	create_appdata_directory();
 	save_file = gc_strdup(APPDATA_DIRECTORY);
-	save_file = gc_strappend(save_file, '/', LK_TRUE);
+	save_file = gc_strappend(save_file, '/');
 	save_file = gc_strjoin(save_file, save_name, FREE_FIRST);
 	if (truncate)
 		fd = open(save_file, O_CREAT | O_RDWR | O_TRUNC, 0777);

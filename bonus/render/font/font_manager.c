@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "core.h"
-#include "leaky.h"
 #include "render.h"
 
 inline static void	add_font(char *meta_path, char *bitmap_path);
@@ -79,7 +78,7 @@ inline static void	grow_font_array(t_font_manager *manager)
 	else
 	{
 		new = gc_calloc(manager->font_count + 1, sizeof (t_font));
-		gc_memmove(new, manager->fonts, manager->font_count * sizeof (t_font));
+		ft_memmove(new, manager->fonts, manager->font_count * sizeof (t_font));
 		gc_free(manager->fonts);
 		manager->fonts = new;
 	}

@@ -11,15 +11,14 @@ DEBUG_OBJS_DIR			:=		$(MAKE_DIR)/objd
 DEBUG_BONUS_OBJS_DIR	:=		$(MAKE_DIR)/bonus_objd
 
 LIBFT_DIR		:=		$(MAKE_DIR)/Libft
-LEAKY_DIR		:=		$(LIBFT_DIR)/Leaky
 MLX_DIR			:=		$(MAKE_DIR)/minilibx
 
 INCLUDE_DIR			:=	-I$(MAKE_DIR)/include
 INCLUDE_BONUS_DIR	:=	-I$(MAKE_DIR)/include_bonus
 
-INC_PATH		:=		-I$(LIBFT_DIR) -I$(LEAKY_DIR)
+INC_PATH		:=		-I$(LIBFT_DIR)
 
-LIB_PATH		:=		-L$(LIBFT_DIR) -L$(LEAKY_DIR)
+LIB_PATH		:=		-L$(LIBFT_DIR)
 
 OS				=	$(shell uname -s)
 ifeq ($(OS), Linux)
@@ -30,8 +29,8 @@ else
 	MLXFLAGS	=		-lmlx -framework OpenGL -framework AppKit -lz
 endif
 
-RELEASE_LIBS		:=		$(MLXFLAGS) $(LIB_PATH) -lft -lleaky -lm
-DEBUG_LIBS			:=		$(MLXFLAGS) $(LIB_PATH) -lftd -lleakyd -lm
+RELEASE_LIBS		:=		$(MLXFLAGS) $(LIB_PATH) -lft -lm
+DEBUG_LIBS			:=		$(MLXFLAGS) $(LIB_PATH) -lftd -lm
 
 BIN_CC				:=		gcc
 
@@ -55,9 +54,6 @@ DEBUG_BIN_LDFLAGS		+=		-fsanitize=address
 RELEASE_LIBFT_LIB	:=		$(LIBFT_DIR)/libft.a
 DEBUG_LIBFT_LIB		:=		$(LIBFT_DIR)/libftd.a
 
-RELEASE_LEAKY_LIB	:=		$(LEAKY_DIR)/libleaky.a
-DEBUG_LEAKY_LIB		:=		$(LEAKY_DIR)/libleakyd.a
-
 export MAKE_DIR
 export RELEASE_BONUS_OBJS_DIR
 export RELEASE_OBJS_DIR
@@ -78,11 +74,8 @@ export RELEASE_BIN_LDFLAGS
 export DEBUG_BIN_LDFLAGS
 export DEBUG_LIBFT_LIB
 export RELEASE_LIBFT_LIB
-export DEBUG_LEAKY_LIB
-export RELEASE_LEAKY_LIB
 export LIB_PATH
 export LIBFT_DIR
-export LEAKY_DIR
 export INCLUDE_DIR
 export INCLUDE_BONUS_DIR
 

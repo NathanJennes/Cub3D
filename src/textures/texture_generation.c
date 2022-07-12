@@ -6,11 +6,10 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:58:17 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/23 13:57:40 by njennes          ###   ########.fr       */
+/*   Updated: 2022/07/12 17:09:55 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "leaky.h"
 #include "texture.h"
 #include "mlx.h"
 #include "core.h"
@@ -24,7 +23,7 @@ t_texture	create_texture_from_xpm_file(t_xpm_file file)
 {
 	t_texture	texture;
 
-	gc_memset(&texture, 0, sizeof (t_texture));
+	ft_memset(&texture, 0, sizeof (t_texture));
 	transfer_texture_data(&file, &texture);
 	create_texture_variations(&texture);
 	shade_texture_variations(&texture);
@@ -35,7 +34,7 @@ t_texture	create_blank_texture(int width, int height)
 {
 	t_texture	texture;
 
-	gc_memset(&texture, 0, sizeof (t_texture));
+	ft_memset(&texture, 0, sizeof (t_texture));
 	texture.width = width;
 	texture.height = height;
 	texture.original_handle = mlx_new_image(get_mlx(), width, height);
@@ -44,7 +43,7 @@ t_texture	create_blank_texture(int width, int height)
 	texture.original = (t_rgb *)mlx_get_data_addr(
 			texture.original_handle, &texture.bpp,
 			&texture.line_size, &texture.endian);
-	gc_memseti(texture.original, trgb(255, 0, 0, 0),
+	ft_memseti(texture.original, trgb(255, 0, 0, 0),
 		texture.width * texture.height);
 	return (texture);
 }

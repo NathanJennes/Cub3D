@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "core.h"
-#include "leaky.h"
 
 int	main(int argc, char *argv[])
 {

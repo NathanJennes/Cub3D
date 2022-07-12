@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "core.h"
-#include "leaky.h"
 
 static char	*try_skip_str(char *line, char *str);
 

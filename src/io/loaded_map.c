@@ -13,7 +13,6 @@
 #include <sys/fcntl.h>
 #include <sys/stat.h>
 #include "core.h"
-#include "leaky.h"
 
 int			deserialize_save(t_gamestate *save_out, int fd, char *filename);
 

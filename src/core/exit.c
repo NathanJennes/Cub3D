@@ -6,13 +6,12 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:51:10 by cybattis          #+#    #+#             */
-/*   Updated: 2022/06/29 16:57:00 by njennes          ###   ########.fr       */
+/*   Updated: 2022/07/12 16:55:12 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "core.h"
-#include "leaky.h"
 
 int	close_app()
 {

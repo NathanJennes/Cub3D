@@ -12,7 +12,6 @@
 
 #include "core.h"
 #include "ui.h"
-#include "leaky.h"
 #include "render.h"
 
 int					btn_settings_back(t_button *button);

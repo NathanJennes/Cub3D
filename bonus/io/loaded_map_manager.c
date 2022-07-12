@@ -12,7 +12,6 @@
 
 #include <dirent.h>
 #include "core.h"
-#include "leaky.h"
 
 inline static void	add_to_maps(char *save_name);
 inline static void	grow_maps_array(void);

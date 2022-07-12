@@ -13,7 +13,6 @@
 #include "core.h"
 #include "render.h"
 #include "input_code.h"
-#include "leaky.h"
 
 void			handle_f1(t_mlx *app);
 inline static void	handle_escape(t_mlx *app);

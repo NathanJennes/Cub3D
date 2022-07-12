@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "map_error.h"
-#include "leaky.h"
 #include "render.h"
 #include "core.h"
 #include "io.h"

@@ -12,7 +12,6 @@
 
 #include "texture.h"
 #include "core.h"
-#include "leaky.h"
 #include "render.h"
 
 int64_t			add_texture_to_array(t_texture texture);

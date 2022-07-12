@@ -12,7 +12,6 @@
 
 #include <dirent.h>
 #include "core.h"
-#include "leaky.h"
 
 void				change_background(t_mlx *app);
 

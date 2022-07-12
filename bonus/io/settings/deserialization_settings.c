@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "core.h"
-#include "leaky.h"
 
 int				parse_fov(char *line, t_settings *settings);
 int				parse_sens(char *line, t_settings *settings);

@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   settings_menu_update.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:36:24 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/27 17:44:44 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/07/12 17:17:35 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "ui.h"
-#include "leaky.h"
 
 void	update_labels(int *last_fov, double *last_sens,
 			t_ui_settings_menu *menu);
@@ -49,7 +48,7 @@ void	update_labels(int *last_fov, double *last_sens,
 	if (*last_sens != menu->slid_sens.value)
 	{
 		text = gc_itoa((int)menu->slid_sens.value);
-		text = gc_strappend(text, '.', TRUE);
+		text = gc_strappend(text, '.');
 		text = gc_strjoin(text,
 				gc_itoa((int)((menu->slid_sens.value - \
 					(double)((int)menu->slid_sens.value)) * 10.0)),

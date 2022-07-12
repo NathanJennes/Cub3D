@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "texture.h"
-#include "leaky.h"
 #include "mlx.h"
 #include "core.h"
 

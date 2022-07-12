@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "core.h"
-#include "leaky.h"
 #include "map_error.h"
 
 t_bool	is_color_value_legal(char *line);

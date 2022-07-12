@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   loaded_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:07:45 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/29 11:19:38 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/07/12 17:18:37 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/fcntl.h>
 #include <sys/stat.h>
 #include "core.h"
-#include "leaky.h"
+#include "libft.h"
 
 void		serialize_game(int fd);
 int			deserialize_save(t_gamestate *save_out, int fd, char *filename);
@@ -50,7 +50,7 @@ inline static int	open_map_file(char *map_name)
 	char	*map_file;
 
 	map_file = gc_strdup(MAPS_DIRECTORY);
-	map_file = gc_strappend(map_file, '/', LK_TRUE);
+	map_file = gc_strappend(map_file, '/');
 	map_file = gc_strjoin(map_file, map_name, FREE_FIRST);
 	fd = open(map_file, O_RDWR, 0777);
 	gc_free(map_file);

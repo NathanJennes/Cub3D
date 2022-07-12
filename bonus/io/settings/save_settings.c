@@ -6,14 +6,13 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 12:51:53 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/20 17:02:45 by njennes          ###   ########.fr       */
+/*   Updated: 2022/07/12 17:18:14 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/fcntl.h>
 #include <sys/stat.h>
 #include "core.h"
-#include "leaky.h"
 
 inline static void	save_player(t_settings *settings, int fd);
 inline static void	save_win(t_settings *settings, int fd);
@@ -59,7 +58,7 @@ inline static int	open_settings_file(char *save_name)
 
 	create_directory_appdata();
 	save_file = gc_strdup(APPDATA_DIRECTORY);
-	save_file = gc_strappend(save_file, '/', LK_TRUE);
+	save_file = gc_strappend(save_file, '/');
 	save_file = gc_strjoin(save_file, save_name, FREE_FIRST);
 	fd = open(save_file, O_CREAT | O_RDWR | O_TRUNC, 0777);
 	gc_free(save_file);

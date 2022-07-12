@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_construction.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 14:24:49 by njennes           #+#    #+#             */
-/*   Updated: 2022/06/27 15:17:25 by cybattis         ###   ########.fr       */
+/*   Updated: 2022/07/12 17:10:15 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
-#include "leaky.h"
 
 inline static void	read_map_content(t_map_info *infos, size_t i, size_t j,
 						int *row);
@@ -27,7 +26,7 @@ void	construct_map(t_map_info *infos)
 	while (i < infos->height)
 	{
 		row = gc_calloc(infos->width, sizeof (int));
-		gc_memseti(row, VOID, infos->width);
+		ft_memseti(row, VOID, infos->width);
 		j = 0;
 		while (j < (int64_t)ft_strlen(infos->map_raw[i]))
 		{

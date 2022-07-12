@@ -12,7 +12,6 @@
 
 #include <math.h>
 #include "core.h"
-#include "leaky.h"
 #include "render.h"
 
 inline static void	generate_lookup_table(double *table, t_settings *settings);

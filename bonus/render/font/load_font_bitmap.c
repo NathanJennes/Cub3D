@@ -13,7 +13,6 @@
 #include "render.h"
 #include "mlx.h"
 #include "core.h"
-#include "leaky.h"
 
 t_font_bitmap	load_bitmap_font(char *path)
 {
@@ -30,7 +29,7 @@ t_font_bitmap	load_bitmap_font(char *path)
 	}
 	data = mlx_get_data_addr(img, &font.bpp, &font.line_size, &font.endian);
 	font.data = (uint8_t *)gc_calloc(font.width * font.height, font.bpp / 8);
-	gc_memmove(font.data, data, font.width * font.height * font.bpp / 8);
+	ft_memmove(font.data, data, font.width * font.height * font.bpp / 8);
 	mlx_destroy_image(get_mlx(), img);
 	return (font);
 }

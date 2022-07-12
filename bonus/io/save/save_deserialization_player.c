@@ -12,7 +12,6 @@
 
 #include <math.h>
 #include "core.h"
-#include "leaky.h"
 
 inline static int	parse_line_player(char *line, t_gamestate *save);
 inline static int	parse_pos(char *line, t_gamestate *save);

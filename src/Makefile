@@ -64,13 +64,10 @@ DEPENDS			:=	$(RELEASE_OBJS:.o=.d) $(DEBUG_OBJS:.o=.d)
 # ****************************************************************************
 
 .PHONY: all
-all: $(RELEASE_NAME)
+all: ../$(RELEASE_NAME)
 
 .PHONY: debug
-debug: $(DEBUG_NAME)
-
-.PHONY: bonus
-bonus: all
+debug: ../$(DEBUG_NAME)
 
 # --------------------------- #
 #           Release           #
@@ -104,10 +101,14 @@ $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(SETTINGS_DIR)/%.c | $(RELEASE_OBJS_DIR)
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
+../$(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) ../.release Makefile
 	@printf "$(_BLUE)\nCompiled source files\n"
-	@$(BIN_CC) $(RELEASE_BIN_LDFLAGS) $(RELEASE_OBJS) $(RELEASE_LIBS) -o ../$@
+	@$(BIN_CC) $(RELEASE_BIN_LDFLAGS) $(RELEASE_OBJS) $(RELEASE_LIBS) -o ../$(RELEASE_NAME)
 	@printf "$(_GREEN)Finish compiling $(RELEASE_NAME)!$(_END)\n"
+	@rm -f ../.bonus
+
+../.release:
+	@touch ../.release
 
 # --------------------------- #
 #           Debug             #
@@ -141,9 +142,9 @@ $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(SETTINGS_DIR)/%.c | $(DEBUG_OBJS_DIR)
 	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(DEBUG_NAME): $(DEBUG_OBJS) $(DEBUG_LIBFT_LIB) $(DEBUG_LEAKY_LIB)
+../$(DEBUG_NAME): $(DEBUG_OBJS) $(DEBUG_LIBFT_LIB) Makefile
 	@printf "$(_BLUE)\nCompiled source files\n"
-	@$(BIN_CC) $(DEBUG_BIN_LDFLAGS) $(DEBUG_OBJS) $(DEBUG_LIBS) -o ../$@
+	@$(BIN_CC) $(DEBUG_BIN_LDFLAGS) $(DEBUG_OBJS) $(DEBUG_LIBS) -o ../$(DEBUG_NAME)
 	@printf "$(_GREEN)Finish compiling $(DEBUG_NAME)!$(_END)\n"
 
 clean:
@@ -164,12 +165,6 @@ $(RELEASE_OBJS_DIR):
 
 $(DEBUG_OBJS_DIR):
 	@mkdir -p $(DEBUG_OBJS_DIR)
-
-$(RELEASE_LEAKY_LIB):
-	@$(MAKE) -j4 -C $(LEAKY_DIR) -r -R
-
-$(DEBUG_LEAKY_LIB):
-	@$(MAKE) -j4 -C $(LEAKY_DIR) -r -R
 
 $(RELEASE_LIBFT_LIB):
 	@$(MAKE) -j4 -C $(LIBFT_DIR) -r -R

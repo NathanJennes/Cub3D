@@ -12,7 +12,6 @@
 
 #include "render.h"
 #include "core.h"
-#include "leaky.h"
 
 void	add_light(t_gamestate *gamestate, t_vec3 pos, t_rgb color,
 		double intensity)
@@ -20,7 +19,7 @@ void	add_light(t_gamestate *gamestate, t_vec3 pos, t_rgb color,
 	t_light	*new;
 
 	new = gc_calloc(gamestate->light_count + 1, sizeof (t_light));
-	gc_memmove(new, gamestate->lights,
+	ft_memmove(new, gamestate->lights,
 		gamestate->light_count * sizeof(t_light));
 	gc_free(gamestate->lights);
 	gamestate->lights = new;

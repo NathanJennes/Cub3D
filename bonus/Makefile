@@ -135,20 +135,17 @@ DEPENDS			:=	$(RELEASE_OBJS:.o=.d) $(DEBUG_OBJS:.o=.d)
 # ****************************************************************************
 
 .PHONY: all
-all: $(RELEASE_NAME)
+all: ../$(RELEASE_NAME)
 
 .PHONY: debug
-debug: $(DEBUG_NAME)
-
-.PHONY: bonus
-bonus: all
+debug: ../$(DEBUG_NAME)
 
 # --------------------------- #
 #           Release           #
 # --------------------------- #
 
 $(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(CORE_DIR)/%.c | $(RELEASE_BONUS_OBJS_DIR)
-	$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
+	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
 $(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(RENDER_DIR)/%.c | $(RELEASE_BONUS_OBJS_DIR)
@@ -215,10 +212,14 @@ $(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(UI_MAP_MENU_DIR)/%.c | $(RELEASE_B
 	@$(BIN_CC) $(RELEASE_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) $(RELEASE_LEAKY_LIB)
+../$(RELEASE_NAME): $(RELEASE_OBJS) $(RELEASE_LIBFT_LIB) ../.bonus Makefile
 	@printf "$(_BLUE)\nCompiled source files\n"
-	@$(BIN_CC) $(RELEASE_BIN_LDFLAGS) $(RELEASE_OBJS) $(RELEASE_LIBS) -o ../$@
+	@$(BIN_CC) $(RELEASE_BIN_LDFLAGS) $(RELEASE_OBJS) $(RELEASE_LIBS) -o ../$(RELEASE_NAME)
 	@printf "$(_GREEN)Finish compiling $(RELEASE_NAME)!$(_END)\n"
+	@rm -f ../.release
+
+../.bonus:
+	@touch ../.bonus
 
 # --------------------------- #
 #           Debug             #
@@ -292,9 +293,9 @@ $(DEBUG_BONUS_OBJS_DIR)/%d.o:	$(BONUS_DIR)/$(UI_MAP_MENU_DIR)/%.c | $(DEBUG_BONU
 	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-$(DEBUG_NAME): $(DEBUG_OBJS) $(DEBUG_LIBFT_LIB) $(DEBUG_LEAKY_LIB)
+../$(DEBUG_NAME): $(DEBUG_OBJS) $(DEBUG_LIBFT_LIB) Makefile
 	@printf "$(_BLUE)\nCompiled source files\n"
-	@$(BIN_CC) $(DEBUG_BIN_LDFLAGS) $(DEBUG_OBJS) $(DEBUG_LIBS) -o ../$@
+	@$(BIN_CC) $(DEBUG_BIN_LDFLAGS) $(DEBUG_OBJS) $(DEBUG_LIBS) -o ../$(DEBUG_NAME)
 	@printf "$(_GREEN)Finish compiling $(DEBUG_NAME)!$(_END)\n"
 
 clean:
@@ -315,12 +316,6 @@ $(RELEASE_BONUS_OBJS_DIR):
 
 $(DEBUG_BONUS_OBJS_DIR):
 	@mkdir -p $(DEBUG_BONUS_OBJS_DIR)
-
-$(RELEASE_LEAKY_LIB):
-	@$(MAKE) -j4 -C $(LEAKY_DIR) -r -R
-
-$(DEBUG_LEAKY_LIB):
-	@$(MAKE) -j4 -C $(LEAKY_DIR) -r -R
 
 $(RELEASE_LIBFT_LIB):
 	@$(MAKE) -j4 -C $(LIBFT_DIR) -r -R

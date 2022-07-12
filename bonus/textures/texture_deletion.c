@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "texture.h"
-#include "leaky.h"
 #include "mlx.h"
 #include "core.h"
 
@@ -28,5 +27,5 @@ void	free_texture(t_texture *texture)
 		mlx_destroy_image(get_mlx(), texture->inversed_handle);
 	if (texture->inversed_grayscale_handle)
 		mlx_destroy_image(get_mlx(), texture->inversed_grayscale_handle);
-	gc_memset(texture, 0, sizeof(t_texture));
+	ft_memset(texture, 0, sizeof(t_texture));
 }

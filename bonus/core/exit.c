@@ -12,7 +12,6 @@
 
 #include <stdlib.h>
 #include "core.h"
-#include "leaky.h"
 #include "render.h"
 
 int	close_app()

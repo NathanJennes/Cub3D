@@ -14,7 +14,6 @@
 #include "io.h"
 #include "libft.h"
 #include "core.h"
-#include "leaky.h"
 
 static void	print_error_message(const t_map_parser *parser);
 

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "core.h"
-#include "leaky.h"
 #include "render.h"
 
 int			deserialize_map_parse_width(char *line, t_gamestate *save);

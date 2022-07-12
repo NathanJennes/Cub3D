@@ -12,7 +12,6 @@
 
 #include "render.h"
 #include "core.h"
-#include "leaky.h"
 
 void		construct_map(t_map_info *infos);
 int			load_mandatory_map(t_gamestate *save_out, int fd, char *line,

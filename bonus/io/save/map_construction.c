@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "core.h"
-#include "leaky.h"
 
 inline static void	read_map_content(t_map_info *infos, size_t i, size_t j,
 						int *row);
@@ -27,7 +26,7 @@ void	construct_map(t_map_info *infos)
 	while (i < infos->height)
 	{
 		row = gc_calloc(infos->width, sizeof (int));
-		gc_memseti(row, VOID, infos->width);
+		ft_memseti(row, VOID, infos->width);
 		j = 0;
 		while (j < (int64_t)ft_strlen(infos->map_raw[i]))
 		{

@@ -12,7 +12,6 @@
 
 #include <sys/time.h>
 #include "core.h"
-#include "leaky.h"
 #include "ui.h"
 #include "render.h"
 

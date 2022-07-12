@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "core.h"
-#include "leaky.h"
 
 inline static int	contains_illegal_char(t_map_info *infos, char *line);
 inline static int	is_illegal_char(char c, t_map_info *infos, int *saw_wall,

@@ -13,7 +13,6 @@
 #include <float.h>
 #include "core.h"
 #include "render.h"
-#include "leaky.h"
 
 inline static void		render_multithreaded(t_renderer *renderer);
 inline static void		render_singlethreaded(void);

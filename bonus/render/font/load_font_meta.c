@@ -13,7 +13,6 @@
 #include <sys/fcntl.h>
 #include <printf.h>
 #include "render.h"
-#include "leaky.h"
 #include "libft.h"
 #include "error_utils.h"
 

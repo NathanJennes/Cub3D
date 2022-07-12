@@ -12,7 +12,6 @@
 
 #include "texture.h"
 #include "core.h"
-#include "leaky.h"
 
 inline static void	grow_texture_array(void);
 
@@ -41,7 +40,7 @@ inline static void	grow_texture_array(void)
 
 	tex_manager = &get_app()->texture_manager;
 	new_array = gc_calloc(tex_manager->tex_array_size + 1, sizeof (t_texture));
-	gc_memmove(new_array, tex_manager->tex_array,
+	ft_memmove(new_array, tex_manager->tex_array,
 		tex_manager->tex_array_size * sizeof (t_texture));
 	gc_free(tex_manager->tex_array);
 	tex_manager->tex_array = new_array;
