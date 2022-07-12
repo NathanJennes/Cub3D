@@ -216,7 +216,7 @@ $(RELEASE_BONUS_OBJS_DIR)/%.o:	$(BONUS_DIR)/$(UI_MAP_MENU_DIR)/%.c | $(RELEASE_B
 	@printf "$(_BLUE)\nCompiled source files\n"
 	@$(BIN_CC) $(RELEASE_BIN_LDFLAGS) $(RELEASE_OBJS) $(RELEASE_LIBS) -o ../$(RELEASE_NAME)
 	@printf "$(_GREEN)Finish compiling $(RELEASE_NAME)!$(_END)\n"
-	@rm -f ../.release
+	@rm -f ../.release ../.debug_bonus ../.debug_release
 
 ../.bonus:
 	@touch ../.bonus
@@ -293,10 +293,14 @@ $(DEBUG_BONUS_OBJS_DIR)/%d.o:	$(BONUS_DIR)/$(UI_MAP_MENU_DIR)/%.c | $(DEBUG_BONU
 	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_BONUS_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-../$(DEBUG_NAME): $(DEBUG_OBJS) $(DEBUG_LIBFT_LIB) Makefile
+../$(DEBUG_NAME): $(DEBUG_OBJS) $(DEBUG_LIBFT_LIB) Makefile ../.debug_bonus
 	@printf "$(_BLUE)\nCompiled source files\n"
 	@$(BIN_CC) $(DEBUG_BIN_LDFLAGS) $(DEBUG_OBJS) $(DEBUG_LIBS) -o ../$(DEBUG_NAME)
 	@printf "$(_GREEN)Finish compiling $(DEBUG_NAME)!$(_END)\n"
+	@rm -f ../.release ../.bonus ../.debug_release
+
+../.debug_bonus:
+	@touch ../.debug_bonus
 
 clean:
 	@printf "$(_YELLOW)Removing object files ...$(_END)\n"

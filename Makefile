@@ -103,6 +103,14 @@ ifeq ($(OS), Darwin)
 endif
 	@$(MAKE) -j4 -C $(BONUS_DIR) -r -R --warn-undefined-variables
 
+.PHONY: debug_bonus
+debug_bonus: header
+	@$(MAKE) -j4 -C $(LIBFT_DIR) debug
+ifeq ($(OS), Darwin)
+	@$(MAKE) -j4 -C $(MLX_DIR)
+endif
+	@$(MAKE) -j4 -C $(BONUS_DIR) -r -R --warn-undefined-variables debug
+
 .PHONY: clean
 clean: header
 	@$(MAKE) -C $(LIBFT_DIR) clean

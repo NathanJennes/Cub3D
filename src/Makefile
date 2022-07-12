@@ -105,7 +105,7 @@ $(RELEASE_OBJS_DIR)/%.o:	$(SRCS_DIR)/$(SETTINGS_DIR)/%.c | $(RELEASE_OBJS_DIR)
 	@printf "$(_BLUE)\nCompiled source files\n"
 	@$(BIN_CC) $(RELEASE_BIN_LDFLAGS) $(RELEASE_OBJS) $(RELEASE_LIBS) -o ../$(RELEASE_NAME)
 	@printf "$(_GREEN)Finish compiling $(RELEASE_NAME)!$(_END)\n"
-	@rm -f ../.bonus
+	@rm -f ../.bonus ../.debug_bonus ../.debug_release
 
 ../.release:
 	@touch ../.release
@@ -142,10 +142,14 @@ $(DEBUG_OBJS_DIR)/%d.o:	$(SRCS_DIR)/$(SETTINGS_DIR)/%.c | $(DEBUG_OBJS_DIR)
 	@$(BIN_CC) $(DEBUG_BIN_CFLAGS) $(INCLUDE_DIR) -c $< -o $@
 	@printf "$(_GREEN)█$(_END)"
 
-../$(DEBUG_NAME): $(DEBUG_OBJS) $(DEBUG_LIBFT_LIB) Makefile
+../$(DEBUG_NAME): $(DEBUG_OBJS) $(DEBUG_LIBFT_LIB) Makefile ../.debug_release
 	@printf "$(_BLUE)\nCompiled source files\n"
 	@$(BIN_CC) $(DEBUG_BIN_LDFLAGS) $(DEBUG_OBJS) $(DEBUG_LIBS) -o ../$(DEBUG_NAME)
 	@printf "$(_GREEN)Finish compiling $(DEBUG_NAME)!$(_END)\n"
+	@rm -f ../.debug_bonus ../.bonus ../.release
+
+../.debug_release:
+	@touch ../.debug_release
 
 clean:
 	@printf "$(_YELLOW)Removing object files ...$(_END)\n"
